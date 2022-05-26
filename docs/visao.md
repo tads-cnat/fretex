@@ -22,8 +22,16 @@
 ### 3. Descrição dos usuários
 
 ### 4. Descrição do ambiente dos usuários
+Por se tratar de uma **_plataforma web_** em que o usuário (**_cliente_**) tem uma necessidade e o usuário (**_freteiro_**) tem um serviço a oferecer, então as tarefas executadas no sistema são feitas pelos próprios utilizadores da aplicação. Por consequência disso, as postagens devem ser realizáveis em qualquer horário e o envio das propostas também, logo **_o sistema deve possuir a capacidade de receber requisições 24 horas por dia, durante todos os dias da semana, inclusive ao longo dos feriados._**
+
+**_A interação com o sistema pode ter diversas variações devido a localidade e sinal de internet do usuário, fato que pode restringir a navegação e o acesso ao sistema._**
 
 ### 5. Principais necessidades dos usuários
+As pessoas que necessitam contratar algum serviço de frete na grande maioria das vezes não sabem quem chamar ou então tentam falar com o máximo de pessoas até encontrar alguém que saiba o número ou conheça um freteiro. No momento há alguns aplicativos que tentam sanar essa falta de praticidade como a Easyfrete, a fretebras, entre outros. Como esses sistemas são de índoles mais especificas, para empresas, acabam não abrangendo todos os usuários necessitados dos serviços de frete. Devido a isso, acaba prejudicando uma parte de possíveis clientes de pequeno e médio porte.
+
+Nesse contexto, os clientes gostariam que fosse construído um sistema que envolvesse todas as camadas de usuários, como empresas e pessoas físicas. Para que nele sejam feitas os registros e divulgação dos serviços de fretes pendentes.
+
+Para isso, o sistema deve permitir a realização de postagens dos pedidos de serviço com: **_preço (opcional), descrição e trajeto._** O sistema também deve permitir a realização de **_propostas e contrapropostas_** por parte dos freteiros sobre determinada postagem.
 
 ### 6.	Alternativas concorrentes
 Atualmente, não existem alternativas, que realizem a ligação entre pessoas físicas para negociação de fretes, porém, existem plataformas que indicam e listam transportadoras apenas para fretes com pequenas cargas, são elas: Kangu e Central do Frete.
