@@ -21,14 +21,17 @@
 
 ### 3. Descrição dos usuários
 Nome:
-Usuario1: Transportadores autônomos/Empresas de transporte
-Usuario2: Clientes/Pessoas que desejam transportar alguma mercadoria
+
+Usuario1: Transportadores autônomos/Empresas de transporte.
+Usuario2: Clientes/Pessoas que desejam transportar alguma mercadoria.
 
 Ambiente de trabalho
+
 Usuario1: O ambiente do transportador terá acesso as ordens de transporte.
-Usuario2:  O ambiente do cliente poderá criar ordens de transporte com especificações e também poderá acompanhar o andamento
+Usuario2:  O ambiente do cliente poderá criar ordens de transporte com especificações e também poderá acompanhar o andamento.
 
 Responsabilidade
+
 Usuario1: O transportador terá que filtrar as ordens de transporte, também devem precificar as ordens que possui interesse e criar uma oferta, além de atualizar corretamente o sistema com relação a ordens em andamento.
 Usuario2: O cliente terá que preencher corretamente os dados ao criar uma ordem, também deve analisar ofertas de transportadores, negociar e acompanhar sua ordem até ela ser concluída. 
 
