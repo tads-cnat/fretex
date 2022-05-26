@@ -20,6 +20,17 @@
 | **_Uma boa solução seria_** | uma plataforma que conectasse pessoas que necessitam enviar produtos com freteiros que buscam criar uma renda extra ou empresas de frete que queiram aumentar seu lucro.|
 
 ### 3. Descrição dos usuários
+Nome:
+Usuario1: Transportadores autônomos/Empresas de transporte
+Usuario2: Clientes/Pessoas que desejam transportar alguma mercadoria
+
+Ambiente de trabalho
+Usuario1: O ambiente do transportador terá acesso as ordens de transporte.
+Usuario2:  O ambiente do cliente poderá criar ordens de transporte com especificações e também poderá acompanhar o andamento
+
+Responsabilidade
+Usuario1: O transportador terá que filtrar as ordens de transporte, também devem precificar as ordens que possui interesse e criar uma oferta, além de atualizar corretamente o sistema com relação a ordens em andamento.
+Usuario2: O cliente terá que preencher corretamente os dados ao criar uma ordem, também deve analisar ofertas de transportadores, negociar e acompanhar sua ordem até ela ser concluída. 
 
 ### 4. Descrição do ambiente dos usuários
 Por se tratar de uma **_plataforma web_** em que o usuário (**_cliente_**) tem uma necessidade e o usuário (**_freteiro_**) tem um serviço a oferecer, então as tarefas executadas no sistema são feitas pelos próprios utilizadores da aplicação. Por consequência disso, as postagens devem ser realizáveis em qualquer horário e o envio das propostas também, logo **_o sistema deve possuir a capacidade de receber requisições 24 horas por dia, durante todos os dias da semana, inclusive ao longo dos feriados._**
