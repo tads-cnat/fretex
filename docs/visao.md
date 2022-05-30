@@ -41,14 +41,15 @@ Por se tratar de uma **_plataforma web_** em que o usuário (**_cliente_**) tem 
 **_A interação com o sistema pode ter diversas variações devido a localidade e sinal de internet do usuário, fato que pode restringir a navegação e o acesso ao sistema._**
 
 ### 5. Principais necessidades dos usuários
-As pessoas que necessitam contratar algum serviço de frete na grande maioria das vezes não sabem quem chamar ou então tentam falar com o máximo de pessoas até encontrar alguém que saiba o número ou conheça um freteiro. No momento há alguns aplicativos que tentam sanar essa falta de praticidade como a kangu, central do frete, entre outros. Como esses sistemas são de nichos mais especificas, para empresas, acabam não abrangendo todos os usuários necessitados dos serviços de frete. Devido a isso, acaba prejudicando uma parte de possíveis clientes de pequeno e médio porte.
+As pessoas que necessitam contratar algum serviço de frete na grande maioria das vezes não sabem quem chamar ou então tentam falar com o máximo de pessoas até encontrar alguém que saiba o número ou conheça um freteiro. No momento há alguns aplicativos que tentam sanar essa falta de praticidade como a Kangu, Central do Frete, entre outros. Como esses sistemas são de nichos mais especificas, para empresas, acabam não abrangendo todos os usuários necessitados dos serviços de frete. Devido a isso, acaba prejudicando uma parte de possíveis clientes de pequeno e médio porte.
 
 Nesse contexto, os clientes gostariam que fosse construído um sistema que envolvesse todas as camadas de usuários, como empresas e pessoas físicas. Para que nele sejam feitas os registros e divulgação dos serviços de fretes pendentes.
 
 Para isso, o sistema deve permitir a realização de postagens dos pedidos de serviço com: **_preço (opcional), descrição e trajeto._** O sistema também deve permitir a realização de **_propostas e contrapropostas_** por parte dos freteiros sobre determinada postagem.
 
 ### 6.	Alternativas concorrentes
-Atualmente, não existem alternativas, que realizem a ligação entre pessoas físicas para negociação de fretes, porém, existem plataformas que indicam e listam transportadoras apenas para fretes com pequenas cargas, são elas: Kangu e Central do Frete.
+Atualmente, existem 2 alternativas. Uma delas é a Kangu, uma plataforma tecnológica que conecta lojas virtuais, transportadoras e pontos de coleta para envio e retirada de mercadorias. A segunda opção é o Central do Frete, que lista as transportadoras disponíveis para realizar o frete com as características que o cliente informou.Ou seja, essas alternativas disponíveis não conseguem fazer uma ligação direta entre o cliente e o freteiro, que é o proposto pela Fretex, dando assim uma maior liberdade e autonomia para o cliente e o freteiro.
+
 ### 7.	Visão geral do produto
 **_Fretex_**, nova plataforma de fretes, deve ser desenvolvida para navegadores já existentes. Sua interface com o usuário deve ter uma boa usabilidade e ser clara para reduzir o tempo gasto de seus usuários.
 
