@@ -56,28 +56,6 @@ Atualmente, existem 2 alternativas. Uma delas é a Kangu, uma plataforma tecnol�
 O sistema se propõe a servir de facilitador para os **_clientes_**, que desejam encontrar um freteiro para suas situações diárias, e também para os **_freteiros_** que buscam aumentar e controlar sua renda. Fornecendo uma negociação breve e rápida entre as duas partes.
 
 ### 8. Requisitos Funcionais
-```
-| Cod. | Nome | Descrição |
-| :---: | :---: | :--- |
-| RF001 | Fazer Login | Deve ser possível fazer login no sistema. Todos os tipos de usuários devem fazer login no sistema para ter acesso às informações particulares de cada um. Para realizar o login o usuário deve passar o nome de um usuário e senha. |
-| RF002 | Cadastrar pedido de frete | Deve ser possível criar um pedido de frete. |
-| RF003 | Listar pedidos de fretes | Deve ser possível listar os pedidos de fretes. Essa opção deverá permitir filtros pois será utilizada em vários casos de uso da aplicação. |
-| RF004 | Atualizar pedido de frete | Deve ser possível atualizar um pedido de frete que ainda não tenha sido finalizado. |
-| RF005 | Deletar frete concluído | Deve ser possível deletar pedidos de fretes que já foram concluídos. |
-| RF006 | Cadastrar cliente | Deve ser possível fazer o cadastro de clientes. Clientes são o tipo de usuário responsável por fazer os pedidos de frete. |
-| RF007 | Listar clientes | Deve ser possível listar os clientes cadastrados. |
-| RF008 | Atualizar cliente | Deve ser possível atualizar os dados da conta de um cliente. |
-| RF009 | Deletar cliente | Deve ser possível deletar a conta de um cliente. |
-| RF010 | Cadastrar fretista | Deve ser possível fazer um cadastro de fretista. |
-| RF011 | Listar fretistas | Deve ser possível listar os fretistas que estejam cadastrados. |
-| RF012 | Atualizar fretista | Deve ser possível atualizar os dados da conta de um fretista. |
-| RF013 | Deletar fretista | Deve ser possível deletar a conta de um fretista. |
-| RF014 | Cadastrar veículo | Deve ser possível cadastrar o veículo de um fretista. |
-| RF015 | Listar veículos | Deve ser possível listar o veículo de um fretista. |
-| RF016 | Atualizar veículo | Deve ser possível atualizar os dados do veículo de um fretista. |
-| RF017 | Deletar veículo | Deve ser possível deletar os dados do veículo de um fretista. |
-
-```
 | Cod. | Nome | Descrição |
 | :---: | :---: | :--- |
 | RF001 | Autenticação | Fazer login na plataforma para acessar o conteúdo. |
