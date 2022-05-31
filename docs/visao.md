@@ -56,6 +56,7 @@ Atualmente, existem 2 alternativas. Uma delas é a Kangu, uma plataforma tecnol�
 O sistema se propõe a servir de facilitador para os **_clientes_**, que desejam encontrar um freteiro para suas situações diárias, e também para os **_freteiros_** que buscam aumentar e controlar sua renda. Fornecendo uma negociação breve e rápida entre as duas partes.
 
 ### 8. Requisitos Funcionais
+```
 | Cod. | Nome | Descrição |
 | :---: | :---: | :--- |
 | RF001 | Fazer Login | Deve ser possível fazer login no sistema. Todos os tipos de usuários devem fazer login no sistema para ter acesso às informações particulares de cada um. Para realizar o login o usuário deve passar o nome de um usuário e senha. |
@@ -75,6 +76,16 @@ O sistema se propõe a servir de facilitador para os **_clientes_**, que desejam
 | RF015 | Listar veículos | Deve ser possível listar o veículo de um fretista. |
 | RF016 | Atualizar veículo | Deve ser possível atualizar os dados do veículo de um fretista. |
 | RF017 | Deletar veículo | Deve ser possível deletar os dados do veículo de um fretista. |
+
+```
+| Cod. | Nome | Descrição |
+| :---: | :---: | :--- |
+| RF001 | Autenticação | Fazer login na plataforma para acessar o conteúdo. |
+| RF002 | Gerenciar pedidos de frete | Gerenciar os dados relacionadas a um pedido de frete |
+| RF003 | Gerenciar clientes | Gerenciar os dados da conta de um cliente. |
+| RF004 | Gerenciar fretistas | Gerenciar os dados da conta dos fretistas. |
+| RF005 | Gerenciar veículos | Gerenciar os dados referentes aos veículos de um freteiro. |
+
 
 ### 9. Requisitos não-funcionais
 | Cod. | Nome | Descrição | Categoria | Classificação |
