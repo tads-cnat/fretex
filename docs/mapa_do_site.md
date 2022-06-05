@@ -10,9 +10,9 @@ flowchart TD
   cadastro_freteiro(Página de cadastro de Freteiro.)
   perfil_freteiro(Perfil do Freteiro cadastrado.)
   perfil_cliente(Perfil do Cliente cadastrado.)
-  meus_fretes_freteiro(Listar Fretes do Freteiro.)
+  meus_fretes_freteiro(Dashboard_freteiro.)
   meus_fretes_cliente(Dashboard_cliente.)
-  fretes_disponíveis_freteiro(Dashboard_freteiro.)
+  fretes_disponíveis_freteiro(Fretes disponíveis.)
   
   
   index -- Clicou em Login--> login
