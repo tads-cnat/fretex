@@ -1,15 +1,13 @@
 # Documento de visão
 
-## Rede Social (Trails)
-
 ### Histórico da Revisão 
 
-|  Data  | Versão | Descrição | Autor |
+|  Data  | Versão | Descrição | Autores |
 |:-------|:-------|:----------|:------|
-| 05/06/2021 |  **`1.00`** | Versão Inicial  | Alessandro Souza|
+| 30/05/2022 |  **`1.00`** | Versão Inicial  | Alessandro Souza, Arthur Medeiros, Italo Gabriel, Lucas Oliveira, Marcos Alexandre, Mathews Dantas, Sávio Araújo.|
 
 
-### 1. Objetivo do Projeto 
+### 1. Projeto: **`Fretex`**
 
 ### 2. Descrição do problema 
 | __ | __ |
