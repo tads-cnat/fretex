@@ -1,0 +1,82 @@
+{% extends 'layouts/guest.html' %}
+{% load static %}
+
+{% block content %}
+<nav class="bg-black p-4 text-white">
+    <div class="container mx-auto flex justify-between items-center">
+        <div>
+            <a href="#" class="text-white text-2xl font-bold">
+                Frete<span class="text-yellow-300">X</span>
+            </a>
+        </div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a href="#">Fretes</a>
+            <a href="#">Para freteiros</a>
+            <a href="#">Contato</a>
+            <a href="#" class="bg-yellow-300 px-4 py-2 rounded text-black">LOGIN</a>
+        </div>
+    </div>
+</nav>
+<section class="bg-black text-white py-24">
+    <div class="md:container md:mx-auto md:flex md:items-center gap-8">
+        <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1">
+            <h1 class="font-bold text-6xl">Fretex, sua encomenda sem complicação.</h1>
+            <p class="text-gray-300">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
+            <a href="#" class="bg-yellow-300 px-4 py-2 rounded text-black text-center md:w-max font-bold">FAZER PEDIDO DE FRETE</a>
+        </div>
+        <div class="py-8 md:px-8 md:flex-1 md:-mr-96">
+            <img src="{% static "images/header_image.svg" %}"/>
+        </div>
+    </div>
+</section>
+<section class="py-24">
+    <div class="container mx-auto gap-8 flex flex-col px-4">
+        <div class="flex flex-col items-center justify-center">
+            <h1 class="text-3xl border-x-4 border-yellow-400 font-bold md:text-6xl w-max px-2">Como a FreteX funciona?</h1>
+            <p class="text-xl mt-4 w-full md:w-1/2 text-center">Nós facilitamos a oferta do serviço de frete em todo o Brasil, atendendo Clientes  e Freteiros Autônomos.</p>
+        </div>
+        <div class="flex flex-col md:flex-row gap-16">
+            <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                <img src="{% static "images/cart.svg" %}" class="w-1/2"/>
+                <p class="text-gray-800 text-lg">Os Clientes publicam os fretes em nossa plataforma</p>
+            </div>
+            <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                <img src="{% static "images/truck.svg" %}" class="w-1/2"/>
+                <p class="text-gray-800 text-lg">Os Freteiros procuram os fretes compatíveis e de seu interesse</p>
+            </div>
+            <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                <img src="{% static "images/hands.svg" %}" class="w-1/2"/>
+                <p class="text-gray-800 text-lg">Ambos negociam diretamente o frete, sem intermediário</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-black text-white py-24">
+    <div class="md:container px-4 flex mx-auto gap-8">
+        <div class="flex gap-12 flex-col flex-1">
+            <div class="flex flex-col gap-4">
+                <h2 class="text-2xl text-gray-200">FRETES COM DISCRIÇÃO</h2>
+                <h1 class="text-6xl font-semibold">Descubra as vantagens.</h1>
+                <p class="text-2xl text-gray-100">Os fretes com descrição ajudam os clientes a encontrarem um freteiro mais rápido. 
+                    E consequentemente ajudam os freteiros a encontrarem os fretes ideais para eles.</p>
+            </div>
+            <a href="#" class="text-yellow-400 text-2xl font-semibold underline">Vantagens</a>
+            <div class="flex gap-4">
+                <div class="flex flex-col gap-4 flex-1">
+                    <h1 class="text-yellow-400">IC</h1>
+                    <h2 class="text-2xl font-medium">Filtros precisos</h2>
+                    <p>Com a descrição os freteiros conseguem encontrar os fretes mais próximos, além disso podem filtrar por região, preço, entre outros.</p>
+                </div>
+                <div class="flex flex-col gap-4 flex-1">
+                    <h1 class="text-yellow-400">IC</h1>
+                    <h2 class="text-2xl font-medium">Filtros precisos</h2>
+                    <p>Com a descrição os freteiros conseguem encontrar os fretes mais próximos, além disso podem filtrar por região, preço, entre outros.</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 hidden md:flex">
+            <img src="{% static "images/diferencial.jpg" %}" class="w-full rounded-lg -mt-32"/>
+        </div>
+    </div>
+</section>
+{% endblock %}
