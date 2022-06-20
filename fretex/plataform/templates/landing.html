@@ -21,7 +21,7 @@
     <div class="md:container md:mx-auto md:flex md:items-center gap-8">
         <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1">
             <h1 class="font-bold text-6xl">Fretex, sua encomenda sem complicação.</h1>
-            <p class="text-gray-300">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
+            <p class="text-neutral-500">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
             <a href="#" class="bg-yellow-300 px-4 py-2 rounded text-black text-center md:w-max font-bold">FAZER PEDIDO DE FRETE</a>
         </div>
         <div class="py-8 md:px-8 md:flex-1 md:-mr-96">
@@ -79,4 +79,54 @@
         </div>
     </div>
 </section>
+<section class="bg-yellow-400 text-white py-24">
+    <div class="flex flex-row container mx-auto">
+        <div class="hidden basis-1/2 md:block py-8 md:px-8  md:-ml-80 md:grow">
+            <img class="rounded-2xl"src="{% static "images/funcionario.jpg" %}"/>
+        </div>
+        <div class="px-4 basis-1/1 md:basis-1/2 md:px-0 py-8 flex flex-col gap-8 grow-0 justify-center">
+            <h1 class="font-bold text-6xl drop-shadow-lg max-w-lg">Uma das melhores plataformas para envio de cargas de pequeno e médio porte.</h1>
+        </div>
+    </div>
+</section>
+<section class="text-white bg-black md:flex">
+    <div class="bg-[url('/static/images/cliente.jpg')] gap-4 flex flex-col items-center px-8 py-24 bg-center grow">
+        <h1 class="font-bold text-5xl">Para clientes<span class="text-yellow-300">.</span></h1>
+        <p class="font-semibold">Publique seus pedidos de fretes.</p>
+        <a href="#" class="bg-yellow-400 px-4 py-2 rounded text-black text-center md:w-max font-bold">CADASTRE-SE</a>
+    </div>
+    <div class="bg-[url('/static/images/freteiro.jpg')] gap-4 flex flex-col items-center px-8 py-24 bg-center grow">
+        <h1 class="font-bold text-5xl">Para freteiros<span class="text-yellow-300">.</span></h1>
+        <p class="font-semibold">Encontre as melhores cargas para o seu veículo.</p>
+        <a href="#" class="bg-yellow-400 px-4 py-2 rounded text-black text-center md:w-max font-bold">CADASTRE-SE</a>
+    </div>
+</section>
+<footer class="bg-black text-white py-8 px-4">
+    <div class="container grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+        <div class="flex flex-col gap-4">
+            <a href="#" class="text-white text-2xl font-bold">
+                Frete<span class="text-yellow-300">X</span>
+            </a>
+        </div>
+        <div class="flex flex-col gap-4">
+            <h1 class="text-xl ">CONTATO</h1>
+            <a class="text-neutral-500">+55 21 9999-9999</a>
+            <a class="text-neutral-500">contato@fretex.com</a>
+            <a class="text-neutral-500">Rua do IF, 42 - Grêmio. Natal - RN</a>
+            <div class="flex gap-4">
+                <a href="#">IN</a>
+                <a href="#">FB</a>
+                <a href="#">YT</a>
+            </div>
+        </div>
+        <div class="flex flex-col gap-4">
+            <h1 class="text-xl ">INFORMAÇÕES</h1>
+            <a href="#" class="text-neutral-500">Seguros</a>
+            <a href="#" class="text-neutral-500">Contatos</a>
+            <a href="#" class="text-neutral-500">Termos e Condições</a>
+        </div>
+        <div>
+            <span class="text-neutral-500">Fretex © Alguns direitos reservados.</span>
+        </div>
+</footer>
 {% endblock %}
