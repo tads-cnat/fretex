@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <title>Escolha seu cadastro</title>
+</head>
+
+<body class="form-bg bg-escolha">
+    <main class="container-escolha">
+        <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
+        <p class="font-1-s cor-0 mb-15">Vamos lá, o que deseja fazer?</p>
+        <a href="/cadastrofreteiro/" class="container-opcao">
+            <img src="{% static "images/truck.svg" %}" alt="caminhão" class="img-opcao">
+            <div class="opcao-texto">
+                <h2 class="font-1-m-b cor-0">Quero buscar fretes</h2>
+                <p class="font-1-m cor-0">Aqui você encontra e negocia as melhores opções de fretes em todo o Brasil.</p>
+            </div>
+            <img src="{% static "images/setaDireita.png" %}" alt="seta para direita" class="seta">
+        </a>
+
+        <a href="/cadastrocliente/" class="container-opcao">
+            <img src="{% static "images/cart.svg" %}" alt="carrinho" class="img-opcao">
+            <div class="opcao-texto">
+                <h2 class="font-1-m-b cor-0">Quero anunciar fretes</h2>
+                <p class="font-1-m cor-0">Aqui você anuncia seus fretes para encontrar motoristas de forma rápida e segura.</p>
+            </div>
+            <img src="{% static "images/setaDireita.png" %}" alt="seta para direita" class="seta">
+        </a>
+    </main>
+</body>
+
+</html>

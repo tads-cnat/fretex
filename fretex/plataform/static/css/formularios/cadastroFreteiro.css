@@ -1,0 +1,62 @@
+body .cadastro-freteiro {
+    max-width: 500px;
+}
+
+.container-campos-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 10px;
+}
+
+.container-campos-2 {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 0px 15px;
+}
+
+.container-campos-1 label,
+.container-campos-2 label {
+    display: block;
+}
+
+.container-campos-1 input,
+.container-campos-2 #rua,
+.container-campos-2 #numero,
+.container-formulario #estado {
+    width: 100%;
+}
+
+.container-cadastro-2 #numero {
+    padding: 5px;
+}
+
+.container-formulario #estado {
+    border-radius: 10px;
+    border: none;
+    padding: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+    body .cadastro-freteiro {
+        margin-bottom: 0;
+    }
+    .form-bg-3 {
+        background-color: #202020;
+    }
+}
+
+@media (max-width: 400px) {
+    .container-campos-1 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .container-campos-2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

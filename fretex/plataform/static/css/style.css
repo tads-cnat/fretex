@@ -1,0 +1,10 @@
+@import "./global/global.css";
+@import "./utilidades/tipografia.css";
+@import "./utilidades/cores.css";
+
+/* Formulários */
+@import "./formularios/form-global.css";
+@import "./formularios/cadastroCliente.css";
+@import "./formularios/cadastroFreteiro.css";
+@import "./formularios/login.css";
+@import "./formularios/escolhaCadastro.css";
