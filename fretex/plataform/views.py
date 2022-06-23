@@ -15,3 +15,6 @@ def cadastroCliente(request):
 
 def cadastroFreteiro(request):
     return render(request, 'cadastroFreteiro.html')
+
+def fretes_index(request):
+    return render(request, 'fretes/index.html')

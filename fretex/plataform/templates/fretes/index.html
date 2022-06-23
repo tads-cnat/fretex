@@ -1,0 +1,22 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+<main id="fretesIndex" class="container mx-auto fretes-index">
+    <header>
+        <h1>Fretes disponíveis</h1>
+        <form method="GET" action="{% url 'fretes.index' %}">
+            <label for="order">Ordenar por</label>
+            <select id="order" name="order" onchange="this.form.submit()">
+                <option value="1" {% if request.GET.order == '1' %} selected {% endif %}>Mais relevantes</option>
+                <option value="2" {% if request.GET.order == '2' %} selected {% endif %}>Mais recentes</option>
+            </select>
+        </form>
+    </header>
+    <aside>
+
+    </aside>
+    <main>
+        
+    </main>
+</main>
+{% endblock %}
