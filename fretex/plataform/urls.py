@@ -10,5 +10,7 @@ urlpatterns = [
     path('cadastrocliente/', views.cadastroCliente, name='cadastrocliente'),
     path('cadastrofreteiro/', views.cadastroFreteiro, name='cadastrofreteiro'),
 
+    path('dashboardfreteiro/', views.dashboardFreteiro, name='dashboardfreteiro'),
+
     path('fretes/', views.fretes_index, name='fretes.index'),
 ]
