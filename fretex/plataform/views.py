@@ -21,3 +21,6 @@ def dashboardFreteiro(request):
 
 def fretes_index(request):
     return render(request, 'fretes/index.html')
+
+def detalhesFreteFreteiro(request):
+    return render(request, 'fretes/detalhesFretesDisponiveis.html')

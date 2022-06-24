@@ -1,0 +1,132 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/detalhesFretes.css' %}">{% endblock %}
+{% block title %}Cadastro - Cliente{% endblock %}
+
+{% block content %}
+
+<main class="detalhesFretes container mx-auto md:padding-1">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Detalhes do Frete</h1>
+        <hr>
+    </div>
+    <div class="container-detalhes-geral">
+        <p class="font-1-l mb-3 font-semibold data-pedido">Data do pedido: 13/06/2022</p>
+        <div class="container-detalhes">
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/detalhesPerfil.svg' %}" alt="">
+                <p class="font-1-m">Cliente: joaozin</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/iconeLocalidade.svg' %}" alt="">
+                <p class="font-1-m">Origem: Rua do IF</p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Destino: parnamirim</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/calendario.svg' %}" alt="">
+                <p class="font-1-m">Data de coleta: XX/XX/XXXX </p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Data de entrega: XX/XX/XXXX</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/observacao.svg' %}" alt="">
+                <p class="font-1-m">Observação:</p>
+            </div>
+            <p class="font-1-xs mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero nostrum rerum quo harum odio, nesciunt ea blanditiis, nam, ad error cum. Minima vel inventore ad veritatis enim ipsam earum quia.</p>
+            <div class="div-botao">
+                <button id="myBtn" class="botao-padrao">Realizar proposta</button>
+            </div>
+        </div>
+        <div class="lateral">
+            <img src="{% static 'images/imgteste.svg' %}" alt="" class="mb-2">
+            <p class="font-1-m font-semibold mb-2">Produto: Livros</p>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header mb-2">
+                <span class="close">&times;</span>
+                <h2 class="font-1-m font-semibold">Proposta</h2>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <p class="font-1-m font-semibold mb-2">Informe o veículo a ser usado:</p>
+
+                    <div class="veiculo mb-3">
+                        <input type="radio" name="veiculo" id="veiculo">
+                        <label for="veiculo">
+                            <div class="imagem-veiculo">
+                                <img src="{% static 'images/imgteste.svg' %}" alt="">
+                            </div>
+                            <div>
+                                <p class="font-1-m">Marca: Fiat</p>
+                                <p class="font-1-m">Modelo: Palio</p>
+                                <p class="font-1-m">Ano: 2016</p>
+                                <p class="font-1-m">Placa do veículo: XXXXXXX</p>
+                                <p class="font-1-m">Cor do veículo: Cranco</p>
+                                <p class="font-1-m">Tipo do veículo: Carro</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="mb-3 flex flex-col">
+                        <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
+                        <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="botao-padrao enviar-proposta" id="myBtn2">Realizar proposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="myModal2" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header mb-2">
+                <span class="close">&times;</span>
+                <h2 class="font-1-m font-semibold">Proposta</h2>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <p class="font-1-m font-semibold mb-2">Informe o veículo a ser usado:</p>
+
+                    <div class="veiculo mb-3">
+                        <input type="radio" name="veiculo" id="veiculo">
+                        <label for="veiculo">
+                            <div>
+                                <img src="{% static 'images/imgteste.svg' %}" alt="">
+                            </div>
+                            <div>
+                                <p>Marca: Fiat</p>
+                                <p>Modelo: Palio</p>
+                                <p>Ano: 2016</p>
+                                <p>Placa do veículo: XXXXXXX</p>
+                                <p>Cor do veículo: Cranco</p>
+                                <p>Tipo do veículo: Carro</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="mb-3 flex flex-col">
+                        <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
+                        <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="botao-padrao enviar-proposta">Realizar proposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}

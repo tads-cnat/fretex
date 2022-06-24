@@ -4,21 +4,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
         <!-- CSS GLOBAL -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <!-- FIM CSS GLOBAL -->
+        <link rel="stylesheet" href="{% static 'css/fretes.css' %}">
         
         <title>{% block title %} {% endblock %}</title>
     </head>
     <body>
         <header>
             <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-black">
-                <div class="container flex flex-wrap justify-between items-center mx-auto">
+                <div class="container flex flex-wrap justify-between items-center mx-auto gap-4">
 
                     <a href="/" class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></a>
         
@@ -84,10 +84,10 @@
                 </div>
 
                 <div class="flex flex-col gap-4">
-                    <h1 class="font-2-l-b cor-0">CONTATO</h1>
-                    <a class="font-2-m cor-5">+55 21 9999-9999</a>
-                    <a class="font-2-m cor-5">contato@fretex.com</a>
-                    <a class="font-2-m cor-5">Rua do IF, 42 - Grêmio. Natal - RN</a>
+                    <h1 class="font-2-l-b cor-0">Contato</h1>
+                    <a class="font-1-m cor-5">+55 21 9999-9999</a>
+                    <a class="font-1-m cor-5">contato@fretex.com</a>
+                    <a class="font-1-m cor-5">Rua do IF, 42 - Grêmio. Natal - RN</a>
                     <div class="flex gap-4">
                         <a href="#"><img src="{% static 'images/instagram.svg' %}" alt="instagram"></a>
                         <a href="#"><img src="{% static 'images/facebook.svg' %}" alt="facebook"></a>
@@ -95,18 +95,20 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-4 links-footer">
+                <div class="flex flex-col gap-4">
                     <h1 class="font-2-l-b cor-0">Informações</h1>
-                    <a href="#" class="font-1-m cor-5 link-info">Seguros</a>
-                    <a href="#" class="font-1-m cor-5">Contatos</a>
-                    <a href="#" class="font-1-m cor-5">Termos e Condições</a>
+                    <a href="#" class="font-1-m cor-5 link-info hover:text-gray-50">Seguros</a>
+                    <a href="#" class="font-1-m cor-5 hover:text-gray-50">Contatos</a>
+                    <a href="#" class="font-1-m cor-5 hover:text-gray-50">Termos e Condições</a>
                 </div>
 
                 <div>
-                    <span class="font-2-m cor-6">Fretex © Alguns direitos reservados.</span>
+                    <span class="font-1-m cor-6">Fretex © Alguns direitos reservados.</span>
                 </div>
             </div>
         </footer>
         <script src="{% static 'js/script.js' %}"></script>
+        {% block js %}
+        {% endblock %}
     </body>
 </html>

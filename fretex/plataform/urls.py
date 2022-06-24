@@ -13,4 +13,5 @@ urlpatterns = [
     path('dashboardfreteiro/', views.dashboardFreteiro, name='dashboardfreteiro'),
 
     path('fretes/', views.fretes_index, name='fretes.index'),
+    path('fretes/detalhes/', views.detalhesFreteFreteiro, name='detalhesfretefreteiro'),
 ]
