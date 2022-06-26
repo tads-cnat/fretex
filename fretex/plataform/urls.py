@@ -10,8 +10,10 @@ urlpatterns = [
     path('cadastrocliente/', views.cadastroCliente, name='cadastrocliente'),
     path('cadastrofreteiro/', views.cadastroFreteiro, name='cadastrofreteiro'),
 
-    path('dashboardfreteiro/', views.dashboardFreteiro, name='dashboardfreteiro'),
-
     path('fretes/', views.fretes_index, name='fretes.index'),
-    path('fretes/detalhes/', views.detalhesFreteFreteiro, name='detalhesfretefreteiro'),
+    path('fretes/detalhes/', views.detalhesFretesDisponiveis, name='detalhesFretesDisponiveis'),
+
+    path('dashboardfreteiro/', views.dashboardFreteiro, name='dashboardfreteiro'),
+    path('dashboardfreteiro/detalhes/', views.detalhesMeusFretesFreteiro, name='detalhesMeusFretesFreteiro'),
+    path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente, name='detalhesMeusFretesCliente'),
 ]
