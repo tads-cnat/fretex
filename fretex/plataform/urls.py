@@ -16,4 +16,6 @@ urlpatterns = [
     path('dashboardfreteiro/', views.dashboardFreteiro, name='dashboardfreteiro'),
     path('dashboardfreteiro/detalhes/', views.detalhesMeusFretesFreteiro, name='detalhesMeusFretesFreteiro'),
     path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente, name='detalhesMeusFretesCliente'),
+
+    path('cadastrofrete/origem-destino', views.cadastro1, name="cadastro1"),
 ]

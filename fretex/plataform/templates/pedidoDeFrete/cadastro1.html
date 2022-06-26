@@ -1,0 +1,143 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Cadastro - Cliente{% endblock %}
+
+{% block content %}
+
+<main class="detalhesFretes  mx-auto md:padding-1 bg-cadastro">
+    <div class="container mb-3 md:mb-5 mx-auto md:padding-1">
+        <div class="mb-6">
+            <h1 class="font-1-xl cor-0 mt-2 md:mt-10 mb-3">Cadastro do pedido de frete</h1>
+            <hr>
+        </div>
+        <div class="container-cadastro-form">
+            <h2 class="font-1-s text-lg font-semibold cor-0 mb-4">Publique seu pedido agora mesmo</h2>
+            <div class="barraDeProgresso mb-3">
+                <div class="progressoAtual"></div>
+            </div>
+            <form action="" method="post" class="form-cadastro-frete">
+                <div class="">
+                    <h3 class="font-1-s font-semibold cor-0 mb-2">Origem</h3>
+                    <div class="container-campos-2 mb-2">
+                        <div class="mb-2">
+                            <label for="rua" class="font-1-s cor-0 mb-2">Rua*</label>
+                            <input type="text" name="rua" id="rua" placeholder="Digite a sua rua" class="font-1-s">
+                        </div>
+                        <div>
+                            <label for="numero" class="font-1-s cor-0 mb-2">Número*</label>
+                            <input type="text" name="numero" id="numero" class="font-1-s">
+                        </div>
+                    </div>
+                    <div class="container-campos-1 mb-2">
+                        <div class="mb-2">
+                            <label for="estado" class="font-1-s cor-0 mb-2">Estado*</label>
+                            <select id="estado" name="estado" class="font-1-s" required>
+                                <option value="" selected>Selecione uma opção</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="bairro" class="font-1-s cor-0 mb-2">Bairro/Distrito*</label>
+                            <input type="text" name="bairro" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-3">
+                        <label for="complemento" class="font-1-s cor-0 mb-2">Complemento</label>
+                        <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento" class="font-1-s">
+                    </div>
+
+                    <h3 class="font-1-s font-semibold cor-0 mb-2">Destino</h3>
+                    <div class="container-campos-2 mb-2">
+                        <div class="mb-2">
+                            <label for="rua" class="font-1-s cor-0 mb-2">Rua*</label>
+                            <input type="text" name="rua" id="rua" placeholder="Digite a sua rua" class="font-1-s">
+                        </div>
+                        <div>
+                            <label for="numero" class="font-1-s cor-0 mb-2">Número*</label>
+                            <input type="text" name="numero" id="numero" class="font-1-s">
+                        </div>
+                    </div>
+                    <div class="container-campos-1 mb-2">
+                        <div class="mb-2">
+                            <label for="estado" class="font-1-s cor-0 mb-2">Estado*</label>
+                            <select id="estado" name="estado" class="font-1-s" required>
+                                <option value="" selected>Selecione uma opção</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="bairro" class="font-1-s cor-0 mb-2">Bairro/Distrito*</label>
+                            <input type="text" name="bairro" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="complemento" class="font-1-s cor-0 mb-2">Complemento</label>
+                        <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento" class="font-1-s">
+                    </div>
+                    <div class="meio">
+                        <button class="botao-padrao ">Próximo</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+
+
+</main>
+{% endblock %}
+
+{% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}
