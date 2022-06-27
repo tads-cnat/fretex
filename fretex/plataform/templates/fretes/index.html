@@ -6,7 +6,7 @@
 <main id="fretesIndex" class="py-14 container mx-auto flex gap-8 flex-col md:grid md:grid-cols-12 gap-y-8 px-4">
     <header class="py-4 flex justify-between border-b border-neutral-100 col-span-12 flex-col md:flex-row gap-4 items-center">
         <h1 class="font-bold text-5xl">Fretes disponíveis</h1>
-        <form method="GET" action="{% url 'fretes.index' %}">
+        <form method="GET" class="self-start" action="{% url 'fretes.index' %}">
             <label for="order">Ordenar por</label>
             <select id="order" class="font-bold" name="order" onchange="this.form.submit()">
                 <option value="1" {% if request.GET.order == '1' %} selected {% endif %}>Mais relevantes</option>
@@ -15,39 +15,60 @@
         </form>
     </header>
     <aside class="col-span-3 flex md:flex-col gap-4">
-        <form class="flex md:flex-col gap-4">
-            <a href="#" class="bg-black text-white px-4 font-bold py-2 rounded-md">Filtrar resultados</a>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Estado de origem</label>
-                <select class="rounded-md border border-neutral-100 p-4">
-                    <option value="1">Valor</option>
-                </select>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Cidade de origem</label>
-                <select class="rounded-md border border-neutral-100 p-4">
-                    <option value="1">Valor</option>
-                </select>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Estado de origem</label>
-                <select class="rounded-md border border-neutral-100 p-4">
-                    <option value="1">Valor</option>
-                </select>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Cidade de origem</label>
-                <select class="rounded-md border border-neutral-100 p-4">
-                    <option value="1">Valor</option>
-                </select>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Faixa de distância</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Tipo de veículo</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <form class="flex md:flex-col gap-4 flex-wrap" method="GET" action="#">
+            <button type="submit" class="bg-black text-white px-4 font-bold py-2 rounded-md text-center">Filtrar resultados</button>
+            <div class="flex flex-wrap gap-4">
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Estado de origem</label>
+                    <select class="rounded-md border border-neutral-100 p-4">
+                        <option value="1">Valor</option>
+                    </select>
+                </div>
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Cidade de origem</label>
+                    <select class="rounded-md border border-neutral-100 p-4">
+                        <option value="1">Valor</option>
+                    </select>
+                </div>
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Estado de origem</label>
+                    <select class="rounded-md border border-neutral-100 p-4">
+                        <option value="1">Valor</option>
+                    </select>
+                </div>
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Cidade de origem</label>
+                    <select class="rounded-md border border-neutral-100 p-4">
+                        <option value="1">Valor</option>
+                    </select>
+                </div>
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Faixa de distância</label>
+                    <div class="flex text-sm gap-1">
+                        <p>1km</p>
+                        <input type="range" min="1" max="500" value="100" class="slider" id="range">
+                        <p>500km</p>
+                    </div>
+                </div>
+                <div class="flex grow flex-col gap-2">
+                    <label class="font-bold">Tipo de veículo</label>
+                    <div>
+                        <input type="checkbox" id="truck" name="truck">
+                        <label for="truck">Caminhão</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="car" name="car">
+                        <label for="car">Carro</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="moto" name="moto">
+                        <label for="moto">Moto</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="others" name="others">
+                        <label for="others">Outros</label>
+                    </div>
+                </div>
             </div>
         </form>
     </aside>
