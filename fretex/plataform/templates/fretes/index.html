@@ -42,11 +42,11 @@
                         <option value="1">Valor</option>
                     </select>
                 </div>
-                <div class="flex grow flex-col gap-2">
+                <div class="flex grow flex-col gap-2 w-full">
                     <label class="font-bold">Faixa de distância</label>
-                    <div class="flex text-sm gap-1">
+                    <div class="flex text-sm gap-1 w-full">
                         <p>1km</p>
-                        <input type="range" min="1" max="500" value="100" class="slider" id="range">
+                        <input type="range" min="1" max="500" value="100" class="w-full" id="range">
                         <p>500km</p>
                     </div>
                 </div>
@@ -63,6 +63,10 @@
                     <div>
                         <input type="checkbox" id="moto" name="moto">
                         <label for="moto">Moto</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="bicicleta" name="bicicleta">
+                        <label for="bicicleta">Bicicleta</label>
                     </div>
                     <div>
                         <input type="checkbox" id="others" name="others">
