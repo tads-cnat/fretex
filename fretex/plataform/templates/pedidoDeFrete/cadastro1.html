@@ -16,7 +16,7 @@
                 <div class="progressoAtual"></div>
             </div>
             <form action="" method="post" class="form-cadastro-frete">
-                <div class="">
+                <div id="step_1" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2">Origem</h3>
                     <div class="container-campos-2 mb-2">
                         <div class="mb-2">
@@ -126,11 +126,96 @@
                         <label for="complemento" class="font-1-s cor-0 mb-2">Complemento</label>
                         <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento" class="font-1-s">
                     </div>
-                    <div class="meio">
-                        <button class="botao-padrao ">Próximo</button>
+                    
+                    <div class="flex gap-3 meio justify-center mb-2">     
+                        <a class="botao-padrao" id="next">Próximo</a>
                     </div>
                 </div>
 
+                <div id="step_2" class="step">
+                    <div class="flex flex-col items-center sm:flex-row gap-2 items-center mb-4 mt-4">
+                        <img src="{% static 'images/funcionario.jpg' %}" class="img-cadastro-frete" alt="">
+                        <input type="file" accept="image/*" value="test">
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="produto" class="font-1-s cor-0 mb-2">Produto:</label>
+                        <input type="text" name="produto" id="produto" placeholder="Digite o produto a ser transportado" class="font-1-s">
+                    </div>
+                    <label class="font-1-s cor-0 mb-2">Tipo do veículo que pode transportar:</label>
+                    <div class="flex flex-col sm:flex-row mb-2 gap-x-3">
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="carro" value="carro">
+                            <label for="carro" class="font-1-s cor-0">Carro</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="moto" value="moto">
+                            <label for="moto" class="font-1-s cor-0">Moto</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="caminhao" value="caminhao">
+                            <label for="caminhao" class="font-1-s cor-0">Caminhão</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="bicicleta" value="bicicleta">
+                            <label for="bicicleta" class="font-1-s cor-0">Bicicleta</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="todos" value="todos">
+                            <label for="caminhao" class="font-1-s cor-0">Todos</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="observacao" class="font-1-s cor-0 mb-2">Observação:</label>
+                        <textarea name="observacao" id="observacao" cols="30" rows="10" placeholder="Digita alguma observação sobre o pedido" style="resize: none"></textarea>
+                    </div>
+                    <div class="flex flex-row sm:flex-row gap-3 meio justify-center mb-2">
+                        <a class="botao-padrao" id="prev" >Anterior</a>                     
+                        <a class="botao-padrao" id="next" >Próximo</a>
+                    </div>
+                </div>
+
+                <div id="step_3" class="step">
+                    <div class="flex flex-col items-center sm:flex-row gap-2 items-center mb-4 mt-4">
+                        <img src="{% static 'images/funcionario.jpg' %}" class="img-cadastro-frete" alt="">
+                        <input type="file" accept="image/*" value="test">
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="produto" class="font-1-s cor-0 mb-2"> TesteAAAAAAAAAAAAAAA Produto:</label>
+                        <input type="text" name="produto" id="produto" placeholder="Digite o produto a ser transportado" class="font-1-s">
+                    </div>
+                    <label class="font-1-s cor-0 mb-2">Tipo do veículo que pode transportar:</label>
+                    <div class="flex flex-col sm:flex-row mb-2 gap-x-3">
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="carro" value="carro">
+                            <label for="carro" class="font-1-s cor-0">Carro</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="moto" value="moto">
+                            <label for="moto" class="font-1-s cor-0">Moto</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="caminhao" value="caminhao">
+                            <label for="caminhao" class="font-1-s cor-0">Caminhão</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="bicicleta" value="bicicleta">
+                            <label for="bicicleta" class="font-1-s cor-0">Bicicleta</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-1">
+                            <input type="checkbox" name="tipoveiculo" id="todos" value="todos">
+                            <label for="caminhao" class="font-1-s cor-0">Todos</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="observacao" class="font-1-s cor-0 mb-2">Observação:</label>
+                        <textarea name="observacao" id="observacao" cols="30" rows="10" placeholder="Digita alguma observação sobre o pedido" style="resize: none"></textarea>
+                    </div>
+                    <div class="flex flex-row sm:flex-row gap-3 meio justify-center mb-2">
+                        <button class="botao-padrao" id="prev">Anterior</button>                     
+                        <button class="botao-padrao" id="next">Próximo</button>
+                        <button type="submit" class="botao-padrao">Enviar</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -140,4 +225,25 @@
 </main>
 {% endblock %}
 
-{% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    //Esconde todos os passos e exibe o primeiro ao carregar a página 
+    $('.step').hide();
+    $('.step').first().show();
+    
+    //avança para o próximo passo
+    $("#next").click(function(){
+        $(".step:visible").hide().next().show();
+    });
+
+    //retrocede para o passo anterior
+    $("#prev").click(function(){
+        $(".step:visible").hide().prev().show();
+    });
+
+ });
+</script>
+{% endblock %}

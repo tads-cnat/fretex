@@ -22,19 +22,26 @@
     text-align: left;
 }
 
-.form-cadastro-frete input, 
-.form-cadastro-frete select{
+.form-cadastro-frete input[type="text"], 
+.form-cadastro-frete input[type="number"],
+.form-cadastro-frete select,
+#observacao{
     width: 100%;
     border: 2px solid black;
     border-radius: 5px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
+#observacao{
+    height: 120px;
+}
+
 .form-cadastro-frete select{
     padding: 3px 0px;
 }
 
-.form-cadastro-frete input{
+.form-cadastro-frete input,
+#observacao{
     text-indent: 5px;
     padding: 2px 0px;
 }
@@ -43,8 +50,9 @@
     text-align: center;
 }
 
-.meio button{
+.meio a{
     padding: 6px 30px;
+    cursor: pointer;
 }
 
 .barraDeProgresso{
@@ -73,6 +81,11 @@
     transform: translateY(-50%);
     background-color: var(--cor-p6);
     border-radius: 100%;
+}
+
+.img-cadastro-frete {
+    width: 200px;
+    border-radius: 10px;
 }
 
 
