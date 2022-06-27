@@ -31,5 +31,5 @@ def detalhesMeusFretesFreteiro(request):
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
 
-def cadastro1(request):
-    return render(request, 'pedidoDeFrete/cadastro1.html')
+def cadastroDeFrete(request):
+    return render(request, 'pedidoDeFrete/cadastroFrete.html')
