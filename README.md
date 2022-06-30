@@ -4,10 +4,14 @@
 
 <p align="center">
 <img src="FreteX.png" width="508" height="200" align="center"/>
+
+
+
+&nbsp;
 </p>
-
-
->Inserir pequena descrição do projeto
+<p>
+O sistema se propõe a servir de facilitador para os clientes, que desejam encontrar um freteiro para suas situações diárias, e também para os freteiros que buscam aumentar e controlar sua renda. Fornecendo uma negociação breve e rápida entre as duas partes.
+</p>
 
 # Tecnologias Utilizadas
 
