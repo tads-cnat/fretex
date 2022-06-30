@@ -30,7 +30,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 # Documentação
 
->Link para os documentos do projeto
+[>Link para os documentos do projeto](https://github.com/tads-cnat/fretex/tree/main/docs)
+
+
+
+# Equipe
 
 <table>
   <tr>
