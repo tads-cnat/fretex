@@ -53,8 +53,8 @@
                         <p class="font-1-m">Realizado por jaozin</p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <button class="botao-padrao font-1-m">Aceitar</button>
-                        <button id="myBtn" class="botao-padrao font-1-m">Realizar proposta</button>
+                        <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
+                        <button id="myBtn" class="botao-padrao font-1-m font-semibold">Realizar proposta</button>
                     </div>
                 </div>
                 <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
@@ -85,7 +85,6 @@
         </div>
     </div>
 
-
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->
@@ -100,7 +99,7 @@
 
                     <div class="veiculo mb-3">
                         
-                        <label for="veiculo" style="cursor:initial;">
+                        <label for="veiculo rounded-lg" style="cursor:initial;">
                             <div class="imagem-veiculo flex items-center">
                                 <img src="{% static 'images/funcionario.jpg' %}" alt="">
                             </div>
@@ -120,7 +119,7 @@
                         <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
                     </div>
                     <div class="flex justify-center">
-                        <button class="botao-padrao enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
                     </div>
                 </form>
             </div>

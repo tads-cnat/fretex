@@ -5,15 +5,19 @@
     box-sizing: border-box;
 }
 
-.mb-10 {
-    margin-bottom: 10px;
-}
+.botao-padrao {
+    padding: 5px 10px;
+    background: linear-gradient(180deg, #FFBF00 0%, #F2A50C 100%);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    font-weight: bold;
+ }
+ 
+.botao-padrao:hover {
+    background: linear-gradient(180deg, #ebb001 0%, #db960b 100%);
+ }
 
 .mb-15 {
     margin-bottom: 15px;
-}
-
-.mb-30 {
-    margin-bottom: 30px;
 }
 

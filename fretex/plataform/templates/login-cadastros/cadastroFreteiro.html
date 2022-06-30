@@ -1,8 +1,9 @@
-{% extends 'layouts/main2.html' %}
+{% extends 'layouts/cadastroUsuario.html' %}
 {% load static %}
 {% block title %}Cadastro - Freteiro{% endblock %}
 
 {% block content %}
+
 <body class="form-bg form-bg-3 body-center2">
     <main class="container-formulario cadastro-freteiro">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
@@ -71,10 +72,13 @@
                     </select>
                 </div>
                 <div>
-                    <label for="bairro" class="font-1-s cor-0">Bairro/Distrito*</label>
-                    <input type="text" name="bairro" id="bairro" required autocomplete="on" placeholder="Digite seu bairro" class="font-1-s">
+                    <label for="cidade" class="font-1-s cor-0">Cidade*</label>
+                    <input type="text" name="cidade" id="cidade" required autocomplete="on" placeholder="Digite sua cidade" class="font-1-s">
                 </div>
             </div>
+
+            <label for="bairro" class="font-1-s cor-0">Bairro/Distrito*</label>
+            <input type="text" name="bairro" id="bairro" required autocomplete="on" placeholder="Digite seu bairro" class="font-1-s">
 
             <label for="Complemento" class="font-1-s cor-0">Complemento</label>
             <input type="text" name="Complemento" id="Complemento" placeholder="Digite o Complemento" class="font-1-s">

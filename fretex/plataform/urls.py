@@ -17,5 +17,5 @@ urlpatterns = [
     path('dashboardfreteiro/detalhes/', views.detalhesMeusFretesFreteiro, name='detalhesMeusFretesFreteiro'),
     path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente, name='detalhesMeusFretesCliente'),
 
-    path('cadastrodefrete/', views.cadastroDeFrete, name="cadastrodefrete"),
+    path('cadastrofrete/', views.cadastroDeFrete, name="cadastrodefrete"),
 ]

@@ -95,3 +95,11 @@
 .cor-p6 {
     color: var(--cor-p6);
 }
+
+.bg-cor-p6 {
+    background-color: var(--cor-p6);
+}
+
+.bg-cor-p6:hover {
+    background-color: #e4a208;
+}
