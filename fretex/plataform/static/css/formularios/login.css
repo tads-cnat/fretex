@@ -2,7 +2,7 @@
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
-    max-width: 400px;
+    max-width: 500px;
     background-color: #202020;
     border: none;
     border-radius: 10px;
@@ -35,7 +35,7 @@
 .container-login #senha {
     border-radius: 10px;
     border: none;
-    padding: 5px;
+    padding: 13px;
     font-size: 0.9rem;
 }
 

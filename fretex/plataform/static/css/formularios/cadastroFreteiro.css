@@ -27,13 +27,13 @@ body .cadastro-freteiro {
 }
 
 .container-cadastro-2 #numero {
-    padding: 5px;
+    padding: 10px;
 }
 
 .container-formulario #estado {
     border-radius: 10px;
     border: none;
-    padding: 4px;
+    padding: 11px;
     font-size: 0.9rem;
     margin-bottom: 10px;
 }

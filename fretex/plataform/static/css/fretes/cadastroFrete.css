@@ -12,12 +12,6 @@
     text-align: center;
 }
 
-@media (max-width: 500px) {
-    .container-cadastro-form{
-        padding: 30px 30px;
-    }
-}
-
 .form-cadastro-frete{
     text-align: left;
 }
@@ -28,7 +22,7 @@
 #observacao,#turno, #data{
     width: 100%;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 6px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -37,13 +31,13 @@
 }
 
 .form-cadastro-frete select{
-    padding: 3px 0px;
+    padding: 9px 0px;
 }
 
 .form-cadastro-frete input,
 #observacao{
     text-indent: 5px;
-    padding: 2px 0px;
+    padding: 8px 0px;
 }
 
 .meio{
@@ -99,4 +93,10 @@
 
 .step.ativo{
     display: initial;
+}
+
+@media (max-width: 500px) {
+    .container-cadastro-form{
+        padding: 30px 30px;
+    }
 }
