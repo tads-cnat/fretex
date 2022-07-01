@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
+    <script>document.documentElement.className += ' js';</script>
     <script src="jquery-3.6.0.min.js"></script>
     <title>Fretex</title>
 </head>
@@ -25,14 +26,14 @@
             </div>
         </div>
     </nav>
-    <section class="bg-black text-white py-24">
+    <section class="detalhe-lateral bg-black text-white py-24">
         <div class="md:container md:mx-auto md:flex md:items-center gap-8">
-            <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1">
+            <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1" data-anime="scroll" style="transition: 0.8s;">
                 <h1 class="font-bold text-6xl">Fretex, sua encomenda sem complicação.</h1>
                 <p class="text-neutral-500">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
                 <a href="#" class="bg-cor-p6 px-4 py-2 rounded text-black text-center md:w-max font-1-m font-semibold">Fazer Pedido De Frete</a>
             </div>
-            <div class="py-8 md:px-8 md:flex-1 md:-mr-96">
+            <div class="py-8 md:px-8 md:flex-1 md:-mr-96" data-anime="scroll2" style="transition: 0.8s;">
                 <img src="{% static "images/header_image.svg" %}" />
             </div>
         </div>
@@ -40,15 +41,15 @@
     <section class="py-24">
         <div class="container mx-auto gap-8 flex flex-col px-4">
             <div class="flex flex-col items-center justify-center mb-2">
-                <h1 class="text-3xl border-x-4 md:border-x-8 border-yellow-400 font-bold md:text-6xl w-max px-2">Como a FreteX funciona?</h1>
-                <p class="text-xl mt-4 w-full md:w-1/2 text-center">Nós facilitamos a oferta do serviço de frete em todo o Brasil, atendendo Clientes e Freteiros Autônomos.</p>
+                <h1 class="text-3xl border-x-4 md:border-x-8 border-yellow-400 font-bold md:text-6xl w-max px-2" data-anime="scroll3" style="transition: 0.4s;">Como a FreteX funciona?</h1>
+                <p class="text-xl mt-4 w-full md:w-1/2 text-center" data-anime="scroll3" style="transition: 0.7s;">Nós facilitamos a oferta do serviço de frete em todo o Brasil, atendendo Clientes e Freteiros Autônomos.</p>
             </div>
-            <div class="flex flex-col md:flex-row gap-16 mb-6">
-                <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+            <div class="flex flex-col md:flex-row gap-16 mb-6" data-anime="scroll3" style="transition: 0.9s;">
+                <div class="barras rounded shadow p-8 text-center items-center flex flex-col flex-1">
                     <img src="{% static "images/cart.svg" %}" class="w-1/2" />
                     <p class="text-gray-800 text-lg">Os Clientes publicam os fretes em nossa plataforma</p>
                 </div>
-                <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                <div class="barras rounded shadow p-8 text-center items-center flex flex-col flex-1">
                     <img src="{% static "images/truck.svg" %}" class="w-1/2" />
                     <p class="text-gray-800 text-lg">Os Freteiros procuram os fretes compatíveis e de seu interesse</p>
                 </div>
@@ -59,9 +60,9 @@
             </div>
         </div>
     </section>
-    <section class="bg-black text-white py-24" id="vantagens">
+    <section class="bg-black text-white py-24 detalhe-lateral2" id="vantagens">
         <div class="md:container px-4 flex mx-auto gap-8">
-            <div class="flex gap-12 flex-col flex-1">
+            <div class="flex gap-12 flex-col flex-1" data-anime="scroll">
                 <div class="flex flex-col gap-4">
                     <h2 class="text-2xl text-gray-400">FRETES COM DESCRIÇÃO</h2>
                     <h1 class="text-6xl font-semibold">Descubra as vantagens<span class="cor-p6">.</span></h1>
@@ -69,7 +70,7 @@
                         E consequentemente ajudam os freteiros a encontrarem os fretes ideais para eles.</p>
                 </div>
                 <a href="#" class="text-yellow-400 text-2xl font-semibold underline">Vantagens</a>
-                <div class="flex gap-4">
+                <div class="flex gap-4" >
                     <div class="flex flex-col gap-4 flex-1">
                         <img src="{% static 'images/filtro.svg' %}" alt="" class="w-8">
                         <h2 class="text-2xl font-medium">Filtros precisos</h2>
@@ -82,17 +83,17 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-1 hidden md:flex">
+            <div class="flex-1 hidden md:flex" data-anime="scroll2">
                 <img src="{% static "images/diferencial.jpg" %}" class="w-full rounded-lg -mt-32" />
             </div>
         </div>
     </section>
-    <section class="bg-yellow-400 text-white py-24">
-        <div class="flex flex-row container mx-auto">
+    <section class="bg-yellow-400 text-white py-24 detalhe-lateral3 detalhe-lateral4">
+        <div class="flex flex-row container mx-auto" data-anime="scroll">
             <div class="hidden basis-1/2 md:block py-8 md:px-8  md:-ml-80 md:grow">
                 <img class="rounded-2xl" src="{% static "images/funcionario.jpg" %}" />
             </div>
-            <div class="px-4 basis-1/1 md:basis-1/2 md:px-0 py-8 flex flex-col gap-8 grow-0 justify-center">
+            <div class="px-4 basis-1/1 md:basis-1/2 md:px-0 py-8 flex flex-col gap-8 grow-0 justify-center ">
                 <h1 class="font-bold text-6xl drop-shadow-lg max-w-lg">Uma das melhores plataformas para envio de cargas de pequeno e médio porte.</h1>
             </div>
         </div>
@@ -139,6 +140,7 @@
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/animacaoScroll.js' %}"></script>
 </body>
 
 </html>

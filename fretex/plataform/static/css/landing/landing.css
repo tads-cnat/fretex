@@ -1,3 +1,60 @@
 * {
     scroll-behavior: smooth;
 }
+
+.detalhe-lateral {
+    background: url("../../images/dec.svg") no-repeat bottom 80px left 20px;
+}
+.detalhe-lateral2 {
+    background: url("../../images/dec.svg") no-repeat bottom 40px left 20px;
+}
+
+.detalhe-lateral3 {
+    background: url("../../images/dec3.svg") no-repeat top 120px right 40px, url("../../images/dec4.svg") no-repeat bottom 120px right 40px;
+}
+
+
+
+@media (max-width:768px) {
+    .detalhe-lateral,
+    .detalhe-lateral2 {
+        background: none;
+    }
+    .detalhe-lateral3 {
+        background: url("../../images/dec3.svg") no-repeat top 120px right 40px;
+    }
+}
+
+.barras {
+    position: relative;
+    z-index: 0;
+}
+
+
+.barras::after {
+    content: "";
+    width: 4rem;
+    height: 20px;
+    top: 50%;
+    right: -4rem;
+    position: absolute;
+    background-color: var(--cor-p6);
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .barras::after {
+        display: none;
+    }
+    .barras::before {
+        content: "";
+        width: 20px;
+        height: 4rem;
+        bottom: -4rem;
+        right: 50%;
+        position: absolute;
+        background-color: var(--cor-p6);
+        display: block;
+        
+    }
+}

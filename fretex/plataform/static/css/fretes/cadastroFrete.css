@@ -54,14 +54,14 @@
     cursor: pointer;
 }
 
-.barraDeProgresso{
+.barraDeProgresso {
     width: 100%;
     height: 8px;
     background-color: rgb(221, 223, 228);
     border-radius: 50px;
 }
 
-.progressoAtual{
+.progressoAtual {
     background-color: var(--cor-p6);
     height: 100%;
     position: relative;
