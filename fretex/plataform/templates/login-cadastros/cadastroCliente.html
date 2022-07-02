@@ -1,0 +1,36 @@
+{% extends 'layouts/cadastroUsuario.html' %}
+{% load static %}
+{% block title %}Cadastro - Cliente{% endblock %}
+
+{% block content %}
+
+<body class="form-bg form-bg-2 body-center3">
+    <main class="container-formulario cadastro-cliente">
+        <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
+        <p class="font-1-s cor-0">Faça seu cadastro</p>
+        <form action=""><!--<abbr title="Campo obrigatório">*</abbr>-->
+            <label for="nome" class="font-1-s cor-0">Nome completo*</label>
+            <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
+
+            <label for="email" class="font-1-s cor-0">Email*</label>
+            <input type="text" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
+
+            <label for="cpf" class="font-1-s cor-0">CPF*</label>
+            <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" autocomplete="on" placeholder="000.000.000-00" class="font-1-s" required>
+
+            <label for="senha" class="font-1-s cor-0">Senha*</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="font-1-s" required>
+
+            <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
+            <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+
+            <div class="termos">
+                <input type="checkbox" name="aceitar-termos" id="termos" required>
+                <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
+            </div>
+            <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
+        </form>
+        <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
+    </main>
+</body>
+{% endblock %}

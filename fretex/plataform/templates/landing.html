@@ -1,0 +1,146 @@
+{% load static %}
+
+<html class="overflow-x-hidden">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
+    <script>document.documentElement.className += ' js';</script>
+    <script src="jquery-3.6.0.min.js"></script>
+    <title>Fretex</title>
+</head>
+
+<body class="overflow-x-hidden">
+    <nav class="bg-black p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <a href="/" class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></a>
+            </div>
+            <div class="flex gap-3 md:gap-8 items-center">
+                <a href="#vantagens" class="hidden md:inline-block font-1-s hover:text-neutral-200">Vantagens</a>
+                <a href="#contato" class="hidden md:inline-block font-1-s text-sm md:text-base hover:text-neutral-200">Contato</a>
+                <a href="#cadastro" class="font-1-s hover:text-neutral-200 text-sm md:text-base ">Cadastrar-se</a>
+                <a href="/login/" class="bg-cor-p6 px-4 py-2 rounded font-1-m font-semibold text-black">Login</a>
+            </div>
+        </div>
+    </nav>
+    <section class="detalhe-lateral bg-black text-white py-24">
+        <div class="md:container md:mx-auto md:flex md:items-center gap-8">
+            <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1" data-anime="scroll" style="transition: 0.8s;">
+                <h1 class="font-bold text-6xl">Fretex, sua encomenda sem complicação.</h1>
+                <p class="text-neutral-500">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
+                <a href="/cadastrofrete/" class="bg-cor-p6 px-4 py-2 rounded text-black text-center md:w-max font-1-m font-semibold">Fazer Pedido De Frete</a>
+            </div>
+            <div class="py-8 md:px-8 md:flex-1 md:-mr-96" data-anime="scroll2" style="transition: 0.8s;">
+                <img src="{% static "images/header_image.svg" %}" />
+            </div>
+        </div>
+    </section>
+    <section class="py-24">
+        <div class="container mx-auto gap-8 flex flex-col px-4">
+            <div class="flex flex-col items-center justify-center mb-2">
+                <h1 class="text-3xl border-x-4 md:border-x-8 border-yellow-400 font-bold md:text-6xl w-max px-2" data-anime="scroll3" style="transition: 0.4s;">Como a FreteX funciona?</h1>
+                <p class="text-xl mt-4 w-full md:w-1/2 text-center" data-anime="scroll3" style="transition: 0.7s;">Nós facilitamos a oferta do serviço de frete em todo o Brasil, atendendo Clientes e Freteiros Autônomos.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-16 mb-6" data-anime="scroll3" style="transition: 0.9s;">
+                <div class="barras rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                    <img src="{% static "images/cart.svg" %}" class="w-1/2" />
+                    <p class="text-gray-800 text-lg">Os Clientes publicam os fretes em nossa plataforma</p>
+                </div>
+                <div class="barras rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                    <img src="{% static "images/truck.svg" %}" class="w-1/2" />
+                    <p class="text-gray-800 text-lg">Os Freteiros procuram os fretes compatíveis e de seu interesse</p>
+                </div>
+                <div class="rounded shadow p-8 text-center items-center flex flex-col flex-1">
+                    <img src="{% static "images/hands.svg" %}" class="w-1/2" />
+                    <p class="text-gray-800 text-lg">Ambos negociam diretamente o frete, sem intermediário</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-black text-white py-24 detalhe-lateral2" id="vantagens">
+        <div class="md:container px-4 flex mx-auto gap-8">
+            <div class="flex gap-12 flex-col flex-1" data-anime="scroll">
+                <div class="flex flex-col gap-4">
+                    <h2 class="text-2xl text-gray-400">FRETES COM DESCRIÇÃO</h2>
+                    <h1 class="text-6xl font-semibold">Descubra as vantagens<span class="cor-p6">.</span></h1>
+                    <p class="text-2xl text-gray-100">Os fretes com descrição ajudam os clientes a encontrarem um freteiro mais rápido.
+                        E consequentemente ajudam os freteiros a encontrarem os fretes ideais para eles.</p>
+                </div>
+                <p href="#" class="text-yellow-400 text-2xl font-semibold underline">Vantagens</p>
+                <div class="flex gap-4" >
+                    <div class="flex flex-col gap-4 flex-1">
+                        <img src="{% static 'images/filtro.svg' %}" alt="" class="w-8">
+                        <h2 class="text-2xl font-medium">Filtros precisos</h2>
+                        <p class="text-gray-400">Com a descrição os freteiros conseguem encontrar os fretes mais próximos, além disso podem filtrar por região, preço, entre outros.</p>
+                    </div>
+                    <div class="flex flex-col gap-4 flex-1">
+                        <img src="{% static 'images/comunicação.svg' %}" alt="" class="w-8">
+                        <h2 class="text-2xl font-medium">Comunicação</h2>
+                        <p class="text-gray-400">A descrição mostra as informações necessárias sobre o frete, portanto ajuda o feteiro a se preparar melhor para o serviço.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 hidden md:flex" data-anime="scroll2">
+                <img src="{% static "images/diferencial.jpg" %}" class="w-full rounded-lg -mt-32" />
+            </div>
+        </div>
+    </section>
+    <section class="bg-yellow-400 text-white py-24 detalhe-lateral3 detalhe-lateral4">
+        <div class="flex flex-row container mx-auto" data-anime="scroll">
+            <div class="hidden basis-1/2 md:block py-8 md:px-8  md:-ml-80 md:grow">
+                <img class="rounded-2xl" src="{% static "images/funcionario.jpg" %}" />
+            </div>
+            <div class="px-4 basis-1/1 md:basis-1/2 md:px-0 py-8 flex flex-col gap-8 grow-0 justify-center ">
+                <h1 class="font-bold text-6xl drop-shadow-lg max-w-lg">Uma das melhores plataformas para envio de cargas de pequeno e médio porte.</h1>
+            </div>
+        </div>
+    </section>
+    <section class="text-white bg-black md:flex" id="cadastro">
+        <div class="bg-[url('/static/images/cliente.jpg')] gap-4 flex flex-col items-center text-center px-8 py-24 bg-center grow">
+            <h1 class="font-bold text-5xl">Para clientes<span class="cor-p6">.</span></h1>
+            <p class="font-semibold">Publique seus pedidos de fretes</p>
+            <a href="/cadastrocliente/" class="bg-cor-p6 px-4 py-2 rounded-full text-black text-center md:w-max font-semibold font-1-m">Cadastre-se</a>
+        </div>
+        <div class="bg-[url('/static/images/freteiro.jpg')] gap-4 flex flex-col items-center text-center px-8 py-24 bg-center grow">
+            <h1 class="font-bold text-5xl">Para freteiros<span class="cor-p6">.</span></h1>
+            <p class="font-semibold">Encontre as melhores cargas para o seu veículo</p>
+            <a href="/cadastrofreteiro/" class="bg-cor-p6 px-4 py-2 rounded-full text-black text-center md:w-max font-semibold font-1-m">Cadastre-se</a>
+        </div>
+    </section>
+    <footer class="bg-black py-8 px-4" id="contato">
+        <div class="container grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+            <div class="flex flex-col gap-4">
+                <a href="#" class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></a>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <h1 class="font-2-l-b cor-0">Contato</h1>
+                <a class="font-1-m cor-5">+55 21 9999-9999</a>
+                <a class="font-1-m cor-5">contato@fretex.com</a>
+                <a class="font-1-m cor-5">Rua do IF, 42 - Grêmio. Natal - RN</a>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:brightness-75"><img src="{% static 'images/instagram.svg' %}" alt="instagram"></a>
+                    <a href="#" class="hover:brightness-75"><img src="{% static 'images/facebook.svg' %}" alt="facebook"></a>
+                    <a href="#" class="hover:brightness-75"><img src="{% static 'images/youtube.svg' %}" alt="youtube"></a>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <h1 class="font-2-l-b cor-0">Informações</h1>
+                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Seguros</a>
+                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Contatos</a>
+                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Termos e Condições</a>
+            </div>
+
+            <div>
+                <span class="font-1-m cor-6">Fretex © Alguns direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/animacaoScroll.js' %}"></script>
+</body>
+
+</html>

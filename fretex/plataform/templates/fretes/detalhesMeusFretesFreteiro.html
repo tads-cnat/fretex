@@ -1,0 +1,129 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Detalhes meu frete - Freteiro{% endblock %}
+
+{% block content %}
+
+<main class="detalhesFretes container mx-auto md:padding-1">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Detalhes do Frete</h1>
+        <hr>
+    </div>
+    <div class="container-detalhes-geral">
+        <p class="font-1-l mb-3 font-semibold data-pedido">Data do pedido: 13/06/2022</p>
+        <div class="container-detalhes">
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/detalhesPerfil.svg' %}" alt="">
+                <p class="font-1-m">Cliente: joaozin</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/iconeLocalidade.svg' %}" alt="">
+                <p class="font-1-m">Origem: Rua São Paulo, 247 - Alecrim - Natal - RN</p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Destino: Av. Amintas Barros, 3700 - Lagoa Nova - Natal - RN</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/calendario.svg' %}" alt="">
+                <p class="font-1-m">Data de coleta: XX/XX/XXXX </p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Data de entrega: XX/XX/XXXX</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/turno.png' %}" alt="">
+                <p class="font-1-m">Turno de coleta: Manhã</p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Turno de entrega: Tarde</p>
+            </div>
+            <div class="flex flex-col gap-1 mb-1 sm:mb-2">
+                <div class="flex items-center gap-3 ">
+                    <img src="{% static 'images/caminhaoDetalhes.svg' %}" alt="">
+                    <p class="font-1-m">Detalhes:</p>
+                </div>
+                <div class="flex flex-col detalhes-info ml-8 sm:ml-11">
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Destinatário: joaozin</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Kilometragem: 20Km</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Produto:  Livros</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Tipo de veículo: Todos</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1 mb-1 sm:mb-2">
+                <img src="{% static 'images/observacao.svg' %}" alt="">
+                <p class="font-1-m">Observação:</p>
+            </div>
+            <p class="font-1-m mb-4 ml-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero nostrum rerum quo harum odio, nesciunt ea blanditiis, nam, ad error cum. Minima vel inventore ad veritatis enim ipsam earum quia.</p>
+            <div class="historico-propostas">
+                <h2 class="font-1-l mb-3 font-semibold">Histórico de Propostas:</h2>
+                <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
+                    <div class="flex flex-col">
+                        <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ XX,XX</h3>
+                        <p class="font-1-m">Data da proposta: XX/XX/XXXX</p>
+                        <p class="font-1-m">Realizado por jaozin</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
+                        <button id="myBtn" class="botao-padrao font-1-m font-semibold">Realizar proposta</button>
+                    </div>
+                </div>
+                <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
+                    <div>
+                        <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ XX,XX</h3>
+                        <p class="font-1-m">Data da proposta: XX/XX/XXXX</p>
+                        <p class="font-1-m">Realizado por você</p>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="font-1-m-b text-red-500">Status: Não aceito</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lateral">
+            <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2">
+            <p class="font-1-m font-semibold mb-2">Produto: Livros</p>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header mb-2">
+                <span class="close">&times;</span>
+                <h2 class="font-1-m font-semibold">Proposta</h2>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <p class="font-1-m font-semibold mb-2">Veículo escolhido:</p>
+
+                    <div class="veiculo mb-3">
+                        
+                        <label for="veiculo" style="cursor:initial;">
+                            <div class="imagem-veiculo flex items-center">
+                                <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                            </div>
+                            <div>
+                                <p class="font-1-m">Marca: Fiat</p>
+                                <p class="font-1-m">Modelo: Palio</p>
+                                <p class="font-1-m">Ano: 2016</p>
+                                <p class="font-1-m">Placa do veículo: XXXXXXX</p>
+                                <p class="font-1-m">Cor do veículo: Cranco</p>
+                                <p class="font-1-m">Tipo do veículo: Carro</p>
+                            </div>
+                        </label>
+                    </div>
+                <form action="" method="post">
+                    <div class="mb-3 flex flex-col">
+                        <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
+                        <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}
