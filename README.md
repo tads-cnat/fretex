@@ -1,7 +1,19 @@
 # FRETEX
 
+<p align="center">
 <img src="LandingPage.png" width="1882" height="2000" align="center"/>
 
+
+
+&nbsp;
+</p>
+<p align="center">
+Para ter acesso as demais páginas basta acessar o link seguinte: http://fretex.pythonanywhere.com/
+
+
+
+&nbsp;
+</p>
 <p align="center">
 <img src="FreteX.png" width="508" height="200" align="center"/>
 
