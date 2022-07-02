@@ -1,6 +1,6 @@
 # FRETEX
 
->Testando um template para servir de base para o PDS
+<img src="LandingPage.png" width="1882" height="2000" align="center"/>
 
 <p align="center">
 <img src="FreteX.png" width="508" height="200" align="center"/>
@@ -43,7 +43,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/alessandrojsouza"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/24280654?v=4" width="100px;" alt=""/><br /><sub><b>Alessandro Souza</b></sub></a><br /><a href="https://github.com/alessandrojsouza" title="Dev">:man_teacher:</a></td>
+    <td align="center"><a href="https://github.com/alessandrojsouza"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/24280654?v=4" width="100px;" alt=""/><br /><sub><b>Alessandro Souza</b></sub></a><br /><a href="https://github.com/alessandrojsouza" title="Orientador">:man_teacher:</a></td>
     <td align="center"><a href="https://github.com/ArthurOnly"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/56327949?v=4" width="100px;" alt=""/><br /><sub><b>Arthur Medeiros</b></sub></a><br /><a href="https://github.com/ArthurOnly" title="Dev">:man_technologist:</a></td>
     <td align="center"><a href="https://github.com/ItaloGSM"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/94062715?v=4" width="100px;" alt=""/><br /><sub><b>Italo Gabriel</b></sub></a><br /><a href="https://github.com/ItaloGSM" title="Dev">:man_technologist:</a></td>
     <td align="center"><a href="https://github.com/Lucas-Veras"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/83588582?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Oliveira</b></sub></a><br /><a href="https://github.com/Lucas-Veras" title="Dev">:man_technologist:</a></td>
