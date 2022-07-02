@@ -19,6 +19,9 @@ def cadastroFreteiro(request):
 def dashboardFreteiro(request):
     return render(request, 'dashboards/dashboardFreteiro.html')
 
+def dashboardCliente(request):
+    return render(request, 'dashboards/dashboardCliente.html')
+
 def fretes_index(request):
     return render(request, 'fretes/index.html')
 
