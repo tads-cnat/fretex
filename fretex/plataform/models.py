@@ -48,17 +48,22 @@ class TipoVeiculo(models.Model):
 
 
 class Pedido(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
     Status = models.ForeignKey(Status, on_delete=models.CASCADE)
     Produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)  # <--------#
     observacao = models.CharField(max_length=300)
+    nomeDestinatario = models.CharField(max_length=200)
+    dataColeta = models.DateField()
+    dataEntrega = models.DateField()
+    turnoColeta = models.CharField(max_length=6)
+    turnoEntrega = models.CharField(max_length=6)
 
 
 class Veiculo(models.Model):
     tipo_veiculo = models.ForeignKey(TipoVeiculo, on_delete=models.CASCADE)
-
     placa = models.CharField(max_length=20)
     cor = models.CharField(max_length=20)
     marca = models.CharField(max_length=30)
