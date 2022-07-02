@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, Status, TipoVeiculo, Usuario, Veiculo
+from .models import Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, Status, TipoVeiculo, Veiculo
 
 admin.site.register(Cliente)
 admin.site.register(Freteiro)
