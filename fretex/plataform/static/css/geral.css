@@ -2,6 +2,7 @@
 @import "./utilidades/tipografia.css";
 @import "./utilidades/cores.css";
 @import "./utilidades/modal.css";
+@import "./utilidades/accordion.css";
 
 @import "./formularios/formGlobal.css";
 @import "./formularios/cadastroCliente.css";
@@ -11,3 +12,6 @@
 
 @import "./fretes/detalhesFrete.css";
 @import "./fretes/cadastroFrete.css";
+
+@import "./dashboards/cliente.css";
+@import "./dashboards/freteiro.css";

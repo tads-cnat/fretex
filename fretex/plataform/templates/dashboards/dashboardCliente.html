@@ -3,6 +3,123 @@
 {% block title %}Cadastro - Cliente{% endblock %}
 
 {% block content %}
-<p>cliente</p>
-<a href="/dashboardcliente/detalhes" class="botao-padrao mb-2 inline-block">Detalhes</a>
+<main class="dashboardCliente container mx-auto p-2 mb-12">
+    <section>
+        <div class="mb-3 md:mb-5">
+            <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Meus Fretes</h1>
+            <hr>
+        </div>
+        <div class="container-dashboard">
+            <div class="cardCliente">
+                <div class="perfilCliente">
+                    <img src="{% static 'images/perfil.svg' %}" alt="">
+                    <p class="font-1-m">Joaozin</p>
+                </div>
+                <div class="fretesDoAno">
+                    <h2 class="font-1-m font-semibold text-2xl">Fretes do ano</h2>
+                    <button class="font-1-xs text-lg">Atual</button>
+                    <button class="font-1-xs text-lg">2021</button>
+                    <button class="font-1-xs text-lg">2020</button>
+                </div>  
+            </div>
+            <div>
+                <a href="" class="botao-padrao px-9 py-3">Novo Pedido de Frete</a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="mb-3 md:mb-5">
+            <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Fretes</h1>
+            <hr>
+        </div>
+        <div>
+            <dl data-anime="accordion">
+                <section class="section mb-3">
+                    <dt>
+                        <a class="block flex justify-between items-center">
+                            <span class="esperaDashboard font-1-m text-white inline-block">Em espera</span>
+                            <img src="{% static 'images/setaBaixo.svg' %}" alt="">
+                        </a>
+                    </dt>
+                    <dd class="mt-5 teste">
+                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
+                            <div class="flex justify-center md:justify-start grow-0">
+                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Origem</strong>: teste</p>
+                                <p><strong>Destino</strong>: teste</p>
+                                <p><strong>KM</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Produto</strong>: teste</p>
+                                <p><strong>Tipo de veiculo</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow items-center justify-center">
+                                <a href="/dashboardcliente/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                            </div>
+                        </div>
+                    </dd>
+                </section>
+
+                <section class="section mb-3">
+                    <dt>
+                        <a class="block flex justify-between items-center">
+                            <span class="andamentoDashboard font-1-m text-white inline-block">Em andamento</span>
+                            <img src="{% static 'images/setaBaixo.svg' %}" alt="">
+                        </a>
+                    </dt>
+                    <dd class="mt-5">
+                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-8 mb-3 caixa-frete">
+                            <div class="flex justify-center md:justify-start grow-0">
+                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Origem</strong>: teste</p>
+                                <p><strong>Destino</strong>: teste</p>
+                                <p><strong>KM</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Produto</strong>: teste</p>
+                                <p><strong>Tipo de veiculo</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow items-center justify-center">
+                                <a href="/dashboardcliente/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                            </div>
+                        </div>
+                    </dd>
+                </section>
+
+                <section class="section mb-3">
+                    <dt>
+                        <a class="block flex justify-between items-center">
+                            <span class="encerradoDashboard font-1-m text-white inline-block">Encerrados</span>
+                            <img src="{% static 'images/setaBaixo.svg' %}" alt="">
+                        </a>
+                    </dt>
+                    <dd class="mt-5">
+                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-8 mb-3 caixa-frete">
+                            <div class="flex justify-center md:justify-start grow-0">
+                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Origem</strong>: teste</p>
+                                <p><strong>Destino</strong>: teste</p>
+                                <p><strong>KM</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow">
+                                <p><strong>Produto</strong>: teste</p>
+                                <p><strong>Tipo de veiculo</strong>: teste</p>
+                            </div>
+                            <div class="flex flex-col gap-4 grow items-center justify-center">
+                                <a href="/dashboardcliente/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                            </div>
+                        </div>
+                    </dd>
+                </section>
+        </div>
+    </section>
+</main>
 {% endblock %}
+
+{% block js %}<script src="{% static 'js/accordion.js' %}"></script>{% endblock %}
