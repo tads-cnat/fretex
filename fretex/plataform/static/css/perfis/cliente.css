@@ -1,0 +1,105 @@
+.form-perfil {
+    display: grid;
+    grid-template-columns: 3fr 8fr;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.form-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #EBEBEB;
+    padding: 25px 40px;
+    border-radius: 15px;
+    gap: 5px;
+}
+
+.form-foto-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-foto img {
+    width: 250px;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.form-info-header {
+    background-color: #D9D9D9;
+    padding: 25px 40px 0px 40px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.form-info-content {
+    background-color: #EBEBEB;
+    padding: 20px 40px;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.form-info-header .link {
+    position: relative;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+.form-info-header .link::after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -6px;
+    width: 100%;
+    height: 4px;
+    background-color: black;
+}
+
+.form-info-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 60px;
+}
+
+.form-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.container-total {
+    grid-column: 1/-1;
+}
+
+.form-info-container #complemento {
+    height: 100px;
+}
+
+@media (max-width: 1024px) {
+    .form-foto img {
+        width: 100px;
+    }
+    .form-perfil {
+        grid-template-columns: 1fr 8fr;
+        gap: 5px;
+    }
+    .form-foto {
+        padding: 25px 20px;
+    }
+    .form-info-content {
+        grid-template-columns: 1fr;
+        gap: 10px 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-perfil {
+        grid-template-columns: 1fr;
+    }
+    .form-info-header {
+        padding: 25px 20px 0px 20px;
+    }
+    .form-info-content {
+        padding: 20px 20px;
+    }
+}

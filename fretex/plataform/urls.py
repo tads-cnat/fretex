@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.landing),
+   
     path('login/', views.login, name='login'),
-
     path('escolhacadastro/', views.escolhaCadastro, name='escolhacadastro'),
     path('cadastrocliente/', views.cadastroCliente, name='cadastrocliente'),
     path('cadastrofreteiro/', views.cadastroFreteiro, name='cadastrofreteiro'),
@@ -18,6 +18,9 @@ urlpatterns = [
 
     path('dashboardcliente/', views.dashboardCliente, name='dashboardcliente'),
     path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente, name='detalhesMeusFretesCliente'),
+
+    path('perfilCliente/', views.perfilCliente, name="perfilCliente"),
+    path('perfilFreteiro/', views.perfilFreteiro, name="perfilFreteiro"),
 
     path('cadastrofrete/', views.cadastroDeFrete, name="cadastrodefrete"),
 ]

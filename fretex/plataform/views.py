@@ -36,3 +36,9 @@ def detalhesMeusFretesCliente(request):
 
 def cadastroDeFrete(request):
     return render(request, 'pedidoDeFrete/cadastroFrete.html')
+
+def perfilCliente(request):
+    return render(request, 'perfis/perfilCliente.html')
+
+def perfilFreteiro(request):
+    return render(request, 'perfis/perfilFreteiro.html')

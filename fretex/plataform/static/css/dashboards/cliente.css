@@ -3,15 +3,7 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
-}
-
-@media (max-width: 1050px) {
-    .dashboardCliente .container-dashboard {
-        grid-template-columns: 1fr;
-    }
-    .dashboardCliente .container-dashboard a {
-        display: none;
-    }
+    gap: 20px;
 }
 
 .cardCliente {
@@ -29,16 +21,6 @@
     width: 120px;
     border: 1px solid rgba(20, 20, 20, 0.514);
     border-radius: 50%;
-}
-
-@media (max-width: 450px) {
-    .cardCliente {
-        padding: 20px 20px 20px 20px;
-        gap: 15px;
-    }
-    .cardCliente img { 
-        width: 80px;
-    }
 }
 
 .cardCliente button {
@@ -99,4 +81,26 @@
 
 .caixa-frete {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.397);
+}
+
+@media (max-width: 1050px) {
+    .dashboardCliente .container-dashboard {
+        grid-template-columns: 1fr;
+    }
+    .dashboardCliente .container-dashboard a {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .cardCliente {
+        padding: 20px 20px 20px 20px;
+        gap: 15px;
+    }
+    .cardCliente img { 
+        width: 80px;
+    }
+    .section {
+        padding: 10px;
+    }
 }
