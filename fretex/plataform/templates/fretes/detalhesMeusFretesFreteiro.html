@@ -73,6 +73,9 @@
                         <p class="font-1-m-b text-red-500">Status: Não aceito</p>
                     </div>
                 </div>
+               <!-- Teste modal
+                 <button id="myBtn" class="botao-padrao font-1-m font-semibold">Realizar proposta</button>
+                -->
             </div>
         </div>
         <div class="lateral">
@@ -91,12 +94,12 @@
                 <h2 class="font-1-m font-semibold">Proposta</h2>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="" method="post">
                     <p class="font-1-m font-semibold mb-2">Veículo escolhido:</p>
 
                     <div class="veiculo mb-3">
-                        
-                        <label for="veiculo" style="cursor:initial;">
+                        <input type="radio" name="veiculo" id="veiculo">
+                        <label for="veiculo">
                             <div class="imagem-veiculo flex items-center">
                                 <img src="{% static 'images/funcionario.jpg' %}" alt="">
                             </div>
@@ -110,7 +113,6 @@
                             </div>
                         </label>
                     </div>
-                <form action="" method="post">
                     <div class="mb-3 flex flex-col">
                         <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
                         <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>

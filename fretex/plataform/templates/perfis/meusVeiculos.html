@@ -1,0 +1,56 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Meus Veículos - Freteiro{% endblock %}
+
+{% block content %}
+<main class="perfilCliente container mx-auto p-2 mb-12">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
+        <hr>
+    </div>
+    <form action="" method="post" class="align-initial form-perfil">
+        <div class="form-foto">
+            <img src="{% static 'images/perfil.svg' %}" alt="">
+            <div class="form-foto-info ">
+                <h2 class="font-1-xl">Ladeira</h2>
+                <p class="font-1-m">ladeira123@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="form-info">
+            <div class="form-info-header">
+                <h2 class="font-1-xl mb-3">Editar Perfil</h2>
+                <ul class="form-info-links">
+                    <li><a href="/perfilFreteiro/" class="link font-1-m font-semibold">Informações do usuário</a></li>
+                    <li><a href="#" class="link-ativo font-1-m font-semibold">Meus Veículos</a></li>
+                </ul>
+            </div>
+            <div class="form-info-content">
+                <div class="form-info-container container-total">
+                    <h3 class="font-1-m font-semibold text-xl md:text-2xl ">Nenhum veículo cadastrado</h3>
+                </div>
+                <!-- Card Veiculos
+                <div class="form-info-container container-total bg-white" id="veiculo-container">
+                    <a href="" class="veiculo">
+                        <div class="imagem-veiculo flex items-center">
+                            <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                        </div>
+                        <div>
+                            <p class="font-1-m">Marca: Fiat</p>
+                            <p class="font-1-m">Modelo: Palio</p>
+                            <p class="font-1-m">Ano: 2016</p>
+                            <p class="font-1-m">Placa do veículo: XXXXXXX</p>
+                            <p class="font-1-m">Cor do veículo: Cranco</p>
+                            <p class="font-1-m">Tipo do veículo: Carro</p>
+                        </div>
+                    </a>
+                </div>
+                -->
+                <div>
+                    <a href="/adicionarVeiculo/" class="botao-padrao mt-1">Adicionar Veículo</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

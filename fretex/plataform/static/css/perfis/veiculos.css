@@ -1,0 +1,39 @@
+#veiculo-container {
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 15px 15px;
+}
+
+#veiculo-container:hover {
+    background-color: #ffbb005d;
+}
+
+#form-veiculos {
+    grid-template-columns: 1fr 3fr;
+    gap: 8px 30px;
+}
+
+.form-adicionar-veiculo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 1024px) {
+    #form-veiculos {
+        grid-template-columns: 1fr;
+    }
+}
+
+.veiculo-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.veiculo-img img {
+    width: 230px;
+    border: 1px solid black;
+    border-radius: 6px;
+}

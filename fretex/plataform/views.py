@@ -42,3 +42,15 @@ def perfilCliente(request):
 
 def perfilFreteiro(request):
     return render(request, 'perfis/perfilFreteiro.html')
+
+def editarPerfilCliente(request):
+    return render(request, 'perfis/editarPerfilCliente.html')
+
+def editarPerfilFreteiro(request):
+    return render(request, 'perfis/editarPerfilFreteiro.html')
+
+def meusVeiculos(request):
+    return render(request, 'perfis/meusVeiculos.html')
+
+def adicionarVeiculo(request):
+    return render(request, 'perfis/adicionarVeiculo.html')

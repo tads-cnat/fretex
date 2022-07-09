@@ -22,5 +22,11 @@ urlpatterns = [
     path('perfilCliente/', views.perfilCliente, name="perfilCliente"),
     path('perfilFreteiro/', views.perfilFreteiro, name="perfilFreteiro"),
 
+    path('editarPerfilCliente/', views.editarPerfilCliente, name="editarPerfilCliente"),
+    path('editarPerfilFreteiro/', views.editarPerfilFreteiro, name="editarPerfilFreteiro"),
+
+    path('meusVeiculos/', views.meusVeiculos, name="meusVeiculos"),
+    path('adicionarVeiculo/', views.adicionarVeiculo, name="adicionarVeiculo"),
+
     path('cadastrofrete/', views.cadastroDeFrete, name="cadastrodefrete"),
 ]

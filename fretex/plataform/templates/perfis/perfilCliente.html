@@ -14,8 +14,6 @@
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">Ladeira</h2>
                 <p class="font-1-m">ladeira123@gmail.com</p>
-          <!--      <label for="upload-image" class="botao-padrao cursor-pointer">Upload da imagem</label>
-                <input type="file" accept="image/*" value="test" id="upload-image" class="hidden" required>-->
             </div>
         </div>
 
@@ -23,57 +21,57 @@
             <div class="form-info-header">
                 <h2 class="font-1-xl mb-3">Editar Perfil</h2>
                 <ul>
-                    <li><a href="" class="link font-1-m font-semibold">Informações do usuário</a></li>
+                    <li><a class="link-ativo cursor-default font-1-m font-semibold">Informações do usuário</a></li>
                 </ul>
             </div>
             <div class="form-info-content">
                 <div class="form-info-container">
                     <label for="nome" class="font-1-m">Nome completo</label>
-                    <input type="text" name="nome" id="nome" class="font-1-s" value="Ladeira" readonly>
+                    <input type="text" name="nome" id="nome" class="font-1-s input-perfil no-click bg-cinza" value="Ladeira" readonly>
                 </div>
                 <div class="form-info-container">
                     <label for="email" class="font-1-m">Email</label>
-                    <input type="email" name="email" id="email" class="font-1-s" value="ladeira123@gmail.com" readonly>
+                    <input type="email" name="email" id="email" class="font-1-s input-perfil no-click bg-cinza" value="ladeira123@gmail.com" readonly>
                 </div>
                 <div class="form-info-container">
                     <label for="cpf" class="font-1-m">CPF</label>
-                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m" readonly value="123.321.321-23">
+                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m input-perfil no-click bg-cinza" readonly value="123.321.321-23">
                 </div>
                 <div class="form-info-container">
                     <label for="email" class="font-1-m">CEP</label>
-                    <input type="text" name="cep" id="cep" readonly pattern="\d{5}-?\d{3}" value="1234-123" class="font-1-s">
+                    <input type="text" name="cep" id="cep" readonly pattern="\d{5}-?\d{3}" value="12134-123" class="font-1-s input-perfil no-click bg-cinza">
                 </div>
                 <div class="form-info-container">
                     <label for="rua" class="font-1-m">Rua</label>
-                    <input type="text" name="rua" id="rua" class="font-1-s" value="Rua do IF" readonly>
+                    <input type="text" name="rua" id="rua" class="font-1-s input-perfil no-click bg-cinza" value="Rua do IF" readonly>
                 </div>
                 <div class="form-info-container">
                     <label for="numero" class="font-1-m">Número</label>
-                    <input type="number" name="numero" id="numero" class="font-1-s" readonly value="2013">
+                    <input type="number" name="numero" id="numero" class="font-1-s input-perfil no-click bg-cinza" readonly value="2013">
                 </div>
                 <div class="form-info-container">
                     <label for="estado" class="font-1-m">Estado</label>
-                    <input type="text" class="font-1-s" name="estado" id="estado" readonly value="Rio Grande do Norte">
+                    <input type="text" class="font-1-s input-perfil no-click bg-cinza" name="estado" id="estado" readonly value="Rio Grande do Norte">
                 </div>
                 <div class="form-info-container">
                     <label for="bairro" class="font-1-m">Bairro/Distrito</label>
-                    <input type="text" name="bairro" id="bairro" readonly value="Bairro do IF" class="font-1-s">
+                    <input type="text" name="bairro" id="bairro" readonly value="Bairro do IF" class="font-1-s input-perfil no-click bg-cinza">
                 </div>
                 <div class="form-info-container">
                     <label for="senha" class="font-1-m">Senha</label>
-                    <input type="password" name="senha" id="senha"  value="12345789" class="font-1-s" readonly>
+                    <input type="password" name="senha" id="senha"  value="12345789" class="font-1-s input-perfil no-click bg-cinza" readonly>
                 </div>
                 <div class="form-info-container">
                     <label for="confirmar-senha" class="font-1-m">Confirmar senha</label>
-                    <input type="password" name="confirmar-senha" id="confirmar-senha"  value="12345789" class="font-1-s" readonly>
+                    <input type="password" name="confirmar-senha" id="confirmar-senha"  value="12345789" class="font-1-s input-perfil no-click bg-cinza" readonly>
                 </div>
                 <div class="form-info-container container-total">
-                    <label for="complemento">Complemento</label>
-                    <textarea name="complemento" id="complemento" class="font-1-s px-3 resize-none" readonly>Portão branco, perto do mercado
+                    <label for="complemento" class="font-1-m">Complemento</label>
+                    <textarea name="complemento" id="complemento" class="font-1-s resize-none input-perfil no-click bg-cinza" readonly>Portão branco, perto do mercado
                     </textarea>
                 </div>
                 <div>
-                    <a href="" class="botao-padrao">Atualizar Informações</a>
+                    <a href="/editarPerfilCliente/" class="botao-padrao">Atualizar Informações</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,65 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Adicionar Veículo - Freteiro{% endblock %}
+
+{% block content %}
+<main class="perfilCliente container mx-auto p-2 mb-12">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
+        <hr>
+    </div>
+    <form action="" method="post" class="align-initial form-perfil">
+        <div class="form-foto">
+            <img src="{% static 'images/perfil.svg' %}" alt="">
+            <div class="form-foto-info ">
+                <h2 class="font-1-xl">Ladeira</h2>
+                <p class="font-1-m">ladeira123@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="form-info">
+            <div class="form-info-header">
+                <h2 class="font-1-xl mb-3">Editar Perfil</h2>
+                <ul class="form-info-links">
+                    <li><a href="/perfilFreteiro/" class="link font-1-m font-semibold">Informações do usuário</a></li>
+                    <li><a href="/meusVeiculos/" class="link font-1-m font-semibold">Meus Veículos</a></li>
+                </ul>
+            </div>
+            <div class="form-info-content" id="form-veiculos">
+                <div class="form-info-container container-total mb-3">
+                    <h3 class="font-1-m font-semibold text-xl">Informações do Veículo</h3>
+                </div>
+                <div class="form-info-container">
+                    <div class="veiculo-img">
+                        <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                        <div class="">
+                            <label for="upload-image" class="botao-padrao cursor-pointer">Upload Imagem</label>
+                            <input type="file" accept="image/*" value="test" id="upload-image" required class="hidden">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-info-container">
+                    <label for="marca" class="font-1-m">Marca*</label>
+                    <input type="text" name="marca" id="marca" class="font-1-s input-perfil" required>
+
+                    <label for="modelo" class="font-1-m">Modelo*</label>
+                    <input type="text" name="modelo" id="modelo" class="font-1-s input-perfil" required>
+
+                    <label for="ano" class="font-1-m">Ano*</label>
+                    <input type="text" name="ano" id="ano" class="font-1-s input-perfil" required>
+
+                    <label for="placa-veiculo" class="font-1-m">Placa do veículo*</label>
+                    <input type="text" name="placa-veiculo" id="placa-veiculo" class="font-1-s input-perfil" required>
+
+                    <label for="cor-veiculo" class="font-1-m">Cor do veículo*</label>
+                    <input type="text" name="cor-veiculo" id="cor-veiculo" class="font-1-s input-perfil" required>
+
+                    <div class="mt-3">
+                        <button class="botao-padrao">+ Adicionar Veículo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

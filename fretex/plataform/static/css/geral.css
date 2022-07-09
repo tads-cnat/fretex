@@ -16,5 +16,5 @@
 @import "./dashboards/cliente.css";
 @import "./dashboards/freteiro.css";
 
-@import "./perfis/cliente.css";
-@import "./perfis/freteiro.css";
+@import "./perfis/perfis.css";
+@import "./perfis/veiculos.css";
