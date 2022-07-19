@@ -1,5 +1,6 @@
 from django.urls import path
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
     path('dashboardcliente/', views.dashboardCliente, name='dashboardcliente'),
     path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente, name='detalhesMeusFretesCliente'),
 
+<<<<<<< Updated upstream
     path('perfilCliente/', views.perfilCliente, name="perfilCliente"),
     path('perfilFreteiro/', views.perfilFreteiro, name="perfilFreteiro"),
 
@@ -29,4 +31,7 @@ urlpatterns = [
     path('adicionarVeiculo/', views.adicionarVeiculo, name="adicionarVeiculo"),
 
     path('cadastrofrete/', views.cadastroDeFrete, name="cadastrodefrete"),
+=======
+    path('cadastrofrete/', views.CadastroDeFrete.as_view(), name="cadastrodefrete"),
+>>>>>>> Stashed changes
 ]

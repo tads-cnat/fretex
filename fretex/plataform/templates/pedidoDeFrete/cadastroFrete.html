@@ -16,6 +16,7 @@
                 <div class="progressoAtual"></div>
             </div>
             <form action="" method="post" class="form-cadastro-frete">
+                {% csrf_token %}
                 <div id="step_1" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Origem</h3>
                     <div class="flex flex-col mb-3">
@@ -25,17 +26,17 @@
                     <div class="container-campos-2 mb-2">
                         <div class="mb-2">
                             <label for="rua" class="font-1-s cor-0 mb-2">Rua*</label>
-                            <input type="text" name="rua" id="rua" placeholder="Digite a sua rua" class="font-1-s">
+                            <input type="text" name="rua-origem" id="rua" placeholder="Digite a sua rua" class="font-1-s">
                         </div>
                         <div>
                             <label for="numero" class="font-1-s cor-0 mb-2">Número*</label>
-                            <input type="text" name="numero" id="numero" class="font-1-s">
+                            <input type="text" name="numero-origem" id="numero" class="font-1-s">
                         </div>
                     </div>
                     <div class="container-campos-1 mb-2">
                         <div class="mb-2">
                             <label for="estado" class="font-1-s cor-0 mb-2">Estado*</label>
-                            <select id="estado" name="estado" class="font-1-s" required>
+                            <select id="estado" name="estado-origem" class="font-1-s" required>
                                 <option value="" selected>Selecione uma opção</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
@@ -68,16 +69,16 @@
                         </div>
                         <div>
                             <label for="cidade" class="font-1-s cor-0 mb-2">Cidade*</label>
-                            <input type="text" name="cidade" id="cidade" placeholder="Digite a sua cidade" class="font-1-s">
+                            <input type="text" name="cidade-origem" id="cidade" placeholder="Digite a sua cidade" class="font-1-s">
                         </div>
                     </div>
                     <div class="flex flex-col mb-3">
                         <label for="bairro" class="font-1-s cor-0 mb-2">Bairro/Distrito*</label>
-                                <input type="text" name="bairro" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
+                                <input type="text" name="bairro-origem" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="complemento" class="font-1-s cor-0 mb-2">Complemento</label>
-                        <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento" class="font-1-s">
+                        <input type="text" name="complemento-origem" id="complemento" placeholder="Digite o complemento" class="font-1-s">
                     </div>
                     <div class="flex gap-3 meio justify-center mb-2">     
                         <a class="botao-padrao" id="next">Próximo</a>
@@ -87,22 +88,22 @@
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Destino</h3>
                     <div class="flex flex-col mb-3">
                         <label for="cep" class="font-1-s cor-0 mb-2">CEP*</label>
-                                <input type="text" name="cep" id="cep" placeholder="Digite o seu cep" class="font-1-s">
+                                <input type="text" name="cep-destino" id="cep" placeholder="Digite o seu cep" class="font-1-s">
                     </div>
                     <div class="container-campos-2 mb-2">
                         <div class="mb-2">
                             <label for="rua" class="font-1-s cor-0 mb-2">Rua*</label>
-                            <input type="text" name="rua" id="rua" placeholder="Digite a sua rua" class="font-1-s">
+                            <input type="text" name="rua-destino" id="rua" placeholder="Digite a sua rua" class="font-1-s">
                         </div>
                         <div>
                             <label for="numero" class="font-1-s cor-0 mb-2">Número*</label>
-                            <input type="text" name="numero" id="numero" class="font-1-s">
+                            <input type="text" name="numero-destino" id="numero" class="font-1-s">
                         </div>
                     </div>
                     <div class="container-campos-1 mb-2">
                         <div class="mb-2">
                             <label for="estado" class="font-1-s cor-0 mb-2">Estado*</label>
-                            <select id="estado" name="estado" class="font-1-s" required>
+                            <select id="estado" name="estado-destino" class="font-1-s" required>
                                 <option value="" selected>Selecione uma opção</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
@@ -135,16 +136,16 @@
                         </div>
                         <div>
                             <label for="cidade" class="font-1-s cor-0 mb-2">Cidade*</label>
-                            <input type="text" name="cidade" id="cidade" placeholder="Digite a sua cidade" class="font-1-s">
+                            <input type="text" name="cidade-destino" id="cidade" placeholder="Digite a sua cidade" class="font-1-s">
                         </div>
                     </div>
                     <div class="flex flex-col mb-3">
                         <label for="bairro" class="font-1-s cor-0 mb-2">Bairro/Distrito*</label>
-                                <input type="text" name="bairro" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
+                                <input type="text" name="bairro-destino" id="bairro" placeholder="Digite o seu bairro" class="font-1-s">
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="complemento" class="font-1-s cor-0 mb-2">Complemento</label>
-                        <input type="text" name="complemento" id="complemento" placeholder="Digite o complemento" class="font-1-s">
+                        <input type="text" name="complemento-destino" id="complemento" placeholder="Digite o complemento" class="font-1-s">
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 meio justify-center mb-2 meio">  
                         <a class="botao-padrao" id="prev" >Anterior</a>   
@@ -157,7 +158,7 @@
                         <img src="{% static 'images/funcionario.jpg' %}" class="img-cadastro-frete" alt="">
                         <div class="flex w-full justify-center">
                             <label for="upload-image" class="botao-padrao cursor-pointer">Enviar imagem</label>
-                            <input type="file" accept="image/*" value="test" id="upload-image" class="hidden">
+                            <input type="file" name="imagem" accept="image/*" value="test" id="upload-image" class="hidden">
                         </div>
                     </div>
                     <div class="flex flex-col mb-4">

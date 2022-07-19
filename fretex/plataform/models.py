@@ -19,6 +19,7 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=100)
     cidade = models.CharField(max_length=100)
     estado = models.CharField(max_length=100)
+    complemento = models.CharField(max_length=200)
 
 
 class Freteiro(Usuario):
@@ -50,16 +51,15 @@ class TipoVeiculo(models.Model):
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
-    endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
-    Status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    Produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    #origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
+    #destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)  # <--------#
     observacao = models.CharField(max_length=300)
     nomeDestinatario = models.CharField(max_length=200)
-    dataColeta = models.DateField()
-    dataEntrega = models.DateField()
-    turnoColeta = models.CharField(max_length=6)
-    turnoEntrega = models.CharField(max_length=6)
+    #data_turno_Coleta = models.DateField()
+    #data_turno_Entrega = models.DateField()
 
 
 class Veiculo(models.Model):
