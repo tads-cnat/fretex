@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from .models import Endereco, Freteiro, Pedido, Status, Produto, TipoVeiculo, Cliente
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
@@ -40,6 +40,10 @@ class Login(View):
         else:
             erro = 'Email e senha inválidas!'
             return render(request, 'login-cadastros/login.html', {'erro': erro}) #inserir condições de next no template
+
+def logoutView(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
 
 @method_decorator(login_required, name='dispatch')
 class CadastroDeFrete(View):

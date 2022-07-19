@@ -34,8 +34,8 @@
                     <!-- Dropdown menu -->
                     <div class="hidden z-50 my-4 text-base list-none rounded divide-y shadow bg-gray-700 divide-gray-600" id="dropdown" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position:absolute;margin-top:275px;right:10px;">
                         <div class="py-3 px-4">
-                            <span class="block text-sm text-white">Bonnie Green</span>
-                            <span class="block text-sm font-medium truncate text-gray-400">name@flowbite.com</span>
+                            <span class="block text-sm text-white">{{ user.username }}</span>
+                            <span class="block text-sm font-medium truncate text-gray-400">{{ user.email }}</span>
                         </div>
                         <ul class="py-1" aria-labelledby="dropdown">
                             <li>
@@ -49,7 +49,7 @@
                                 <a href="/dashboardcliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Meus pedidos</a>
                             </li>
                             <li>
-                                <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
+                                <a href="{% url 'logout' %}" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
                             </li>
                         </ul>
                     </div>
