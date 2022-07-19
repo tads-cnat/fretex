@@ -6,9 +6,10 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth import login, authenticate
-from .models import Endereco, Pedido, Status, Produto, TipoVeiculo
+from .models import Endereco, Pedido, Status, Produto, TipoVeiculo, Cliente
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.models import User
 
 
 class EmailBackend(ModelBackend):
@@ -35,10 +36,10 @@ class Login(View):
             if hasattr(request.user, 'cliente'):
                 return HttpResponseRedirect(reverse('dashboardcliente'))
             else:
-                return HttpResponseRedirect(reverse('dashboardfreteiro'))
+                return HttpResponseRedirect(reverse('fretes.index'))
         else:
             erro = 'Email e senha inválidas!'
-            return render(request, 'login-cadastros/login.html', {'erro': erro})
+            return render(request, 'login-cadastros/login.html', {'erro': erro}) #inserir condições de next no template
 
 @method_decorator(login_required, name='dispatch')
 class CadastroDeFrete(View):
@@ -113,8 +114,22 @@ def landing(request):
 def escolhaCadastro(request):
     return render(request, 'login-cadastros/escolhaCadastro.html')
 
-def cadastroCliente(request):
-    return render(request, 'login-cadastros/cadastroCliente.html')
+class CadastroCliente(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'login-cadastros/cadastroCliente.html')
+    def post(self, request, *args, **kwargs):
+        nome = request.POST['nome']
+        email = request.POST['email']               # posteriormente verificar se já existe conta com o msm email,cpf.
+        cpf = request.POST['cpf']
+        senha = request.POST['senha']
+        if nome and email and cpf and senha:
+            user = User.objects.create_user(username= nome, password= senha, email= email)
+            Cliente.objects.create(user= user, cpf = cpf)
+            return HttpResponseRedirect(reverse('login'))
+        else:
+            erro = 'Informe corretamente os parâmetros necessários!'
+            return render(request, 'login-cadastros/cadastroCliente.html', {'erro':erro}) #inserir condição de error no template
+
 
 def cadastroFreteiro(request):
     return render(request, 'login-cadastros/cadastroFreteiro.html')
