@@ -67,7 +67,6 @@ class CadastroDeFrete(View):
 
         imagem  = request.POST['imagem']
         produto  = request.POST['produto']
-        tipoveiculo  = request.POST['tipoveiculo']
         observacao  = request.POST['observacao']
 
         nomedestinatario  = request.POST['nomedestinatario']
@@ -79,7 +78,7 @@ class CadastroDeFrete(View):
 
         if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and 
         cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and
-        produto and tipoveiculo and nomedestinatario and data_coleta and data_entrega and turno_entrega and turno_coleta):
+        produto and nomedestinatario and data_coleta and data_entrega and turno_entrega and turno_coleta):
 
             endereco_origem = Endereco( rua = rua_origem, CEP = cep_origem, numero = numero_origem, 
             bairro = bairro_origem, estado = estado_origem, cidade = cidade_origem, complemento = complemento_origem)
@@ -95,9 +94,6 @@ class CadastroDeFrete(View):
             produto = Produto(nome = produto, imagem_url = imagem)
             produto.save()
             
-            tipo_veiculo = TipoVeiculo(descricao = tipoveiculo)
-            tipo_veiculo.save()
-
             if hasattr(request.user, 'cliente'):
                 pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto,
                 observacao = observacao, nomeDestinatario = nomedestinatario, origem = endereco_origem,
@@ -105,7 +101,28 @@ class CadastroDeFrete(View):
                 turno_entrega = turno_entrega, turno_coleta = turno_coleta)
 
                 pedido.save()
-                pedido.tipo_veiculo.add(tipo_veiculo)
+                tipo_veiculo1 = request.POST['tipoveiculo1']
+
+                if tipo_veiculo1:
+                    tipo_veiculo1 = TipoVeiculo(descricao = request.POST['tipoveiculo1'])
+                    tipo_veiculo1.save()
+                    pedido.tipo_veiculo.add(tipo_veiculo1)
+
+               # if tipo_veiculo2:
+               #     tipo_veiculo2 = TipoVeiculo(descricao = request.POST['tipoveiculo2'])
+               #     tipo_veiculo2.save()
+               #     pedido.tipo_veiculo.add(tipo_veiculo2)                
+
+                #if tipo_veiculo3:
+                #    tipo_veiculo3 = TipoVeiculo(descricao = request.POST['tipoveiculo3'])
+                #    tipo_veiculo3.save()
+                #    pedido.tipo_veiculo.add(tipo_veiculo3)
+
+               # if tipo_veiculo4:
+               #     tipo_veiculo4 = TipoVeiculo(descricao = request.POST['tipoveiculo4'])
+               #     tipo_veiculo4.save()
+               #     pedido.tipo_veiculo.add(tipo_veiculo4)  
+
                 return HttpResponseRedirect(reverse('dashboardcliente'))
             else:   
                 erro = 'Usuario não logado!'
