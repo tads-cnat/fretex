@@ -32,7 +32,5 @@ urlpatterns = [
     path('meusVeiculos/', views.meusVeiculos, name="meusVeiculos"),
     path('adicionarVeiculo/', views.adicionarVeiculo, name="adicionarVeiculo"),
 
-    path('cadastrofrete/', views.cadastroDeFrete, name="cadastrodefrete"),
-
     path('cadastrofrete/', views.CadastroDeFrete.as_view(), name="cadastrodefrete"),
 ]

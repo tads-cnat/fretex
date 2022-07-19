@@ -46,7 +46,7 @@ class CadastroDeFrete(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')
     def post(self, request, *args, **kwargs):
-        cep_origem = request.POST.get('cep-origem',False)
+        cep_origem = request.POST.get('cep-origem')
         rua_origem = request.POST['rua-origem']
         numero_origem = request.POST['numero-origem']
         estado_origem = request.POST['estado-origem']
@@ -54,7 +54,7 @@ class CadastroDeFrete(View):
         bairro_origem = request.POST['bairro-origem']
         complemento_origem = request.POST['complemento-origem']
 
-        cep_destino  = request.POST.get('cep-destino',False)
+        cep_destino  = request.POST.get('cep-destino')
         rua_destino  = request.POST['rua-destino'] 
         numero_destino  = request.POST['numero-destino']
         estado_destino  = request.POST['estado-destino']
@@ -95,9 +95,10 @@ class CadastroDeFrete(View):
             tipo_veiculo.save()
 
             if hasattr(request.user, 'cliente'):
-                pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto, tipo_veiculo = tipo_veiculo,
+                pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto,
                 observacao = observacao, nomeDestinatario = nomedestinatario)
                 pedido.save()
+                pedido.tipo_veiculo.add(tipo_veiculo)
                 #origem = endereco_origem, 
                 #destino = endereco_destino,
                 #data_turno_Coleta = data_turno_coleta, 
@@ -174,9 +175,6 @@ def detalhesMeusFretesFreteiro(request):
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
-
-def cadastroDeFrete(request):
-    return render(request, 'pedidoDeFrete/cadastroFrete.html')
 
 def perfilCliente(request):
     return render(request, 'perfis/perfilCliente.html')

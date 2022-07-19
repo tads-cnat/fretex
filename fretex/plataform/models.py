@@ -57,7 +57,7 @@ class TipoVeiculo(models.Model):
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
+    freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True)
     #origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
     #destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
