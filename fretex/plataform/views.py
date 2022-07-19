@@ -1,12 +1,11 @@
-import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.contrib.auth import login, logout, authenticate
-from .models import Endereco, Freteiro, Pedido, Status, Produto, TipoVeiculo, Cliente
+from django.contrib.auth import login, logout
+from .models import Endereco, Freteiro, Pedido, Status, Produto, TipoVeiculo, Cliente, Veiculo
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
@@ -72,15 +71,16 @@ class CadastroDeFrete(View):
         observacao  = request.POST['observacao']
 
         nomedestinatario  = request.POST['nomedestinatario']
-        data_coleta  = request.POST.get('data-coleta',False)
-        data_entrega  = request.POST.get('data-entrega',False)
-        turno_entrega  = request.POST.get('turno-entrega',False)
-        turno_coleta  = request.POST.get('turno-coleta',False)
+        data_coleta  = request.POST.get('data-coleta')
+        data_entrega  = request.POST.get('data-entrega')
+        turno_entrega  = request.POST.get('turno-entrega')
+        turno_coleta  = request.POST.get('turno-coleta')
 
-        #if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and 
-        #cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and 
-        #imagem and produto and tipoveiculo and data_turno_coleta and data_turno_entrega):
-        if True:
+
+        if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and 
+        cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and
+        produto and tipoveiculo and nomedestinatario and data_coleta and data_entrega and turno_entrega and turno_coleta):
+
             endereco_origem = Endereco( rua = rua_origem, CEP = cep_origem, numero = numero_origem, 
             bairro = bairro_origem, estado = estado_origem, cidade = cidade_origem, complemento = complemento_origem)
             endereco_origem.save()
@@ -90,7 +90,7 @@ class CadastroDeFrete(View):
             endereco_destino.save()
 
             status = Status(descricao = "Em espera")
-            status.save() # será q é necessário msm salvar o status????
+            status.save()
 
             produto = Produto(nome = produto, imagem_url = imagem)
             produto.save()
@@ -100,17 +100,16 @@ class CadastroDeFrete(View):
 
             if hasattr(request.user, 'cliente'):
                 pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto,
-                observacao = observacao, nomeDestinatario = nomedestinatario)
+                observacao = observacao, nomeDestinatario = nomedestinatario, origem = endereco_origem,
+                destino = endereco_destino, data_coleta = data_coleta, data_entrega = data_entrega,
+                turno_entrega = turno_entrega, turno_coleta = turno_coleta)
+
                 pedido.save()
                 pedido.tipo_veiculo.add(tipo_veiculo)
-                #origem = endereco_origem, 
-                #destino = endereco_destino,
-                #data_turno_Coleta = data_turno_coleta, 
-                #data_turno_Entrega = data_turno_entrega
                 return HttpResponseRedirect(reverse('dashboardcliente'))
             else:   
                 erro = 'Usuario não logado!'
-                return render(request, 'login/', {'erro':erro})
+                return render(request, 'login', {'erro':erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
             return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro':erro})
@@ -195,5 +194,29 @@ def editarPerfilFreteiro(request):
 def meusVeiculos(request):
     return render(request, 'perfis/meusVeiculos.html')
 
-def adicionarVeiculo(request):
-    return render(request, 'perfis/adicionarVeiculo.html')
+@method_decorator(login_required, name='dispatch')
+class AdicionarVeiculo(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'perfis/adicionarVeiculo.html')
+    def post(self, request, *args, **kwargs):
+        marca = request.POST['marca']
+        modelo = request.POST['modelo']
+        ano = request.POST['ano']
+        placa_veiculo = request.POST['placa-veiculo']
+        cor_veiculo = request.POST['cor-veiculo']
+        tipo_veiculo = request.POST['tipo-veiculo']
+
+        if marca and modelo and ano and placa_veiculo and cor_veiculo:
+            if hasattr(request.user, 'freteiro'):
+                tipoveiculo = TipoVeiculo(descricao = tipo_veiculo)
+                tipo_veiculo.save()
+                veiculo = Veiculo(freteiro = request.user.freteiro, tipo_veiculo = tipoveiculo, marca=marca, modelo=modelo,
+                ano=ano, placa=placa_veiculo,cor=cor_veiculo)
+                veiculo.save()
+                return HttpResponseRedirect(reverse('meusVeiculos'))
+            else:   
+                erro = 'Usuario não logado!'
+                return render(request, 'login', {'erro':erro})     
+        else:
+            erro = 'Informe corretamente os parâmetros necessários!'
+            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro':erro})

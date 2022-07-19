@@ -9,6 +9,7 @@
         <hr>
     </div>
     <form action="" method="post" class="align-initial form-perfil">
+        {% csrf_token %}
         <div class="form-foto">
             <img src="{% static 'images/perfil.svg' %}" alt="">
             <div class="form-foto-info ">
@@ -34,7 +35,7 @@
                         <img src="{% static 'images/funcionario.jpg' %}" alt="">
                         <div class="">
                             <label for="upload-image" class="botao-padrao cursor-pointer">Upload Imagem</label>
-                            <input type="file" accept="image/*" value="test" id="upload-image" required class="hidden">
+                            <input type="file" name = "imagem" accept="image/*" value="test" id="upload-image" class="hidden">
                         </div>
                     </div>
                 </div>
