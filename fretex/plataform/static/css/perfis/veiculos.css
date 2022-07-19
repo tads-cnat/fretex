@@ -18,12 +18,6 @@
     grid-template-columns: 1fr 1fr;
 }
 
-@media (max-width: 1024px) {
-    #form-veiculos {
-        grid-template-columns: 1fr;
-    }
-}
-
 .veiculo-img {
     display: flex;
     flex-direction: column;
@@ -36,4 +30,12 @@
     width: 230px;
     border: 1px solid black;
     border-radius: 6px;
+}
+
+
+
+@media (max-width: 1024px) {
+    #form-veiculos {
+        grid-template-columns: 1fr;
+    }
 }
