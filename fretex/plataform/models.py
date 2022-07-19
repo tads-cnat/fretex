@@ -58,18 +58,21 @@ class TipoVeiculo(models.Model):
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True)
-    #origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
-    #destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
+    origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
+    destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)  # <--------#
     observacao = models.CharField(max_length=300)
     nomeDestinatario = models.CharField(max_length=200)
-    #data_turno_Coleta = models.DateField()
-    #data_turno_Entrega = models.DateField()
+    data_coleta = models.DateField()
+    data_entrega = models.DateField()
+    turno_entrega = models.CharField(max_length=10)
+    turno_coleta = models.CharField(max_length=10)
 
 
 class Veiculo(models.Model):
+    freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
     tipo_veiculo = models.ForeignKey(TipoVeiculo, on_delete=models.CASCADE)
     placa = models.CharField(max_length=20)
     cor = models.CharField(max_length=20)

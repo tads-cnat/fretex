@@ -50,10 +50,10 @@ urlpatterns = [
     path('editarPerfilFreteiro/', views.editarPerfilFreteiro,
         name="editarPerfilFreteiro"),
 
-    path('meusVeiculos/', views.meusVeiculos, 
+    path('meusVeiculos/', views.meusVeiculos,
         name="meusVeiculos"),
-        
-    path('adicionarVeiculo/', views.adicionarVeiculo, 
+
+    path('adicionarVeiculo/', views.AdicionarVeiculo.as_view(),
         name="adicionarVeiculo"),
 
     path('cadastrofrete/', views.CadastroDeFrete.as_view(), 
