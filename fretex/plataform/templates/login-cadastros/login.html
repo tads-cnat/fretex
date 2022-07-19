@@ -8,13 +8,15 @@
     <main class="container-login">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça login na sua conta</p>
-        <form action="">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
             <label for="email" class="font-1-s cor-0">Email</label>
             <input type="email" name="email" id="email" placeholder="Digite seu email" class="font-1-m" required autocomplete="email">
             <label for="senha" class="font-1-s cor-0">Senha</label>
             <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="font-1-m" required>
             <a href="#" class="font-2-s">Esqueceu sua senha?</a>
             <input type="submit" value="Entrar" class="font-1-m cor-0">
+            <input type="hidden" name="next" value="{{ next }}" class="font-1-m cor-0">
         </form>
         <p class="font-2-s cor-0">Não tem uma conta? <a href="/escolhacadastro/" class="font-2-s cor-0">Cadastrar-se</a></p>
     </main>

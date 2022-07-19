@@ -1,15 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Usuario(models.Model):
-    nome = models.CharField(max_length=200)
-    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
-    email = models.EmailField('Email')
-    cpf = models.CharField(max_length=15)
-    senha = models.CharField(max_length=30)
-    ehModerador = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
+#class Usuario(models.Model):
+#    nome = models.CharField(max_length=200)
+#    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+#    email = models.EmailField('Email')
+#    cpf = models.CharField(max_length=15)
+#    senha = models.CharField(max_length=30)
+#    ehModerador = models.BooleanField(default=False)
+#
+#    def __str__(self):
+#        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
 
 
 class Endereco(models.Model):
@@ -22,17 +23,23 @@ class Endereco(models.Model):
     complemento = models.CharField(max_length=200)
 
 
-class Freteiro(Usuario):
+class Freteiro(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE)  # pk ?#
 
     def __str__(self):
-        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
+        return f"Nome: {self.user.username} - CPF: {self.cpf} "
 
 
-class Cliente(Usuario):
+class Cliente(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    cpf = models.CharField(max_length=15)
     def __str__(self):
-        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
+        return f"Nome: {self.user.username} - CPF: {self.cpf} "
 
 
 class Status(models.Model):
@@ -72,7 +79,7 @@ class Veiculo(models.Model):
 
 
 class Proposta(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     #cont_proposta_id =#

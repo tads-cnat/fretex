@@ -15,7 +15,7 @@
             <div class="barraDeProgresso mb-5">
                 <div class="progressoAtual"></div>
             </div>
-            <form action="" method="post" class="form-cadastro-frete">
+            <form action="{% url 'cadastrodefrete' %}" method="post" class="form-cadastro-frete">
                 {% csrf_token %}
                 <div id="step_1" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Origem</h3>

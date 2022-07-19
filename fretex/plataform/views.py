@@ -1,13 +1,44 @@
 import datetime
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
+from django.contrib.auth import login, authenticate
 from .models import Endereco, Pedido, Status, Produto, TipoVeiculo
+from django.contrib.auth import get_user_model
+from django.contrib.auth.backends import ModelBackend
 
+
+class EmailBackend(ModelBackend):
+    def authenticate(request, username=None, password=None, **kwargs):
+        UserModel = get_user_model()
+        try:
+            user = UserModel.objects.get(email=username)
+        except UserModel.DoesNotExist:
+            return None
+        else:
+            if user.check_password(password):
+                return user
+        return None
+
+class Login(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'login-cadastros/login.html')
+    def post(self, request, *args, **kwargs):
+        email = request.POST['email']
+        senha = request.POST['senha']
+        user = EmailBackend.authenticate(request, username = email, password = senha)
+        if user is not None:
+            login(request, user)
+            if hasattr(request.user, 'cliente'):
+                return HttpResponseRedirect(reverse('dashboardcliente'))
+            else:
+                return HttpResponseRedirect(reverse('dashboardfreteiro'))
+        else:
+            erro = 'Email e senha inválidas!'
+            return render(request, 'login-cadastros/login.html', {'erro': erro})
 
 @method_decorator(login_required, name='dispatch')
 class CadastroDeFrete(View):
@@ -52,7 +83,7 @@ class CadastroDeFrete(View):
             endereco_destino.save()
 
             status = Status(descricao = "Em espera")
-            status.save()
+            status.save() # será q é necessário msm salvar o status????
 
             produto = Produto(nome = produto, imagem_url = imagem)
             produto.save()
@@ -61,8 +92,9 @@ class CadastroDeFrete(View):
             tipo_veiculo.save()
 
             if hasattr(request.user, 'cliente'):
-                pedido = Pedido.objects.create(cliente = request.user.cliente, status = status, produto = produto, tipo_veiculo = tipo_veiculo,
+                pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto, tipo_veiculo = tipo_veiculo,
                 observacao = observacao, nomeDestinatario = nomedestinatario)
+                pedido.save()
                 #origem = endereco_origem, 
                 #destino = endereco_destino,
                 #data_turno_Coleta = data_turno_coleta, 
@@ -75,12 +107,8 @@ class CadastroDeFrete(View):
             erro = 'Informe corretamente os parâmetros necessários!'
             return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro':erro})
 
-
 def landing(request):
     return render(request, 'landing.html')
-
-def login(request):
-    return render(request, 'login-cadastros/login.html')
 
 def escolhaCadastro(request):
     return render(request, 'login-cadastros/escolhaCadastro.html')
@@ -108,7 +136,6 @@ def detalhesMeusFretesFreteiro(request):
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
-<<<<<<< Updated upstream
 
 def cadastroDeFrete(request):
     return render(request, 'pedidoDeFrete/cadastroFrete.html')
@@ -130,5 +157,3 @@ def meusVeiculos(request):
 
 def adicionarVeiculo(request):
     return render(request, 'perfis/adicionarVeiculo.html')
-=======
->>>>>>> Stashed changes
