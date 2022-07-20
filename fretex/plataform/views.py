@@ -201,10 +201,14 @@ def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
 
 def perfilCliente(request):
-    return render(request, 'perfis/perfilCliente.html')
+    cliente = request.user.cliente
+    contexto = {'cliente': cliente}
+    return render(request, 'perfis/perfilCliente.html',contexto)
 
 def perfilFreteiro(request):
-    return render(request, 'perfis/perfilFreteiro.html')
+    freteiro = request.user.freteiro
+    contexto = {'freteiro': freteiro}
+    return render(request, 'perfis/perfilFreteiro.html', contexto)
 
 def editarPerfilCliente(request):
     return render(request, 'perfis/editarPerfilCliente.html')
@@ -213,7 +217,9 @@ def editarPerfilFreteiro(request):
     return render(request, 'perfis/editarPerfilFreteiro.html')
 
 def meusVeiculos(request):
-    return render(request, 'perfis/meusVeiculos.html')
+    veiculos = Veiculo.objects.filter(freteiro__user = request.user)
+    contexto = {'veiculos': veiculos}
+    return render(request, 'perfis/meusVeiculos.html', contexto)
 
 @method_decorator(login_required, name='dispatch')
 class AdicionarVeiculo(View):
@@ -230,7 +236,7 @@ class AdicionarVeiculo(View):
         if marca and modelo and ano and placa_veiculo and cor_veiculo:
             if hasattr(request.user, 'freteiro'):
                 tipoveiculo = TipoVeiculo(descricao = tipo_veiculo)
-                tipo_veiculo.save()
+                tipoveiculo.save()
                 veiculo = Veiculo(freteiro = request.user.freteiro, tipo_veiculo = tipoveiculo, marca=marca, modelo=modelo,
                 ano=ano, placa=placa_veiculo,cor=cor_veiculo)
                 veiculo.save()
