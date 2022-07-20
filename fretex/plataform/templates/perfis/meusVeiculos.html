@@ -27,7 +27,12 @@
             </div>
             <div class="form-info-content">
                 <div class="form-info-container container-total">
+                {% if veiculos %}
+                    <h3 class="font-1-m font-semibold text-xl md:text-2xl ">Veiculo(s):</h3>
+                {% else %}
                     <h3 class="font-1-m font-semibold text-xl md:text-2xl ">Nenhum veículo cadastrado</h3>
+                {% endif %}
+
                 </div>
                 {% for veiculo in veiculos %}
                     <div class="form-info-container container-total bg-white" id="veiculo-container">

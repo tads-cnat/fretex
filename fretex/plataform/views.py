@@ -213,8 +213,44 @@ def perfilFreteiro(request):
 def editarPerfilCliente(request):
     return render(request, 'perfis/editarPerfilCliente.html')
 
-def editarPerfilFreteiro(request):
-    return render(request, 'perfis/editarPerfilFreteiro.html')
+#VIEWBOMBA, NAO TA FUNCIONANDO, DEPOIS EU VEJO, ACHO Q NAO É ASSIM!
+@method_decorator(login_required, name='dispatch')
+class EditarPerfilFreteiro(View):
+    def get(self, request, *args, **kwargs):
+        freteiro = request.user.freteiro
+        contexto = {'freteiro': freteiro}
+        return render(request, 'perfis/editarPerfilFreteiro.html', contexto)
+    def post(self, request, *args, **kwargs):
+        nome = request.POST['nome']
+        email = request.POST['email']   
+        cpf = request.POST['cpf']
+        senha = request.POST['senha']
+        cep = request.POST['cep']
+        rua = request.POST['rua']
+        numero = request.POST['numero']
+        estado = request.POST['estado']
+        bairro = request.POST['bairro']
+        complemento = request.POST['complemento']
+        if nome and email and cpf and senha and cep and rua and numero and estado and bairro:
+            if hasattr(request.user, 'freteiro'):
+                request.user.username = nome
+                request.user.email = email
+                request.user.password = senha
+                freteiro = request.user.freteiro
+                freteiro.cpf = cpf
+                freteiro.endereco.CEP = cep
+                freteiro.endereco.rua = rua
+                freteiro.endereco.numero = numero
+                freteiro.endereco.estado = estado
+                freteiro.endereco.bairro = bairro
+                freteiro.endereco.complemento = complemento
+                return HttpResponseRedirect(reverse('perfilFreteiro'))
+            else:   
+                erro = 'Usuario não logado!'
+                return render(request, 'login', {'erro':erro})                
+        else:
+            erro = 'Informe corretamente os parâmetros necessários!'
+            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
 
 def meusVeiculos(request):
     veiculos = Veiculo.objects.filter(freteiro__user = request.user)
@@ -224,7 +260,9 @@ def meusVeiculos(request):
 @method_decorator(login_required, name='dispatch')
 class AdicionarVeiculo(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'perfis/adicionarVeiculo.html')
+        freteiro = request.user.freteiro
+        contexto = {'freteiro': freteiro}
+        return render(request, 'perfis/adicionarVeiculo.html', contexto)
     def post(self, request, *args, **kwargs):
         marca = request.POST['marca']
         modelo = request.POST['modelo']
