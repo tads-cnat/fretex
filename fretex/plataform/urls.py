@@ -34,8 +34,8 @@ urlpatterns = [
 
     path('dashboardcliente/', views.dashboardCliente, 
         name='dashboardcliente'),
-    path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente,
 
+    path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente,
         name='detalhesMeusFretesCliente'),
 
     path('perfilCliente/', views.perfilCliente, 

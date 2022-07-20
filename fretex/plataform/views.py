@@ -179,7 +179,9 @@ class CadastroFreteiro(View):
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
 
 def dashboardFreteiro(request):
-    return render(request, 'dashboards/dashboardFreteiro.html')
+    pedidos = Pedido.objects.filter(freteiro__user = request.user)
+    contexto = {'pedidos': pedidos}
+    return render(request, 'dashboards/dashboardFreteiro.html',contexto)
 
 def dashboardCliente(request):
     pedidos = Pedido.objects.filter(cliente__user= request.user)
