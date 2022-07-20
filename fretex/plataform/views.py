@@ -182,7 +182,9 @@ def dashboardFreteiro(request):
     return render(request, 'dashboards/dashboardFreteiro.html')
 
 def dashboardCliente(request):
-    return render(request, 'dashboards/dashboardCliente.html')
+    pedidos = Pedido.objects.filter(cliente__user= request.user)
+    contexto = {'pedidos': pedidos}
+    return render(request, 'dashboards/dashboardCliente.html',contexto)
 
 def fretes_index(request):
     return render(request, 'fretes/index.html')
