@@ -1,3 +1,4 @@
+from genericpath import exists
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -9,6 +10,7 @@ from .models import Endereco, Freteiro, Pedido, Status, Produto, TipoVeiculo, Cl
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class EmailBackend(ModelBackend):
@@ -101,27 +103,23 @@ class CadastroDeFrete(View):
                 turno_entrega = turno_entrega, turno_coleta = turno_coleta)
 
                 pedido.save()
-                tipo_veiculo1 = request.POST['tipoveiculo1']
+                
+                try:
+                    TipoVeiculo.objects.get(descricao = "carro")
+                except ObjectDoesNotExist:
+                    carro = TipoVeiculo(descricao = "carro")
+                    carro.save()
+                    moto = TipoVeiculo(descricao = "moto")
+                    moto.save()
+                    caminhao = TipoVeiculo(descricao = "caminhao")
+                    caminhao.save()
+                    bicicleta = TipoVeiculo(descricao = "bicicleta")
+                    bicicleta.save()
 
-                if tipo_veiculo1:
-                    tipo_veiculo1 = TipoVeiculo(descricao = request.POST['tipoveiculo1'])
-                    tipo_veiculo1.save()
-                    pedido.tipo_veiculo.add(tipo_veiculo1)
-
-               # if tipo_veiculo2:
-               #     tipo_veiculo2 = TipoVeiculo(descricao = request.POST['tipoveiculo2'])
-               #     tipo_veiculo2.save()
-               #     pedido.tipo_veiculo.add(tipo_veiculo2)                
-
-                #if tipo_veiculo3:
-                #    tipo_veiculo3 = TipoVeiculo(descricao = request.POST['tipoveiculo3'])
-                #    tipo_veiculo3.save()
-                #    pedido.tipo_veiculo.add(tipo_veiculo3)
-
-               # if tipo_veiculo4:
-               #     tipo_veiculo4 = TipoVeiculo(descricao = request.POST['tipoveiculo4'])
-               #     tipo_veiculo4.save()
-               #     pedido.tipo_veiculo.add(tipo_veiculo4)  
+                tipo_veiculo = request.POST.getlist('tipoveiculos')
+                for tipoveiculos in tipo_veiculo:
+                    r = TipoVeiculo.objects.get(descricao = tipoveiculos)
+                pedido.tipo_veiculo.add(r)        
 
                 return HttpResponseRedirect(reverse('dashboardcliente'))
             else:   
