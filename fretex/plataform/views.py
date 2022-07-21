@@ -208,10 +208,32 @@ def perfilFreteiro(request):
     contexto = {'freteiro': freteiro}
     return render(request, 'perfis/perfilFreteiro.html', contexto)
 
-def editarPerfilCliente(request):
-    return render(request, 'perfis/editarPerfilCliente.html')
+@method_decorator(login_required, name='dispatch')
+class EditarPerfilCliente(View):
+    def get(self, request, *args, **kwargs):
+        cliente = request.user.cliente
+        contexto = {'cliente': cliente}
+        return render(request, 'perfis/editarPerfilCliente.html', contexto)
+    def post(self, request, *args, **kwargs):
+        nome = request.POST['nome']
+        email = request.POST['email']   
+        cpf = request.POST['cpf']
+        if nome and email and cpf:
+            if hasattr(request.user, 'cliente'):
+                cliente = request.user.cliente
+                cliente.user.username = nome
+                cliente.user.email = email
+                request.user.save()
+                cliente.cpf = cpf
+                cliente.save()
+                return HttpResponseRedirect(reverse('perfilCliente'))
+            else:   
+                erro = 'Usuario não logado!'
+                return render(request, 'login', {'erro':erro}) 
+        else:
+            erro = 'Informe corretamente os parâmetros necessários!'
+            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
 
-#VIEWBOMBA, NAO TA FUNCIONANDO, DEPOIS EU VEJO, ACHO Q NAO É ASSIM!
 @method_decorator(login_required, name='dispatch')
 class EditarPerfilFreteiro(View):
     def get(self, request, *args, **kwargs):

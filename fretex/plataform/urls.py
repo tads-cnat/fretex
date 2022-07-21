@@ -44,7 +44,7 @@ urlpatterns = [
     path('perfilFreteiro/', views.perfilFreteiro, 
         name="perfilFreteiro"),
 
-    path('editarPerfilCliente/', views.editarPerfilCliente,
+    path('editarPerfilCliente/', views.EditarPerfilCliente.as_view(),
         name="editarPerfilCliente"),
 
     path('editarPerfilFreteiro/', views.EditarPerfilFreteiro.as_view(),
