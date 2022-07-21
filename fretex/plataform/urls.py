@@ -20,11 +20,8 @@ urlpatterns = [
     path('cadastrofreteiro/', views.CadastroFreteiro.as_view(),
         name='cadastrofreteiro'),
 
-    path('fretes/', views.fretes_index, 
-        name='fretes.index'),
-
-    path('fretes/detalhes/', views.detalhesFretesDisponiveis,
-        name='detalhesFretesDisponiveis'),
+    path('fretes/', views.fretes_index, name='fretes_index'),
+    path('fretes/<int:pedido_id>/', views.fretes_show.as_view(), name='fretes_show'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),
@@ -34,8 +31,8 @@ urlpatterns = [
 
     path('dashboardcliente/', views.dashboardCliente, 
         name='dashboardcliente'),
-    path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente,
 
+    path('dashboardcliente/detalhes/', views.detalhesMeusFretesCliente,
         name='detalhesMeusFretesCliente'),
 
     path('perfilCliente/', views.perfilCliente, 
@@ -44,10 +41,10 @@ urlpatterns = [
     path('perfilFreteiro/', views.perfilFreteiro, 
         name="perfilFreteiro"),
 
-    path('editarPerfilCliente/', views.editarPerfilCliente,
+    path('editarPerfilCliente/', views.EditarPerfilCliente.as_view(),
         name="editarPerfilCliente"),
 
-    path('editarPerfilFreteiro/', views.editarPerfilFreteiro,
+    path('editarPerfilFreteiro/', views.EditarPerfilFreteiro.as_view(),
         name="editarPerfilFreteiro"),
 
     path('meusVeiculos/', views.meusVeiculos,

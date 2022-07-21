@@ -13,8 +13,8 @@
         <div class="form-foto">
             <img src="{% static 'images/perfil.svg' %}" alt="">
             <div class="form-foto-info ">
-                <h2 class="font-1-xl">Ladeira</h2>
-                <p class="font-1-m">ladeira123@gmail.com</p>
+                <h2 class="font-1-xl">{{user.username}}</h2>
+                <p class="font-1-m">{{user.email}}</p>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
                     <label for="cor-veiculo" class="font-1-m">Cor do veículo*</label>
                     <input type="text" name="cor-veiculo" id="cor-veiculo" class="font-1-s input-perfil" required>
 
-                    <label class="font-1-m">Cor do veículo*</label>
+                    <label class="font-1-m">Tipo de veículo*</label>
                     <div class="flex flex-col md:flex-row gap-x-4">
                         <div>
                             <input type="radio" id="caminhao" name="tipo-veiculo" value="caminhao">

@@ -9,11 +9,12 @@
         <hr>
     </div>
     <form action="" method="post" class="form-perfil">
+        {% csrf_token %}
         <div class="form-foto">
             <img src="{% static 'images/perfil.svg' %}" alt="">
             <div class="form-foto-info ">
-                <h2 class="font-1-xl">Ladeira</h2>
-                <p class="font-1-m">ladeira123@gmail.com</p>
+                <h2 class="font-1-xl">{{user.username}}</h2>
+                <p class="font-1-m">{{user.email}}</p>
                 <label for="upload-image" class="botao-padrao cursor-pointer">Upload da imagem</label>
                 <input type="file" accept="image/*" value="test" id="upload-image" class="hidden">
             </div>
@@ -30,27 +31,27 @@
             <div class="form-info-content">
                 <div class="form-info-container">
                     <label for="nome" class="font-1-m">Nome completo*</label>
-                    <input type="text" name="nome" id="nome" class="font-1-s input-perfil" value="Ladeira" required>
+                    <input type="text" name="nome" id="nome" class="font-1-s input-perfil" value={{user.username}} required>
                 </div>
                 <div class="form-info-container">
                     <label for="email" class="font-1-m">Email*</label>
-                    <input type="email" name="email" id="email" class="font-1-s input-perfil" value="ladeira123@gmail.com" required>
+                    <input type="email" name="email" id="email" class="font-1-s input-perfil" value={{user.email}} required>
                 </div>
                 <div class="form-info-container">
                     <label for="cpf" class="font-1-m">CPF*</label>
-                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m input-perfil" required value="123.321.321-23">
+                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m input-perfil" required value={{freteiro.cpf}}>
                 </div>
                 <div class="form-info-container">
                     <label for="email" class="font-1-m">CEP*</label>
-                    <input type="text" name="cep" id="cep" required pattern="\d{5}-?\d{3}" value="12134-123" class="font-1-s input-perfil">
+                    <input type="text" name="cep" id="cep" required pattern="\d{5}-?\d{3}" value={{freteiro.endereco.CEP}} class="font-1-s input-perfil">
                 </div>
                 <div class="form-info-container">
                     <label for="rua" class="font-1-m">Rua*</label>
-                    <input type="text" name="rua" id="rua" class="font-1-s input-perfil" value="Rua do IF" required>
+                    <input type="text" name="rua" id="rua" class="font-1-s input-perfil" value={{freteiro.endereco.rua}} required>
                 </div>
                 <div class="form-info-container">
                     <label for="numero" class="font-1-m">Número*</label>
-                    <input type="number" name="numero" id="numero" class="font-1-s input-perfil" required value="2013">
+                    <input type="number" name="numero" id="numero" class="font-1-s input-perfil" required value={{freteiro.endereco.numero}}>
                 </div>
                 <div class="form-info-container">
                     <label for="estado" class="font-1-m">Estado*</label>
@@ -87,19 +88,11 @@
                 </div>
                 <div class="form-info-container">
                     <label for="bairro" class="font-1-m">Bairro/Distrito*</label>
-                    <input type="text" name="bairro" id="bairro" required value="Bairro do IF" class="font-1-s input-perfil">
-                </div>
-                <div class="form-info-container">
-                    <label for="senha" class="font-1-m">Senha*</label>
-                    <input type="password" name="senha" id="senha"  value="12345789" class="font-1-s input-perfil" required>
-                </div>
-                <div class="form-info-container">
-                    <label for="confirmar-senha" class="font-1-m">Confirmar senha*</label>
-                    <input type="password" name="confirmar-senha" id="confirmar-senha"  value="12345789" class="font-1-s input-perfil" required>
+                    <input type="text" name="bairro" id="bairro" required value={{freteiro.endereco.bairro}} class="font-1-s input-perfil">
                 </div>
                 <div class="form-info-container container-total">
                     <label for="complemento" class="font-1-m">Complemento</label>
-                    <textarea name="complemento" id="complemento" class="font-1-s resize-none input-perfil" required>Portão branco, perto do mercado
+                    <textarea name="complemento" id="complemento" class="font-1-s resize-none input-perfil" required>{{freteiro.endereco.complemento}}
                     </textarea>
                 </div>
                 <div>

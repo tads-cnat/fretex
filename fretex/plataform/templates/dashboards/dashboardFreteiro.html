@@ -41,43 +41,30 @@
                             <img src="{% static 'images/setaBaixo.svg' %}" alt="">
                         </a>
                     </dt>
-                    <dd class="mt-5 teste">
-                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
-                            <div class="flex justify-center md:justify-start grow-0">
-                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Origem</strong>: teste</p>
-                                <p><strong>Destino</strong>: teste</p>
-                                <p><strong>KM</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Produto</strong>: teste</p>
-                                <p><strong>Tipo de veiculo</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow items-center justify-center">
-                                <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                            </div>
-                        </div>
-                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
-                            <div class="flex justify-center md:justify-start grow-0">
-                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Origem</strong>: teste</p>
-                                <p><strong>Destino</strong>: teste</p>
-                                <p><strong>KM</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Produto</strong>: teste</p>
-                                <p><strong>Tipo de veiculo</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow items-center justify-center">
-                                <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                            </div>
-                        </div>
-                    </dd>
-                </section>
+                        <dd class="mt-5 teste">
+                            {% for pedido in pedidos %}
+                                {% if pedido.status.descricao == "Em espera" %}
+                                    <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
+                                        <div class="flex justify-center md:justify-start grow-0">
+                                            <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                                        </div>
+                                        <div class="flex flex-col gap-4 grow">
+                                            <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                            <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                            <p><strong>KM</strong>: teste</p>
+                                        </div>
+                                        <div class="flex flex-col gap-4 grow">
+                                            <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                            <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo.descricao }}</p>
+                                        </div>
+                                        <div class="flex flex-col gap-4 grow items-center justify-center">
+                                            <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </dd>
+                    </section>
 
                 <section class="section mb-3">
                     <dt>
@@ -87,23 +74,27 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
-                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
-                            <div class="flex justify-center md:justify-start grow-0">
-                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Origem</strong>: teste</p>
-                                <p><strong>Destino</strong>: teste</p>
-                                <p><strong>KM</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Produto</strong>: teste</p>
-                                <p><strong>Tipo de veiculo</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow items-center justify-center">
-                                <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                            </div>
-                        </div>
+                        {% for pedido in pedidos %}
+                            {% if pedido.status.descricao == "Em andamento" %}                        
+                                <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
+                                    <div class="flex justify-center md:justify-start grow-0">
+                                        <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                        <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                        <p><strong>KM</strong>: teste</p>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                        <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo.descricao }}</p>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow items-center justify-center">
+                                        <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}                       
                     </dd>
                 </section>
 
@@ -115,23 +106,27 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
-                        <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
-                            <div class="flex justify-center md:justify-start grow-0">
-                                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Origem</strong>: teste</p>
-                                <p><strong>Destino</strong>: teste</p>
-                                <p><strong>KM</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow">
-                                <p><strong>Produto</strong>: teste</p>
-                                <p><strong>Tipo de veiculo</strong>: teste</p>
-                            </div>
-                            <div class="flex flex-col gap-4 grow items-center justify-center">
-                                <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                            </div>
-                        </div>
+                        {% for pedido in pedidos %}
+                            {% if pedido.status.descricao == "Encerrado" %}
+                                <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
+                                    <div class="flex justify-center md:justify-start grow-0">
+                                        <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                        <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                        <p><strong>KM</strong>: teste</p>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                        <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo }}</p>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow items-center justify-center">
+                                        <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %} 
                     </dd>
                 </section>
         </div>
