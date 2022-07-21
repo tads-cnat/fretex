@@ -222,26 +222,27 @@ class EditarPerfilFreteiro(View):
         nome = request.POST['nome']
         email = request.POST['email']   
         cpf = request.POST['cpf']
-        senha = request.POST['senha']
         cep = request.POST['cep']
         rua = request.POST['rua']
         numero = request.POST['numero']
         estado = request.POST['estado']
         bairro = request.POST['bairro']
         complemento = request.POST['complemento']
-        if nome and email and cpf and senha and cep and rua and numero and estado and bairro:
+        if nome and email and cpf and cep and rua and numero and estado and bairro:
             if hasattr(request.user, 'freteiro'):
-                request.user.username = nome
-                request.user.email = email
-                request.user.password = senha
                 freteiro = request.user.freteiro
-                freteiro.cpf = cpf
+                freteiro.user.username = nome
+                freteiro.user.email = email
+                request.user.save()
                 freteiro.endereco.CEP = cep
                 freteiro.endereco.rua = rua
                 freteiro.endereco.numero = numero
                 freteiro.endereco.estado = estado
                 freteiro.endereco.bairro = bairro
                 freteiro.endereco.complemento = complemento
+                freteiro.endereco.save()
+                freteiro.cpf = cpf
+                freteiro.save()
                 return HttpResponseRedirect(reverse('perfilFreteiro'))
             else:   
                 erro = 'Usuario não logado!'
