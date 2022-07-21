@@ -9,30 +9,30 @@
         <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Detalhes do Frete</h1>
         <hr>
     </div>
-    <div class="container-detalhes-geral">
+    <div class="container-detalhes-geral mb-0">
         <p class="font-1-l mb-3 font-semibold data-pedido">Data do pedido: 13/06/2022</p>
         <div class="container-detalhes">
             <div class="flex items-center gap-3 mb-1 sm:mb-2">
                 <img src="{% static 'images/detalhesPerfil.svg' %}" alt="">
-                <p class="font-1-m">Cliente: joaozin</p>
+                <p class="font-1-m">Cliente: {{pedido.cliente}}</p>
             </div>
             <div class="flex items-center gap-3 mb-1 sm:mb-2">
                 <img src="{% static 'images/iconeLocalidade.svg' %}" alt="">
-                <p class="font-1-m">Origem: Rua São Paulo, 247 - Alecrim - Natal - RN</p>
+                <p class="font-1-m">Origem: {{pedido.origem}}</p>
                 <img src="{% static 'images/flechaDireita.svg' %}" alt="">
-                <p class="font-1-m">Destino: Av. Amintas Barros, 3700 - Lagoa Nova - Natal - RN</p>
+                <p class="font-1-m">Destino: {{pedido.destino}}</p>
             </div>
             <div class="flex items-center gap-3 mb-1 sm:mb-2">
                 <img src="{% static 'images/calendario.svg' %}" alt="">
-                <p class="font-1-m">Data de coleta: XX/XX/XXXX </p>
+                <p class="font-1-m">Data de coleta: {{pedido.data_coleta}} </p>
                 <img src="{% static 'images/flechaDireita.svg' %}" alt="">
-                <p class="font-1-m">Data de entrega: XX/XX/XXXX</p>
+                <p class="font-1-m">Data de entrega: {{pedido.data_entrega}}</p>
             </div>
             <div class="flex items-center gap-3 mb-1 sm:mb-2">
                 <img src="{% static 'images/turno.png' %}" alt="">
-                <p class="font-1-m">Turno de coleta: Manhã</p>
+                <p class="font-1-m">Turno de coleta: {{pedido.turno_coleta}}</p>
                 <img src="{% static 'images/flechaDireita.svg' %}" alt="">
-                <p class="font-1-m">Turno de entrega: Tarde</p>
+                <p class="font-1-m">Turno de entrega: {{pedido.turno_entrega}}</p>
             </div>
             <div class="flex flex-col gap-1 mb-1 sm:mb-2">
                 <div class="flex items-center gap-3 ">
@@ -40,17 +40,17 @@
                     <p class="font-1-m">Detalhes:</p>
                 </div>
                 <div class="flex flex-col detalhes-info ml-8 sm:ml-11">
-                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Destinatário: joaozin</p>
-                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Kilometragem: 20Km</p>
-                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Produto:  Livros</p>
-                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Tipo de veículo: Todos</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Destinatário: {{pedido.nomeDestinatario}}</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Kilometragem: ?Km</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Produto:  {{pedido.produto}}</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Tipo de veículo: {% for tipo in pedido.tipo_veiculo.all %} {{tipo}} {% endfor %}</p>
                 </div>
             </div>
             <div class="flex items-center gap-1 mb-1 sm:mb-2">
                 <img src="{% static 'images/observacao.svg' %}" alt="">
                 <p class="font-1-m">Observação:</p>
             </div>
-            <p class="font-1-xs mb-4 ml-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero nostrum rerum quo harum odio, nesciunt ea blanditiis, nam, ad error cum. Minima vel inventore ad veritatis enim ipsam earum quia.</p>
+            <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
             <div class="div-botao">
                 <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">Realizar proposta</button>
             </div>
@@ -61,7 +61,6 @@
         </div>
     </div>
 
-
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->
@@ -71,37 +70,57 @@
                 <h2 class="font-1-m font-semibold">Proposta</h2>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="{% url 'fretes_show' pedido.id %}" method="POST">
+                    {% csrf_token %}
                     <p class="font-1-m font-semibold mb-2">Informe o veículo a ser usado:</p>
-
+                    
+                    {% for veiculo in request.user.freteiro.veiculo_set.all %}
                     <div class="veiculo mb-3" >
-                        <input type="radio" name="veiculo" id="veiculo" required>
+                        <input type="radio" name="veiculo_id" id="veiculo" value="{{veiculo.id}}" required>
                         <label for="veiculo" class="flex items-center justify-start">
                             <div class="imagem-veiculo">
                                 <img src="{% static 'images/funcionario.jpg' %}" alt="">
                             </div>
                             <div>
-                                <p class="font-1-m">Marca: Fiat</p>
-                                <p class="font-1-m">Modelo: Palio</p>
-                                <p class="font-1-m">Ano: 2016</p>
-                                <p class="font-1-m">Placa do veículo: XXXXXXX</p>
-                                <p class="font-1-m">Cor do veículo: Cranco</p>
-                                <p class="font-1-m">Tipo do veículo: Carro</p>
+                                <p class="font-1-m">Marca: {{veiculo.marca}}</p>
+                                <p class="font-1-m">Modelo: {{veiculo.modelo}}</p>
+                                <p class="font-1-m">Ano: {{veiculo.ano}}</p>
+                                <p class="font-1-m">Placa do veículo: {{veiculo.placa}}</p>
+                                <p class="font-1-m">Cor do veículo: {{veiculo.cor}}</p>
+                                <p class="font-1-m">Tipo do veículo: {{veiculo.tipo_veiculo}}</p>
                             </div>
                         </label>
                     </div>
+                    {% endfor %}
                     <div class="mb-3 flex flex-col">
-                        <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
-                        <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
+                        <label class="font-1-m font-semibold mb-2" for="valor">Informe o valor da proposta:</label>
+                        <input type="number" name="valor" id="valor" placeholder="R$" class="cor-12" required>
                     </div>
                     <div class="flex justify-center">
-                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2" type="submit">Realizar proposta</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </main>
+<section class="container mx-auto mb-16">
+    <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Histórico de propostas</h1>
+    {% for proposta in pedido.proposta_set.all %}
+        {% if proposta.usuario == request.user or pedido.usuario == request.user %}
+        <div class="border rounded border-neutral-200 p-4 mb-4">
+            <div>
+                <p>Valor da proposta: {{ proposta.valor }}</p>
+                <p>Data da proposta: {{ proposta.data_criacao }}</p>
+                <p>Realizada por {{ proposta.usuario }}</p>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
 {% endblock %}
 
 {% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}

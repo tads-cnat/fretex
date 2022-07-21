@@ -1,12 +1,12 @@
 from genericpath import exists
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth import login, logout
-from .models import Endereco, Freteiro, Pedido, Status, Produto, TipoVeiculo, Cliente, Veiculo
+from .models import Endereco, Freteiro, Pedido, Proposta, Status, Produto, TipoVeiculo, Cliente, Veiculo
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
@@ -187,10 +187,19 @@ def dashboardCliente(request):
     return render(request, 'dashboards/dashboardCliente.html',contexto)
 
 def fretes_index(request):
-    return render(request, 'fretes/index.html')
+    pedidos = Pedido.objects.all()
+    return render(request, 'fretes/index.html', {'pedidos': pedidos})
 
-def detalhesFretesDisponiveis(request):
-    return render(request, 'fretes/detalhesFretesDisponiveis.html')
+class fretes_show(View):
+    def get(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, pk=pedido_id)
+        return render(request, 'fretes/show.html', {'pedido': pedido})
+    
+    def post(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, pk=pedido_id)
+        veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
+        Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
+        return render(request, 'fretes/show.html', {'pedido': pedido})
 
 def detalhesMeusFretesFreteiro(request):
     return render(request, 'fretes/detalhesMeusFretesFreteiro.html')

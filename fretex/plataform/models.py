@@ -22,6 +22,9 @@ class Endereco(models.Model):
     estado = models.CharField(max_length=100)
     complemento = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"{self.rua}, {self.numero}, {self.bairro}. {self.cidade}"
+
 
 class Freteiro(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -50,14 +53,20 @@ class Produto(models.Model):
     nome = models.CharField(max_length=200)
     imagem_url = models.ImageField(upload_to = None, blank=True, null=True)
 
+    def __str__(self):
+        return self.nome
+
 
 class TipoVeiculo(models.Model):
     descricao = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.descricao
+
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True)
+    #freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True) #Freteiro se relaciona atraves de proposta
     origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
     destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
