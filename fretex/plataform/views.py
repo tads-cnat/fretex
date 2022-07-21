@@ -37,7 +37,7 @@ class Login(View):
             if hasattr(request.user, 'cliente'):
                 return HttpResponseRedirect(reverse('dashboardcliente'))
             else:
-                return HttpResponseRedirect(reverse('fretes.index'))
+                return HttpResponseRedirect(reverse('fretes_index'))
         else:
             erro = 'Email e senha inválidas!'
             return render(request, 'login-cadastros/login.html', {'erro': erro}) #inserir condições de next no template
@@ -177,7 +177,7 @@ class CadastroFreteiro(View):
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
 
 def dashboardFreteiro(request):
-    pedidos = Pedido.objects.filter(freteiro__user = request.user)
+    pedidos = Pedido.objects.filter(proposta__usuario = request.user) ## pedidos repetidos quando tem mais de 1 proposta feita ao msm pedido.
     contexto = {'pedidos': pedidos}
     return render(request, 'dashboards/dashboardFreteiro.html',contexto)
 
