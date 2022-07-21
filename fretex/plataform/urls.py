@@ -20,11 +20,8 @@ urlpatterns = [
     path('cadastrofreteiro/', views.CadastroFreteiro.as_view(),
         name='cadastrofreteiro'),
 
-    path('fretes/', views.fretes_index, 
-        name='fretes.index'),
-
-    path('fretes/detalhes/', views.detalhesFretesDisponiveis,
-        name='detalhesFretesDisponiveis'),
+    path('fretes/', views.fretes_index, name='fretes_index'),
+    path('fretes/<int:pedido_id>/', views.fretes_show.as_view(), name='fretes_show'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),

@@ -6,7 +6,7 @@
 <main id="fretesIndex" class="py-14 container mx-auto flex gap-8 flex-col md:grid md:grid-cols-12 gap-y-8 px-4">
     <header class="py-4 flex justify-between border-b border-neutral-200 col-span-12 flex-col md:flex-row gap-4 items-center">
         <h1 class="font-bold text-5xl">Fretes disponíveis</h1>
-        <form method="GET" class="self-start" action="{% url 'fretes.index' %}">
+        <form method="GET" class="self-start" action="{% url 'fretes_index' %}">
             <label for="order">Ordenar por</label>
             <select id="order" class="font-bold" name="order" onchange="this.form.submit()">
                 <option value="1" {% if request.GET.order == '1' %} selected {% endif %}>Mais relevantes</option>
@@ -77,23 +77,25 @@
         </form>
     </aside>
     <main class="col-span-9">
+        {% for pedido in pedidos %}
         <div class="rounded-lg border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8">
             <div class="flex justify-center md:justify-start grow-0">
                 <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
             </div>
             <div class="flex flex-col gap-4 grow">
-                <p><strong>Origem</strong>: teste</p>
-                <p><strong>Destino</strong>: teste</p>
-                <p><strong>KM</strong>: teste</p>
+                <p><strong>Origem</strong>: {{pedido.origem}}</p>
+                <p><strong>Destino</strong>: {{pedido.destino}}</p>
+                <p><strong>KM</strong>: ?</p>
             </div>
             <div class="flex flex-col gap-4 grow">
-                <p><strong>Produto</strong>: teste</p>
-                <p><strong>Tipo de veiculo</strong>: teste</p>
+                <p><strong>Produto</strong>: {{pedido.produto}}</p>
+                <p><strong>Tipo de veiculo</strong>: {% for tipo in pedido.tipo_veiculo.all %} {{tipo}} {% endfor %}</p>
             </div>
             <div class="flex flex-col gap-4 grow items-center justify-center">
-                <a href="/fretes/detalhes/" class="bg-yellow-400 px-4 font-bold py-2 rounded-full w-fit hover:bg-yellow-500">Detalhes</a>
+                <a href="{% url 'fretes_show' pedido.id %}" class="bg-yellow-400 px-4 font-bold py-2 rounded-full w-fit hover:bg-yellow-500">Detalhes</a>
             </div>
         </div>
+        {% endfor %}
     </main>
 </main>
 {% endblock %}
