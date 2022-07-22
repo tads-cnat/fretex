@@ -5,19 +5,40 @@
 {% block content %}
 
 <main class="detalhesFretes  mx-auto md:padding-1 bg-cadastro">
-    <div class="container mb-3 md:mb-5 mx-auto md:padding-1" id="marginBottomForm">
+    <div class="container mb-2 md:mb-4 mx-auto md:padding-1" id="marginBottomForm">
         <div class="mb-6">
-            <h1 class="font-1-xl cor-0 mt-2 md:mt-6 mb-3">Cadastro do pedido de frete</h1>
+            <h1 class="font-1-xl cor-0 mt-2 md:mt-5 mb-2">Cadastro do pedido de frete</h1>
             <hr>
         </div>
         <div class="container-cadastro-form">
-            <h2 class="font-1-s text-lg font-semibold cor-0 mb-4">Publique seu pedido agora mesmo</h2>
+            <!--
             <div class="barraDeProgresso mb-5">
                 <div class="progressoAtual"></div>
-            </div>
+            </div> current-item -->
+            <section class="stepBar">
+                <ul class="stepBar-list">
+                    <li class="stepBar-item">
+                        <span class="progress-count">1</span>
+                        <span class="progress-label">Origem</span>
+                    </li>
+                    <li class="stepBar-item">
+                        <span class="progress-count">2</span>
+                        <span class="progress-label">Destino</span>
+                    </li>
+                    <li class="stepBar-item  ">
+                        <span class="progress-count">3</span>
+                        <span class="progress-label">Produto</span>
+                    </li>
+                    <li class="stepBar-item">
+                        <span class="progress-count">4</span>
+                        <span class="progress-label">Entrega</span>
+                    </li>
+                </ul>
+            </section>
+            <h2 class="font-1-s text-lg font-semibold cor-0 mb-4">Publique seu pedido agora mesmo</h2>
             <form action="{% url 'cadastrodefrete' %}" method="POST" class="form-cadastro-frete">
                 {% csrf_token %}
-                <div id="step_1" class="step">
+                <div id="step" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Origem</h3>
                     <div class="flex flex-col mb-3">
                         <label for="cep" class="font-1-s cor-0 mb-2">CEP*</label>
@@ -84,7 +105,7 @@
                         <a class="botao-padrao" id="next">Próximo</a>
                     </div>
                 </div>
-                <div id="step_2" class="step">
+                <div id="step" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Destino</h3>
                     <div class="flex flex-col mb-3">
                         <label for="cep" class="font-1-s cor-0 mb-2">CEP*</label>
@@ -153,7 +174,7 @@
                     </div>
                 </div>
 
-                <div id="step_3" class="step">
+                <div id="step" class="step">
                     <div class="flex flex-col items-center sm:flex-row gap-3 items-center mb-4 mt-4">
                         <img src="{% static 'images/funcionario.jpg' %}" class="img-cadastro-frete" alt="">
                         <div class="flex w-full justify-center">
@@ -194,7 +215,7 @@
                     </div>
                 </div>
 
-                <div id="step_4" class="step">
+                <div id="step" class="step">
                     <div class="flex flex-col mb-4">
                         <label for="nomedestinatario" class="font-1-s cor-0 mb-2">Nome do Destinatário:</label>
                         <input type="text" name="nomedestinatario" id="nomedestinatario" placeholder="Digite o nome do Destinatário" class="font-1-s">
@@ -232,4 +253,5 @@
 
 {% block js %}
 <script src="{% static 'js/formEtapas.js' %}"></script>
+<script src="{% static 'js/stepBar.js' %}"></script>
 {% endblock %}

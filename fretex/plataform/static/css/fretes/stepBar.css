@@ -1,0 +1,117 @@
+.stepBar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stepBar-list {
+    color: white;
+    list-style-type: none;
+    border-radius: 10px;
+    display: flex;
+    padding: 0px 0px 10px 0px;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+.stepBar-item {
+    padding: 0 20px;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+@media (max-width: 800px) {
+    .stepBar-item {
+        
+    }
+}
+
+.stepBar-item+.stepBar-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 19px;
+    background: linear-gradient(180deg, #FFBF00 0%, #F2A50C 100%);
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    z-index: -10;
+}
+
+.progress-count {
+    height: 40px;
+    max-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    color: transparent;
+}
+
+.progress-count:after {
+    content: "";
+    height: 35px;
+    width: 35px;
+    background: linear-gradient(180deg, #FFBF00 0%, #F2A50C 100%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -10;
+}
+
+.progress-count:before {
+    content: "";
+    height: 10px;
+    width: 20px;
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%) rotate(-45deg);
+    transform-origin: center center;
+}
+
+.progress-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.current-item .progress-count:before,
+.current-item~.stepBar-item .progress-count:before {
+    display: none;
+}
+
+.current-item~.stepBar-item .progress-count:after {
+    height: 10px;
+    max-width: 10px;
+}
+
+.current-item~.stepBar-item .progress-label {
+    opacity: 0.5;
+}
+
+.current-item .progress-count:after {
+    background: #fff;
+    border: 2px solid #b9800d;
+}
+
+.current-item .progress-count {
+    color: #c0850e;
+}

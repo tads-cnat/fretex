@@ -46,7 +46,7 @@ def logoutView(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url="/login/"), name='dispatch')
 class CadastroDeFrete(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')

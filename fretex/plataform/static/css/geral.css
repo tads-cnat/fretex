@@ -12,6 +12,7 @@
 
 @import "./fretes/detalhesFrete.css";
 @import "./fretes/cadastroFrete.css";
+@import './fretes/stepBar.css';
 
 @import "./dashboards/cliente.css";
 @import "./dashboards/freteiro.css";
