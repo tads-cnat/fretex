@@ -17,7 +17,6 @@
 }
 
 .stepBar-item {
-    padding: 0 20px;
     flex-basis: 0;
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
@@ -27,12 +26,6 @@
     flex-direction: column;
     text-align: center;
     position: relative;
-}
-
-@media (max-width: 800px) {
-    .stepBar-item {
-        
-    }
 }
 
 .stepBar-item+.stepBar-item:after {
@@ -114,4 +107,10 @@
 
 .current-item .progress-count {
     color: #c0850e;
+}
+
+@media (max-width: 350px) {
+    .progress-label {
+        display: none;
+    }
 }

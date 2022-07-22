@@ -5,9 +5,9 @@
 {% block content %}
 
 <main class="detalhesFretes  mx-auto md:padding-1 bg-cadastro">
-    <div class="container mb-2 md:mb-4 mx-auto md:padding-1" id="marginBottomForm">
+    <div class="container mb-3 md:mb-5 mx-auto md:padding-1" id="marginBottomForm">
         <div class="mb-6">
-            <h1 class="font-1-xl cor-0 mt-2 md:mt-5 mb-2">Cadastro do pedido de frete</h1>
+            <h1 class="font-1-xl cor-0 mt-2 md:mt-5 mb-1">Cadastro do pedido de frete</h1>
             <hr>
         </div>
         <div class="container-cadastro-form">
@@ -35,7 +35,7 @@
                     </li>
                 </ul>
             </section>
-            <h2 class="font-1-s text-lg font-semibold cor-0 mb-4">Publique seu pedido agora mesmo</h2>
+            <h2 class="font-1-s text-lg font-semibold cor-0 mb-3">Publique seu pedido agora mesmo</h2>
             <form action="{% url 'cadastrodefrete' %}" method="POST" class="form-cadastro-frete">
                 {% csrf_token %}
                 <div id="step" class="step">
@@ -190,19 +190,19 @@
                     <div class="flex flex-col sm:flex-row mb-2 gap-x-3">
                         <div class="flex flex-row items-center gap-1">
                             <input type="checkbox" name="tipoveiculos" id="carro" value="carro">
-                            <label for="carro" class="font-1-s cor-0">Carro</label>
+                            <label for="carro" class="font-1-s cor-0 cursor-pointer">Carro</label>
                         </div>
                         <div class="flex flex-row items-center gap-1">
                             <input type="checkbox" name="tipoveiculos" id="moto" value="moto">
-                            <label for="moto" class="font-1-s cor-0">Moto</label>
+                            <label for="moto" class="font-1-s cor-0 cursor-pointer">Moto</label>
                         </div>
                         <div class="flex flex-row items-center gap-1">
                             <input type="checkbox" name="tipoveiculos" id="caminhao" value="caminhao">
-                            <label for="caminhao" class="font-1-s cor-0">Caminhão</label>
+                            <label for="caminhao" class="font-1-s cor-0 cursor-pointer">Caminhão</label>
                         </div>
                         <div class="flex flex-row items-center gap-1">
                             <input type="checkbox" name="tipoveiculos" id="bicicleta" value="bicicleta">
-                            <label for="bicicleta" class="font-1-s cor-0">Bicicleta</label>
+                            <label for="bicicleta" class="font-1-s cor-0 cursor-pointer">Bicicleta</label>
                         </div>
                     </div>
                     <div class="flex flex-col mb-4">
