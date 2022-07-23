@@ -20,13 +20,16 @@ urlpatterns = [
     path('cadastrofreteiro/', views.CadastroFreteiro.as_view(),
         name='cadastrofreteiro'),
 
-    path('fretes/', views.fretes_index, name='fretes_index'),
-    path('fretes/<int:pedido_id>/', views.fretes_show.as_view(), name='fretes_show'),
+    path('fretes/', views.fretes_index, 
+        name='fretes_index'),
+
+    path('fretes/<int:pedido_id>/', views.fretes_show.as_view(), 
+        name='fretes_show'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),
 
-    path('dashboardfreteiro/detalhes/', views.detalhesMeusFretesFreteiro,
+    path('dashboardfreteiro/detalhes/<int:pedido_id>/', views.detalhesMeusFretesFreteiro.as_view(),
         name='detalhesMeusFretesFreteiro'),
 
     path('dashboardcliente/', views.dashboardCliente, 

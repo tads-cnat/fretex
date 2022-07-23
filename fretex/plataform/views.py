@@ -25,13 +25,16 @@ class EmailBackend(ModelBackend):
                 return user
         return None
 
+
 class Login(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'login-cadastros/login.html')
+
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
         senha = request.POST['senha']
-        user = EmailBackend.authenticate(request, username = email, password = senha)
+        user = EmailBackend.authenticate(
+            request, username=email, password=senha)
         if user is not None:
             login(request, user)
             if hasattr(request.user, 'cliente'):
@@ -40,16 +43,20 @@ class Login(View):
                 return HttpResponseRedirect(reverse('fretes_index'))
         else:
             erro = 'Email e senha inválidas!'
-            return render(request, 'login-cadastros/login.html', {'erro': erro}) #inserir condições de next no template
+            # inserir condições de next no template
+            return render(request, 'login-cadastros/login.html', {'erro': erro})
+
 
 def logoutView(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
 class CadastroDeFrete(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')
+
     def post(self, request, *args, **kwargs):
         cep_origem = request.POST.get('cep-origem')
         rua_origem = request.POST['rua-origem']
@@ -59,105 +66,112 @@ class CadastroDeFrete(View):
         bairro_origem = request.POST['bairro-origem']
         complemento_origem = request.POST['complemento-origem']
 
-        cep_destino  = request.POST.get('cep-destino')
-        rua_destino  = request.POST['rua-destino'] 
-        numero_destino  = request.POST['numero-destino']
-        estado_destino  = request.POST['estado-destino']
-        cidade_destino  = request.POST['cidade-destino']
-        bairro_destino  = request.POST['bairro-destino'] 
-        complemento_destino  = request.POST['complemento-destino']
+        cep_destino = request.POST.get('cep-destino')
+        rua_destino = request.POST['rua-destino']
+        numero_destino = request.POST['numero-destino']
+        estado_destino = request.POST['estado-destino']
+        cidade_destino = request.POST['cidade-destino']
+        bairro_destino = request.POST['bairro-destino']
+        complemento_destino = request.POST['complemento-destino']
 
-        imagem  = request.POST['imagem']
-        produto  = request.POST['produto']
-        observacao  = request.POST['observacao']
+        imagem = request.POST['imagem']
+        produto = request.POST['produto']
+        observacao = request.POST['observacao']
 
-        nomedestinatario  = request.POST['nomedestinatario']
-        data_coleta  = request.POST.get('data-coleta')
-        data_entrega  = request.POST.get('data-entrega')
-        turno_entrega  = request.POST.get('turno-entrega')
-        turno_coleta  = request.POST.get('turno-coleta')
+        nomedestinatario = request.POST['nomedestinatario']
+        data_coleta = request.POST.get('data-coleta')
+        data_entrega = request.POST.get('data-entrega')
+        turno_entrega = request.POST.get('turno-entrega')
+        turno_coleta = request.POST.get('turno-coleta')
 
+        if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and
+            cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and
+                produto and nomedestinatario and data_coleta and data_entrega and turno_entrega and turno_coleta):
 
-        if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and 
-        cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and
-        produto and nomedestinatario and data_coleta and data_entrega and turno_entrega and turno_coleta):
-
-            endereco_origem = Endereco( rua = rua_origem, CEP = cep_origem, numero = numero_origem, 
-            bairro = bairro_origem, estado = estado_origem, cidade = cidade_origem, complemento = complemento_origem)
+            endereco_origem = Endereco(rua=rua_origem, CEP=cep_origem, numero=numero_origem,
+                                    bairro=bairro_origem, estado=estado_origem, cidade=cidade_origem, complemento=complemento_origem)
             endereco_origem.save()
 
-            endereco_destino = Endereco( rua = rua_destino, CEP = cep_destino, numero = numero_destino,
-            bairro = bairro_destino, estado = estado_destino, cidade = cidade_destino, complemento = complemento_destino)
+            endereco_destino = Endereco(rua=rua_destino, CEP=cep_destino, numero=numero_destino,
+                                        bairro=bairro_destino, estado=estado_destino, cidade=cidade_destino, complemento=complemento_destino)
             endereco_destino.save()
 
-            status = Status(descricao = "Em espera")
-            status.save()
+            status = Status(descricao="Em espera")
+            status.save() #criar apenas uma vez no banco
 
-            produto = Produto(nome = produto, imagem_url = imagem)
+            produto = Produto(nome=produto, imagem_url=imagem)
             produto.save()
-            
-            if hasattr(request.user, 'cliente'):
-                pedido = Pedido(cliente = request.user.cliente, status = status, produto = produto,
-                observacao = observacao, nomeDestinatario = nomedestinatario, origem = endereco_origem,
-                destino = endereco_destino, data_coleta = data_coleta, data_entrega = data_entrega,
-                turno_entrega = turno_entrega, turno_coleta = turno_coleta)
 
+            if hasattr(request.user, 'cliente'):
+                pedido = Pedido(cliente=request.user.cliente, status=status, produto=produto,
+                                observacao=observacao, nomeDestinatario=nomedestinatario, origem=endereco_origem,
+                                destino=endereco_destino, data_coleta=data_coleta, data_entrega=data_entrega,
+                                turno_entrega=turno_entrega, turno_coleta=turno_coleta)
                 pedido.save()
-                
+
                 try:
-                    TipoVeiculo.objects.get(descricao = "carro")
+                    TipoVeiculo.objects.get(descricao="carro")
                 except ObjectDoesNotExist:
-                    carro = TipoVeiculo(descricao = "carro")
+                    carro = TipoVeiculo(descricao="carro")
                     carro.save()
-                    moto = TipoVeiculo(descricao = "moto")
+                    moto = TipoVeiculo(descricao="moto")
                     moto.save()
-                    caminhao = TipoVeiculo(descricao = "caminhao")
+                    caminhao = TipoVeiculo(descricao="caminhao")
                     caminhao.save()
-                    bicicleta = TipoVeiculo(descricao = "bicicleta")
+                    bicicleta = TipoVeiculo(descricao="bicicleta")
                     bicicleta.save()
 
                 tipo_veiculo = request.POST.getlist('tipoveiculos')
                 for tipoveiculos in tipo_veiculo:
-                    r = TipoVeiculo.objects.get(descricao = tipoveiculos)
-                pedido.tipo_veiculo.add(r)        
+                    r = TipoVeiculo.objects.get(descricao=tipoveiculos)
+                    pedido.tipo_veiculo.add(r)
 
                 return HttpResponseRedirect(reverse('dashboardcliente'))
-            else:   
+            else:
                 erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro':erro})
+                return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro':erro})
+            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro': erro})
+
 
 def landing(request):
     return render(request, 'landing.html')
 
+
 def escolhaCadastro(request):
     return render(request, 'login-cadastros/escolhaCadastro.html')
+
 
 class CadastroCliente(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'login-cadastros/cadastroCliente.html')
+
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        email = request.POST['email']               # posteriormente verificar se já existe conta com o msm email,cpf.
+        # posteriormente verificar se já existe conta com o msm email,cpf.
+        email = request.POST['email']
         cpf = request.POST['cpf']
         senha = request.POST['senha']
         if nome and email and cpf and senha:
-            user = User.objects.create_user(username= nome, password= senha, email= email)
-            Cliente.objects.create(user= user, cpf = cpf)
+            user = User.objects.create_user(
+                username=nome, password=senha, email=email)
+            Cliente.objects.create(user=user, cpf=cpf)
             return HttpResponseRedirect(reverse('login'))
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'login-cadastros/cadastroCliente.html', {'erro':erro}) #inserir condição de error no template
+            # inserir condição de error no template
+            return render(request, 'login-cadastros/cadastroCliente.html', {'erro': erro})
 
 
 class CadastroFreteiro(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'login-cadastros/cadastroFreteiro.html')
+
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        email = request.POST['email']               # posteriormente verificar se já existe conta com o msm email,cpf.
+        # posteriormente verificar se já existe conta com o msm email,cpf.
+        email = request.POST['email']
         cpf = request.POST['cpf']
         senha = request.POST['senha']
         cep = request.POST['cep']
@@ -168,64 +182,81 @@ class CadastroFreteiro(View):
         bairro = request.POST['bairro']
         complemento = request.POST['complemento']
         if nome and email and cpf and senha and cep and rua and numero and estado and cidade and bairro:
-            user = User.objects.create_user(username= nome, password= senha, email= email)
-            endereco = Endereco.objects.create(CEP= cep, rua= rua, numero= numero, bairro= bairro, cidade= cidade, estado= estado,complemento= complemento)
-            Freteiro.objects.create(user= user, cpf = cpf, endereco= endereco)
+            user = User.objects.create_user(
+                username=nome, password=senha, email=email)
+            endereco = Endereco.objects.create(
+                CEP=cep, rua=rua, numero=numero, bairro=bairro, cidade=cidade, estado=estado, complemento=complemento)
+            Freteiro.objects.create(user=user, cpf=cpf, endereco=endereco)
             return HttpResponseRedirect(reverse('login'))
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
+            # inserir condição de error no template
+            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
+
 
 def dashboardFreteiro(request):
-    pedidos = Pedido.objects.filter(proposta__usuario = request.user) ## pedidos repetidos quando tem mais de 1 proposta feita ao msm pedido.
+    pedidos = Pedido.objects.filter(proposta__usuario=request.user).distinct()
     contexto = {'pedidos': pedidos}
-    return render(request, 'dashboards/dashboardFreteiro.html',contexto)
+    return render(request, 'dashboards/dashboardFreteiro.html', contexto)
+
 
 def dashboardCliente(request):
-    pedidos = Pedido.objects.filter(cliente__user= request.user)
+    pedidos = Pedido.objects.filter(cliente__user=request.user)
     contexto = {'pedidos': pedidos}
-    return render(request, 'dashboards/dashboardCliente.html',contexto)
+    return render(request, 'dashboards/dashboardCliente.html', contexto)
+
 
 def fretes_index(request):
-    pedidos = Pedido.objects.all()
+    pedidos = Pedido.objects.all() #Limitar por página.
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
+
 
 class fretes_show(View):
     def get(self, request, pedido_id):
         pedido = get_object_or_404(Pedido, pk=pedido_id)
         return render(request, 'fretes/show.html', {'pedido': pedido})
-    
+
     def post(self, request, pedido_id):
         pedido = get_object_or_404(Pedido, pk=pedido_id)
         veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
-        Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
+        Proposta.objects.create(usuario=request.user, pedido=pedido,
+                                veiculo=veiculo, valor=request.POST.get('valor'))
         return render(request, 'fretes/show.html', {'pedido': pedido})
 
-def detalhesMeusFretesFreteiro(request):
-    return render(request, 'fretes/detalhesMeusFretesFreteiro.html')
+
+class detalhesMeusFretesFreteiro(View):
+    def get(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, pk=pedido_id)
+        contexto = {'pedido': pedido}
+        return render(request, 'fretes/detalhesMeusFretesFreteiro.html', contexto)
+
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
 
+
 def perfilCliente(request):
     cliente = request.user.cliente
     contexto = {'cliente': cliente}
-    return render(request, 'perfis/perfilCliente.html',contexto)
+    return render(request, 'perfis/perfilCliente.html', contexto)
+
 
 def perfilFreteiro(request):
     freteiro = request.user.freteiro
     contexto = {'freteiro': freteiro}
     return render(request, 'perfis/perfilFreteiro.html', contexto)
 
-@method_decorator(login_required, name='dispatch')
+
+@method_decorator(login_required(login_url="/login/"), name='dispatch')
 class EditarPerfilCliente(View):
     def get(self, request, *args, **kwargs):
         cliente = request.user.cliente
         contexto = {'cliente': cliente}
         return render(request, 'perfis/editarPerfilCliente.html', contexto)
+
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        email = request.POST['email']   
+        email = request.POST['email']
         cpf = request.POST['cpf']
         if nome and email and cpf:
             if hasattr(request.user, 'cliente'):
@@ -236,22 +267,25 @@ class EditarPerfilCliente(View):
                 cliente.cpf = cpf
                 cliente.save()
                 return HttpResponseRedirect(reverse('perfilCliente'))
-            else:   
+            else:
                 erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro':erro}) 
+                return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
+            # inserir condição de error no template
+            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
-@method_decorator(login_required, name='dispatch')
+
+@method_decorator(login_required(login_url="/login/"), name='dispatch')
 class EditarPerfilFreteiro(View):
     def get(self, request, *args, **kwargs):
         freteiro = request.user.freteiro
         contexto = {'freteiro': freteiro}
         return render(request, 'perfis/editarPerfilFreteiro.html', contexto)
+
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        email = request.POST['email']   
+        email = request.POST['email']
         cpf = request.POST['cpf']
         cep = request.POST['cep']
         rua = request.POST['rua']
@@ -275,24 +309,28 @@ class EditarPerfilFreteiro(View):
                 freteiro.cpf = cpf
                 freteiro.save()
                 return HttpResponseRedirect(reverse('perfilFreteiro'))
-            else:   
+            else:
                 erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro':erro})                
+                return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro':erro}) #inserir condição de error no template
+            # inserir condição de error no template
+            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
+
 
 def meusVeiculos(request):
-    veiculos = Veiculo.objects.filter(freteiro__user = request.user)
+    veiculos = Veiculo.objects.filter(freteiro__user=request.user)
     contexto = {'veiculos': veiculos}
     return render(request, 'perfis/meusVeiculos.html', contexto)
 
-@method_decorator(login_required, name='dispatch')
+
+@method_decorator(login_required(login_url="/login/"), name='dispatch')
 class AdicionarVeiculo(View):
     def get(self, request, *args, **kwargs):
         freteiro = request.user.freteiro
         contexto = {'freteiro': freteiro}
         return render(request, 'perfis/adicionarVeiculo.html', contexto)
+
     def post(self, request, *args, **kwargs):
         marca = request.POST['marca']
         modelo = request.POST['modelo']
@@ -303,15 +341,15 @@ class AdicionarVeiculo(View):
 
         if marca and modelo and ano and placa_veiculo and cor_veiculo:
             if hasattr(request.user, 'freteiro'):
-                tipoveiculo = TipoVeiculo(descricao = tipo_veiculo)
+                tipoveiculo = TipoVeiculo(descricao=tipo_veiculo)
                 tipoveiculo.save()
-                veiculo = Veiculo(freteiro = request.user.freteiro, tipo_veiculo = tipoveiculo, marca=marca, modelo=modelo,
-                ano=ano, placa=placa_veiculo,cor=cor_veiculo)
+                veiculo = Veiculo(freteiro=request.user.freteiro, tipo_veiculo=tipoveiculo, marca=marca, modelo=modelo,
+                                ano=ano, placa=placa_veiculo, cor=cor_veiculo)
                 veiculo.save()
                 return HttpResponseRedirect(reverse('meusVeiculos'))
-            else:   
+            else:
                 erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro':erro})     
+                return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro':erro})
+            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro': erro})

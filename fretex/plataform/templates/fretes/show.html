@@ -110,7 +110,7 @@
         {% if proposta.usuario == request.user or pedido.usuario == request.user %}
         <div class="border rounded border-neutral-200 p-4 mb-4">
             <div>
-                <p>Valor da proposta: {{ proposta.valor }}</p>
+                <p>Valor da proposta: R$ {{ proposta.valor }}</p>
                 <p>Data da proposta: {{ proposta.data_criacao }}</p>
                 <p>Realizada por {{ proposta.usuario }}</p>
             </div>

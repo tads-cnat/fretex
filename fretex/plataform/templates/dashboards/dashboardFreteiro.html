@@ -55,10 +55,14 @@
                                         </div>
                                         <div class="flex flex-col gap-4 grow">
                                             <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                            <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo.descricao }}</p>
+                                            <p><strong>Tipo de veiculo</strong>: 
+                                                {% for tipo in pedido.tipo_veiculo.all %}
+                                                    {{tipo.descricao}}/
+                                                {% endfor %}
+                                            </p>
                                         </div>
                                         <div class="flex flex-col gap-4 grow items-center justify-center">
-                                            <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                            <a href="{% url 'detalhesMeusFretesFreteiro' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
                                         </div>
                                     </div>
                                 {% endif %}
@@ -87,10 +91,14 @@
                                     </div>
                                     <div class="flex flex-col gap-4 grow">
                                         <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                        <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo.descricao }}</p>
+                                        <p><strong>Tipo de veiculo</strong>: 
+                                            {% for tipo in pedido.tipo_veiculo.all %}
+                                                {{tipo.descricao}}/
+                                            {% endfor %}
+                                        </p>
                                     </div>
                                     <div class="flex flex-col gap-4 grow items-center justify-center">
-                                        <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                        <a href="{% url 'detalhesMeusFretesFreteiro' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
                                     </div>
                                 </div>
                             {% endif %}
@@ -119,10 +127,14 @@
                                     </div>
                                     <div class="flex flex-col gap-4 grow">
                                         <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                        <p><strong>Tipo de veiculo</strong>: {{ pedido.tipo_veiculo }}</p>
+                                        <p><strong>Tipo de veiculo</strong>: 
+                                            {% for tipo in pedido.tipo_veiculo.all %}
+                                                {{tipo.descricao}}/
+                                            {% endfor %}
+                                        </p>
                                     </div>
                                     <div class="flex flex-col gap-4 grow items-center justify-center">
-                                        <a href="/dashboardfreteiro/detalhes" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                        <a href="{% url 'detalhesMeusFretesFreteiro' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
                                     </div>
                                 </div>
                             {% endif %}
