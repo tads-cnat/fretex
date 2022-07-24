@@ -4,10 +4,6 @@
     padding: 15px 15px;
 }
 
-#veiculo-container:hover {
-    background-color: #ffbb005d;
-}
-
 #form-veiculos {
     grid-template-columns: 1fr 3fr;
     gap: 8px 30px;
@@ -32,10 +28,36 @@
     border-radius: 6px;
 }
 
-
+.card-veiculo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
 
 @media (max-width: 1024px) {
     #form-veiculos {
         grid-template-columns: 1fr;
+    }
+    .card-veiculo {
+        flex-direction: column;
+        gap: 15px;
+        
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card-veiculo {
+        align-items: initial;
+    }
+    .centro {
+        align-self: center;
+    }
+}
+
+@media (max-width: 550px) {
+    .veiculo {
+        flex-direction: column;
     }
 }

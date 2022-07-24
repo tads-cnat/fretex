@@ -36,19 +36,25 @@
                 </div>
                 {% for veiculo in veiculos %}
                     <div class="form-info-container container-total bg-white" id="veiculo-container">
-                        <a href="" class="veiculo">
-                            <div class="imagem-veiculo flex items-center">
-                                <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                        <div class="card-veiculo">
+                            <div class="veiculo">
+                                <div class="imagem-veiculo flex items-center">
+                                    <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                                </div>
+                                <div>
+                                    <p class="font-1-m">Marca: {{ veiculo.marca }}</p>
+                                    <p class="font-1-m">Modelo: {{ veiculo.modelo }}</p>
+                                    <p class="font-1-m">Ano: {{ veiculo.ano }}</p>
+                                    <p class="font-1-m">Placa do veículo: {{ veiculo.placa }}</p>
+                                    <p class="font-1-m">Cor do veículo: {{ veiculo.cor }}</p>
+                                    <p class="font-1-m">Tipo do veículo: {{ veiculo.tipo_veiculo.descricao }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="font-1-m">Marca: {{ veiculo.marca }}</p>
-                                <p class="font-1-m">Modelo: {{ veiculo.modelo }}</p>
-                                <p class="font-1-m">Ano: {{ veiculo.ano }}</p>
-                                <p class="font-1-m">Placa do veículo: {{ veiculo.placa }}</p>
-                                <p class="font-1-m">Cor do veículo: {{ veiculo.cor }}</p>
-                                <p class="font-1-m">Tipo do veículo: {{ veiculo.tipo_veiculo.descricao }}</p>
+                            <div class="centro">
+                                <a href="" class="botao-padrao">Excluir</a>
                             </div>
-                        </a>
+                        </div>
+                        
                     </div>
                 {% endfor %}
                 <div>
