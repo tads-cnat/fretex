@@ -42,6 +42,7 @@
                         </a>
                     </dt>
                         <dd class="mt-3 md:mt-5 teste">
+                        {% if pedidos %}
                             {% for pedido in pedidos %}
                                 {% if pedido.status.descricao == "Em espera" %}
                                     <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
@@ -67,6 +68,14 @@
                                     </div>
                                 {% endif %}
                             {% endfor %}
+
+                            {% for pedido in pedidos|slice:":1" %}
+                                <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                            {% endfor %}
+
+                        {% else %}
+                            <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                        {% endif %}
                         </dd>
                     </section>
 
@@ -78,6 +87,7 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
+                    {% if pedidos %}
                         {% for pedido in pedidos %}
                             {% if pedido.status.descricao == "Em andamento" %}
                                 <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
@@ -103,6 +113,14 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
+
+                        {% for pedido in pedidos|slice:":1" %}
+                            <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                        {% endfor %}
+
+                    {% else %}
+                        <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                    {% endif %}
                     </dd>
                 </section>
 
@@ -114,6 +132,7 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
+                    {% if pedidos %}
                         {% for pedido in pedidos %}
                             {% if pedido.status.descricao == "Encerrado" %}
                                 <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8 mb-3 caixa-frete">
@@ -139,6 +158,14 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
+
+                        {% for pedido in pedidos|slice:":1" %}
+                            <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                        {% endfor %}
+
+                    {% else %}
+                        <p class="font-1-m font-semibold">Não há fretes encerrados</p>
+                    {% endif %}
                     </dd>
                 </section>
         </div>
