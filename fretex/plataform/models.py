@@ -94,7 +94,7 @@ class Proposta(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
-    #cont_proposta_id =#
+    contraproposta_id = models.IntegerField(null=True)
     valor = models.DecimalField(max_digits=10,decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     ehAceita = models.BooleanField(default=False)

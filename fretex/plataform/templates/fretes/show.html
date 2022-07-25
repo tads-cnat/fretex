@@ -51,9 +51,11 @@
                 <p class="font-1-m">Observação:</p>
             </div>
             <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
+            {% if request.user.freteiro %}
             <div class="div-botao">
                 <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">Realizar proposta</button>
             </div>
+            {% endif %}
         </div>
         <div class="lateral">
             <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2">
@@ -91,6 +93,8 @@
                             </div>
                         </label>
                     </div>
+                    {% empty %}
+                    <p>Não há veículos disponíveis</p>
                     {% endfor %}
                     <div class="mb-3 flex flex-col">
                         <label class="font-1-m font-semibold mb-2" for="valor">Informe o valor da proposta:</label>
@@ -107,18 +111,31 @@
 <section class="container mx-auto mb-16">
     <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Histórico de propostas</h1>
     {% for proposta in pedido.proposta_set.all %}
-        {% if proposta.usuario == request.user or pedido.usuario == request.user %}
-        <div class="border rounded border-neutral-200 p-4 mb-4">
-            <div>
+        {% if proposta.usuario == request.user or pedido.cliente == request.user.cliente %}
+        <div class="border rounded border-neutral-200 p-4 mb-4 flex">
+            <div class="grow">
                 <p>Valor da proposta: R$ {{ proposta.valor }}</p>
                 <p>Data da proposta: {{ proposta.data_criacao }}</p>
                 <p>Realizada por {{ proposta.usuario }}</p>
             </div>
-            <div>
-
+            <div class="grow text-center items-center">
+                {% if request.user.freteiro %}
+                    {% if proposta.ehAceita %}
+                    <p>Aceita</p>
+                    {% else %}
+                    <p>Em análise</p>
+                    {% endif %}
+                {% else %}
+                    <div class="">
+                        <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
+                        <button id="myBtn" class="botao-padrao font-1-m font-semibold">Realizar proposta</button>
+                    </div>
+                {% endif %}
             </div>
         </div>
         {% endif %}
+    {% empty %}
+        <p>Nenhuma proposta no histórico.</p>
     {% endfor %}
 </section>
 {% endblock %}
