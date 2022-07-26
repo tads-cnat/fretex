@@ -229,7 +229,14 @@ class detalhesMeusFretesFreteiro(View):
         pedido = get_object_or_404(Pedido, pk=pedido_id)
         contexto = {'pedido': pedido}
         return render(request, 'fretes/detalhesMeusFretesFreteiro.html', contexto)
-
+    def post(self, request, proposta_id):
+        proposta = get_object_or_404(Proposta, pk=proposta_id)
+        proposta.ehAceita = True
+        proposta.save()
+        pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
+        pedido.status = "Em andamento"
+        pedido.save()
+        return HttpResponseRedirect(reverse('dashboardfreteiro'))
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
