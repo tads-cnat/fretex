@@ -8,7 +8,7 @@
     <main class="container-login">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça login na sua conta</p>
-        <form action="{% url 'login' %}" method="POST">
+        <form action="{% url 'login' %}" method="POST" id="login">
             {% csrf_token %}
             <label for="email" class="font-1-s cor-0">Email</label>
             <input type="email" name="email" id="email" placeholder="Digite seu email" class="font-1-m" required autocomplete="email">
@@ -20,5 +20,31 @@
         </form>
         <p class="font-2-s cor-0">Não tem uma conta? <a href="/escolhacadastro/" class="font-2-s cor-0">Cadastrar-se</a></p>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#login").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    senha: {
+                        required: true
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Por favor, digite o seu email.",
+                        email: "Por favor, digite um email válido."
+                    },
+                    senha: {
+                        required: "Por favor, digite a sua senha."
+                    }
+                }
+            })     
+        })
+    </script>
 </body>
 {% endblock %}

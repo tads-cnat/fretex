@@ -8,7 +8,7 @@
     <main class="container-formulario cadastro-freteiro">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça seu cadastro</p>
-        <form action="{% url 'cadastrofreteiro' %}" method="POST">
+        <form action="{% url 'cadastrofreteiro' %}" method="POST" id="cadastroFreteiro">
             {% csrf_token %}
             <label for="nome" class="font-1-s cor-0">Nome completo*</label>
             <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
@@ -30,7 +30,7 @@
             <div class="container-campos-2">
                 <div>
                     <label for="rua" class="font-1-s cor-0">Rua</label>
-                    <input type="text" name="rua" id="rua" autocomplete="on" class="font-1-s" placeholder="Digite sua a rua">
+                    <input type="text" name="rua" id="rua" autocomplete="on" class="font-1-s" placeholder="Digite sua a rua" required>
                 </div>
                 <div class="input-numero">
                     <label for="numero" class="font-1-s cor-0">Número*</label>
@@ -42,7 +42,7 @@
                 <div>
                     <label for="estado" class="font-1-s cor-0">Estado*</label>
                     <select id="estado" name="estado" class="font-1-s" required>
-                        <option value="" selected>Selecione uma opção</option>
+                        <option selected disabled>Selecione uma opção</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -92,17 +92,134 @@
 
                 <div>
                     <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
-                    <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+                    <input type="password" name="confirmarSenha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
                 </div>
             </div>
 
             <div class="termos">
-                <input type="checkbox" name="aceitar-termos" id="termos" required>
+                <input type="checkbox" name="aceitarTermos" id="termos" required>
                 <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
             </div>
             <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
         </form>
         <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/dist/jquery.mask.min.js' %}"></script>
+    <script>
+        $('#cpf').mask('000.000.000-00');
+        $('#cep').mask('00000-000');
+
+        $(document).ready(function(){
+            $("#cadastroFreteiro").validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        maxlength: 45
+                    },
+                    cpf: {
+                        required: true,
+                        minlength: 14
+                    },
+                    cep: {
+                        required: true,
+                        minlength: 9
+                    },
+                    numero: {
+                        required: true,
+                        number: true
+                    },
+                    rua: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    estado: {
+                        required: true,
+                    },
+                    cidade: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    bairro: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    complemento: {
+                        maxlength: 200
+                    },
+                    senha: {
+                        required: true,
+                        minlength: 8,
+                        maxlength: 40
+                    },
+                    confirmarSenha: {
+                        required: true,
+                        equalTo: "#senha"
+                    },
+                    aceitarTermos: {
+                        required: true
+                    },
+                },
+                messages: {
+                    nome: {
+                        required: "Por favor, digite o seu nome.",
+                        maxlength: "Use 100 caracteres ou menos para o seu nome."
+                    },
+                    email: {
+                        required: "Por favor, digite o seu email.",
+                        email: "Por favor, digite um email válido.",
+                        maxlength: "Email inválido."
+                    },
+                    cpf: {
+                        required: "Digite o seu CPF.",
+                        minlength: "Digite um CPF válido."
+                    },
+                    cep: {
+                        required: "Digite o seu CEP.",
+                        minlength: "Digite um CEP válido."
+                    },
+                    rua: {
+                        required: "Por favor, digite a sua rua.",
+                    },
+                    numero: {
+                        required: "Obrigatório",
+                        number: "Inválido"
+                    },
+                    estado: {
+                        required: "Selecione uma opção."
+                    },
+                    cidade: {
+                        required: "Digite uma cidade.",
+                        maxlength: "Use 100 caracteres ou menos para a sua cidade."
+                    },
+                    bairro: {
+                        required: "Digite um bairro.",
+                        maxlength: "Use 100 caracteres ou menos para o seu bairro."
+                    },
+                    complemento: {
+                        maxlength: "Use 200 caracteres ou menos para o complemento."
+                    },
+                    senha: {
+                        required: "Por favor, digite a sua senha.",
+                        minlength: "Use 8 caracteres ou mais para sua senha.",
+                        maxlength: "Use 40 caracteres ou menos para sua senha."
+                    },
+                    confirmarSenha: {
+                        required: "Por favor, Confirme a sua senha.",
+                        equalTo: "As senhas não são iguais. Tente novamente."
+                    },
+                    aceitarTermos: {
+                        required: ""
+                    }
+                }
+            })     
+        })
+    </script>
 </body>
 {% endblock %}

@@ -8,7 +8,7 @@
     <main class="container-formulario cadastro-cliente">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça seu cadastro</p>
-        <form action="{% url 'cadastrocliente' %}" method="POST"><!--<abbr title="Campo obrigatório">*</abbr>-->
+        <form action="{% url 'cadastrocliente' %}" method="POST" id="cadastroCliente"><!--<abbr title="Campo obrigatório">*</abbr>-->
             {% csrf_token %}
             <label for="nome" class="font-1-s cor-0">Nome completo*</label>
             <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
@@ -23,15 +23,78 @@
             <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="font-1-s" required>
 
             <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
-            <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+            <input type="password" name="confirmarSenha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
 
             <div class="termos">
-                <input type="checkbox" name="aceitar-termos" id="termos" required>
+                <input type="checkbox" name="aceitarTermos" id="termos" required>
                 <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
             </div>
             <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
         </form>
         <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/dist/jquery.mask.min.js' %}"></script>
+    <script>
+        $('#cpf').mask('000.000.000-00');
+
+        $(document).ready(function(){
+            $("#cadastroCliente").validate({
+                rules: {
+                    nome: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        maxlength: 45
+                    },
+                    cpf: {
+                        required: true,
+                        minlength: 14
+                    },
+                    senha: {
+                        required: true,
+                        minlength: 8,
+                        maxlength: 40
+                    },
+                    confirmarSenha: {
+                        required: true,
+                        equalTo: "#senha"
+                    },
+                    aceitarTermos: {
+                        required: true
+                    },
+                },
+                messages: {
+                    nome: {
+                        required: "Por favor, digite o seu nome."
+                    },
+                    email: {
+                        required: "Por favor, digite o seu email.",
+                        email: "Por favor, digite um email válido.",
+                        maxlength: "Email inválido"
+                    },
+                    cpf: {
+                        required: "Por favor, digite o seu CPF.",
+                        minlength: "Por favor, digite um CPF válido."
+                    },
+                    senha: {
+                        required: "Por favor, digite a sua senha.",
+                        minlength: "Use 8 caracteres ou mais para sua senha.",
+                        maxlength: "Use 40 caracteres ou menos para sua senha."
+                    },
+                    confirmarSenha: {
+                        required: "Por favor, Confirme a sua senha.",
+                        equalTo: "As senhas não são iguais. Tente novamente."
+                    },
+                    aceitarTermos: {
+                        required: ""
+                    }
+                }
+            })     
+        })
+    </script>
 </body>
 {% endblock %}

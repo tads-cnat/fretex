@@ -24,3 +24,6 @@
     margin-bottom: 15px;
 }
 
+label.error {
+    color:rgb(255, 64, 64);
+}
