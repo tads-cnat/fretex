@@ -63,7 +63,7 @@
                                             </p>
                                         </div>
                                         <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
-                                            <a href="{% url 'detalhesMeusFretesFreteiro' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                            <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
                                         </div>
                                     </div>
                                 {% else %}
@@ -115,8 +115,8 @@
                                     {% if forloop.first %}
                                         <p class="font-1-m font-semibold">Não há fretes em andamento</p>
                                     {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                                {% endif %}
+                            {% endfor %}
                         
                         {% else %}
                             <p class="font-1-m font-semibold">Não há fretes em andamento</p>

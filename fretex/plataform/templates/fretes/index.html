@@ -78,23 +78,25 @@
     </aside>
     <main class="col-span-9">
         {% for pedido in pedidos %}
-        <div class="rounded-lg border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8">
-            <div class="flex justify-center md:justify-start grow-0">
-                <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+            {% if pedido.status.descricao == "Em espera" %}
+            <div class="rounded-lg border border-neutral-200 p-4 flex flex-col md:flex-row gap-4 md:gap-8">
+                <div class="flex justify-center md:justify-start grow-0">
+                    <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                </div>
+                <div class="flex flex-col gap-4 grow">
+                    <p><strong>Origem</strong>: {{pedido.origem}}</p>
+                    <p><strong>Destino</strong>: {{pedido.destino}}</p>
+                    <p><strong>KM</strong>: ?</p>
+                </div>
+                <div class="flex flex-col gap-4 grow">
+                    <p><strong>Produto</strong>: {{pedido.produto}}</p>
+                    <p><strong>Tipo de veiculo</strong>: {% for tipo in pedido.tipo_veiculo.all %} {{tipo}} {% endfor %}</p>
+                </div>
+                <div class="flex flex-col gap-4 grow items-center justify-center">
+                    <a href="{% url 'fretes_show' pedido.id %}" class="bg-yellow-400 px-4 font-bold py-2 rounded-full w-fit hover:bg-yellow-500">Detalhes</a>
+                </div>
             </div>
-            <div class="flex flex-col gap-4 grow">
-                <p><strong>Origem</strong>: {{pedido.origem}}</p>
-                <p><strong>Destino</strong>: {{pedido.destino}}</p>
-                <p><strong>KM</strong>: ?</p>
-            </div>
-            <div class="flex flex-col gap-4 grow">
-                <p><strong>Produto</strong>: {{pedido.produto}}</p>
-                <p><strong>Tipo de veiculo</strong>: {% for tipo in pedido.tipo_veiculo.all %} {{tipo}} {% endfor %}</p>
-            </div>
-            <div class="flex flex-col gap-4 grow items-center justify-center">
-                <a href="{% url 'fretes_show' pedido.id %}" class="bg-yellow-400 px-4 font-bold py-2 rounded-full w-fit hover:bg-yellow-500">Detalhes</a>
-            </div>
-        </div>
+            {% endif %}
         {% endfor %}
     </main>
 </main>

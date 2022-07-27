@@ -211,7 +211,7 @@ def fretes_index(request):
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
 
 
-class fretes_show(View):
+class Fretes_show(View): 
     def get(self, request, pedido_id):
         pedido = get_object_or_404(Pedido, pk=pedido_id)
         return render(request, 'fretes/show.html', {'pedido': pedido})
@@ -221,14 +221,9 @@ class fretes_show(View):
         veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
         Proposta.objects.create(usuario=request.user, pedido=pedido,
                                 veiculo=veiculo, valor=request.POST.get('valor'))
-        return render(request, 'fretes/show.html', {'pedido': pedido})
+        return HttpResponseRedirect(reverse( 'fretes_show', args=(pedido_id,)))
 
-
-class detalhesMeusFretesFreteiro(View):
-    def get(self, request, pedido_id):
-        pedido = get_object_or_404(Pedido, pk=pedido_id)
-        contexto = {'pedido': pedido}
-        return render(request, 'fretes/detalhesMeusFretesFreteiro.html', contexto)
+class AceitaProposta(View):
     def post(self, request, proposta_id):
         proposta = get_object_or_404(Proposta, pk=proposta_id)
         proposta.ehAceita = True
@@ -236,7 +231,24 @@ class detalhesMeusFretesFreteiro(View):
         pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
         pedido.status = "Em andamento"
         pedido.save()
-        return HttpResponseRedirect(reverse('dashboardfreteiro'))
+        if hasattr(request.user, 'freteiro'):
+            return HttpResponseRedirect(reverse('dashboardfreteiro'))
+        else:
+            return HttpResponseRedirect(reverse('dashboardcliente'))
+
+#class detalhesMeusFretesFreteiro(View):
+#    def get(self, request, pedido_id):
+#        pedido = get_object_or_404(Pedido, pk=pedido_id)
+#        contexto = {'pedido': pedido}
+#        return render(request, 'fretes/detalhesMeusFretesFreteiro.html', contexto)
+#    def post(self, request, proposta_id):
+#        proposta = get_object_or_404(Proposta, pk=proposta_id)
+#        proposta.ehAceita = True
+#        proposta.save()
+#        pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
+#        pedido.status = "Em andamento"
+#        pedido.save()
+#        return HttpResponseRedirect(reverse('dashboardfreteiro'))
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')

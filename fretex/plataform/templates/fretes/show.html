@@ -51,7 +51,7 @@
                 <p class="font-1-m">Observação:</p>
             </div>
             <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
-            {% if request.user.freteiro %}
+            {% if request.user.freteiro %} <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
             <div class="div-botao">
                 <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">Realizar proposta</button>
             </div>
@@ -59,9 +59,10 @@
         </div>
         <div class="lateral">
             <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2">
-            <p class="font-1-m font-semibold mb-2">Produto: Livros</p>
+            <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
         </div>
     </div>
+        
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -108,28 +109,35 @@
         </div>
     </div>
 </main>
-<section class="container mx-auto mb-16">
-    <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Histórico de propostas</h1>
+<section class="historico-propostas">
+    <h2 class="font-1-l mb-3 font-semibold">Histórico de Propostas:</h2>
     {% for proposta in pedido.proposta_set.all %}
         {% if proposta.usuario == request.user or pedido.cliente == request.user.cliente %}
-        <div class="border rounded border-neutral-200 p-4 mb-4 flex">
-            <div class="grow">
-                <p>Valor da proposta: R$ {{ proposta.valor }}</p>
-                <p>Data da proposta: {{ proposta.data_criacao }}</p>
-                <p>Realizada por {{ proposta.usuario }}</p>
+        <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
+            <div class="flex flex-col">
+                <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ {{ proposta.valor }}</h3>
+                <p class="font-1-m">Data da proposta: {{ proposta.data_criacao }}</p>
+                <p class="font-1-m">Realizado por {{ proposta.usuario }}</p>
             </div>
             <div class="grow text-center items-center">
                 {% if request.user.freteiro %}
                     {% if proposta.ehAceita %}
-                    <p>Aceita</p>
+                        <div class="flex flex-col gap-2">
+                            <p class="font-1-m-b text-green-500">Status: Aceito</p>
+                        </div>
                     {% else %}
-                    <p>Em análise</p>
+                        <div class="flex flex-col gap-2">
+                            <p class="font-1-m-b text-blue-500">Status: Em análise</p>
+                        </div>
                     {% endif %}
                 {% else %}
-                    <div class="">
-                        <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
-                        <button id="myBtn" class="botao-padrao font-1-m font-semibold">Realizar proposta</button>
-                    </div>
+                <div class="flex flex-col gap-2">
+                    <form action="{% url 'aceita_prop' proposta.id %}" method="POST">
+                    {% csrf_token %}
+                        <button class="botao-padrao font-1-m font-semibold" type="submit">Aceitar</button>
+                    </form>
+                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                </div>
                 {% endif %}
             </div>
         </div>
