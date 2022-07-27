@@ -99,3 +99,6 @@ class Proposta(models.Model):
     data_criacao = models.DateField(auto_now_add=True)
     ehAceita = models.BooleanField(default=False)
     ehContraproposta = models.BooleanField(default=False)
+
+    def contraproposta(self):
+        return Proposta.objects.get(id=self.contraproposta_id)

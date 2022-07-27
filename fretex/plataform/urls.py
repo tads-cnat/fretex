@@ -23,11 +23,14 @@ urlpatterns = [
     path('fretes/', views.fretes_index, 
         name='fretes_index'),
 
-    path('fretes/<int:pedido_id>/', views.Fretes_show.as_view(), 
+    path('fretes/<int:pedido_id>/', views.fretes_show, 
         name='fretes_show'),
 
-    path('proposta/<int:proposta_id>/', views.AceitaProposta.as_view(), #É necessário msm fazer uma view só para aceitar?
-        name='aceita_prop'),
+    path('proposta/', views.proposta_create, 
+        name='proposta_create'),
+
+    path('proposta/<int:proposta_id>/aceitar/', views.proposta_aceitar, 
+        name='proposta_aceitar'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),

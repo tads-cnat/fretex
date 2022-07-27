@@ -210,31 +210,36 @@ def fretes_index(request):
     pedidos = Pedido.objects.all() #Limitar por página.
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
 
+def fretes_show(request, pedido_id):
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+    return render(request, 'fretes/show.html', {'pedido': pedido})
 
-class Fretes_show(View): 
-    def get(self, request, pedido_id):
-        pedido = get_object_or_404(Pedido, pk=pedido_id)
-        return render(request, 'fretes/show.html', {'pedido': pedido})
-
-    def post(self, request, pedido_id):
-        pedido = get_object_or_404(Pedido, pk=pedido_id)
+def proposta_create(request):
+    pedido = get_object_or_404(Pedido, pk=request.POST.get('pedido_id'))
+    if request.POST.get('ehContraproposta'):
+        proposta_inicial = get_object_or_404(Proposta, pk=request.POST.get('proposta_id'))
+        Proposta.objects.create(pedido=pedido, 
+        usuario=request.user, 
+        ehContraproposta=True, 
+        valor=request.POST.get('valor'), 
+        veiculo=proposta_inicial.veiculo, 
+        contraproposta_id=proposta_inicial.id)
+    else:
         veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
-        Proposta.objects.create(usuario=request.user, pedido=pedido,
-                                veiculo=veiculo, valor=request.POST.get('valor'))
-        return HttpResponseRedirect(reverse( 'fretes_show', args=(pedido_id,)))
+        Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
+    return HttpResponseRedirect(reverse( 'fretes_show', args=(request.POST.get('pedido_id'),)))
 
-class AceitaProposta(View):
-    def post(self, request, proposta_id):
-        proposta = get_object_or_404(Proposta, pk=proposta_id)
-        proposta.ehAceita = True
-        proposta.save()
-        pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
-        pedido.status = "Em andamento"
-        pedido.save()
-        if hasattr(request.user, 'freteiro'):
-            return HttpResponseRedirect(reverse('dashboardfreteiro'))
-        else:
-            return HttpResponseRedirect(reverse('dashboardcliente'))
+def proposta_aceitar(request, proposta_id):
+    proposta = get_object_or_404(Proposta, pk=proposta_id)
+    proposta.ehAceita = True
+    proposta.save()
+    pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
+    pedido.status = Status.objects.get(descricao='Em andamento')
+    pedido.save()
+    if hasattr(request.user, 'freteiro'):
+        return HttpResponseRedirect(reverse('dashboardfreteiro'))
+    else:
+        return HttpResponseRedirect(reverse('dashboardcliente'))
 
 #class detalhesMeusFretesFreteiro(View):
 #    def get(self, request, pedido_id):

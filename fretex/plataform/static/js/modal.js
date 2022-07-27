@@ -1,11 +1,21 @@
-function modal(){
-    const modal = document.getElementById("myModal");
-    const btn = document.getElementById("myBtn");
-    const span = document.getElementsByClassName("close")[0];
+const propostaInput = document.querySelector("#proposta_id");
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("myBtn");
+const span = document.getElementsByClassName("close")[0];
 
-    btn.onclick = function() {
-        modal.style.display = "block";
+function onContrapropostaButtonClick(id) {
+    propostaInput.value = id; 
+    console.log(propostaInput)
+    modal.style.display = "block";
+}
+
+function modall(){
+    if (btn) {
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
     }
+
     span.onclick = function() {
         modal.style.display = "none";
     }
@@ -17,4 +27,4 @@ function modal(){
     }
 }
 
-modal();
+modall();
