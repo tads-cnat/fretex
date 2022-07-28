@@ -22,6 +22,10 @@ function registerValidation(element) {
                     required: true,
                     minlength: 9
                 },
+                cepOrigem: {
+                    required: true,
+                    minlength: 9
+                },
                 numero: {
                     required: true,
                     number: true
@@ -81,6 +85,9 @@ function registerValidation(element) {
                 },
                 tipoVeiculo: {
                     required: true
+                },
+                nomedestinatario: {
+                    required: true
                 }
             },
             messages: {
@@ -98,6 +105,10 @@ function registerValidation(element) {
                     minlength: "Digite um CPF válido."
                 },
                 cep: {
+                    required: "Digite o seu CEP.",
+                    minlength: "Digite um CEP válido."
+                },
+                cepOrigem: {
                     required: "Digite o seu CEP.",
                     minlength: "Digite um CEP válido."
                 },
@@ -159,7 +170,10 @@ function registerValidation(element) {
                 },
                 tipoVeiculo: {
                     required: "Por favor, selecione uma opção."
-                }
+                },
+                nomedestinatario: {
+                    required: "por favor, digite um destinatário"
+                },
             }
         })     
     })
@@ -170,4 +184,4 @@ registerValidation("#cadastroCliente")
 registerValidation("#perfilFreteiro")
 registerValidation("#perfilCliente")
 registerValidation("#adicionarVeiculo")
-registerValidation("cadastroFrete")
+registerValidation("#cadastroFrete")

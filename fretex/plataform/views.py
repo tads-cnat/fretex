@@ -58,7 +58,7 @@ class CadastroDeFrete(View):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')
 
     def post(self, request, *args, **kwargs):
-        cep_origem = request.POST.get('cep-origem')
+        cep_origem = request.POST.get('cepOrigem')
         rua_origem = request.POST['rua-origem']
         numero_origem = request.POST['numero-origem']
         estado_origem = request.POST['estado-origem']
