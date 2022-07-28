@@ -19,6 +19,21 @@
 </head>
 
 <body>
+    {% if request.user is None %}
+    <nav class="bg-black p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <a href="/" class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></a>
+            </div>
+            <div class="flex gap-3 md:gap-8 items-center">
+                <a href="#vantagens" class="hidden md:inline-block font-1-s hover:text-neutral-200">Vantagens</a>
+                <a href="#contato" class="hidden md:inline-block font-1-s text-sm md:text-base hover:text-neutral-200">Contato</a>
+                <a href="#cadastro" class="font-1-s hover:text-neutral-200 text-sm md:text-base ">Cadastrar-se</a>
+                <a href="/login/" class="bg-cor-p6 px-4 py-2 rounded font-1-m font-semibold text-black">Login</a>
+            </div>
+        </div>
+    </nav>
+    {% else %}
     <header>
         <nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5">
             <div class="container flex flex-wrap justify-between items-center mx-auto gap-4">
@@ -38,6 +53,7 @@
                             <span class="block text-sm font-medium truncate text-gray-400">{{ user.email }}</span>
                         </div>
                         <ul class="py-1" aria-labelledby="dropdown">
+                            {% if request.user.freteiro %}
                             <li>
                                 <a href="/perfilFreteiro/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
                             </li>
@@ -49,8 +65,23 @@
                                 <a href="/meusVeiculos/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Meus veículos</a>
                             </li>
                             <li>
-                                <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
+                                <a href="{% url 'logout' %}" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
                             </li>
+                            {% else %}
+                            <li>
+                                <a href="/perfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
+                            </li>
+                            <li>
+                                <a href="/editarPerfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 
+                                    hover:text-white">Editar perfil</a>
+                            </li>
+                            <li>
+                                <a href="/dashboardcliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Meus pedidos</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
 
@@ -67,6 +98,7 @@
 
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                        {% if request.user.freteiro %}
                         <li>
                             {% if request.get_full_path == '/fretes/' %}
                             <a href="#" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-yellow-600 md:p-0">Fretes disponíveis</a>
@@ -81,11 +113,28 @@
                             <a href="/dashboardfreteiro/" class="block py-2 pr-4 pl-3 border-b md:hover:bg-transparent md:border-0 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white border-gray-700">Meus Fretes</a>
                             {% endif %}
                         </li>
+                        {% else %}
+                        <li>
+                            {% if request.get_full_path == '/cadastrofrete/' %}
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-yellow-600 md:p-0">Fazer pedido de frete</a>
+                            {% else %}
+                            <a href="/cadastrofrete/" class="block py-2 pr-4 pl-3 border-b md:hover:bg-transparent md:border-0 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white border-gray-700">Fazer pedido de frete</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.get_full_path == '/dashboardcliente/' %}
+                            <a href="#" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-yellow-600 md:p-0">Meus Fretes</a>
+                            {% else %}
+                            <a href="/dashboardcliente/" class="block py-2 pr-4 pl-3 border-b md:hover:bg-transparent md:border-0 md:p-0 text-gray-400 md:hover:text-white hover:bg-gray-700 hover:text-white border-gray-700">Meus Fretes</a>
+                            {% endif %}
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    {% endif %}
 
     {% block content %}
     {% endblock %}
@@ -130,6 +179,11 @@
         </div>
     </footer>
     <script src="{% static 'js/header.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/dist/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/registerValidation.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>

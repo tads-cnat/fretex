@@ -8,7 +8,7 @@
         <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
         <hr>
     </div>
-    <form action="" method="post" class="align-initial form-perfil">
+    <form action="" method="post" class="align-initial form-perfil" id="adicionarVeiculo">
         {% csrf_token %}
         <div class="form-foto">
             <img src="{% static 'images/perfil.svg' %}" alt="">
@@ -50,31 +50,36 @@
                     <input type="text" name="ano" id="ano" class="font-1-s input-perfil" required>
 
                     <label for="placa-veiculo" class="font-1-m">Placa do veículo*</label>
-                    <input type="text" name="placa-veiculo" id="placa-veiculo" class="font-1-s input-perfil" required>
+                    <input type="text" name="placaVeiculo" id="placa-veiculo" class="font-1-s input-perfil" required>
 
                     <label for="cor-veiculo" class="font-1-m">Cor do veículo*</label>
-                    <input type="text" name="cor-veiculo" id="cor-veiculo" class="font-1-s input-perfil" required>
+                    <input type="text" name="corVeiculo" id="cor-veiculo" class="font-1-s input-perfil" required>
 
                     <label class="font-1-m">Tipo de veículo*</label>
                     <div class="flex flex-col md:flex-row gap-x-4">
                         <div>
-                            <input type="radio" id="caminhao" name="tipo-veiculo" value="caminhao">
+                            <input type="radio" id="caminhao" name="tipoVeiculo" value="caminhao" required>
                             <label for="caminhao" class="cursor-pointer">Caminhão</label>
                         </div>
                         <div>
-                            <input type="radio" id="carro" name="tipo-veiculo" value="carro">
+                            <input type="radio" id="carro" name="tipoVeiculo" value="carro">
                             <label for="carro" class="cursor-pointer">Carro</label>
                         </div>
                         <div>
-                            <input type="radio" id="moto" name="tipo-veiculo" value="moto">
+                            <input type="radio" id="moto" name="tipoVeiculo" value="moto">
                             <label for="moto" class="cursor-pointer">Moto</label>
                         </div>
                         <div>
-                            <input type="radio" id="bicicleta" name="tipo-veiculo" value="bicicleta">
+                            <input type="radio" id="bicicleta" name="tipoVeiculo" value="bicicleta">
                             <label for="bicicleta" class="cursor-pointer">Bicicleta</label>
                         </div>
                     </div>
+                    <div>
+                        <label for="tipoVeiculo" class="error"></label>
+                    </div>
+                    
                     <div class="mt-3">
+                        
                         <button class="botao-padrao">+ Adicionar Veículo</button>
                     </div>
                 </div>

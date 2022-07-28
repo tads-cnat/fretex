@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                 {% else %}
-                                    {% if forloop.first %}
+                                    {% if forloop.last %}
                                         <p class="font-1-m font-semibold">Não há fretes em espera</p>
                                     {% endif %}
                                 {% endif %}
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                {% if forloop.first %}
+                                {% if forloop.last %}
                                     <p class="font-1-m font-semibold">Não há fretes em andamento</p>
                                 {% endif %}
                         {% endif %}
@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                            {% if forloop.first %}
+                            {% if forloop.last %}
                                 <p class="font-1-m font-semibold">Não há fretes encerrados</p>
                             {% endif %}
                         {% endif %}

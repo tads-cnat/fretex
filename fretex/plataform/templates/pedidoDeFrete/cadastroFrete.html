@@ -7,14 +7,10 @@
 <main class="detalhesFretes  mx-auto md:padding-1 bg-cadastro">
     <div class="container mb-3 md:mb-5 mx-auto md:padding-1" id="marginBottomForm">
         <div class="mb-6">
-            <h1 class="font-1-xl cor-0 mt-2 md:mt-5 mb-1">Cadastro do pedido de frete</h1>
+            <h1 class="font-1-xl cor-0 mt-2 md:mt-5 mb-1" id="titulo">Cadastro do pedido de frete</h1>
             <hr>
         </div>
         <div class="container-cadastro-form">
-            <!--
-            <div class="barraDeProgresso mb-5">
-                <div class="progressoAtual"></div>
-            </div> current-item -->
             <section class="stepBar">
                 <ul class="stepBar-list">
                     <li class="stepBar-item">
@@ -36,7 +32,7 @@
                 </ul>
             </section>
             <h2 class="font-1-s text-lg font-semibold cor-0 mb-3">Publique seu pedido agora mesmo</h2>
-            <form action="{% url 'cadastrodefrete' %}" method="POST" class="form-cadastro-frete">
+            <form action="{% url 'cadastrodefrete' %}" method="POST" class="form-cadastro-frete" id="cadastroFrete">
                 {% csrf_token %}
                 <div id="step" class="step">
                     <h3 class="font-1-s font-semibold cor-0 mb-2 text-lg md:text-xl">Origem</h3>
@@ -102,7 +98,7 @@
                         <input type="text" name="complemento-origem" id="complemento" placeholder="Digite o complemento" class="font-1-s">
                     </div>
                     <div class="flex gap-3 meio justify-center mb-2">     
-                        <a class="botao-padrao" id="next">Próximo</a>
+                        <a class="botao-padrao" id="next" href="#titulo">Próximo</a>
                     </div>
                 </div>
                 <div id="step" class="step">
@@ -169,8 +165,8 @@
                         <input type="text" name="complemento-destino" id="complemento" placeholder="Digite o complemento" class="font-1-s">
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 meio justify-center mb-2 meio">  
-                        <a class="botao-padrao" id="prev" >Anterior</a>   
-                        <a class="botao-padrao" id="next">Próximo</a>
+                        <a class="botao-padrao" id="prev" href="#titulo">Anterior</a>   
+                        <a class="botao-padrao" id="next" href="#titulo">Próximo</a>
                     </div>
                 </div>
 
@@ -210,8 +206,8 @@
                         <textarea name="observacao" id="observacao" cols="30" rows="10" placeholder="Digita alguma observação sobre o pedido" style="resize: none"></textarea>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 meio justify-center mb-2">
-                        <a class="botao-padrao" id="prev" >Anterior</a>                     
-                        <a class="botao-padrao" id="next" >Próximo</a>
+                        <a class="botao-padrao" id="prev" href="#titulo">Anterior</a>                     
+                        <a class="botao-padrao" id="next" href="#titulo">Próximo</a>
                     </div>
                 </div>
 

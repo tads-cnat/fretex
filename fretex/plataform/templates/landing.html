@@ -31,7 +31,11 @@
             <div class="px-4 md:px-0 py-8 flex flex-col gap-8 md:flex-1" data-anime="scroll" style="transition: 0.8s;">
                 <h1 class="font-bold text-6xl">Fretex, sua encomenda sem complicação.</h1>
                 <p class="text-neutral-500">A maior plataforma de transporte rodoviário de cargas do Brasil</p>
-                <a href="/cadastrofrete/" class="bg-cor-p6 px-4 py-2 rounded text-black text-center md:w-max font-1-m font-semibold">Fazer Pedido De Frete</a>
+                {% if request.user.freteiro %}
+                    <a href="/fretes/" class="bg-cor-p6 px-4 py-2 rounded text-black text-center md:w-max font-1-m font-semibold">Ver Fretes Disponíveis</a>
+                {% else %}
+                    <a href="/cadastrofrete/" class="bg-cor-p6 px-4 py-2 rounded text-black text-center md:w-max font-1-m font-semibold">Fazer Pedido De Frete</a>
+                {% endif %}
             </div>
             <div class="py-8 md:px-8 md:flex-1 md:-mr-96" data-anime="scroll2" style="transition: 0.8s;">
                 <img src="{% static "images/header_image.svg" %}" />

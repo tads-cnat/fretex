@@ -359,9 +359,9 @@ class AdicionarVeiculo(View):
         marca = request.POST['marca']
         modelo = request.POST['modelo']
         ano = request.POST['ano']
-        placa_veiculo = request.POST['placa-veiculo']
-        cor_veiculo = request.POST['cor-veiculo']
-        tipo_veiculo = request.POST['tipo-veiculo']
+        placa_veiculo = request.POST['placaVeiculo']
+        cor_veiculo = request.POST['corVeiculo']
+        tipo_veiculo = request.POST['tipoVeiculo']
 
         if marca and modelo and ano and placa_veiculo and cor_veiculo:
             if hasattr(request.user, 'freteiro'):
@@ -376,4 +376,4 @@ class AdicionarVeiculo(View):
                 return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'pedidoDeFrete/cadastroFrete.html', {'erro': erro})
+            return render(request, 'perfis/adicionarVeiculo.html', {'erro': erro})

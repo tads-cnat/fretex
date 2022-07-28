@@ -1,5 +1,5 @@
 {% extends 'layouts/cadastroUsuario.html' %}
-
+{% load static %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -22,29 +22,8 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#login").validate({
-                rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    senha: {
-                        required: true
-                    }
-                },
-                messages: {
-                    email: {
-                        required: "Por favor, digite o seu email.",
-                        email: "Por favor, digite um email válido."
-                    },
-                    senha: {
-                        required: "Por favor, digite a sua senha."
-                    }
-                }
-            })     
-        })
+    <script src="{% static 'js/loginValidation.js' %}">
+        
     </script>
 </body>
 {% endblock %}

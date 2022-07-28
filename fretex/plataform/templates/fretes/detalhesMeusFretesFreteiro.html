@@ -70,7 +70,7 @@
                             {% else %}
                                 {% if proposta.ehContraproposta %}
                                     <div class="flex flex-col gap-2">
-                                        <form action="{% url 'detalhesMeusFretesFreteiro' proposta.id %}" method="POST">
+                                        <form action="{% url 'fretes_show' proposta.id %}" method="POST">
                                             <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
                                             <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
                                         </form>

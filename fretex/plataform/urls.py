@@ -35,9 +35,6 @@ urlpatterns = [
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),
 
-    #path('dashboardfreteiro/detalhes/<int:pedido_id>/', views.detalhesMeusFretesFreteiro.as_view(),
-    #    name='detalhesMeusFretesFreteiro'),
-
     path('dashboardcliente/', views.dashboardCliente, 
         name='dashboardcliente'),
 
