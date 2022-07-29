@@ -43,10 +43,6 @@ function formEtapas() {
 
         passos.forEach((passo, index) => {
             if (proximo[index]) {
-                passo.querySelectorAll("")
-
-
-
                 proximo[index].addEventListener('click', () => {
                     proximoForm(index);
                 });
