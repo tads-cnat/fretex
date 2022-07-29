@@ -1,6 +1,7 @@
 function registerValidation(element) {
     $('#cpf').mask('000.000.000-00');
     $('#cep').mask('00000-000');
+    $('#cep2').mask('00000-000');
 
     $(document).ready(function(){
         $(element).validate({
@@ -23,6 +24,10 @@ function registerValidation(element) {
                     minlength: 9
                 },
                 cepOrigem: {
+                    required: true,
+                    minlength: 9
+                },
+                cepDestino: {
                     required: true,
                     minlength: 9
                 },
@@ -87,6 +92,65 @@ function registerValidation(element) {
                     required: true
                 },
                 nomedestinatario: {
+                    required: true,
+                    maxlength: 100
+                },
+                ruaOrigem: {
+                    required: true,
+                    maxlength: 100
+                },
+                ruaDestino: {
+                    required: true,
+                    maxlength: 100
+                },
+                numeroOrigem: {
+                    required: true,
+                    number: true,
+                    maxlength: 20
+                },
+                numeroDestino: {
+                    required: true,
+                    number: true,
+                    maxlength: 20
+                },
+                estadoOrigem: {
+                    required: true
+                },
+                estadoDestino: {
+                    required: true
+                },
+                cidadeOrigem: {
+                    required: true,
+                    maxlength: 100
+                },
+                cidadeDestino: {
+                    required: true,
+                    maxlength: 100
+                },
+                bairroOrigem: {
+                    required: true,
+                    maxlength: 100
+                },
+                bairroDestino: {
+                    required: true,
+                    maxlength: 100
+                },
+                produto: {
+                    required: true
+                },
+                tipoveiculos: {
+                    required: true
+                },
+                dataColeta: {
+                    required: true
+                },
+                turnoColeta: {
+                    required: true
+                },
+                turnoEntrega: {
+                    required:true
+                },
+                dataEntrega: {
                     required: true
                 }
             },
@@ -112,6 +176,10 @@ function registerValidation(element) {
                     required: "Digite o seu CEP.",
                     minlength: "Digite um CEP válido."
                 },
+                cepDestino: {
+                    required: "Digite o seu CEP.",
+                    minlength: "Digite um CEP válido."
+                },
                 rua: {
                     required: "Por favor, digite a sua rua.",
                 },
@@ -121,6 +189,18 @@ function registerValidation(element) {
                 },
                 estado: {
                     required: "Selecione uma opção."
+                },
+                dataColeta: {
+                    required: "Selecione uma data."
+                },
+                dataEntrega: {
+                    required: "Selecione uma data."
+                },
+                turnoColeta: {
+                    required: "Selecione um turno."
+                },
+                turnoEntrega: {
+                    required: "Selecione um turno."
                 },
                 cidade: {
                     required: "Digite uma cidade.",
@@ -171,9 +251,57 @@ function registerValidation(element) {
                 tipoVeiculo: {
                     required: "Por favor, selecione uma opção."
                 },
-                nomedestinatario: {
-                    required: "por favor, digite um destinatário"
+                tipoveiculos: {
+                    required: "Por favor, selecione uma opção."
                 },
+                nomedestinatario: {
+                    required: "por favor, digite um destinatário",
+                    maxlength: "Use 100 caracteres ou menos para o seu destinatário."
+                },
+                ruaOrigem: {
+                    required: "Por favor, digite a sua rua.",
+                    maxlength: "Use 100 caracteres ou menos para a rua."
+                },
+                ruaDestino: {
+                    required: "Por favor, digite a sua rua.",
+                    maxlength: "Use 100 caracteres ou menos para a rua."
+                },
+                numeroOrigem: {
+                    required: "Digite o número",
+                    number: "Inválido",
+                    maxlength: "Use 20 caracteres ou menos para o número."
+                },
+                numeroDestino: {
+                    required: "Digite o número",
+                    number: "Inválido",
+                    maxlength: "Use 20 caracteres ou menos para o número."
+                },
+                estadoOrigem: {
+                    required: "Selecione uma opção."
+                },
+                estadoDestino: {
+                    required: "Selecione uma opção."
+                },
+                cidadeOrigem: {
+                    required: "Por favor, digite a sua cidade",
+                    maxlength: "Use 100 caracteres ou menos para a cidade."
+                },
+                cidadeDestino: {
+                    required: "Por favor, digite a sua cidade",
+                    maxlength: "Use 100 caracteres ou menos para a cidade."
+                },
+                bairroOrigem: {
+                    required: "Por favor, digite o seu bairro",
+                    maxlength: "Use 100 caracteres ou menos para o seu bairro."
+                },
+                bairroDestino: {
+                    required: "Por favor, digite o seu bairro",
+                    maxlength: "Use 100 caracteres ou menos para o seu bairro."
+                },
+                produto: {
+                    required: "Por favor, digite o produto"
+                },
+
             }
         })     
     })

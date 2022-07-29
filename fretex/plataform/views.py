@@ -59,19 +59,19 @@ class CadastroDeFrete(View):
 
     def post(self, request, *args, **kwargs):
         cep_origem = request.POST.get('cepOrigem')
-        rua_origem = request.POST['rua-origem']
-        numero_origem = request.POST['numero-origem']
-        estado_origem = request.POST['estado-origem']
-        cidade_origem = request.POST['cidade-origem']
-        bairro_origem = request.POST['bairro-origem']
+        rua_origem = request.POST['ruaOrigem']
+        numero_origem = request.POST['numeroOrigem']
+        estado_origem = request.POST['estadoOrigem']
+        cidade_origem = request.POST['cidadeOrigem']
+        bairro_origem = request.POST['bairroOrigem']
         complemento_origem = request.POST['complemento-origem']
 
-        cep_destino = request.POST.get('cep-destino')
-        rua_destino = request.POST['rua-destino']
-        numero_destino = request.POST['numero-destino']
-        estado_destino = request.POST['estado-destino']
-        cidade_destino = request.POST['cidade-destino']
-        bairro_destino = request.POST['bairro-destino']
+        cep_destino = request.POST.get('cepDestino')
+        rua_destino = request.POST['ruaDestino']
+        numero_destino = request.POST['numeroDestino']
+        estado_destino = request.POST['estadoDestino']
+        cidade_destino = request.POST['cidadeDestino']
+        bairro_destino = request.POST['bairroDestino']
         complemento_destino = request.POST['complemento-destino']
 
         imagem = request.POST['imagem']
@@ -79,10 +79,10 @@ class CadastroDeFrete(View):
         observacao = request.POST['observacao']
 
         nomedestinatario = request.POST['nomedestinatario']
-        data_coleta = request.POST.get('data-coleta')
-        data_entrega = request.POST.get('data-entrega')
-        turno_entrega = request.POST.get('turno-entrega')
-        turno_coleta = request.POST.get('turno-coleta')
+        data_coleta = request.POST.get('dataColeta')
+        data_entrega = request.POST.get('dataEntrega')
+        turno_entrega = request.POST.get('turnoEntrega')
+        turno_coleta = request.POST.get('turnoColeta')
 
         if (cep_origem and rua_origem and numero_origem and estado_origem and cidade_origem and bairro_origem and
             cep_destino and rua_destino and numero_destino and estado_destino and cidade_destino and bairro_destino and
