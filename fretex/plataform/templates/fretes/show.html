@@ -100,9 +100,12 @@
         </div>
         {% else %}
             {% if proposta.usuario == pedido.cliente.user %}
-            <div class="flex flex-col gap-2">
-                <p class="font-1-m-b text-blue-500">Aceitar</p>
-            </div>
+              <form method="POST" action="{% url 'proposta_aceitar' proposta.id %}">
+                {% csrf_token %}
+                <button class="botao-padrao font-1-m font-semibold mb-5" type="submit">Aceitar</button>
+            </form>
+            <button class="botao-padrao font-1-m font-semibold mb-5" onclick="onContrapropostaButtonClickF({{proposta.id}})">Contraproposta</button>
+        
             {% else %}
             <div class="flex flex-col gap-2">
                 <p class="font-1-m-b text-blue-500">Status: Em análise</p>
@@ -206,6 +209,49 @@
     </div>
   </div>
 </div>
+
+<!-- The Modal ctrProp_frt -->
+<div id="myModalF" class="modal">
+  <!-- Modal content ctrProp_frt-->
+  <div class="modal-content">
+    <div class="modal-header mb-2">
+      <span class="close">&times;</span>
+      <h2 class="font-1-m font-semibold">Proposta</h2>
+    </div>
+    <div class="modal-body">
+      <form action="{% url 'proposta_create' %}" method="POST">
+        {% csrf_token %}
+        <input type='hidden' name="pedido_id" value="{{pedido.id}}"/>
+        <input type='hidden' name="proposta_id" id="proposta_id"/>  
+        <input type='hidden' name="ehContraproposta" value=1/>
+
+        <div class="mb-3 flex flex-col">
+          <label class="font-1-m font-semibold mb-2" for="valor"
+            >Informe o valor da proposta:</label
+          >
+          <input
+            type="number"
+            name="valor"
+            id="valor"
+            placeholder="R$"
+            class="cor-12 border-2 border-black rounded-md indent-1"
+            required
+          />
+        </div>
+        <div class="flex justify-center div-button">
+          <button
+            class="botao-padrao font-1-m font-semibold enviar-proposta mb-5"
+            id="myBtn2"
+            type="submit"
+          >
+            Realizar proposta
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% else %}
 <!-- The Modal -->
 <div id="myModal" class="modal">

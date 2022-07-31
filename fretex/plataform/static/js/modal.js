@@ -1,5 +1,6 @@
 const propostaInput = document.querySelector("#proposta_id");
 const modal = document.getElementById("myModal");
+const modalF = document.getElementById("myModalF");
 const btn = document.getElementById("myBtn");
 const span = document.getElementsByClassName("close")[0];
 
@@ -8,6 +9,13 @@ function onContrapropostaButtonClick(id) {
     console.log(propostaInput)
     modal.style.display = "block";
 }
+
+function onContrapropostaButtonClickF(id) {
+    propostaInput.value = id; 
+    console.log(propostaInput)
+    modalF.style.display = "block";
+}
+
 
 function modall(){
     if (btn) {
