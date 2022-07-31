@@ -1,0 +1,35 @@
+/* Animação ao scroll lateral esquerda */
+.js [data-anime="scroll"] {
+    opacity: 0;
+    transition: 0.4s;
+    transform: translate3d(-30px, 0, 0);
+}
+
+.js [data-anime="scroll"].ativo {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Animação ao scroll lateral direita */
+.js [data-anime="scroll2"] {
+    opacity: 0;
+    transition: 0.4s;
+    transform: translate3d(30px, 0, 0);
+}
+
+.js [data-anime="scroll2"].ativo {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Animação ao scroll de cima pra baixo */
+.js [data-anime="scroll3"] {
+    opacity: 0;
+    transition: 0.4s;
+    transform: translate3d(0, -30px, 0);
+}
+
+.js [data-anime="scroll3"].ativo {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
