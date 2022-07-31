@@ -224,6 +224,8 @@ def proposta_create(request):
         valor=request.POST.get('valor'), 
         veiculo=proposta_inicial.veiculo, 
         contraproposta_id=proposta_inicial.id)
+        proposta_inicial.ehNegada = True
+        proposta_inicial.save()
     else:
         veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
         Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))

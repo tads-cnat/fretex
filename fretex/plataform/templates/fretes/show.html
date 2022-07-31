@@ -94,11 +94,12 @@
     <div class="grow text-center items-center">
       {% if request.user.freteiro %} 
       
-        {% if proposta.ehAceita %}
+        {% if proposta.ehNegada %}
         <div class="flex flex-col gap-2">
-            <p class="font-1-m-b text-green-500">Status: Aceito</p>
+            <p class="font-1-m-b text-red-500">Status: Negada</p>
         </div>
         {% else %}
+            {% if proposta.ehAceita == False %}
             {% if proposta.usuario == pedido.cliente.user %}
               <form method="POST" action="{% url 'proposta_aceitar' proposta.id %}">
                 {% csrf_token %}
@@ -109,16 +110,25 @@
             {% else %}
             <div class="flex flex-col gap-2">
                 <p class="font-1-m-b text-blue-500">Status: Em análise</p>
-            </div>
+            </div>            
             {% endif%}
+            {% endif%}
+            {% if proposta.ehAceita %}
+            <div class="flex flex-col gap-2">
+                <p class="font-1-m-b text-green-500">Status: Aceito</p>
+            </div>
+            {% endif %}
         {% endif %} 
 
       {% else %}
-        {% if proposta.ehAceita %}
+      <!-- Cliente  -->
+        
+      {% if proposta.ehNegada %}
         <div class="flex flex-col gap-2">
-            <p class="font-1-m-b text-green-500">Status: Aceito</p>
+            <p class="font-1-m-b text-red-500">Status: Negada</p>
         </div>
         {% else %}
+          {% if proposta.ehAceita == False %}
             {% if request.user == proposta.usuario %}
             <div class="flex flex-col gap-2">
                 <p class="font-1-m-b text-blue-500">Status: Em análise</p>
@@ -130,6 +140,12 @@
                 </form>
                 <button class="botao-padrao font-1-m font-semibold mb-5" onclick="onContrapropostaButtonClick({{proposta.id}})">Contraproposta</button>
             {% endif%}
+          {% endif%}
+          {% if proposta.ehAceita %}
+          <div class="flex flex-col gap-2">
+              <p class="font-1-m-b text-green-500">Status: Aceito</p>
+          </div>
+          {% endif %}   
         {% endif %} 
       {% endif %}
     </div>
