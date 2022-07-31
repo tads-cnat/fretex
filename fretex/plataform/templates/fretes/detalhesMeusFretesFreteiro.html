@@ -1,0 +1,142 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Detalhes meu frete - Freteiro{% endblock %}
+
+{% block content %}
+
+<main class="detalhesFretes container mx-auto md:p-1">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Detalhes do Frete</h1>
+        <hr>
+    </div>
+    <div class="container-detalhes-geral">
+        <p class="font-1-l mb-3 font-semibold data-pedido">Data do pedido: 13/06/2022</p>
+        <div class="container-detalhes">
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/detalhesPerfil.svg' %}" alt="">
+                <p class="font-1-m">Cliente: {{ pedido.cliente.user.username }}</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/iconeLocalidade.svg' %}" alt="">
+                <p class="font-1-m">Origem: {{ pedido.origem }}</p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Destino: {{ pedido.destino }}</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/calendario.svg' %}" alt="">
+                <p class="font-1-m">Data de coleta: {{ pedido.data_coleta }} </p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Data de entrega: {{ pedido.data_entrega }}</p>
+            </div>
+            <div class="flex items-center gap-3 mb-1 sm:mb-2">
+                <img src="{% static 'images/turno.png' %}" alt="">
+                <p class="font-1-m">Turno de coleta: {{ pedido.turno_coleta }}</p>
+                <img src="{% static 'images/flechaDireita.svg' %}" alt="">
+                <p class="font-1-m">Turno de entrega: {{ pedido.turno_coleta }}</p>
+            </div>
+            <div class="flex flex-col gap-1 mb-1 sm:mb-2">
+                <div class="flex items-center gap-3 ">
+                    <img src="{% static 'images/caminhaoDetalhes.svg' %}" alt="">
+                    <p class="font-1-m">Detalhes:</p>
+                </div>
+                <div class="flex flex-col detalhes-info ml-8 sm:ml-11">
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Destinatário: {{ pedido.destinatario }}</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Kilometragem: 20Km</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Produto:  {{ pedido.produto }}</p>
+                    <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">Tipo de veículo: {% for tipo in pedido.tipo_veiculo.all %}
+                                                                                                            {{tipo.descricao}}/
+                                                                                                        {% endfor %}</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1 mb-1 sm:mb-2">
+                <img src="{% static 'images/observacao.svg' %}" alt="">
+                <p class="font-1-m">Observação: {{ pedido.observacao }}</p>
+            </div>
+            
+            <div class="historico-propostas">
+                <h2 class="font-1-l mb-3 font-semibold">Histórico de Propostas:</h2>
+                {% for proposta in pedido.proposta_set.all %}
+                    {% if proposta.usuario == request.user or pedido.cliente == proposta.usuario %}  <!-- colocar pra listar as proposta do cliente apenas referente ao freteiro logado. -->
+                        <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
+                            <div class="flex flex-col">
+                                <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ {{ proposta.valor }}</h3>
+                                <p class="font-1-m">Data da proposta: {{ proposta.data_criacao }}</p>
+                                <p class="font-1-m">Realizado por {{ proposta.usuario }}</p>
+                            </div>
+                            {% if proposta.ehAceita %}
+                                <div class="flex flex-col gap-2">
+                                    <p class="font-1-m-b text-green-500">Status: Aceito</p>
+                                </div>
+                            {% else %}
+                                {% if proposta.ehContraproposta %}
+                                    <div class="flex flex-col gap-2">
+                                        <form action="{% url 'fretes_show' proposta.id %}" method="POST">
+                                            <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
+                                            <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <div class="flex flex-col gap-2">
+                                        <p class="font-1-m-b text-blue-500">Status: Em análise</p>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            
+                        </div>
+                    {% endif %}
+                    {% empty %}
+                        <p>Não há veículos disponíveis</p>
+                {% endfor %}
+                
+            </div>
+        </div>
+        <div class="lateral">
+            <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2">
+            <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header mb-2">
+                <span class="close">&times;</span>
+                <h2 class="font-1-m font-semibold">Proposta</h2>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <p class="font-1-m font-semibold mb-2">Veículo escolhido:</p><!-- Escolher o veiculo toda vez que for fazer a proposta? -->
+
+                    <div class="veiculo mb-3">
+                        <input type="radio" name="veiculo" id="veiculo">
+                        <label for="veiculo" class="flex items-center justify-start">
+                            <div class="imagem-veiculo flex items-center">
+                                <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                            </div>
+                            <div>
+                                <p class="font-1-m">Marca: {{proposta.veiculo.marca}}</p>
+                                <p class="font-1-m">Modelo: {{proposta.veiculo.modelo}}</p>
+                                <p class="font-1-m">Ano: {{proposta.veiculo.ano}}</p>
+                                <p class="font-1-m">Placa do veículo: {{proposta.veiculo.placa}}</p>
+                                <p class="font-1-m">Cor do veículo: {{proposta.veiculo.cor}}</p>
+                                <p class="font-1-m">Tipo do veículo: {{proposta.veiculo.tipo_veiculo}}</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="mb-3 flex flex-col">
+                        <label class="font-1-m font-semibold mb-2" for="valorProposta">Informe o valor da proposta:</label>
+                        <input type="number" name="valorProposta" id="valorProposta" placeholder="R$" class="cor-12" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="botao-padrao font-1-m font-semibold enviar-proposta mb-5" id="myBtn2">Realizar proposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block js %}<script src="{% static 'js/modal.js' %}"></script>{% endblock %}

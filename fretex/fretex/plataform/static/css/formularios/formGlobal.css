@@ -1,0 +1,53 @@
+.form-bg {
+    background-color: #121212;
+}
+
+@media (max-width: 400px) {
+    .form-bg {
+        background-color: #202020;
+    }
+}
+
+.container-formulario {
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #202020;
+    border: none;
+    border-radius: 10px;
+    padding: 35px 50px 10px 50px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 450px) {
+    .container-formulario {
+        margin-bottom: 0;
+        margin-top: 0;
+        border-radius: 0;
+        padding: 35px 25px 10px 25px;
+    }
+}
+
+@media (min-width: 1400px){
+    .body-center {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+    }
+}
+
+@media (min-width: 2100px){
+    .body-center2 {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+    }
+}
+
+@media (min-width: 1400px){
+    .body-center3 {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+    }
+}

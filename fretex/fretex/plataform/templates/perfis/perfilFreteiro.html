@@ -1,0 +1,73 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Perfil - Freteiro{% endblock %}
+
+{% block content %}
+<main class="perfilCliente container mx-auto p-2 mb-12">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
+        <hr>
+    </div>
+    <form action="" method="post" class="form-perfil">
+        <div class="form-foto">
+            <img src="{% static 'images/perfil.svg' %}" alt="">
+            <div class="form-foto-info ">
+                <h2 class="font-1-xl">{{user.username}}</h2>
+                <p class="font-1-m">{{user.email}}</p>
+            </div>
+        </div>
+
+        <div class="form-info">
+            <div class="form-info-header">
+                <h2 class="font-1-xl mb-3">Editar Perfil</h2>
+                <ul class="form-info-links">
+                    <li><a href="#" class="link-ativo font-1-m font-semibold">Informações do usuário</a></li>
+                    <li><a href="/meusVeiculos/" class="link font-1-m font-semibold">Meus Veículos</a></li>
+                </ul>
+            </div>
+            <div class="form-info-content">
+                <div class="form-info-container">
+                    <label for="nome" class="font-1-m">Nome completo</label>
+                    <input type="text" name="nome" id="nome" class="font-1-s input-perfil no-click bg-cinza" value={{user.username}} readonly>
+                </div>
+                <div class="form-info-container">
+                    <label for="email" class="font-1-m">Email</label>
+                    <input type="email" name="email" id="email" class="font-1-s input-perfil no-click bg-cinza" value={{user.email}} readonly>
+                </div>
+                <div class="form-info-container">
+                    <label for="cpf" class="font-1-m">CPF</label>
+                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m input-perfil no-click bg-cinza" readonly value="{{freteiro.cpf}}">
+                </div>
+                <div class="form-info-container">
+                    <label for="email" class="font-1-m">CEP</label>
+                    <input type="text" name="cep" id="cep" readonly pattern="\d{5}-?\d{3}" value={{freteiro.endereco.CEP}} class="font-1-s input-perfil no-click bg-cinza">
+                </div>
+                <div class="form-info-container">
+                    <label for="rua" class="font-1-m">Rua</label>
+                    <input type="text" name="rua" id="rua" class="font-1-s input-perfil no-click bg-cinza" value={{freteiro.endereco.rua}} readonly>
+                </div>
+                <div class="form-info-container">
+                    <label for="numero" class="font-1-m">Número</label>
+                    <input type="number" name="numero" id="numero" class="font-1-s input-perfil no-click bg-cinza" readonly value={{freteiro.endereco.numero}}>
+                </div>
+                <div class="form-info-container">
+                    <label for="estado" class="font-1-m">Estado</label>
+                    <input type="text" class="font-1-s input-perfil no-click bg-cinza" name="estado" id="estado" readonly value={{freteiro.endereco.estado}}>
+                </div>
+                <div class="form-info-container">
+                    <label for="bairro" class="font-1-m">Bairro/Distrito</label>
+                    <input type="text" name="bairro" id="bairro" readonly value={{freteiro.endereco.bairro}} class="font-1-s input-perfil no-click bg-cinza">
+                </div>
+                <div class="form-info-container container-total">
+                    <label for="complemento" class="font-1-m">Complemento</label>
+                    <textarea name="complemento" id="complemento" class="font-1-s resize-none input-perfil no-click bg-cinza" readonly>{{freteiro.endereco.complemento}}
+                    </textarea>
+                </div>
+                <div>
+                    <a href="/editarPerfilFreteiro/" class="botao-padrao">Atualizar Informações</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

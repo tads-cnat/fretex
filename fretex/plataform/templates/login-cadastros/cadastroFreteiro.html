@@ -1,0 +1,113 @@
+{% extends 'layouts/cadastroUsuario.html' %}
+{% load static %}
+{% block title %}Cadastro - Freteiro{% endblock %}
+
+{% block content %}
+
+<body class="form-bg form-bg-3 body-center2">
+    <main class="container-formulario cadastro-freteiro">
+        <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
+        <p class="font-1-s cor-0">Faça seu cadastro</p>
+        <form action="{% url 'cadastrofreteiro' %}" method="POST" id="cadastroFreteiro">
+            {% csrf_token %}
+            <label for="nome" class="font-1-s cor-0">Nome completo*</label>
+            <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
+
+            <label for="email" class="font-1-s cor-0">Email*</label>
+            <input type="email" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
+
+            <div class="container-campos-1">
+                <div>
+                    <label for="cpf" class="font-1-s cor-0">CPF*</label>
+                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" autocomplete="on" placeholder="000.000.000-00" class="font-1-s" required>
+                </div>
+                <div>
+                    <label for="cep" class="font-1-s cor-0">CEP*</label>
+                    <input type="text" name="cep" id="cep" required autocomplete="on" pattern="\d{5}-?\d{3}" placeholder="00000-000" class="font-1-s">
+                </div>
+            </div>
+
+            <div class="container-campos-2">
+                <div>
+                    <label for="rua" class="font-1-s cor-0">Rua</label>
+                    <input type="text" name="rua" id="rua" autocomplete="on" class="font-1-s" placeholder="Digite sua a rua" required>
+                </div>
+                <div class="input-numero">
+                    <label for="numero" class="font-1-s cor-0">Número*</label>
+                    <input type="number" name="numero" id="numero" class="font-1-s" required placeholder="0000">
+                </div>
+            </div>
+
+            <div class="container-campos-1">
+                <div>
+                    <label for="estado" class="font-1-s cor-0">Estado*</label>
+                    <select id="estado" name="estado" class="font-1-s" required>
+                        <option selected disabled>Selecione uma opção</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cidade" class="font-1-s cor-0">Cidade*</label>
+                    <input type="text" name="cidade" id="cidade" required autocomplete="on" placeholder="Digite sua cidade" class="font-1-s">
+                </div>
+            </div>
+
+            <label for="bairro" class="font-1-s cor-0">Bairro/Distrito*</label>
+            <input type="text" name="bairro" id="bairro" required autocomplete="on" placeholder="Digite seu bairro" class="font-1-s">
+
+            <label for="complemento" class="font-1-s cor-0">Complemento</label>
+            <input type="text" name="complemento" id="complemento" placeholder="Digite o Complemento" class="font-1-s">
+
+            <div class="container-campos-1">
+                <div>
+                    <label for="senha" class="font-1-s cor-0">Senha*</label>
+                    <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="font-1-s" required>
+                </div>
+
+                <div>
+                    <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
+                    <input type="password" name="confirmarSenha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+                </div>
+            </div>
+
+            <div class="termos">
+                <input type="checkbox" name="aceitarTermos" id="termos" required>
+                <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
+            </div>
+            <label for="aceitarTermos" class="error"></label>
+            <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
+        </form>
+        <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/src/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/registerValidation.js' %}"></script>
+</body>
+{% endblock %}

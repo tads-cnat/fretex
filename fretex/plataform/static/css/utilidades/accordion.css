@@ -1,0 +1,23 @@
+.js [data-anime="accordion"] dd {
+    display: none;
+}
+
+[data-anime="accordion"] dt {
+    cursor: pointer;
+}
+
+[data-anime="accordion"] dd.ativo {
+    display: block;
+    animation: slideDown 0.5s forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -15px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}

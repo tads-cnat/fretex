@@ -1,0 +1,107 @@
+.bg-cadastro{
+    background-color: #111111;
+}
+
+.container-cadastro-form{
+    background-color: #232323;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px 60px 20px 60px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.form-cadastro-frete{
+    text-align: left;
+}
+
+.form-cadastro-frete input[type="text"], 
+.form-cadastro-frete input[type="number"],
+.form-cadastro-frete select,
+#observacao,#turno, #data{
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+#observacao{
+    height: 120px;
+}
+
+.form-cadastro-frete select{
+    padding: 9px 0px;
+}
+
+.form-cadastro-frete input,
+#observacao{
+    text-indent: 5px;
+    padding: 8px 0px;
+}
+
+#turnoColeta,
+#turnoEntrega {
+    padding: 11px 0;
+}
+
+.meio{
+    text-align: center;
+}
+
+.meio a{
+    padding: 6px 30px;
+    cursor: pointer;
+}
+
+.meio button{
+    padding: 6px 30px;
+    cursor: pointer;
+}
+
+.barraDeProgresso {
+    width: 100%;
+    height: 8px;
+    background-color: rgb(221, 223, 228);
+    border-radius: 50px;
+}
+
+.progressoAtual {
+    background-color: var(--cor-p6);
+    height: 100%;
+    position: relative;
+    border-radius: 50px;
+    width: 10%;
+    transition: width 1s ease 0s;
+}
+
+.progressoAtual::before{
+    content: "";
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 10px);
+    transform: translateY(-50%);
+    background-color: var(--cor-p6);
+    border-radius: 100%;
+}
+
+.img-cadastro-frete {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.step {
+    display: none;
+}
+
+.step.ativo{
+    display: initial;
+}
+
+@media (max-width: 500px) {
+    .container-cadastro-form{
+        padding: 30px 30px;
+    }
+}
