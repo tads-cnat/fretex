@@ -64,11 +64,13 @@
       <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
       {% if request.user.freteiro %}
       <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
+      {% if pedido.temProposta != True  %}
       <div class="div-botao">
         <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
           Realizar proposta
         </button>
       </div>
+      {% endif %}
       {% endif %}
     </div>
     <div class="lateral">
