@@ -8,12 +8,13 @@
     <main class="container-formulario cadastro-freteiro">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça seu cadastro</p>
-        <form action="">
+        <form action="{% url 'cadastrofreteiro' %}" method="POST" id="cadastroFreteiro">
+            {% csrf_token %}
             <label for="nome" class="font-1-s cor-0">Nome completo*</label>
             <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
 
             <label for="email" class="font-1-s cor-0">Email*</label>
-            <input type="text" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
+            <input type="email" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
 
             <div class="container-campos-1">
                 <div>
@@ -29,7 +30,7 @@
             <div class="container-campos-2">
                 <div>
                     <label for="rua" class="font-1-s cor-0">Rua</label>
-                    <input type="text" name="rua" id="rua" autocomplete="on" class="font-1-s" placeholder="Digite sua a rua">
+                    <input type="text" name="rua" id="rua" autocomplete="on" class="font-1-s" placeholder="Digite sua a rua" required>
                 </div>
                 <div class="input-numero">
                     <label for="numero" class="font-1-s cor-0">Número*</label>
@@ -41,7 +42,7 @@
                 <div>
                     <label for="estado" class="font-1-s cor-0">Estado*</label>
                     <select id="estado" name="estado" class="font-1-s" required>
-                        <option value="" selected>Selecione uma opção</option>
+                        <option selected disabled>Selecione uma opção</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -80,8 +81,8 @@
             <label for="bairro" class="font-1-s cor-0">Bairro/Distrito*</label>
             <input type="text" name="bairro" id="bairro" required autocomplete="on" placeholder="Digite seu bairro" class="font-1-s">
 
-            <label for="Complemento" class="font-1-s cor-0">Complemento</label>
-            <input type="text" name="Complemento" id="Complemento" placeholder="Digite o Complemento" class="font-1-s">
+            <label for="complemento" class="font-1-s cor-0">Complemento</label>
+            <input type="text" name="complemento" id="complemento" placeholder="Digite o Complemento" class="font-1-s">
 
             <div class="container-campos-1">
                 <div>
@@ -91,17 +92,22 @@
 
                 <div>
                     <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
-                    <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+                    <input type="password" name="confirmarSenha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
                 </div>
             </div>
 
             <div class="termos">
-                <input type="checkbox" name="aceitar-termos" id="termos" required>
+                <input type="checkbox" name="aceitarTermos" id="termos" required>
                 <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
             </div>
+            <label for="aceitarTermos" class="error"></label>
             <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
         </form>
         <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/src/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/registerValidation.js' %}"></script>
 </body>
 {% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'layouts/freteiro.html' %}
+{% load static %}
+{% block title %}Editar Perfil - Freteiro{% endblock %}
+
+{% block content %}
+<main class="perfilCliente container mx-auto p-2 mb-12">
+    <div class="mb-3 md:mb-5">
+        <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
+        <hr>
+    </div>
+    <form action="" method="post" class="form-perfil" id="perfilFreteiro">
+        {% csrf_token %}
+        <div class="form-foto">
+            <img src="{% static 'images/perfil.svg' %}" alt="">
+            <div class="form-foto-info ">
+                <h2 class="font-1-xl">{{user.username}}</h2>
+                <p class="font-1-m">{{user.email}}</p>
+                <label for="upload-image" class="botao-padrao cursor-pointer">Upload da imagem</label>
+                <input type="file" accept="image/*" value="test" id="upload-image" class="hidden">
+            </div>
+        </div>
+
+        <div class="form-info">
+            <div class="form-info-header">
+                <h2 class="font-1-xl mb-3">Editar Perfil</h2>
+                <ul class="form-info-links">
+                    <li><a href="/perfilFreteiro/" class="link font-1-m font-semibold">Informações do usuário</a></li>
+                    <li><a href="/meusVeiculos/" class="link font-1-m font-semibold">Meus Veículos</a></li>
+                </ul>
+            </div>
+            <div class="form-info-content">
+                <div class="form-info-container">
+                    <label for="nome" class="font-1-m">Nome completo*</label>
+                    <input type="text" name="nome" id="nome" class="font-1-s input-perfil" value={{user.username}} required>
+                </div>
+                <div class="form-info-container">
+                    <label for="email" class="font-1-m">Email*</label>
+                    <input type="email" name="email" id="email" class="font-1-s input-perfil" value={{user.email}} required>
+                </div>
+                <div class="form-info-container">
+                    <label for="cpf" class="font-1-m">CPF*</label>
+                    <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"  class="font-1-m input-perfil" required value={{freteiro.cpf}}>
+                </div>
+                <div class="form-info-container">
+                    <label for="email" class="font-1-m">CEP*</label>
+                    <input type="text" name="cep" id="cep" required pattern="\d{5}-?\d{3}" value={{freteiro.endereco.CEP}} class="font-1-s input-perfil">
+                </div>
+                <div class="form-info-container">
+                    <label for="rua" class="font-1-m">Rua*</label>
+                    <input type="text" name="rua" id="rua" class="font-1-s input-perfil" value={{freteiro.endereco.rua}} required>
+                </div>
+                <div class="form-info-container">
+                    <label for="numero" class="font-1-m">Número*</label>
+                    <input type="number" name="numero" id="numero" class="font-1-s input-perfil" required value={{freteiro.endereco.numero}}>
+                </div>
+                <div class="form-info-container">
+                    <label for="estado" class="font-1-m">Estado*</label>
+                    <select id="estado" name="estado" class="font-1-s input-perfil select-perfil" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN" selected>Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <div class="form-info-container">
+                    <label for="bairro" class="font-1-m">Bairro/Distrito*</label>
+                    <input type="text" name="bairro" id="bairro" required value={{freteiro.endereco.bairro}} class="font-1-s input-perfil">
+                </div>
+                <div class="form-info-container container-total">
+                    <label for="complemento" class="font-1-m">Complemento</label>
+                    <textarea name="complemento" id="complemento" class="font-1-s resize-none input-perfil" required>{{freteiro.endereco.complemento}}
+                    </textarea>
+                </div>
+                <div>
+                    <button class="botao-padrao">Enviar Informações</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

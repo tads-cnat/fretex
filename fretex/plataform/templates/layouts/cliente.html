@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>document.documentElement.className += ' js';</script>
     <!-- FIM CSS GLOBAL -->
     <link rel="stylesheet" href="{% static 'css/geral.css' %}">
     {% block css %} {% endblock %}
@@ -33,22 +34,22 @@
                     <!-- Dropdown menu -->
                     <div class="hidden z-50 my-4 text-base list-none rounded divide-y shadow bg-gray-700 divide-gray-600" id="dropdown" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position:absolute;margin-top:275px;right:10px;">
                         <div class="py-3 px-4">
-                            <span class="block text-sm text-white">Bonnie Green</span>
-                            <span class="block text-sm font-medium truncate text-gray-400">name@flowbite.com</span>
+                            <span class="block text-sm text-white">{{ user.username }}</span>
+                            <span class="block text-sm font-medium truncate text-gray-400">{{ user.email }}</span>
                         </div>
                         <ul class="py-1" aria-labelledby="dropdown">
                             <li>
-                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
+                                <a href="/perfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 
+                                <a href="/editarPerfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 
                                     hover:text-white">Editar perfil</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Meus pedidos</a>
+                                <a href="/dashboardcliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Meus pedidos</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
+                                <a href="{% url 'logout' %}" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sair</a>
                             </li>
                         </ul>
                     </div>
@@ -108,10 +109,19 @@
             </div>
 
             <div class="flex flex-col gap-4">
-                <h1 class="font-2-l-b cor-0">Informações</h1>
-                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Seguros</a>
-                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Contatos</a>
-                <a href="#" class="font-1-m cor-5 hover:text-gray-50">Termos e Condições</a>
+                <h1 class="font-2-l-b cor-0">Desenvolvedores</h1>
+                <div class="flex flex-row gap-8">
+                    <div class="flex flex-col gap-4">
+                        <a href="https://github.com/Lucas-Veras" class="font-1-m cor-5 hover:text-gray-50">Lucas Oliveira</a>
+                        <a href="https://github.com/MathewsDantas" class="font-1-m cor-5 hover:text-gray-50">Mathews Dantas</a>
+                        <a href="https://github.com/ItaloGSM" class="font-1-m cor-5 hover:text-gray-50">Italo Gabriel</a>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <a href="https://github.com/ArthurOnly" class="font-1-m cor-5 hover:text-gray-50">Arthur Medeiros</a>
+                        <a href="https://github.com/savio-84" class="font-1-m cor-5 hover:text-gray-50">Sávio Araújo</a>
+                        <a href="https://github.com/c4nt" class="font-1-m cor-5 hover:text-gray-50">Marcos Alexandre</a>
+                    </div>
+                </div>
             </div>
 
             <div>
@@ -120,6 +130,10 @@
         </div>
     </footer>
     <script src="{% static 'js/header.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/dist/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/registerValidation.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>

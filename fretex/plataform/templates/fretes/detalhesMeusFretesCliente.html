@@ -1,10 +1,10 @@
-{% extends 'layouts/freteiro.html' %}
+{% extends 'layouts/cliente.html' %}
 {% load static %}
 {% block title %}Detalhes meu frete - Cliente{% endblock %}
 
 {% block content %}
 
-<main class="detalhesFretes container mx-auto md:padding-1">
+<main class="detalhesFretes container mx-auto md:p-1">
     <div class="mb-3 md:mb-5">
         <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Detalhes do Frete</h1>
         <hr>
@@ -57,7 +57,7 @@
                     <div class="flex flex-col">
                         <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ XX,XX</h3>
                         <p class="font-1-m">Data da proposta: XX/XX/XXXX</p>
-                        <p class="font-1-m">Realizado por jaozin</p>
+                        <p class="font-1-m">Realizado por freteiro</p>
                     </div>
                     <div class="flex flex-col gap-2">
                         <button class="botao-padrao font-1-m font-semibold">Aceitar</button>
@@ -65,13 +65,13 @@
                     </div>
                 </div>
                 <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">
-                    <div class="flex flex-col">
+                    <div>
                         <h3 class="font-1-m-b mb-1 font-semibold">Valor da proposta: R$ XX,XX</h3>
                         <p class="font-1-m">Data da proposta: XX/XX/XXXX</p>
-                        <p class="font-1-m">Realizado por jaozin</p>
+                        <p class="font-1-m">Realizado por você</p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <p class="font-1-m-b text-yellow-500">Status: Em espera</p>
+                        <p class="font-1-m-b text-red-500">Status: Não aceito</p>
                     </div>
                 </div>
                 <div class="proposta flex flex-row justify-between items-center px-3 py-3 sm:px-7 sm:py-7 rounded-xl border-2 border-black mb-2">

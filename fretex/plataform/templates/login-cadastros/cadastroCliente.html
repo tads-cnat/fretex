@@ -8,12 +8,13 @@
     <main class="container-formulario cadastro-cliente">
         <h1 class="font-1-xl cor-0">Frete<span class="font-1-xl cor-p6">X</span></h1>
         <p class="font-1-s cor-0">Faça seu cadastro</p>
-        <form action=""><!--<abbr title="Campo obrigatório">*</abbr>-->
+        <form action="{% url 'cadastrocliente' %}" method="POST" id="cadastroCliente">
+            {% csrf_token %}
             <label for="nome" class="font-1-s cor-0">Nome completo*</label>
             <input type="text" name="nome" id="nome" required autocomplete="name" placeholder="Digite seu nome completo" class="font-1-s">
 
             <label for="email" class="font-1-s cor-0">Email*</label>
-            <input type="text" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
+            <input type="email" name="email" id="email" autocomplete="email" placeholder="Digite seu email" class="font-1-s" required>
 
             <label for="cpf" class="font-1-s cor-0">CPF*</label>
             <input type="text" name="cpf" id="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" autocomplete="on" placeholder="000.000.000-00" class="font-1-s" required>
@@ -22,15 +23,20 @@
             <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="font-1-s" required>
 
             <label for="confirmar-senha" class="font-1-s cor-0">Confirmar Senha*</label>
-            <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
+            <input type="password" name="confirmarSenha" id="confirmar-senha" placeholder="Confirme sua senha" class="font-1-s" required>
 
             <div class="termos">
-                <input type="checkbox" name="aceitar-termos" id="termos" required>
+                <input type="checkbox" name="aceitarTermos" id="termos" required>
                 <label for="termos" class="font-1-s cor-0">Li e aceito todos os <a href="#" class="font-1-s cor-p2">termos do site</a></label>
             </div>
+            <label for="aceitarTermos" class="error"></label>
             <input type="submit" value="Cadastrar-se" class="font-1-s cor-0">
         </form>
         <p class="font-1-s">Já tem uma conta? <a href="/login/" class="font-1-s cor-0">Entrar</a></p>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="{% static 'js/mask/src/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/registerValidation.js' %}"></script>
 </body>
 {% endblock %}
