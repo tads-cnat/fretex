@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-plataform/__pycache__/
+__pycache__/
 plataform/migrations/
 build/
 develop-eggs/
