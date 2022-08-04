@@ -243,6 +243,12 @@ def proposta_aceitar(request, proposta_id):
     else:
         return HttpResponseRedirect(reverse('dashboardcliente'))
 
+def entrega_concluida(request, pedido_id):
+    pedido = get_object_or_404(Pedido, pk=pedido_id)
+    pedido.status = Status.objects.get(descricao='Encerrado')
+    pedido.save()
+    return HttpResponseRedirect(reverse('dashboardfreteiro'))
+
 #class detalhesMeusFretesFreteiro(View):
 #    def get(self, request, pedido_id):
 #        pedido = get_object_or_404(Pedido, pk=pedido_id)

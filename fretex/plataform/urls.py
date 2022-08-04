@@ -31,6 +31,9 @@ urlpatterns = [
 
     path('proposta/<int:proposta_id>/aceitar/', views.proposta_aceitar, 
         name='proposta_aceitar'),
+    
+    path('pedido/<int:pedido_id>/encerrar/', views.entrega_concluida, 
+       name='entrega_concluida'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),
