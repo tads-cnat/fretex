@@ -63,11 +63,14 @@
       </div>
       <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
       {% if request.user.freteiro %}
-      <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
-      <div class="div-botao">
-        <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
-          Realizar proposta
-        </button>
+        {% if propostafreteiro %}
+        {% else %}
+          <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
+          <div class="div-botao">
+            <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
+              Realizar proposta
+            </button>        
+        {% endif %}
         {% if pedido.status.descricao == "Em andamento" %}
           <form method="POST" action="{% url 'entrega_concluida' pedido.id %}">
           {% csrf_token %}

@@ -212,7 +212,13 @@ def fretes_index(request):
 
 def fretes_show(request, pedido_id):
     pedido = get_object_or_404(Pedido, pk=pedido_id)
-    return render(request, 'fretes/show.html', {'pedido': pedido})
+    contexto = {'pedido': pedido}
+    if hasattr(request.user, 'freteiro'):
+        for proposta in pedido.proposta_set.all():
+            if request.user == proposta.usuario:
+                proposta_usuario = proposta
+                contexto = {'pedido': pedido, 'propostafreteiro': proposta_usuario}
+    return render(request, 'fretes/show.html', contexto)
 
 def proposta_create(request):
     pedido = get_object_or_404(Pedido, pk=request.POST.get('pedido_id'))
