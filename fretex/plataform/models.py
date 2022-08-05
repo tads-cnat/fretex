@@ -1,18 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#class Usuario(models.Model):
-#    nome = models.CharField(max_length=200)
-#    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
-#    email = models.EmailField('Email')
-#    cpf = models.CharField(max_length=15)
-#    senha = models.CharField(max_length=30)
-#    ehModerador = models.BooleanField(default=False)
-#
-#    def __str__(self):
-#        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
-
-
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
     CEP = models.CharField(max_length=9)
@@ -62,11 +50,10 @@ class TipoVeiculo(models.Model):
 
     def __str__(self):
         return self.descricao
-
+        
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    #freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True) #Freteiro se relaciona atraves de proposta
     origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
     destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)

@@ -65,25 +65,26 @@
       {% if request.user.freteiro %}
         {% if propostafreteiro %}
         {% else %}
-          <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
           <div class="div-botao">
             <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
               Realizar proposta
-            </button>        
+            </button> 
+          </div>
         {% endif %}
         {% if pedido.status.descricao == "Em andamento" %}
+          {% if request.user.freteiro %}
           <form method="POST" action="{% url 'entrega_concluida' pedido.id %}">
           {% csrf_token %}
-            <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">Entrega concluída</button>
+            <button class="botao-padrao font-1-m font-semibold mb-5">Entrega concluída</button>
           </form>
+          {% endif %}
         {% endif %}
-      </div>
       {% endif %}
-    </div>
-    <div class="lateral">
-      <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2" />
-      <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
-    </div>
+      </div>
+      <div class="lateral">
+        <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2" />
+        <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
+      </div>
   </div>
 </main>
 <section class="historico-propostas container mx-auto">
