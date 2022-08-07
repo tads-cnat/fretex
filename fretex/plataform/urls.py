@@ -59,6 +59,12 @@ urlpatterns = [
     path('adicionarVeiculo/', views.AdicionarVeiculo.as_view(),
         name="adicionarVeiculo"),
 
+    path('deletarVeiculo/<int:veiculo_id>', views.DeletarVeiculo, 
+        name="deletarVeiculo"),
+
     path('cadastrofrete/', views.CadastroDeFrete.as_view(), 
         name="cadastrodefrete"),
+
+    path('deletarPedido/<int:pedido_id>', views.DeletarPedido,
+        name="deletarPedido"),
 ]

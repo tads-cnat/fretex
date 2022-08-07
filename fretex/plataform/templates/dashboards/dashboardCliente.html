@@ -66,6 +66,12 @@
                                             <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
                                         </div>
                                     </div>
+
+                                    {% if pedido.status.descricao == "Em espera" %}
+                                        <div class="centro">
+                                            <a href="{% url 'deletarPedido' pedido.id %}" class="botao-padrao">Excluir</a>
+                                        </div>
+                                    {% endif %}
                                 {% else %}
                                     {% if forloop.last %}
                                         <p class="font-1-m font-semibold">Não há fretes em espera</p>

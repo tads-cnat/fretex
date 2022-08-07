@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.shortcuts import redirect
 
 class EmailBackend(ModelBackend):
     def authenticate(request, username=None, password=None, **kwargs):
@@ -379,3 +379,35 @@ class AdicionarVeiculo(View):
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
             return render(request, 'perfis/adicionarVeiculo.html', {'erro': erro})
+
+# @method_decorator(login_required(login_url="/login/"), name='dispatch')
+# class DeletarVeiculo(View):
+#     def post(request, veiculo_id):
+#         veiculo = get_object_or_404(Veiculo, pk=veiculo_id)
+#         veiculo.delete()
+#         return HttpResponseRedirect('meusVeiculos')
+
+login_required(login_url="/login/")
+def DeletarVeiculo(request, veiculo_id):
+    veiculo = Veiculo.objects.get(id = veiculo_id)
+    veiculo.delete()
+    return redirect('meusVeiculos')
+
+login_required(login_url="/login/")
+def DeletarPedido(request, pedido_id):
+    pedido = Pedido.objects.get(id = pedido_id)
+    pedido.delete()
+    return redirect('dashboardcliente') 
+
+# @method_decorator(login_required(login_url="/login/"), name='dispatch')
+# class DeletarPedido(View):
+#     def post(request, pedido_id):
+#         pedido = get_object_or_404(Pedido, pk=pedido_id)
+#         if pedido.status.descricao == "Em espera":
+#             pedido.delete()
+#         else:
+#             error = "Não é possível deletar um pedido que não esteja em espera"
+#             return render(request, 'dashboards/dashboardClient.html', {'erro': erro})
+#         return render(request, 'dashboardcliente')
+
+
