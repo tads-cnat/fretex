@@ -42,37 +42,30 @@
                         </a>
                     </dt>
                         <dd class="mt-3 md:mt-5 teste">
-                        {% if pedidos %}
-                            {% for pedido in pedidos %}
-                                {% if pedido.status.descricao == "Em espera" %}
-                                    <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
-                                        <div class="flex justify-center lg:justify-start grow-1">
-                                            <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                                        </div>
-                                        <div class="flex flex-col gap-4 grow">
-                                            <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
-                                            <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
-                                            <p><strong>KM</strong>: teste</p>
-                                        </div>
-                                        <div class="flex flex-col gap-4 grow">
-                                            <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                            <p><strong>Tipo de veiculo</strong>: 
-                                                {% for tipo in pedido.tipo_veiculo.all %}
-                                                    {{tipo.descricao}} /
-                                                {% endfor %}
-                                            </p>
-                                        </div>
-                                        <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
-                                            <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                                        </div>
+                        {% if pedidosEspera %}
+                            {% for pedido in pedidosEspera %}
+                                <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
+                                    <div class="flex justify-center lg:justify-start grow-1">
+                                        <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
                                     </div>
-                                {% else %}
-                                    {% if forloop.last %}
-                                        <p class="font-1-m font-semibold">Não há fretes em espera</p>
-                                    {% endif %}
-                                {% endif %}
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                        <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                        <p><strong>KM</strong>: teste</p>
+                                    </div>
+                                    <div class="flex flex-col gap-4 grow">
+                                        <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                        <p><strong>Tipo de veiculo</strong>: 
+                                            {% for tipo in pedido.tipo_veiculo.all %}
+                                                {{tipo.descricao}} /
+                                            {% endfor %}
+                                        </p>
+                                    </div>
+                                    <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
+                                        <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                    </div>
+                                </div>
                             {% endfor %}
-                        
                         {% else %}
                             <p class="font-1-m font-semibold">Não há fretes em espera</p>
                         {% endif %}
@@ -87,37 +80,30 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
-                    {% if pedidos %}
-                        {% for pedido in pedidos %}
-                            {% if pedido.status.descricao == "Em andamento" %}
-                                <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
-                                    <div class="flex justify-center lg:justify-start grow-1">
-                                        <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                                    </div>
-                                    <div class="flex flex-col gap-4 grow">
-                                        <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
-                                        <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
-                                        <p><strong>KM</strong>: teste</p>
-                                    </div>
-                                    <div class="flex flex-col gap-4 grow">
-                                        <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                        <p><strong>Tipo de veiculo</strong>: 
-                                            {% for tipo in pedido.tipo_veiculo.all %}
-                                                {{tipo.descricao}} /
-                                            {% endfor %}
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
-                                        <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                                    </div>
+                    {% if pedidosAndamento %}
+                        {% for pedido in pedidosAndamento %}
+                            <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
+                                <div class="flex justify-center lg:justify-start grow-1">
+                                    <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
                                 </div>
-                            {% else %}
-                                {% if forloop.last %}
-                                    <p class="font-1-m font-semibold">Não há fretes em andamento</p>
-                                {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                    
+                                <div class="flex flex-col gap-4 grow">
+                                    <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                    <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                    <p><strong>KM</strong>: teste</p>
+                                </div>
+                                <div class="flex flex-col gap-4 grow">
+                                    <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                    <p><strong>Tipo de veiculo</strong>: 
+                                        {% for tipo in pedido.tipo_veiculo.all %}
+                                            {{tipo.descricao}} /
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
+                                    <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% else %}
                         <p class="font-1-m font-semibold">Não há fretes em andamento</p>
                     {% endif %}
@@ -132,37 +118,30 @@
                         </a>
                     </dt>
                     <dd class="mt-5">
-                    {% if pedidos %}
-                        {% for pedido in pedidos %}
-                            {% if pedido.status.descricao == "Encerrado" %}
-                                <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
-                                    <div class="flex justify-center lg:justify-start grow-1">
-                                        <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
-                                    </div>
-                                    <div class="flex flex-col gap-4 grow">
-                                        <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
-                                        <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
-                                        <p><strong>KM</strong>: teste</p>
-                                    </div>
-                                    <div class="flex flex-col gap-4 grow">
-                                        <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
-                                        <p><strong>Tipo de veiculo</strong>: 
-                                            {% for tipo in pedido.tipo_veiculo.all %}
-                                                {{tipo.descricao}} /
-                                            {% endfor %}
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
-                                        <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
-                                    </div>
+                    {% if pedidosEncerrados %}
+                        {% for pedido in pedidosEncerrados %}
+                            <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
+                                <div class="flex justify-center lg:justify-start grow-1">
+                                    <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
                                 </div>
-                            {% else %}
-                            {% if forloop.last %}
-                                <p class="font-1-m font-semibold">Não há fretes encerrados</p>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                    
+                                <div class="flex flex-col gap-4 grow">
+                                    <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
+                                    <p><strong>Destino</strong>: {{ pedido.destino.rua }}</p>
+                                    <p><strong>KM</strong>: teste</p>
+                                </div>
+                                <div class="flex flex-col gap-4 grow">
+                                    <p><strong>Produto</strong>: {{ pedido.produto.nome }}</p>
+                                    <p><strong>Tipo de veiculo</strong>: 
+                                        {% for tipo in pedido.tipo_veiculo.all %}
+                                            {{tipo.descricao}} /
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
+                                    <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% else %}
                         <p class="font-1-m font-semibold">Não há fretes encerrados</p>
                     {% endif %}

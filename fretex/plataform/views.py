@@ -195,16 +195,18 @@ class CadastroFreteiro(View):
 
 
 def dashboardFreteiro(request):
-    pedidos = Pedido.objects.filter(proposta__usuario=request.user).distinct()
-    contexto = {'pedidos': pedidos}
+    pedidosEspera = Pedido.objects.filter(proposta__usuario=request.user).filter(status__descricao = "Em espera").distinct()
+    pedidosAndamento = Pedido.objects.filter(proposta__usuario=request.user).filter(status__descricao = "Em andamento").distinct()
+    pedidosEncerrados = Pedido.objects.filter(proposta__usuario=request.user).filter(status__descricao = "Encerrado").distinct()
+    contexto = {'pedidosEspera': pedidosEspera, 'pedidosAndamento': pedidosAndamento, 'pedidosEncerrados': pedidosEncerrados}
     return render(request, 'dashboards/dashboardFreteiro.html', contexto)
 
-
 def dashboardCliente(request):
-    pedidos = Pedido.objects.filter(cliente__user=request.user)
-    contexto = {'pedidos': pedidos}
+    pedidosEspera = Pedido.objects.filter(cliente__user=request.user).filter(status__descricao = "Em espera")
+    pedidosAndamento = Pedido.objects.filter(cliente__user=request.user).filter(status__descricao = "Em andamento")
+    pedidosEncerrados = Pedido.objects.filter(cliente__user=request.user).filter(status__descricao = "Encerrado")
+    contexto = {'pedidosEspera': pedidosEspera ,'pedidosAndamento': pedidosAndamento, 'pedidosEncerrados': pedidosEncerrados}
     return render(request, 'dashboards/dashboardCliente.html', contexto)
-
 
 def fretes_index(request):
     pedidos = Pedido.objects.all() #Limitar por página.
@@ -214,7 +216,7 @@ def fretes_show(request, pedido_id):
     pedido = get_object_or_404(Pedido, pk=pedido_id)
     contexto = {'pedido': pedido}
     if hasattr(request.user, 'freteiro'):
-        for proposta in pedido.proposta_set.all():
+        for proposta in pedido.proposta_set.all().reverse():
             if request.user == proposta.usuario:
                 proposta_usuario = proposta
                 contexto = {'pedido': pedido, 'propostafreteiro': proposta_usuario}
