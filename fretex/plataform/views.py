@@ -1,9 +1,8 @@
-from genericpath import exists
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views import View
 from django.contrib.auth import login, logout
 from .models import Endereco, Freteiro, Pedido, Proposta, Status, Produto, TipoVeiculo, Cliente, Veiculo
@@ -13,6 +12,12 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 
+def freteiro_check(user):
+    return hasattr(user, 'freteiro')
+
+def cliente_check(user):
+    return hasattr(user, 'cliente')
+        
 class EmailBackend(ModelBackend):
     def authenticate(request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
@@ -43,7 +48,7 @@ class Login(View):
                 return HttpResponseRedirect(reverse('fretes_index'))
         else:
             erro = 'Email e senha inválidas!'
-            # inserir condições de next no template
+
             return render(request, 'login-cadastros/login.html', {'erro': erro})
 
 
@@ -51,12 +56,11 @@ def logoutView(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-
-@method_decorator(login_required(login_url="/login/"), name='dispatch')
+@method_decorator(user_passes_test(cliente_check, login_url='/login/'), name='dispatch')
 class CadastroDeFrete(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')
-
+    
     def post(self, request, *args, **kwargs):
         cep_origem = request.POST.get('cepOrigem')
         rua_origem = request.POST['ruaOrigem']
@@ -160,7 +164,7 @@ class CadastroCliente(View):
             return HttpResponseRedirect(reverse('login'))
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            # inserir condição de error no template
+
             return render(request, 'login-cadastros/cadastroCliente.html', {'erro': erro})
 
 
@@ -190,10 +194,11 @@ class CadastroFreteiro(View):
             return HttpResponseRedirect(reverse('login'))
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            # inserir condição de error no template
+
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
+@user_passes_test(freteiro_check, login_url='/login/')
 def dashboardFreteiro(request):
     pedidosEspera = Pedido.objects.filter(proposta__usuario=request.user).filter(status__descricao = "Em espera").distinct()
     pedidosAndamento = Pedido.objects.filter(proposta__usuario=request.user).filter(status__descricao = "Em andamento").distinct()
@@ -201,6 +206,8 @@ def dashboardFreteiro(request):
     contexto = {'pedidosEspera': pedidosEspera, 'pedidosAndamento': pedidosAndamento, 'pedidosEncerrados': pedidosEncerrados}
     return render(request, 'dashboards/dashboardFreteiro.html', contexto)
 
+
+@user_passes_test(cliente_check, login_url='/login/')
 def dashboardCliente(request):
     pedidosEspera = Pedido.objects.filter(cliente__user=request.user).filter(status__descricao = "Em espera")
     pedidosAndamento = Pedido.objects.filter(cliente__user=request.user).filter(status__descricao = "Em andamento")
@@ -208,9 +215,12 @@ def dashboardCliente(request):
     contexto = {'pedidosEspera': pedidosEspera ,'pedidosAndamento': pedidosAndamento, 'pedidosEncerrados': pedidosEncerrados}
     return render(request, 'dashboards/dashboardCliente.html', contexto)
 
+
+@user_passes_test(freteiro_check, login_url='/login/')
 def fretes_index(request):
     pedidos = Pedido.objects.all() #Limitar por página.
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
+
 
 def fretes_show(request, pedido_id):
     pedido = get_object_or_404(Pedido, pk=pedido_id)
@@ -221,6 +231,7 @@ def fretes_show(request, pedido_id):
                 proposta_usuario = proposta
                 contexto = {'pedido': pedido, 'propostafreteiro': proposta_usuario}
     return render(request, 'fretes/show.html', contexto)
+
 
 def proposta_create(request):
     pedido = get_object_or_404(Pedido, pk=request.POST.get('pedido_id'))
@@ -239,6 +250,7 @@ def proposta_create(request):
         Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
     return HttpResponseRedirect(reverse( 'fretes_show', args=(request.POST.get('pedido_id'),)))
 
+
 def proposta_aceitar(request, proposta_id):
     proposta = get_object_or_404(Proposta, pk=proposta_id)
     proposta.ehAceita = True
@@ -251,43 +263,33 @@ def proposta_aceitar(request, proposta_id):
     else:
         return HttpResponseRedirect(reverse('dashboardcliente'))
 
+
 def entrega_concluida(request, pedido_id):
     pedido = get_object_or_404(Pedido, pk=pedido_id)
     pedido.status = Status.objects.get(descricao='Encerrado')
     pedido.save()
     return HttpResponseRedirect(reverse('dashboardfreteiro'))
 
-#class detalhesMeusFretesFreteiro(View):
-#    def get(self, request, pedido_id):
-#        pedido = get_object_or_404(Pedido, pk=pedido_id)
-#        contexto = {'pedido': pedido}
-#        return render(request, 'fretes/detalhesMeusFretesFreteiro.html', contexto)
-#    def post(self, request, proposta_id):
-#        proposta = get_object_or_404(Proposta, pk=proposta_id)
-#        proposta.ehAceita = True
-#        proposta.save()
-#        pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
-#        pedido.status = "Em andamento"
-#        pedido.save()
-#        return HttpResponseRedirect(reverse('dashboardfreteiro'))
 
 def detalhesMeusFretesCliente(request):
     return render(request, 'fretes/detalhesMeusFretesCliente.html')
 
 
+@user_passes_test(cliente_check, login_url='/login/')
 def perfilCliente(request):
     cliente = request.user.cliente
     contexto = {'cliente': cliente}
     return render(request, 'perfis/perfilCliente.html', contexto)
 
 
+@user_passes_test(freteiro_check, login_url='/login/')
 def perfilFreteiro(request):
     freteiro = request.user.freteiro
     contexto = {'freteiro': freteiro}
     return render(request, 'perfis/perfilFreteiro.html', contexto)
 
 
-@method_decorator(login_required(login_url="/login/"), name='dispatch')
+@method_decorator(user_passes_test(cliente_check, login_url='/login/'), name='dispatch')
 class EditarPerfilCliente(View):
     def get(self, request, *args, **kwargs):
         cliente = request.user.cliente
@@ -316,7 +318,8 @@ class EditarPerfilCliente(View):
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
-@method_decorator(login_required(login_url="/login/"), name='dispatch')
+
+@method_decorator(user_passes_test(freteiro_check, login_url='/login/'), name='dispatch')
 class EditarPerfilFreteiro(View):
     def get(self, request, *args, **kwargs):
         freteiro = request.user.freteiro
@@ -354,17 +357,19 @@ class EditarPerfilFreteiro(View):
                 return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            # inserir condição de error no template
+
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
+@user_passes_test(freteiro_check, login_url='/login/')
 def meusVeiculos(request):
     veiculos = Veiculo.objects.filter(freteiro__user=request.user)
     contexto = {'veiculos': veiculos}
     return render(request, 'perfis/meusVeiculos.html', contexto)
 
 
-@method_decorator(login_required(login_url="/login/"), name='dispatch')
+
+@method_decorator(user_passes_test(freteiro_check, login_url='/login/'), name='dispatch')
 class AdicionarVeiculo(View):
     def get(self, request, *args, **kwargs):
         freteiro = request.user.freteiro
@@ -393,3 +398,4 @@ class AdicionarVeiculo(View):
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
             return render(request, 'perfis/adicionarVeiculo.html', {'erro': erro})
+
