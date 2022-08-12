@@ -16,7 +16,7 @@ class Endereco(models.Model):
 
 class Freteiro(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    url_foto = models.ImageField(upload_to = 'freteiro', blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE)  # pk ?#
@@ -27,7 +27,7 @@ class Freteiro(models.Model):
 
 class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    url_foto = models.ImageField(upload_to = 'cliente', blank=True, null=True)
     cpf = models.CharField(max_length=15)
     def __str__(self):
         return f"Nome: {self.user.username} - CPF: {self.cpf} "

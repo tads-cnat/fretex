@@ -48,7 +48,6 @@
                                     <div class="flex justify-center lg:justify-start grow-1">
                                         {% if pedido.produto.imagem_url %}
                                             <img class="rounded-md w-36 h-36" src="{{ pedido.produto.imagem_url.url }}"/>
-                                            <p>{{ pedido.produto.imagem_url }}</p>
                                         {% endif%}
                                     </div>
                                     <div class="flex flex-col gap-4 grow">
@@ -87,7 +86,9 @@
                         {% for pedido in pedidosAndamento %}
                             <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
                                 <div class="flex justify-center lg:justify-start grow-1">
-                                    <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                                    {% if pedido.produto.imagem_url %}
+                                        <img class="rounded-md w-36 h-36" src="{{ pedido.produto.imagem_url.url }}"/>
+                                    {% endif%}
                                 </div>
                                 <div class="flex flex-col gap-4 grow">
                                     <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
@@ -125,7 +126,9 @@
                         {% for pedido in pedidosEncerrados %}
                             <div class="rounded-lg bg-white border border-neutral-200 p-4 flex flex-col lg:flex-row gap-4 lg:gap-8 mb-3 caixa-frete">
                                 <div class="flex justify-center lg:justify-start grow-1">
-                                    <img class="rounded-md w-36 h-36" src="{% static 'images/funcionario.jpg' %}"/>
+                                    {% if pedido.produto.imagem_url %}
+                                        <img class="rounded-md w-36 h-36" src="{{ pedido.produto.imagem_url.url }}"/>
+                                    {% endif%}
                                 </div>
                                 <div class="flex flex-col gap-4 grow">
                                     <p><strong>Origem</strong>: {{ pedido.origem.rua }}</p>
