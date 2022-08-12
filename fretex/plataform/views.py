@@ -78,7 +78,7 @@ class CadastroDeFrete(View):
         bairro_destino = request.POST['bairroDestino']
         complemento_destino = request.POST['complemento-destino']
 
-        imagem = request.POST['imagem']
+        imagem = request.FILES['imagem']
         produto = request.POST['produto']
         observacao = request.POST['observacao']
 

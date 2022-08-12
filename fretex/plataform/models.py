@@ -39,7 +39,7 @@ class Status(models.Model):
 
 class Produto(models.Model):
     nome = models.CharField(max_length=200)
-    imagem_url = models.ImageField(upload_to = None, blank=True, null=True)
+    imagem_url = models.ImageField(upload_to = 'produto', blank=True, null=True)
 
     def __str__(self):
         return self.nome
