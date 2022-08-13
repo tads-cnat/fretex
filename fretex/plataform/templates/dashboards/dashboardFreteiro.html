@@ -12,7 +12,11 @@
         <div class="container-dashboard">
             <div class="cardCliente">
                 <div class="perfilCliente">
-                    <img src="{% static 'images/perfil.svg' %}" alt="">
+                    {% if user.freteiro.url_foto %}
+                        <img src="{{ user.freteiro.url_foto.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'images/perfil.svg' %}" alt="">
+                    {% endif %}
                     <p class="font-1-m">{{ user.username }}</p>
                 </div>
                 <div class="fretesDoAno">

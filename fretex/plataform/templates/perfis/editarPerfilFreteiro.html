@@ -11,12 +11,16 @@
     <form action="" method="post" class="form-perfil" id="perfilFreteiro" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-foto">
-            <img src="{% static 'images/perfil.svg' %}" alt="">
+                {% if user.freteiro.url_foto %}
+                    <img src="{{ user.freteiro.url_foto.url }}" alt="">
+                {% else %}
+                    <img src="{% static 'images/perfil.svg' %}" alt="">
+                {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{user.username}}</h2>
                 <p class="font-1-m">{{user.email}}</p>
                 <label for="upload-image" class="botao-padrao cursor-pointer">Upload da imagem</label>
-                <input type="file" accept="image/*" value="test" id="upload-image" class="hidden">
+                <input type="file" name="imagem" accept="image/*" value="{{ user.freteiro.url_foto }}" id="upload-image" class="hidden">
             </div>
         </div>
 

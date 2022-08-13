@@ -300,12 +300,14 @@ class EditarPerfilCliente(View):
         nome = request.POST['nome']
         email = request.POST['email']
         cpf = request.POST['cpf']
+        imagem = request.FILES['imagem']
         if nome and email and cpf:
             if hasattr(request.user, 'cliente'):
                 cliente = request.user.cliente
                 cliente.user.username = nome
                 cliente.user.email = email
                 request.user.save()
+                cliente.url_foto = imagem
                 cliente.cpf = cpf
                 cliente.save()
                 return HttpResponseRedirect(reverse('perfilCliente'))
@@ -336,7 +338,8 @@ class EditarPerfilFreteiro(View):
         estado = request.POST['estado']
         bairro = request.POST['bairro']
         complemento = request.POST['complemento']
-        if nome and email and cpf and cep and rua and numero and estado and bairro:
+        imagem = request.FILES['imagem']
+        if nome and email and cpf and cep and rua and numero and estado and bairro and imagem:
             if hasattr(request.user, 'freteiro'):
                 freteiro = request.user.freteiro
                 freteiro.user.username = nome
@@ -349,6 +352,7 @@ class EditarPerfilFreteiro(View):
                 freteiro.endereco.bairro = bairro
                 freteiro.endereco.complemento = complemento
                 freteiro.endereco.save()
+                freteiro.url_foto = imagem
                 freteiro.cpf = cpf
                 freteiro.save()
                 return HttpResponseRedirect(reverse('perfilFreteiro'))
@@ -383,7 +387,7 @@ class AdicionarVeiculo(View):
         placa_veiculo = request.POST['placaVeiculo']
         cor_veiculo = request.POST['corVeiculo']
         tipo_veiculo = request.POST['tipoVeiculo']
-
+        imagem = request.FILES['imagemveiculo']
         if marca and modelo and ano and placa_veiculo and cor_veiculo:
             if hasattr(request.user, 'freteiro'):
                 tipoveiculo = TipoVeiculo(descricao=tipo_veiculo)

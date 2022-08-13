@@ -10,7 +10,11 @@
     </div>
     <form action="" method="post" class="form-perfil mb-20" enctype="multipart/form-data">
         <div class="form-foto">
-            <img src="{% static 'images/perfil.svg' %}" alt="">
+            {% if user.cliente.url_foto %}
+                <img src="{{ user.cliente.url_foto.url }}" alt="">
+            {% else %}
+                <img src="{% static 'images/perfil.svg' %}" alt="">
+            {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{user.username}}</h2>
                 <p class="font-1-m">{{user.email}}</p>
