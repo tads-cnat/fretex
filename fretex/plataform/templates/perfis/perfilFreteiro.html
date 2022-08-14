@@ -10,15 +10,11 @@
     </div>
     <form action="" method="post" class="form-perfil">
         <div class="form-foto">
-            {% if usuario.foto_url %}
-                <img class="rounded-md w-36 h-36" src="{{ usuario.foto_url.url }}"/>
+            {% if user.freteiro.url_foto %}
+                <img src="{{ user.freteiro.url_foto.url }}" alt="" class="h-60 rounded-full">
             {% else %}
-                {% if user.freteiro.url_foto %}
-                    <img src="{{ user.freteiro.url_foto.url }}" alt="">
-                {% else %}
-                    <img src="{% static 'images/perfil.svg' %}" alt="">
-                {% endif %}
-            {% endif%}
+                <img src="{% static 'images/perfil.svg' %}" alt="" class="h-60 rounded-full">
+            {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{user.username}}</h2>
                 <p class="font-1-m">{{user.email}}</p>

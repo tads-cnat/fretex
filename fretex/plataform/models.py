@@ -69,6 +69,7 @@ class Pedido(models.Model):
 
 class Veiculo(models.Model):
     freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
+    url_foto = models.ImageField(upload_to = 'veiculo', blank=True, null=True)
     tipo_veiculo = models.ForeignKey(TipoVeiculo, on_delete=models.CASCADE)
     placa = models.CharField(max_length=20)
     cor = models.CharField(max_length=20)

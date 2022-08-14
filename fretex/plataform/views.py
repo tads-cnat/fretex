@@ -388,12 +388,11 @@ class AdicionarVeiculo(View):
         cor_veiculo = request.POST['corVeiculo']
         tipo_veiculo = request.POST['tipoVeiculo']
         imagem = request.FILES['imagemveiculo']
-        if marca and modelo and ano and placa_veiculo and cor_veiculo:
+        if marca and modelo and ano and placa_veiculo and cor_veiculo and imagem:
             if hasattr(request.user, 'freteiro'):
                 tipoveiculo = TipoVeiculo(descricao=tipo_veiculo)
                 tipoveiculo.save()
-                veiculo = Veiculo(freteiro=request.user.freteiro, tipo_veiculo=tipoveiculo, marca=marca, modelo=modelo,
-                                ano=ano, placa=placa_veiculo, cor=cor_veiculo)
+                veiculo = Veiculo(freteiro=request.user.freteiro, url_foto=imagem, tipo_veiculo=tipoveiculo, marca=marca, modelo=modelo, ano=ano, placa=placa_veiculo, cor=cor_veiculo)
                 veiculo.save()
                 return HttpResponseRedirect(reverse('meusVeiculos'))
             else:

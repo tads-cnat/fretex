@@ -11,9 +11,9 @@
     <form action="" method="post" class="align-initial form-perfil">
         <div class="form-foto">
             {% if user.freteiro.url_foto %}
-                <img src="{{ user.freteiro.url_foto.url }}" alt="">
+                <img src="{{ user.freteiro.url_foto.url }}" alt="" class="h-60 rounded-full">
             {% else %}
-                <img src="{% static 'images/perfil.svg' %}" alt="">
+                <img src="{% static 'images/perfil.svg' %}" alt="" class="h-60 rounded-full">
             {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{ user.username }}</h2>
@@ -43,7 +43,9 @@
                         <div class="card-veiculo">
                             <div class="veiculo">
                                 <div class="imagem-veiculo flex items-center">
-                                    <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                                    {% if veiculo.url_foto %}
+                                    <img src="{{veiculo.url_foto.url}}" alt="" class="h-28">
+                                    {% endif %}
                                 </div>
                                 <div>
                                     <p class="font-1-m">Marca: {{ veiculo.marca }}</p>

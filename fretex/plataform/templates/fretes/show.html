@@ -205,8 +205,10 @@
             required
           />
           <label for="veiculo" class="flex items-center justify-start">
-            <div class="imagem-veiculo">
-              <img src="{% static 'images/funcionario.jpg' %}" alt="" />
+            <div class="imagem-veiculo">             
+              {% if veiculo.url_foto %}
+                <img src="{{veiculo.url_foto.url}}" alt="" class="h-28">
+              {% endif %}
             </div>
             <div>
               <p class="font-1-m">Marca: {{veiculo.marca}}</p>
