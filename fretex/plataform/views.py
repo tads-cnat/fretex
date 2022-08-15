@@ -218,7 +218,11 @@ def dashboardCliente(request):
 
 @user_passes_test(freteiro_check, login_url='/login/')
 def fretes_index(request):
-    pedidos = Pedido.objects.all() #Limitar por página.
+    filtered = {}
+    for param in request.GET:
+        filtered[param] = request.GET[param]
+
+    pedidos = Pedido.objects.filter(**filtered) 
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
 
 
