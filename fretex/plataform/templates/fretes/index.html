@@ -36,20 +36,20 @@
                             <option {% if request.GET.origem__estado == 'MT' %} selected {% endif %} value="MT">Mato Grosso</option>
                             <option {% if request.GET.origem__estado == 'MS' %} selected {% endif %} value="MS">Mato Grosso do Sul</option>
                             <option {% if request.GET.origem__estado == 'MG' %} selected {% endif %} value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
+                            <option {% if request.GET.origem__estado == 'PA' %} selected {% endif %} value="RN">Pará</option>
+                            <option {% if request.GET.origem__estado == 'PB' %} selected {% endif %} value="PB">Paraíba</option>
+                            <option {% if request.GET.origem__estado == 'PR' %} selected {% endif %} value="PR">Paraná</option>
+                            <option {% if request.GET.origem__estado == 'PE' %} selected {% endif %} value="PE">Pernambuco</option>
+                            <option {% if request.GET.origem__estado == 'PI' %} selected {% endif %} value="PI">Piauí</option>
+                            <option {% if request.GET.origem__estado == 'RJ' %} selected {% endif %} value="RJ">Rio de Janeiro</option>
+                            <option {% if request.GET.origem__estado == 'RN' %} selected {% endif %} value="RN">Rio Grande do Norte</option>
+                            <option {% if request.GET.origem__estado == 'RS' %} selected {% endif %} value="RS">Rio Grande do Sul</option>
+                            <option {% if request.GET.origem__estado == 'RO' %} selected {% endif %} value="RO">Rondônia</option>
+                            <option {% if request.GET.origem__estado == 'RR' %} selected {% endif %} value="RR">Roraima</option>
+                            <option {% if request.GET.origem__estado == 'SC' %} selected {% endif %} value="SC">Santa Catarina</option>
+                            <option {% if request.GET.origem__estado == 'SP' %} selected {% endif %} value="SP">São Paulo</option>
+                            <option {% if request.GET.origem__estado == 'SE' %} selected {% endif %} value="SE">Sergipe</option>
+                            <option {% if request.GET.origem__estado == 'TO' %} selected {% endif %} value="TO">Tocantins</option>
                         </select>
                     </div>
                     <div class="flex grow basis-1/2 flex-col gap-2">
@@ -60,13 +60,13 @@
                     </div>
                 </div>
                 <div class="flex grow flex-col gap-2">
-                    <label class="font-bold">Estado de origem</label>
+                    <label class="font-bold">Estado de destino</label>
                     <select class="rounded-md border border-neutral-200 p-4">
                         <option value="1">Valor</option>
                     </select>
                 </div>
                 <div class="flex grow flex-col gap-2">
-                    <label class="font-bold">Cidade de origem</label>
+                    <label class="font-bold">Cidade de destino</label>
                     <select class="rounded-md border border-neutral-200 p-4">
                         <option value="1">Valor</option>
                     </select>
