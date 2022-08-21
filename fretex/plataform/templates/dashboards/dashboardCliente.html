@@ -67,8 +67,9 @@
                                             {% endfor %}
                                         </p>
                                     </div>
-                                    <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center">
+                                    <div class="flex flex-col lg:pr-9 grow items-center lg:items-end justify-center gap-2">
                                         <a href="{% url 'fretes_show' pedido.id %}" class="botao-padrao font-1-m font-semibold">Detalhes</a>
+                                        <a href="{% url 'deletarPedido' pedido.id %}" class="botao-padrao font-1-m font-semibold">Excluir</a>
                                     </div>
                                 </div>
                             {% endfor %}
