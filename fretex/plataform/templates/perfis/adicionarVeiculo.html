@@ -8,10 +8,14 @@
         <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
         <hr>
     </div>
-    <form action="" method="post" class="align-initial form-perfil" id="adicionarVeiculo">
+    <form action="" method="post" class="align-initial form-perfil" id="adicionarVeiculo" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-foto">
-            <img src="{% static 'images/perfil.svg' %}" alt="">
+            {% if user.freteiro.url_foto %}
+                <img src="{{ user.freteiro.url_foto.url }}" alt="" class="h-60 rounded-full">
+            {% else %}
+                <img src="{% static 'images/perfil.svg' %}" alt="" class="h-60 rounded-full">
+            {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{user.username}}</h2>
                 <p class="font-1-m">{{user.email}}</p>
@@ -32,10 +36,10 @@
                 </div>
                 <div class="form-info-container">
                     <div class="veiculo-img">
-                        <img src="{% static 'images/funcionario.jpg' %}" alt="">
+                        <img src="{% static 'images/inputImage.png' %}" alt="" class="h-44">
                         <div class="">
                             <label for="upload-image" class="botao-padrao cursor-pointer">Upload Imagem</label>
-                            <input type="file" name = "imagem" accept="image/*" value="test" id="upload-image" class="hidden">
+                            <input type="file" name = "imagemveiculo" accept="image/*" value="test" id="upload-image" class="hidden">
                         </div>
                     </div>
                 </div>

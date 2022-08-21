@@ -1,18 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#class Usuario(models.Model):
-#    nome = models.CharField(max_length=200)
-#    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
-#    email = models.EmailField('Email')
-#    cpf = models.CharField(max_length=15)
-#    senha = models.CharField(max_length=30)
-#    ehModerador = models.BooleanField(default=False)
-#
-#    def __str__(self):
-#        return f"Nome: {self.nome} - CPF: {self.cpf} - ehModerador: {self.ehModerador}"
-
-
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
     CEP = models.CharField(max_length=9)
@@ -28,7 +16,7 @@ class Endereco(models.Model):
 
 class Freteiro(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    url_foto = models.ImageField(upload_to = 'freteiro', blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE)  # pk ?#
@@ -39,7 +27,7 @@ class Freteiro(models.Model):
 
 class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = None, blank=True, null=True)
+    url_foto = models.ImageField(upload_to = 'cliente', blank=True, null=True)
     cpf = models.CharField(max_length=15)
     def __str__(self):
         return f"Nome: {self.user.username} - CPF: {self.cpf} "
@@ -51,7 +39,7 @@ class Status(models.Model):
 
 class Produto(models.Model):
     nome = models.CharField(max_length=200)
-    imagem_url = models.ImageField(upload_to = None, blank=True, null=True)
+    imagem_url = models.ImageField(upload_to = 'produto', blank=True, null=True)
 
     def __str__(self):
         return self.nome
@@ -62,11 +50,10 @@ class TipoVeiculo(models.Model):
 
     def __str__(self):
         return self.descricao
-
+        
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    #freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE, blank=True, null=True) #Freteiro se relaciona atraves de proposta
     origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
     destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
@@ -82,6 +69,7 @@ class Pedido(models.Model):
 
 class Veiculo(models.Model):
     freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
+    url_foto = models.ImageField(upload_to = 'veiculo', blank=True, null=True)
     tipo_veiculo = models.ForeignKey(TipoVeiculo, on_delete=models.CASCADE)
     placa = models.CharField(max_length=20)
     cor = models.CharField(max_length=20)

@@ -22,7 +22,13 @@
             <div class="flex items-center md:order-2" style="position: relative;">
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 ring-2 ring-white focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="{% static 'images/perfil.svg' %}" alt="user photo">
+                    {% if user.cliente.url_foto %}
+                        <img class="w-8 h-8 rounded-full" src="{{ user.cliente.url_foto.url }}" alt="user photo">
+                    {% elif user.freteiro.url_foto %}
+                        <img src="{{ user.freteiro.url_foto.url }}" alt="" class="w-8 h-8 rounded-full">
+                    {% else %}
+                        <img class="w-8 h-8 rounded-full" src="{% static 'images/perfil.svg' %}" alt="user photo">
+                    {% endif %}
                 </button>
 
                 <!-- Dropdown menu -->

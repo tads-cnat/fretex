@@ -8,15 +8,19 @@
         <h1 class="font-1-xl cor-12 mt-2 md:mt-10 mb-3">Perfil</h1>
         <hr>
     </div>
-    <form action="" method="post" class="form-perfil mb-20" id="perfilCliente">
+    <form action="" method="post" class="form-perfil mb-20" id="perfilCliente" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-foto">
-            <img src="{% static 'images/perfil.svg' %}" alt="">
+            {% if user.cliente.url_foto %}
+                <img src="{{ user.cliente.url_foto.url }}" alt="" class="h-60 rounded-full">
+            {% else %}
+                <img src="{% static 'images/perfil.svg' %}" alt="" class="h-60 rounded-full">
+            {% endif %}
             <div class="form-foto-info ">
                 <h2 class="font-1-xl">{{user.username}}</h2>
                 <p class="font-1-m">{{user.email}}</p>
                 <label for="upload-image" class="botao-padrao cursor-pointer">Upload da imagem</label>
-                <input type="file" accept="image/*" value="test" id="upload-image" class="hidden">
+                <input type="file" name="imagem" accept="image/*" value="test" id="upload-image" class="hidden">
             </div>
         </div>
 

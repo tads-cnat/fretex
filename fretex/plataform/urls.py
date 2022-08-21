@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -31,6 +33,9 @@ urlpatterns = [
 
     path('proposta/<int:proposta_id>/aceitar/', views.proposta_aceitar, 
         name='proposta_aceitar'),
+    
+    path('pedido/<int:pedido_id>/encerrar/', views.entrega_concluida, 
+        name='entrega_concluida'),
 
     path('dashboardfreteiro/', views.dashboardFreteiro, 
         name='dashboardfreteiro'),
@@ -68,3 +73,4 @@ urlpatterns = [
     path('deletarPedido/<int:pedido_id>', views.DeletarPedido,
         name="deletarPedido"),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

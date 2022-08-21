@@ -63,21 +63,33 @@
       </div>
       <p class="font-1-xs mb-4 ml-4">{{pedido.observacao}}</p>
       {% if request.user.freteiro %}
-      <!-- Se o freteiro logado já tiver feito uma proposta, n deve mostrar mais o botão -->
-      <div class="div-botao">
-        <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
-          Realizar proposta
-        </button>
-      </div>
+        {% if propostafreteiro %}
+        {% else %}
+          <div class="div-botao">
+            <button id="myBtn" class="botao-padrao font-1-m font-semibold mb-5">
+              Realizar proposta
+            </button> 
+          </div>
+        {% endif %}
+        {% if pedido.status.descricao == "Em andamento" %}
+          {% if request.user.freteiro %}
+          <form method="POST" action="{% url 'entrega_concluida' pedido.id %}">
+          {% csrf_token %}
+            <button class="botao-padrao font-1-m font-semibold mb-5">Entrega concluída</button>
+          </form>
+          {% endif %}
+        {% endif %}
       {% endif %}
-    </div>
-    <div class="lateral">
-      <img src="{% static 'images/funcionario.jpg' %}" alt="" class="mb-2" />
-      <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
-    </div>
+      </div>
+      <div class="lateral">
+        {% if pedido.produto.imagem_url %}
+          <img class="mb-2" src="{{ pedido.produto.imagem_url.url }}"/>
+        {% endif%}
+        <p class="font-1-m font-semibold mb-2">Produto: {{ pedido.produto }}</p>
+      </div>
   </div>
 </main>
-<section class="historico-propostas container mx-auto">
+<section class="historico-propostas container mx-auto mb-14" style="padding: 10px;">
   <h2 class="font-1-l mb-3 font-semibold">Histórico de Propostas</h2>
   {% for proposta in pedido.proposta_set.all %} 
   {% if proposta.usuario == request.user or pedido.cliente == request.user.cliente or request.user == proposta.contraproposta.usuario %}
@@ -91,7 +103,7 @@
       <p class="font-1-m">Data da proposta: {{ proposta.data_criacao }}</p>
       <p class="font-1-m">Realizado por {{ proposta.usuario }}</p>
     </div>
-    <div class="grow text-center items-center">
+    <div class="text-center justify-self-end items-center pr-5">
       {% if request.user.freteiro %} 
       
         {% if proposta.ehNegada %}
@@ -101,12 +113,13 @@
         {% else %}
             {% if proposta.ehAceita == False %}
             {% if proposta.usuario == pedido.cliente.user %}
+            <div class="flex flex-col gap-2">
               <form method="POST" action="{% url 'proposta_aceitar' proposta.id %}">
-                {% csrf_token %}
-                <button class="botao-padrao font-1-m font-semibold mb-5" type="submit">Aceitar</button>
-            </form>
-            <button class="botao-padrao font-1-m font-semibold mb-5" onclick="onContrapropostaButtonClickF({{proposta.id}})">Contraproposta</button>
-        
+                  {% csrf_token %}
+                  <button class="font-1-m font-semibold" id="botao-padrao" type="submit">Aceitar</button>
+              </form>
+              <button class="botao-padrao font-1-m font-semibold" onclick="onContrapropostaButtonClickF({{proposta.id}})">Contraproposta</button>
+            </div>
             {% else %}
             <div class="flex flex-col gap-2">
                 <p class="font-1-m-b text-blue-500">Status: Em análise</p>
@@ -114,9 +127,16 @@
             {% endif%}
             {% endif%}
             {% if proposta.ehAceita %}
-            <div class="flex flex-col gap-2">
-                <p class="font-1-m-b text-green-500">Status: Aceito</p>
-            </div>
+              {% if pedido.status.descricao == "Em andamento" %}
+                <div class="flex flex-col gap-2">
+                    <p class="font-1-m-b text-green-500">Status: Aceito</p>
+                </div>
+              {% endif %}
+              {% if pedido.status.descricao == "Encerrado" %}
+                <div class="flex flex-col gap-2">
+                  <p class="font-1-m-b text-green-500">Entrega concluída</p>
+                </div>
+              {% endif %}
             {% endif %}
         {% endif %} 
 
@@ -134,11 +154,13 @@
                 <p class="font-1-m-b text-blue-500">Status: Em análise</p>
             </div>
             {% else %}
-                <form method="POST" action="{% url 'proposta_aceitar' proposta.id %}">
-                    {% csrf_token %}
-                    <button class="botao-padrao font-1-m font-semibold mb-5" type="submit">Aceitar</button>
-                </form>
-                <button class="botao-padrao font-1-m font-semibold mb-5" onclick="onContrapropostaButtonClick({{proposta.id}})">Contraproposta</button>
+            <div class="flex flex-col gap-2">
+              <form method="POST" action="{% url 'proposta_aceitar' proposta.id %}">
+                  {% csrf_token %}
+                  <button class="font-1-m font-semibold" id="botao-padrao" type="submit">Aceitar</button>
+              </form>
+              <button class="botao-padrao font-1-m font-semibold" onclick="onContrapropostaButtonClick({{proposta.id}})">Contraproposta</button>
+            </div>
             {% endif%}
           {% endif%}
           {% if proposta.ehAceita %}
@@ -183,8 +205,10 @@
             required
           />
           <label for="veiculo" class="flex items-center justify-start">
-            <div class="imagem-veiculo">
-              <img src="{% static 'images/funcionario.jpg' %}" alt="" />
+            <div class="imagem-veiculo">             
+              {% if veiculo.url_foto %}
+                <img src="{{veiculo.url_foto.url}}" alt="" class="h-28">
+              {% endif %}
             </div>
             <div>
               <p class="font-1-m">Marca: {{veiculo.marca}}</p>
