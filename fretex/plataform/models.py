@@ -19,7 +19,7 @@ class Freteiro(models.Model):
     url_foto = models.ImageField(upload_to = 'freteiro', blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(
-        Endereco, on_delete=models.CASCADE)  # pk ?#
+        Endereco, on_delete=models.CASCADE) 
 
     def __str__(self):
         return f"Nome: {self.user.username} - CPF: {self.cpf} "
@@ -58,9 +58,10 @@ class Pedido(models.Model):
     destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    tipo_veiculo = models.ManyToManyField(TipoVeiculo)  # <--------#
+    tipo_veiculo = models.ManyToManyField(TipoVeiculo)  
     observacao = models.CharField(max_length=300)
     nomeDestinatario = models.CharField(max_length=200)
+    data_criacao = models.DateField(auto_now_add=True)
     data_coleta = models.DateField()
     data_entrega = models.DateField()
     turno_entrega = models.CharField(max_length=10)
@@ -75,7 +76,7 @@ class Veiculo(models.Model):
     cor = models.CharField(max_length=20)
     marca = models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
-    ano = models.CharField(max_length=4) # ????????????#
+    ano = models.CharField(max_length=4) 
 
 
 class Proposta(models.Model):

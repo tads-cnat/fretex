@@ -9,7 +9,7 @@
   </div>
   <div class="container-detalhes-geral mb-0">
     <p class="font-1-l mb-3 font-semibold data-pedido">
-      Data do pedido: 13/06/2022
+      Data do pedido: {{pedido.data_criacao | date:"d/m/Y"}}
     </p>
     <div class="container-detalhes">
       <div class="flex items-center gap-3 mb-1 sm:mb-2">
@@ -24,9 +24,9 @@
       </div>
       <div class="flex items-center gap-3 mb-1 sm:mb-2">
         <img src="{% static 'images/calendario.svg' %}" alt="" />
-        <p class="font-1-m">Data de coleta: {{pedido.data_coleta}}</p>
+        <p class="font-1-m">Data de coleta: {{pedido.data_coleta | date:"d/m/Y"}}</p>
         <img src="{% static 'images/flechaDireita.svg' %}" alt="" />
-        <p class="font-1-m">Data de entrega: {{pedido.data_entrega}}</p>
+        <p class="font-1-m">Data de entrega: {{pedido.data_entrega | date:"d/m/Y"}}</p>
       </div>
       <div class="flex items-center gap-3 mb-1 sm:mb-2">
         <img src="{% static 'images/turno.png' %}" alt="" />
@@ -42,9 +42,6 @@
         <div class="flex flex-col detalhes-info ml-8 sm:ml-11">
           <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">
             Destinatário: {{pedido.nomeDestinatario}}
-          </p>
-          <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">
-            Kilometragem: ?Km
           </p>
           <p class="font-1-m border-l-4 border-l-black indent-2 md:indent-4">
             Produto: {{pedido.produto}}

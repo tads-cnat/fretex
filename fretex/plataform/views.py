@@ -101,7 +101,7 @@ class CadastroDeFrete(View):
             endereco_destino.save()
 
             status = Status(descricao="Em espera")
-            status.save() #criar apenas uma vez no banco
+            status.save() 
 
             produto = Produto(nome=produto, imagem_url=imagem)
             produto.save()
@@ -153,7 +153,6 @@ class CadastroCliente(View):
 
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        # posteriormente verificar se já existe conta com o msm email,cpf.
         email = request.POST['email']
         cpf = request.POST['cpf']
         senha = request.POST['senha']
@@ -174,7 +173,6 @@ class CadastroFreteiro(View):
 
     def post(self, request, *args, **kwargs):
         nome = request.POST['nome']
-        # posteriormente verificar se já existe conta com o msm email,cpf.
         email = request.POST['email']
         cpf = request.POST['cpf']
         senha = request.POST['senha']
@@ -275,10 +273,6 @@ def entrega_concluida(request, pedido_id):
     return HttpResponseRedirect(reverse('dashboardfreteiro'))
 
 
-def detalhesMeusFretesCliente(request):
-    return render(request, 'fretes/detalhesMeusFretesCliente.html')
-
-
 @user_passes_test(cliente_check, login_url='/login/')
 def perfilCliente(request):
     cliente = request.user.cliente
@@ -320,7 +314,6 @@ class EditarPerfilCliente(View):
                 return render(request, 'login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            # inserir condição de error no template
             return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
@@ -407,34 +400,15 @@ class AdicionarVeiculo(View):
             return render(request, 'perfis/adicionarVeiculo.html', {'erro': erro})
 
 
-# @method_decorator(login_required(login_url="/login/"), name='dispatch')
-# class DeletarVeiculo(View):
-#     def post(request, veiculo_id):
-#         veiculo = get_object_or_404(Veiculo, pk=veiculo_id)
-#         veiculo.delete()
-#         return HttpResponseRedirect('meusVeiculos')
-
 login_required(login_url="/login/")
 def DeletarVeiculo(request, veiculo_id):
     veiculo = Veiculo.objects.get(id = veiculo_id)
     veiculo.delete()
     return redirect('meusVeiculos')
 
+
 login_required(login_url="/login/")
 def DeletarPedido(request, pedido_id):
     pedido = Pedido.objects.get(id = pedido_id)
     pedido.delete()
     return redirect('dashboardcliente') 
-
-# @method_decorator(login_required(login_url="/login/"), name='dispatch')
-# class DeletarPedido(View):
-#     def post(request, pedido_id):
-#         pedido = get_object_or_404(Pedido, pk=pedido_id)
-#         if pedido.status.descricao == "Em espera":
-#             pedido.delete()
-#         else:
-#             error = "Não é possível deletar um pedido que não esteja em espera"
-#             return render(request, 'dashboards/dashboardClient.html', {'erro': erro})
-#         return render(request, 'dashboardcliente')
-
-
