@@ -44,6 +44,8 @@
                     <span class="sr-only">Open user menu</span>
                     {% if user.freteiro.url_foto %}
                         <img class="w-8 h-8 rounded-full" src="{{ user.freteiro.url_foto.url }}" alt="user photo">
+                    {% elif user.cliente.url_foto %}
+                        <img class="w-8 h-8 rounded-full" src="{{ user.cliente.url_foto.url }}" alt="user photo">
                     {% else %}
                         <img class="w-8 h-8 rounded-full" src="{% static 'images/perfil.svg' %}" alt="user photo">
                     {% endif %}
@@ -61,7 +63,7 @@
                             <a href="/perfilFreteiro/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
                         </li>
                         <li>
-                            <a href="/editarPerfilFreteiro/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 
+                            <a href="/editarPerfilFreteiro/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200
                                 hover:text-white">Editar perfil</a>
                         </li>
                         <li>
@@ -75,7 +77,7 @@
                             <a href="/perfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Perfil</a>
                         </li>
                         <li>
-                            <a href="/editarPerfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200 
+                            <a href="/editarPerfilCliente/" class="block py-2 px-4 text-sm hover:bg-gray-600 text-gray-200
                                 hover:text-white">Editar perfil</a>
                         </li>
                         <li>

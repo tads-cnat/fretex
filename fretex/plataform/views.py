@@ -17,7 +17,7 @@ def freteiro_check(user):
 
 def cliente_check(user):
     return hasattr(user, 'cliente')
-        
+
 class EmailBackend(ModelBackend):
     def authenticate(request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
@@ -60,7 +60,7 @@ def logoutView(request):
 class CadastroDeFrete(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pedidoDeFrete/cadastroFrete.html')
-    
+
     def post(self, request, *args, **kwargs):
         cep_origem = request.POST.get('cepOrigem')
         rua_origem = request.POST['ruaOrigem']
@@ -101,7 +101,7 @@ class CadastroDeFrete(View):
             endereco_destino.save()
 
             status = Status(descricao="Em espera")
-            status.save() 
+            status.save()
 
             produto = Produto(nome=produto, imagem_url=imagem)
             produto.save()
@@ -220,7 +220,7 @@ def fretes_index(request):
     for param in request.GET:
         filtered[param] = request.GET[param]
 
-    pedidos = Pedido.objects.filter(**filtered) 
+    pedidos = Pedido.objects.filter(**filtered)
     return render(request, 'fretes/index.html', {'pedidos': pedidos})
 
 
@@ -239,11 +239,11 @@ def proposta_create(request):
     pedido = get_object_or_404(Pedido, pk=request.POST.get('pedido_id'))
     if request.POST.get('ehContraproposta'):
         proposta_inicial = get_object_or_404(Proposta, pk=request.POST.get('proposta_id'))
-        Proposta.objects.create(pedido=pedido, 
-        usuario=request.user, 
-        ehContraproposta=True, 
-        valor=request.POST.get('valor'), 
-        veiculo=proposta_inicial.veiculo, 
+        Proposta.objects.create(pedido=pedido,
+        usuario=request.user,
+        ehContraproposta=True,
+        valor=request.POST.get('valor'),
+        veiculo=proposta_inicial.veiculo,
         contraproposta_id=proposta_inicial.id)
         proposta_inicial.ehNegada = True
         proposta_inicial.save()
@@ -260,6 +260,12 @@ def proposta_aceitar(request, proposta_id):
     pedido = get_object_or_404(Pedido, pk=proposta.pedido.id)
     pedido.status = Status.objects.get(descricao='Em andamento')
     pedido.save()
+
+    for proposta in pedido.proposta_set.all():
+        if proposta.ehAceita == False:
+            proposta.ehNegada = True
+            proposta.save()
+
     if hasattr(request.user, 'freteiro'):
         return HttpResponseRedirect(reverse('dashboardfreteiro'))
     else:
@@ -387,8 +393,7 @@ class AdicionarVeiculo(View):
         imagem = request.FILES['imagemveiculo']
         if marca and modelo and ano and placa_veiculo and cor_veiculo and imagem:
             if hasattr(request.user, 'freteiro'):
-                tipoveiculo = TipoVeiculo(descricao=tipo_veiculo)
-                tipoveiculo.save()
+                tipoveiculo = TipoVeiculo.objects.get(descricao= tipo_veiculo)
                 veiculo = Veiculo(freteiro=request.user.freteiro, url_foto=imagem, tipo_veiculo=tipoveiculo, marca=marca, modelo=modelo, ano=ano, placa=placa_veiculo, cor=cor_veiculo)
                 veiculo.save()
                 return HttpResponseRedirect(reverse('meusVeiculos'))
@@ -411,4 +416,4 @@ login_required(login_url="/login/")
 def DeletarPedido(request, pedido_id):
     pedido = Pedido.objects.get(id = pedido_id)
     pedido.delete()
-    return redirect('dashboardcliente') 
+    return redirect('dashboardcliente')
