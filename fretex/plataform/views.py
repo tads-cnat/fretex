@@ -248,8 +248,12 @@ def proposta_create(request):
         proposta_inicial.ehNegada = True
         proposta_inicial.save()
     else:
-        veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
-        Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
+        if request.POST.get('veiculo_id'):
+            veiculo = get_object_or_404(Veiculo, pk=request.POST.get('veiculo_id'))
+            Proposta.objects.create(usuario=request.user, pedido=pedido, veiculo=veiculo, valor=request.POST.get('valor'))
+        else:
+            return HttpResponseRedirect(reverse('adicionarVeiculo'))
+
     return HttpResponseRedirect(reverse( 'fretes_show', args=(request.POST.get('pedido_id'),)))
 
 
@@ -304,23 +308,29 @@ class EditarPerfilCliente(View):
         nome = request.POST['nome']
         email = request.POST['email']
         cpf = request.POST['cpf']
-        imagem = request.FILES['imagem']
-        if nome and email and cpf:
-            if hasattr(request.user, 'cliente'):
-                cliente = request.user.cliente
-                cliente.user.username = nome
-                cliente.user.email = email
-                request.user.save()
-                cliente.url_foto = imagem
-                cliente.cpf = cpf
-                cliente.save()
-                return HttpResponseRedirect(reverse('perfilCliente'))
+        if hasattr(request.user, 'cliente'):
+            if nome and email and cpf:
+                if request.FILES.get('imagem'):
+                    imagem = request.FILES.get('imagem')
+                    cliente = request.user.cliente
+                    cliente.user.username = nome
+                    cliente.user.email = email
+                    request.user.save()
+                    cliente.url_foto = imagem
+                    cliente.cpf = cpf
+                    cliente.save()
+                    return HttpResponseRedirect(reverse('perfilCliente'))
+                else:
+                    cliente = request.user.cliente
+                    cliente.user.username = nome
+                    cliente.user.email = email
+                    request.user.save()
+                    cliente.cpf = cpf
+                    cliente.save()
+                    return HttpResponseRedirect(reverse('perfilCliente'))
             else:
-                erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro': erro})
-        else:
-            erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
+                erro = 'Informe corretamente os parâmetros necessários!'
+                return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
 
@@ -341,31 +351,43 @@ class EditarPerfilFreteiro(View):
         estado = request.POST['estado']
         bairro = request.POST['bairro']
         complemento = request.POST['complemento']
-        imagem = request.FILES['imagem']
-        if nome and email and cpf and cep and rua and numero and estado and bairro and imagem:
-            if hasattr(request.user, 'freteiro'):
-                freteiro = request.user.freteiro
-                freteiro.user.username = nome
-                freteiro.user.email = email
-                request.user.save()
-                freteiro.endereco.CEP = cep
-                freteiro.endereco.rua = rua
-                freteiro.endereco.numero = numero
-                freteiro.endereco.estado = estado
-                freteiro.endereco.bairro = bairro
-                freteiro.endereco.complemento = complemento
-                freteiro.endereco.save()
-                freteiro.url_foto = imagem
-                freteiro.cpf = cpf
-                freteiro.save()
-                return HttpResponseRedirect(reverse('perfilFreteiro'))
+        if hasattr(request.user, 'freteiro'):
+            if nome and email and cpf and cep and rua and numero and estado and bairro:
+                if request.FILES.get('imagem'):
+                    imagem = request.FILES.get('imagem')
+                    freteiro = request.user.freteiro
+                    freteiro.user.username = nome
+                    freteiro.user.email = email
+                    request.user.save()
+                    freteiro.endereco.CEP = cep
+                    freteiro.endereco.rua = rua
+                    freteiro.endereco.numero = numero
+                    freteiro.endereco.estado = estado
+                    freteiro.endereco.bairro = bairro
+                    freteiro.endereco.complemento = complemento
+                    freteiro.endereco.save()
+                    freteiro.url_foto = imagem
+                    freteiro.cpf = cpf
+                    freteiro.save()
+                    return HttpResponseRedirect(reverse('perfilFreteiro'))
+                else:
+                    freteiro = request.user.freteiro
+                    freteiro.user.username = nome
+                    freteiro.user.email = email
+                    request.user.save()
+                    freteiro.endereco.CEP = cep
+                    freteiro.endereco.rua = rua
+                    freteiro.endereco.numero = numero
+                    freteiro.endereco.estado = estado
+                    freteiro.endereco.bairro = bairro
+                    freteiro.endereco.complemento = complemento
+                    freteiro.endereco.save()
+                    freteiro.cpf = cpf
+                    freteiro.save()
+                    return HttpResponseRedirect(reverse('perfilFreteiro'))
             else:
-                erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro': erro})
-        else:
-            erro = 'Informe corretamente os parâmetros necessários!'
-
-            return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
+                erro = 'Informe corretamente os parâmetros necessários!'
+                return render(request, 'login-cadastros/cadastroFreteiro.html', {'erro': erro})
 
 
 @user_passes_test(freteiro_check, login_url='/login/')
