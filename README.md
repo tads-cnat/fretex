@@ -37,6 +37,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [CSS](https://www.w3schools.com/css/)
 - [JavaScript](https://www.javascript.com/)
 - [Tailwind](https://tailwindcss.com/)
+- [jQuery](https://jquery.com/)
 
 
 # Instalação
