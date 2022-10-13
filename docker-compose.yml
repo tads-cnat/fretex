@@ -1,0 +1,26 @@
+version: '3'
+services:
+  node:
+    container_name: fretex_node
+    image: node:16
+    working_dir: /code/frontend
+    command: bash -c "npm install && npm run dev"
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/code
+  django:
+    container_name: fretex_django
+    working_dir: /code/backend
+    build: .
+    env_file:
+      - .env
+    command: bash -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - default
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/code
+    depends_on:
+      - node

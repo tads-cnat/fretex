@@ -1,7 +1,7 @@
 # FRETEX
 
 <p align="center">
-<img src="LandingPage.png" width="1882" height="2000" align="center"/>
+<img src="docs/LandingPage.png" width="1882" height="2000" align="center"/>
 
 
 
@@ -15,7 +15,7 @@ Para ter acesso as demais páginas basta acessar o link seguinte: http://fretex.
 &nbsp;
 </p>
 <p align="center">
-<img src="FreteX.png" width="508" height="200" align="center"/>
+<img src="docs/FreteX.png" width="508" height="200" align="center"/>
 
 
 
