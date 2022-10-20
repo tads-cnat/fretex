@@ -14,21 +14,19 @@ class Endereco(models.Model):
         return f"{self.rua}, {self.numero}, {self.bairro}. {self.cidade}"
 
 
-class Freteiro(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = 'freteiro', blank=True, null=True)
+class Freteiro(User):
+    url_foto = models.ImageField(upload_to="freteiro", blank=True, null=True)
     cpf = models.CharField(max_length=15)
-    endereco = models.OneToOneField(
-        Endereco, on_delete=models.CASCADE) 
+    endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Nome: {self.user.username} - CPF: {self.cpf} "
 
 
-class Cliente(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = 'cliente', blank=True, null=True)
+class Cliente(User):
+    url_foto = models.ImageField(upload_to="cliente", blank=True, null=True)
     cpf = models.CharField(max_length=15)
+
     def __str__(self):
         return f"Nome: {self.user.username} - CPF: {self.cpf} "
 
@@ -39,7 +37,7 @@ class Status(models.Model):
 
 class Produto(models.Model):
     nome = models.CharField(max_length=200)
-    imagem_url = models.ImageField(upload_to = 'produto', blank=True, null=True)
+    imagem_url = models.ImageField(upload_to="produto", blank=True, null=True)
 
     def __str__(self):
         return self.nome
@@ -50,15 +48,19 @@ class TipoVeiculo(models.Model):
 
     def __str__(self):
         return self.descricao
-        
+
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_origem')
-    destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name='pedido_endereco_destino')
+    origem = models.ForeignKey(
+        Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_origem"
+    )
+    destino = models.ForeignKey(
+        Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_destino"
+    )
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    tipo_veiculo = models.ManyToManyField(TipoVeiculo)  
+    tipo_veiculo = models.ManyToManyField(TipoVeiculo)
     observacao = models.CharField(max_length=300)
     nomeDestinatario = models.CharField(max_length=200)
     data_criacao = models.DateField(auto_now_add=True)
@@ -70,13 +72,13 @@ class Pedido(models.Model):
 
 class Veiculo(models.Model):
     freteiro = models.ForeignKey(Freteiro, on_delete=models.CASCADE)
-    url_foto = models.ImageField(upload_to = 'veiculo', blank=True, null=True)
+    url_foto = models.ImageField(upload_to="veiculo", blank=True, null=True)
     tipo_veiculo = models.ForeignKey(TipoVeiculo, on_delete=models.CASCADE)
     placa = models.CharField(max_length=20)
     cor = models.CharField(max_length=20)
     marca = models.CharField(max_length=30)
     modelo = models.CharField(max_length=30)
-    ano = models.CharField(max_length=4) 
+    ano = models.CharField(max_length=4)
 
 
 class Proposta(models.Model):
@@ -84,11 +86,8 @@ class Proposta(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     contraproposta_id = models.IntegerField(null=True)
-    valor = models.DecimalField(max_digits=10,decimal_places=2)
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     ehAceita = models.BooleanField(default=False)
-    ehContraproposta = models.BooleanField(default=False)
+    ehContraproposta = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     ehNegada = models.BooleanField(default=False)
-
-    def contraproposta(self):
-        return Proposta.objects.get(id=self.contraproposta_id)
