@@ -33,7 +33,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Django Rest Framework](https://www.django-rest-framework.org/)
 - [React](https://pt-br.reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)]
+- [TypeScript](https://www.typescriptlang.org/)
 - [Styled-Components](https://styled-components.com/)
 - [Docker](https://www.docker.com/)
 
