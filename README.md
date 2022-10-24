@@ -31,13 +31,11 @@ O sistema se propõe a servir de facilitador para os clientes, que desejam encon
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Python](https://www.python.org/)
-- [Django](https://www.djangoproject.com/)
-- [HTML](https://www.w3schools.com/html/)
-- [CSS](https://www.w3schools.com/css/)
-- [JavaScript](https://www.javascript.com/)
-- [Tailwind](https://tailwindcss.com/)
-- [jQuery](https://jquery.com/)
+- [Django Rest Framework](https://www.django-rest-framework.org/)
+- [React](https://pt-br.reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)]
+- [Styled-Components](https://styled-components.com/)
+- [Docker](https://www.docker.com/)
 
 
 # Instalação
