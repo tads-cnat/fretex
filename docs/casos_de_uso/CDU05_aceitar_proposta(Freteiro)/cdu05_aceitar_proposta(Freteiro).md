@@ -9,6 +9,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |09/06/2022 |1.0 |Detalhamento inicial. |Mathews Dantas. |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro. |
 
 ## 1- Resumo:
 
@@ -25,7 +26,7 @@
 **4.1- Fluxo básico:** 
 
 1. O ator seleciona a opção “ Aceitar”. 
-2. O sistema passa o frete para situação “em andamento”. 
+2. O sistema atualiza o status do pedido de frete para “aguardando coleta” . 
 
 
 ## 5- Protótipo(s) de interface do Aceitar Proposta(freteiro):  
