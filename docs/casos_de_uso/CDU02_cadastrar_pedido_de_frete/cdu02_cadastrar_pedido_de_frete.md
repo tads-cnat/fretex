@@ -10,7 +10,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |08/06/2022 |1.0 |Detalhamento incial. |Italo Gabriel da Silva Monteiro |
-|29/10/2022 |1.0 |Detalhamento incial. |Italo Gabriel da Silva Monteiro |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro |
 
 ## 1- Resumo:
 
