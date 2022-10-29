@@ -11,7 +11,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |09/06/2022 |1.0 |Detalhamento inicial. |Mathews Dantas. |
-|29/10/2022 |2.0 |Segunda versão. |Mathews Dantas. |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro. |
 
 ## 1- Resumo: 
 
