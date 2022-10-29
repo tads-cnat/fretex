@@ -9,6 +9,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |12/06/2022 |1.0 |Detalhamento inicial. |Sávio Araújo Carvalho Alves |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro |
 
 ## 1- Resumo: 
 
