@@ -9,6 +9,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |08/06/2022 |1.0 |Detalhamento incial. |Italo Gabriel da Silva Monteiro |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro |
 
 ## 1- Resumo: 
 
@@ -25,7 +26,7 @@
 **4.1- Fluxo básico:** 
 
 1. O ator seleciona a opção Meus Fretes no seu Dashboard. 
-2. O sistema verifica os pedidos existentes e retorna uma lista com todos  os  pedidos  cadastrados,  seja  em  situação  de  “em  espera”,  ”em andamento” ou “encerrados”. 
+2. O sistema verifica os pedidos existentes e retorna uma lista com todos  os  pedidos  cadastrados,  seja  em  situação  de  “em  negociação”,  ”aguardando coleta”, “em transporte” ou “finalizado”. 
 
 **4.2- Fluxo de Exceção – Nenhum pedido cadastrado:** 
 
