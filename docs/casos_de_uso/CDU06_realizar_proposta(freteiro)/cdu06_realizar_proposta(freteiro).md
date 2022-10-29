@@ -10,6 +10,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |11/06/2022 |1.0 |Detalhamento inicial. |Marcos Alexandre Oliveira |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro |
 
 ## 1- Resumo: 
 
@@ -34,7 +35,7 @@
 6. O ator confirma o valor. 
 7. O ator seleciona a opção submeter proposta. 
 8. O sistema confirma a submissão da proposta. 
-9. O sistema cadastra a  proposta na lista de propostas para aquele pedido de frete. 
+9. O sistema cadastra a proposta na lista de propostas para aquele pedido de frete. 
 
 **4.2 Fluxo de Exceção – Submissão de valor inválido:** 
 
