@@ -14,6 +14,9 @@ export const GlobalStyle = createGlobalStyle`
     --text-brown: #332200;
     --text-light: #FFFFFF;
 
+    --boxes-home-page: #FBFBFB;
+    --boxes-border-home-page:#D7D7D7;
+
     --btn-text-color1: #332200;
     --btn-hover: #b1800e;
     
@@ -22,6 +25,10 @@ export const GlobalStyle = createGlobalStyle`
     --font-large: 1.5rem;
     --font-xl: 2rem;
     --font-xxl: 3.125rem;
+
+    --mb-15: 15px;
+    --mb-20: 20px;
+    --mb-80: 80px;
   }
 
   @media (max-width: 768px) {
@@ -31,6 +38,10 @@ export const GlobalStyle = createGlobalStyle`
       --font-large: 1.125rem;
       --font-xl: 1.275rem;
       --font-xxl: 2rem;
+
+      --mb-15: 8px;
+      --mb-20: 10px;
+      --mb-80: 40px;
     }
   }
 

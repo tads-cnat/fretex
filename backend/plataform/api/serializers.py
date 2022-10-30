@@ -1,12 +1,13 @@
-from rest_framework import serializers
 from django.db import transaction
+from plataform.models import Cliente, Endereco, Freteiro, Pedido
+from rest_framework import serializers
 
-from plataform.models import Endereco, Freteiro, Cliente, Pedido
 
 class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Endereco
         fields = ("__all__")
+
 
 class FreteiroSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,12 +23,15 @@ class FreteiroSerializer(serializers.ModelSerializer):
         pass
 
 # TODO - VErificar fotos nos serializers
+
+
 class ClienteSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = Cliente
-        fields = ("username", "first_name", "last_name", "password", "email", "url_foto")
+        fields = ("username", "first_name", "last_name",
+                  "password", "email", "url_foto")
 
     @transaction.atomic
     def create(self, validated_data):
@@ -35,6 +39,7 @@ class ClienteSerializer(serializers.ModelSerializer):
         # metodo set password do cliente set_password
         # retorna Cliente
         pass
+
 
 class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
@@ -44,4 +49,5 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pedido
-        fields = ("cliente", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
+        fields = ("cliente", "origem", "destino", "status", "tipo_veiculo", "observacao",
+                  "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")

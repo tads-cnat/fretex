@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
@@ -118,7 +119,8 @@ class Proposta(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     ehAceita = models.BooleanField(default=False)
-    contraproposta = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    contraproposta = models.ForeignKey(
+        'self', on_delete=models.CASCADE, null=True)
     ehNegada = models.BooleanField(default=False)
 
     class Meta:

@@ -9,6 +9,7 @@ export const VideoSection = styled.div`
   padding: 0 30px;
   height: 80vh;
   position: relative;
+  margin-bottom: var(--mb-80);
 `;
 
 export const ContainerVideo = styled.div`
@@ -47,7 +48,7 @@ export const VideoP = styled.p`
   font-size: var(--font-large);
   text-align: center;
   max-width: 500px;
-  margin-bottom: 20px;
+  margin-bottom: var(--mb-20);
 `;
 
 export const VideoBtnWrapper = styled.div`

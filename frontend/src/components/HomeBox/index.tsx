@@ -1,13 +1,23 @@
 import { IHomeBox } from "../../interfaces/Home";
-import { Box, Description, Image, Title } from "./styles";
+import { Box, BoxWithLines, Description, Image, Title } from "./styles";
 
-const HomeBox = ({ title, desc, img }: IHomeBox) => {
+const HomeBox = ({ title, desc, img, line }: IHomeBox) => {
   return (
-    <Box>
-      <Image src={img} />
-      <Title>{title}</Title>
-      <Description>{desc}</Description>
-    </Box>
+    <>
+      {line ? (
+        <BoxWithLines>
+          <Image src={img} />
+          <Title>{title}</Title>
+          <Description>{desc}</Description>
+        </BoxWithLines>
+      ) : (
+        <Box>
+          <Image src={img} />
+          <Title>{title}</Title>
+          <Description>{desc}</Description>
+        </Box>
+      )}
+    </>
   );
 };
 
