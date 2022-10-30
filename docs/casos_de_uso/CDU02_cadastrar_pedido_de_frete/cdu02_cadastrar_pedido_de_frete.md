@@ -10,6 +10,7 @@
 |**Data** |**Versão** |**Descrição** |**Autor** |
 | - | - | - | - |
 |08/06/2022 |1.0 |Detalhamento incial. |Italo Gabriel da Silva Monteiro |
+|29/10/2022 |2.0 |Segunda versão. |Italo Gabriel da Silva Monteiro |
 
 ## 1- Resumo:
 
@@ -29,7 +30,7 @@
 2. O sistema solicita os dados do pedido de frete: Tipo de produto, tipo  de  veículo,  data  de  coleta,  data  de  entrega,  origem,  destino, observação. 
 3. O ator preenche todos os dados e confirma o cadastro do pedido. 
 4. O sistema verifica se todos os dados foram preenchidos de forma correta. 
-5. O sistema cadastra o pedido de frete e coloca-o em situação de “em espera”. 
+5. O sistema cadastra o pedido de frete e coloca-o em situação de “em negociação”. 
 
 
 **4.2- Fluxo de Exceção – Dados inválidos ou incompletos para a abertura do pedido de frete:** 
