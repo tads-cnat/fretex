@@ -25,6 +25,7 @@ export const Logos = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-top: 64px;
+  align-items: center;
 
   @media (max-width: 768px) {
     margin-top: 16px;
@@ -39,7 +40,6 @@ export const FooterBoxLogo = styled.div``;
 
 export const FooterBoxInfo = styled.div``;
 
-`;
 
 export const ImgLink = styled.img`
     &:hover{
