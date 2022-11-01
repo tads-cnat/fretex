@@ -7,6 +7,7 @@ import cliente from "../../assets/images/cliente.svg";
 import negociacao from "../../assets/images/negociacao.svg";
 import HomeVideoSection from "../../components/HomeVideoSection";
 import SectionVantagens from "../../components/SectionVantagens";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return (
@@ -40,6 +41,7 @@ const Home = () => {
         </Container>
       </Wrapper>
       <SectionVantagens/>
+      <Footer/>
     </>
   );
 };

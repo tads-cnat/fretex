@@ -5,6 +5,8 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --theme-primary: #F6AD08;
 
+    --bg-grey: #353535;
+    --bg-grey2: #282828;
     --bg-ligth: #FFFFFF;
     --bg-dark: #000000;
 
