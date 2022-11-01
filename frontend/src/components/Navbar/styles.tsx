@@ -33,7 +33,4 @@ export const NavbarLinks = styled(Link)`
     }
 `;
 
-export const Profile = styled.div`
-
-`;
 

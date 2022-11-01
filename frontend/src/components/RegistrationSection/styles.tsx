@@ -45,21 +45,6 @@ export const Text = styled.p`
     margin-bottom: 20px;
 `;
 
-
-export const ButtonLink = styled(Link)`
-    padding: 9px 32px;
-    background-color: var(--theme-primary);
-    color: var(--btn-text-color1);
-    transition: 0.5s;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: var(--font-medium);
-    font-weight: 500;
-    &:hover {
-        background-color: var(--btn-hover);
-    }
-`;
-
 export const Title = styled.h2`
     color: var(--bg-ligth);
     margin-bottom: 10px;

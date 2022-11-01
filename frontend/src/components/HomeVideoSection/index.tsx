@@ -1,6 +1,4 @@
-import React from "react";
 import {
-  ButtonLink,
   ContainerVideo,
   ContainerVideoContent,
   VideoBg,
@@ -10,7 +8,7 @@ import {
   VideoSection,
 } from "./styles";
 import Video from "../../assets/videos/video.mp4";
-import { SpanYellow } from "../../styles";
+import { SpanYellow, BtnPattern } from "../../styles";
 
 const HomeVideoSection = () => {
   return (
@@ -26,7 +24,7 @@ const HomeVideoSection = () => {
           A maior plataforma de transporte rodoviário de cargas do Brasil
         </VideoP>
         <VideoBtnWrapper>
-          <ButtonLink to="/choose-user">Comece agora</ButtonLink>
+          <BtnPattern to="/choose-user">Comece agora</BtnPattern>
         </VideoBtnWrapper>
       </ContainerVideoContent>
     </VideoSection>
