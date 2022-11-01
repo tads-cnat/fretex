@@ -23,6 +23,7 @@ export const FooterContainer = styled.footer`
 export const Logos = styled.footer`
     margin-top: 64px;
     display: flex;
+    align-items: center;
     gap: 1.5rem;
 
 `;
@@ -44,6 +45,13 @@ export const FooterBoxInfo = styled.footer`
 
 
 `;
+
+export const ImgLink = styled.img`
+    &:hover{
+        opacity: 0.5;
+    }
+`;
+
 export const Logo = styled.h1`
     font-family: "Poppins", sans-serif;
     font-size: var(--font-xxl);
