@@ -68,6 +68,6 @@ export const ButtonLink = styled(Link)`
   font-size: var(--font-medium);
   font-weight: 500;
   &:hover {
-    background-color: var(--theme-primary);
+    background-color: var(--btn-hover);
   }
 `;

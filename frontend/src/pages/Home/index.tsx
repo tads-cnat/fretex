@@ -9,6 +9,7 @@ import HomeVideoSection from "../../components/HomeVideoSection";
 import SectionVantagens from "../../components/SectionVantagens";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import Registration from "../../components/RegistrationSection";
 
 const Home = () => {
   return (
@@ -43,6 +44,7 @@ const Home = () => {
         </Container>
       </Wrapper>
       <SectionVantagens/>
+      <Registration/>
       <Footer/>
     </>
   );
