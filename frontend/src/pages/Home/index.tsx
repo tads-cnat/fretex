@@ -8,10 +8,12 @@ import negociacao from "../../assets/images/negociacao.svg";
 import HomeVideoSection from "../../components/HomeVideoSection";
 import SectionVantagens from "../../components/SectionVantagens";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 const Home = () => {
   return (
     <>
+      <Navbar/>
       <HomeVideoSection />
       <Wrapper>
         <Title>Como a FreteX funciona?</Title>
