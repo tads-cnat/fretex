@@ -30,7 +30,7 @@ const Footer = () => {
             <FooterBoxInfo>
               <Title>CONTATO</Title>
               <Info>+55 21 99999-9999</Info>
-              <Info>contato@fretex.com</Info>
+              <Info border={"1px solid #000"} marginBottom={"5px"}>contato@fretex.com</Info>
               <Info>Rua do IF, 42 - Grêmio</Info>
               <Info>Natal - RN</Info>
               <Logos>

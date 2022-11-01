@@ -42,6 +42,7 @@ export const FooterBoxInfo = styled.div``;
 
 
 export const ImgLink = styled.img`
+    transition: 0.5s;
     &:hover{
         opacity: 0.5;
     }
@@ -63,7 +64,14 @@ export const Title = styled.h2`
   }
 `;
 
-export const Info = styled.p`
+interface InterfaceInfo {
+  border?: string;
+  marginBottom?: string;
+}
+
+export const Info = styled.p<InterfaceInfo>`
+  border-bottom: ${(props) => props?.border};
+  margin-bottom: ${(props) => props?.marginBottom};
   font-size: var(--font-medium);
   color: var(--text-grey-1);
 `;
