@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { InterfaceInfo } from "../../interfaces/styledComponents";
 
 export const FinalFooterContainer = styled.section`
   background-color: var(--bg-grey2);
@@ -62,12 +63,6 @@ export const Title = styled.h2`
     margin-bottom: 16px;
   }
 `;
-
-interface InterfaceInfo {
-  border?: string;
-  marginBottom?: string;
-  padding?: string;
-}
 
 export const Info = styled.p<InterfaceInfo>`
   border-bottom: ${(props) => props?.border};
