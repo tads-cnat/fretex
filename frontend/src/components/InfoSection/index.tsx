@@ -10,7 +10,11 @@ const InfoSection = () => {
             <ContainerImg>
                 <Img src={ImgInfo} alt='Entregador'></Img>
             </ContainerImg>
-            <ContainerInfo>Uma das melhores plataformas para envio de cargas de pequeno e médio porte.</ContainerInfo>
+            <ContainerInfo>
+                <p>
+                Uma das melhores plataformas para envio de cargas de pequeno e médio porte.
+                </p>
+            </ContainerInfo>
         </ContainerInfos>
     )
 }
