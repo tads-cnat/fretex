@@ -12,31 +12,42 @@ export const RegisterContainer = styled.div`
 `;
 
 export const RegisterUser = styled.div<IRegisterImage>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 125px 0;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 125px 0;
+    position: relative;
+    
+    &::before{
+        width: 100%;
+        content: "";
+        height: 100%;
+        display: block;
+        position: absolute;
+        background-image: url(${(props) => props.img});
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+        filter: brightness(50%);
+        transition: .5s;
+    }
+    &:hover::before  {
+        filter: none;    
+    }
+`
 
-  &::before {
-    width: 100%;
-    content: "";
-    height: 100%;
-    display: block;
-    position: absolute;
-    background-image: url(${(props) => props.img});
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-    filter: brightness(40%);
-    transition: 0.5s;
-  }
-  &:hover::before {
-    filter: brightness(70%);
-  }
-  & p,
-  & h2 {
+export const Text = styled.p`
+  color: var(--bg-ligth);
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+
+export const ButtonLink = styled(Link)`
+    padding: 9px 32px;
+    background-color: var(--theme-primary);
+    color: var(--btn-text-color1);
     transition: 0.5s;
   }
   &:hover p,
@@ -46,26 +57,6 @@ export const RegisterUser = styled.div<IRegisterImage>`
 
   @media (max-width: 768px) {
     padding: 60px 0;
-  }
-`;
-
-export const Text = styled.p`
-  color: var(--bg-ligth);
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-export const ButtonLink = styled(Link)`
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--btn-text-color1);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: var(--font-medium);
-  font-weight: 500;
-  &:hover {
-    background-color: var(--btn-hover);
   }
 `;
 

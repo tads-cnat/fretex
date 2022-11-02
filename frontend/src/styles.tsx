@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom"
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -65,4 +66,18 @@ export const Wrapper = styled.div`
 
 export const SpanYellow = styled.span`
   color: var(--theme-primary);
+`;
+
+export const BtnPattern = styled(Link)`
+    padding: 9px 32px;
+    background-color: var(--theme-primary);
+    color: var(--btn-text-color1);
+    transition: 0.5s;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: var(--font-medium);
+    font-weight: 500;
+    &:hover {
+      background-color: var(--btn-hover);
+  }
 `;

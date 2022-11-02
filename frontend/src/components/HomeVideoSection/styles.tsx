@@ -58,16 +58,3 @@ export const VideoBtnWrapper = styled.div`
   justify-content: center;
 `;
 
-export const ButtonLink = styled(Link)`
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--btn-text-color1);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: var(--font-medium);
-  font-weight: 500;
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-`;
