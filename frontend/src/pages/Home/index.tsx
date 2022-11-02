@@ -10,6 +10,7 @@ import SectionVantagens from "../../components/SectionVantagens";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Registration from "../../components/RegistrationSection";
+import InfoSection from "../../components/InfoSection";
 
 const Home = () => {
   return (
@@ -44,6 +45,7 @@ const Home = () => {
         </Container>
       </Wrapper>
       <SectionVantagens/>
+      <InfoSection/>
       <Registration/>
       <Footer/>
     </>

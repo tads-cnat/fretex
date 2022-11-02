@@ -9,6 +9,8 @@ export const VantagensContainer = styled.section<IRegisterImage>`
   padding: 0 0 30px 0;
   box-shadow: inset 0 2rem white;
 
+  
+
   @media (max-width: 1200px) {
     background-position: bottom 40px left 20px;
   }
