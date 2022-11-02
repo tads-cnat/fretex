@@ -12,7 +12,7 @@ export const FooterContainer = styled.section`
 export const FooterStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
+  gap: 4rem;
   padding: 40px 0;
 
   @media (max-width: 768px) {
@@ -24,7 +24,6 @@ export const FooterStyled = styled.div`
 export const Logos = styled.div`
   display: flex;
   gap: 1.5rem;
-  margin-top: 64px;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -67,11 +66,13 @@ export const Title = styled.h2`
 interface InterfaceInfo {
   border?: string;
   marginBottom?: string;
+  padding?: string;
 }
 
 export const Info = styled.p<InterfaceInfo>`
   border-bottom: ${(props) => props?.border};
   margin-bottom: ${(props) => props?.marginBottom};
+  padding: ${(props) => props?.padding};
   font-size: var(--font-medium);
   color: var(--text-grey-1);
 `;

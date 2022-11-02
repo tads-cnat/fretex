@@ -29,14 +29,32 @@ const Footer = () => {
             </FooterBoxLogo>
             <FooterBoxInfo>
               <Title>CONTATO</Title>
-              <Info>+55 21 99999-9999</Info>
-              <Info border={"1px solid #000"} marginBottom={"5px"}>contato@fretex.com</Info>
-              <Info>Rua do IF, 42 - Grêmio</Info>
-              <Info>Natal - RN</Info>
+              <Info marginBottom={"5px"}>+55 21 99999-9999</Info>
+              <Info
+                border={"1px solid #424242"}
+                marginBottom={"10px"}
+                padding={"0 0 10px 0"}
+              >
+                contato@fretex.com
+              </Info>
+              <Info marginBottom={"5px"}>Rua do IF, 42 - Grêmio</Info>
+              <Info
+                border={"1px solid #424242"}
+                marginBottom={"20px"}
+                padding={"0 0 10px 0"}
+              >
+                Natal - RN
+              </Info>
               <Logos>
-              <a href="/"><ImgLink src={instagram} alt="Instagram"/></a>
-              <a href="/"><ImgLink src={facebook} alt="Facebook"/></a>
-              <a href="/"><ImgLink src={youtube} alt="Youtube" /></a>
+                <a href="/">
+                  <ImgLink src={instagram} alt="Instagram" />
+                </a>
+                <a href="/">
+                  <ImgLink src={facebook} alt="Facebook" />
+                </a>
+                <a href="/">
+                  <ImgLink src={youtube} alt="Youtube" />
+                </a>
               </Logos>
             </FooterBoxInfo>
             <FooterBoxInfo>
