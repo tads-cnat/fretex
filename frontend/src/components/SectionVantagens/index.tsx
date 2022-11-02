@@ -1,7 +1,5 @@
-import React from "react";
-import { SpanYellow,Wrapper } from "../../styles";
+import { SpanYellow, Wrapper } from "../../styles";
 import {
-  VantagemBox,
   VantagensContainer,
   VantagensFlex,
   VantagensGrid,
@@ -9,16 +7,18 @@ import {
   VantagensImage,
   VantagensP,
   VantagensText,
-  VantagensWrapper,
 } from "./styles";
 import diferencial from "../../assets/images/diferencial.png";
+import comunicacao from "../../assets/images/comunicacao.svg";
+import filtro from "../../assets/images/filtro.svg";
+import fundo from "../../assets/images/fundo.svg";
 
 const SectionVantagens = () => {
   return (
-    <VantagensContainer>
+    <VantagensContainer img={fundo}>
       <Wrapper>
         <VantagensGrid>
-          <VantagensWrapper>
+          <div>
             <VantagensP>FRETES COM DESCRIÇÃO </VantagensP>
             <VantagensH1>
               Descubra as vantagens<SpanYellow>.</SpanYellow>
@@ -30,13 +30,28 @@ const SectionVantagens = () => {
             </VantagensP>
             <VantagensText>Vantagens</VantagensText>
             <VantagensFlex>
-              <VantagemBox></VantagemBox>
-              <VantagemBox></VantagemBox>
+              <div>
+                <img src={filtro} alt="filtro" />
+                <h3>Filtros precisos</h3>
+                <p>
+                  Com a descrição os freteiros conseguem encontrar os fretes
+                  mais próximos, além disso podem filtrar por região, preço,
+                  entre outros.
+                </p>
+              </div>
+              <div>
+                <img src={comunicacao} alt="comunicação" />
+                <h3>Comunicação</h3>
+                <p>
+                  A descrição mostra as informações necessárias sobre o frete,
+                  portanto ajuda o feteiro a se preparar melhor para o serviço.
+                </p>
+              </div>
             </VantagensFlex>
-          </VantagensWrapper>
-          <VantagensWrapper>
+          </div>
+          <div>
             <VantagensImage src={diferencial} />
-          </VantagensWrapper>
+          </div>
         </VantagensGrid>
       </Wrapper>
     </VantagensContainer>
