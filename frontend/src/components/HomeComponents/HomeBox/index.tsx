@@ -1,4 +1,4 @@
-import { IHomeBox } from "../../interfaces/Home";
+import { IHomeBox } from "../../../interfaces/Home";
 import { Box, BoxWithLines, Description, Image, Title } from "./styles";
 
 const HomeBox = ({ title, desc, img, line }: IHomeBox) => {

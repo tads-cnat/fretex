@@ -12,3 +12,7 @@ export interface InterfaceInfo {
   marginBottom?: string;
   padding?: string;
 }
+
+export interface IDropdownMenu {
+  display?: string;
+}

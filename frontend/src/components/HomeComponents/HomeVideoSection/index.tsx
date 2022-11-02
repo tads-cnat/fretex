@@ -7,8 +7,8 @@ import {
   VideoP,
   VideoSection,
 } from "./styles";
-import Video from "../../assets/videos/video.mp4";
-import { SpanYellow, BtnPattern } from "../../styles";
+import Video from "../../../assets/videos/video.mp4";
+import { SpanYellow, BtnPattern } from "../../../styles";
 
 const HomeVideoSection = () => {
   return (

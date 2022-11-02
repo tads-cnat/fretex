@@ -1,7 +1,7 @@
 import { ContainerInfos,ContainerImg, ContainerInfo, Img } from "./styles"
-import ImgInfo from "../../assets/images/InfoEntregas.png"
-import fundo from "../../assets/images/fundoBranco.svg"
-import fundoBaixo from "../../assets/images/fundoBrancoBaixo.svg"
+import ImgInfo from "../../../assets/images/InfoEntregas.png"
+import fundo from "../../../assets/images/fundoBranco.svg"
+import fundoBaixo from "../../../assets/images/fundoBrancoBaixo.svg"
 
 const InfoSection = () => {
 

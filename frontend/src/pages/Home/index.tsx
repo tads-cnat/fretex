@@ -1,16 +1,16 @@
 import React from "react";
 import { Container, Description, Title } from "./styles";
 import { Wrapper } from "../../styles";
-import HomeBox from "../../components/HomeBox/index";
+import HomeBox from "../../components/HomeComponents/HomeBox/index";
 import freteiro from "../../assets/images/caminhao.svg";
 import cliente from "../../assets/images/cliente.svg";
 import negociacao from "../../assets/images/negociacao.svg";
-import HomeVideoSection from "../../components/HomeVideoSection";
-import SectionVantagens from "../../components/SectionVantagens";
+import HomeVideoSection from "../../components/HomeComponents/HomeVideoSection";
+import SectionVantagens from "../../components/HomeComponents/SectionVantagens";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import Registration from "../../components/RegistrationSection";
-import InfoSection from "../../components/InfoSection";
+import Registration from "../../components/HomeComponents/RegistrationSection";
+import InfoSection from "../../components/HomeComponents/InfoSection";
 
 const Home = () => {
   return (

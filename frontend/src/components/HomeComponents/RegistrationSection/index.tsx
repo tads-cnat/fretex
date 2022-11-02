@@ -1,7 +1,7 @@
-import { BtnPattern, SpanYellow } from "../../styles";
+import { BtnPattern, SpanYellow } from "../../../styles";
 import { RegisterContainer, RegisterUser, Title, Text } from "./styles";
-import imgCliente from "../../assets/images/ParaClientes.png";
-import imgFreteiro from "../../assets/images/ParaFreteiros.png";
+import imgCliente from "../../../assets/images/ParaClientes.png";
+import imgFreteiro from "../../../assets/images/ParaFreteiros.png";
 
 export const Registration = () => {
   return (

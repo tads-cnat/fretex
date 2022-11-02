@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import {BtnPattern } from "../../styles";
 import { Link } from "react-router-dom";
+import { IDropdownMenu } from "../../interfaces/styledComponents";
 
 export const Nav = styled.nav`
     background-color: var(--bg-grey);
     color: var(--text-light);
 `;
-
+ 
 export const NavContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+
 `;
 
 export const Logo = styled.h1`
@@ -43,22 +45,20 @@ export const BtnLogin = styled(BtnPattern)`
     }
 `;
 
-export const BtnDropdown = styled(BtnPattern)`
+export const ImgDropdown = styled.img`
+    height: 35px;
+    width: 35px;
     position: relative;
-    padding:10px 15px 10px 15px;
     @media (min-width: 440px){
         display: none;
     }
-    &:hover div {
-        display: flex;
-    }
 `;
 
-export const DropdownContent = styled.div`
-    display: none;
+export const DropdownContent = styled.div<IDropdownMenu>`
+    display: ${(props) => props.display};
     width: 100%;
     left:0;
-    top:40px;
+    top:58px;
     flex-direction: column;
     position: absolute;
     background-color: var(--bg-grey);
@@ -66,6 +66,16 @@ export const DropdownContent = styled.div`
     padding: 30px;
     gap: 1rem;
     z-index: 1;
+
+    @media (min-width: 440px) {
+        display: none
+    }
+`;
+
+export const DropdownCircle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 
