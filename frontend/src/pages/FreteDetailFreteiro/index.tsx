@@ -2,11 +2,14 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import FreteDetail from "../../components/FreteDetailFreteiroComponents/FreteDetail";
 import { Wrapper } from "../../styles";
+
+
+
 const index = () => {
   return (
     <>
     <Navbar/>
-    <Wrapper>
+    <Wrapper bgColor="#f5f5f5">
       <FreteDetail/>
     </Wrapper>
     <Footer/>

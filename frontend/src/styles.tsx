@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom"
 import { createGlobalStyle } from "styled-components";
+import { IWrapper } from "./interfaces/styledComponents";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -58,10 +59,11 @@ export const GlobalStyle = createGlobalStyle`
 
 export const StyledApp = styled.div``;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWrapper>`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  background-color : ${(props) => (props.bgColor)};
 `;
 
 export const SpanYellow = styled.span`

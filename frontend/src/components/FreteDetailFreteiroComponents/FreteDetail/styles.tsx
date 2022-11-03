@@ -1,27 +1,27 @@
 import styled from "styled-components";
-import {BtnPattern} from "../../../styles"
+import { BtnPattern } from "../../../styles"
 
 export const Container = styled.div`
-background-color: #f5f5f5;
+    background-color: #f5f5f5;
 
-span{
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-}
+    span{
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+    }
 
-h1 {
-    margin: 30px 0px 20px 0px;
-    font-weight: 600;
-    line-height: 24px;
-    font-size: 52px;
-    color: #353535;
-}
+    h1 {
+        margin: 30px 0px 20px 0px;
+        font-weight: 600;
+        line-height: 32px;
+        font-size: var(--font-xxl);
+        color: #353535;
+    }
 `;
 
 export const Content = styled.div`
-    background-color: #ffffff;
+    background-color: var(--bg-ligth);
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -33,15 +33,24 @@ export const Content = styled.div`
 
 export const Content1 = styled.div`
     display: flex;
+    align-items: center;
+    flex-wrap: wrap-reverse;
     gap: 2rem;
     div{
         display: flex;
         flex-direction: column;
     }
+    img {
+        object-fit: cover;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
 `;
 
 export const Content2 = styled.div`
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
 
 `;

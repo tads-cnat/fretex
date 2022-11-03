@@ -16,3 +16,7 @@ export interface InterfaceInfo {
 export interface IDropdownMenu {
   display?: string;
 }
+
+export interface IWrapper {
+  bgColor?: string;
+}

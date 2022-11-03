@@ -68,7 +68,7 @@ export const DropdownContent = styled.div<IDropdownMenu>`
     z-index: 1;
 
     @media (min-width: 440px) {
-        display: none
+        display: none;
     }
 `;
 
@@ -76,6 +76,9 @@ export const DropdownCircle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (min-width: 440px) {
+        display: none;
+    }
 `;
 
 
