@@ -1,8 +1,8 @@
 import {
-    Container, Content, Negotiation,
+    Container,Seta, Content, Negotiation,
     Content1, Content2, HeaderContainer,
     PropostaContainer2, BtnGreen, Content2Info,
-    BtnYellow
+    BtnYellow, AceitaContra, ValorPerfil
 } from "./styles"
 
 import { BtnPattern } from "../../../styles"
@@ -17,8 +17,10 @@ import info from "../../../assets/images/info-circle.svg"
 const index = () => {
     return (
         <Container>
-            <h1>Detalhes de frete</h1>
-            <p><img src={arrowleft} alt="voltar" /> Voltar</p>
+            <div>
+                <h1>Detalhes de frete</h1>
+                <Seta><img src={arrowleft} alt="voltar" /> Voltar</Seta>
+            </div>
             <Content>
                 <Content1>
                     <img src={caixas} alt="caixas" />
@@ -63,7 +65,7 @@ const index = () => {
                     </Content2Info>
                 </Content2>
             </Content>
-            
+
             <Negotiation>
                 <HeaderContainer>
                     <div>
@@ -75,13 +77,17 @@ const index = () => {
                     </BtnYellow>
                 </HeaderContainer>
                 <PropostaContainer2>
-                    <img src={user} alt="avatar-user" />
-                    <div>
-                        <h3>R$ 270,00</h3>
-                        <p>feita em: dd/mm/yyyy</p>
-                    </div>
-                    <BtnGreen to="/aceitar-proposta-freteiro">Aceitar</BtnGreen>
-                    <h4>Contraproposta</h4>
+                    <ValorPerfil>
+                        <img src={user} alt="avatar-user" />
+                        <div>
+                            <h3>R$ 270,00</h3>
+                            <p>feita em: dd/mm/yyyy</p>
+                        </div>
+                    </ValorPerfil>
+                    <AceitaContra>
+                        <BtnGreen to="/aceitar-proposta-freteiro">Aceitar</BtnGreen>
+                        <h4>Contraproposta</h4>
+                    </AceitaContra>
                 </PropostaContainer2>
             </Negotiation>
         </Container>

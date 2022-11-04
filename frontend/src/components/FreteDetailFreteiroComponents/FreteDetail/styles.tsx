@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { BtnPattern } from "../../../styles"
 
 export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     background-color: #f5f5f5;
-
     span{
         font-weight: 600;
         font-size: 16px;
@@ -12,12 +14,18 @@ export const Container = styled.div`
     }
 
     h1 {
-        margin: 30px 0px 20px 0px;
         font-weight: 600;
         line-height: 32px;
         font-size: var(--font-xxl);
         color: #353535;
+        margin: 0 0 30px 0;
     }
+`;
+
+export const Seta = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 `;
 
 export const Content = styled.div`
@@ -25,7 +33,6 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    margin: 30px;
     padding: 20px;
     border-radius: 15px;
 
@@ -52,7 +59,7 @@ export const Content2 = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-
+    margin: 0 0 30px 0;
 `;
 
 export const Content2Info = styled.div`
@@ -70,19 +77,17 @@ export const Negotiation = styled.div`
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    margin: 30px;
     padding: 20px;
     border-radius: 15px;
     gap: 2rem;
-    div{
-
-    }
 `;
 
 export const HeaderContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    row-gap: 1.5em;
     p {
         border-radius: 15px;
         background-color: #E7E7E7;
@@ -94,24 +99,40 @@ export const HeaderContainer = styled.div`
     }
     div {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 2rem;
+        column-gap: 2rem;
+        row-gap: 0.75em;
     }
 `;
 
 export const PropostaContainer2 = styled.div`
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
-    div{
-        display: flex;
-        flex-direction: column;
-        margin-right: 30px;
-    }
-    img{
+    img {
         height: 50px;
         width: 50px;
     }
+    p {
+        line-height: 18px;
+    }
+`;
+
+export const AceitaContra = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+`;
+
+export const ValorPerfil = styled.div`
+    display: flex;
+    gap: 10px;
+    margin: 0 100px 0 0;
 `;
 
 export const BtnGreen = styled(BtnPattern)`
