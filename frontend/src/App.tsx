@@ -4,6 +4,7 @@ import Home from "./pages/Home/index";
 import Register from "./pages/Resgister";
 import ChooseUser from "./pages/ChooseUser";
 import FreteDetailFreteiro from "./pages/FreteDetailFreteiro/index";
+import CadastroFrete from "./pages/CadastroFrete/index"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/choose-user" element={<ChooseUser/>}/> 
           <Route path="/frete-detail-freteiro" element={<FreteDetailFreteiro/>}/>
+          <Route path="/cadastro-frete" element={<CadastroFrete/>}/>
         </Routes>
       </BrowserRouter>
     </StyledApp>

@@ -5,7 +5,6 @@ import {
     BtnYellow, AceitaContra, ValorPerfil
 } from "./styles"
 
-import { BtnPattern } from "../../../styles"
 import caixas from "../../../assets/images/caixas.png"
 import user from "../../../assets/images/user-circle.svg"
 import arrowleft from "../../../assets/images/arrow-left-circle.svg"
