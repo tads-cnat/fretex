@@ -1,5 +1,6 @@
 from django.db import transaction
-from plataform.models import Cliente, Endereco, Freteiro, Pedido
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
+                              Proposta, TipoVeiculo, Veiculo)
 from rest_framework import serializers
 
 
@@ -10,42 +11,29 @@ class EnderecoSerializer(serializers.ModelSerializer):
 
 
 class FreteiroSerializer(serializers.ModelSerializer):
-    endereco = EnderecoSerializer(write_only=True)
-    password = serializers.CharField(write_only=True)
+    endereco = EnderecoSerializer(read_only=False)
 
     class Meta:
         model = Freteiro
-        fields = ("username", "first_name", "last_name",
-                  "password", "email", "cpf", "url_foto", "endereco")
-#        read_only_fields = ['endereco']
+        fields = ("id", "username", "first_name", "last_name", 
+                 "email", "cpf", "url_foto", "endereco")
 
     @transaction.atomic
     def create(self, validated_data):
-        """   if self.is_valid():
-            endereco1 = Endereco.objects.create(validated_data.get("endereco"))
-            endereco1.save()
+        if self.is_valid():
+            endereco = validated_data['endereco']
+            del validated_data['endereco']
 
-            url_foto = validated_data.get("url_foto")
-            cpf = validated_data.get("cpf")
-            username = validated_data.get("username")
-            first_name = validated_data.get("first_name")
-            last_name = validated_data.get("last_name")
+            end = Endereco.objects.create(**endereco)
+            end.save()
 
-            freteiro = Freteiro.objects.create(
-                username=username, first_name=first_name,
-                last_name=last_name, url_foto=url_foto,
-                cpf=cpf, endereco=endereco1
+            freteiro = Freteiro.objects.create_user(
+                **validated_data, endereco=end
             )
-
             freteiro.set_password(validated_data.get("password"))
             freteiro.save()
-            return freteiro"""
-        pass
 
-        # cria endereco
-        # criar o endereco
-        # metodo set password do endereco set_password
-        # retorna endereco
+            return freteiro
 
 
 # TODO - VErificar fotos nos serializers
@@ -67,18 +55,71 @@ class ClienteSerializer(serializers.ModelSerializer):
             cliente.save()
             return cliente
 
-        # criar o cliente
-        # metodo set password do cliente set_password
-        # retorna Cliente
 
+class TipoVeiculoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoVeiculo
+        fields = ("__all__")
 
+        
+class ProdutoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Produto
+        fields = ("nome", "imagem_url")
+
+        
 class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
+    tipoveiculo = TipoVeiculoSerializer(many=True)
+    produto = ProdutoSerializer()
     cliente = serializers.ReadOnlyField()
     status = serializers.ReadOnlyField()
-
+    
     class Meta:
         model = Pedido
-        fields = ("cliente", "origem", "destino", "status", "tipo_veiculo", "observacao",
-                  "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
+        fields = ("id", "cliente", "origem", "destino", "status", "tipoveiculo", "observacao",
+                  "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta", "produto")
+        
+    @transaction.atomic
+    def create(self, validated_data):
+        """ if self.is_valid():
+            origem = validated_data['origem']
+            del validated_data['origem']
+            origem1 = Endereco.objects.create(**origem)
+            origem1.save()
+
+            destino = validated_data['destino']
+            del validated_data['destino']
+            destino1 = Endereco.objects.create(**destino)
+            destino1.save()
+
+            produto = validated_data['produto']
+            del validated_data['produto']
+            produto1 = Produto.objects.create(**produto)
+            produto1.save()
+
+            tipoveiculo = validated_data['tipoveiculo']
+            del validated_data['tipoveiculo']
+            tipoveiculo2 = TipoVeiculo.objects.create(*tipoveiculo)
+            tipoveiculo2.save()
+
+            pedido = Pedido.objects.create(
+                **validated_data, origem=origem1, destino=destino1, produto=produto1, tipoveiculo=tipoveiculo2
+            )
+            pedido.save()
+
+            return pedido"""
+        pass
+
+
+class VeiculoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Veiculo
+        fields = ("__all__")
+
+
+class PropostaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proposta
+        fields = ("__all__")
