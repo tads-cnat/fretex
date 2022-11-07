@@ -7,7 +7,7 @@ export const Nav = styled.nav`
     background-color: var(--bg-grey);
     color: var(--text-light);
 `;
- 
+
 export const NavContainer = styled.div`
     display: flex;
     justify-content: space-between;

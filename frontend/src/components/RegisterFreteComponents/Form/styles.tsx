@@ -163,8 +163,8 @@ export const BtnYellow = styled.button`
     font-size: var(--font-large);
     line-height: 24px;
     &:hover {
-      background-color: var(--btn-hover);
-  }
+        background-color: var(--btn-hover);
+    }
 `;
 
 export const ButtonDiv = styled.div`
