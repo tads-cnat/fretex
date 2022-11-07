@@ -27,7 +27,7 @@ Atividades realizadas nesse momento:
 
 **TERCEIRO MOMENTO:**
 
-A terceira etapa é basicamente a atualização do repositorio como reflexo das estapas anteriores.
+A terceira etapa consiste basicamente na atualização do repositorio como reflexo das estapas anteriores.
 
 Atividades realizadas nesse momento:
 
