@@ -71,46 +71,41 @@ class ProdutoSerializer(serializers.ModelSerializer):
 class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
-    tipoveiculo = TipoVeiculoSerializer(many=True)
     produto = ProdutoSerializer()
     cliente = serializers.ReadOnlyField()
     status = serializers.ReadOnlyField()
     
     class Meta:
         model = Pedido
-        fields = ("id", "cliente", "origem", "destino", "status", "tipoveiculo", "observacao",
-                  "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta", "produto")
+        fields = ("cliente", "produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
         
     @transaction.atomic
     def create(self, validated_data):
-        """ if self.is_valid():
+        if self.is_valid():
             origem = validated_data['origem']
             del validated_data['origem']
             origem1 = Endereco.objects.create(**origem)
             origem1.save()
-
+            
             destino = validated_data['destino']
             del validated_data['destino']
             destino1 = Endereco.objects.create(**destino)
             destino1.save()
-
+            
             produto = validated_data['produto']
             del validated_data['produto']
             produto1 = Produto.objects.create(**produto)
-            produto1.save()
+            produto1.save()       
 
-            tipoveiculo = validated_data['tipoveiculo']
-            del validated_data['tipoveiculo']
-            tipoveiculo2 = TipoVeiculo.objects.create(*tipoveiculo)
-            tipoveiculo2.save()
 
             pedido = Pedido.objects.create(
-                **validated_data, origem=origem1, destino=destino1, produto=produto1, tipoveiculo=tipoveiculo2
+                **validated_data, origem=origem1, 
+                destino=destino1, produto=produto1, cliente = self.cliente.id
             )
             pedido.save()
 
-            return pedido"""
-        pass
+            return pedido
+        
 
 
 class VeiculoSerializer(serializers.ModelSerializer):
