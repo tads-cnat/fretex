@@ -3,6 +3,7 @@
 A rotina de trabalho da equipe FRETEX é dividida de forma cíclica em três momentos.
 
 **PRIMEIRO MOMENTO:**
+
 Consiste na reunião presencial dos membros do grupo em horário de aula. 
 
 Atividades realizadas nesse momento:
@@ -14,6 +15,7 @@ Atividades realizadas nesse momento:
 - Criação das novas issues.
 
 **SEGUNDO MOMENTO:**
+
 Esta etapa da rotina de trabalho reflete fundamentalmente a parte prática do desenvolvimento, nesse momento os integrantes colocam a mão na massa de forma predominantemente remota. Visando melhorar o desempenho, a comunicação e difundir o conhecimento entre os membros do grupo é muito comum nesta etapa a programação em pares via Discord. 
 
 Atividades realizadas nesse momento:
@@ -24,6 +26,7 @@ Atividades realizadas nesse momento:
 - Realização de testes.
 
 **TERCEIRO MOMENTO:**
+
 A terceira etapa é basicamente a atualização do repositorio como reflexo das estapas anteriores.
 
 Atividades realizadas nesse momento:
