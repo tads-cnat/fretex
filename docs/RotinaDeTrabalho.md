@@ -1,10 +1,10 @@
 # Rotina de Trabalho - FRETEX
 
-A rotina de trabalho da equipe FRETEX é dividida de forma cíclica em três momentos.
+#### A rotina de trabalho da equipe FRETEX é dividida de forma cíclica em três momentos.
 
-**PRIMEIRO MOMENTO:**
+### PRIMEIRO MOMENTO:
 
-Consiste na reunião presencial dos membros do grupo em horário de aula. 
+##### Consiste na reunião presencial dos membros do grupo em horário de aula. 
 
 Atividades realizadas nesse momento:
 
@@ -14,9 +14,9 @@ Atividades realizadas nesse momento:
 - Debate sobre a parte conceitual do projeto, caso seja necessario.
 - Criação das novas issues.
 
-**SEGUNDO MOMENTO:**
+### SEGUNDO MOMENTO:
 
-Esta etapa da rotina de trabalho reflete fundamentalmente a parte prática do desenvolvimento, nesse momento os integrantes colocam a mão na massa de forma predominantemente remota. Visando melhorar o desempenho, a comunicação e difundir o conhecimento entre os membros do grupo é muito comum nesta etapa a programação em pares via Discord. 
+##### Esta etapa da rotina de trabalho reflete fundamentalmente a parte prática do desenvolvimento, nesse momento os integrantes colocam a mão na massa de forma predominantemente remota. Visando melhorar o desempenho, a comunicação e difundir o conhecimento entre os membros do grupo é muito comum nesta etapa a programação em pares via Discord. 
 
 Atividades realizadas nesse momento:
 
@@ -25,9 +25,9 @@ Atividades realizadas nesse momento:
 - Codificação prática.
 - Realização de testes.
 
-**TERCEIRO MOMENTO:**
+### TERCEIRO MOMENTO:
 
-A terceira etapa consiste basicamente na atualização do repositorio como reflexo das estapas anteriores.
+##### A terceira etapa consiste basicamente na atualização do repositorio como reflexo das estapas anteriores.
 
 Atividades realizadas nesse momento:
 
