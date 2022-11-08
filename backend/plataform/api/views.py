@@ -1,4 +1,5 @@
 from core.api.renders import CustomRenderer
+from django.contrib.auth.models import User
 from plataform.api.serializers import (ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
 from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo)
 from rest_framework import viewsets
@@ -8,15 +9,24 @@ from rest_framework.decorators import action
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
+from core.api.helpers import open_api_parameter
 
 class AuthViewSet(viewsets.ViewSet):
     permission_classes = []
 
-    @swagger_auto_schema(method='post', manual_parameters=[openapi.Parameter('username', openapi.IN_QUERY, type=openapi.TYPE_STRING)], responses={200: ''})
+    @swagger_auto_schema(method='post', manual_parameters=[open_api_parameter('email', 'string'), open_api_parameter('password', 'string')], responses={200: ''})
     @action(detail=False, methods=['post'])
     def login(self, request):
-        email = request.data.email
-        return Response({'teste': 'hello'})
+        email = request.data.get('email')
+        print(User.objects.all())
+        user = User.objects.filter(email=email)
+        if len(user) == 0:
+            return Response({'detail': 'Credenciais incorretas 0'})
+        user = user[0]
+        success = user.check_password()
+        if not success:
+            return Response({'detail': 'Credenciais incorretas 1'})
+        return Response({'sucesso': 'hello'})
 
 class EnderecoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -33,7 +43,7 @@ class FreteiroViewSet(viewsets.ModelViewSet):
 
 
 class ClienteViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
     serializer_class = ClienteSerializer
     queryset = Cliente.objects.all()
     renderer_classes = [CustomRenderer]
