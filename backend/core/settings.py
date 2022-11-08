@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['fretex.pythonanywhere.com', '127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'plataform',
 
+    'rest_framework.authtoken',
     'rest_framework',
     'drf_yasg',
 

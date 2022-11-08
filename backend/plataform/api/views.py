@@ -3,7 +3,20 @@ from plataform.api.serializers import (ClienteSerializer, EnderecoSerializer, Fr
 from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo)
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.decorators import action
 
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+
+class AuthViewSet(viewsets.ViewSet):
+    permission_classes = []
+
+    @swagger_auto_schema(method='post', manual_parameters=[openapi.Parameter('username', openapi.IN_QUERY, type=openapi.TYPE_STRING)], responses={200: ''})
+    @action(detail=False, methods=['post'])
+    def login(self, request):
+        email = request.data.email
+        return Response({'teste': 'hello'})
 
 class EnderecoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
