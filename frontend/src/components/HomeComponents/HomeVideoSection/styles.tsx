@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const VideoSection = styled.div`
   background: var(--bg-dark);
@@ -9,6 +8,7 @@ export const VideoSection = styled.div`
   padding: 0 30px;
   height: 80vh;
   position: relative;
+  margin-bottom: var(--mb-80);
 `;
 
 export const ContainerVideo = styled.div`
@@ -47,7 +47,7 @@ export const VideoP = styled.p`
   font-size: var(--font-large);
   text-align: center;
   max-width: 500px;
-  margin-bottom: 20px;
+  margin-bottom: var(--mb-20);
 `;
 
 export const VideoBtnWrapper = styled.div`
@@ -57,16 +57,3 @@ export const VideoBtnWrapper = styled.div`
   justify-content: center;
 `;
 
-export const ButtonLink = styled(Link)`
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--btn-text-color1);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: var(--font-medium);
-  font-weight: 500;
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-`;
