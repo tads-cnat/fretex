@@ -9,7 +9,6 @@ export const ContainerFilter = styled.div`
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
 `;
 
-
 export const TypesVehicles = styled.div`
     display: flex;
     flex-direction: column;
@@ -19,8 +18,6 @@ export const TypesVehicles = styled.div`
         margin: 10px 0;
     }
 `;
-
-
 
 export const PeriodCollect = styled.div`
     display: flex;

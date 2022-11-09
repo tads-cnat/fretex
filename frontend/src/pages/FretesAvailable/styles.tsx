@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 export const ContainerBg = styled.div`
     background-color: var(--bg-grey3);
-
+    height: 95vh;
 `;
 
 export const ContainerMain = styled.div`
     background-color: var(--bg-grey3);
     display: flex;
+    column-gap: 20px;
     row-gap: 24px;
-    justify-content: space-between;
     flex-wrap: wrap;
 `;
 
