@@ -1,60 +1,112 @@
-import { SpanYellow } from '../../../styles'
-import { ContainerForm, BtnYellow, ContainerPrincipal, ContainerContent } from './styles'
+import { SpanYellow } from "../../../styles";
+import Email from "../../../assets/Svg/Email";
+import Password from "../../../assets/Svg/Password";
+import User from "../../../assets/Svg/User";
+import {
+  ContainerForm,
+  BtnYellow,
+  ContainerPrincipal,
+  ContainerContent,
+} from "./styles";
+import Eye from "../../../assets/Svg/Eye";
+import { useEffect, useRef, useState } from "react";
+import ClosedEye from "../../../assets/Svg/ClosedEye";
 
-const index = () => {
-    return (
-        <ContainerPrincipal>
-            <ContainerForm>
-                <form method="POST">
-                    <h1>Crie sua conta</h1>
-                    <label>
-                        <input
-                            type='email'
-                            name='email'
-                            required
-                            placeholder='Seu E-mail' />
-                    </label>
-                    <label>
-                        <input
-                            type='text'
-                            name='nome'
-                            required
-                            placeholder='Seu nome completo' />
-                    </label>
-                    <label>
-                        <input
-                            type='password'
-                            name='password'
-                            required
-                            placeholder='Sua senha' />
-                    </label>
-                    <label>
-                        <input
-                            type='password'
-                            name='confirm-password'
-                            required
-                            placeholder='Confirme sua senha' />
-                    </label>
-                    <BtnYellow>
-                        Cadastre-se
-                    </BtnYellow>
-                </form>
-                <div>
-                    <p>Já tem uma conta?</p><a href='/login'>Entrar</a>
-                </div>
-            </ContainerForm>
-            <ContainerContent>
-                <div>
-                    <h1>Frete<SpanYellow>X</SpanYellow></h1>
+const RegisterClientForm = () => {
+  const [password, setPassord] = useState<boolean>(false);
+  const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const email: any = useRef();
 
-                    <h2>Conta Cliente</h2>
-                    <p> Como cliente você pode cadastrar
-                        seus pedidos de frete e negociar
-                        diretamente com os nossos freteiros parceiros</p>
-                </div>
-            </ContainerContent>
-        </ContainerPrincipal>
-    )
-}
+  const handlePassword = (e: any) => {
+    e.preventDefault();
+    setPassord(!password);
+  };
 
-export default index
+  const handleConfirmPassword = (e: any) => {
+    e.preventDefault();
+    setConfirmPassword(!confirmPassword);
+  };
+
+  useEffect(() => {
+    email.current.focus();
+  }, []);
+
+  return (
+    <ContainerPrincipal>
+      <ContainerForm>
+        <form>
+          <h1>Crie sua conta</h1>
+          <div>
+            <label>
+              <Email />
+              <input
+                ref={email}
+                type="email"
+                autoComplete="on"
+                name="email"
+                required
+                placeholder="Seu E-mail"
+              />
+            </label>
+            <label>
+              <User />
+              <input
+                type="text"
+                name="nome"
+                required
+                placeholder="Seu nome completo"
+              />
+            </label>
+            <label>
+              <Password />
+              <input
+                type={password === true ? "text" : "password"}
+                name="password"
+                required
+                placeholder="Sua senha"
+              />
+              <button onClick={handlePassword}>
+                {password ? <ClosedEye /> : <Eye />}
+              </button>
+            </label>
+            <label>
+              <Password />
+              <input
+                type={confirmPassword === true ? "text" : "password"}
+                name="confirm-password"
+                required
+                placeholder="Confirme sua senha"
+              />
+              <button onClick={handleConfirmPassword}>
+                {confirmPassword ? <ClosedEye /> : <Eye />}
+              </button>
+            </label>
+          </div>
+          <section>
+            <BtnYellow>Cadastre-se</BtnYellow>
+            <p>
+              Já tem uma conta?<a href="/login"> Entrar</a>
+            </p>
+          </section>
+        </form>
+      </ContainerForm>
+      <ContainerContent>
+        <div>
+          <section>
+            <h1>
+              Frete<SpanYellow>X</SpanYellow>
+            </h1>
+
+            <h2>Conta Cliente</h2>
+            <p>
+              Como cliente você pode cadastrar seus pedidos de frete e negociar
+              diretamente com os nossos freteiros parceiros
+            </p>
+          </section>
+        </div>
+      </ContainerContent>
+    </ContainerPrincipal>
+  );
+};
+
+export default RegisterClientForm;

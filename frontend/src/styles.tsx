@@ -81,6 +81,7 @@ export const BtnPattern = styled(Link)`
     border-radius: 6px;
     font-size: var(--font-medium);
     font-weight: 500;
+    cursor: pointer;
     &:hover {
       background-color: var(--btn-hover);
   }

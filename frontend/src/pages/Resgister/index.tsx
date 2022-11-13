@@ -1,18 +1,17 @@
-import Footer from '../../components/Footer'
-import Navbar from '../../components/Navbar'
-import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm'
-import { Wrapper } from '../../styles'
+import RegisterClienteForm from "../../components/RegisterComponents/RegisterClienteForm";
+import { Wrapper } from "../../styles";
+import { BgRegister, Teste } from "./style";
 
 const Register = () => {
   return (
-    <>
-      <Navbar/>
-      <Wrapper bgColor='#282828'>
-        <RegisterClienteForm/>
-      </Wrapper>
-      <Footer/>
-    </>
-  )
-}
+    <BgRegister>
+      <Teste>
+        <Wrapper bgColor="#282828">
+          <RegisterClienteForm />
+        </Wrapper>
+      </Teste>
+    </BgRegister>
+  );
+};
 
-export default Register
+export default Register;
