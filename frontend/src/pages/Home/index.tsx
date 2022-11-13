@@ -18,7 +18,7 @@ const Home = () => {
       <Navbar/>
       <HomeVideoSection />
       <Wrapper>
-        <Title>Como a FreteX funciona?</Title>
+        <Title id="howWorks">Como a FreteX funciona?</Title>
 
         <Description>
           Nós facilitamos a oferta do serviço de frete em todo o Brasil,

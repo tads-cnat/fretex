@@ -15,7 +15,7 @@ import fundo from "../../../assets/images/fundo.svg";
 
 const SectionVantagens = () => {
   return (
-    <VantagensContainer img={fundo}>
+    <VantagensContainer img={fundo} id="vantagens">
       <Wrapper>
         <VantagensGrid>
           <div>

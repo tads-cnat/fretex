@@ -5,7 +5,7 @@ import imgFreteiro from "../../../assets/images/ParaFreteiros.png";
 
 export const Registration = () => {
   return (
-    <RegisterContainer>
+    <RegisterContainer id="registration">
       <RegisterUser img={imgCliente}>
         <Title>
           Para Clientes<SpanYellow>.</SpanYellow>

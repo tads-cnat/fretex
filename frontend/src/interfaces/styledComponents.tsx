@@ -14,7 +14,8 @@ export interface InterfaceInfo {
 }
 
 export interface IDropdownMenu {
-  display?: string;
+  display?: string | boolean;
+  animation?: string | boolean;
 }
 
 export interface IWrapper {

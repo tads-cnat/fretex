@@ -41,7 +41,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
       --font-small: .6rem;
       --font-medium: .75rem;
-      --font-large: 1.125rem;
+      --font-large: 1.115rem;
       --font-xl: 1.275rem;
       --font-xxl: 2rem;
 
@@ -52,10 +52,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * {
+    scroll-behavior: smooth;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 

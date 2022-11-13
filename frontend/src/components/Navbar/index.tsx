@@ -1,45 +1,54 @@
-import { SpanYellow, Wrapper} from "../../styles";
-import { useState } from "react"
-import { Nav, Logo, LinksFretes,
-  NavContainer, NavbarLinks, BtnLogin,
-  ImgDropdown, DropdownContent,DropdownCircle } from "./styles";
-import dropdown from "../../assets/images/dropdown.svg";
+import { BtnPattern, Wrapper, SpanYellow } from "../../styles";
+import { useState } from "react";
+import {
+  Header,
+  Logo,
+  LinksFretes,
+  NavContainer,
+  NavbarLinks,
+  ButtonMenuContainer,
+} from "./styles";
 
 const Navbar = () => {
-
-  const [dropdownUp, setDropdownUp] = useState(false)
-
-  const handleDropdown = () => {
-    if (dropdownUp === false){
-      setDropdownUp(true)
-    } else {
-      setDropdownUp(false)
-    }
-  }
+  const [dropdownUp, setDropdownUp] = useState(false);
 
   return (
-    <Nav>
+    <Header>
       <Wrapper>
         <NavContainer>
-          <Logo>Frete<SpanYellow>X</SpanYellow></Logo>
-          <LinksFretes>
-            <NavbarLinks to=''>Buscar fretes</NavbarLinks>
-            <NavbarLinks to=''>Meus fretes</NavbarLinks>
+          <div>
+            <Logo to="/">
+              Frete<SpanYellow>X</SpanYellow>
+            </Logo>
+          </div>
+
+          <LinksFretes display={dropdownUp}>
+            <ul>
+              <li>
+                <a href="#howWorks">Como funciona</a>
+              </li>
+              <li>
+                <a href="#vantagens">Vantagens</a>
+              </li>
+              <li>
+                <a href="#registration">Cadastrar-se</a>
+              </li>
+            </ul>
+            <div>
+              <BtnPattern to=";">Login</BtnPattern>
+              {/* colocar perfil do usuário*/}
+            </div>
           </LinksFretes>
-          <BtnLogin to=";">
-            Login
-          </BtnLogin>
-          <DropdownCircle onClick={handleDropdown}>
-            <ImgDropdown src={dropdown} alt="dropdown"/>
-          </DropdownCircle>
-          <DropdownContent display={dropdownUp===true ? "flex" : "none"}>
-                <NavbarLinks to=''>Buscar fretes</NavbarLinks>
-                <NavbarLinks to=''>Meus fretes</NavbarLinks>
-                <NavbarLinks to=''>Login</NavbarLinks>
-          </DropdownContent>
+
+          <ButtonMenuContainer animation={dropdownUp}>
+            <button onClick={() => setDropdownUp(!dropdownUp)}>
+              Menu
+              <span></span>
+            </button>
+          </ButtonMenuContainer>
         </NavContainer>
       </Wrapper>
-    </Nav>
+    </Header>
   );
 };
 
