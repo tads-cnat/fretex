@@ -7,15 +7,13 @@ import cliente from "../../assets/images/cliente.svg";
 import negociacao from "../../assets/images/negociacao.svg";
 import HomeVideoSection from "../../components/HomeComponents/HomeVideoSection";
 import SectionVantagens from "../../components/HomeComponents/SectionVantagens";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import Registration from "../../components/HomeComponents/RegistrationSection";
 import InfoSection from "../../components/HomeComponents/InfoSection";
+import Layout from "../../components/Layout";
 
 const Home = () => {
   return (
-    <>
-      <Navbar/>
+    <Layout>
       <HomeVideoSection />
       <Wrapper>
         <Title id="howWorks">Como a FreteX funciona?</Title>
@@ -44,11 +42,10 @@ const Home = () => {
           />
         </Container>
       </Wrapper>
-      <SectionVantagens/>
-      <InfoSection/>
-      <Registration/>
-      <Footer/>
-    </>
+      <SectionVantagens />
+      <InfoSection />
+      <Registration />
+    </Layout>
   );
 };
 
