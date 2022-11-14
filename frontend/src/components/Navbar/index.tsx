@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 const Navbar = () => {
-  const [dropdownUp, setDropdownUp] = useState(false);
+  const [dropdownUp, setDropdownUp] = useState<boolean>(false);
 
   return (
     <Header>
@@ -22,7 +22,7 @@ const Navbar = () => {
             </Logo>
           </div>
 
-          <LinksFretes display={dropdownUp}>
+          <LinksFretes show={dropdownUp}>
             <ul>
               <li>
                 <a href="#howWorks">Como funciona</a>

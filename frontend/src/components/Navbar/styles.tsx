@@ -59,7 +59,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
 
   @media (max-width: 768px) {
     & {
-      display: ${(props) => (props.display ? "flex" : "none")};
+      display: ${(props) => props.show ? "flex" : "none"};
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
