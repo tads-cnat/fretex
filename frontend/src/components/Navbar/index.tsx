@@ -9,11 +9,15 @@ import {
   ButtonMenuContainer,
 } from "./styles";
 
-const Navbar = () => {
+interface INavbar {
+  id?: string;
+}
+
+const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
 
   return (
-    <Header>
+    <Header id={id}>
       <Wrapper>
         <NavContainer>
           <div>
