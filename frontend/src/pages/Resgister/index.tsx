@@ -1,4 +1,5 @@
 import RegisterClienteForm from "../../components/RegisterComponents/RegisterClienteForm";
+import RegisterFreteiroForm from "../../components/RegisterComponents/RegisterFreteiroForm";
 import { Wrapper } from "../../styles";
 import { BgRegister, Teste } from "./style";
 
@@ -7,7 +8,7 @@ const Register = () => {
     <BgRegister>
       <Teste>
         <Wrapper bgColor="#282828">
-          <RegisterClienteForm />
+          <RegisterFreteiroForm />
         </Wrapper>
       </Teste>
     </BgRegister>

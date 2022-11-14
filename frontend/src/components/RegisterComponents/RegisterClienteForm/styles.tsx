@@ -45,6 +45,7 @@ export const ContainerContent = styled.div`
     font-weight: 600;
     font-size: var(--font-medium);
   }
+  
   @media (max-width: 768px) {
     div {
       order: -1;
