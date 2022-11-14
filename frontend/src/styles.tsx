@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { IWrapper } from "./interfaces/styledComponents";
 
@@ -65,7 +65,7 @@ export const Wrapper = styled.div<IWrapper>`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  background-color : ${(props) => (props.bgColor)};
+  background-color: ${(props) => props.bgColor};
 `;
 
 export const SpanYellow = styled.span`
@@ -73,16 +73,29 @@ export const SpanYellow = styled.span`
 `;
 
 export const BtnPattern = styled(Link)`
-    padding: 9px 32px;
-    background-color: var(--theme-primary);
-    color: var(--btn-text-color1);
-    transition: 0.5s;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: var(--font-medium);
-    font-weight: 500;
-    cursor: pointer;
-    &:hover {
-      background-color: var(--btn-hover);
+  padding: 9px 32px;
+  background-color: var(--theme-primary);
+  color: var(--btn-text-color1);
+  transition: 0.5s;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: var(--font-medium);
+  font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--btn-hover);
+  }
+`;
+
+export const Animation = styled.div`
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: animeLeft 0.3s forwards;
+
+  @keyframes animeLeft {
+    to {
+      transform: initial;
+      opacity: initial;
+    }
   }
 `;

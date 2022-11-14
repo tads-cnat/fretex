@@ -1,10 +1,10 @@
 import styled from "styled-components";
+import { Animation } from "../../../styles";
 
-export const ContainerPrincipal = styled.div`
+export const ContainerPrincipal = styled(Animation)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-
   gap: 50px;
 
   @media (max-width: 768px) {
@@ -18,7 +18,7 @@ export const ContainerContent = styled.div`
   display: flex;
   max-width: 400px;
   align-items: center;
-  
+
   div {
     display: flex;
     align-items: center;
@@ -28,27 +28,22 @@ export const ContainerContent = styled.div`
   }
   h1 {
     color: var(--bg-ligth);
-    font-style: normal;
     font-weight: 600;
-    font-size: 42px;
-    line-height: 72px;
-    margin-bottom: 40px;
+    font-size: var(--font-xl);
+    margin-bottom: 20px;
   }
 
   h2 {
     color: var(--bg-ligth);
-    font-style: normal;
     font-weight: 600;
-    font-size: 28px;
-    line-height: 30px;
-    margin-bottom: 20px;
+    font-size: var(--font-large);
+    margin-bottom: 10px;
   }
 
   p {
     color: var(--bg-ligth);
-    font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--font-medium);
   }
   @media (max-width: 768px) {
     div {
@@ -74,11 +69,14 @@ export const ContainerForm = styled.div`
 
   form h1 {
     color: var(--bg-ligth);
-    font-style: normal;
     font-weight: 500;
     font-size: 28px;
     line-height: 24px;
     margin-bottom: 40px;
+    @media (max-width: 768px) {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
   }
 
   form div {
@@ -163,6 +161,14 @@ export const ContainerForm = styled.div`
     border: none;
     color: var(--text-light);
   }
+
+  label input:-webkit-autofill {
+    caret-color: white;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #1b1b1b inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
   @media (max-width: 768px) {
     order: 1;
     form {
