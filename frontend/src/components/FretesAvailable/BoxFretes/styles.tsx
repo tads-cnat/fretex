@@ -9,54 +9,78 @@ export const ContainerMain = styled.div`
     border-radius: 5px;
 `;
 
+export const ContainerInfoBtn = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+`;
+
 export const ContainerInfos = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 5px;
-    margin: 20px;
+    max-width: 550px;
     p {
         font-size: var(--font-medium);
+        color: #787070;
     }
     h2 {
         font-size: var(--font-large);
+    }
+    img {
+        width: 24px;
     }
 `;
 
 export const ContainerEndereco = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px;
+`;
 
-    img {
-        margin-right: 8px;
-    }
+export const Seta = styled.img`
+    transform: rotate(90deg);
+`
+
+export const End = styled.div`
+    display: flex;
+    gap: 8px;
 `;
 
 export const ContainerCalendar = styled.div`
     display: flex;
+    gap: 8px;
     align-items: center;
+    margin-bottom: 26px;
+`;
 
-    img {
-        margin-right: 8px;
-    }
 
-    
+export const ContainerImgMain = styled.div`
+
+
 `;
 
 export const ContainerImg = styled.img`
     object-fit: cover;
+    border-radius:  0 8px 8px 0;
+    height: 100%;
+    width: 100%;
 `;
 
 export const BtnYellow = styled.button`
-    padding: 9px 32px;
+    width: 163px;
+    padding: 9px 27px;
     background-color: var(--theme-primary);
     color: var(--text-light);
     transition: 0.5s;
     text-decoration: none;
     border-radius: 6px;
     border: 0px;
-    font-weight: 700;
-    font-size: var(--font-large);
+    font-size: var(--font-medium);
     line-height: 24px;
+    cursor: pointer;
     &:hover {
         background-color: var(--btn-hover);
     }

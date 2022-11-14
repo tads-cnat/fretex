@@ -3,7 +3,7 @@ import BoxFretes from "../../components/FretesAvailable/BoxFretes";
 import Filter from "../../components/FretesAvailable/Filter";
 import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../styles";
-import { ContainerBg, ContainerMain, Search } from "./styles";
+import { ContainerBg, ContainerMain, ContainerFretes, Search } from "./styles";
 import SearchImg from "../../assets/images/search.svg"
 
 const FretesAvailable = () => {
@@ -20,7 +20,11 @@ const FretesAvailable = () => {
                     </Search>
                     <ContainerMain>
                         <Filter />
-                        <BoxFretes />
+                        <ContainerFretes>
+                            <BoxFretes />
+                            <BoxFretes />
+                            <BoxFretes />
+                        </ContainerFretes>
                     </ContainerMain>
                 </Wrapper>
             </ContainerBg>

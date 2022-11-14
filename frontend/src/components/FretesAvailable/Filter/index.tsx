@@ -20,7 +20,6 @@ const Filter = () => {
                 <label >
                     <input type="checkbox" name="matutino" value="matutino" />
                     <span>Matutino</span>
-                    
                 </label>
                 <label >
                     <input type="checkbox" name="vespertino" value="vespertino" />
