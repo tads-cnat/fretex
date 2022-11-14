@@ -11,6 +11,7 @@ import {
 import Eye from "../../../assets/Svg/Eye";
 import { useEffect, useRef, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
+import { Link } from "react-router-dom";
 
 const RegisterClientForm = () => {
   const [password, setPassord] = useState<boolean>(false);
@@ -85,7 +86,7 @@ const RegisterClientForm = () => {
           <section>
             <BtnYellow>Cadastre-se</BtnYellow>
             <p>
-              Já tem uma conta?<a href="/login"> Entrar</a>
+              Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>
           </section>
         </form>
