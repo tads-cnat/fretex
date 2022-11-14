@@ -3,12 +3,10 @@ import styled from "styled-components";
 
 export const ContainerMain = styled.div`
     display: flex;
-    flex-grow: 1;
     background-color: var(--bg-ligth);
     justify-content: space-between;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
-    
 `;
 
 export const ContainerInfoBtn = styled.div `
@@ -25,35 +23,50 @@ export const ContainerInfos = styled.div`
     max-width: 550px;
     p {
         font-size: var(--font-medium);
+        color: #787070;
     }
     h2 {
         font-size: var(--font-large);
+    }
+    img {
+        width: 24px;
     }
 `;
 
 export const ContainerEndereco = styled.div`
     display: flex;
-    align-items: center;
-    gap: 18px;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px;
 `;
 
-export const EndColeta = styled.div`
+export const Seta = styled.img`
+    transform: rotate(90deg);
+`
+
+export const End = styled.div`
     display: flex;
     gap: 8px;
-`;
-
-export const EndEntrega = styled.div`
-
 `;
 
 export const ContainerCalendar = styled.div`
     display: flex;
     gap: 8px;
     align-items: center;
+    margin-bottom: 26px;
+`;
+
+
+export const ContainerImgMain = styled.div`
+
+
 `;
 
 export const ContainerImg = styled.img`
     object-fit: cover;
+    border-radius:  0 8px 8px 0;
+    height: 100%;
+    width: 100%;
 `;
 
 export const BtnYellow = styled.button`
@@ -65,8 +78,9 @@ export const BtnYellow = styled.button`
     text-decoration: none;
     border-radius: 6px;
     border: 0px;
-    font-size: var(--font-large);
+    font-size: var(--font-medium);
     line-height: 24px;
+    cursor: pointer;
     &:hover {
         background-color: var(--btn-hover);
     }
