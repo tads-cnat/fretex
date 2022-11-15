@@ -97,6 +97,11 @@ export const ContainerInfos = styled(ContainerContent)`
     div {
       padding-left: 0px;
       border: none;
+
+      a{
+        text-decoration: none;
+        color: var(--text-light);
+      }
     }
   }
 `;

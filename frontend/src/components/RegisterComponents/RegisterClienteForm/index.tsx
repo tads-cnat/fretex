@@ -95,7 +95,7 @@ const RegisterClientForm = () => {
         <div>
           <section>
             <h1>
-              Frete<SpanYellow>X</SpanYellow>
+              <Link to="/">Frete<SpanYellow>X</SpanYellow></Link>
             </h1>
 
             <h2>Conta Cliente</h2>

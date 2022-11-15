@@ -3,7 +3,8 @@ import Email from "../../assets/Svg/Email";
 import Password from "../../assets/Svg/Password";
 import ClosedEye from "../../assets/Svg/ClosedEye";
 import Eye from "../../assets/Svg/Eye";
-import { ContainerPrincipal, ContainerContent, ContainerForm, BtnYellow } from "../../components/RegisterComponents/RegisterClienteForm/styles";
+import { ContainerPrincipal, ContainerForm, BtnYellow } from "../../components/RegisterComponents/RegisterClienteForm/styles";
+import { ContainerContent2 } from "./styles";
 import { SpanYellow, Wrapper } from "../../styles";
 import { BgRegister } from "../Resgister/style";
 import { Link } from "react-router-dom";
@@ -11,17 +12,11 @@ import { Link } from "react-router-dom";
 const Login = () => {
 
     const [password, setPassord] = useState<boolean>(false);
-    const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
     const email: any = useRef();
 
     const handlePassword = (e: any) => {
         e.preventDefault();
         setPassord(!password);
-    };
-
-    const handleConfirmPassword = (e: any) => {
-        e.preventDefault();
-        setConfirmPassword(!confirmPassword);
     };
 
     useEffect(() => {
@@ -32,21 +27,18 @@ const Login = () => {
         <BgRegister>
             <Wrapper bgColor="#282828">
                 <ContainerPrincipal>
-                    <ContainerContent>
+                    <ContainerContent2>
                         <div>
                             <section>
                                 <h1>
-                                    Frete<SpanYellow>X</SpanYellow>
+                                    <Link to="/">Frete<SpanYellow>X</SpanYellow></Link>
                                 </h1>
-                                <p>
-                                    Faça seu login
-                                    na plataforma
-                                </p>
                             </section>
                         </div>
-                    </ContainerContent>
+                    </ContainerContent2>
                     <ContainerForm>
                         <form>
+                            <h1>Entre na sua conta</h1>
                             <div>
                                 <label>
                                     <Email />
@@ -75,7 +67,7 @@ const Login = () => {
                             <section>
                                 <BtnYellow>Entrar</BtnYellow>
                                 <p>
-                                    Já tem uma conta?<Link to="/login"> Cadastrar-se</Link>
+                                    Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
                                 </p>
                             </section>
                         </form>

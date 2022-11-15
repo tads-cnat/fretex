@@ -25,6 +25,10 @@ export const ContainerContent = styled.div`
     padding-left: 50px;
     border-left: 1px solid #5f5f5f;
     height: 70%;
+    a{
+      text-decoration: none;
+      color: var(--text-light);
+    }
   }
   h1 {
     color: var(--bg-ligth);
