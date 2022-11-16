@@ -81,30 +81,33 @@ class PedidoSerializer(serializers.ModelSerializer):
         
     @transaction.atomic
     def create(self, validated_data):
-        if self.is_valid():
-            origem = validated_data['origem']
-            del validated_data['origem']
-            origem1 = Endereco.objects.create(**origem)
-            origem1.save()
+        print(validated_data)
+        origem = validated_data['origem']
+        del validated_data['origem']
+        origem1 = Endereco.objects.create(**origem)
+        origem1.save()
             
-            destino = validated_data['destino']
-            del validated_data['destino']
-            destino1 = Endereco.objects.create(**destino)
-            destino1.save()
+        destino = validated_data['destino']
+        del validated_data['destino']
+        destino1 = Endereco.objects.create(**destino)
+        destino1.save()
             
-            produto = validated_data['produto']
-            del validated_data['produto']
-            produto1 = Produto.objects.create(**produto)
-            produto1.save()       
+        produto = validated_data['produto']
+        del validated_data['produto']
+        produto1 = Produto.objects.create(**produto)
+        produto1.save()       
+
+        cliente = Cliente.objects.get(user_ptr=validated_data.get('cliente'))
+        del validated_data['cliente']
 
 
-            pedido = Pedido.objects.create(
-                **validated_data, origem=origem1, 
-                destino=destino1, produto=produto1, cliente = self.cliente.id
-            )
-            pedido.save()
+        pedido = Pedido.objects.create(
+            **validated_data, origem=origem1, 
+            destino=destino1, produto=produto1, cliente = cliente
+        )
+        pedido.save()
 
-            return pedido
+        return pedido
         
 
 
