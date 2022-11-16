@@ -61,11 +61,16 @@ class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
 
-    def perform_create(self, serializer):
-        serializer.save(
-            cliente=Cliente.objects.get(user_ptr=self.request.user),
-            status='EN',
-        )
+    def create(self, request, *args, **kwargs):
+        request.data['cliente'] = cliente=Cliente.objects.get(user_ptr=self.request.user)
+        request.data['status'] = 'EN'
+        return super().create(request, *args, **kwargs)
+
+    # def perform_create(self, serializer):
+    #     serializer.save(
+    #         cliente=Cliente.objects.get(user_ptr=self.request.user),
+    #         status='EN',
+    #     )
 
 
 class ProdutoViewSet(viewsets.ModelViewSet):
