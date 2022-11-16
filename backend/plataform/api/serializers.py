@@ -72,42 +72,42 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
-    cliente = serializers.ReadOnlyField()
-    status = serializers.ReadOnlyField()
+    cliente = serializers.ReadOnlyField(source="cliente.id")
+    status = serializers.ReadOnlyField(source="status.id")
     
     class Meta:
         model = Pedido
         fields = ("cliente", "produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
         
-    @transaction.atomic
-    def create(self, validated_data):
-        print(validated_data)
-        origem = validated_data['origem']
-        del validated_data['origem']
-        origem1 = Endereco.objects.create(**origem)
-        origem1.save()
+    # @transaction.atomic
+    # def create(self, validated_data):
+    #     print(validated_data)
+    #     origem = validated_data['origem']
+    #     del validated_data['origem']
+    #     origem1 = Endereco.objects.create(**origem)
+    #     origem1.save()
             
-        destino = validated_data['destino']
-        del validated_data['destino']
-        destino1 = Endereco.objects.create(**destino)
-        destino1.save()
+    #     destino = validated_data['destino']
+    #     del validated_data['destino']
+    #     destino1 = Endereco.objects.create(**destino)
+    #     destino1.save()
             
-        produto = validated_data['produto']
-        del validated_data['produto']
-        produto1 = Produto.objects.create(**produto)
-        produto1.save()       
+    #     produto = validated_data['produto']
+    #     del validated_data['produto']
+    #     produto1 = Produto.objects.create(**produto)
+    #     produto1.save()       
 
-        cliente = Cliente.objects.get(user_ptr=validated_data.get('cliente'))
-        del validated_data['cliente']
+    #     tipos_veiculos = validated_data['tipo_veiculo']
+    #     del validated_data['tipo_veiculo']
 
+    #     pedido = Pedido.objects.create(
+    #         **validated_data, origem=origem1, 
+    #         destino=destino1, produto=produto1
+    #     )
+    #     pedido.tipo_veiculo.set(tipos_veiculos)
+    #     pedido.save()
 
-        pedido = Pedido.objects.create(
-            **validated_data, origem=origem1, 
-            destino=destino1, produto=produto1, cliente = cliente
-        )
-        pedido.save()
-
-        return pedido
+    #     return pedido
         
 
 

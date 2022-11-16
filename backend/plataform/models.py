@@ -27,7 +27,7 @@ class Freteiro(User):
         ordering = ['-id']
 
     def __str__(self):
-        return f"Nome: {self.user.username} - CPF: {self.cpf} "
+        return f"Nome: {self.user_ptr.username} - CPF: {self.cpf} "
 
 
 class Cliente(User):
@@ -38,7 +38,7 @@ class Cliente(User):
         ordering = ['-id']
 
     def __str__(self):
-        return f"Nome: {self.user.username} - CPF: {self.cpf} "
+        return f"Nome: {self.user_ptr.username} - CPF: {self.cpf} "
 
 
 class Produto(models.Model):

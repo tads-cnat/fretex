@@ -62,10 +62,8 @@ class PedidoViewSet(viewsets.ModelViewSet):
     renderer_classes = [CustomRenderer]
 
     def perform_create(self, serializer):
-
-        print(f"Cliente: {self.request.user}")
         serializer.save(
-            cliente=self.request.user,
+            cliente=Cliente.objects.get(user_ptr=self.request.user),
             status='EN',
         )
 
