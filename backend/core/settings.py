@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['fretex.pythonanywhere.com', '127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'plataform',
 
+    'rest_framework.authtoken',
     'rest_framework',
     'drf_yasg',
 
@@ -100,6 +101,18 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser'
     ],
 
+}
+
+# SWAGGER
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
 }
 
 
