@@ -12,11 +12,20 @@ import Eye from "../../../assets/Svg/Eye";
 import { useEffect, useRef, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const RegisterClientForm = () => {
   const [password, setPassord] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
   const email: any = useRef();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setFocus,
+  } = useForm();
+  console.log(watch());
 
   const handlePassword = (e: any) => {
     e.preventDefault();
@@ -29,32 +38,29 @@ const RegisterClientForm = () => {
   };
 
   useEffect(() => {
-    email.current.focus();
-  }, []);
+    setFocus("email");
+  }, [setFocus]);
 
   return (
     <ContainerPrincipal>
       <ContainerForm>
-        <form>
+        <form onSubmit={handleSubmit((data) => console.log(data))}>
           <h1>Crie sua conta</h1>
           <div>
             <label>
               <Email />
               <input
-                ref={email}
+                {...register("email")}
                 type="email"
                 autoComplete="on"
-                name="email"
-                required
                 placeholder="Seu E-mail"
               />
             </label>
             <label>
               <User />
               <input
+                {...register("nome")}
                 type="text"
-                name="nome"
-                required
                 placeholder="Seu nome completo"
               />
             </label>
@@ -62,8 +68,7 @@ const RegisterClientForm = () => {
               <Password />
               <input
                 type={password === true ? "text" : "password"}
-                name="password"
-                required
+                {...register("password")}
                 placeholder="Sua senha"
               />
               <button onClick={handlePassword}>
@@ -74,8 +79,7 @@ const RegisterClientForm = () => {
               <Password />
               <input
                 type={confirmPassword === true ? "text" : "password"}
-                name="confirm-password"
-                required
+                {...register("confirmPassword")}
                 placeholder="Confirme sua senha"
               />
               <button onClick={handleConfirmPassword}>
@@ -95,7 +99,9 @@ const RegisterClientForm = () => {
         <div>
           <section>
             <h1>
-              <Link to="/">Frete<SpanYellow>X</SpanYellow></Link>
+              <Link to="/">
+                Frete<SpanYellow>X</SpanYellow>
+              </Link>
             </h1>
 
             <h2>Conta Cliente</h2>

@@ -4,6 +4,7 @@ import RegisterFreteiroForm from "../../components/RegisterComponents/RegisterFr
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from "./style";
 
 const Register = () => {
+  window.scrollTo(0, 0);
   const [typeResgister, setTypeRegister] = useState("cliente");
 
   useEffect(() => {
