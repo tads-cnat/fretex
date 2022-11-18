@@ -97,7 +97,7 @@ const RegisterFreteiroForm = () => {
             </label>
           </RegisterPerson>
           <RegisterAddress>
-            <h1>Seu Endereço</h1>
+            <h1 className="title">Seu Endereço</h1>
             <label>
               <Loc />
               <input type="text" name="cep" required placeholder="Seu CEP" />

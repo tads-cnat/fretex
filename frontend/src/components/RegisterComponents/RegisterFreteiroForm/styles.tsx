@@ -42,6 +42,7 @@ export const ContainerForm2 = styled(ContainerForm)`
 export const RegisterPerson = styled.div`
   max-width: 100%;
   flex-grow: 1;
+  
 `;
 
 export const PerfilImg = styled.div`
@@ -79,6 +80,14 @@ export const RegisterAddress = styled.div`
   flex-grow: 1;
   Button {
     margin-top: 30px;
+  }
+  .title {
+    margin-bottom: 75px;
+  }
+  @media (max-width: 768px) {
+    .title {
+      margin-bottom: 20px;
+    }
   }
 `;
 
