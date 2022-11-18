@@ -21,3 +21,7 @@ export interface IDropdownMenu {
 export interface IWrapper {
   bgColor?: string;
 }
+
+export interface IActive {
+  active?: boolean;
+}

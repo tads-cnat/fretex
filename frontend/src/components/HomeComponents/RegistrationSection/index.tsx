@@ -4,6 +4,10 @@ import imgCliente from "../../../assets/images/ParaClientes.png";
 import imgFreteiro from "../../../assets/images/ParaFreteiros.png";
 
 export const Registration = () => {
+  const handleTypeUser = (type: string) => {
+    localStorage.setItem("typeUser", type);
+  };
+
   return (
     <RegisterContainer id="registration">
       <RegisterUser img={imgCliente}>
@@ -11,14 +15,21 @@ export const Registration = () => {
           Para Clientes<SpanYellow>.</SpanYellow>
         </Title>
         <Text>Publique seus pedidos de fretes.</Text>
-        <BtnPattern to="/register-cliente">Cadastre-se</BtnPattern>
+        <BtnPattern to="/register" onClick={() => handleTypeUser('cliente')}>
+          Cadastre-se
+        </BtnPattern>
       </RegisterUser>
       <RegisterUser img={imgFreteiro}>
         <Title>
           Para Freteiros<SpanYellow>.</SpanYellow>
         </Title>
         <Text> Encontre as melhores cargas para o seu veículo.</Text>
-        <BtnPattern to="/register-freteiro">Cadastre-se</BtnPattern>
+        <BtnPattern
+          to="/register"
+          onClick={() => handleTypeUser('freteiro')}
+        >
+          Cadastre-se
+        </BtnPattern>
       </RegisterUser>
     </RegisterContainer>
   );

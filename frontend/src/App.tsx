@@ -6,6 +6,7 @@ import ChooseUser from "./pages/ChooseUser";
 import FreteDetailFreteiro from "./pages/FreteDetailFreteiro";
 import CadastroFrete from "./pages/RegisterFrete"
 import FretesAvailable from "./pages/FretesAvailable"
+import Login from "./pages/Login"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/choose-user" element={<ChooseUser />} />
           <Route path="/frete-detail-freteiro" element={<FreteDetailFreteiro />} />
