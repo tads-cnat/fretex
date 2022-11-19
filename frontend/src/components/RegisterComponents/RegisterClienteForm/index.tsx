@@ -9,30 +9,38 @@ import {
   ContainerContent,
 } from "./styles";
 import Eye from "../../../assets/Svg/Eye";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaCliente } from "../../../pages/Resgister/schemas";
+
+interface IFormCliente {
+  email: string;
+  nome: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const RegisterClientForm = () => {
   const [password, setPassord] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
-  const email: any = useRef();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     setFocus,
-  } = useForm();
-  console.log(watch());
+  } = useForm<IFormCliente>({
+    resolver: yupResolver(schemaCliente),
+  });
 
-  const handlePassword = (e: any) => {
+  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setPassord(!password);
   };
 
-  const handleConfirmPassword = (e: any) => {
+  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setConfirmPassword(!confirmPassword);
   };
@@ -41,10 +49,15 @@ const RegisterClientForm = () => {
     setFocus("email");
   }, [setFocus]);
 
+  const onSubmit: SubmitHandler<IFormCliente> = (values, event) => {
+    event?.preventDefault();
+    console.log(values);
+  };
+
   return (
     <ContainerPrincipal>
       <ContainerForm>
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Crie sua conta</h1>
           <div>
             <label>
@@ -56,6 +69,7 @@ const RegisterClientForm = () => {
                 placeholder="Seu E-mail"
               />
             </label>
+            {errors.email && <p className="error">{errors.email?.message}</p>}
             <label>
               <User />
               <input
@@ -64,6 +78,7 @@ const RegisterClientForm = () => {
                 placeholder="Seu nome completo"
               />
             </label>
+            {errors.nome && <p className="error">{errors.nome?.message}</p>}
             <label>
               <Password />
               <input
@@ -75,6 +90,9 @@ const RegisterClientForm = () => {
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
+            {errors.password && (
+              <p className="error">{errors.password?.message}</p>
+            )}
             <label>
               <Password />
               <input
@@ -86,6 +104,9 @@ const RegisterClientForm = () => {
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>
+            {errors.confirmPassword && (
+              <p className="error">{errors.confirmPassword?.message}</p>
+            )}
           </div>
           <section>
             <BtnYellow>Cadastre-se</BtnYellow>

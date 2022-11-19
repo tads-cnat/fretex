@@ -67,6 +67,13 @@ export const ContainerForm = styled.div`
   border-radius: 10px;
   background-color: #353535;
 
+  .error {
+    color: #ee5757;
+    display: inline-block;
+    font-size: var(--font-small);
+    text-align: left;
+  }
+
   form {
     padding: 80px 40px;
     max-width: 500px;
