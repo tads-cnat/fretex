@@ -72,8 +72,6 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
-    cliente = serializers.ReadOnlyField()
-    status = serializers.ReadOnlyField()
     
     class Meta:
         model = Pedido
@@ -81,30 +79,24 @@ class PedidoSerializer(serializers.ModelSerializer):
         
     @transaction.atomic
     def create(self, validated_data):
-        if self.is_valid():
-            origem = validated_data['origem']
-            del validated_data['origem']
-            origem1 = Endereco.objects.create(**origem)
-            origem1.save()
+        origem = validated_data.pop('origem')
+        origem = Endereco.objects.create(**origem)
             
-            destino = validated_data['destino']
-            del validated_data['destino']
-            destino1 = Endereco.objects.create(**destino)
-            destino1.save()
+        destino = validated_data.pop('destino')
+        destino = Endereco.objects.create(**destino)
             
-            produto = validated_data['produto']
-            del validated_data['produto']
-            produto1 = Produto.objects.create(**produto)
-            produto1.save()       
+        produto = validated_data.pop('produto')
+        produto = Produto.objects.create(**produto)    
 
+        tipos_veiculos = validated_data.pop('tipo_veiculo')
 
-            pedido = Pedido.objects.create(
-                **validated_data, origem=origem1, 
-                destino=destino1, produto=produto1, cliente = self.cliente.id
-            )
-            pedido.save()
+        pedido = Pedido.objects.create(
+            **validated_data, origem=origem, 
+            destino=destino, produto=produto
+        )
+        pedido.tipo_veiculo.set(tipos_veiculos)
 
-            return pedido
+        return pedido
         
 
 

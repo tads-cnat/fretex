@@ -6,20 +6,21 @@ class Command(BaseCommand):
     help = 'Seed the database'
 
     def handle(self, *args, **options):
-        cliente = Cliente.objects.create(username='Arthurmed', first_name='Arthur', last_name='Medeiros', email='arthur@gmail.com', cpf='103.948.454-98', url_foto='')
-        cliente.set_password('123')
-        cliente.save()
+        TipoVeiculo.objects.create(descricao='carro')
+        # cliente = Cliente.objects.create(username='Arthurmed', first_name='Arthur', last_name='Medeiros', email='arthur@gmail.com', cpf='103.948.454-98', url_foto='')
+        # cliente.set_password('123')
+        # cliente.save()
 
-        enderecoFreteiro = Endereco.objects.create(rua='Avenida Éneas Cavalcante', 
-        CEP='59570-000', 
-        numero=22, 
-        bairro='Santa Agueda', 
-        cidade='Ceará-Mirim', 
-        estado='RN',
-        complemento='casa')
-        freteiro = Freteiro.objects.create(cpf='123.456.789-12', url_foto='', endereco=enderecoFreteiro, username='Lucasoli', first_name='Lucas', last_name='Oliveira', email='lucaso@gmail.com')
-        freteiro.set_password('123')
-        freteiro.save()
+        # enderecoFreteiro = Endereco.objects.create(rua='Avenida Éneas Cavalcante', 
+        # CEP='59570-000', 
+        # numero=22, 
+        # bairro='Santa Agueda', 
+        # cidade='Ceará-Mirim', 
+        # estado='RN',
+        # complemento='casa')
+        # freteiro = Freteiro.objects.create(cpf='123.456.789-12', url_foto='', endereco=enderecoFreteiro, username='Lucasoli', first_name='Lucas', last_name='Oliveira', email='lucaso@gmail.com')
+        # freteiro.set_password('123')
+        # freteiro.save()
 
         # enderecoEntrega = Endereco.objects.create(rua='Avenida prudente de morais', 
         # CEP='59020-510', 
