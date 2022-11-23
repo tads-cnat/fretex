@@ -1,14 +1,74 @@
 from django.db import transaction
+from django.contrib.auth.models import User
+from rest_framework.validators import UniqueValidator
 from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
                               Proposta, TipoVeiculo, Veiculo)
 from rest_framework import serializers
-
 
 class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Endereco
         fields = ("__all__")
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
 
+class RegisterClienteSerializer(serializers.Serializer):
+    username = serializers.CharField(validators=[UniqueValidator(queryset=User.objects.all())])
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    cpf = serializers.CharField(validators=[UniqueValidator(queryset=Cliente.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
+    password = serializers.CharField()
+
+    @transaction.atomic
+    def create(self, validated_data):
+       cliente = Cliente.objects.create(**validated_data)
+       cliente.set_password(validated_data.get("password"))
+       cliente.save()
+       return cliente
+
+class RegisterFreteiroSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    cpf = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    endereco = EnderecoSerializer()
+
+    @transaction.atomic
+    def create(self, validated_data):
+        endereco = validated_data.pop('endereco')
+
+        end = Endereco.objects.create(**endereco)
+        end.save()
+
+        freteiro = Freteiro.objects.create_user(**validated_data, endereco=end)
+        freteiro.set_password(validated_data.get("password"))
+        freteiro.save()
+
+        return freteiro
+
+class UserSerializer(serializers.ModelSerializer):
+    extra_data = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'email', 'last_name', 'extra_data')
+
+    def get_extra_data(self, obj):
+        try:
+            freteiro = Freteiro.objects.get(user_ptr=obj)
+        except:
+            freteiro = None
+        try:
+            cliente = Cliente.objects.get(user_ptr=obj)
+        except: 
+            cliente = None
+        return {
+            'freteiro': freteiro.id if freteiro else None,
+            'cliente': cliente.id if cliente else None
+        }
 
 class FreteiroSerializer(serializers.ModelSerializer):
     endereco = EnderecoSerializer(read_only=False)

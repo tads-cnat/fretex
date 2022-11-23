@@ -1,11 +1,12 @@
 from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from plataform.api.serializers import (ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
+from plataform.api.serializers import (RegisterClienteSerializer, RegisterFreteiroSerializer, LoginSerializer, UserSerializer, ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
 from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo)
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework import status
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -13,12 +14,12 @@ from core.api.helpers import open_api_request_body
 from drf_yasg import openapi
 from rest_framework.authtoken.models import Token
 
-class AuthViewSet(viewsets.ViewSet):
+class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
+    serializer_class = None
 
-    @swagger_auto_schema(method='post', request_body=open_api_request_body({'email': 'string', 'password': 'string'}))
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], serializer_class=LoginSerializer)
     def login(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -33,6 +34,24 @@ class AuthViewSet(viewsets.ViewSet):
 
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
+
+    @action(detail=False, methods=['get'])
+    def user(self, request):
+        return Response({'user': UserSerializer(request.user).data})
+
+    @action(detail=False, methods=['post'], serializer_class=RegisterFreteiroSerializer)
+    def register_freteiro(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        freteiro = serializer.save()
+        return Response(UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=['post'], serializer_class=RegisterClienteSerializer)
+    def register_cliente(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        cliente = serializer.save()
+        return Response(UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED)
 
 class EnderecoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
