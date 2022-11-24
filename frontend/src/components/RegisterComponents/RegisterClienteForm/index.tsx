@@ -9,19 +9,14 @@ import {
   ContainerContent,
 } from "./styles";
 import Eye from "../../../assets/Svg/Eye";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCliente } from "../../../pages/Resgister/schemas";
-
-interface IFormCliente {
-  email: string;
-  nome: string;
-  password: string;
-  confirmPassword: string;
-}
+import { ICliente } from "../../../interfaces";
+import { AuthContext } from "../../../context/Auth/AuthContext";
 
 const RegisterClientForm = () => {
   const [password, setPassord] = useState<boolean>(false);
@@ -31,9 +26,11 @@ const RegisterClientForm = () => {
     handleSubmit,
     formState: { errors },
     setFocus,
-  } = useForm<IFormCliente>({
+  } = useForm<ICliente>({
     resolver: yupResolver(schemaCliente),
   });
+
+  const { registerCliente, } = useContext(AuthContext);
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -49,7 +46,7 @@ const RegisterClientForm = () => {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<IFormCliente> = (values, event) => {
+  const onSubmit: SubmitHandler<ICliente> = (values, event) => {
     event?.preventDefault();
     console.log(values);
   };

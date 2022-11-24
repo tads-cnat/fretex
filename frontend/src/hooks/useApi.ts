@@ -1,7 +1,11 @@
-import React from 'react'
+import { api } from "../services/api"
 
-const useApi = () => {
-  return 
-}
+
+export const useApi = () => ({
+    signin: async (email: string, password: string) => {
+        const response = await api.post('/auth/login', { email, password })
+        return response.data
+    },
+})
 
 export default useApi
