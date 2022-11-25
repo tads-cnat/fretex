@@ -8,11 +8,12 @@ export interface ICliente {
 
 export interface IFreteiro {
     email: string;
-    nome: string;
+    username: string;
+    cpf: string;
     password: string;
-    confirmPassword: string;
+    confirmPassword?: string;
     endereco: {
-        cep: string;
+        CEP: string;
         rua: string;
         numero: number;
         bairro: string;
@@ -34,7 +35,7 @@ export interface IPedido {
         bairro: string,
         cidade: string,
         estado: string,
-        complemento: string
+        complemento?: string
     },
     destino: {
         rua: string,
@@ -43,7 +44,7 @@ export interface IPedido {
         bairro: string,
         cidade: string,
         estado: string,
-        complemento: string
+        complemento?: string
     },
     status: string,
     tipo_veiculo: number[],

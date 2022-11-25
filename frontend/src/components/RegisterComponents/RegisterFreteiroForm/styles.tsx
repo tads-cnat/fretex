@@ -79,10 +79,10 @@ export const PerfilImg = styled.div`
 export const RegisterAddress = styled.div`
   flex-grow: 1;
   Button {
-    margin-top: 30px;
+    margin-top: 15px;
   }
   .title {
-    margin-bottom: 75px;
+    margin-bottom: 38px;
   }
   @media (max-width: 768px) {
     .title {

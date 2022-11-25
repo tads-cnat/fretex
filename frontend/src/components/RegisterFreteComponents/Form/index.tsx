@@ -10,7 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas"
 import { IPedido } from "../../../interfaces";
 
-const index = () => {
+const Index = () => {
+
   const {
     register,
     handleSubmit,
@@ -260,4 +261,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
