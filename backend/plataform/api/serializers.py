@@ -72,10 +72,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FreteiroSerializer(serializers.ModelSerializer):
     endereco = EnderecoSerializer(read_only=False)
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = Freteiro
-        fields = ("id", "username", "first_name", "last_name", 
+        fields = ("id", "username", "first_name", "last_name", "password",
                  "email", "cpf", "url_foto", "endereco")
 
     @transaction.atomic

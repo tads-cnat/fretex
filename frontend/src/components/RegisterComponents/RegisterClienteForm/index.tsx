@@ -60,6 +60,7 @@ const RegisterClientForm = () => {
         password: data.password,
       };
       registerCliente(cliente);
+      console.log(cliente);
       navigate("/login");
     } catch (err) {
       setError("Houve um erro, tente novamente");

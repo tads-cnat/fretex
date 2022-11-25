@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 import { ICliente, IFreteiro } from "../../interfaces";
 import { AuthContext } from "./AuthContext";
@@ -9,27 +9,42 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const signin = async (email: string, password: string) => {
     const data = await api.signin(email, password);
-    if (data.user && data.token) {
-      setUser(data.user);
-      return true;
+    console.log(data.data);
+
+    if (data.data.user && data.data.token) {
+      setToken(data.data.token);
+      setUser(data.data.user);
+      setUserStorage(data.data.user);
+      return data.data.user.id === data.data.user.extra_data.freteiro;
     }
-    return false;
+    return null;
   };
 
-  const registerCliente = (user:ICliente) => {
-    
-  };
-
-  const registerFreteiro = (user:IFreteiro) => {
-
-  }
+  /* useEffect(() => {
+    const validateToken = async () => {
+      const storageData = localStorage.getItem('authToken');
+      if(storageData) {
+        const data = await api.
+      }
+    }
+    validateToken()
+  }, [api])*/ // falta endpoint de retorno de usuario atravez do token
 
   const signout = () => {
+    setToken("");
     setUser(null);
   };
 
+  const setToken = (token: string) => {
+    localStorage.setItem("authToken", token);
+  };
+
+  const setUserStorage = (token: string) => {
+    localStorage.setItem("user", token);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signin, registerFreteiro, registerCliente, signout }}>
+    <AuthContext.Provider value={{ user, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -52,9 +52,11 @@ export const schemaFreteiro = yup.object({
             .required('Email Obrigatório'),
         CEP: yup
             .string()
+            .max(9, 'CEP inválido')
             .required('CEP Obrigatório'),
         numero: yup
             .number()
+            .transform((value) => (isNaN(value) ? 0 : value))
             .required('Numero Obrigatório'),
         bairro: yup
             .string()
@@ -66,7 +68,6 @@ export const schemaFreteiro = yup.object({
             .string()
             .required('Estado Obrigatório'),
         complemento: yup
-            .string()
-            .required('Complemento Obrigatório'),
+            .string(),
     }).required(),
 }).required();

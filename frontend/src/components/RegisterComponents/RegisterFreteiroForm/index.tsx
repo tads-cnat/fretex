@@ -8,6 +8,7 @@ import {
   ContainerInfos,
   BtnYellow,
 } from "./styles";
+import InputMask from "react-input-mask";
 import perfil from "../../../assets/images/imgperfil.svg";
 import Email from "../../../assets/Svg/Email";
 import Loc from "../../../assets/Svg/Loc";
@@ -16,17 +17,18 @@ import Password from "../../../assets/Svg/Password";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import Eye from "../../../assets/Svg/Eye";
 import { SpanYellow } from "../../../styles";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFreteiro } from "../../../interfaces";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaFreteiro } from "../../../pages/Resgister/schemas";
+import useApi from "../../../hooks/useApi";
 
 const RegisterFreteiroForm = () => {
   const [password, setPassord] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
-
+  const { registerFreteiro } = useApi();
   const {
     register,
     handleSubmit,
@@ -36,23 +38,27 @@ const RegisterFreteiroForm = () => {
   } = useForm<IFreteiro>({
     resolver: yupResolver(schemaFreteiro),
   });
-  console.log(watch());
-  const onSubmit:SubmitHandler<IFreteiro> = (data) => {
-    const freteiro:IFreteiro = {
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<IFreteiro> = (data) => {
+    const freteiro: IFreteiro = {
       email: data.email,
       username: data.username,
       cpf: data.cpf,
       password: data.password,
       endereco: {
-          CEP: data.endereco.CEP,
-          rua: data.endereco.rua,
-          numero: data.endereco.numero,
-          bairro: data.endereco.bairro,
-          cidade: data.endereco.cidade,
-          estado: data.endereco.estado,
-          complemento: data.endereco.complemento,
-      }
-    }
+        CEP: data.endereco.CEP,
+        rua: data.endereco.rua,
+        numero: data.endereco.numero,
+        bairro: data.endereco.bairro,
+        cidade: data.endereco.cidade,
+        estado: data.endereco.estado,
+        complemento: data.endereco.complemento,
+      },
+    };
+    const data1 = registerFreteiro(freteiro);
+    navigate("/login");
+    console.log(data1);
     console.log(freteiro);
   };
 
@@ -67,13 +73,13 @@ const RegisterFreteiroForm = () => {
   };
 
   useEffect(() => {
-    setFocus('email')
+    setFocus("email");
   }, [setFocus]);
 
   return (
     <ContainerMain>
       <ContainerForm2>
-        <form onSubmit= {handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <RegisterPerson>
             <h1>Crie sua conta</h1>
             {/* <PerfilImg>
@@ -109,11 +115,11 @@ const RegisterFreteiroForm = () => {
             )}
             <label>
               <User />
-              <input
+              <InputMask
+                mask="999.999.999-99"
                 {...register("cpf")}
-                type="text"
-                placeholder="Seu CPF"
-              />
+                placeholder="Seu cpf"
+              ></InputMask>
             </label>
             {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
             <label>
@@ -149,31 +155,37 @@ const RegisterFreteiroForm = () => {
             <h1 className="title">Seu Endereço</h1>
             <label>
               <Loc />
-              <input 
+              <InputMask
+                mask="99999-999"
                 {...register("endereco.CEP")}
-                type="text"  
                 placeholder="Seu CEP"
-               />
+              ></InputMask>
             </label>
-            {errors.endereco?.CEP && <p className="error">{errors.endereco.CEP?.message}</p>}
+            {errors.endereco?.CEP && (
+              <p className="error">{errors.endereco.CEP?.message}</p>
+            )}
             <label>
               <Loc />
-              <input 
+              <input
                 {...register("endereco.rua")}
-                type="text"  
+                type="text"
                 placeholder="Seu rua"
-               />
+              />
             </label>
-            {errors.endereco?.rua && <p className="error">{errors.endereco.rua?.message}</p>}
+            {errors.endereco?.rua && (
+              <p className="error">{errors.endereco.rua?.message}</p>
+            )}
             <label>
               <Loc />
-              <input 
+              <input
                 {...register("endereco.numero")}
-                type="number"  
-                placeholder="Seu numero"
-               />
+                type="text"
+                placeholder="Número da sua casa"
+              />
             </label>
-            {errors.endereco?.numero && <p className="error">{errors.endereco.numero?.message}</p>}
+            {errors.endereco?.numero && (
+              <p className="error">{errors.endereco.numero?.message}</p>
+            )}
             <label>
               <Loc />
               <input
@@ -182,7 +194,9 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu bairro"
               />
             </label>
-            {errors.endereco?.bairro && <p className="error">{errors.endereco.bairro?.message}</p>}
+            {errors.endereco?.bairro && (
+              <p className="error">{errors.endereco.bairro?.message}</p>
+            )}
             <label>
               <Loc />
               <input
@@ -191,7 +205,9 @@ const RegisterFreteiroForm = () => {
                 placeholder="Sua cidade"
               />
             </label>
-            {errors.endereco?.cidade && <p className="error">{errors?.endereco.cidade.message}</p>}
+            {errors.endereco?.cidade && (
+              <p className="error">{errors?.endereco.cidade.message}</p>
+            )}
             <label>
               <Loc />
               <input
@@ -200,7 +216,9 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu estado"
               />
             </label>
-            {errors.endereco?.estado && <p className="error">{errors.endereco.estado?.message}</p>}
+            {errors.endereco?.estado && (
+              <p className="error">{errors.endereco.estado?.message}</p>
+            )}
             <label>
               <Loc />
               <input
@@ -209,7 +227,9 @@ const RegisterFreteiroForm = () => {
                 placeholder="Complemento"
               />
             </label>
-            {errors.endereco?.complemento && <p className="error">{errors.endereco.complemento?.message}</p>}
+            {errors.endereco?.complemento && (
+              <p className="error">{errors.endereco.complemento?.message}</p>
+            )}
             <BtnYellow>Cadastre-se</BtnYellow>
           </RegisterAddress>
         </form>
@@ -223,7 +243,9 @@ const RegisterFreteiroForm = () => {
         <div>
           <section>
             <h1>
-              <Link to="/">Frete<SpanYellow>X</SpanYellow></Link>
+              <Link to="/">
+                Frete<SpanYellow>X</SpanYellow>
+              </Link>
             </h1>
 
             <h2>Conta Freteiro</h2>

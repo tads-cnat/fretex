@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { string } from "yup/lib/locale";
 
 export const schemaPedido = yup.object({
     produto: yup.object({

@@ -33,7 +33,7 @@ class AuthViewSet(viewsets.GenericViewSet):
             return Response({'detail': 'Credenciais incorretas 1'})
 
         token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key})
+        return Response({'token': token.key, 'user': UserSerializer(user).data})
 
     @action(detail=False, methods=['get'])
     def user(self, request):
@@ -61,7 +61,7 @@ class EnderecoViewSet(viewsets.ModelViewSet):
 
 
 class FreteiroViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
     serializer_class = FreteiroSerializer
     queryset = Freteiro.objects.all()
     renderer_classes = [CustomRenderer]

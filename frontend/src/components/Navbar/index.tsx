@@ -1,5 +1,5 @@
 import { BtnPattern, Wrapper, SpanYellow } from "../../styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Header,
   Logo,
@@ -8,6 +8,7 @@ import {
   NavbarLinks,
   ButtonMenuContainer,
 } from "./styles";
+import { AuthContext } from "../../context/Auth/AuthContext";
 
 interface INavbar {
   id?: string;
@@ -15,7 +16,8 @@ interface INavbar {
 
 const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
-
+  const { user } = useContext(AuthContext);
+console.log(user)
   return (
     <Header id={id}>
       <Wrapper>
@@ -39,7 +41,8 @@ const Navbar = ({ id }: INavbar) => {
               </li>
             </ul>
             <div>
-              <BtnPattern to="/login">Login</BtnPattern>
+            {user !== null ? <p>{user.username}</p> : <BtnPattern to="/login">Login</BtnPattern>}
+              
               {/* colocar perfil do usuário*/}
             </div>
           </LinksFretes>

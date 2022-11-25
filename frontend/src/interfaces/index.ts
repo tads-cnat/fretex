@@ -55,3 +55,8 @@ export interface IPedido {
     turno_entrega: string,
     turno_coleta: string
 }
+
+export interface ILogin {
+    email: string;
+    password: string;
+}
