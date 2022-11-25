@@ -1,8 +1,9 @@
 export interface ICliente {
     email: string;
-    nome: string;
+    username: string;
+    cpf: string;
     password: string;
-    confirmPassword: string;
+    confirmPassword?: string;
 }
 
 export interface IFreteiro {

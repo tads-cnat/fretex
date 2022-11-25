@@ -11,26 +11,30 @@ import {
 import Eye from "../../../assets/Svg/Eye";
 import { useContext, useEffect, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import InputMask from "react-input-mask";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCliente } from "../../../pages/Resgister/schemas";
 import { ICliente } from "../../../interfaces";
-import { AuthContext } from "../../../context/Auth/AuthContext";
+import useApi from "../../../hooks/useApi";
 
 const RegisterClientForm = () => {
   const [password, setPassord] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     setFocus,
   } = useForm<ICliente>({
     resolver: yupResolver(schemaCliente),
   });
 
-  const { registerCliente, } = useContext(AuthContext);
+  const { registerCliente } = useApi();
+  const navigate = useNavigate();
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -46,9 +50,20 @@ const RegisterClientForm = () => {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<ICliente> = (values, event) => {
-    event?.preventDefault();
-    console.log(values);
+  const onSubmit: SubmitHandler<ICliente> = (data) => {
+    setError("");
+    try {
+      const cliente: ICliente = {
+        email: data.email,
+        username: data.username,
+        cpf: data.cpf,
+        password: data.password,
+      };
+      registerCliente(cliente);
+      navigate("/login");
+    } catch (err) {
+      setError("Houve um erro, tente novamente");
+    }
   };
 
   return (
@@ -70,12 +85,23 @@ const RegisterClientForm = () => {
             <label>
               <User />
               <input
-                {...register("nome")}
+                {...register("username")}
                 type="text"
                 placeholder="Seu nome completo"
               />
             </label>
-            {errors.nome && <p className="error">{errors.nome?.message}</p>}
+            {errors.username && (
+              <p className="error">{errors.username?.message}</p>
+            )}
+            <label>
+              <User />
+              <InputMask
+                mask="999.999.999-99"
+                {...register("cpf")}
+                placeholder="Seu cpf"
+              ></InputMask>
+            </label>
+            {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
             <label>
               <Password />
               <input
@@ -106,7 +132,7 @@ const RegisterClientForm = () => {
             )}
           </div>
           <section>
-            <BtnYellow>Cadastre-se</BtnYellow>
+            <BtnYellow type="submit">Cadastre-se</BtnYellow>
             <p>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>

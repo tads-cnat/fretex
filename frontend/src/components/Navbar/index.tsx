@@ -39,7 +39,7 @@ const Navbar = ({ id }: INavbar) => {
               </li>
             </ul>
             <div>
-              <BtnPattern to=";">Login</BtnPattern>
+              <BtnPattern to="/login">Login</BtnPattern>
               {/* colocar perfil do usuário*/}
             </div>
           </LinksFretes>
