@@ -16,7 +16,7 @@ export const useApi = () => ({
         return response.data
     },
     registerCliente: async ({ username, email, cpf, password }: ICliente) => {
-        const response = await api.post('/cliente/', { username, cpf, email, password })
+        const response = await api.post('/auth/register_cliente/', { username, cpf, email, password })
         return response.data
     },
 })
