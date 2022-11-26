@@ -5,10 +5,12 @@ import {
   EntregaDivContent, BtnYellow, ButtonDiv
 } from "./styles"
 import arrowleft from "../../../assets/images/arrow-left-circle.svg"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas"
 import { IPedido } from "../../../interfaces";
+import { useNavigate } from "react-router-dom"
+import useApi from "../../../hooks/useApi"
 
 const Index = () => {
 
@@ -20,7 +22,46 @@ const Index = () => {
     setFocus, } = useForm<IPedido>({
       resolver: yupResolver(schemaPedido)
     })
-  const option = []
+  const navigate = useNavigate();
+  const { registerPedido } = useApi()
+
+  const onSubmit: SubmitHandler<IPedido> = (data) => {
+    console.log(data)
+    const pedido: IPedido = {
+      produto: {
+        nome: data.produto.nome
+      },
+      origem: {
+        rua: data.origem.rua,
+        CEP: data.origem.CEP,
+        numero: data.origem.numero,
+        bairro: data.origem.bairro,
+        cidade: data.origem.cidade,
+        estado: data.origem.estado,
+        complemento: data.origem.complemento,
+      },
+      destino: {
+        rua: data.destino.rua,
+        CEP: data.destino.CEP,
+        numero: data.destino.numero,
+        bairro: data.destino.bairro,
+        cidade: data.destino.cidade,
+        estado: data.destino.estado,
+        complemento: data.destino.complemento,
+      },
+      status: data.status,
+      tipo_veiculo: data.tipo_veiculo,
+      observacao: data.observacao,
+      nomeDestinatario: data.nomeDestinatario,
+      data_coleta: data.data_coleta,
+      data_entrega: data.data_entrega,
+      turno_entrega: data.turno_entrega,
+      turno_coleta: data.turno_coleta,
+    };
+    registerPedido(pedido)
+    console.log(pedido);
+    //navigate("/login");
+  };
 
   return (
     <>
@@ -29,7 +70,7 @@ const Index = () => {
           <h1>Cadastro de coleta</h1>
           <Seta><img src={arrowleft} alt="voltar" /> Voltar</Seta>
         </div>
-        <Form method="POST">
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <EnderecoDiv>
             <div>
               <h3>Endereço de Coleta</h3>
@@ -165,7 +206,7 @@ const Index = () => {
                 </label>
                 <label>
                   <span>Tipos de veiculo</span>
-                  {/* select*/} 
+                  {/* select*/}
                   <input
                     {...register("tipo_veiculo")}
                     type="text"
@@ -252,8 +293,8 @@ const Index = () => {
               </div>
             </EntregaDivContent>
           </EntregaDiv>
-          <ButtonDiv>
-            <BtnYellow>Finalizar pedido</BtnYellow>
+          <ButtonDiv >
+            <BtnYellow type="submit">Finalizar pedido</BtnYellow>
           </ButtonDiv>
         </Form>
       </Container>

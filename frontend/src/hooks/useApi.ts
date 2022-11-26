@@ -1,4 +1,4 @@
-import { ICliente, IFreteiro } from "../interfaces"
+import { ICliente, IFreteiro, IPedido } from "../interfaces"
 import { api } from "../services/api"
 
 /*const Headers = {
@@ -21,6 +21,14 @@ export const useApi = () => ({
     },
     registerFreteiro: async ({ username, email, cpf, password, endereco }: IFreteiro) => {
         const response = await api.post('/freteiro/', { username, email, cpf, password, endereco })
+        return response.data
+    },
+    registerPedido: async (pedido: IPedido) => {
+        const response = await api.post('/pedido/', { pedido }, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
         return response.data
     },
     validateToken: async (token: string) => {
