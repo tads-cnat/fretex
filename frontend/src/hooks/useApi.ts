@@ -22,8 +22,15 @@ export const useApi = () => ({
     registerFreteiro: async ({ username, email, cpf, password, endereco }: IFreteiro) => {
         const response = await api.post('/freteiro/', { username, email, cpf, password, endereco })
         return response.data
+    },
+    validateToken: async (token: string) => {
+        const response = await api.get('/auth/user/', {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
+        return response.data
     }
-
 })
 
 export default useApi

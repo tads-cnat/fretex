@@ -9,6 +9,7 @@ import {
   ButtonMenuContainer,
 } from "./styles";
 import { AuthContext } from "../../context/Auth/AuthContext";
+import NavUser from "./NavUser";
 
 interface INavbar {
   id?: string;
@@ -17,7 +18,7 @@ interface INavbar {
 const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user } = useContext(AuthContext);
-console.log(user)
+ 
   return (
     <Header id={id}>
       <Wrapper>
@@ -41,9 +42,11 @@ console.log(user)
               </li>
             </ul>
             <div>
-            {user !== null ? <p>{user.username}</p> : <BtnPattern to="/login">Login</BtnPattern>}
-              
-              {/* colocar perfil do usuário*/}
+              {user !== null ? (
+                <NavUser />
+              ) : (
+                <BtnPattern to="/login">Login</BtnPattern>
+              )}
             </div>
           </LinksFretes>
 
