@@ -52,19 +52,17 @@ const RegisterClientForm = () => {
 
   const onSubmit: SubmitHandler<ICliente> = (data) => {
     setError("");
-    try {
-      const cliente: ICliente = {
-        email: data.email,
-        username: data.username,
-        cpf: data.cpf,
-        password: data.password,
-      };
-      registerCliente(cliente);
-      console.log(cliente);
-      navigate("/login");
-    } catch (err) {
-      setError("Houve um erro, tente novamente");
-    }
+    const cliente: ICliente = {
+      email: data.email,
+      username: data.username,
+      cpf: data.cpf,
+      password: data.password,
+    };
+    registerCliente(cliente)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch(() => setError("Houve um erro, tente novamente"));
   };
 
   return (
@@ -131,6 +129,7 @@ const RegisterClientForm = () => {
             {errors.confirmPassword && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
+            {error && <p className="error">{error}</p>}
           </div>
           <section>
             <BtnYellow type="submit">Cadastre-se</BtnYellow>

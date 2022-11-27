@@ -1,45 +1,51 @@
 import {
-  Container, Seta, Form,
-  EnderecoDiv, ProdutoDiv,
-  ProdutoDivContent, EntregaDiv,
-  EntregaDivContent, BtnYellow, ButtonDiv
-} from "./styles"
-import arrowleft from "../../../assets/images/arrow-left-circle.svg"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { schemaPedido } from "../../../pages/RegisterFrete/schemas"
+  Container,
+  Seta,
+  Form,
+  EnderecoDiv,
+  ProdutoDiv,
+  ProdutoDivContent,
+  EntregaDiv,
+  EntregaDivContent,
+  BtnYellow,
+  ButtonDiv,
+} from "./styles";
+import arrowleft from "../../../assets/images/arrow-left-circle.svg";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaPedido } from "../../../pages/RegisterFrete/schemas";
 import { IPedido } from "../../../interfaces";
-import { useNavigate } from "react-router-dom"
-import useApi from "../../../hooks/useApi"
-import { useEffect, useState} from "react"
-
+import { useNavigate } from "react-router-dom";
+import useApi from "../../../hooks/useApi";
+import { useEffect, useState } from "react";
+import { Turnos } from "./turnos";
 
 interface ITiposDeVeiculo {
-  id: number
-  descricao: string
+  id: number;
+  descricao: string;
 }
 
 const Index = () => {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-    setFocus, } = useForm<IPedido>({
-      resolver: yupResolver(schemaPedido)
-    })
+    setFocus,
+  } = useForm<IPedido>({
+    resolver: yupResolver(schemaPedido),
+  });
 
   const navigate = useNavigate();
-  const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([])
-  console.log(tiposDeVeiculo)
-  const { registerPedido, tiposVeiculo } = useApi()
+  const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
+  console.log(tiposDeVeiculo);
+  const { registerPedido, tiposVeiculo } = useApi();
   const onSubmit: SubmitHandler<IPedido> = (data) => {
-    console.log(data)
+    console.log(data);
 
     const pedido: IPedido = {
       produto: {
-        nome: data.produto.nome
+        nome: data.produto.nome,
       },
       origem: {
         rua: data.origem.rua,
@@ -100,67 +106,31 @@ const Index = () => {
     //               turno_entrega: "TA",
     //                 turno_coleta: "TA"
     // }
-    registerPedido(pedido).catch((error) => console.log(error))
+    registerPedido(pedido).catch((error) => console.log(error));
     console.log(pedido);
-    //navigate("/login");
+    //navigate("/dashboard");
   };
 
   useEffect(() => {
-    tiposVeiculo().then(res => setTiposDeVeiculo(res.data)).catch((error) => console.log(error))
-    console.log()
-  },[])
+    tiposVeiculo()
+      .then((res) => setTiposDeVeiculo(res.data))
+      .catch((error) => console.log(error));
+    console.log();
+  }, []);
 
   return (
     <>
       <Container>
         <div>
           <h1>Cadastro de coleta</h1>
-          <Seta><img src={arrowleft} alt="voltar" /> Voltar</Seta>
+          <Seta>
+            <img src={arrowleft} alt="voltar" /> Voltar
+          </Seta>
         </div>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <EnderecoDiv>
             <div>
               <h3>Endereço de Coleta</h3>
-              <label>
-                <span>Rua *</span>
-                <input
-                  {...register("origem.rua")}
-                  type="text"
-                  placeholder="Digite o nome da rua"
-                />
-              </label>
-              <label>
-                <span>Número *</span>
-                <input
-                  {...register("origem.numero")}
-                  type="number"
-                  placeholder="Digite o numero da casa"
-                />
-              </label>
-              <label>
-                <span>Bairro *</span>
-                <input
-                  {...register("origem.bairro")}
-                  type="string"
-                  placeholder="Digite o bairro"
-                />
-              </label>
-              <label>
-                <span>Cidade *</span>
-                <input
-                  {...register("origem.cidade")}
-                  type="text"
-                  placeholder="Digite a Cidade"
-                />
-              </label>
-              <label>
-                <span>Estado *</span>
-                <input
-                  {...register("origem.estado")}
-                  type="text"
-                  placeholder="Digite o Estado"
-                />
-              </label>
               <label>
                 <span>CEP *</span>
                 <input
@@ -168,6 +138,69 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o CEP"
                 />
+                {errors.origem?.CEP && (
+                  <p className="error">{errors.origem.CEP?.message}</p>
+                )}
+              </label>
+
+              <label>
+                <span>Rua *</span>
+                <input
+                  {...register("origem.rua")}
+                  type="text"
+                  placeholder="Digite o nome da rua"
+                />
+                {errors.origem?.rua && (
+                  <p className="error">{errors.origem.rua?.message}</p>
+                )}
+              </label>
+
+              <label>
+                <span>Número *</span>
+                <input
+                  {...register("origem.numero")}
+                  type="number"
+                  placeholder="Digite o numero da casa"
+                />
+                {errors.origem?.numero && (
+                  <p className="error">{errors.origem.numero?.message}</p>
+                )}
+              </label>
+
+              <label>
+                <span>Bairro *</span>
+                <input
+                  {...register("origem.bairro")}
+                  type="string"
+                  placeholder="Digite o bairro"
+                />
+                {errors.origem?.bairro && (
+                  <p className="error">{errors.origem.bairro?.message}</p>
+                )}
+              </label>
+
+              <label>
+                <span>Cidade *</span>
+                <input
+                  {...register("origem.cidade")}
+                  type="text"
+                  placeholder="Digite a Cidade"
+                />
+                {errors.origem?.cidade && (
+                  <p className="error">{errors.origem.cidade?.message}</p>
+                )}
+              </label>
+
+              <label>
+                <span>Estado *</span>
+                <input
+                  {...register("origem.estado")}
+                  type="text"
+                  placeholder="Digite o Estado"
+                />
+                {errors.origem?.estado && (
+                  <p className="error">{errors.origem.estado?.message}</p>
+                )}
               </label>
               <label>
                 <span>Complemento</span>
@@ -181,12 +214,26 @@ const Index = () => {
             <div>
               <h3>Endereço de Entrega</h3>
               <label>
+                <span>CEP *</span>
+                <input
+                  {...register("destino.CEP")}
+                  type="text"
+                  placeholder="Digite o CEP"
+                />
+                {errors.destino?.CEP && (
+                  <p className="error">{errors.destino.CEP?.message}</p>
+                )}
+              </label>
+              <label>
                 <span>Rua *</span>
                 <input
                   {...register("destino.rua")}
                   type="text"
                   placeholder="Digite o nome da rua"
                 />
+                {errors.destino?.rua && (
+                  <p className="error">{errors.destino.rua?.message}</p>
+                )}
               </label>
               <label>
                 <span>Número *</span>
@@ -195,6 +242,9 @@ const Index = () => {
                   type="number"
                   placeholder="Digite o numero da casa"
                 />
+                {errors.destino?.numero && (
+                  <p className="error">{errors.destino.numero?.message}</p>
+                )}
               </label>
               <label>
                 <span>Bairro *</span>
@@ -203,6 +253,9 @@ const Index = () => {
                   type="string"
                   placeholder="Digite o bairro"
                 />
+                {errors.destino?.bairro && (
+                  <p className="error">{errors.destino.bairro?.message}</p>
+                )}
               </label>
               <label>
                 <span>Cidade *</span>
@@ -211,6 +264,9 @@ const Index = () => {
                   type="text"
                   placeholder="Digite a Cidade"
                 />
+                {errors.destino?.cidade && (
+                  <p className="error">{errors.destino.cidade?.message}</p>
+                )}
               </label>
               <label>
                 <span>Estado *</span>
@@ -219,14 +275,9 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o Estado"
                 />
-              </label>
-              <label>
-                <span>CEP *</span>
-                <input
-                  {...register("destino.CEP")}
-                  type="text"
-                  placeholder="Digite o CEP"
-                />
+                {errors.destino?.estado && (
+                  <p className="error">{errors.destino.estado?.message}</p>
+                )}
               </label>
               <label>
                 <span>Complemento</span>
@@ -250,22 +301,32 @@ const Index = () => {
                     type="text"
                     placeholder="Digite o nome do produto"
                   />
+                  {errors.produto?.nome && (
+                    <p className="error">{errors.produto.nome?.message}</p>
+                  )}
                 </label>
-                <div>
-                  <span>Tipos de veiculo</span>
-                  <div className="div_tipoveiculo">
-                    {tiposDeVeiculo && tiposDeVeiculo?.map((tipoveiculo) => (
-                      <label key={tipoveiculo.id} className="checkbox_tipoveiculo">
-                          <input 
+                <div className="containerTipoVeiculo">
+                  <span>Tipos de veículo</span>
+                  <div className="tipoveiculo">
+                    {tiposDeVeiculo &&
+                      tiposDeVeiculo?.map((tipoveiculo) => (
+                        <label
+                          key={tipoveiculo.id}
+                          className="checkbox_tipoveiculo"
+                        >
+                          <input
                             {...register("tipo_veiculo")}
                             type="checkbox"
                             value={tipoveiculo.id}
                           />
                           {tipoveiculo.descricao}
-                      </label>
-                    ))}
+                        </label>
+                      ))}
                   </div>
-              </div>
+                  {errors.tipo_veiculo && (
+                    <p className="error">{errors.tipo_veiculo?.message}</p>
+                  )}
+                </div>
               </div>
               <div>
                 {/* <label>
@@ -298,6 +359,9 @@ const Index = () => {
                     type="text"
                     placeholder="Digite o nome do destinatario"
                   />
+                  {errors.nomeDestinatario && (
+                    <p className="error">{errors.nomeDestinatario?.message}</p>
+                  )}
                 </label>
               </div>
             </EntregaDivContent>
@@ -305,22 +369,30 @@ const Index = () => {
               <div>
                 <label>
                   <span>Turno Coleta *</span>
-                  <input
-                    {...register("turno_coleta")}
-                    type="text"
-                    placeholder="Digite o nome do destinatario"
-                  />
+                  <select {...register("turno_coleta")}>
+                    <option value="">Selecione uma opção</option>
+                    {Turnos.map((turno) => (
+                      <option value={turno.value}>{turno.name}</option>
+                    ))}
+                  </select>
                 </label>
+                {errors.turno_coleta && (
+                  <p className="error">{errors.turno_coleta?.message}</p>
+                )}
               </div>
               <div>
                 <label>
                   <span>Turno Entrega *</span>
-                  <input
-                    {...register("turno_entrega")}
-                    type="text"
-                    placeholder="Digite o turno da entrega"
-                  />
+                  <select {...register("turno_entrega")}>
+                    <option value="">Selecione uma opção</option>
+                    {Turnos.map((turno) => (
+                      <option value={turno.value}>{turno.name}</option>
+                    ))}
+                  </select>
                 </label>
+                {errors.turno_entrega && (
+                  <p className="error">{errors.turno_entrega?.message}</p>
+                )}
               </div>
             </EntregaDivContent>
             <EntregaDivContent>
@@ -333,6 +405,9 @@ const Index = () => {
                     placeholder="Digite o nome do destinatario"
                   />
                 </label>
+                {errors.data_coleta && (
+                  <p className="error">{errors.data_coleta?.message}</p>
+                )}
               </div>
               <div>
                 <label>
@@ -343,16 +418,19 @@ const Index = () => {
                     placeholder="Digite o turno da entrega"
                   />
                 </label>
+                {errors.data_entrega && (
+                  <p className="error">{errors.data_entrega?.message}</p>
+                )}
               </div>
             </EntregaDivContent>
           </EntregaDiv>
-          <ButtonDiv >
+          <ButtonDiv>
             <BtnYellow type="submit">Finalizar pedido</BtnYellow>
           </ButtonDiv>
         </Form>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

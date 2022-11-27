@@ -45,6 +45,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await signin(data.email, data.password);
+    
     if (res === true) {
         navigate('/fretes-disponiveis')
     } else if (res === false) {

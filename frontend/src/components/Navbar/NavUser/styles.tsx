@@ -6,20 +6,23 @@ export const Container = styled.button<IActive>`
   align-items: center;
   background-color: ${(props) => (props.active ? "#3f3f3f" : "#444444")};
   border: none;
-  padding: 10px;
-  border-radius: 100px 8px 8px 100px;
+  padding: 8px;
+  border-radius: ${(props) => (props.active ? "6px 6px 0px 0px" : "6px")};;
   cursor: pointer;
   gap: 7px;
   position: relative;
+  z-index: 999;
+  transition: .5s;
 
   &:hover {
     background-color: #3f3f3f;
   }
 
   .perfil {
-    width: 40px;
+    width: 30px;
   }
   .seta {
+    width: 10px;
     transition: .2s;
     transform: ${(props) => (props.active ? "rotate(0deg)" : "rotate(180deg)")};
   }
@@ -38,18 +41,22 @@ export const Content = styled.div<IActive>`
   position: absolute;
   width: 100%;
   display: ${(props) => (props.active ? "block" : "none")};
-  top: 90%;
-  left: 0;
-  z-index: 999;
+  top: 100%;
+  right: 0;
+  border-radius: 0px 0px 6px 6px;
+  overflow: hidden;
+  z-index: 998;
 
   button {
+    transition: .5s;
     display: ${(props) => (props.active ? "block" : "none")};
     width: 100%;
+   
     color: var(--text-light);
     border: none;
     cursor: pointer;
-    text-align: left;
-    padding: 3px;
+    text-align: right;
+    padding: 5px;
     background-color: #444444;
     &:hover {
       background-color: #3f3f3f;

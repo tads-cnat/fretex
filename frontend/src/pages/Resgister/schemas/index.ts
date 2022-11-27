@@ -57,6 +57,7 @@ export const schemaFreteiro = yup.object({
         numero: yup
             .number()
             .transform((value) => (isNaN(value) ? 0 : value))
+            .min(2, "mínimo de dois números")
             .required('Numero Obrigatório'),
         bairro: yup
             .string()
