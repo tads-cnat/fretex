@@ -24,7 +24,8 @@ export const useApi = () => ({
         return response.data
     },
     registerPedido: async (pedido: IPedido) => {
-        const response = await api.post('/pedido/', { pedido }, {
+        console.log(pedido)
+        const response = await api.post('/pedido/', pedido, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }

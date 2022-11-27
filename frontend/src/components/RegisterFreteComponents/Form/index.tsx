@@ -24,7 +24,6 @@ const Index = () => {
     })
   const navigate = useNavigate();
   const { registerPedido } = useApi()
-
   const onSubmit: SubmitHandler<IPedido> = (data) => {
     console.log(data)
     const pedido: IPedido = {
@@ -49,8 +48,7 @@ const Index = () => {
         estado: data.destino.estado,
         complemento: data.destino.complemento,
       },
-      status: data.status,
-      tipo_veiculo: data.tipo_veiculo,
+      tipo_veiculo: [1],
       observacao: data.observacao,
       nomeDestinatario: data.nomeDestinatario,
       data_coleta: data.data_coleta,
@@ -58,7 +56,40 @@ const Index = () => {
       turno_entrega: data.turno_entrega,
       turno_coleta: data.turno_coleta,
     };
-    registerPedido(pedido)
+    // const pedido2: IPedido = {
+    //   produto: {
+    //     nome: "string"
+    //   },
+    //   origem: {
+    //     rua: "string",
+    //       CEP: "string",
+    //         numero: "string",
+    //           bairro: "string",
+    //             cidade: "string",
+    //               estado: "string",
+    //                 complemento: "string"
+    //   },
+    //   destino: {
+    //     rua: "string",
+    //       CEP: "string",
+    //         numero: "string",
+    //           bairro: "string",
+    //             cidade: "string",
+    //               estado: "string",
+    //                 complemento: "string"
+    //   },
+    //   status: "CA",
+    //     tipo_veiculo: [
+    //       1
+    //     ],
+    //       observacao: "string",
+    //         nomeDestinatario: "string",
+    //           data_coleta: "2022-11-27",
+    //             data_entrega: "2022-11-27",
+    //               turno_entrega: "TA",
+    //                 turno_coleta: "TA"
+    // }
+    registerPedido(pedido).catch((error) => console.log(error))
     console.log(pedido);
     //navigate("/login");
   };
@@ -152,7 +183,7 @@ const Index = () => {
               <label>
                 <span>Bairro *</span>
                 <input
-                  {...register("origem.bairro")}
+                  {...register("destino.bairro")}
                   type="string"
                   placeholder="Digite o bairro"
                 />
@@ -206,23 +237,27 @@ const Index = () => {
                 </label>
                 <label>
                   <span>Tipos de veiculo</span>
-                  {/* select*/}
-                  <input
+                  <input 
                     {...register("tipo_veiculo")}
-                    type="text"
-                    placeholder="Digite o tipo de veiculo"
+                    type="checkbox"
                   />
+                  <label>Carro</label>
+                  <input 
+                    {...register("tipo_veiculo")}
+                    type="checkbox"
+                  />
+                  <label>Caminhão</label>
                 </label>
               </div>
               <div>
-                <label>
+                {/* <label>
                   <span>Foto do produto</span>
                   <input
-                    {...register("tipo_veiculo")}
+                    {...register("FOTO")}
                     type="file"
                     placeholder="Foto do produto"
                   />
-                </label>
+                </label> */}
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -276,7 +311,7 @@ const Index = () => {
                   <span>Data Coleta *</span>
                   <input
                     {...register("data_coleta")}
-                    type="text"
+                    type="date"
                     placeholder="Digite o nome do destinatario"
                   />
                 </label>
@@ -286,7 +321,7 @@ const Index = () => {
                   <span>Data Entrega *</span>
                   <input
                     {...register("data_entrega")}
-                    type="text"
+                    type="date"
                     placeholder="Digite o turno da entrega"
                   />
                 </label>

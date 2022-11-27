@@ -24,7 +24,7 @@ export interface IFreteiro {
 }
 
 export interface IPedido {
-    //cliente: string,
+    // cliente: string,
     produto: {
         nome: string
     },
@@ -46,7 +46,7 @@ export interface IPedido {
         estado: string,
         complemento?: string
     },
-    status: string,
+    // status: string,
     tipo_veiculo: number[],
     observacao: string,
     nomeDestinatario: string,
