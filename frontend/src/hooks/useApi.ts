@@ -39,6 +39,15 @@ export const useApi = () => ({
             }
         })
         return response.data
+    },
+    
+    tiposVeiculo: async() => {
+        const response = await api.get('/tipodeveiculo/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
     }
 })
 

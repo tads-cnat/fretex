@@ -11,6 +11,13 @@ import { schemaPedido } from "../../../pages/RegisterFrete/schemas"
 import { IPedido } from "../../../interfaces";
 import { useNavigate } from "react-router-dom"
 import useApi from "../../../hooks/useApi"
+import { useEffect, useState} from "react"
+
+
+interface ITiposDeVeiculo {
+  id: number
+  descricao: string
+}
 
 const Index = () => {
 
@@ -22,10 +29,14 @@ const Index = () => {
     setFocus, } = useForm<IPedido>({
       resolver: yupResolver(schemaPedido)
     })
+
   const navigate = useNavigate();
-  const { registerPedido } = useApi()
+  const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([])
+  console.log(tiposDeVeiculo)
+  const { registerPedido, tiposVeiculo } = useApi()
   const onSubmit: SubmitHandler<IPedido> = (data) => {
     console.log(data)
+
     const pedido: IPedido = {
       produto: {
         nome: data.produto.nome
@@ -48,7 +59,7 @@ const Index = () => {
         estado: data.destino.estado,
         complemento: data.destino.complemento,
       },
-      tipo_veiculo: [1],
+      tipo_veiculo: data.tipo_veiculo,
       observacao: data.observacao,
       nomeDestinatario: data.nomeDestinatario,
       data_coleta: data.data_coleta,
@@ -93,6 +104,11 @@ const Index = () => {
     console.log(pedido);
     //navigate("/login");
   };
+
+  useEffect(() => {
+    tiposVeiculo().then(res => setTiposDeVeiculo(res.data)).catch((error) => console.log(error))
+    console.log()
+  },[])
 
   return (
     <>
@@ -235,19 +251,21 @@ const Index = () => {
                     placeholder="Digite o nome do produto"
                   />
                 </label>
-                <label>
+                <div>
                   <span>Tipos de veiculo</span>
-                  <input 
-                    {...register("tipo_veiculo")}
-                    type="checkbox"
-                  />
-                  <label>Carro</label>
-                  <input 
-                    {...register("tipo_veiculo")}
-                    type="checkbox"
-                  />
-                  <label>Caminhão</label>
-                </label>
+                  <div className="div_tipoveiculo">
+                    {tiposDeVeiculo && tiposDeVeiculo?.map((tipoveiculo) => (
+                      <label key={tipoveiculo.id} className="checkbox_tipoveiculo">
+                          <input 
+                            {...register("tipo_veiculo")}
+                            type="checkbox"
+                            value={tipoveiculo.id}
+                          />
+                          {tipoveiculo.descricao}
+                      </label>
+                    ))}
+                  </div>
+              </div>
               </div>
               <div>
                 {/* <label>

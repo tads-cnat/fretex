@@ -121,6 +121,18 @@ export const ProdutoDivContent = styled.div`
         display: flex;
         flex-direction: column;
     }
+    .checkbox_tipoveiculo{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    .div_tipoveiculo{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
 `;
 
 export const EntregaDiv = styled.div`
