@@ -40,9 +40,24 @@ export const useApi = () => ({
         })
         return response.data
     },
-    
-    tiposVeiculo: async() => {
+    tiposVeiculo: async () => {
         const response = await api.get('/tipodeveiculo/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
+    getPedidos: async () => {
+        const response = await api.get('/pedido/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
+    getUser: async (id: number | undefined) => {
+        const response = await api.get(`/cliente/${id}/`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }

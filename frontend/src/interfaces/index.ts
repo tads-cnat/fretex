@@ -24,7 +24,7 @@ export interface IFreteiro {
 }
 
 export interface IPedido {
-    // cliente: string,
+    cliente?: number,
     produto: {
         nome: string
     },
