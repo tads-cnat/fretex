@@ -13,10 +13,8 @@ export const schemaPedido = yup.object({
             .string()
             .required('Rua Obrigatória'),
         CEP: yup //verificar melhor o cep
-            .number()
-            .typeError("CEP inválido")
-            .min(8, "CEP inválido")
-            .max(8, "CEP inválido")
+            .string()
+          
             .required('CEP Obrigatório'),
         numero: yup
             .number()
@@ -32,19 +30,13 @@ export const schemaPedido = yup.object({
         estado: yup
             .string()
             .required('Estado Obrigatório'),
-        complemento: yup
-            .string()
-            .required('Complemento Obrigatório'),
     }).required(),
     destino: yup.object({
         rua: yup
             .string()
             .required('Rua Obrigatória'),
         CEP: yup //verificar melhor o cep
-            .number()
-            .transform((value) => (isNaN(value) ? 0 : value))
-            .min(8, "Mínimo de 8 números")
-            .max(9, "Máximo de 8 números")
+            .string()
             .required('CEP Obrigatório'),
         numero: yup
             .number()
@@ -60,36 +52,19 @@ export const schemaPedido = yup.object({
         estado: yup
             .string()
             .required('Estado Obrigatório'),
-        complemento: yup
-            .string()
-            .required('Complemento Obrigatório'),
     }).required(),
     observacao: yup
-        .string(),
-    tipo_veiculo: yup
-        .boolean()
-        .typeError("Marcar pelo menos 1 veículo")
-        .oneOf([true], 'Marcar pelo menos 1 veículo')
-        .required('Marcar pelo menos 1 veículo'),
+        .string()
+        .required(),
     nomeDestinatario: yup
         .string()
         .required('Complemento Obrigatório'),
     data_coleta: yup
-        .date()
-        .min(today, 'A data não pode ser no passado')
-        .default(null)
-        .typeError('Data inválida')
+        .string()
         .required('Data de coleta Obrigatório'),
     data_entrega: yup
-        .date()
-        .default(null)
-        .typeError("Data inválida")
-        .required('Data de entrega Obrigatório')
-        .min(
-            yup.ref('data_coleta'),
-            "Data entrega tem que ser amior ou igual que data de coleta"
-        )
-        .min(today, 'A data não pode ser no passado'),
+        .string()
+        .required(),
     turno_entrega: yup
         .string()
         .required('Turno de entrega obrigatório'),
