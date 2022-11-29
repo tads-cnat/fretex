@@ -129,7 +129,7 @@ const RegisterFreteiroForm = () => {
                 type={password === true ? "text" : "password"}
                 placeholder="Sua senha"
               />
-              <button onClick={handlePassword}>
+              <button type="button" onClick={handlePassword}>
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
@@ -143,7 +143,7 @@ const RegisterFreteiroForm = () => {
                 type={confirmPassword === true ? "text" : "password"}
                 placeholder="Confirme sua senha"
               />
-              <button onClick={handleConfirmPassword}>
+              <button type="button" onClick={handleConfirmPassword}>
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>

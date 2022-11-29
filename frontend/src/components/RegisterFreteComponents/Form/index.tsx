@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { Turnos } from "./turnos";
+import { number } from "yup";
 
 interface ITiposDeVeiculo {
   id: number;
@@ -32,17 +33,16 @@ const Index = () => {
     formState: { errors },
     watch,
     setFocus,
+    getValues
   } = useForm<IPedido>({
     resolver: yupResolver(schemaPedido),
   });
 
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
-  console.log(tiposDeVeiculo);
-  const { registerPedido, tiposVeiculo } = useApi();
-  const onSubmit: SubmitHandler<IPedido> = (data) => {
-    console.log(data);
+  const { registerPedido, tiposVeiculo, getCEP } = useApi();
 
+  const onSubmit: SubmitHandler<IPedido> = (data) => {
     const pedido: IPedido = {
       produto: {
         nome: data.produto.nome,
@@ -65,7 +65,7 @@ const Index = () => {
         estado: data.destino.estado,
         complemento: data.destino.complemento,
       },
-      tipo_veiculo: data.tipo_veiculo,
+      tipo_veiculo: data.tipo_veiculo.map((tipo) => Number(tipo)),
       observacao: data.observacao,
       nomeDestinatario: data.nomeDestinatario,
       data_coleta: data.data_coleta,
@@ -73,43 +73,13 @@ const Index = () => {
       turno_entrega: data.turno_entrega,
       turno_coleta: data.turno_coleta,
     };
-    // const pedido2: IPedido = {
-    //   produto: {
-    //     nome: "string"
-    //   },
-    //   origem: {
-    //     rua: "string",
-    //       CEP: "string",
-    //         numero: "string",
-    //           bairro: "string",
-    //             cidade: "string",
-    //               estado: "string",
-    //                 complemento: "string"
-    //   },
-    //   destino: {
-    //     rua: "string",
-    //       CEP: "string",
-    //         numero: "string",
-    //           bairro: "string",
-    //             cidade: "string",
-    //               estado: "string",
-    //                 complemento: "string"
-    //   },
-    //   status: "CA",
-    //     tipo_veiculo: [
-    //       1
-    //     ],
-    //       observacao: "string",
-    //         nomeDestinatario: "string",
-    //           data_coleta: "2022-11-27",
-    //             data_entrega: "2022-11-27",
-    //               turno_entrega: "TA",
-    //                 turno_coleta: "TA"
-    // }
+   
     registerPedido(pedido).catch((error) => console.log(error));
     console.log(pedido);
     //navigate("/dashboard");
+    
   };
+
 
   useEffect(() => {
     tiposVeiculo()
@@ -118,6 +88,11 @@ const Index = () => {
     console.log();
   }, []);
 
+useEffect(() => {
+  if (watch("origem.CEP").length === 8)
+    getCEP(getValues("origem.CEP")).then(res => console.log(res))
+    
+}, [watch("origem.CEP")])
   return (
     <>
       <Container>

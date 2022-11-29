@@ -96,7 +96,7 @@ const Login = () => {
                     {...register("password")}
                     placeholder="Sua senha"
                   />
-                  <button onClick={handlePassword}>
+                  <button type="button" onClick={handlePassword}>
                     {password ? <ClosedEye /> : <Eye />}
                   </button>
                 </label>

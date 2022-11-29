@@ -1,5 +1,5 @@
 import { ICliente, IFreteiro, IPedido } from "../interfaces"
-import { api } from "../services/api"
+import { api, cepApi } from "../services/api"
 
 /*const Headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -63,6 +63,10 @@ export const useApi = () => ({
             }
         })
         return response.data
+    },
+    getCEP: async (cep:string) => {
+        const response = await cepApi.get(`/${cep}/json/`)
+        return response
     }
 })
 

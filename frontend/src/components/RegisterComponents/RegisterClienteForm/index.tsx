@@ -108,7 +108,7 @@ const RegisterClientForm = () => {
                 {...register("password")}
                 placeholder="Sua senha"
               />
-              <button onClick={handlePassword}>
+              <button type="button" onClick={handlePassword}>
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
@@ -122,7 +122,7 @@ const RegisterClientForm = () => {
                 {...register("confirmPassword")}
                 placeholder="Confirme sua senha"
               />
-              <button onClick={handleConfirmPassword}>
+              <button type="button" onClick={handleConfirmPassword}>
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>
