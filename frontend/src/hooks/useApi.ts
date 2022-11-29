@@ -66,7 +66,7 @@ export const useApi = () => ({
     },
     getCEP: async (cep:string) => {
         const response = await cepApi.get(`/${cep}/json/`)
-        return response
+        return response.data
     }
 })
 

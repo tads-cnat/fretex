@@ -33,7 +33,8 @@ const Index = () => {
     formState: { errors },
     watch,
     setFocus,
-    getValues
+    getValues,
+    setValue,
   } = useForm<IPedido>({
     resolver: yupResolver(schemaPedido),
   });
@@ -73,13 +74,12 @@ const Index = () => {
       turno_entrega: data.turno_entrega,
       turno_coleta: data.turno_coleta,
     };
-   
+
     registerPedido(pedido).catch((error) => console.log(error));
+
     console.log(pedido);
     //navigate("/dashboard");
-    
   };
-
 
   useEffect(() => {
     tiposVeiculo()
@@ -88,11 +88,16 @@ const Index = () => {
     console.log();
   }, []);
 
-useEffect(() => {
-  if (watch("origem.CEP").length === 8)
-    getCEP(getValues("origem.CEP")).then(res => console.log(res))
-    
-}, [watch("origem.CEP")])
+  useEffect(() => {
+    if (watch("origem.CEP").length === 9)
+      getCEP(getValues("origem.CEP").replace("/", "")).then((res) => {
+        setValue("origem.rua", res.logradouro);
+        setValue("origem.bairro", res.bairro);
+        setValue("origem.cidade", res.localidade);
+        setValue("origem.estado", res.uf);
+      });
+  }, [watch, getValues, getCEP, setValue]);
+
   return (
     <>
       <Container>
