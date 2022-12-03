@@ -64,6 +64,7 @@ export const PerfilImg = styled.div`
     border-radius: 50%;
     object-fit: cover;
     width: 150px;
+    height: 150px;
     transition: 0.5s;
   }
   label img:hover,

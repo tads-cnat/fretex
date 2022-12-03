@@ -7,6 +7,7 @@ export const schemaPedido = yup.object({
     produto: yup.object({
         nome: yup
             .string()
+            .required("Campo Obrigatório")
     }),
     origem: yup.object({
         rua: yup
@@ -14,12 +15,13 @@ export const schemaPedido = yup.object({
             .required('Rua Obrigatória'),
         CEP: yup //verificar melhor o cep
             .string()
-          
+            .transform((value) => (value.replaceAll("_", "").replace("-", "")))
+            .min(8, "CEP inválido")
             .required('CEP Obrigatório'),
         numero: yup
             .number()
             .transform((value) => (isNaN(value) ? 0 : value))
-            .min(2, 'Mínimo de 2 números')
+            .min(2, 'Mínimo de 1 números')
             .required('Numero Obrigatório'),
         bairro: yup
             .string()
@@ -29,6 +31,7 @@ export const schemaPedido = yup.object({
             .required('Cidade Obrigatória'),
         estado: yup
             .string()
+            .max(2, "No máximo 2 letras")
             .required('Estado Obrigatório'),
     }).required(),
     destino: yup.object({
@@ -37,11 +40,14 @@ export const schemaPedido = yup.object({
             .required('Rua Obrigatória'),
         CEP: yup //verificar melhor o cep
             .string()
+            .transform((value) => (value.replaceAll("_", "").replace("-", "")))
+            .oneOf([yup.ref('origem.CEP'), ], "Os CEPs não devem ser iguais")
+            .min(8, "CEP inválido")
             .required('CEP Obrigatório'),
         numero: yup
             .number()
             .transform((value) => (isNaN(value) ? 0 : value))
-            .min(2, 'Mínimo de 2 números')
+            .min(2, 'Mínimo de 1 número')
             .required('Numero Obrigatório'),
         bairro: yup
             .string()
@@ -51,19 +57,25 @@ export const schemaPedido = yup.object({
             .required('Cidade Obrigatória'),
         estado: yup
             .string()
+            .max(2, "No máximo 2 letras")
             .required('Estado Obrigatório'),
     }).required(),
-    observacao: yup
-        .string()
-        .required(),
+    tipo_veiculo: yup
+        .array()
+        .nullable()
+        .required("Escolha pelo menos 1 veículo"),
     nomeDestinatario: yup
         .string()
-        .required('Complemento Obrigatório'),
+        .required('Campo Obrigatório'),
     data_coleta: yup
         .string()
+        .transform((value) => new Date(value))
+        
+       
         .required('Data de coleta Obrigatório'),
     data_entrega: yup
         .string()
+        
         .required(),
     turno_entrega: yup
         .string()

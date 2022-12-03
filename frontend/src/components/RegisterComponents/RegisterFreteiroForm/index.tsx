@@ -34,14 +34,20 @@ const RegisterFreteiroForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    getValues,
+    setValue,
     setFocus,
   } = useForm<IFreteiro>({
     resolver: yupResolver(schemaFreteiro),
   });
   const navigate = useNavigate();
+  const [imagePreview, setImagePreview] = useState<any>();
+  const [imagePerfil, setImagePerfil] = useState();
 
   const onSubmit: SubmitHandler<IFreteiro> = (data) => {
+  
     const freteiro: IFreteiro = {
+      url_foto: imagePerfil,
       email: data.email,
       username: data.username,
       cpf: data.cpf,
@@ -56,10 +62,11 @@ const RegisterFreteiroForm = () => {
         complemento: data.endereco.complemento,
       },
     };
-    const data1 = registerFreteiro(freteiro);
+    registerFreteiro(freteiro)
+      .then((res) => console.log(res))
+      .catch((res) => console.log(res));
     navigate("/login");
-    console.log(data1);
-    console.log(freteiro);
+   
   };
 
   const handlePassword = (e: any) => {
@@ -76,22 +83,31 @@ const RegisterFreteiroForm = () => {
     setFocus("email");
   }, [setFocus]);
 
+  const onChange = (e: any) => {
+    const file = e.target.files[0];
+    setValue("url_foto", file)
+    setImagePreview(URL.createObjectURL(file));
+    setImagePerfil(file)
+  };
+ 
   return (
     <ContainerMain>
       <ContainerForm2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <RegisterPerson>
             <h1>Crie sua conta</h1>
-            {/* <PerfilImg>
+            <PerfilImg>
               <label>
-                <img src={perfil} alt="perfil" />
-                <input 
-                type="file" 
-                accept="image/*" 
+                <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
+                <input
+                  type="file"
+                  {...register("url_foto")}
+                  accept="image/*"
+                  onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>
               </label>
-            </PerfilImg> */}
+            </PerfilImg>
             <label>
               <Email />
               <input

@@ -133,10 +133,11 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
+   # clienteName = serializers.CharField(source="cliente.username", read_only=True)
     
     class Meta:
         model = Pedido
-        fields = ("cliente", "produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
+        fields = ("id", "cliente", "produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
         
     @transaction.atomic
     def create(self, validated_data):

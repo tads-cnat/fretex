@@ -45,7 +45,7 @@ const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
           </ContainerEndereco>
           <ContainerCalendar>
             <img src={Calendar} alt="Calendária" />
-            <span>Entregar até {pedido.data_entrega}</span>
+          {/*  <span>Entregar até {pedido.data_entrega}</span>*/}
           </ContainerCalendar>
         </ContainerInfos>
         <BtnYellow>Negociar</BtnYellow>

@@ -19,7 +19,7 @@ class Endereco(models.Model):
 
 
 class Freteiro(User):
-    url_foto = models.ImageField(upload_to="freteiro", blank=True, null=True)
+    url_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
 
@@ -31,7 +31,7 @@ class Freteiro(User):
 
 
 class Cliente(User):
-    url_foto = models.ImageField(upload_to="cliente", blank=True, null=True)
+    url_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
 
     class Meta:
@@ -43,7 +43,7 @@ class Cliente(User):
 
 class Produto(models.Model):
     nome = models.CharField(max_length=200)
-    imagem_url = models.ImageField(upload_to="produto", blank=True, null=True)
+    imagem_url = models.ImageField(upload_to="produto/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
         ordering = ['-id']
@@ -86,7 +86,7 @@ class Pedido(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, default='EN')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)
-    observacao = models.CharField(max_length=300)
+    observacao = models.CharField(max_length=300, blank=True, null=True)
     nomeDestinatario = models.CharField(max_length=200)
     data_criacao = models.DateField(auto_now_add=True)
     data_coleta = models.DateField()

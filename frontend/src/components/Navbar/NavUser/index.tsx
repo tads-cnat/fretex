@@ -4,7 +4,7 @@ import { ICliente, IFreteiro } from "../../../interfaces";
 import Seta from "../../../assets/images/seta.svg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/Auth/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavUser = () => {
   const { user, signout } = useContext(AuthContext);
@@ -23,7 +23,7 @@ const NavUser = () => {
       <p>{user?.username}</p>
       <img src={Seta} alt="seta" className="seta"/>
       <Content active={active}>
-        <button onClick={handleClick}>Sair</button>
+        <Link className="links" to='' onClick={handleClick}>Sair</Link>
       </Content>
     </Container>
   );

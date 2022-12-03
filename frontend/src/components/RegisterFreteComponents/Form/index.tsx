@@ -20,6 +20,8 @@ import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { Turnos } from "./turnos";
 import { number } from "yup";
+import InputMask from "react-input-mask";
+import { useAddress } from "../../../hooks/useAddress";
 
 interface ITiposDeVeiculo {
   id: number;
@@ -27,21 +29,17 @@ interface ITiposDeVeiculo {
 }
 
 const Index = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    setFocus,
-    getValues,
-    setValue,
-  } = useForm<IPedido>({
-    resolver: yupResolver(schemaPedido),
-  });
-
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
   const { registerPedido, tiposVeiculo, getCEP } = useApi();
+  const {
+    register,
+    completeAddress,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useAddress(schemaPedido);
 
   const onSubmit: SubmitHandler<IPedido> = (data) => {
     const pedido: IPedido = {
@@ -85,18 +83,7 @@ const Index = () => {
     tiposVeiculo()
       .then((res) => setTiposDeVeiculo(res.data))
       .catch((error) => console.log(error));
-    console.log();
   }, []);
-
-  useEffect(() => {
-    if (watch("origem.CEP").length === 9)
-      getCEP(getValues("origem.CEP").replace("/", "")).then((res) => {
-        setValue("origem.rua", res.logradouro);
-        setValue("origem.bairro", res.bairro);
-        setValue("origem.cidade", res.localidade);
-        setValue("origem.estado", res.uf);
-      });
-  }, [watch, getValues, getCEP, setValue]);
 
   return (
     <>
@@ -113,11 +100,13 @@ const Index = () => {
               <h3>Endereço de Coleta</h3>
               <label>
                 <span>CEP *</span>
-                <input
+                <InputMask
+                  mask="99999-999"
                   {...register("origem.CEP")}
+                  onBlur={completeAddress}
                   type="text"
                   placeholder="Digite o CEP"
-                />
+                ></InputMask>
                 {errors.origem?.CEP && (
                   <p className="error">{errors.origem.CEP?.message}</p>
                 )}
@@ -195,11 +184,13 @@ const Index = () => {
               <h3>Endereço de Entrega</h3>
               <label>
                 <span>CEP *</span>
-                <input
+                <InputMask
+                  mask="99999-999"
                   {...register("destino.CEP")}
+                  onBlur={completeAddress}
                   type="text"
                   placeholder="Digite o CEP"
-                />
+                ></InputMask>
                 {errors.destino?.CEP && (
                   <p className="error">{errors.destino.CEP?.message}</p>
                 )}
@@ -324,6 +315,9 @@ const Index = () => {
                     placeholder="Digite as observações"
                   />
                 </label>
+                {errors.observacao && (
+                    <p className="error">{errors.observacao?.message}</p>
+                  )}
               </div>
             </ProdutoDivContent>
           </ProdutoDiv>
@@ -351,8 +345,8 @@ const Index = () => {
                   <span>Turno Coleta *</span>
                   <select {...register("turno_coleta")}>
                     <option value="">Selecione uma opção</option>
-                    {Turnos.map((turno) => (
-                      <option value={turno.value}>{turno.name}</option>
+                    {Turnos.map((turno, index) => (
+                      <option key={index} value={turno.value}>{turno.name}</option>
                     ))}
                   </select>
                 </label>
@@ -365,8 +359,8 @@ const Index = () => {
                   <span>Turno Entrega *</span>
                   <select {...register("turno_entrega")}>
                     <option value="">Selecione uma opção</option>
-                    {Turnos.map((turno) => (
-                      <option value={turno.value}>{turno.name}</option>
+                    {Turnos.map((turno, index) => (
+                      <option key={index} value={turno.value}>{turno.name}</option>
                     ))}
                   </select>
                 </label>

@@ -38,7 +38,7 @@ const FretesAvailable = () => {
             <Filter />
             <ContainerFretes>
               {pedidos && !loading ? (
-                pedidos.map((pedido) => <BoxFretes pedido={pedido}/>)
+                pedidos.map((pedido) => <BoxFretes key={pedido.id} pedido={pedido}/>)
               ) : (
                 <p>Carregando</p>
               )}

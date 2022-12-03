@@ -7,6 +7,7 @@ export interface ICliente {
 }
 
 export interface IFreteiro {
+    url_foto?: string;
     email: string;
     username: string;
     cpf: string;
@@ -24,6 +25,7 @@ export interface IFreteiro {
 }
 
 export interface IPedido {
+    id?: number,
     cliente?: number,
     produto: {
         nome: string
