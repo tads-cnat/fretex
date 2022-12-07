@@ -73,6 +73,7 @@ class UserSerializer(serializers.ModelSerializer):
 class FreteiroSerializer(serializers.ModelSerializer):
     endereco = EnderecoSerializer(read_only=False)
     password = serializers.CharField(write_only=True)
+    url_foto = serializers.ImageField(required=False)
 
     class Meta:
         model = Freteiro
