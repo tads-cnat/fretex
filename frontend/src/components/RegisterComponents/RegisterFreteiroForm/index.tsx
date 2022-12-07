@@ -45,7 +45,22 @@ const RegisterFreteiroForm = () => {
   const [imagePerfil, setImagePerfil] = useState();
 
   const onSubmit: SubmitHandler<IFreteiro> = (data) => {
-  
+      // const form_data = new FormData();
+      // if (data.url_foto)
+      //   form_data.append("url_foto", data.url_foto, data.url_foto);
+      // form_data.append("email", data.email);
+      // form_data.append("username", data.username);
+      // form_data.append("cpf", data.cpf);
+      // form_data.append("passoword", data.password);
+      // form_data.append("CEP", data.endereco.CEP);
+      // form_data.append("rua", data.endereco.rua);
+      // form_data.append("numero", data.endereco.numero);
+      // form_data.append("bairro", data.endereco.bairro);
+      // form_data.append("cidade", data.endereco.cidade);
+      // form_data.append("estado", data.endereco.estado);
+      // if(data.endereco.complemento)
+      //   form_data.append("complemento", data.endereco.complemento);
+      
     const freteiro: IFreteiro = {
       url_foto: imagePerfil,
       email: data.email,
@@ -102,7 +117,7 @@ const RegisterFreteiroForm = () => {
                 <input
                   type="file"
                   {...register("url_foto")}
-                  accept="image/*"
+                  accept="image/jpeg,image/png,image/gif"
                   onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>

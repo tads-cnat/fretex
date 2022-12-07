@@ -19,8 +19,12 @@ export const useApi = () => ({
         const response = await api.post('/cliente/', { username, cpf, email, password })
         return response.data
     },
-    registerFreteiro: async ({ username, email, cpf, password, endereco }: IFreteiro) => {
-        const response = await api.post('/freteiro/', { username, email, cpf, password, endereco })
+    // registerFreteiro: async (data:any) => {
+    //     const response = await api.post('/freteiro/', data)
+    //     return response.data
+    // },
+    registerFreteiro: async ({ url_foto, username, email, cpf, password, endereco }: IFreteiro) => {
+        const response = await api.post('/freteiro/', { url_foto, username, email, cpf, password, endereco })
         return response.data
     },
     registerPedido: async (pedido: IPedido) => {
