@@ -17,17 +17,21 @@ import Password from "../../../assets/Svg/Password";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import Eye from "../../../assets/Svg/Eye";
 import { SpanYellow } from "../../../styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFreteiro } from "../../../interfaces";
 import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaFreteiro } from "../../../pages/Resgister/schemas";
 import useApi from "../../../hooks/useApi";
+import { useToggle } from "../../../hooks/useToggle";
+import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
 
 const RegisterFreteiroForm = () => {
-  const [password, setPassord] = useState<boolean>(false);
-  const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const [imagePreview, setImagePreview] = useState<string>();
+  const { value: password, toggle: togglePassword } = useToggle();
+  const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
+
   const { registerFreteiro } = useApi();
   const {
     register,
@@ -41,57 +45,19 @@ const RegisterFreteiroForm = () => {
     resolver: yupResolver(schemaFreteiro),
   });
   const navigate = useNavigate();
-  const [imagePreview, setImagePreview] = useState<any>();
-  const [imagePerfil, setImagePerfil] = useState();
 
-  const onSubmit: SubmitHandler<IFreteiro> = (data) => {
-      // const form_data = new FormData();
-      // if (data.url_foto)
-      //   form_data.append("url_foto", data.url_foto, data.url_foto);
-      // form_data.append("email", data.email);
-      // form_data.append("username", data.username);
-      // form_data.append("cpf", data.cpf);
-      // form_data.append("passoword", data.password);
-      // form_data.append("CEP", data.endereco.CEP);
-      // form_data.append("rua", data.endereco.rua);
-      // form_data.append("numero", data.endereco.numero);
-      // form_data.append("bairro", data.endereco.bairro);
-      // form_data.append("cidade", data.endereco.cidade);
-      // form_data.append("estado", data.endereco.estado);
-      // if(data.endereco.complemento)
-      //   form_data.append("complemento", data.endereco.complemento);
-      
-    const freteiro: IFreteiro = {
-      url_foto: imagePerfil,
-      email: data.email,
-      username: data.username,
-      cpf: data.cpf,
-      password: data.password,
-      endereco: {
-        CEP: data.endereco.CEP,
-        rua: data.endereco.rua,
-        numero: data.endereco.numero,
-        bairro: data.endereco.bairro,
-        cidade: data.endereco.cidade,
-        estado: data.endereco.estado,
-        complemento: data.endereco.complemento,
-      },
-    };
-    registerFreteiro(freteiro)
-      .then((res) => console.log(res))
-      .catch((res) => console.log(res));
-    navigate("/login");
-   
-  };
+  const { onSubmit } = useFreteiroForm({
+    onSuccess: () => navigate("/login"),
+  });
 
   const handlePassword = (e: any) => {
     e.preventDefault();
-    setPassord(!password);
+    togglePassword();
   };
 
   const handleConfirmPassword = (e: any) => {
     e.preventDefault();
-    setConfirmPassword(!confirmPassword);
+    toggleConfirmPassword();
   };
 
   useEffect(() => {
@@ -100,11 +66,10 @@ const RegisterFreteiroForm = () => {
 
   const onChange = (e: any) => {
     const file = e.target.files[0];
-    setValue("url_foto", file)
+    setValue("url_foto", file);
     setImagePreview(URL.createObjectURL(file));
-    setImagePerfil(file)
   };
- 
+
   return (
     <ContainerMain>
       <ContainerForm2>

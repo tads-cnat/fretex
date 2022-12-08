@@ -16,14 +16,21 @@ const NavUser = () => {
     signout();
     navigate("/");
   };
-
+  console.log(user)
   return (
     <Container onClick={() => setActive(!active)} active={active}>
-      <img src={perfil} alt={user?.username} className="perfil" />
+      {user?.url_foto ? (
+        <img src={user?.url_foto} alt={user?.username} className="perfil" />
+      ) : (
+        <img src={perfil} alt={user?.username} className="perfil" />
+      )}
+
       <p>{user?.username}</p>
-      <img src={Seta} alt="seta" className="seta"/>
+      <img src={Seta} alt="seta" className="seta" />
       <Content active={active}>
-        <Link className="links" to='' onClick={handleClick}>Sair</Link>
+        <Link className="links" to="" onClick={handleClick}>
+          Sair
+        </Link>
       </Content>
     </Container>
   );

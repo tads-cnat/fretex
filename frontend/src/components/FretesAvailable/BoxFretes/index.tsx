@@ -20,10 +20,10 @@ import { useEffect, useState } from "react";
 
 const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
   const [user, setUser] = useState<ICliente>();
-  const { getUser } = useApi();
+  const { getCliente } = useApi();
 
   useEffect(() => {
-    getUser(pedido?.cliente).then((res) => setUser(res.data));
+    getCliente(pedido?.cliente).then((res) => setUser(res.data));
   }, []);
 
   return (

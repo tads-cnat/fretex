@@ -18,7 +18,7 @@ interface INavbar {
 const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user } = useContext(AuthContext);
- 
+
   return (
     <Header id={id}>
       <Wrapper>

@@ -67,7 +67,7 @@ class UserSerializer(serializers.ModelSerializer):
             cliente = None
         return {
             'freteiro': freteiro.id if freteiro else None,
-            'cliente': cliente.id if cliente else None
+            'cliente': cliente.id if cliente else None,
         }
 
 class FreteiroSerializer(serializers.ModelSerializer):

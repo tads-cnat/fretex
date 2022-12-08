@@ -23,12 +23,15 @@ export const useApi = () => ({
     //     const response = await api.post('/freteiro/', data)
     //     return response.data
     // },
-    registerFreteiro: async ({ url_foto, username, email, cpf, password, endereco }: IFreteiro) => {
-        const response = await api.post('/freteiro/', { url_foto, username, email, cpf, password, endereco })
+    registerFreteiro: async (data: any) => {
+        const response = await api.post('/freteiro/', data,{
+            headers:{
+                'Content-Type': 'multipart/form-data',
+            }
+        })
         return response.data
     },
     registerPedido: async (pedido: IPedido) => {
-        console.log(pedido)
         const response = await api.post('/pedido/', pedido, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
@@ -60,8 +63,16 @@ export const useApi = () => ({
         })
         return response.data
     },
-    getUser: async (id: number | undefined) => {
+    getCliente: async (id: number | undefined) => {
         const response = await api.get(`/cliente/${id}/`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
+    getUser: async () => {
+        const response = await api.get(`/auth/user/`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }

@@ -1,4 +1,5 @@
 export interface ICliente {
+    url_foto?: any;
     email: string;
     username: string;
     cpf: string;
@@ -7,7 +8,7 @@ export interface ICliente {
 }
 
 export interface IFreteiro {
-    url_foto?: string;
+    url_foto?: any;
     email: string;
     username: string;
     cpf: string;

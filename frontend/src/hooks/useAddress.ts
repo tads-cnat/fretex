@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { IPedido } from "../interfaces";
+import { IFreteiro, IPedido } from "../interfaces";
 import { schemaPedido } from "../pages/RegisterFrete/schemas";
 import useApi from "./useApi";
 

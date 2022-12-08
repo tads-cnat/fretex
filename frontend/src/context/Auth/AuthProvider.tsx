@@ -12,7 +12,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     if (data.data.user && data.data.token) {
       setToken(data.data.token);
-      setUser(data.data.user);
+      api.getUser().then((res) => setUser(res.data.user));
       return data.data.user.id === data.data.user.extra_data.freteiro;
     }
     return null;
@@ -23,14 +23,14 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     if (storageToken) {
       const userData = await api.validateToken(storageToken);
       if (userData.data.user) {
-        setUser(userData.data.user);
+        api.getUser().then((res) => setUser(res.data.user));
       }
     }
   };
 
   useEffect(() => {
     validateToken();
-  }, []); 
+  }, []);
 
   const signout = () => {
     setToken("");
