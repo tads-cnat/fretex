@@ -26,6 +26,7 @@ import { schemaFreteiro } from "../../../pages/Resgister/schemas";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
+import { useAddress } from "../../../hooks/useAddress";
 
 const RegisterFreteiroForm = () => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -33,7 +34,7 @@ const RegisterFreteiroForm = () => {
   const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
 
   const { registerFreteiro } = useApi();
-  const {
+ /* const {
     register,
     handleSubmit,
     formState: { errors },
@@ -43,7 +44,19 @@ const RegisterFreteiroForm = () => {
     setFocus,
   } = useForm<IFreteiro>({
     resolver: yupResolver(schemaFreteiro),
-  });
+  });*/
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    getValues,
+    setValue,
+    setFocus,
+    completeAddress
+  } = useAddress<IFreteiro>(schemaFreteiro);
+  
   const navigate = useNavigate();
 
   const { onSubmit } = useFreteiroForm({
@@ -69,7 +82,8 @@ const RegisterFreteiroForm = () => {
     setValue("url_foto", file);
     setImagePreview(URL.createObjectURL(file));
   };
-
+console.log(typeof watch("url_foto"))
+console.log(watch("url_foto"))
   return (
     <ContainerMain>
       <ContainerForm2>
@@ -86,6 +100,7 @@ const RegisterFreteiroForm = () => {
                   onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>
+                {/*errors.url_foto && <p className="error">{errors.url_foto?.message}</p>*/}
               </label>
             </PerfilImg>
             <label>
@@ -155,6 +170,7 @@ const RegisterFreteiroForm = () => {
                 mask="99999-999"
                 {...register("endereco.CEP")}
                 placeholder="Seu CEP"
+                onBlur={completeAddress}
               ></InputMask>
             </label>
             {errors.endereco?.CEP && (

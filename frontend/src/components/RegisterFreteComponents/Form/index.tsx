@@ -39,7 +39,8 @@ const Index = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useAddress(schemaPedido);
+    getValues,
+  } = useAddress<IPedido>(schemaPedido);
 
   const onSubmit: SubmitHandler<IPedido> = (data) => {
     const pedido: IPedido = {

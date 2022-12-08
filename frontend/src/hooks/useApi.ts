@@ -71,6 +71,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getFreteiro: async (id: number | undefined) => {
+        const response = await api.get(`/freteiro/${id}/`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     getUser: async () => {
         const response = await api.get(`/auth/user/`, {
             headers: {

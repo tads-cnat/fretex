@@ -16,7 +16,7 @@ const NavUser = () => {
     signout();
     navigate("/");
   };
-  console.log(user)
+
   return (
     <Container onClick={() => setActive(!active)} active={active}>
       {user?.url_foto ? (

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { IFreteiro, IPedido } from "../interfaces";
 import { schemaPedido } from "../pages/RegisterFrete/schemas";
 import useApi from "./useApi";
@@ -10,15 +10,17 @@ const getCEPNumbers = (value: string) => {
         .replaceAll("_", "")
 }
 
-export const useAddress = (schema:any) => {
+export const useAddress = <T extends FieldValues>(schema: any) => {
     const {
         register,
         setValue,
         watch,
         handleSubmit,
         getValues,
-        formState: { errors }
-    } = useForm<IPedido>({
+        setFocus,
+        formState: { errors },
+        ...rest
+    } = useForm<T>({
         resolver: yupResolver(schema),
     })
     const { getCEP } = useApi()
@@ -50,9 +52,12 @@ export const useAddress = (schema:any) => {
     return {
         register,
         completeAddress,
+        setFocus,
         watch,
         handleSubmit,
         formState: { errors },
-        setValue
+        setValue,
+        getValues,
+        rest
     }
 };

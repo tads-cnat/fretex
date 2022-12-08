@@ -20,6 +20,9 @@ export const Container = styled.button<IActive>`
 
   .perfil {
     width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .seta {
