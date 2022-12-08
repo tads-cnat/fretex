@@ -8,7 +8,7 @@ export interface ICliente {
 }
 
 export interface IFreteiro {
-    url_foto?: string;
+    url_foto?: any;
     email: string;
     username: string;
     cpf: string;
@@ -28,8 +28,10 @@ export interface IFreteiro {
 export interface IPedido {
     id?: number,
     cliente?: number,
+    clienteName?: string,
     produto: {
-        nome: string
+        nome: string,
+        imagem_url?: any,
     },
     origem: {
         rua: string,

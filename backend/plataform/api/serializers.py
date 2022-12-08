@@ -125,20 +125,22 @@ class TipoVeiculoSerializer(serializers.ModelSerializer):
 
         
 class ProdutoSerializer(serializers.ModelSerializer):
+    imagem_url = serializers.ImageField(required=False)
+
     class Meta:
         model = Produto
-        fields = ("nome", "imagem_url")
+        fields = ("__all__")
 
         
 class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
-    produto = ProdutoSerializer()
-   # clienteName = serializers.CharField(source="cliente.username", read_only=True)
+    produto = ProdutoSerializer() 
+    clienteName = serializers.CharField(source="cliente.username", read_only=True)
     
     class Meta:
         model = Pedido
-        fields = ("id", "cliente", "produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
+        fields = ("id", "cliente", "clienteName","produto", "origem", "destino", "status", "tipo_veiculo", "observacao", "nomeDestinatario", "data_coleta", "data_entrega", "turno_entrega", "turno_coleta")
         
     @transaction.atomic
     def create(self, validated_data):

@@ -10,7 +10,7 @@ export const schemaCliente = yup.object({
         .required('Nome Obrigatório'),
     cpf: yup
         .string()
-        .matches(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/, 'CPF deve conter apenas números')
+        .matches(/([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})$/, 'CPF deve conter apenas números')
         .min(14, 'CPF deve ter no mínimo 11 caracteres')
         .max(14, 'CPF deve ter no máximo 11 caracteres'),
     password: yup
@@ -46,7 +46,7 @@ export const schemaFreteiro = yup.object({
         .required('Nome Obrigatório'),
     cpf: yup
         .string()
-        .matches(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$/, 'CPF deve conter apenas números')
+        .matches(/([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})$/, 'CPF deve conter apenas números')
         .min(14, 'CPF deve ter no mínimo 11 caracteres')
         .max(14, 'CPF deve ter no máximo 11 caracteres'),
     password: yup

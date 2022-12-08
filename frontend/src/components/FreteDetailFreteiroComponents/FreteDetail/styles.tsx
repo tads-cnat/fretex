@@ -49,6 +49,7 @@ export const Content1 = styled.div`
     }
     img {
         object-fit: cover;
+        width: 250px;
         @media (max-width: 768px) {
             width: 100%;
         }

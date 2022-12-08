@@ -43,41 +43,30 @@ const Index = () => {
   } = useAddress<IPedido>(schemaPedido);
 
   const onSubmit: SubmitHandler<IPedido> = (data) => {
-    const pedido: IPedido = {
-      produto: {
-        nome: data.produto.nome,
-      },
-      origem: {
-        rua: data.origem.rua,
-        CEP: data.origem.CEP,
-        numero: data.origem.numero,
-        bairro: data.origem.bairro,
-        cidade: data.origem.cidade,
-        estado: data.origem.estado,
-        complemento: data.origem.complemento,
-      },
-      destino: {
-        rua: data.destino.rua,
-        CEP: data.destino.CEP,
-        numero: data.destino.numero,
-        bairro: data.destino.bairro,
-        cidade: data.destino.cidade,
-        estado: data.destino.estado,
-        complemento: data.destino.complemento,
-      },
-      tipo_veiculo: data.tipo_veiculo.map((tipo) => Number(tipo)),
-      observacao: data.observacao,
-      nomeDestinatario: data.nomeDestinatario,
-      data_coleta: data.data_coleta,
-      data_entrega: data.data_entrega,
-      turno_entrega: data.turno_entrega,
-      turno_coleta: data.turno_coleta,
-    };
+    const formData: any = new FormData();
+    const { origem, destino, produto, ...pedido } = data;
 
-    registerPedido(pedido).catch((error) => console.log(error));
+    Object.entries(origem).forEach(([key, value]) => {
+      if (value) formData.append(`origem.${key}`, value);
+    });
+    Object.entries(destino).forEach(([key, value]) => {
+      if (value) formData.append(`destino.${key}`, value);
+    });
+    Object.entries(produto).forEach(([key, value]) => {
+      if (value && value[0].name) formData.append(`produto.${key}`, value[0]);
+      else if (value) formData.append(`produto.${key}`, value);
+    });
+    Object.entries(pedido).forEach(([key, value]) => {
+      if (value) formData.append(`${key}`, value);
+    });
 
-    console.log(pedido);
-    //navigate("/dashboard");
+    for (const [key,value] of formData){
+      console.log(`${key}: ${value}`)
+    }
+
+    registerPedido(formData)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -85,7 +74,7 @@ const Index = () => {
       .then((res) => setTiposDeVeiculo(res.data))
       .catch((error) => console.log(error));
   }, []);
-
+ 
   return (
     <>
       <Container>
@@ -301,14 +290,15 @@ const Index = () => {
                 </div>
               </div>
               <div>
-                {/* <label>
+                <label>
                   <span>Foto do produto</span>
                   <input
-                    {...register("FOTO")}
+                    {...register("produto.imagem_url")}
                     type="file"
-                    placeholder="Foto do produto"
+                    //  onChange={handleChange}
+                    accept="image/jpeg,image/png,image/gif"
                   />
-                </label> */}
+                </label>
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -317,8 +307,8 @@ const Index = () => {
                   />
                 </label>
                 {errors.observacao && (
-                    <p className="error">{errors.observacao?.message}</p>
-                  )}
+                  <p className="error">{errors.observacao?.message}</p>
+                )}
               </div>
             </ProdutoDivContent>
           </ProdutoDiv>
@@ -347,7 +337,9 @@ const Index = () => {
                   <select {...register("turno_coleta")}>
                     <option value="">Selecione uma opção</option>
                     {Turnos.map((turno, index) => (
-                      <option key={index} value={turno.value}>{turno.name}</option>
+                      <option key={index} value={turno.value}>
+                        {turno.name}
+                      </option>
                     ))}
                   </select>
                 </label>
@@ -361,7 +353,9 @@ const Index = () => {
                   <select {...register("turno_entrega")}>
                     <option value="">Selecione uma opção</option>
                     {Turnos.map((turno, index) => (
-                      <option key={index} value={turno.value}>{turno.name}</option>
+                      <option key={index} value={turno.value}>
+                        {turno.name}
+                      </option>
                     ))}
                   </select>
                 </label>

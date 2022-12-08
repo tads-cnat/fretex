@@ -14,11 +14,17 @@ export const ContainerBg = styled.div`
 `;
 
 export const ContainerMain = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    align-items: flex-start;
     column-gap: 20px;
     row-gap: 15px;
     background-color: var(--bg-grey3);
+    @media (max-width:1000px) {
+        & {
+            grid-template-columns: 1fr;
+        }
+    }
 `;
 
 export const ContainerFretes = styled.div`

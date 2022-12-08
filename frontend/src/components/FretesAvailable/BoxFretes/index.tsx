@@ -19,18 +19,19 @@ import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 
 const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
-  const [user, setUser] = useState<ICliente>();
-  const { getCliente } = useApi();
-
-  useEffect(() => {
-    getCliente(pedido?.cliente).then((res) => setUser(res.data));
-  }, []);
+  const formatDate = () => {
+    const date = pedido.data_entrega.replaceAll("-","/")
+    const year = date.slice(0,4)
+    const day = date.slice(8)
+    const month = date.slice(4,8)
+    return `${day}${month}${year}`
+  }
 
   return (
     <ContainerMain>
       <ContainerInfoBtn>
         <ContainerInfos>
-          <p>{user?.username}</p>
+          <p>{pedido.clienteName}</p>
           <h2>{pedido.produto.nome}</h2>
           <ContainerEndereco>
             <End>
@@ -45,13 +46,17 @@ const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
           </ContainerEndereco>
           <ContainerCalendar>
             <img src={Calendar} alt="Calendária" />
-          {/*  <span>Entregar até {pedido.data_entrega}</span>*/}
+            <span>Entregar até {formatDate()}</span>
           </ContainerCalendar>
         </ContainerInfos>
-        <BtnYellow>Negociar</BtnYellow>
+        <BtnYellow to={`/fretes/${pedido.id}`}>Negociar</BtnYellow>
       </ContainerInfoBtn>
       <ContainerImgMain>
-        <ContainerImg src={caixa} alt="caixas" />
+        {pedido.produto.imagem_url ? (
+          <ContainerImg src={pedido.produto.imagem_url} alt="caixas" />
+        ) : (
+          <ContainerImg src={caixa} alt="caixas" />
+        )}
       </ContainerImgMain>
     </ContainerMain>
   );

@@ -28,8 +28,7 @@ export const ContainerFilter = styled.div`
         cursor: pointer;
     }
 
-    @media (max-width: 1116px) {
-
+    @media (max-width: 1000px) {
         width: 100%;
         flex-direction: row;
         h2{

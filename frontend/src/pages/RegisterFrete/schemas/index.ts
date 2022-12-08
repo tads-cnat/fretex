@@ -41,7 +41,7 @@ export const schemaPedido = yup.object({
         CEP: yup //verificar melhor o cep
             .string()
             .transform((value) => (value.replaceAll("_", "").replace("-", "")))
-            .oneOf([yup.ref('origem.CEP'), ], "Os CEPs não devem ser iguais")
+            //   .oneOf([yup.ref('origem.CEP'), ], "Os CEPs não devem ser iguais")
             .min(8, "CEP inválido")
             .required('CEP Obrigatório'),
         numero: yup
@@ -63,19 +63,20 @@ export const schemaPedido = yup.object({
     tipo_veiculo: yup
         .array()
         .nullable()
+        .min(1, "Escolha pelo menos 1 veículo")
         .required("Escolha pelo menos 1 veículo"),
     nomeDestinatario: yup
         .string()
         .required('Campo Obrigatório'),
     data_coleta: yup
         .string()
-        .transform((value) => new Date(value))
-        
-       
+        //    .transform((value) => new Date(value))
+
+
         .required('Data de coleta Obrigatório'),
     data_entrega: yup
         .string()
-        
+
         .required(),
     turno_entrega: yup
         .string()

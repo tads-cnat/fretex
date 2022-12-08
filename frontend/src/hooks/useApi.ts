@@ -24,8 +24,8 @@ export const useApi = () => ({
     //     return response.data
     // },
     registerFreteiro: async (data: any) => {
-        const response = await api.post('/freteiro/', data,{
-            headers:{
+        const response = await api.post('/freteiro/', data, {
+            headers: {
                 'Content-Type': 'multipart/form-data',
             }
         })
@@ -63,6 +63,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getPedido: async (id: number) => {
+        const response = await api.get(`/pedido/${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     getCliente: async (id: number | undefined) => {
         const response = await api.get(`/cliente/${id}/`, {
             headers: {
@@ -87,7 +95,7 @@ export const useApi = () => ({
         })
         return response.data
     },
-    getCEP: async (cep:string) => {
+    getCEP: async (cep: string) => {
         const response = await cepApi.get(`/${cep}/json/`)
         return response.data
     }
