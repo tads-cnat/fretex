@@ -75,7 +75,7 @@ const Index = () => {
     <>
       <Container>
         <div>
-          <h1>Cadastro de coleta</h1>
+          <h1>Cadastro de pedido</h1>
           <Seta onClick={() => navigate(-1)}>
             <Arrowleft /> Voltar
           </Seta>

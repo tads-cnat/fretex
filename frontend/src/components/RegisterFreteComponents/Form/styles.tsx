@@ -184,6 +184,7 @@ export const EntregaDivContent = styled.div`
 `;
 
 export const BtnYellow = styled.button`
+  cursor: pointer;
   padding: 9px 32px;
   background-color: var(--theme-primary);
   color: var(--text-light);
