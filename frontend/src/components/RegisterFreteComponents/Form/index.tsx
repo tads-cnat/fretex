@@ -10,16 +10,14 @@ import {
   BtnYellow,
   ButtonDiv,
 } from "./styles";
-import arrowleft from "../../../assets/images/arrow-left-circle.svg";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
+import { SubmitHandler } from "react-hook-form";
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas";
 import { IPedido } from "../../../interfaces";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { Turnos } from "./turnos";
-import { number } from "yup";
 import InputMask from "react-input-mask";
 import { useAddress } from "../../../hooks/useAddress";
 
@@ -31,15 +29,12 @@ interface ITiposDeVeiculo {
 const Index = () => {
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
-  const { registerPedido, tiposVeiculo, getCEP } = useApi();
+  const { registerPedido, tiposVeiculo } = useApi();
   const {
     register,
     completeAddress,
     handleSubmit,
     formState: { errors },
-    watch,
-    setValue,
-    getValues,
   } = useAddress<IPedido>(schemaPedido);
 
   const onSubmit: SubmitHandler<IPedido> = (data) => {
@@ -59,10 +54,11 @@ const Index = () => {
     Object.entries(pedido).forEach(([key, value]) => {
       if (value) formData.append(`${key}`, value);
     });
-
-    for (const [key,value] of formData){
-      console.log(`${key}: ${value}`)
+/* colocar any no formdata caso queira fazer print
+    for (const [key, value] of formData) {
+      console.log(`${key}: ${value}`);
     }
+*/
 
     registerPedido(formData)
       .then((res) => console.log(res))
@@ -74,14 +70,14 @@ const Index = () => {
       .then((res) => setTiposDeVeiculo(res.data))
       .catch((error) => console.log(error));
   }, []);
- 
+
   return (
     <>
       <Container>
         <div>
           <h1>Cadastro de coleta</h1>
-          <Seta>
-            <img src={arrowleft} alt="voltar" /> Voltar
+          <Seta onClick={() => navigate(-1)}>
+            <Arrowleft /> Voltar
           </Seta>
         </div>
         <Form onSubmit={handleSubmit(onSubmit)}>

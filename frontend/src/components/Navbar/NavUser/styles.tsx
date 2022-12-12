@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { IActive } from "../../../interfaces/styledComponents";
 
+export const ContainerAll = styled.div``;
+
 export const Container = styled.button<IActive>`
   display: flex;
   align-items: center;
@@ -15,7 +17,7 @@ export const Container = styled.button<IActive>`
   transition: 0.5s;
 
   &:hover {
-    background-color: #3f3f3f;
+    // background-color: #3f3f3f;
   }
 
   .perfil {
@@ -37,7 +39,18 @@ export const Container = styled.button<IActive>`
 
   @media (max-width: 768px) {
     & {
-      margin-bottom: 10px;
+      margin-bottom: ${(props) => (props.active ? "40px" : "10px")};
+      overflow-y: ${(props) => (props.active ? "visible" : "hidden")};
+      background-color: transparent;
+      padding: 4px 0;
+      width: 100%;
+    }
+    .perfil {
+      width: 16px;
+      height: 16px;
+    }
+    .seta {
+      display: none;
     }
   }
 `;
@@ -46,16 +59,14 @@ export const Content = styled.div<IActive>`
   background-color: #444444;
   position: absolute;
   width: 100%;
-  display: ${(props) => (props.active ? "block" : "none")};
+  display: ${(props) => (props.active ? "flex" : "none")};
+  flex-direction: column;
   top: 100%;
   right: 0;
   border-radius: 0px 0px 6px 6px;
   overflow: hidden;
   z-index: 998;
-
-  @media (max-width: 768px) {
-    padding: 0 !important;
-  }
+  padding: 0 !important;
 
   .links {
     transition: 0.5s;
@@ -65,14 +76,27 @@ export const Content = styled.div<IActive>`
     border: none;
     cursor: pointer;
     text-align: right;
-    padding: 5px;
+    padding: 4px;
     background-color: #444444;
 
     &:hover {
       background-color: #3f3f3f;
     }
     @media (max-width: 768px) {
-      margin: 0 !important;
+      & {
+        margin: 0 !important;
+        position: unset;
+        text-align: left;
+        display: "block";
+        background-color: var(--bg-grey);
+        border-top: 1px solid #424242;
+      }
+      .links {
+        //   display: block;
+        display: block;
+        
+        padding: 4px !important;
+      }
     }
   }
 `;

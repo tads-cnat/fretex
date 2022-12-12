@@ -22,12 +22,6 @@ export const Container = styled.div`
     }
 `;
 
-export const Seta = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-`;
-
 export const Content = styled.div`
     background-color: var(--bg-ligth);
     display: flex;

@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IDropdownMenu } from "../../interfaces/styledComponents";
+import { BtnPattern } from "../../styles";
 
 export const Header = styled.header`
   background-color: var(--bg-grey);
   color: var(--text-light);
   @media (max-width: 768px) {
     position: relative;
+  }
+`;
+
+export const BtnPatternLogin = styled(BtnPattern)`
+  @media (max-width:768px) {
+    margin-top: 5px;
   }
 `;
 
@@ -56,10 +63,13 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       color: var(--btn-hover);
     }
   }
+  .active {
+    color: var(--btn-hover);
+  }
 
   @media (max-width: 768px) {
     & {
-      display: ${(props) => props.show ? "flex" : "none"};
+      display: ${(props) => (props.show ? "flex" : "none")};
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -69,7 +79,13 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       left: 0;
       background-color: var(--bg-grey);
       z-index: 1000;
-      gap: 15px;
+      gap: 0px;
+    }
+
+    .containerUser {
+      width: 100%;
+      display: flex;
+      justify-content: start;
     }
 
     ul {
@@ -88,7 +104,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     ul li {
       width: 100%;
       display: block;
-      padding: 2px 0;
+      padding: 4px 0;
     }
 
     div {

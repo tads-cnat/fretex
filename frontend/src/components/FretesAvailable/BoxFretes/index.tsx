@@ -14,9 +14,7 @@ import caixa from "../../../assets/images/caixas.png";
 import Loc from "../../../assets/images/geo-alt.svg";
 import Arrow from "../../../assets/images/arrow-right.svg";
 import Calendar from "../../../assets/images/calendar.svg";
-import { ICliente, IPedido } from "../../../interfaces";
-import useApi from "../../../hooks/useApi";
-import { useEffect, useState } from "react";
+import { IPedido } from "../../../interfaces";
 
 const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
   const formatDate = () => {

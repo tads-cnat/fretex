@@ -24,7 +24,7 @@ const HomeVideoSection = () => {
           A maior plataforma de transporte rodoviário de cargas do Brasil
         </VideoP>
         <VideoBtnWrapper>
-          <BtnPattern to="/choose-user">Comece agora</BtnPattern>
+          <BtnPattern to="/register">Comece agora</BtnPattern>
         </VideoBtnWrapper>
       </ContainerVideoContent>
     </VideoSection>

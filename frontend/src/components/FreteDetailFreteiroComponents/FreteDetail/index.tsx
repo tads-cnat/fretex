@@ -1,6 +1,5 @@
 import {
   Container,
-  Seta,
   Content,
   Negotiation,
   Content1,
@@ -15,25 +14,16 @@ import {
 } from "./styles";
 
 import caixas from "../../../assets/images/caixas.png";
-import user from "../../../assets/images/user-circle.svg";
-import arrowleft from "../../../assets/images/arrow-left-circle.svg";
+import userPhoto from "../../../assets/images/user-circle.svg";
+import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
 import geoalt from "../../../assets/images/geo-alt.svg";
 import info from "../../../assets/images/info-circle.svg";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useApi from "../../../hooks/useApi";
+import { useNavigate } from "react-router-dom";
 import { IPedido } from "../../../interfaces";
+import { Seta } from "../../RegisterFreteComponents/Form/styles";
 
-const FreteDetailComponent = () => {
-  const [pedido, setPedido] = useState<IPedido>();
-  const { id } = useParams();
-  const { getPedido } = useApi();
-
-  useEffect(() => {
-    getPedido(Number(id))
-      .then((res) => setPedido(res.data))
-      .catch((res) => console.log(res));
-  }, []);
+const FreteDetailComponent = ({pedido}: {pedido:IPedido | undefined}) => {
+  const navigate = useNavigate()
 
   const formatDate = (initialDate: string | undefined) => {
     const date = initialDate?.replaceAll("-", "/");
@@ -53,8 +43,8 @@ const FreteDetailComponent = () => {
     <Container>
       <div>
         <h1>Detalhes de frete</h1>
-        <Seta>
-          <img src={arrowleft} alt="voltar" /> Voltar
+        <Seta onClick={() => navigate(-1)}>
+          <Arrowleft /> Voltar
         </Seta>
       </div>
       <Content>
@@ -148,7 +138,7 @@ const FreteDetailComponent = () => {
         </HeaderContainer>
         <PropostaContainer2>
           <ValorPerfil>
-            <img src={user} alt="avatar-user" />
+            <img src={userPhoto} alt="avatar-user" />
             <div>
               <h3>R$ 270,00</h3>
               <p>feita em: dd/mm/yyyy</p>

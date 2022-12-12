@@ -21,10 +21,19 @@ export const Container = styled.div`
   }
 `;
 
-export const Seta = styled.div`
+export const Seta = styled.button`
   display: flex;
   align-items: center;
   gap: 0.5em;
+  font-size: var(--font-medium);
+  border: none;
+  transition: all .3s;
+  background-color: transparent;
+  cursor: pointer;
+  
+  &:hover {
+    color: var(--theme-primary)
+  }
 `;
 
 export const Form = styled.form`

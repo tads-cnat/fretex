@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     --boxes-border-home-page:#D7D7D7;
 
     --btn-text-color1: #332200;
-    --btn-hover: #b1800e;
+    --btn-hover: #d89a0a;
     
     --font-small: .75rem;
     --font-medium: 1rem;

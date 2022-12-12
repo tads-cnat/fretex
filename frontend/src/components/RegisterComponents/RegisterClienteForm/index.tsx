@@ -9,7 +9,7 @@ import {
   ContainerContent,
 } from "./styles";
 import Eye from "../../../assets/Svg/Eye";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -27,7 +27,6 @@ const RegisterClientForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     setFocus,
   } = useForm<ICliente>({
     resolver: yupResolver(schemaCliente),

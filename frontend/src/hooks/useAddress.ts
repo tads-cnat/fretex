@@ -1,7 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, useForm } from "react-hook-form";
-import { IFreteiro, IPedido } from "../interfaces";
-import { schemaPedido } from "../pages/RegisterFrete/schemas";
 import useApi from "./useApi";
 
 const getCEPNumbers = (value: string) => {

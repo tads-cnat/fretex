@@ -15,7 +15,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { schemaLogin } from "./schemas";
-import useApi from "../../hooks/useApi";
 import { ILogin } from "../../interfaces";
 import { AuthContext } from "../../context/Auth/AuthContext";
 
@@ -26,7 +25,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     setFocus,
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),

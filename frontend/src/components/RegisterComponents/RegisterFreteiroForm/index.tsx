@@ -17,13 +17,10 @@ import Password from "../../../assets/Svg/Password";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import Eye from "../../../assets/Svg/Eye";
 import { SpanYellow } from "../../../styles";
-import { useEffect, useState, useRef } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { IFreteiro } from "../../../interfaces";
 import { Link, useNavigate } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaFreteiro } from "../../../pages/Resgister/schemas";
-import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
 import { useAddress } from "../../../hooks/useAddress";
@@ -33,25 +30,10 @@ const RegisterFreteiroForm = () => {
   const { value: password, toggle: togglePassword } = useToggle();
   const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
 
-  const { registerFreteiro } = useApi();
- /* const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    getValues,
-    setValue,
-    setFocus,
-  } = useForm<IFreteiro>({
-    resolver: yupResolver(schemaFreteiro),
-  });*/
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    getValues,
     setValue,
     setFocus,
     completeAddress
@@ -82,8 +64,7 @@ const RegisterFreteiroForm = () => {
     setValue("url_foto", file);
     setImagePreview(URL.createObjectURL(file));
   };
-console.log(typeof watch("url_foto"))
-console.log(watch("url_foto"))
+
   return (
     <ContainerMain>
       <ContainerForm2>

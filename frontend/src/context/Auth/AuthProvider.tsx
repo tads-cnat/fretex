@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<ICliente | IFreteiro | null>(null);
+  const [typeUser, setTypeUser] = useState<number>(0);
   const api = useApi();
 
   const signin = async (email: string, password: string) => {
@@ -13,8 +14,14 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     if (data.data.user && data.data.token) {
       setToken(data.data.token);
       data.data.user.id === data.data.user.extra_data.freteiro
-        ? api.getFreteiro(data.data.user.id).then((res) => setUser(res.data))
-        : api.getCliente(data.data.user.id).then((res) => setUser(res.data));
+        ? api.getFreteiro(data.data.user.id).then((res) => {
+            setUser(res.data);
+            setTypeUser(1);
+          })
+        : api.getCliente(data.data.user.id).then((res) => {
+            setUser(res.data);
+            setTypeUser(2);
+          });
       return data.data.user.id === data.data.user.extra_data.freteiro;
     }
     return null;
@@ -26,12 +33,14 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
       const userData = await api.validateToken(storageToken);
       if (userData.data.user) {
         userData.data.user.id === userData.data.user.extra_data.freteiro
-          ? api
-              .getFreteiro(userData.data.user.id)
-              .then((res) => setUser(res.data))
-          : api
-              .getCliente(userData.data.user.id)
-              .then((res) => setUser(res.data));
+          ? api.getFreteiro(userData.data.user.id).then((res) => {
+              setUser(res.data);
+              setTypeUser(1);
+            })
+          : api.getCliente(userData.data.user.id).then((res) => {
+              setUser(res.data);
+              setTypeUser(2);
+            });
       }
     }
   };
@@ -50,7 +59,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, signout }}>
+    <AuthContext.Provider value={{ user, typeUser, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );
