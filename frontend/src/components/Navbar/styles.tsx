@@ -12,7 +12,7 @@ export const Header = styled.header`
 `;
 
 export const BtnPatternLogin = styled(BtnPattern)`
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     margin-top: 5px;
   }
 `;
@@ -67,6 +67,10 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     color: var(--btn-hover);
   }
 
+  .linkMobile {
+    visibility: hidden;
+  }
+
   @media (max-width: 768px) {
     & {
       display: ${(props) => (props.show ? "flex" : "none")};
@@ -82,6 +86,10 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       gap: 0px;
     }
 
+    .linkMobile {
+      visibility: visible;
+    }
+
     .containerUser {
       width: 100%;
       display: flex;
@@ -94,6 +102,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
+      margin-bottom: 10px;
     }
 
     ul li {
@@ -104,7 +113,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     ul li {
       width: 100%;
       display: block;
-      padding: 4px 0;
+      padding: 5px 0;
     }
 
     div {
@@ -133,10 +142,16 @@ export const ButtonMenuContainer = styled.div<IDropdownMenu>`
   @media (max-width: 768px) {
     display: flex;
     justify-content: end;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
     button {
       display: flex;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       font-size: 1rem;
       align-items: center;
       border: none;

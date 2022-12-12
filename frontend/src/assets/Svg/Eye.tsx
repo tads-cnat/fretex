@@ -1,6 +1,6 @@
 import React from "react";
 
-const Eye = ({ color }: any) => {
+const Eye = ({ color }: { color?: string }) => {
   return (
     <svg
       width="15"

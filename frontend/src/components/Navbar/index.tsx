@@ -10,7 +10,8 @@ import {
 } from "./styles";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import NavUser from "./NavUser";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import perfil from "../../assets/images/perfil.svg";
 
 interface INavbar {
   id?: string;
@@ -18,7 +19,14 @@ interface INavbar {
 
 const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
-  const { user, typeUser } = useContext(AuthContext);
+  const { user, typeUser, signout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    signout();
+    navigate("/");
+  };
 
   return (
     <Header id={id}>
@@ -47,20 +55,29 @@ const Navbar = ({ id }: INavbar) => {
             {user && typeUser === 1 && (
               <ul>
                 <li>
-                <NavLink
+                  <NavLink
                     to="/"
                     end
-                    className={({ isActive }) => (isActive ? 'active' : '')}
+                    className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to='/fretes-disponiveis'>Fretes Disponíveis</NavLink>
+                  <NavLink to="/fretes-disponiveis">Fretes Disponíveis</NavLink>
                 </li>
-              {/**   <li>
+                {/**   <li>
                <NavLink to='/meusFretes'>Meus fretes</NavLink> 
                 </li>*/}
+                <li>
+                  <Link
+                    className="links linkMobile"
+                    to="/"
+                    onClick={handleClick}
+                  >
+                    Sair
+                  </Link>
+                </li>
               </ul>
             )}
             {user && typeUser === 2 && (
@@ -69,17 +86,22 @@ const Navbar = ({ id }: INavbar) => {
                   <NavLink
                     to="/"
                     end
-                    className={({ isActive }) => (isActive ? 'active' : '')}
+                    className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     Home
                   </NavLink>
                 </li>
                 <li>
-                <NavLink to='/cadastro-frete'>Cadastrar pedido</NavLink>
+                  <NavLink to="/cadastro-frete">Cadastrar pedido</NavLink>
                 </li>
-             {/**   <li>
+                {/**   <li>
                 <NavLink to='/meusFretes'>Meus fretes</NavLink>
                 </li> */}
+                <li>
+                  <Link className="links linkMobile" to="/" onClick={handleClick}>
+                    Sair
+                  </Link>
+                </li>
               </ul>
             )}
             <div className="containerUser">
@@ -93,7 +115,16 @@ const Navbar = ({ id }: INavbar) => {
 
           <ButtonMenuContainer animation={dropdownUp}>
             <button onClick={() => setDropdownUp(!dropdownUp)}>
-              Menu
+              {user && (
+                <>
+                  {user?.url_foto ? (
+                    <img src={user?.url_foto} alt={user?.username} />
+                  ) : (
+                    <img src={perfil} alt={user?.username} />
+                  )}
+                  <p>{user.username}</p>
+                </>
+              )}
               <span></span>
             </button>
           </ButtonMenuContainer>

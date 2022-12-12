@@ -15,13 +15,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaCliente } from "../../../pages/Resgister/schemas";
+import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
 import { ICliente } from "../../../interfaces";
 import useApi from "../../../hooks/useApi";
+import { useToggle } from "../../../hooks/useToggle";
 
 const RegisterClientForm = () => {
-  const [password, setPassord] = useState<boolean>(false);
-  const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const { value: password, toggle: togglePassword } = useToggle();
+  const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
   const [error, setError] = useState<string>("");
   const {
     register,
@@ -31,18 +32,19 @@ const RegisterClientForm = () => {
   } = useForm<ICliente>({
     resolver: yupResolver(schemaCliente),
   });
+ 
 
   const { registerCliente } = useApi();
   const navigate = useNavigate();
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    setPassord(!password);
+    togglePassword()
   };
 
   const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    setConfirmPassword(!confirmPassword);
+    toggleConfirmPassword()
   };
 
   useEffect(() => {

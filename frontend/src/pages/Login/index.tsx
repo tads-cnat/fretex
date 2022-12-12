@@ -10,16 +10,17 @@ import {
 } from "../../components/RegisterComponents/RegisterClienteForm/styles";
 import { ContainerContent2 } from "./styles";
 import { SpanYellow, Wrapper } from "../../styles";
-import { BgRegister } from "../Resgister/style";
+import { BgRegister } from "../ResgisterUser/style";
 import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { schemaLogin } from "./schemas";
 import { ILogin } from "../../interfaces";
 import { AuthContext } from "../../context/Auth/AuthContext";
+import { useToggle } from "../../hooks/useToggle";
 
 const Login = () => {
-  const [password, setPassord] = useState<boolean>(false);
+  const { value: password, toggle: togglePassword } = useToggle();
   const [error, setError]  = useState("")
   const {
     register,
@@ -32,9 +33,9 @@ const Login = () => {
   const { signin } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handlePassword = (e: any) => {
+  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    setPassord(!password);
+    togglePassword()
   };
 
   useEffect(() => {

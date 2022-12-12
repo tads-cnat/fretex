@@ -1,6 +1,6 @@
 import React from "react";
 
-const User = ({ color }: any) => {
+const User = () => {
   return (
     <svg
       width="15"

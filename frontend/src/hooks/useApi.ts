@@ -1,11 +1,5 @@
-import { ICliente, IFreteiro, IPedido } from "../interfaces"
+import { ICliente, IPedido } from "../interfaces"
 import { api, cepApi } from "../services/api"
-
-/*const Headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': 'true',
-    'Access-Control-Allow-Methods': 'GET, PUT, PATCH, POST, DELETE'
-}*/
 
 // GET com ou sem Slash
 // POST APENAS COM SLASH
@@ -19,10 +13,6 @@ export const useApi = () => ({
         const response = await api.post('/cliente/', { username, cpf, email, password })
         return response.data
     },
-    // registerFreteiro: async (data:any) => {
-    //     const response = await api.post('/freteiro/', data)
-    //     return response.data
-    // },
     registerFreteiro: async (data: any) => {
         const response = await api.post('/freteiro/', data, {
             headers: {

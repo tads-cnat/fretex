@@ -13,7 +13,7 @@ export const Container = styled.button<IActive>`
   cursor: pointer;
   gap: 7px;
   position: relative;
-  z-index: 999;
+  
   transition: 0.5s;
 
   &:hover {
@@ -39,6 +39,7 @@ export const Container = styled.button<IActive>`
 
   @media (max-width: 768px) {
     & {
+      display: none;
       margin-bottom: ${(props) => (props.active ? "40px" : "10px")};
       overflow-y: ${(props) => (props.active ? "visible" : "hidden")};
       background-color: transparent;

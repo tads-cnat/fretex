@@ -20,7 +20,7 @@ import { SpanYellow } from "../../../styles";
 import { useEffect, useState } from "react";
 import { IFreteiro } from "../../../interfaces";
 import { Link, useNavigate } from "react-router-dom";
-import { schemaFreteiro } from "../../../pages/Resgister/schemas";
+import { schemaFreteiro } from "../../../pages/ResgisterUser/schemas";
 import { useToggle } from "../../../hooks/useToggle";
 import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
 import { useAddress } from "../../../hooks/useAddress";
@@ -45,12 +45,12 @@ const RegisterFreteiroForm = () => {
     onSuccess: () => navigate("/login"),
   });
 
-  const handlePassword = (e: any) => {
+  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     togglePassword();
   };
 
-  const handleConfirmPassword = (e: any) => {
+  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     toggleConfirmPassword();
   };
