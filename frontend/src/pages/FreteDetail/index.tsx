@@ -1,5 +1,3 @@
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../styles";
 import { ContainerPrincipal } from "./styles";
 import { useContext, useEffect, useState } from "react";
@@ -9,6 +7,7 @@ import useApi from "../../hooks/useApi";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import FreteDetailComponent from "../../components/FreteDetailFreteiroComponents/FreteDetail";
 import Login from "../Login";
+import Layout from "../../components/Layout";
 
 const FreteDetail = () => {
   const [pedido, setPedido] = useState<IPedido>();
@@ -31,17 +30,15 @@ const FreteDetail = () => {
 
   if (loading === false && typeUser === 2 && user?.id !== pedido?.cliente)
     return <Login />;
-    
+
   return (
-    <>
-      <Navbar />
+    <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
           <FreteDetailComponent pedido={pedido} />
         </Wrapper>
       </ContainerPrincipal>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

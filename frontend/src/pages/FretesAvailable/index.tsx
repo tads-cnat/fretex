@@ -1,13 +1,12 @@
-import Footer from "../../components/Footer";
 import BoxFretes from "../../components/FretesAvailable/BoxFretes";
 import Filter from "../../components/FretesAvailable/Filter";
-import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../styles";
 import { ContainerBg, ContainerMain, ContainerFretes, Search } from "./styles";
 import SearchImg from "../../assets/images/search.svg";
 import useApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IPedido } from "../../interfaces";
+import Layout from "../../components/Layout";
 
 const FretesAvailable = () => {
   const [pedidos, setPedidos] = useState<IPedido[]>([]);
@@ -15,7 +14,7 @@ const FretesAvailable = () => {
   const { getPedidos } = useApi();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     getPedidos()
       .then((res) => {
         setPedidos(res.data);
@@ -25,8 +24,7 @@ const FretesAvailable = () => {
   }, []);
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <ContainerBg>
         <Wrapper bgColor="#f5f5f5">
           <h1>Fretes Disponíveis</h1>
@@ -38,7 +36,9 @@ const FretesAvailable = () => {
             <Filter />
             <ContainerFretes>
               {pedidos && !loading ? (
-                pedidos.map((pedido) => <BoxFretes key={pedido.id} pedido={pedido}/>)
+                pedidos.map((pedido) => (
+                  <BoxFretes key={pedido.id} pedido={pedido} />
+                ))
               ) : (
                 <p>Carregando</p>
               )}
@@ -46,8 +46,7 @@ const FretesAvailable = () => {
           </ContainerMain>
         </Wrapper>
       </ContainerBg>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

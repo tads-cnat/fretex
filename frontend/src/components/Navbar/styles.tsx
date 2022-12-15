@@ -68,7 +68,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
   }
 
   .linkMobile {
-    visibility: hidden;
+    display: none;
   }
 
   @media (max-width: 768px) {
@@ -79,7 +79,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       align-items: flex-start;
       background-color: initial;
       position: absolute;
-      top: 55px;
+      top: 100%;
       left: 0;
       background-color: var(--bg-grey);
       z-index: 1000;

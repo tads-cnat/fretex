@@ -69,6 +69,10 @@ export const Content = styled.div<IActive>`
   z-index: 998;
   padding: 0 !important;
 
+  .links.active {
+    color: var(--btn-hover);
+  }
+
   .links {
     transition: 0.5s;
     display: ${(props) => (props.active ? "block" : "none")};

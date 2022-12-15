@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useApi from "../../hooks/useApi";
 import { ICliente, IFreteiro } from "../../interfaces";
 import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const [user, setUser] = useState<ICliente | IFreteiro | null>(null);
+  const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
   const [typeUser, setTypeUser] = useState<number>(0);
   const api = useApi();
 
@@ -15,7 +15,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
       setToken(data.data.token);
       data.data.user.id === data.data.user.extra_data.freteiro
         ? api.getFreteiro(data.data.user.id).then((res) => {
-            setUser(res.data);
+            setUser((res.data));
             setTypeUser(1);
           })
         : api.getCliente(data.data.user.id).then((res) => {

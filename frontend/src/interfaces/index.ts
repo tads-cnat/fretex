@@ -8,23 +8,18 @@ export interface ICliente {
     confirmPassword?: string;
 }
 
-export interface IFreteiro {
-    id?: number;
-    url_foto?: any;
-    email: string;
-    username: string;
-    cpf: string;
-    password: string;
-    confirmPassword?: string;
-    endereco: {
-        CEP: string;
-        rua: string;
-        numero: number;
-        bairro: string;
-        cidade: string;
-        estado: string;
-        complemento?: string;
-    }
+export interface IFreteiro extends ICliente {
+    endereco: IEndereco;
+}
+
+export interface IEndereco {
+    CEP: string;
+    rua: string;
+    numero: number;
+    bairro: string;
+    cidade: string;
+    estado: string;
+    complemento?: string;
 }
 
 export interface IPedido {
@@ -35,25 +30,9 @@ export interface IPedido {
         nome: string,
         imagem_url?: any,
     },
-    origem: {
-        rua: string,
-        CEP: string,
-        numero: string,
-        bairro: string,
-        cidade: string,
-        estado: string,
-        complemento?: string
-    },
-    destino: {
-        rua: string,
-        CEP: string,
-        numero: string,
-        bairro: string,
-        cidade: string,
-        estado: string,
-        complemento?: string
-    },
-    // status: string,
+    origem: IEndereco,
+    destino: IEndereco,
+    status?: string,
     tipo_veiculo: number[],
     observacao: string,
     nomeDestinatario: string,

@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --mb-15: 15px;
     --mb-20: 20px;
+    --mb-40: 40px;
     --mb-80: 80px;
   }
 
@@ -47,6 +48,7 @@ export const GlobalStyle = createGlobalStyle`
 
       --mb-15: 8px;
       --mb-20: 10px;
+      --mb-40: 20px;
       --mb-80: 40px;
     }
   }

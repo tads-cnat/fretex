@@ -70,6 +70,14 @@ const Navbar = ({ id }: INavbar) => {
                <NavLink to='/meusFretes'>Meus fretes</NavLink> 
                 </li>*/}
                 <li>
+                  <NavLink
+                    className="links linkMobile"
+                    to={`/perfil/${user?.id}`}
+                  >
+                    Meu perfil
+                  </NavLink>
+                </li>
+                <li>
                   <Link
                     className="links linkMobile"
                     to="/"
@@ -98,7 +106,19 @@ const Navbar = ({ id }: INavbar) => {
                 <NavLink to='/meusFretes'>Meus fretes</NavLink>
                 </li> */}
                 <li>
-                  <Link className="links linkMobile" to="/" onClick={handleClick}>
+                  <NavLink
+                    className="links linkMobile"
+                    to={`/perfil/${user?.id}`}
+                  >
+                    Meu perfil
+                  </NavLink>
+                </li>
+                <li>
+                  <Link
+                    className="links linkMobile"
+                    to="/"
+                    onClick={handleClick}
+                  >
                     Sair
                   </Link>
                 </li>

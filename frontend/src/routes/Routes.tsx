@@ -7,6 +7,7 @@ import Login from '../pages/Login'
 import Register from '../pages/ResgisterUser'
 import CadastroFrete from "../pages/RegisterFrete"
 import FreteDetail from '../pages/FreteDetail'
+import Profile from '../pages/Profile'
 
 const RoutesApp = () => {
   return (
@@ -15,6 +16,7 @@ const RoutesApp = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/perfil/:id" element={<RequireAuth level={3}><Profile /></RequireAuth>} />
           
           <Route path="/cadastro-frete" element={<RequireAuth level={2}><CadastroFrete /></RequireAuth>} />
 
