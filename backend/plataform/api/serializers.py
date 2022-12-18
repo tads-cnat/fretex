@@ -15,10 +15,10 @@ class LoginSerializer(serializers.Serializer):
 
 class RegisterClienteSerializer(serializers.Serializer):
     username = serializers.CharField(validators=[UniqueValidator(queryset=User.objects.all())])
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
     cpf = serializers.CharField(validators=[UniqueValidator(queryset=Cliente.objects.all())])
-    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
+    email = serializers.EmailField(required=False, validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
 
     @transaction.atomic
@@ -30,10 +30,10 @@ class RegisterClienteSerializer(serializers.Serializer):
 
 class RegisterFreteiroSerializer(serializers.Serializer):
     username = serializers.CharField()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
     cpf = serializers.CharField()
-    email = serializers.EmailField()
+    email = serializers.EmailField(required=False)
     password = serializers.CharField()
     endereco = EnderecoSerializer()
 

@@ -61,7 +61,7 @@ class EnderecoViewSet(viewsets.ModelViewSet):
 
 
 class FreteiroViewSet(viewsets.ModelViewSet):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = FreteiroSerializer
     queryset = Freteiro.objects.all()
     renderer_classes = [CustomRenderer]
