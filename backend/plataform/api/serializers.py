@@ -20,6 +20,7 @@ class RegisterClienteSerializer(serializers.Serializer):
     cpf = serializers.CharField(validators=[UniqueValidator(queryset=Cliente.objects.all())])
     email = serializers.EmailField(required=False, validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
+    capa_foto = serializers.ImageField(required=False)
 
     @transaction.atomic
     def create(self, validated_data):
@@ -36,6 +37,7 @@ class RegisterFreteiroSerializer(serializers.Serializer):
     email = serializers.EmailField(required=False)
     password = serializers.CharField()
     endereco = EnderecoSerializer()
+    capa_foto = serializers.ImageField(required=False)
 
     @transaction.atomic
     def create(self, validated_data):
@@ -78,7 +80,7 @@ class FreteiroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Freteiro
         fields = ("id", "username", "first_name", "last_name", "password",
-                 "email", "cpf", "url_foto", "endereco")
+                 "email", "cpf", "url_foto", "endereco", "capa_foto")
 
     @transaction.atomic
     def create(self, validated_data):
@@ -107,7 +109,7 @@ class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = ("id", "username", "first_name", "last_name",
-                  "password", "email", "cpf", "url_foto")
+                  "password", "email", "cpf", "url_foto", "capa_foto")
 
     @transaction.atomic
     def create(self, validated_data):
