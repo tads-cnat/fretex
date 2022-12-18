@@ -1,7 +1,7 @@
 from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from plataform.api.serializers import (RegisterClienteSerializer, RegisterFreteiroSerializer, LoginSerializer, UserSerializer, ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo)
+from plataform.api.serializers import (RegisterClienteSerializer, RegisterFreteiroSerializer, LoginSerializer, AvaliacaoUsuarioSerializer, UserSerializer, ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo, AvaliacaoUsuario)
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -79,18 +79,16 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
+    filterset_fields = {
+        'status': ['exact'],
+        'cliente': ['exact'],
+        'tipo_veiculo': ['in'],
+    }
 
     def create(self, request, *args, **kwargs):
-        request.data['cliente'] = cliente=Cliente.objects.get(user_ptr=self.request.user)
+        request.data['cliente'] = Cliente.objects.get(user_ptr=self.request.user)
         request.data['status'] = 'EN'
         return super().create(request, *args, **kwargs)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(
-    #         cliente=Cliente.objects.get(user_ptr=self.request.user),
-    #         status='EN',
-    #     )
-
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -118,4 +116,14 @@ class PropostaViewSet(viewsets.ModelViewSet):
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
+
+class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = AvaliacaoUsuarioSerializer
+    queryset = AvaliacaoUsuario.objects.all()
+    renderer_classes = [CustomRenderer]
+
+    def create(self, request, *args, **kwargs):
+        request.data['avaliador'] = Cliente.objects.get(user_ptr=self.request.user)
+        return super().create(request, *args, **kwargs)
 

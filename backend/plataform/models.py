@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Endereco(models.Model):
@@ -22,6 +23,7 @@ class Freteiro(User):
     url_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
+    capa_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
         ordering = ['-id']
@@ -33,6 +35,7 @@ class Freteiro(User):
 class Cliente(User):
     url_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
+    capa_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
         ordering = ['-id']
@@ -118,7 +121,7 @@ class Proposta(models.Model):
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
-    ehAceita = models.BooleanField(default=False)
+    eh_aceita = models.BooleanField(default=False)
     contraproposta = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True)
     ehNegada = models.BooleanField(default=False)
@@ -126,5 +129,12 @@ class Proposta(models.Model):
     class Meta:
         ordering = ['-id']
 
-    def ehContraprosta(self, obj):
+
+    def eh_contraprosta(self, obj):
         return obj.contraproposta is not None
+
+class AvaliacaoUsuario(models.Model):
+    avaliador = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliador")
+    avaliado = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliado")
+    nota = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
+    observacao = models.TextField()
