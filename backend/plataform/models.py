@@ -13,32 +13,40 @@ class Endereco(models.Model):
     complemento = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return f"{self.rua}, {self.numero}, {self.bairro}. {self.cidade}"
 
 
 class Freteiro(User):
-    url_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
+    url_foto = models.ImageField(
+        upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True
+    )
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
-    capa_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
+    capa_foto = models.ImageField(
+        upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True
+    )
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return f"Nome: {self.user_ptr.username} - CPF: {self.cpf} "
 
 
 class Cliente(User):
-    url_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
+    url_foto = models.ImageField(
+        upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True
+    )
     cpf = models.CharField(max_length=15)
-    capa_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
+    capa_foto = models.ImageField(
+        upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True
+    )
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return f"Nome: {self.user_ptr.username} - CPF: {self.cpf} "
@@ -49,7 +57,7 @@ class Produto(models.Model):
     imagem_url = models.ImageField(upload_to="produto/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return self.nome
@@ -59,7 +67,7 @@ class TipoVeiculo(models.Model):
     descricao = models.CharField(max_length=50)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     def __str__(self):
         return self.descricao
@@ -67,17 +75,13 @@ class TipoVeiculo(models.Model):
 
 class Pedido(models.Model):
     STATUS = [
-        ('CA', 'Cancelado'),
-        ('EN', 'Em negociação'),
-        ('AG', 'Aguardando coleta'),
-        ('TR', 'Em trânsito'),
-        ('CO', 'Concluído')
+        ("CA", "Cancelado"),
+        ("EN", "Em negociação"),
+        ("AG", "Aguardando coleta"),
+        ("TR", "Em trânsito"),
+        ("CO", "Concluído"),
     ]
-    TURNO = [
-        ('TA', 'Tarde'),
-        ('MA', 'Manhã'),
-        ('NO', "Noite")
-    ]
+    TURNO = [("TA", "Tarde"), ("MA", "Manhã"), ("NO", "Noite")]
 
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     origem = models.ForeignKey(
@@ -86,7 +90,7 @@ class Pedido(models.Model):
     destino = models.ForeignKey(
         Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_destino"
     )
-    status = models.CharField(max_length=2, choices=STATUS, default='EN')
+    status = models.CharField(max_length=2, choices=STATUS, default="EN")
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)
     observacao = models.CharField(max_length=300, blank=True, null=True)
@@ -98,7 +102,7 @@ class Pedido(models.Model):
     turno_coleta = models.CharField(max_length=2, choices=TURNO)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
 
 class Veiculo(models.Model):
@@ -112,7 +116,7 @@ class Veiculo(models.Model):
     ano = models.CharField(max_length=4)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
 
 class Proposta(models.Model):
@@ -122,19 +126,22 @@ class Proposta(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     eh_aceita = models.BooleanField(default=False)
-    contraproposta = models.ForeignKey(
-        'self', on_delete=models.CASCADE, null=True)
+    contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
     ehNegada = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-id']
-
+        ordering = ["-id"]
 
     def eh_contraprosta(self, obj):
         return obj.contraproposta is not None
 
+
 class AvaliacaoUsuario(models.Model):
-    avaliador = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliador")
-    avaliado = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliado")
+    avaliador = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="avaliador"
+    )
+    avaliado = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="avaliado"
+    )
     nota = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
     observacao = models.TextField()

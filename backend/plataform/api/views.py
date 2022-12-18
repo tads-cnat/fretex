@@ -1,7 +1,31 @@
 from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from plataform.api.serializers import (RegisterClienteSerializer, RegisterFreteiroSerializer, LoginSerializer, AvaliacaoUsuarioSerializer, UserSerializer, ClienteSerializer, EnderecoSerializer, FreteiroSerializer, PedidoSerializer, ProdutoSerializer, PropostaSerializer, TipoVeiculoSerializer, VeiculoSerializer)
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, Proposta, TipoVeiculo, Veiculo, AvaliacaoUsuario)
+from plataform.api.serializers import (
+    RegisterClienteSerializer,
+    RegisterFreteiroSerializer,
+    LoginSerializer,
+    AvaliacaoUsuarioSerializer,
+    UserSerializer,
+    ClienteSerializer,
+    EnderecoSerializer,
+    FreteiroSerializer,
+    PedidoSerializer,
+    ProdutoSerializer,
+    PropostaSerializer,
+    TipoVeiculoSerializer,
+    VeiculoSerializer,
+)
+from plataform.models import (
+    Cliente,
+    Endereco,
+    Freteiro,
+    Pedido,
+    Produto,
+    Proposta,
+    TipoVeiculo,
+    Veiculo,
+    AvaliacaoUsuario,
+)
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -14,44 +38,55 @@ from core.api.helpers import open_api_request_body
 from drf_yasg import openapi
 from rest_framework.authtoken.models import Token
 
+
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
     serializer_class = None
 
-    @action(detail=False, methods=['post'], serializer_class=LoginSerializer)
+    @action(detail=False, methods=["post"], serializer_class=LoginSerializer)
     def login(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
+        email = request.data.get("email")
+        password = request.data.get("password")
         user = User.objects.filter(email=email)
 
         if len(user) == 0:
-            return Response({'detail': 'Credenciais incorretas 0'})
+            return Response({"detail": "Credenciais incorretas 0"})
         user = user[0]
         success = user.check_password(password)
         if not success:
-            return Response({'detail': 'Credenciais incorretas 1'})
+            return Response({"detail": "Credenciais incorretas 1"})
 
         token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user': UserSerializer(user).data})
+        return Response({"token": token.key, "user": UserSerializer(user).data})
 
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=["get"])
     def user(self, request):
-        return Response({'user': UserSerializer(request.user).data})
+        return Response({"user": UserSerializer(request.user).data})
 
-    @action(detail=False, methods=['post'], serializer_class=RegisterFreteiroSerializer)
+    @action(detail=False, methods=["post"], serializer_class=RegisterFreteiroSerializer)
     def register_freteiro(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         freteiro = serializer.save()
-        return Response(UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED)
+        return Response(
+            UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED
+        )
 
-    @action(detail=False, methods=['post'], serializer_class=RegisterClienteSerializer)
+    @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
-        return Response(UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED)
+        return Response(
+            UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED
+        )
+
+    @action(detail=False, methods=["get"])
+    def logout(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class EnderecoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -80,15 +115,16 @@ class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
     filterset_fields = {
-        'status': ['exact'],
-        'cliente': ['exact'],
-        'tipo_veiculo': ['in'],
+        "status": ["exact"],
+        "cliente": ["exact"],
+        "tipo_veiculo": ["in"],
     }
 
     def create(self, request, *args, **kwargs):
-        request.data['cliente'] = Cliente.objects.get(user_ptr=self.request.user)
-        request.data['status'] = 'EN'
+        request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
+        request.data["status"] = "EN"
         return super().create(request, *args, **kwargs)
+
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -117,6 +153,7 @@ class PropostaViewSet(viewsets.ModelViewSet):
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
+
 class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = AvaliacaoUsuarioSerializer
@@ -124,6 +161,5 @@ class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
     renderer_classes = [CustomRenderer]
 
     def create(self, request, *args, **kwargs):
-        request.data['avaliador'] = Cliente.objects.get(user_ptr=self.request.user)
+        request.data["avaliador"] = Cliente.objects.get(user_ptr=self.request.user)
         return super().create(request, *args, **kwargs)
-
