@@ -51,11 +51,11 @@ class AuthViewSet(viewsets.GenericViewSet):
         user = User.objects.filter(email=email)
 
         if len(user) == 0:
-            return Response({"detail": "Credenciais incorretas 0"})
+            return Response({"detail": "Credenciais incorretas"})
         user = user[0]
         success = user.check_password(password)
         if not success:
-            return Response({"detail": "Credenciais incorretas 1"})
+            return Response({"detail": "Credenciais incorretas"})
 
         token, created = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, "user": UserSerializer(user).data})
