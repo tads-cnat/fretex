@@ -7,6 +7,7 @@ import Login from '../pages/Login'
 import Register from '../pages/ResgisterUser'
 import CadastroFrete from "../pages/RegisterFrete"
 import FreteDetail from '../pages/FreteDetail'
+import Dashboard from '../pages/Dashboard'
 
 const RoutesApp = () => {
   return (
@@ -20,6 +21,8 @@ const RoutesApp = () => {
 
           <Route path="/fretes/:id" element={<RequireAuth level={3}><FreteDetail /></RequireAuth>} />
           <Route path="/fretes-disponiveis" element={<RequireAuth level={1}><FretesAvailable /></RequireAuth>} />
+
+          <Route path='/dashboard' element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
   )
