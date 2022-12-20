@@ -163,6 +163,10 @@ class PedidoSerializer(serializers.ModelSerializer):
 
         return pedido
         
+    def update(self, instance, validated_data):
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance
 
 
 class VeiculoSerializer(serializers.ModelSerializer):

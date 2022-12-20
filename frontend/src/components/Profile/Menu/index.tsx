@@ -1,22 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ContainerMenu } from "./styles";
 
 interface IMenu {
-  choices: string[];
+  userId: number | undefined;
+  choices: choice[];
   handleClick: (index: number) => void;
   selectedTab: number;
 }
 
-const ProfileMenu = ({ choices, handleClick, selectedTab }: IMenu) => {
+interface choice {
+  name: string;
+  url: string;
+}
+
+const ProfileMenu = ({ userId, choices, handleClick, selectedTab }: IMenu) => {
   return (
     <ContainerMenu>
       {choices.map((choice, index) => (
-        <button key={index}
+        <Link
+          to={`/perfil/${userId}/${choice.url}`}
+          key={index}
           className={selectedTab === index ? "menuBtn active" : "menuBtn"}
           onClick={() => handleClick(index)}
         >
-          {choice}
-        </button>
+          {choice.name}
+        </Link>
       ))}
     </ContainerMenu>
   );

@@ -7,11 +7,10 @@ export const BoxWithShadow = styled.div`
 
 export const Content = styled.main`
   padding-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  min-height: 50vh;
   padding-bottom: 20px;
 `;
+
  export const Container = styled.div`
   
  `;

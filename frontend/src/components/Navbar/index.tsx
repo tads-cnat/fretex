@@ -64,7 +64,7 @@ const Navbar = ({ id }: INavbar) => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/fretes-disponiveis">Fretes Disponíveis</NavLink>
+                  <NavLink to="/fretesDisponiveis">Fretes Disponíveis</NavLink>
                 </li>
                 {/**   <li>
                <NavLink to='/meusFretes'>Meus fretes</NavLink> 
@@ -100,7 +100,7 @@ const Navbar = ({ id }: INavbar) => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/cadastro-frete">Cadastrar pedido</NavLink>
+                  <NavLink to="/cadastroFrete">Cadastrar pedido</NavLink>
                 </li>
                 {/**   <li>
                 <NavLink to='/meusFretes'>Meus fretes</NavLink>

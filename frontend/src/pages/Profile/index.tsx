@@ -1,54 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import BoxFretes from "../../components/FretesAvailable/BoxFretes";
+import { Outlet, useOutletContext } from "react-router-dom";
 import Layout from "../../components/Layout";
 import Banner from "../../components/Profile/Banner";
 import ProfileMenu from "../../components/Profile/Menu";
 import UserInfo from "../../components/Profile/UserInfo";
 import { AuthContext } from "../../context/Auth/AuthContext";
-import useApi from "../../hooks/useApi";
-import { IPedido } from "../../interfaces";
+import { ICliente, IFreteiro } from "../../interfaces";
 import { Wrapper } from "../../styles";
 import { BoxWithShadow, Container, Content } from "./styles";
 import { menuChoices } from "./utils/menuChoices";
 
+interface IProfileContext {
+  user: ICliente | IFreteiro;
+  handleSelectTab: (tab: number) => void;
+}
+
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
-  const [fretes, setFretes] = useState<IPedido[]>([]);
-  const [loading, setLoading] = useState(false);
-  const { user, typeUser } = useContext(AuthContext);
-  const { getPedidos } = useApi();
+  const { user } = useContext(AuthContext);
 
   const handleSelectTab = (tab: number) => {
     setSelectedTab(tab);
-    changeTabContent(tab);
   };
-
-  const changeTabContent = (tab: number) => {
-    setLoading(true);
-    if (tab === 0) {
-      getPedidos().then((res) => {
-        console.log(
-          res.data.filter((pedido: IPedido) => pedido.cliente === user?.id),
-        );
-        setFretes(
-          res.data.filter((pedido: IPedido) => pedido.cliente === user?.id),
-        );
-      });
-    } else if (tab === 3) {
-      return <p>ola</p>;
-    }
-  };
-
-  useEffect(() => {
-    getPedidos().then((res) => {
-      console.log(
-        res.data.filter((pedido: IPedido) => pedido.cliente === user?.id),
-      );
-      setFretes(
-        res.data.filter((pedido: IPedido) => pedido.cliente === user?.id),
-      );
-    });
-  }, []);
 
   if (!user) return <p>Carregando...</p>;
   else
@@ -59,6 +32,7 @@ const Profile = () => {
           <Wrapper>
             <UserInfo user={user} />
             <ProfileMenu
+              userId={user.id}
               choices={menuChoices}
               selectedTab={selectedTab}
               handleClick={handleSelectTab}
@@ -68,14 +42,16 @@ const Profile = () => {
         <Container style={{ background: "#f1f1f1" }}>
           <Wrapper>
             <Content>
-              {fretes.map((frete) => (
-                <BoxFretes key={frete.id} pedido={frete} />
-              ))}
+              <Outlet context={{ user, handleSelectTab }} />
             </Content>
           </Wrapper>
         </Container>
       </Layout>
     );
+};
+
+export const useContextProfile = () => {
+  return useOutletContext<IProfileContext>();
 };
 
 export default Profile;

@@ -1,6 +1,18 @@
 export const menuChoices = [
-    "Fretes Realizados",
-    "Veículos",
-    "Avaliações",
-    "Editar Perfil",
+    {
+      name: "Fretes Realizados",
+      url: ""
+    },
+    {
+      name: "Veículos",
+      url: "veiculos",
+    },
+    {
+      name: "Avaliações",
+      url: "avaliacoes",
+    },
+    {
+      name: "Editar Perfil",
+      url: "editarPerfil"
+    }
   ];

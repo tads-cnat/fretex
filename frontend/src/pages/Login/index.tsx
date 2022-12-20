@@ -21,7 +21,7 @@ import { useToggle } from "../../hooks/useToggle";
 
 const Login = () => {
   const { value: password, toggle: togglePassword } = useToggle();
-  const [error, setError]  = useState("")
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ const Login = () => {
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    togglePassword()
+    togglePassword();
   };
 
   useEffect(() => {
@@ -44,16 +44,16 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await signin(data.email, data.password);
-    
+
     if (res === true) {
-        navigate('/fretes-disponiveis')
+      navigate("/fretesDisponiveis");
     } else if (res === false) {
-        //redirecionar para página de cliente
+      //redirecionar para página de cliente
     } else {
-        setError("Credenciais incorretas")
-        setTimeout(() => {
-            setError("")
-        }, 5000);
+      setError("Credenciais incorretas");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
 

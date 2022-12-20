@@ -87,8 +87,8 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     }
 
     .linkMobile {
-      visibility: visible;
-    }
+    display: block;
+  }
 
     .containerUser {
       width: 100%;

@@ -5,6 +5,7 @@ export const ContainerMenu = styled.div`
   gap: 20px;
 
   .menuBtn {
+    color: var(--text-dark);
     border: none;
     background-color: transparent;
     cursor: pointer;
