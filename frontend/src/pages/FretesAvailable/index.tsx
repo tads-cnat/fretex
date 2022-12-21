@@ -9,9 +9,9 @@ import { IPedido } from "../../interfaces";
 import Layout from "../../components/Layout";
 
 const FretesAvailable = () => {
-  const [pedidos, setPedidos] = useState<IPedido[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const { getPedidos } = useApi();
+    const [pedidos, setPedidos] = useState<IPedido[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const { getPedidos } = useApi();
 
   useEffect(() => {
     setLoading(true);

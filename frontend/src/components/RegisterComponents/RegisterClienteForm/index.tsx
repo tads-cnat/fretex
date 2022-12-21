@@ -32,7 +32,7 @@ const RegisterClientForm = () => {
   } = useForm<ICliente>({
     resolver: yupResolver(schemaCliente),
   });
- 
+
 
   const { registerCliente } = useApi();
   const navigate = useNavigate();

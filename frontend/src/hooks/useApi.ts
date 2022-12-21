@@ -9,17 +9,25 @@ export const useApi = () => ({
         const response = await api.post('/auth/login/', { email, password })
         return response.data
     },
+    logout: async () => {
+        const response = await api.get('/auth/logout/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     registerCliente: async ({ username, email, cpf, password }: ICliente) => {
-        const response = await api.post('/cliente/', { username, cpf, email, password })
+        const response = await api.post('/auth/register_cliente/', { username, cpf, email, password })
         return response.data
     },
     registerFreteiro: async (data: any) => {
-        const response = await api.post('/freteiro/', data, {
+        const response = await api.post('/auth/register_freteiro/', data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
         })
-        return response.data
+        return response
     },
     registerPedido: async (pedido: IPedido) => {
         const response = await api.post('/pedido/', pedido, {
