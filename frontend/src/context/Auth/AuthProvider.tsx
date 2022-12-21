@@ -50,6 +50,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   }, []);
 
   const signout = () => {
+    api.logout();
     setToken("");
     setUser(null);
   };

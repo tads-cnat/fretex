@@ -41,7 +41,7 @@ const RegisterFreteiroForm = () => {
   
   const navigate = useNavigate();
 
-  const { onSubmit } = useFreteiroForm({
+  const { onSubmit, error } = useFreteiroForm({
     onSuccess: () => navigate("/login"),
   });
 
@@ -223,6 +223,7 @@ const RegisterFreteiroForm = () => {
             {errors.endereco?.complemento && (
               <p className="error">{errors.endereco.complemento?.message}</p>
             )}
+            {error && <p>{error}</p>}
             <BtnYellow>Cadastre-se</BtnYellow>
           </RegisterAddress>
         </form>
