@@ -25,3 +25,7 @@ export interface IWrapper {
 export interface IActive {
   active?: boolean;
 }
+
+export interface Status {
+  status?: string;
+}
