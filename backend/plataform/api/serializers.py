@@ -27,16 +27,14 @@ class LoginSerializer(serializers.Serializer):
 
 
 class RegisterClienteSerializer(serializers.Serializer):
-    username = serializers.CharField(
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
+    username = serializers.CharField()
     first_name = serializers.CharField(required=False)
     last_name = serializers.CharField(required=False)
     cpf = serializers.CharField(
         validators=[UniqueValidator(queryset=Cliente.objects.all())]
     )
     email = serializers.EmailField(
-        required=False, validators=[UniqueValidator(queryset=User.objects.all())]
+        required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
     password = serializers.CharField()
     capa_foto = serializers.ImageField(required=False)
@@ -54,10 +52,13 @@ class RegisterFreteiroSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=False)
     last_name = serializers.CharField(required=False)
     cpf = serializers.CharField()
-    email = serializers.EmailField(required=False)
+    email = serializers.EmailField(
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
     password = serializers.CharField()
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
+    url_foto = serializers.ImageField()
 
     @transaction.atomic
     def create(self, validated_data):

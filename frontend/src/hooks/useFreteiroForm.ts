@@ -9,6 +9,7 @@ type Props = {
 
 export const useFreteiroForm = ({ onSuccess }: Props) => {
     const { registerFreteiro } = useApi()
+    const [error, setError] = useState("")
 
     const onSubmit: SubmitHandler<IFreteiro> = (data) => {
         const formData = new FormData();
@@ -23,10 +24,14 @@ export const useFreteiroForm = ({ onSuccess }: Props) => {
 
         registerFreteiro(formData)
             .then(onSuccess)
-            .catch((res) => console.log(res));
+            .catch((res) => {
+                setError("Houve um erro, tente novamente!")
+                console.log(res.response)
+            });
     };
 
     return {
         onSubmit,
+        error
     }
 }
