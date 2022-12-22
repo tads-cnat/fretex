@@ -53,7 +53,7 @@ export const Botoes = styled.div`
     display: flex;
     column-gap: 16px;
 
-    button {
+    a, button {
         display: flex;
         align-items: center;
         justify-content: center;

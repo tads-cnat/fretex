@@ -8,6 +8,7 @@ import { ContainerCalendar, ContainerEndereco, ContainerInfos, End, Seta } from 
 import { IPedido } from "../../interfaces";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface IBoxDashBoard {
     pedidos: IPedido[]
@@ -28,19 +29,18 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
     }
 
     const [color, setColor] = useState('')
-
     const changeColor = (status:string) => {
         switch(status) {
-            case 'Em negociacao': 
+            case 'Em negociação': 
                 setColor('#FF7B00')
                 break
             case 'Aguardando coleta':
                 setColor('#FFBF00')
                 break
-            case 'Em transito': 
+            case 'Em trânsito': 
                 setColor('#00A3FF')
                 break
-            case 'Concluido':
+            case 'Concluído':
                 setColor('#2EC34F')
                 break
             case 'Cancelado':
@@ -63,7 +63,8 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
                     {value ? <Min />:<Max/>}
                 </button>
             </Header>
-            {pedidos.map((pedido) =>
+            {pedidos.length === 0 && value === true && <p>Não há pedidos</p>}
+            {pedidos.length > 0 && pedidos.map((pedido) =>
                 <BoxPedido key={pedido.id} active={value}>
                     <ContainerInfos>
                         <p>{pedido.clienteName}</p>
@@ -86,7 +87,7 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
                     </ContainerInfos>
                     <Botoes>
                         <button>Alterar status</button>
-                        <button>Visualizar</button>
+                        <Link to={`/fretes/${pedido.id}`}>Visualizar</Link>
                     </Botoes>
                 </BoxPedido>
             )}

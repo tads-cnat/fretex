@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [pedidos, setPedidos] = useState<IPedido[]>([])
     const { getPedidos } = useApi()
 
-    const {toggle:toggleNegociacao, value:valueNegociacao} = useToggle()
+    const {toggle:toggleNegociacao, value:valueNegociacao} = useToggle(true)
     const {toggle:toggleAguardandoColeta, value:valueAguardandoColeta} = useToggle()
     const {toggle:toggleEmTransito, value:valueEmTransito} = useToggle()
     const {toggle:toggleConcluido, value:valueConcluido} = useToggle()
@@ -27,8 +27,8 @@ const Dashboard = () => {
     }, [])
 
     return (
-        <Layout>
-            <Wrapper>
+        <Layout >
+            <Wrapper style ={{minHeight: '80vh'}}>
                 <Title>Dashboard</Title>
                 <Filter>
                     <span>Fretes dos últimos 30 dias</span>
@@ -39,12 +39,12 @@ const Dashboard = () => {
                 </Filter>
                 <ContainerPedidos>
                     <div className={"containers"}>
-                        <BoxDashboard pedidos={pedidos} toggle={toggleNegociacao} value={valueNegociacao} status='Em negociacao'/>
+                        <BoxDashboard pedidos={pedidos} toggle={toggleNegociacao} value={valueNegociacao} status='Em negociação'/>
                         <BoxDashboard pedidos={pedidos} toggle={toggleAguardandoColeta} value={valueAguardandoColeta} status='Aguardando coleta'/>
                     </div>
                     <div className={"containers"}>
-                        <BoxDashboard pedidos={pedidos} toggle={toggleEmTransito} value={valueEmTransito} status='Em transito'/>
-                        <BoxDashboard pedidos={pedidos} toggle={toggleConcluido} value={valueConcluido} status='Concluido'/>
+                        <BoxDashboard pedidos={pedidos} toggle={toggleEmTransito} value={valueEmTransito} status='Em trânsito'/>
+                        <BoxDashboard pedidos={pedidos} toggle={toggleConcluido} value={valueConcluido} status='Concluído'/>
                         <BoxDashboard pedidos={pedidos} toggle={toggleCancelado} value={valueCancelado} status='Cancelado'/>
                     </div>
                 </ContainerPedidos>
