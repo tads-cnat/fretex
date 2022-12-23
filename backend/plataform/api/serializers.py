@@ -27,20 +27,23 @@ class LoginSerializer(serializers.Serializer):
 
 
 class RegisterClienteSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    first_name = serializers.CharField(required=False)
-    last_name = serializers.CharField(required=False)
+    full_name = serializers.CharField(required=True)
     cpf = serializers.CharField(
         validators=[UniqueValidator(queryset=Cliente.objects.all())]
     )
     email = serializers.EmailField(
-        required=True, validators=[UniqueValidator(queryset=User.objects.all())]
+        validators=[UniqueValidator(queryset=User.objects.all())]
     )
     password = serializers.CharField()
     capa_foto = serializers.ImageField(required=False)
 
     @transaction.atomic
     def create(self, validated_data):
+        full_name_sp = validated_data.pop("full_name").split(' ')
+        validated_data["first_name"] = full_name_sp.pop(0)
+        validated_data["last_name"] = " ".join(full_name_sp)
+
+        validated_data["username"] = validated_data["email"]
         cliente = Cliente.objects.create(**validated_data)
         cliente.set_password(validated_data.get("password"))
         cliente.save()
@@ -48,9 +51,7 @@ class RegisterClienteSerializer(serializers.Serializer):
 
 
 class RegisterFreteiroSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    first_name = serializers.CharField(required=False)
-    last_name = serializers.CharField(required=False)
+    full_name = serializers.CharField(required=True)
     cpf = serializers.CharField()
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -58,10 +59,15 @@ class RegisterFreteiroSerializer(serializers.Serializer):
     password = serializers.CharField()
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
-    url_foto = serializers.ImageField()
+    url_foto = serializers.ImageField(required=False)
 
     @transaction.atomic
     def create(self, validated_data):
+        full_name_sp = validated_data.pop("full_name").split(' ')
+        validated_data["first_name"] = full_name_sp.pop(0)
+        validated_data["last_name"] = " ".join(full_name_sp)
+
+        validated_data["username"] = validated_data["email"]
         endereco = validated_data.pop("endereco")
 
         end = Endereco.objects.create(**endereco)

@@ -115,9 +115,9 @@ class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
     filterset_fields = {
-        "status": ["exact"],
-        "cliente": ["exact"],
-        "tipo_veiculo": ["in"],
+        "status",
+        "cliente",
+        "tipo_veiculo",
     }
 
     def create(self, request, *args, **kwargs):

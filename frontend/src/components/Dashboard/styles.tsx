@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IActive, Status } from "../../interfaces/styledComponents";
 
 
 export const Box = styled.div`
@@ -12,14 +13,15 @@ export const Box = styled.div`
     background-color: var(--bg-ligth);
 `;
 
-export const BoxPedido = styled.div`
+export const BoxPedido = styled.div<IActive>`
     border: 1px solid #F3F3F3;
     border-radius: 6px;
     padding: 24px;
+    display: ${(props) => (props.active ? "block" : "none")};
     
 `;
 
-export const Header = styled.div`
+export const Header = styled.div<Status>`
     display: flex;
     justify-content: space-between;
     div {
@@ -31,7 +33,7 @@ export const Header = styled.div`
         border-radius: 50%;
         width: 25px;
         height: 25px;
-        background-color: black;
+        background-color: ${(props) => props.status};
         }
     }
     button {
@@ -51,7 +53,7 @@ export const Botoes = styled.div`
     display: flex;
     column-gap: 16px;
 
-    button {
+    a, button {
         display: flex;
         align-items: center;
         justify-content: center;

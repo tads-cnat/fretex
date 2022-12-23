@@ -69,7 +69,8 @@ export const BtnYellow = styled.button`
 export const ContainerPedidos = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    column-gap: 30px;
+    margin-bottom: 30px;
 
     .containers {
         display: flex;
@@ -79,6 +80,7 @@ export const ContainerPedidos = styled.div`
 
     @media (max-width: 920px){
         grid-template-columns: 1fr;
+        row-gap: 30px;
     }
 `
 
