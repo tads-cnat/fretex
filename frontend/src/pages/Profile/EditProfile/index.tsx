@@ -5,7 +5,7 @@ import { ContainerForm2, ContainerMain, PerfilImg, RegisterAddress, RegisterPers
 import {useAddress} from '../../../hooks/useAddress'
 import {useFreteiroForm} from '../../../hooks/useFreteiroForm'
 import { useToggle } from "../../../hooks/useToggle";
-import { IFreteiro } from "../../../interfaces";
+import { IFreteiro, IFreteiroFormData } from "../../../interfaces";
 import { schemaFreteiro } from "../../ResgisterUser/schemas";
 import perfil from "../../../assets/images/imgperfil.svg";
 import User from "../../../assets/Svg/User";
@@ -40,7 +40,7 @@ const EditProfile = () => {
     watch,
     getValues,
     completeAddress
-  } = useAddress<IFreteiro>(schemaFreteiro);
+  } = useAddress<IFreteiroFormData>(schemaFreteiro);
 
   const { onSubmit } = useFreteiroForm({
     onSuccess: () => navigate("/login"),
@@ -60,7 +60,7 @@ const EditProfile = () => {
     e.preventDefault();
     togglePassword();
   };
-console.log(getValues('username'))
+//console.log(getValues('username'))
   const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     toggleConfirmPassword();
@@ -87,7 +87,7 @@ console.log(getValues('username'))
               <p>Clique para inserir uma imagem</p>
             </label>
             <div>
-              <h2 style={{color:'#fff'}}>{watch('username')}</h2>
+              <h2 style={{color:'#fff'}}>{watch('full_name')}</h2>
               <p>{getValues('email')}</p>
             </div>
             
@@ -96,13 +96,13 @@ console.log(getValues('username'))
           <label>
             <User />
             <input
-              {...register("username")}
+              {...register("full_name")}
               type="text"
               placeholder="Seu nome completo"
             />
           </label>
-          {errors.username && (
-            <p className="error">{errors.username?.message}</p>
+          {errors.full_name && (
+            <p className="error">{errors.full_name?.message}</p>
           )}
           <label>
             <Password />

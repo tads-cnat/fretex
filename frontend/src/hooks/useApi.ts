@@ -1,4 +1,4 @@
-import { ICliente, IPedido } from "../interfaces"
+import { IClienteFormData, IPedido } from "../interfaces"
 import { api, cepApi } from "../services/api"
 
 // GET com ou sem Slash
@@ -17,11 +17,11 @@ export const useApi = () => ({
         })
         return response.data
     },
-    registerCliente: async ({ username, email, cpf, password }: ICliente) => {
-        const response = await api.post('/auth/register_cliente/', { username, cpf, email, password })
+    registerCliente: async ({ full_name, email, cpf, password }: IClienteFormData) => {
+        const response = await api.post('/auth/register_cliente/', { full_name, cpf, email, password })
         return response.data
     },
-    registerFreteiro: async (data: any) => {
+    registerFreteiro: async (data: FormData) => {
         const response = await api.post('/auth/register_freteiro/', data, {
             headers: {
                 'Content-Type': 'multipart/form-data',

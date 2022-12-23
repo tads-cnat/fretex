@@ -52,7 +52,9 @@ class RegisterClienteSerializer(serializers.Serializer):
 
 class RegisterFreteiroSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
-    cpf = serializers.CharField()
+    cpf = serializers.CharField(
+        validators=[UniqueValidator(queryset=Freteiro.objects.all())]
+    )
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
     )

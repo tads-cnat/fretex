@@ -103,7 +103,7 @@ class FreteiroViewSet(viewsets.ModelViewSet):
 
 
 class ClienteViewSet(viewsets.ModelViewSet):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = ClienteSerializer
     queryset = Cliente.objects.all()
     renderer_classes = [CustomRenderer]

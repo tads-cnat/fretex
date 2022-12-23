@@ -18,7 +18,7 @@ import ClosedEye from "../../../assets/Svg/ClosedEye";
 import Eye from "../../../assets/Svg/Eye";
 import { SpanYellow } from "../../../styles";
 import { useEffect, useState } from "react";
-import { IFreteiro } from "../../../interfaces";
+import { IFreteiroFormData } from "../../../interfaces";
 import { Link, useNavigate } from "react-router-dom";
 import { schemaFreteiro } from "../../../pages/ResgisterUser/schemas";
 import { useToggle } from "../../../hooks/useToggle";
@@ -37,7 +37,7 @@ const RegisterFreteiroForm = () => {
     setValue,
     setFocus,
     completeAddress
-  } = useAddress<IFreteiro>(schemaFreteiro);
+  } = useAddress<IFreteiroFormData>(schemaFreteiro);
   
   const navigate = useNavigate();
 
@@ -97,13 +97,13 @@ const RegisterFreteiroForm = () => {
             <label>
               <User />
               <input
-                {...register("username")}
+                {...register("full_name")}
                 type="text"
                 placeholder="Seu nome completo"
               />
             </label>
-            {errors.username && (
-              <p className="error">{errors.username?.message}</p>
+            {errors.full_name && (
+              <p className="error">{errors.full_name?.message}</p>
             )}
             <label>
               <User />
@@ -223,7 +223,7 @@ const RegisterFreteiroForm = () => {
             {errors.endereco?.complemento && (
               <p className="error">{errors.endereco.complemento?.message}</p>
             )}
-            {error && <p>{error}</p>}
+            {error && <p className="error">{error}</p>}
             <BtnYellow>Cadastre-se</BtnYellow>
           </RegisterAddress>
         </form>

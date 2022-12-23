@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IFreteiro } from "../interfaces";
+import { IFreteiroFormData } from "../interfaces";
 import useApi from "./useApi";
 import { SubmitHandler } from "react-hook-form";
 
@@ -11,7 +11,11 @@ export const useFreteiroForm = ({ onSuccess }: Props) => {
     const { registerFreteiro } = useApi()
     const [error, setError] = useState("")
 
-    const onSubmit: SubmitHandler<IFreteiro> = (data) => {
+    const onSubmit: SubmitHandler<IFreteiroFormData> = (data) => {
+        if (data.url_foto.length === 0) {
+            setError("Imagem obrigatória!")
+            return
+        }
         const formData = new FormData();
         const { endereco, ...freteiro } = data;
 
@@ -24,9 +28,17 @@ export const useFreteiroForm = ({ onSuccess }: Props) => {
 
         registerFreteiro(formData)
             .then(onSuccess)
-            .catch((res) => {
-                setError("Houve um erro, tente novamente!")
-                console.log(res.response)
+            .catch((err) => {
+                const errors = err.response.data.errors
+                if (errors.hasOwnProperty('email') && errors.email[0] === 'This field must be unique.') {
+                    setError("Email, possui uma conta cadastrada!")
+                }
+                else if (errors.hasOwnProperty('cpf') && errors.cpf[0] === 'This field must be unique.') {
+                    setError("CPF, possui uma conta cadastrada!")
+                }
+                else if (errors.hasOwnProperty('url_foto') && errors.url_foto[0].includes('Upload a valid image.')) {
+                    setError("Envie uma imagem válida!")
+                }
             });
     };
 

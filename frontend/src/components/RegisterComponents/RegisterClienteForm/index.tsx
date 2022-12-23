@@ -16,7 +16,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
-import { ICliente } from "../../../interfaces";
+import { ICliente, IClienteFormData } from "../../../interfaces";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 
@@ -29,33 +29,32 @@ const RegisterClientForm = () => {
     handleSubmit,
     formState: { errors },
     setFocus,
-  } = useForm<ICliente>({
+  } = useForm<IClienteFormData>({
     resolver: yupResolver(schemaCliente),
   });
-
 
   const { registerCliente } = useApi();
   const navigate = useNavigate();
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    togglePassword()
+    togglePassword();
   };
 
   const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    toggleConfirmPassword()
+    toggleConfirmPassword();
   };
 
   useEffect(() => {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<ICliente> = (data) => {
+  const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError("");
-    const cliente: ICliente = {
+    const cliente: IClienteFormData = {
       email: data.email,
-      username: data.username,
+      full_name: data.full_name,
       cpf: data.cpf,
       password: data.password,
     };
@@ -63,7 +62,20 @@ const RegisterClientForm = () => {
       .then(() => {
         navigate("/login");
       })
-      .catch(() => setError("Houve um erro, tente novamente"));
+      .catch((err) => {
+        const errors = err.response.data.errors;
+        if (
+          errors.hasOwnProperty("email") &&
+          errors.email[0] === "This field must be unique."
+        ) {
+          setError("Email, possui uma conta cadastrada!");
+        } else if (
+          errors.hasOwnProperty("cpf") &&
+          errors.cpf[0] === "This field must be unique."
+        ) {
+          setError("CPF, possui uma conta cadastrada!");
+        }
+      });
   };
 
   return (
@@ -85,13 +97,13 @@ const RegisterClientForm = () => {
             <label>
               <User />
               <input
-                {...register("username")}
+                {...register("full_name")}
                 type="text"
                 placeholder="Seu nome completo"
               />
             </label>
-            {errors.username && (
-              <p className="error">{errors.username?.message}</p>
+            {errors.full_name && (
+              <p className="error">{errors.full_name?.message}</p>
             )}
             <label>
               <User />

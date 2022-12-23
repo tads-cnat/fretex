@@ -5,7 +5,7 @@ export const schemaCliente = yup.object({
         .string()
         .email("Email inválido")
         .required('Email Obrigatório'),
-    username: yup
+    full_name: yup
         .string()
         .required('Nome Obrigatório'),
     cpf: yup
@@ -41,7 +41,7 @@ export const schemaFreteiro = yup.object({
         .string()
         .email("Email inválido")
         .required('Email Obrigatório'),
-    username: yup
+    full_name: yup
         .string()
         .required('Nome Obrigatório'),
     cpf: yup
