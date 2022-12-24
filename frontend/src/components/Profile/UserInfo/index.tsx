@@ -9,7 +9,7 @@ function isFreteiro(obj: any): obj is IFreteiro {
 const UserTitle = ({ user }: { user: ICliente | IFreteiro }) => {
   return (
     <h1 className="title">
-      {user.username}{" "}
+      {user.first_name} {user.last_name}{" "}
       {isFreteiro(user) && `- ${user.endereco.cidade}/${user.endereco.estado}`}
     </h1>
   );

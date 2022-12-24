@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import NavUser from "./NavUser";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import perfil from "../../assets/images/perfil.svg";
+import { useToggle } from "../../hooks/useToggle";
 
 interface INavbar {
   id?: string;
@@ -20,6 +21,7 @@ interface INavbar {
 const Navbar = ({ id }: INavbar) => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user, typeUser, signout } = useContext(AuthContext);
+  const { value: active, toggle: setActive } = useToggle();
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -72,7 +74,7 @@ const Navbar = ({ id }: INavbar) => {
                 <li>
                   <NavLink
                     className="links linkMobile"
-                    to={`/perfil/${user?.id}`}
+                    to={`/perfil/${user.id}`}
                   >
                     Meu perfil
                   </NavLink>
@@ -108,7 +110,7 @@ const Navbar = ({ id }: INavbar) => {
                 <li>
                   <NavLink
                     className="links linkMobile"
-                    to={`/perfil/${user?.id}`}
+                    to={`/perfil/${user.id}`}
                   >
                     Meu perfil
                   </NavLink>
@@ -126,7 +128,13 @@ const Navbar = ({ id }: INavbar) => {
             )}
             <div className="containerUser">
               {user !== null ? (
-                <NavUser />
+                <NavUser
+                  user={user}
+                  signout={signout}
+                  navigate={navigate}
+                  active={active}
+                  setActive={setActive}
+                />
               ) : (
                 <BtnPatternLogin to="/login">Login</BtnPatternLogin>
               )}

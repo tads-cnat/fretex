@@ -50,7 +50,7 @@ const Login = () => {
     } else if (res === false) {
       //redirecionar para página de cliente
     } else {
-      setError("Credenciais incorretas");
+      setError("Email ou senha incorretos!");
       setTimeout(() => {
         setError("");
       }, 5000);

@@ -1,16 +1,18 @@
 import { Container, Content } from "./styles";
 import perfil from "../../../assets/images/perfil.svg";
 import Seta from "../../../assets/images/seta.svg";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../../context/Auth/AuthContext";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useToggle } from "../../../hooks/useToggle";
+import { Link, NavLink } from "react-router-dom";
+import { ICliente, IFreteiro } from "../../../interfaces";
 
-const NavUser = () => {
-  const { user, signout } = useContext(AuthContext);
-  const { value: active, toggle: setActive } = useToggle();
-  const navigate = useNavigate();
+interface INavUser {
+  user: ICliente | IFreteiro;
+  signout: () => void;
+  navigate: (url: string) => void;
+  active: boolean;
+  setActive: () => void;
+}
 
+const NavUser = ({ user, signout, navigate, active, setActive }: INavUser) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     signout();
@@ -19,18 +21,18 @@ const NavUser = () => {
 
   return (
     <Container onClick={() => setActive()} active={active}>
-      {user?.url_foto ? (
-        <img src={user?.url_foto} alt={user?.username} className="perfil" />
+      {user.url_foto ? (
+        <img src={user.url_foto} alt={user.first_name} className="perfil" />
       ) : (
-        <img src={perfil} alt={user?.username} className="perfil" />
+        <img src={perfil} alt={user.first_name} className="perfil" />
       )}
 
-      <p>{user?.username}</p>
+      <p>{user.first_name}</p>
       <img src={Seta} alt="seta" className="seta" />
       <Content active={active}>
         <NavLink
-          to={`/perfil/${user?.id}`}
-          className={({ isActive }) => (isActive ? "active" : "") + ' links' }
+          to={`/perfil/${user.id}`}
+          className={({ isActive }) => (isActive ? "active" : "") + " links"}
         >
           Meu perfil
         </NavLink>

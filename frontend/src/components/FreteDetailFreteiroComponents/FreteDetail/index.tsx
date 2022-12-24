@@ -55,9 +55,9 @@ const FreteDetailComponent = ({pedido}: {pedido:IPedido | undefined}) => {
             <img src={caixas} alt="caixas" />
           )}
           <div>
-            <p>{pedido?.clienteName}</p>
+            <p>{pedido?.cliente_first_name} {pedido?.cliente_last_name}</p>
             <h3>{pedido?.produto.nome}</h3>
-            <p>Pedido realizado em: {formatDate(pedido?.data_coleta)}</p>{" "}
+            <p>Pedido realizado em: {formatDate(pedido?.criado_em)}</p>{" "}
             {/* colocar data da realização do pedido*/}
           </div>
         </Content1>
@@ -116,7 +116,7 @@ const FreteDetailComponent = ({pedido}: {pedido:IPedido | undefined}) => {
                 <span>Data de coleta:</span> {formatDate(pedido?.data_coleta)}
               </p>
               <p>
-                <span>Nome do recebedor:</span> {pedido?.cliente}
+                <span>Nome do recebedor:</span> {pedido?.nomeDestinatario}
               </p>
               <p>
                 <span>Observações:</span> {pedido?.observacao}

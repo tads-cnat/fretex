@@ -100,7 +100,7 @@ class Pedido(models.Model):
     data_entrega = models.DateField()
     turno_entrega = models.CharField(max_length=2, choices=TURNO)
     turno_coleta = models.CharField(max_length=2, choices=TURNO)
-    criado_em = models.DateTimeField(auto_now_add=True)
+    criado_em = models.DateField(auto_now_add=True)
 
     class Meta:
         ordering = ["-id"]

@@ -187,14 +187,16 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
-    clienteName = serializers.CharField(source="cliente.username", read_only=True)
+    cliente_first_name = serializers.CharField(source='cliente.first_name', read_only=True)
+    cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
 
     class Meta:
         model = Pedido
         fields = (
             "id",
             "cliente",
-            "clienteName",
+            "cliente_first_name",
+            "cliente_last_name",
             "produto",
             "origem",
             "destino",
@@ -206,6 +208,7 @@ class PedidoSerializer(serializers.ModelSerializer):
             "data_entrega",
             "turno_entrega",
             "turno_coleta",
+            "criado_em",
         )
 
     @transaction.atomic

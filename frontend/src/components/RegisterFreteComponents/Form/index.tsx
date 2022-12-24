@@ -13,7 +13,7 @@ import {
 import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
 import { SubmitHandler } from "react-hook-form";
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas";
-import { IPedido } from "../../../interfaces";
+import { IPedido, IPedidoFormData } from "../../../interfaces";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
@@ -35,9 +35,9 @@ const Index = () => {
     completeAddress,
     handleSubmit,
     formState: { errors },
-  } = useAddress<IPedido>(schemaPedido);
+  } = useAddress<IPedidoFormData>(schemaPedido);
 
-  const onSubmit: SubmitHandler<IPedido> = (data) => {
+  const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
 

@@ -26,8 +26,6 @@ const FreteDetail = () => {
       .catch((res) => console.log(res));
   }, []);
 
-  if (loading) return <p>Carregando...</p>;
-
   if (loading === false && typeUser === 2 && user?.id !== pedido?.cliente)
     return <Login />;
 
@@ -35,7 +33,11 @@ const FreteDetail = () => {
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          <FreteDetailComponent pedido={pedido} />
+          {!loading ? (
+            <FreteDetailComponent pedido={pedido} />
+          ) : (
+            <p>Carregando...</p>
+          )}
         </Wrapper>
       </ContainerPrincipal>
     </Layout>

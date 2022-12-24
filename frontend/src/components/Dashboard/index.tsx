@@ -67,7 +67,7 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
             {pedidos.length > 0 && pedidos.map((pedido) =>
                 <BoxPedido key={pedido.id} active={value}>
                     <ContainerInfos>
-                        <p>{pedido.clienteName}</p>
+                        <p>{pedido.cliente_first_name} {pedido.cliente_last_name}</p>
                         <h2>{pedido.produto.nome}</h2>
                         <ContainerEndereco>
                             <End>
