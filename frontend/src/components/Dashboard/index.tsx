@@ -9,16 +9,20 @@ import { IPedido } from "../../interfaces";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useToggle } from "../../hooks/useToggle";
+import Loading from "../Global/Loading";
 
 interface IBoxDashBoard {
-    pedidos: IPedido[]
+    pedidos: IPedido[] | undefined
     status: string
-    value: boolean
-    toggle: () => void;
+    initialToggleValue?: boolean;
+    isLoading: boolean;
+    isError: boolean;
 }
 
 
-const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
+const BoxDashboard = ({pedidos,status, initialToggleValue, isLoading, isError}:IBoxDashBoard) => {
+    const {toggle, value} = useToggle(initialToggleValue)
 
     const formatDate = (pedido : any) => {
         const date = pedido.data_entrega.replaceAll("-", "/")
@@ -50,8 +54,8 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
 
     useEffect(() => {
         changeColor(status)
-    },[])
-
+    },[status])
+ 
     return (
         <Box>
             <Header status={color}>
@@ -63,8 +67,10 @@ const BoxDashboard = ({pedidos,status,toggle,value}:IBoxDashBoard) => {
                     {value ? <Min />:<Max/>}
                 </button>
             </Header>
-            {pedidos.length === 0 && value === true && <p>Não há pedidos</p>}
-            {pedidos.length > 0 && pedidos.map((pedido) =>
+            {isError && value === true && <p>Houve um erro, tente novamente!</p>}
+            {isLoading && value === true && <Loading/>}
+            {!isLoading && pedidos && pedidos.length === 0 && value === true && <p>Não há pedidos</p>}
+            {!isLoading && pedidos && pedidos.map((pedido) =>
                 <BoxPedido key={pedido.id} active={value}>
                     <ContainerInfos>
                         <p>{pedido.cliente_first_name} {pedido.cliente_last_name}</p>

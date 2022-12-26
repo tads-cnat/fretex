@@ -7,10 +7,17 @@ export const ContainerMain = styled.div`
   grid-template-columns: 1fr 300px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
+  transition: .3s;
+  &:hover{
+    transform: scale(1.03);
+  }
   @media (max-width: 768px) {
     & {
       grid-template-columns: 1fr;
     }
+    &:hover{
+    transform: none;
+  }
   }
 `;
 

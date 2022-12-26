@@ -1,10 +1,43 @@
 import styled from "styled-components";
+import { IActive } from "../../../interfaces/styledComponents";
+
+interface InterfaceImage {
+  image?: string;
+}
 
 export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282828;
+`;
+
+export const Preview = styled.div<IActive>`
+  display: ${(props => props.active ? "none" : "block")};
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  p{
+    display: ${(props => props.active ? "none" : "block")};
+  }
+`;
+
+export const Form = styled.form`
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Image = styled.div<InterfaceImage>`
   width: 100%;
   height: 400px;
-  background-color: #282828;
+  background: ${(props) =>
+    props.image ? `url(${props.image}) #282828` : "#282828"};
   background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
 
   .editBtn {
@@ -19,10 +52,10 @@ export const Container = styled.div`
     justify-content: center;
     cursor: pointer;
     border: none;
-    transition: .3s;
+    transition: 0.3s;
 
     &:hover {
-        opacity: calc(.7);
+      opacity: calc(0.7);
     }
     .edit {
       width: 100%;

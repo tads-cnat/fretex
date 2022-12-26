@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
+import Modal from "../../components/Global/Modal";
 import Layout from "../../components/Layout";
 import Banner from "../../components/Profile/Banner";
 import ProfileMenu from "../../components/Profile/Menu";
 import UserInfo from "../../components/Profile/UserInfo";
 import { AuthContext } from "../../context/Auth/AuthContext";
+import { useToggle } from "../../hooks/useToggle";
 import { ICliente, IFreteiro } from "../../interfaces";
 import { Wrapper } from "../../styles";
 import { BoxWithShadow, Container, Content } from "./styles";
@@ -17,6 +19,7 @@ interface IProfileContext {
 
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
+ 
   const { user } = useContext(AuthContext);
 
   const handleSelectTab = (tab: number) => {
@@ -27,7 +30,7 @@ const Profile = () => {
   else
     return (
       <Layout>
-        <Banner />
+        <Banner user={user}/>
         <BoxWithShadow style={{ background: "#fafafa" }}>
           <Wrapper>
             <UserInfo user={user} />

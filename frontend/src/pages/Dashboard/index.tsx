@@ -3,10 +3,8 @@ import Layout from "../../components/Layout";
 import { Wrapper } from "../../styles";
 import { BtnYellow, Filter, Title, ContainerPedidos } from "./styles";
 import useApi from "../../hooks/useApi";
-import { useContext, useEffect, useState } from "react";
-import { IPedido } from "../../interfaces";
-import { useToggle } from "../../hooks/useToggle";
-import { AuthContext } from "../../context/Auth/AuthContext";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
 function objToQueryString(obj: any) {
   const keyValuePairs = [];
@@ -19,63 +17,56 @@ function objToQueryString(obj: any) {
 }
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
-
-  const [pedidosEN, setpedidosEN] = useState<IPedido[]>([]);
-  const [pedidosAG, setpedidosAG] = useState<IPedido[]>([]);
-  const [pedidosTR, setpedidosTR] = useState<IPedido[]>([]);
-  const [pedidosCO, setpedidosCO] = useState<IPedido[]>([]);
-  const [pedidosCA, setpedidosCA] = useState<IPedido[]>([]);
+  const { id } = useParams();
   const { getSearchPedidos } = useApi();
 
-  const { toggle: toggleNegociacao, value: valueNegociacao } = useToggle(true);
-  const { toggle: toggleAguardandoColeta, value: valueAguardandoColeta } =
-    useToggle();
-  const { toggle: toggleEmTransito, value: valueEmTransito } = useToggle();
-  const { toggle: toggleConcluido, value: valueConcluido } = useToggle();
-  const { toggle: toggleCancelado, value: valueCancelado } = useToggle();
+  const queryStringEN = objToQueryString({
+    cliente: `${id}`,
+    status: "EN",
+  });
 
-  useEffect(() => {
-    if (user) {
-      const queryStringEN = objToQueryString({
-        cliente: `${user.id}`,
-        status: "EN",
-      });
-      const queryStringAG = objToQueryString({
-        cliente: `${user.id}`,
-        status: "AG",
-      });
-      const queryStringTR = objToQueryString({
-        cliente: `${user.id}`,
-        status: "TR",
-      });
-      const queryStringCO = objToQueryString({
-        cliente: `${user.id}`,
-        status: "CO",
-      });
-      const queryStringCA = objToQueryString({
-        cliente: `${user.id}`,
-        status: "CA",
-      });
+  const queryStringAG = objToQueryString({
+    cliente: `${id}`,
+    status: "AG",
+  });
+  const queryStringTR = objToQueryString({
+    cliente: `${id}`,
+    status: "TR",
+  });
+  const queryStringCO = objToQueryString({
+    cliente: `${id}`,
+    status: "CO",
+  });
+  const queryStringCA = objToQueryString({
+    cliente: `${id}`,
+    status: "CA",
+  });
 
-      Promise.all([
-        getSearchPedidos(queryStringEN),
-        getSearchPedidos(queryStringAG),
-        getSearchPedidos(queryStringTR),
-        getSearchPedidos(queryStringCO),
-        getSearchPedidos(queryStringCA),
-      ])
-        .then((res) => {
-        console.log(res)
-          setpedidosEN(res[0].data);
-          setpedidosAG(res[1].data);
-          setpedidosTR(res[2].data);
-          setpedidosCO(res[3].data);
-          setpedidosCA(res[4].data);
-        })
-        .catch(() => console.log("erro nos teus pedidos"));
-    }
-  }, [user]);
+  const {
+    data: pedidosEN,
+    isLoading: isLoadingPedidosEN,
+    isError: errorPedidosEN,
+  } = useQuery("pedidosEN", () => getSearchPedidos(queryStringEN));
+  const {
+    data: pedidosAG,
+    isLoading: isLoadingPedidosAG,
+    isError: errorPedidosAG,
+  } = useQuery("pedidosAG", () => getSearchPedidos(queryStringAG));
+  const {
+    data: pedidosTR,
+    isLoading: isLoadingPedidosTR,
+    isError: errorPedidosTR,
+  } = useQuery("pedidosTR", () => getSearchPedidos(queryStringTR));
+  const {
+    data: pedidosCO,
+    isLoading: isLoadingPedidosCO,
+    isError: errorPedidosCO,
+  } = useQuery("pedidosCO", () => getSearchPedidos(queryStringCO));
+  const {
+    data: pedidosCA,
+    isLoading: isLoadingPedidosCA,
+    isError: errorPedidosCA,
+  } = useQuery("pedidosCA", () => getSearchPedidos(queryStringCA));
 
   return (
     <Layout>
@@ -91,35 +82,36 @@ const Dashboard = () => {
         <ContainerPedidos>
           <div className={"containers"}>
             <BoxDashboard
-              pedidos={pedidosEN}
-              toggle={toggleNegociacao}
-              value={valueNegociacao}
+              pedidos={pedidosEN?.data}
+              isLoading={isLoadingPedidosEN}
+              isError={errorPedidosEN}
+              initialToggleValue={true}
               status="Em negociação"
             />
             <BoxDashboard
-              pedidos={pedidosAG}
-              toggle={toggleAguardandoColeta}
-              value={valueAguardandoColeta}
+              pedidos={pedidosAG?.data}
+              isLoading={isLoadingPedidosAG}
+              isError={errorPedidosAG}
               status="Aguardando coleta"
             />
           </div>
           <div className={"containers"}>
             <BoxDashboard
-              pedidos={pedidosTR}
-              toggle={toggleEmTransito}
-              value={valueEmTransito}
+              pedidos={pedidosTR?.data}
+              isLoading={isLoadingPedidosTR}
+              isError={errorPedidosTR}
               status="Em trânsito"
             />
             <BoxDashboard
-              pedidos={pedidosCO}
-              toggle={toggleConcluido}
-              value={valueConcluido}
+              pedidos={pedidosCO?.data}
+              isLoading={isLoadingPedidosCO}
+              isError={errorPedidosCO}
               status="Concluído"
             />
             <BoxDashboard
-              pedidos={pedidosCA}
-              toggle={toggleCancelado}
-              value={valueCancelado}
+              pedidos={pedidosCA?.data}
+              isLoading={isLoadingPedidosCA}
+              isError={errorPedidosCA}
               status="Cancelado"
             />
           </div>

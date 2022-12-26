@@ -68,20 +68,20 @@ const Navbar = ({ id }: INavbar) => {
                 <li>
                   <NavLink to="/fretesDisponiveis">Fretes Disponíveis</NavLink>
                 </li>
-                {/**   <li>
-               <NavLink to='/meusFretes'>Meus fretes</NavLink> 
-                </li>*/}
                 <li>
+                  <NavLink to={`/dashboard/${user.id}`}>Dashboard</NavLink>
+                </li>
+                <li className="linkMobile">
                   <NavLink
-                    className="links linkMobile"
+                    className="links"
                     to={`/perfil/${user.id}`}
                   >
                     Meu perfil
                   </NavLink>
                 </li>
-                <li>
+                <li className="linkMobile">
                   <Link
-                    className="links linkMobile"
+                    className="links"
                     to="/"
                     onClick={handleClick}
                   >
@@ -104,20 +104,20 @@ const Navbar = ({ id }: INavbar) => {
                 <li>
                   <NavLink to="/cadastroFrete">Cadastrar pedido</NavLink>
                 </li>
-                {/**   <li>
-                <NavLink to='/meusFretes'>Meus fretes</NavLink>
-                </li> */}
                 <li>
+                  <NavLink to={`/dashboard/${user.id}`}>Dashboard</NavLink>
+                </li>
+                <li className="linkMobile">
                   <NavLink
-                    className="links linkMobile"
+                    className="links"
                     to={`/perfil/${user.id}`}
                   >
                     Meu perfil
                   </NavLink>
                 </li>
-                <li>
+                <li className="linkMobile">
                   <Link
-                    className="links linkMobile"
+                    className="links"
                     to="/"
                     onClick={handleClick}
                   >
@@ -146,11 +146,11 @@ const Navbar = ({ id }: INavbar) => {
               {user && (
                 <>
                   {user?.url_foto ? (
-                    <img src={user?.url_foto} alt={user?.username} />
+                    <img src={user?.url_foto} alt={user?.first_name} />
                   ) : (
-                    <img src={perfil} alt={user?.username} />
+                    <img src={perfil} alt={user?.first_name} />
                   )}
-                  <p>{user.username}</p>
+                  <p>{user.first_name}</p>
                 </>
               )}
               <span></span>

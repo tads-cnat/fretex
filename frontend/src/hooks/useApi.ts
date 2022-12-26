@@ -1,5 +1,7 @@
 import { IClienteFormData, IPedido } from "../interfaces"
 import { api, cepApi } from "../services/api"
+import { } from 'react-query'
+import { useQuery } from "react-query/types/react"
 
 // GET com ou sem Slash
 // POST APENAS COM SLASH
@@ -97,6 +99,15 @@ export const useApi = () => ({
         const response = await api.get(`/auth/user/`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
+    updateFreteiro: async (id: number, data: FormData) => {
+        const response = await api.put(`/freteiro/${id}/`, data, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
             }
         })
         return response.data

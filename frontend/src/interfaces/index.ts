@@ -19,6 +19,19 @@ export interface IFreteiroFormData {
     endereco: IEndereco;
 }
 
+export interface IFreteiroFormDataUpdate {
+    url_foto: any;
+    capa_foto?: any;
+    email: string;
+    first_name: string;
+    username: string;
+    last_name?: string;
+    cpf: string;
+    password: string;
+    confirmPassword?: string;
+    endereco: IEndereco;
+}
+
 export interface ICliente {
     id: number;
     url_foto?: any;

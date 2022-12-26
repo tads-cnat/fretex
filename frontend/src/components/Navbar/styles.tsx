@@ -39,7 +39,6 @@ export const LinksFretes = styled.div<IDropdownMenu>`
   flex-grow: 2;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
 
   div {
     display: flex;

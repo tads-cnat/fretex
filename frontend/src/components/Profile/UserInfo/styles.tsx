@@ -25,6 +25,12 @@ export const ContainerImage = styled.div`
     border-radius: 50%;
     border: 8px solid #fafafa;
     top: -125px;
+    background-color: #D9D9D9;
+  }
+  @media (max-width: 768px) {
+    .perfil {
+      
+    }
   }
 `;
 
