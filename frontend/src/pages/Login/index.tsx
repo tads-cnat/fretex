@@ -18,10 +18,11 @@ import { schemaLogin } from "./schemas";
 import { ILogin } from "../../interfaces";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { useToggle } from "../../hooks/useToggle";
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const { value: password, toggle: togglePassword } = useToggle();
-  const [error, setError]  = useState("")
+  const [error, setError] = useState("")
   const {
     register,
     handleSubmit,
@@ -44,16 +45,19 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const res = await signin(data.email, data.password);
-    
+
     if (res === true) {
-        navigate('/fretes-disponiveis')
+      toast.success('Login realizado com sucesso!')
+      navigate('/fretes-disponiveis')
     } else if (res === false) {
-        //redirecionar para página de cliente
+      toast.success('Login realizado com sucesso!')
+      navigate('/dashboard')
     } else {
-        setError("Credenciais incorretas")
-        setTimeout(() => {
-            setError("")
-        }, 5000);
+      toast.error('Usuário e/ou senha incorreto(s)')
+      setError("Credenciais incorretas")
+      setTimeout(() => {
+        setError("")
+      }, 5000);
     }
   };
 
