@@ -94,7 +94,11 @@ class EnderecoViewSet(viewsets.ModelViewSet):
     queryset = Endereco.objects.all()
     renderer_classes = [CustomRenderer]
 
-
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    renderer_classes = [CustomRenderer]
 class FreteiroViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = FreteiroSerializer
