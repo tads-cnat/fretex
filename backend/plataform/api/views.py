@@ -118,11 +118,7 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
-    filterset_fields = {
-        "status",
-        "cliente",
-        "tipo_veiculo",
-    }
+    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
 
     def create(self, request, *args, **kwargs):
         request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
