@@ -94,7 +94,11 @@ class EnderecoViewSet(viewsets.ModelViewSet):
     queryset = Endereco.objects.all()
     renderer_classes = [CustomRenderer]
 
-
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    renderer_classes = [CustomRenderer]
 class FreteiroViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = FreteiroSerializer
@@ -114,11 +118,7 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all()
     renderer_classes = [CustomRenderer]
-    filterset_fields = {
-        "status",
-        "cliente",
-        "tipo_veiculo",
-    }
+    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
 
     def create(self, request, *args, **kwargs):
         request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)

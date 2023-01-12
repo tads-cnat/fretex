@@ -13,3 +13,4 @@ router.register(r"tipodeveiculo", views.TipoVeiculoViewSet, basename="tipodeveic
 router.register(r"veiculo", views.VeiculoViewSet, basename="veiculo")
 router.register(r"proposta", views.PropostaViewSet, basename="proposta")
 router.register(r"avaliacao-usuario", views.AvaliacaoUsuarioViewSet, basename="avaliacao-usuario")
+router.register(r"usuarios", views.UserViewSet, basename="user")

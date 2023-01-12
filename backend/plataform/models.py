@@ -122,7 +122,7 @@ class Veiculo(models.Model):
 
 class Proposta(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='proposta_set')
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
