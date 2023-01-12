@@ -3,7 +3,7 @@ import Navbar from "../Navbar";
 import { Container, InitialButton } from "./styles";
 
 interface ILayout {
-  children?: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[] | null;
 }
 
 const Layout = ({ children }: ILayout) => {

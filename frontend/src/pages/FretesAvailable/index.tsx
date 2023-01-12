@@ -7,21 +7,12 @@ import useApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { IPedido } from "../../interfaces";
 import Layout from "../../components/Layout";
+import { useQuery } from "react-query";
+import Loading from "../../components/Global/Loading";
 
 const FretesAvailable = () => {
-    const [pedidos, setPedidos] = useState<IPedido[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const { getPedidos } = useApi();
-
-  useEffect(() => {
-    setLoading(true);
-    getPedidos()
-      .then((res) => {
-        setPedidos(res.data);
-        setLoading(false);
-      })
-      .catch(() => console.log("erro"));
-  }, []);
+  const { getPedidos } = useApi();
+  const { data: pedidos, isLoading, isError } = useQuery("pedidos", getPedidos);
 
   return (
     <Layout>
@@ -35,8 +26,13 @@ const FretesAvailable = () => {
           <ContainerMain>
             <Filter />
             <ContainerFretes>
-              {pedidos && !loading ? (
-                pedidos.map((pedido) => (
+              {isError && <p>Houve um erro, tente novamente!</p>}
+              {isLoading && <Loading />}
+              {!isLoading && pedidos.data.lenght === 0 && (
+                <p>Não há pedidos postados</p>
+              )}
+              {!isLoading && pedidos ? (
+                pedidos.data.map((pedido: IPedido) => (
                   <BoxFretes key={pedido.id} pedido={pedido} />
                 ))
               ) : (

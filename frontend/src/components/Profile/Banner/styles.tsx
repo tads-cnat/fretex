@@ -13,15 +13,15 @@ export const Container = styled.div`
 `;
 
 export const Preview = styled.div<IActive>`
-  display: ${(props => props.active ? "none" : "block")};
+  display: ${(props) => (props.active ? "none" : "block")};
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
-  p{
-    display: ${(props => props.active ? "none" : "block")};
+  p {
+    display: ${(props) => (props.active ? "none" : "block")};
   }
 `;
 
@@ -33,7 +33,7 @@ export const Form = styled.form`
 
 export const Image = styled.div<InterfaceImage>`
   width: 100%;
-  height: 400px;
+  height: 50vh;
   background: ${(props) =>
     props.image ? `url(${props.image}) #282828` : "#282828"};
   background-size: cover;
@@ -60,5 +60,9 @@ export const Image = styled.div<InterfaceImage>`
     .edit {
       width: 100%;
     }
+  }
+
+  @media (max-width: 768px) {
+    height: 30vh;
   }
 `;

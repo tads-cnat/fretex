@@ -104,7 +104,7 @@ export const useApi = () => ({
         return response.data
     },
     updateFreteiro: async (id: number, data: FormData) => {
-        const response = await api.put(`/freteiro/${id}/`, data, {
+        const response = await api.patch(`/freteiro/${id}/`, data, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`,
                 'Content-Type': 'multipart/form-data',

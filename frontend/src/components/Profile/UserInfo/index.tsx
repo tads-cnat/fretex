@@ -1,17 +1,14 @@
-import { Container, ContainerImage, Content } from "./styles";
+import { Container, ContainerImage, Content, Title } from "./styles";
 import perfil from "../../../assets/images/perfil.svg";
 import { ICliente, IFreteiro } from "../../../interfaces";
-
-function isFreteiro(obj: any): obj is IFreteiro {
-  return "endereco" in obj;
-}
+import { isFreteiro } from "../../../utils/isFreteiro";
 
 const UserTitle = ({ user }: { user: ICliente | IFreteiro }) => {
   return (
-    <h1 className="title">
+    <Title className="title">
       {user.first_name} {user.last_name}{" "}
       {isFreteiro(user) && `- ${user.endereco.cidade}/${user.endereco.estado}`}
-    </h1>
+    </Title>
   );
 };
 
