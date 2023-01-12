@@ -103,6 +103,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getTypeUser: async (id: number) => {
+        const response = await api.get(`usuarios/${id}/`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     updateFreteiro: async (id: number, data: FormData) => {
         const response = await api.patch(`/freteiro/${id}/`, data, {
             headers: {

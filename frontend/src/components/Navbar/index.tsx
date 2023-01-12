@@ -69,7 +69,7 @@ const Navbar = ({ id }: INavbar) => {
                   <NavLink to="/fretesDisponiveis">Fretes Disponíveis</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/dashboard/${user.id}`}>Dashboard</NavLink>
+                  <NavLink to={`/dashboard`}>Dashboard</NavLink>
                 </li>
                 <li className="linkMobile">
                   <NavLink
@@ -105,7 +105,7 @@ const Navbar = ({ id }: INavbar) => {
                   <NavLink to="/cadastroFrete">Cadastrar pedido</NavLink>
                 </li>
                 <li>
-                  <NavLink to={`/dashboard/${user.id}`}>Dashboard</NavLink>
+                  <NavLink to={`/dashboard`}>Dashboard</NavLink>
                 </li>
                 <li className="linkMobile">
                   <NavLink

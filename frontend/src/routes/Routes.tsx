@@ -36,7 +36,7 @@ const RoutesApp = () => {
 
           <Route path="/fretesDisponiveis" element={<RequireAuth level={1}><FretesAvailable /></RequireAuth>} />
 
-          <Route path='/dashboard/:id' element={<Dashboard/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
 
         </Routes>
       </BrowserRouter>

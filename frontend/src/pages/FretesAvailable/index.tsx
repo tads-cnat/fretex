@@ -12,7 +12,7 @@ import Loading from "../../components/Global/Loading";
 
 const FretesAvailable = () => {
   const { getPedidos } = useApi();
-  const { data: pedidos, isLoading, isError } = useQuery("pedidos", getPedidos);
+  const { data: pedidos, isLoading, isError } = useQuery("pedidosDisponiveis", getPedidos);
 
   return (
     <Layout>

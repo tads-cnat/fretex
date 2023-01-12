@@ -4,7 +4,9 @@ import { Wrapper } from "../../styles";
 import { BtnYellow, Filter, Title, ContainerPedidos } from "./styles";
 import useApi from "../../hooks/useApi";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../context/Auth/AuthContext";
+import { isFreteiro } from "../../utils/isFreteiro";
 
 function objToQueryString(obj: any) {
   const keyValuePairs = [];
@@ -17,107 +19,112 @@ function objToQueryString(obj: any) {
 }
 
 const Dashboard = () => {
-  const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const { getSearchPedidos } = useApi();
 
-  const queryStringEN = objToQueryString({
-    cliente: `${id}`,
-    status: "EN",
-  });
+  const typeUser = user ? isFreteiro(user) : null;
+  console.log(typeUser);
 
-  const queryStringAG = objToQueryString({
-    cliente: `${id}`,
-    status: "AG",
-  });
-  const queryStringTR = objToQueryString({
-    cliente: `${id}`,
-    status: "TR",
-  });
-  const queryStringCO = objToQueryString({
-    cliente: `${id}`,
-    status: "CO",
-  });
-  const queryStringCA = objToQueryString({
-    cliente: `${id}`,
-    status: "CA",
-  });
+  const queryStringEN = objToQueryString(
+    typeUser
+      ? {
+          proposta_set__usuario: `${user?.id}`,
+          status: "EN",
+        }
+      : {
+          cliente: `${user?.id}`,
+          status: "EN",
+        },
+  );
+
+  const queryStringAG = objToQueryString(
+    typeUser
+      ? {
+          proposta_set__usuario: `${user?.id}`,
+          status: "AG",
+        }
+      : {
+          cliente: `${user?.id}`,
+          status: "AG",
+        },
+  );
+
+  const queryStringTR = objToQueryString(
+    typeUser
+      ? {
+          proposta_set__usuario: `${user?.id}`,
+          status: "TR",
+        }
+      : {
+          cliente: `${user?.id}`,
+          status: "TR",
+        },
+  );
+  const queryStringCO = objToQueryString(
+    typeUser
+      ? {
+          proposta_set__usuario: `${user?.id}`,
+          status: "CO",
+        }
+      : {
+          cliente: `${user?.id}`,
+          status: "CO",
+        },
+  );
+
+  const queryStringCA = objToQueryString(
+    typeUser
+      ? {
+          proposta_set__usuario: `${user?.id}`,
+          status: "CA",
+        }
+      : {
+          cliente: `${user?.id}`,
+          status: "CA",
+        },
+  );
 
   const {
     data: pedidosEN,
     isLoading: isLoadingPedidosEN,
     isError: errorPedidosEN,
-  } = useQuery("pedidosEN", () => getSearchPedidos(queryStringEN));
+  } = useQuery("pedidosEN", () => getSearchPedidos(queryStringEN), {
+    enabled: !!user?.id,
+  });
+
   const {
     data: pedidosAG,
     isLoading: isLoadingPedidosAG,
     isError: errorPedidosAG,
-  } = useQuery("pedidosAG", () => getSearchPedidos(queryStringAG));
+  } = useQuery("pedidosAG", () => getSearchPedidos(queryStringAG), {
+    enabled: !!user?.id,
+  });
+
   const {
     data: pedidosTR,
     isLoading: isLoadingPedidosTR,
     isError: errorPedidosTR,
-  } = useQuery("pedidosTR", () => getSearchPedidos(queryStringTR));
+  } = useQuery("pedidosTR", () => getSearchPedidos(queryStringTR), {
+    enabled: !!user?.id,
+  });
+
   const {
     data: pedidosCO,
     isLoading: isLoadingPedidosCO,
     isError: errorPedidosCO,
-  } = useQuery("pedidosCO", () => getSearchPedidos(queryStringCO));
+  } = useQuery("pedidosCO", () => getSearchPedidos(queryStringCO), {
+    enabled: !!user?.id,
+  });
+
   const {
     data: pedidosCA,
     isLoading: isLoadingPedidosCA,
     isError: errorPedidosCA,
-  } = useQuery("pedidosCA", () => getSearchPedidos(queryStringCA));
+  } = useQuery("pedidosCA", () => getSearchPedidos(queryStringCA), {
+    enabled: !!user?.id,
+  });
 
-  /*
-  const queryString = {
-    EN: objToQueryString({
-      cliente: `${id}`,
-      status: "EN",
-    }),
-    AG: objToQueryString({
-      cliente: `${id}`,
-      status: "AG",
-    }),
-    TR: objToQueryString({
-      cliente: `${id}`,
-      status: "TR",
-    }),
-    CO: objToQueryString({
-      cliente: `${id}`,
-      status: "CO",
-    }),
-    CA: objToQueryString({
-      cliente: `${id}`,
-      status: "CA",
-    }),
-  };
-
-  const {
-    data: pedidosEN,
-    isLoading: isLoadingPedidosEN,
-    isError: errorPedidosEN,
-  } = useQuery("pedidosEN", () => getSearchPedidos(queryString.EN));
-  const {
-    data: pedidosAG,
-    isLoading: isLoadingPedidosAG,
-    isError: errorPedidosAG,
-  } = useQuery("pedidosAG", () => getSearchPedidos(queryString.AG));
-  const {
-    data: pedidosTR,
-    isLoading: isLoadingPedidosTR,
-    isError: errorPedidosTR,
-  } = useQuery("pedidosTR", () => getSearchPedidos(queryString.TR));
-  const {
-    data: pedidoCO,
-    isLoading: isLoadingPedidoCO,
-    isError: errorPedidoCO,
-  } = useQuery("pedidoCO", () => getSearchPedidos(queryString.CO));
-  const {
-    data: pedidoCA,
-    isLoading: isLoadingPedidoCA,
-    isError: errorPedidoCA,
-  } = useQuery("pedidoCA", () => getSearchPedidos(queryString.CA));
-  */
+  
 
   return (
     <Layout>
