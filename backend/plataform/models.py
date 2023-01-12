@@ -127,7 +127,7 @@ class Proposta(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     eh_aceita = models.BooleanField(default=False)
-    contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     ehNegada = models.BooleanField(default=False)
 
     class Meta:
