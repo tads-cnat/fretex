@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const typeUser = user ? isFreteiro(user) : null;
   console.log(typeUser);
-
+//rever
   const queryStringEN = objToQueryString(
     typeUser
       ? {

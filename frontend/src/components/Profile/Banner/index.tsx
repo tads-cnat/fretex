@@ -9,15 +9,20 @@ import { useParams } from "react-router-dom";
 import { ICliente, IFreteiro } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 
-const Banner = ({ user }: { user: IFreteiro | ICliente }) => {
+interface IBanner {
+  user: IFreteiro | ICliente;
+  ownerPage: boolean;
+}
+
+const Banner = ({ user, ownerPage }: IBanner) => {
   const { toggle, value } = useToggle();
   const { id } = useParams();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const [imageBanner, setImageBanner] = useState();
   const [capaFoto, setCapaFoto] = useState();
-  const { updateFreteiro } = useApi();
-/*
-  const handleClick =(e: any) => {
+  const { updateFreteiro, updateCliente } = useApi();
+
+  const handleClick = (e: any) => {
     e.preventDefault();
     const formData = new FormData();
     const userUpdate = {
@@ -35,14 +40,20 @@ const Banner = ({ user }: { user: IFreteiro | ICliente }) => {
         })
         .catch((res) => console.log(res.response.data));
     } else {
-      console.log("updatecliente");
+      updateCliente(Number(id), formData)
+        .then((res) => {
+          setImageBanner(res.data.capa_foto);
+          toggle();
+        })
+        .catch((res) => console.log(res.response.data));
+      console.log("passou");
     }
   };
-*/
+
   useEffect(() => {
     setImageBanner(user.capa_foto);
   }, [user.capa_foto]);
-/*
+
   const onChange = (e: any) => {
     try {
       const file = e.target.files[0];
@@ -52,11 +63,11 @@ const Banner = ({ user }: { user: IFreteiro | ICliente }) => {
       setImagePreview(undefined);
     }
   };
-*/
+
   return (
     <>
       <Container>
-    {/**    <Modal toggle={toggle} title="Imagem de fundo" value={value}>
+        <Modal toggle={toggle} title="Imagem de fundo" value={value}>
           <Image image={imagePreview} id="imageModal">
             <Preview active={imagePreview !== undefined}>
               <p>Preview</p>
@@ -73,9 +84,13 @@ const Banner = ({ user }: { user: IFreteiro | ICliente }) => {
               Enviar
             </BtnYellow>
           </Form>
-        </Modal> */}
+        </Modal>
         <Image image={imageBanner}>
-          <button className="editBtn" onClick={toggle}>
+          <button
+            className="editBtn"
+            onClick={toggle}
+            style={ownerPage ? { display: "flex" } : { display: "none" }}
+          >
             <Pencil className="editImage" />
           </button>
         </Image>

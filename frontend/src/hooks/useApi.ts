@@ -120,6 +120,15 @@ export const useApi = () => ({
         })
         return response.data
     },
+    updateCliente: async (id: number, data: FormData) => {
+        const response = await api.patch(`/cliente/${id}/`, data, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response.data
+    },
     getCEP: async (cep: string) => {
         const response = await cepApi.get(`/${cep}/json/`)
         return response.data

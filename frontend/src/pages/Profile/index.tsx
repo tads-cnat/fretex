@@ -6,7 +6,7 @@ import Banner from "../../components/Profile/Banner";
 import ProfileMenu from "../../components/Profile/Menu";
 import UserInfo from "../../components/Profile/UserInfo";
 import { AuthContext } from "../../context/Auth/AuthContext";
-import { ICliente, IFreteiro } from "../../interfaces";
+import { ICliente, IFreteiro, ITypeUser } from "../../interfaces";
 import { Wrapper } from "../../styles";
 import { BoxWithShadow, Container, Content } from "./styles";
 import { menuChoices } from "./utils/menuChoices";
@@ -22,35 +22,76 @@ interface IProfileContext {
 
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
-  const { user } = useContext(AuthContext);
   const { id } = useParams();
-//  const { getCliente, getFreteiro } = useApi();
-/*
+  const { user } = useContext(AuthContext);
+  const { getCliente, getFreteiro, getTypeUser } = useApi();
+
+  const { data: actualTypeUser } = useQuery<ITypeUser>(
+    "actualUser",
+    () => getTypeUser(Number(id)),
+    {
+      enabled: !!id,
+    },
+  );
+
+  const isFreteiro1 =
+    actualTypeUser && !!actualTypeUser.data.extra_data.freteiro;
+
   const {
-    data: actualUser,
-    isLoading,
-    isError,
-  } = useQuery("userProfile", () => getFreteiro(Number(id)));
-*/
-//  console.log(actualUser);
+    data: userFreteiro,
+    isLoading: isLoadingFreteiro,
+    isError: isErrorFreteiro,
+  } = useQuery("userProfileFreteiro", () => getFreteiro(Number(id)), {
+    enabled: !!actualTypeUser && !!isFreteiro1,
+  });
+
+  const {
+    data: userCliente,
+    isLoading: isLoadingCliente,
+    isError: isErrorCliente,
+  } = useQuery("userProfileCliente", () => getCliente(Number(id)), {
+    enabled: !!actualTypeUser && !isFreteiro1,
+  });
+  if (userCliente || userFreteiro) {
+    console.log(userCliente?.data, 1);
+    console.log(userFreteiro?.data, 2);
+  }
+  //  console.log(actualUser);
   const handleSelectTab = (tab: number) => {
     setSelectedTab(tab);
   };
-  if (!user) return <Loading />;
+
+  if ((!userCliente || !userFreteiro) && !user) return <LoadingPage />;
   else
     return (
       <Layout>
-        {user ? (
+        {(userCliente || userFreteiro) && user ? (
           <>
-            <Banner user={user} />
+            <Banner
+              user={userFreteiro ? userFreteiro.data : userCliente.data}
+              ownerPage={
+                (userFreteiro ? userFreteiro.data.id : userCliente.data.id) ===
+                user.id
+              }
+            />
             <BoxWithShadow style={{ background: "#fafafa" }}>
               <Wrapper>
-                <UserInfo user={user} />
+                <UserInfo
+                  user={userFreteiro ? userFreteiro.data : userCliente.data}
+                />
                 <ProfileMenu
-                  userId={user.id}
+                  userId={
+                    userFreteiro ? userFreteiro.data.id : userCliente.data.id
+                  }
                   choices={menuChoices}
-                  ownerPage={Number(id) === user.id}
-                  isFreteiro={isFreteiro(user)}
+                  ownerPage={
+                    (userFreteiro
+                      ? userFreteiro.data.id
+                      : userCliente.data.id) === user.id
+                  }
+                  isFreteiro={isFreteiro(
+                    userFreteiro ? userFreteiro.data : userCliente.data,
+                  )}
                   selectedTab={selectedTab}
                   handleClick={handleSelectTab}
                 />

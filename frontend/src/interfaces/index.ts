@@ -102,3 +102,22 @@ export interface ILogin {
     email: string;
     password: string;
 }
+
+export interface ITypeUser {
+    data: {
+        id: number,
+        username: string,
+        first_name: string,
+        email: string,
+        last_name: string,
+        extra_data: {
+            freteiro: number | null,
+            cliente: number | null,
+        }
+    },
+    metadata: any,
+    success: boolean,
+    errors: any
+}
+
+
