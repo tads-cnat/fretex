@@ -19,6 +19,17 @@ export interface IFreteiroFormData {
     endereco: IEndereco;
 }
 
+export interface IVeiculo {
+    url_foto: any,
+    placa: string,
+    cor: string,
+    marca: string,
+    modelo: string,
+    ano: string,
+    freteiro: string,
+    tipo_veiculo: number,
+}
+
 export interface IFreteiroFormDataUpdate {
     url_foto: any;
     capa_foto?: any;
