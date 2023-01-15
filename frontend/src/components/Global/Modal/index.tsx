@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { IActive } from "../../../interfaces/styledComponents";
 import Modal from "react-modal";
@@ -12,6 +12,29 @@ interface IModal {
 }
 
 const ModalComponent = ({ children, title, toggle, value }: IModal) => {
+  const [width, setWidth] = useState(window.innerWidth);
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      width: width > 1200 ? "1200px" : "98%",
+      padding: "0",
+    },
+  };
+
   return (
     <Modal isOpen={value} onRequestClose={toggle} style={customStyles}>
       <Content>
@@ -27,20 +50,8 @@ const ModalComponent = ({ children, title, toggle, value }: IModal) => {
   );
 };
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "auto",
-  },
-};
-
 const Content = styled.div`
-  width: 1200px;
+  width: 100%;
   padding: 40px;
   background-color: var(--bg-ligth);
   position: relative;
@@ -72,9 +83,11 @@ const Content = styled.div`
       fill: var(--theme-primary);
     }
   }
-
   @media (max-width: 1200px) {
-    width: 600px;
+    padding: 20px;
+    h1 {
+      font-size: var(--font-medium);
+    }
   }
 `;
 

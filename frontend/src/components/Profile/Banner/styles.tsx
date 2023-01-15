@@ -37,6 +37,7 @@ export const Image = styled.div<InterfaceImage>`
   background: ${(props) =>
     props.image ? `url(${props.image}) #282828` : "#282828"};
   background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
   position: relative;
 
@@ -62,7 +63,7 @@ export const Image = styled.div<InterfaceImage>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     height: 30vh;
   }
 `;

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContextProfile } from "..";
-import { ContainerForm2, ContainerMain, PerfilImg, RegisterAddress, RegisterPerson } from "../../../components/RegisterComponents/RegisterFreteiroForm/styles";
-import {useAddress} from '../../../hooks/useAddress'
-import {useFreteiroForm} from '../../../hooks/useFreteiroForm'
+import {
+  ContainerForm2,
+  ContainerMain,
+  PerfilImg,
+  RegisterAddress,
+  RegisterPerson,
+} from "../../../components/RegisterComponents/RegisterFreteiroForm/styles";
+import { useAddress } from "../../../hooks/useAddress";
+import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
 import { useToggle } from "../../../hooks/useToggle";
 import { IFreteiro, IFreteiroFormData } from "../../../interfaces";
 import { schemaFreteiro } from "../../ResgisterUser/schemas";
@@ -21,8 +27,6 @@ import { BtnYellow } from "../../../components/RegisterComponents/RegisterClient
 import Loc from "../../../assets/Svg/Loc";
 import { Container } from "./styles";
 
-
-
 const EditProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -39,7 +43,7 @@ const EditProfile = () => {
     setFocus,
     watch,
     getValues,
-    completeAddress
+    completeAddress,
   } = useAddress<IFreteiroFormData>(schemaFreteiro);
 
   const { onSubmit } = useFreteiroForm({
@@ -47,8 +51,8 @@ const EditProfile = () => {
   });
 
   useEffect(() => {
-    handleSelectTab(3)
-  }, [handleSelectTab])
+    handleSelectTab(3);
+  }, [handleSelectTab]);
 
   const onChange = (e: any) => {
     const file = e.target.files[0];
@@ -60,7 +64,7 @@ const EditProfile = () => {
     e.preventDefault();
     togglePassword();
   };
-//console.log(getValues('username'))
+  //console.log(getValues('username'))
   const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     toggleConfirmPassword();
@@ -69,29 +73,29 @@ const EditProfile = () => {
   if (!user) return <p>Carregando...</p>;
   if (user && user.id !== Number(id)) navigate("/login");
   return (
-
     <ContainerForm2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RegisterPerson>
           <div>
-          <h1>Edite sua conta</h1>
-          <PerfilImg style={{display:'flex', flexDirection:'row', gap:'50px'}}>
-            <label>
-              <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
-              <input
-                type="file"
-                {...register("url_foto")}
-                accept="image/jpeg,image/png,image/gif"
-                onChange={onChange}
-              />
-              <p>Clique para inserir uma imagem</p>
-            </label>
-            <div>
-              <h2 style={{color:'#fff'}}>{watch('full_name')}</h2>
-              <p>{getValues('email')}</p>
-            </div>
-            
-          </PerfilImg>
+            <h1>Edite sua conta</h1>
+            <PerfilImg
+              style={{ display: "flex", flexDirection: "row", gap: "50px" }}
+            >
+              <label>
+                <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
+                <input
+                  type="file"
+                  {...register("url_foto")}
+                  accept="image/jpeg,image/png,image/gif"
+                  onChange={onChange}
+                />
+                <p>Insira uma imagem</p>
+              </label>
+              <div>
+                <h2 style={{ color: "#fff" }}>{watch("full_name")}</h2>
+                <p>{getValues("email")}</p>
+              </div>
+            </PerfilImg>
           </div>
           <label>
             <User />
