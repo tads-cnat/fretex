@@ -1,4 +1,4 @@
-import { IClienteFormData, IPedido } from "../interfaces"
+import { IClienteFormData, IPedido, IVeiculo } from "../interfaces"
 import { api, cepApi } from "../services/api"
 import { } from 'react-query'
 import { useQuery } from "react-query/types/react"
@@ -38,6 +38,13 @@ export const useApi = () => ({
             }
         })
         return response.data
+    },
+    registerVeiculo: async (veiculo: IVeiculo) => {
+        const response = await api.post('/veiculo/', veiculo, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
     },
     validateToken: async (token: string) => {
         const response = await api.get('/auth/user/', {

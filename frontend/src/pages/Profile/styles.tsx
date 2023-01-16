@@ -11,6 +11,6 @@ export const Content = styled.main`
   padding-bottom: 20px;
 `;
 
- export const Container = styled.div`
+export const Container = styled.div`
   
- `;
+`;
