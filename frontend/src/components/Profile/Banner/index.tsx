@@ -46,7 +46,6 @@ const Banner = ({ user, ownerPage }: IBanner) => {
           toggle();
         })
         .catch((res) => console.log(res.response.data));
-      console.log("passou");
     }
   };
 

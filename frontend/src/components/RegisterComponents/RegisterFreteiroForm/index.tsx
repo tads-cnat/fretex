@@ -162,7 +162,7 @@ const RegisterFreteiroForm = () => {
               <input
                 {...register("endereco.rua")}
                 type="text"
-                placeholder="Seu rua"
+                placeholder="Sua rua"
               />
             </label>
             {errors.endereco?.rua && (

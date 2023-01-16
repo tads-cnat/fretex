@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { IActive } from "../../../interfaces/styledComponents";
 
-export const ContainerAll = styled.div``;
-
 export const Container = styled.button<IActive>`
   display: flex;
   align-items: center;
@@ -13,12 +11,7 @@ export const Container = styled.button<IActive>`
   cursor: pointer;
   gap: 7px;
   position: relative;
-  
   transition: 0.5s;
-
-  &:hover {
-    // background-color: #3f3f3f;
-  }
 
   .perfil {
     width: 30px;
@@ -81,7 +74,7 @@ export const Content = styled.div<IActive>`
     border: none;
     cursor: pointer;
     text-align: right;
-    padding: 4px;
+    padding: 8px;
     background-color: #444444;
 
     &:hover {

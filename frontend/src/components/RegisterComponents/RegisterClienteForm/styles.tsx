@@ -196,6 +196,7 @@ export const BtnYellow = styled.button`
   transition: 0.5s;
   text-decoration: none;
   border-radius: 6px;
+  cursor: pointer;
   border: 0px;
   font-weight: 700;
   font-size: var(--font-large);

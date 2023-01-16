@@ -27,7 +27,6 @@ const ProfileMenu = ({
   isFreteiro,
   ownerPage,
 }: IMenu) => {
-  //console.log(ownerPage)
   return (
     <ContainerMenu>
       {choices.map((choice, index) =>

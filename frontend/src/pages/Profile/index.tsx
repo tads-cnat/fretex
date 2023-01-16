@@ -26,13 +26,10 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
   const { getCliente, getFreteiro, getTypeUser } = useApi();
 
-  const { data: actualTypeUser } = useQuery<ITypeUser>(
-    "actualUser",
-    () => getTypeUser(Number(id)),
-    {
+  const { data: actualTypeUser, isLoading: isLoadingActualTypeUser } =
+    useQuery<ITypeUser>("actualUser", () => getTypeUser(Number(id)), {
       enabled: !!id,
-    },
-  );
+    });
 
   const isFreteiro1 =
     actualTypeUser && !!actualTypeUser.data.extra_data.freteiro;
@@ -52,16 +49,12 @@ const Profile = () => {
   } = useQuery("userProfileCliente", () => getCliente(Number(id)), {
     enabled: !!actualTypeUser && !isFreteiro1,
   });
-  if (userCliente || userFreteiro) {
-    console.log(userCliente?.data, 1);
-    console.log(userFreteiro?.data, 2);
-  }
-  //  console.log(actualUser);
+
   const handleSelectTab = (tab: number) => {
     setSelectedTab(tab);
   };
 
-  if ((!userCliente || !userFreteiro) && !user) return <LoadingPage />;
+  if (!user) return <LoadingPage />;
   else
     return (
       <Layout>
@@ -100,7 +93,12 @@ const Profile = () => {
             <Container style={{ background: "#f1f1f1" }}>
               <Wrapper>
                 <Content>
-                  <Outlet context={{ user, handleSelectTab }} />
+                  <Outlet
+                    context={{
+                      user: userFreteiro ? userFreteiro.data : userCliente.data,
+                      handleSelectTab,
+                    }}
+                  />
                 </Content>
               </Wrapper>
             </Container>
