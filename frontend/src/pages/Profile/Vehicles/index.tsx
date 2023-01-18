@@ -11,6 +11,7 @@ import { useContextProfile } from "..";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaVeiculo } from "./schema";
 import CardVeiculo from "../../../components/Profile/CardVeiculo";
+import { useParams } from "react-router-dom";
 
 
 interface ITiposDeVeiculo {
@@ -21,7 +22,8 @@ interface ITiposDeVeiculo {
 
 const Vehicles = () => {
 
-  const { getVeiculos } = useApi()
+  const { getVeiculosForFreteiro } = useApi()
+  const {id} = useParams()
   const { value, toggle, setAsFalse, setAsTrue } = useToggle();
   const { register,
     handleSubmit,
@@ -38,7 +40,7 @@ const Vehicles = () => {
   const { user } = useContextProfile();
 
   useEffect(() => {
-    getVeiculos()
+    getVeiculosForFreteiro(Number(id))
       .then((res) => {
         setVeiculos(res.data);
       })
@@ -89,8 +91,8 @@ const Vehicles = () => {
         <p>Não possui veículos cadastrados.</p>
       )}
       {veiculos &&
-          veiculos.map((veiculo) => 
-            <CardVeiculo veiculos={veiculo}/>
+          veiculos.map((veiculo, id) => 
+            <CardVeiculo key={id} veiculos={veiculo}/>
           )
       }
       <ModalComponent title="Cadastrar Veículo" toggle={toggle} value={value}>

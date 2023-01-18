@@ -145,6 +145,7 @@ class VeiculoViewSet(viewsets.ModelViewSet):
     serializer_class = VeiculoSerializer
     queryset = Veiculo.objects.all()
     renderer_classes = [CustomRenderer]
+    filterset_fields = ["freteiro"]
 
 
 class PropostaViewSet(viewsets.ModelViewSet):

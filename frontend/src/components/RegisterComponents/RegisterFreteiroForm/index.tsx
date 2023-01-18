@@ -229,7 +229,7 @@ const RegisterFreteiroForm = () => {
         </form>
         <Login>
           <span>
-            Já tem uma conta? <Link to="/">Entrar</Link>
+            Já tem uma conta? <Link to="/login">Entrar</Link>
           </span>
         </Login>
       </ContainerForm2>

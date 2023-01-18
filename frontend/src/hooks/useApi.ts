@@ -46,8 +46,8 @@ export const useApi = () => ({
             }
         })
     },
-    getVeiculos: async () => {
-        const response = await api.get('/veiculo/', {
+    getVeiculosForFreteiro: async (id: number) => {
+        const response = await api.get(`/veiculo/?freteiro=${id}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }

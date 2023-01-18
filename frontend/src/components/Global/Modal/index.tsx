@@ -31,8 +31,9 @@ const ModalComponent = ({ children, title, toggle, value }: IModal) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       width: width > 1200 ? "1200px" : "98%",
+      height: width > 1200 ? "auto" : '80vh',
       padding: "0",
-      overflow: "scroll",
+      overflow: width > 1200 ? "none" : "scroll",
     },
   };
 
