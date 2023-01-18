@@ -15,6 +15,13 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  @media (max-width: 1200px) {
+    .title {
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+  }
 `;
 
 export const PerfilImgUpdate = styled(PerfilImg)`
@@ -37,6 +44,10 @@ export const InputsContainerGrid = styled.div<IActive>`
   margin: ${(props) => (props.active ? "0" : "0 auto")};
   gap: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns:  ${(props) => (props.active && "1fr")};
+  }
 `;
 
 export const GridContent = styled.div<IActive>`
@@ -53,5 +64,13 @@ export const GridEndereco = styled.div`
   h2 {
     grid-column: 1/-1;
     margin-bottom: 20px;
+  }
+
+  @media (max-width: 1200px) {
+    gap: 0px 10px;
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns:  1fr;
   }
 `;

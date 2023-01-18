@@ -9,82 +9,76 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import { ICliente, IFreteiro, ITypeUser } from "../../interfaces";
 import { Wrapper } from "../../styles";
 import { BoxWithShadow, Container, Content } from "./styles";
-import { menuChoices } from "./utils/menuChoices";
 import { isFreteiro } from "../../utils/isFreteiro";
-import { useQuery } from "react-query";
 import useApi from "../../hooks/useApi";
 import LoadingPage from "../../components/Global/LoadingPage";
+import { useQuery } from "react-query";
 
 interface IProfileContext {
   user: ICliente | IFreteiro;
+  setUser: (user: ICliente | IFreteiro) => void;
   handleSelectTab: (tab: number) => void;
 }
 
 const Profile = () => {
-  const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [selectedTab, setSelectedTab] = useState(0);
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user: actualUser } = useContext(AuthContext);
+  const [userToRender, setUserToRender] = useState<
+    ICliente | IFreteiro | undefined
+  >();
   const { getCliente, getFreteiro, getTypeUser } = useApi();
 
-  const { data: actualTypeUser, isLoading: isLoadingActualTypeUser } =
-    useQuery<ITypeUser>("actualUser", () => getTypeUser(Number(id)), {
+  const { data: actualTypeUser } = useQuery<ITypeUser>(
+    "actualUser",
+    () => getTypeUser(Number(id)),
+    {
       enabled: !!id,
-    });
+      refetchOnMount: "always"
+    },
+  );
 
-  const isFreteiro1 =
+  const isFreteiroType =
     actualTypeUser && !!actualTypeUser.data.extra_data.freteiro;
 
-  const {
-    data: userFreteiro,
-    isLoading: isLoadingFreteiro,
-    isError: isErrorFreteiro,
-  } = useQuery("userProfileFreteiro", () => getFreteiro(Number(id)), {
-    enabled: !!actualTypeUser && !!isFreteiro1,
-  });
+  useQuery(
+    "userProfileFreteiro",
+    () => getFreteiro(Number(id)).then((res) => setUserToRender(res.data)),
+    {
+      enabled: !!actualTypeUser && !!isFreteiroType,
+      refetchOnMount: "always"
+    },
+  );
 
-  const {
-    data: userCliente,
-    isLoading: isLoadingCliente,
-    isError: isErrorCliente,
-  } = useQuery("userProfileCliente", () => getCliente(Number(id)), {
-    enabled: !!actualTypeUser && !isFreteiro1,
-  });
+  useQuery(
+    "userProfileCliente",
+    () => getCliente(Number(id)).then((res) => setUserToRender(res.data)),
+    {
+      enabled: !!actualTypeUser && !isFreteiroType,
+    },
+  );
 
   const handleSelectTab = (tab: number) => {
     setSelectedTab(tab);
   };
 
-  if (!user) return <LoadingPage />;
+  if (!actualUser || !userToRender) return <LoadingPage />;
   else
     return (
       <Layout>
-        {(userCliente || userFreteiro) && user ? (
+        {userToRender && actualUser ? (
           <>
             <Banner
-              user={userFreteiro ? userFreteiro.data : userCliente.data}
-              ownerPage={
-                (userFreteiro ? userFreteiro.data.id : userCliente.data.id) ===
-                user.id
-              }
+              user={userToRender}
+              ownerPage={userToRender.id === actualUser.id}
             />
             <BoxWithShadow style={{ background: "#fafafa" }}>
               <Wrapper>
-                <UserInfo
-                  user={userFreteiro ? userFreteiro.data : userCliente.data}
-                />
+                <UserInfo user={userToRender} />
                 <ProfileMenu
-                  userId={
-                    userFreteiro ? userFreteiro.data.id : userCliente.data.id
-                  }
-                  choices={menuChoices}
-                  ownerPage={
-                    (userFreteiro
-                      ? userFreteiro.data.id
-                      : userCliente.data.id) === user.id
-                  }
-                  isFreteiro={isFreteiro(
-                    userFreteiro ? userFreteiro.data : userCliente.data,
-                  )}
+                  userId={userToRender.id}
+                  ownerPage={userToRender.id === actualUser.id}
+                  isFreteiro={isFreteiro(userToRender)}
                   selectedTab={selectedTab}
                   handleClick={handleSelectTab}
                 />
@@ -95,8 +89,9 @@ const Profile = () => {
                 <Content>
                   <Outlet
                     context={{
-                      user: userFreteiro ? userFreteiro.data : userCliente.data,
-                      handleSelectTab,
+                      user: userToRender,
+                      setUser: setUserToRender,
+                      handleSelectTab: handleSelectTab,
                     }}
                   />
                 </Content>
