@@ -1,7 +1,8 @@
 import { Card, Informacoes, Img } from "./styles";
 import { IVeiculo } from "../../../interfaces";
 
-const CardVeiculo = (veiculos: IVeiculo) => {
+
+const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }) => {
     return (
         <Card>
             <Informacoes>

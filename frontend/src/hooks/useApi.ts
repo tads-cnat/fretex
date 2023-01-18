@@ -46,6 +46,14 @@ export const useApi = () => ({
             }
         })
     },
+    getVeiculos: async () => {
+        const response = await api.get('/veiculo/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     validateToken: async (token: string) => {
         const response = await api.get('/auth/user/', {
             headers: {

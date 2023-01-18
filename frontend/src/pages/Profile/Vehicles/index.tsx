@@ -10,6 +10,8 @@ import { IVeiculo } from "../../../interfaces";
 import { useContextProfile } from "..";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaVeiculo } from "./schema";
+import CardVeiculo from "../../../components/Profile/CardVeiculo";
+
 
 interface ITiposDeVeiculo {
   id: number;
@@ -19,6 +21,7 @@ interface ITiposDeVeiculo {
 
 const Vehicles = () => {
 
+  const { getVeiculos } = useApi()
   const { value, toggle, setAsFalse, setAsTrue } = useToggle();
   const { register,
     handleSubmit,
@@ -30,8 +33,19 @@ const Vehicles = () => {
   const [imagemVeiculo, setImagemVeiculo] = useState();
   const [imagemPreview, setImagemPreview] = useState<string | undefined>();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>();
+  const [ veiculos, setVeiculos ] = useState<IVeiculo[]>([]);
   const { registerVeiculo, tiposVeiculo } = useApi();
   const { user } = useContextProfile();
+
+  useEffect(() => {
+    getVeiculos()
+      .then((res) => {
+        setVeiculos(res.data);
+      })
+      .catch((res) => console.log(res));
+      console.log(veiculos)
+  }, []);
+
   useEffect(() => {
     tiposVeiculo()
       .then((res) => setTiposDeVeiculo(res.data))
@@ -71,6 +85,14 @@ const Vehicles = () => {
       <ButtonCadastro onClick={setAsTrue}>
         <PlusVeiculo /> Cadastrar Veículo
       </ButtonCadastro>
+      {veiculos.length === 0 && (
+        <p>Não possui veículos cadastrados.</p>
+      )}
+      {veiculos &&
+          veiculos.map((veiculo) => 
+            <CardVeiculo veiculos={veiculo}/>
+          )
+      }
       <ModalComponent title="Cadastrar Veículo" toggle={toggle} value={value}>
         <form onSubmit={handleSubmit(onSubmit)} >
           <ContainerMain>
