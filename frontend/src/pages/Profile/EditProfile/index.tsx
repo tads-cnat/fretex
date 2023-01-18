@@ -64,7 +64,6 @@ const EditProfile = () => {
 
   const onSubmit: SubmitHandler<IUserUpdateFormData> = (data) => {
     const formData: any = new FormData();
-    console.log(data)
     const userUpdate = {
       full_name: data.full_name,
       email: data.email,
@@ -72,7 +71,6 @@ const EditProfile = () => {
       url_foto: imagePreview,
 
     };
-    console.log(userUpdate)
     if (isFreteiro(user)) {
       if (data.url_foto.length === 0) {
         setErrorUpdate("Imagem obrigatória!");

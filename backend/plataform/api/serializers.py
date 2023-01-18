@@ -62,6 +62,7 @@ class RegisterFreteiroSerializer(serializers.Serializer):
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
     url_foto = serializers.ImageField(required=False)
+    
 
     @transaction.atomic
     def create(self, validated_data):
@@ -238,6 +239,7 @@ class PedidoSerializer(serializers.ModelSerializer):
 
 
 class VeiculoSerializer(serializers.ModelSerializer):
+    url_foto = serializers.ImageField(required=True)
     class Meta:
         model = Veiculo
         fields = "__all__"
