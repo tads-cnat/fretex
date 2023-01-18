@@ -46,6 +46,7 @@ const EditProfile = () => {
   const { updateCliente, updateFreteiro } = useApi();
   const [errorUpdate, setErrorUpdate] = useState("");
   const { user, handleSelectTab } = useContextProfile();
+  const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const { value: password, toggle: togglePassword } = useToggle();
   const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
@@ -63,39 +64,115 @@ const EditProfile = () => {
   );
 
   const onSubmit: SubmitHandler<IUserUpdateFormData> = (data) => {
-    const formData: any = new FormData();
-    console.log(data)
+    const { endereco } = data;
+    console.log(endereco);
+    const formData = new FormData();
     const userUpdate = {
-      full_name: data.full_name,
-      email: data.email,
-      cpf: data.cpf,
-      url_foto: imagePreview,
-
+      url_foto: image,
+      first_name: data.full_name?.split(" ")[0],
+      last_name: data.full_name?.split(" ").slice(1).join(" "),
     };
-    console.log(userUpdate)
+
+    Object.entries(userUpdate).forEach(([key, value]) => {
+      if (value) formData.append(key, value);
+    });
+
+    Object.entries(endereco).forEach(([key, value]) => {
+      if (value) formData.append(`endereco.${key}`, String(value));
+    });
+
     if (isFreteiro(user)) {
-      if (data.url_foto.length === 0) {
-        setErrorUpdate("Imagem obrigatória!");
-        return;
-      }
-      const { endereco } = data;
-      console.log(endereco);
-      Object.entries(userUpdate).forEach(([key, value]) => {
-        if (value) formData.append(key, value);
-      });
-      Object.entries(endereco).forEach(([key, value]) => {
-        if (value) formData.append(`endereco.${key}`, String(value));
-      });
       updateFreteiro(user.id, formData)
-        .then((res) => console.log(res))
-        .catch((res) => console.log(res));
+        .then((res) => {
+          console.log(res);
+          window.location.reload();
+          setValue("password", "");
+          setValue("confirmPassword", "");
+        })
+        .catch((res) => console.log(res.response.data));
     } else {
-      Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value);
-      });
+      updateCliente(user.id, formData)
+        .then((res) => {
+          console.log(res);
+          window.location.reload();
+        })
+        .catch((res) => console.log(res.response.data));
     }
+
+    // const userUpdate = {
+    /*   first_name: data.full_name?.split(' ')[0],
+      last_name: data.full_name?.split(' ').slice(1).join(" "),*/
+    //     url_foto: image,
+    //  };
+    //  console.log(image)
+    //   console.log(data.url_foto)
+    //  if (isFreteiro(user)) {
+    //    console.log("teste")
+    //    if (data.url_foto.length === 0 || image) {
+    //      setErrorUpdate("Imagem obrigatória!");
+    //      return;
+    //    }
+    //    const { endereco } = data;
+    // console.log(endereco);
+    //   Object.entries(userUpdate).forEach(([key, value]) => {
+    //     if (value) formData.append(key, value);
+    //   });
+    //     Object.entries(endereco).forEach(([key, value]) => {
+    //      if (value) formData.append(`endereco.${key}`, String(value));
+    //    });
+    //   updateFreteiro(user.id, formData)
+    ///     .then((res) => console.log(res))
+    //     .catch((res) => console.log(res));
+    //  }
+    /*
+    fetch(data.url_foto)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], user.url_foto, {
+          type: "application/octet-stream",
+        });
+        console.log(file);
+        
+        const userUpdate = {
+          first_name: data.full_name?.split(' ')[0],
+          last_name: data.full_name?.split(' ').slice(1).join(" "),
+          url_foto: file,
+        };
+        console.log(userUpdate);
+        if (isFreteiro(user)) {
+          if (data.url_foto.length === 0) {
+            setErrorUpdate("Imagem obrigatória!");
+            return;
+          }
+          const { endereco } = data;
+          // console.log(endereco);
+          Object.entries(userUpdate).forEach(([key, value]) => {
+            if (value) formData.append(key, value);
+          });
+          Object.entries(endereco).forEach(([key, value]) => {
+            if (value) formData.append(`endereco.${key}`, String(value));
+          });
+          updateFreteiro(user.id, formData)
+            .then((res) => console.log(res))
+            .catch((res) => console.log(res));
+        } else {
+          console.log(data);
+          Object.entries(userUpdate).forEach(([key, value]) => {
+          
+              if (value) formData.append(key, value);
+            
+          });
+        
+
+          updateCliente(user.id, formData)
+            .then(() => window.location.reload())
+            .catch((res) => console.log(res));
+        }
+      });
+    // console.log(data);
+*/
     //  colocar any no formdata caso queira fazer print
-  /*  for (const [key, value] of formData) {
+    /*  for (const [key, value] of formData) {
       console.log(`${key}: ${value}`);
     }*/
   };
@@ -128,7 +205,7 @@ const EditProfile = () => {
 
   const onChange = (e: any) => {
     const file = e.target.files[0];
-    setValue("url_foto", file);
+    setImage(file);
     setImagePreview(URL.createObjectURL(file));
   };
 
@@ -170,8 +247,8 @@ const EditProfile = () => {
           </div>
         </PerfilImgUpdate>
 
-        <InputsContainerGrid>
-          <GridContent>
+        <InputsContainerGrid active={isFreteiro(user)}>
+          <GridContent active={isFreteiro(user)}>
             <h2>Seus Dados</h2>
             <LabelInput
               Icon={User}

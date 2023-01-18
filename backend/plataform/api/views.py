@@ -116,7 +116,7 @@ class ClienteViewSet(viewsets.ModelViewSet):
 class PedidoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = PedidoSerializer
-    queryset = Pedido.objects.all()
+    queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
     filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
 

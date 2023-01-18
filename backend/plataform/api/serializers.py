@@ -138,6 +138,30 @@ class FreteiroSerializer(serializers.ModelSerializer):
             freteiro.save()
 
             return freteiro
+    
+    def update(self, instance, validated_data):
+        address_data = validated_data.pop('endereco', None)
+        if address_data:
+            instance.endereco.cep = address_data.get('cep', instance.endereco.CEP)
+            instance.endereco.rua = address_data.get('rua', instance.endereco.rua)
+            instance.endereco.numero = address_data.get('numero', instance.endereco.numero)
+            instance.endereco.bairro = address_data.get('bairro', instance.endereco.bairro)
+            instance.endereco.cidade = address_data.get('cidade', instance.endereco.cidade)
+            instance.endereco.estado = address_data.get('estado', instance.endereco.estado)
+            instance.endereco.complemento = address_data.get('complemento', instance.endereco.complemento)
+            instance.endereco.save()
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.email = validated_data.get('email', instance.email)
+        instance.cpf = validated_data.get('cpf', instance.cpf)
+        instance.url_foto = validated_data.get('url_foto', instance.url_foto)
+        instance.capa_foto = validated_data.get('capa_foto', instance.capa_foto)
+        password = validated_data.get('password', None)
+        if password:
+            instance.set_password(password)
+        instance.save()
+        return instance
 
 
 # TODO - VErificar fotos nos serializers
