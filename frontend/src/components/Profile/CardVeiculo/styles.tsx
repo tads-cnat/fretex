@@ -43,6 +43,11 @@ export const Informacoes = styled.div`
         display: flex;
         flex-direction: column;
         row-gap: 10px;
+        div {
+            display: flex;
+            align-items: center;
+            column-gap: 6px;
+        }
     }
 
     h1 {

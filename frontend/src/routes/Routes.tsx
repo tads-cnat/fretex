@@ -25,7 +25,7 @@ const RoutesApp = () => {
 
           <Route path="/perfil/:id" element={<RequireAuth level={3}><Profile /></RequireAuth>}>
             <Route path="" element={<RequireAuth level={3}><CompletedFretes /></RequireAuth>} />
-            <Route path="veiculos" element={<RequireAuth level={3}><Vehicles /></RequireAuth>} />
+            <Route path="veiculos" element={<RequireAuth level={3}><Vehicles /></RequireAuth>} /> 
             <Route path="avaliacoes" element={<RequireAuth level={3}><Avaliacoes /></RequireAuth>} />
             <Route path="editarPerfil" element={<RequireAuth level={3}><EditProfile/></RequireAuth>} />
           </Route>
