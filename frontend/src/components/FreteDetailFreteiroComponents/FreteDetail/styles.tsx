@@ -48,6 +48,24 @@ export const Content1 = styled.div`
             width: 100%;
         }
     }
+    .userLink{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+        img {
+            width: 25px;
+            border-radius: 50%;
+        }
+        span {
+            font-size: var(--font-medium);
+            font-weight: 500;
+            transition: .3s;
+        }
+        span:hover {
+            color: var(--btn-hover)
+        }
+    }
 `;
 
 export const Content2 = styled.div`

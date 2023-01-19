@@ -18,12 +18,12 @@ import userPhoto from "../../../assets/images/user-circle.svg";
 import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
 import geoalt from "../../../assets/images/geo-alt.svg";
 import info from "../../../assets/images/info-circle.svg";
-import { useNavigate } from "react-router-dom";
-import { IPedido } from "../../../interfaces";
+import { Link, useNavigate } from "react-router-dom";
+import { ICliente, IPedido } from "../../../interfaces";
 import { Seta } from "../../RegisterFreteComponents/Form/styles";
 
-const FreteDetailComponent = ({pedido}: {pedido:IPedido | undefined}) => {
-  const navigate = useNavigate()
+const FreteDetailComponent = ({ pedido, user }: { pedido: IPedido | undefined, user:ICliente }) => {
+  const navigate = useNavigate();
 
   const formatDate = (initialDate: string | undefined) => {
     const date = initialDate?.replaceAll("-", "/");
@@ -55,7 +55,10 @@ const FreteDetailComponent = ({pedido}: {pedido:IPedido | undefined}) => {
             <img src={caixas} alt="caixas" />
           )}
           <div>
-            <p>{pedido?.cliente_first_name} {pedido?.cliente_last_name}</p>
+            <Link to={`/perfil/${pedido?.cliente}`} className="userLink">
+              <img src={user.url_foto} alt={user.first_name} />
+              <span>{pedido?.cliente_first_name} {pedido?.cliente_last_name}</span>
+            </Link>
             <h3>{pedido?.produto.nome}</h3>
             <p>Pedido realizado em: {formatDate(pedido?.criado_em)}</p>{" "}
             {/* colocar data da realização do pedido*/}
