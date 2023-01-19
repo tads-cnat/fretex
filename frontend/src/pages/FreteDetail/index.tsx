@@ -9,6 +9,7 @@ import FreteDetailComponent from "../../components/FreteDetailFreteiroComponents
 import Login from "../Login";
 import Layout from "../../components/Layout";
 import { useQuery } from "react-query";
+import LoadingPage from "../../components/Global/LoadingPage";
 
 const FreteDetail = () => {
   const [pedido, setPedido] = useState<IPedido>();
@@ -27,7 +28,7 @@ const FreteDetail = () => {
       .catch((res) => console.log(res));
   }, []);
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     "pedidoCreatedBy",
     () => getCliente(pedido?.cliente),
     {
@@ -42,10 +43,9 @@ const FreteDetail = () => {
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {!loading ? (
-            <FreteDetailComponent pedido={pedido} user={data.data} />
-          ) : (
-            <p>Carregando...</p>
+          {isLoading && <LoadingPage />}
+          {!isLoading && (
+            <FreteDetailComponent pedido={pedido} user={data?.data} />
           )}
         </Wrapper>
       </ContainerPrincipal>

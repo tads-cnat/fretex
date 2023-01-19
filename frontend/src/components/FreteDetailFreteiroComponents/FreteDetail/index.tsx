@@ -56,7 +56,7 @@ const FreteDetailComponent = ({ pedido, user }: { pedido: IPedido | undefined, u
           )}
           <div>
             <Link to={`/perfil/${pedido?.cliente}`} className="userLink">
-              <img src={user.url_foto} alt={user.first_name} />
+              <img src={user?.url_foto} alt={user?.first_name} />
               <span>{pedido?.cliente_first_name} {pedido?.cliente_last_name}</span>
             </Link>
             <h3>{pedido?.produto.nome}</h3>
