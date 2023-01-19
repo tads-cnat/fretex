@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import veiculo from "../../../assets/images/veiculo.png"
 import { ReactComponent as PlusVeiculo } from "../../../assets/images/PlusCircle.svg"
 import ModalComponent from '../../../components/Global/Modal';
-import { ContainerMain, ContainerInputs, ContainerImagem, ButtonCadastro, Preview } from './styles';
+import { ContainerMain, ContainerInputs, ContainerImagem, ButtonCadastro, Preview, QtdVeiculos } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useApi from '../../../hooks/useApi';
@@ -23,7 +23,7 @@ interface ITiposDeVeiculo {
 const Vehicles = () => {
 
   const { getVeiculosForFreteiro } = useApi()
-  const {id} = useParams()
+  const { id } = useParams()
   const { value, toggle, setAsFalse, setAsTrue } = useToggle();
   const { register,
     handleSubmit,
@@ -35,7 +35,7 @@ const Vehicles = () => {
   const [imagemVeiculo, setImagemVeiculo] = useState();
   const [imagemPreview, setImagemPreview] = useState<string | undefined>();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>();
-  const [ veiculos, setVeiculos ] = useState<IVeiculo[]>([]);
+  const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
   const { registerVeiculo, tiposVeiculo } = useApi();
   const { user } = useContextProfile();
 
@@ -45,7 +45,7 @@ const Vehicles = () => {
         setVeiculos(res.data);
       })
       .catch((res) => console.log(res));
-      console.log(veiculos)
+    console.log(veiculos)
   }, []);
 
   useEffect(() => {
@@ -84,16 +84,21 @@ const Vehicles = () => {
 
   return (
     <>
-      <ButtonCadastro onClick={setAsTrue}>
-        <PlusVeiculo /> Cadastrar Veículo
-      </ButtonCadastro>
+      <QtdVeiculos>
+        <p>
+          {veiculos.length} Veículo(s)
+        </p>
+        <ButtonCadastro onClick={setAsTrue}>
+          <PlusVeiculo /> Cadastrar Veículo
+        </ButtonCadastro>
+      </QtdVeiculos>
       {veiculos.length === 0 && (
         <p>Não possui veículos cadastrados.</p>
       )}
       {veiculos &&
-          veiculos.map((veiculo, id) => 
-            <CardVeiculo key={id} veiculos={veiculo}/>
-          )
+        veiculos.map((veiculo, id) =>
+          <CardVeiculo key={id} veiculos={veiculo} />
+        )
       }
       <ModalComponent title="Cadastrar Veículo" toggle={toggle} value={value}>
         <form onSubmit={handleSubmit(onSubmit)} >

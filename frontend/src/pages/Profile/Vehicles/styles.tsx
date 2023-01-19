@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { BtnPattern } from "../../../styles";
 
+export const QtdVeiculos = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
 export const ContainerMain = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;

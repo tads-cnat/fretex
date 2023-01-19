@@ -7,7 +7,7 @@ const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }) => {
         <Card>
             <Informacoes>
                 <div className="InfoPrincipais">
-                    <h1>{veiculos.modelo}- {veiculos.ano}</h1>
+                    <h1>{veiculos.modelo} - {veiculos.ano}</h1>
                     <h2>{veiculos.modelo}</h2>
                 </div>
                 <div className="InfoAdicionais">
