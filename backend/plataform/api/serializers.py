@@ -13,6 +13,8 @@ from plataform.models import (
     AvaliacaoUsuario,
 )
 from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -212,6 +214,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
+    tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
     cliente_first_name = serializers.CharField(source='cliente.first_name', read_only=True)
     cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
 
@@ -238,9 +241,10 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
+        serializer = PedidoSerializer(data=self.context['request'].data)
         origem = validated_data.pop("origem")
         origem = Endereco.objects.create(**origem)
-
+        
         destino = validated_data.pop("destino")
         destino = Endereco.objects.create(**destino)
 
@@ -248,6 +252,13 @@ class PedidoSerializer(serializers.ModelSerializer):
         produto = Produto.objects.create(**produto)
 
         tipos_veiculos = validated_data.pop("tipo_veiculo")
+        
+        try:
+            if (int(len(tipos_veiculos)) == 0):
+                tipos_veiculos = list(map(int,self.context['request'].data["tipo_veiculo[]"].split(",")))
+        except:
+            serializer.is_valid()
+            raise serializers.ValidationError({"tipo_veiculo": "tipo_veiculo field is missing"})
 
         pedido = Pedido.objects.create(
             **validated_data, origem=origem, destino=destino, produto=produto

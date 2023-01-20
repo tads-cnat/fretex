@@ -40,7 +40,7 @@ const Index = () => {
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
-
+    const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
     Object.entries(origem).forEach(([key, value]) => {
       if (value) formData.append(`origem.${key}`, value);
     });
@@ -52,16 +52,13 @@ const Index = () => {
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
-      if (value) formData.append(`${key}`, value);
+      if (value && key === "tipo_veiculo")
+        formData.append(`tipo_veiculo[]`, tipoVeiculo);
+      else if (value) formData.append(`${key}`, value);
     });
-/* colocar any no formdata caso queira fazer print
-    for (const [key, value] of formData) {
-      console.log(`${key}: ${value}`);
-    }
-*/
 
     registerPedido(formData)
-      .then((res) => console.log(res))
+      .then(() => navigate("/dashboard"))
       .catch((error) => console.log(error));
   };
 

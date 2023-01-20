@@ -48,7 +48,7 @@ const Login = () => {
     if (res === true) {
       navigate("/fretesDisponiveis");
     } else if (res === false) {
-      //redirecionar para página de cliente
+      navigate("/dashboard");
     } else {
       setError("Email ou senha incorretos!");
       setTimeout(() => {

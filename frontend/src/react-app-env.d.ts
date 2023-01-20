@@ -5,3 +5,4 @@ declare module '*.mp4' {
     export default src;
 }
 
+declare module '*.png';

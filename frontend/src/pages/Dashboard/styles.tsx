@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Title = styled.p`
@@ -50,6 +51,23 @@ export const Filter = styled.div`
 `;
 
 export const BtnYellow = styled.button`
+    cursor: pointer;
+    padding: 8px 16px;
+    background-color: var(--theme-primary);
+    color: var(--text-light);
+    transition: 0.5s;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 0px;
+    font-weight: 600;
+    font-size: var(--font-medium);
+    line-height: 24px;
+    &:hover {
+        background-color: var(--btn-hover);
+    }
+`;
+
+export const BtnYellowLinkRouter = styled(Link)`
     cursor: pointer;
     padding: 8px 16px;
     background-color: var(--theme-primary);

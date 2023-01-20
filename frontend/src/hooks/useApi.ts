@@ -34,13 +34,14 @@ export const useApi = () => ({
     registerPedido: async (pedido: IPedido) => {
         const response = await api.post('/pedido/', pedido, {
             headers: {
-                "Authorization": `Token ${localStorage.getItem("authToken")}`
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
             }
         })
         return response.data
     },
     registerVeiculo: async (veiculo: IVeiculo) => {
-        const response = await api.post('/veiculo/', veiculo, {
+        await api.post('/veiculo/', veiculo, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }

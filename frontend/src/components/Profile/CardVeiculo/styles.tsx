@@ -39,6 +39,10 @@ export const Informacoes = styled.div`
 
     }
 
+    img {
+        width: 24px;
+    }
+
     .InfoAdicionais {
         display: flex;
         flex-direction: column;

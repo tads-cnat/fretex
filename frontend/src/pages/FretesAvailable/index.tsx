@@ -15,6 +15,7 @@ import LoadingPage from "../../components/Global/LoadingPage";
 const FretesAvailable = () => {
   const { user } = useContext(AuthContext);
   const { getPedidos } = useApi();
+  const [inputText, setInputText] = useState();
   const {
     data: pedidos,
     isLoading,
@@ -22,6 +23,14 @@ const FretesAvailable = () => {
   } = useQuery("pedidosDisponiveis", getPedidos, {
     enabled: !!user,
   });
+/*
+  const { data, status } = useQuery(['search', inputText], () => getPedidos(), {
+    refetchOnWindowFocus: false
+  });
+*/
+  const handleChange = (e: any) => {
+
+  };
 
   if (!user) return <LoadingPage />;
   return (
@@ -31,7 +40,11 @@ const FretesAvailable = () => {
           <h1>Fretes Disponíveis</h1>
           <Search>
             <img src={SearchImg} alt="" />
-            <input type="text" placeholder="Material" />
+            <input
+              type="text"
+              placeholder="Material"
+              onChange={(e) => handleChange(e.target.value)}
+            />
           </Search>
           <ContainerMain>
             <Filter />

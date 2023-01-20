@@ -1,12 +1,19 @@
 import BoxDashboard from "../../components/Dashboard";
 import Layout from "../../components/Layout";
 import { Wrapper } from "../../styles";
-import { BtnYellow, Filter, Title, ContainerPedidos } from "./styles";
+import {
+  BtnYellow,
+  Filter,
+  Title,
+  ContainerPedidos,
+  BtnYellowLinkRouter,
+} from "./styles";
 import useApi from "../../hooks/useApi";
 import { useQuery } from "react-query";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { isFreteiro } from "../../utils/isFreteiro";
+import LoadingPage from "../../components/Global/LoadingPage";
 
 function objToQueryString(obj: any) {
   const keyValuePairs = [];
@@ -24,7 +31,7 @@ const Dashboard = () => {
 
   const typeUser = user ? isFreteiro(user) : null;
   console.log(typeUser);
-//rever
+  //rever
   const queryStringEN = objToQueryString(
     typeUser
       ? {
@@ -124,17 +131,20 @@ const Dashboard = () => {
     enabled: !!user?.id,
   });
 
-  
-
+  if (!user) return <LoadingPage />;
   return (
     <Layout>
       <Wrapper style={{ minHeight: "80vh" }}>
         <Title>Dashboard</Title>
         <Filter>
-          <span>Fretes dos últimos 30 dias</span>
+          <span>Seus Fretes {/*dos últimos 30 dias*/}</span>
           <div>
             <button className="concluidos">Ver todos os concluídos</button>
-            <BtnYellow>Buscar novos fretes</BtnYellow>
+            {isFreteiro(user) && (
+              <BtnYellowLinkRouter to={"/fretesDisponiveis"}>
+                Buscar novos fretes
+              </BtnYellowLinkRouter>
+            )}
           </div>
         </Filter>
         <ContainerPedidos>
