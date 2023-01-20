@@ -18,6 +18,7 @@ import { schemaLogin } from "./schemas";
 import { ILogin } from "../../interfaces";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { useToggle } from "../../hooks/useToggle";
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -46,13 +47,16 @@ const Login = () => {
     const res = await signin(data.email, data.password);
 
     if (res === true) {
-      navigate("/fretesDisponiveis");
+      toast.success('Login realizado com sucesso!')
+      navigate('/fretes-disponiveis')
     } else if (res === false) {
-      navigate("/dashboard");
+      toast.success('Login realizado com sucesso!')
+      navigate('/dashboard')
     } else {
-      setError("Email ou senha incorretos!");
+      toast.error('Usuário e/ou senha incorreto(s)')
+      setError("Credenciais incorretas")
       setTimeout(() => {
-        setError("");
+        setError("")
       }, 5000);
     }
   };
