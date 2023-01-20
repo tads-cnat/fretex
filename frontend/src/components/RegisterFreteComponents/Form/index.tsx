@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { Turnos } from "./turnos";
 import InputMask from "react-input-mask";
 import { useAddress } from "../../../hooks/useAddress";
+import { toast } from "react-toastify";
 
 interface ITiposDeVeiculo {
   id: number;
@@ -58,7 +59,10 @@ const Index = () => {
     });
 
     registerPedido(formData)
-      .then(() => navigate("/dashboard"))
+      .then(() => {
+        toast.success('Pedido cadastrado com sucesso!')
+        navigate("/dashboard")
+      })
       .catch((error) => console.log(error));
   };
 
