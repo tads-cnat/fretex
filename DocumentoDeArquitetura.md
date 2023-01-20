@@ -124,15 +124,16 @@ Diagrama de sequencia: Realizar Proposta
 ### 7.3. Persistência
 | Classe | Tabela | Significado |
 | :--- | :--- | :--- |
-| Cliente |  |  |
-| Freteiro |  |  |
-| Proposta |  |  |
-| Pedido |  |  |
-| Endereço |  |  |
-| Status | |  |
-| Produto | |  |
-| TipoVeiculo | |  |
-| Veiculo | |  |
+Status|status|Status possíveis de pedido
+Produto|produtos|Produto que é transportado em um pedido
+Endereco|enderecos|Endereço de um freteiro, ou de entrega ou de coleta
+Pedido|pedidos|Pedido de frete feito por um cliente
+TipoVeiculo|tipos_veiculo|Tipo de veículo o qual um veículo pertence ou tipo de veículo que pode ser usado em uma entrega
+Veiculo|veiculos|Veiculo de um freteiro
+Freteiro|freteiros|Usuario que pode relizar fretes
+Usuario|usuarios|Usuario base do sistema
+Proposta|propostas|Proposta feita a um pedido de frete por um usuário
+Cliente|clientes|Usuario que pode criar pedidos de frete
 
 ### 7.4. Interface de Usuário
 
