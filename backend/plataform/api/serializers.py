@@ -11,6 +11,7 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
     AvaliacaoUsuario,
+    Log
 )
 from rest_framework import serializers
 from rest_framework.response import Response
@@ -289,4 +290,9 @@ class PropostaSerializer(serializers.ModelSerializer):
 class AvaliacaoUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvaliacaoUsuario
+        fields = "__all__"
+
+class TriggerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Log
         fields = "__all__"
