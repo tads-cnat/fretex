@@ -41,9 +41,5 @@
 
 ## 5- Protótipo(s) de interface do Cadastrar Pedido de Frete:
 
-![](./interfaces/cadastroPedido_1.jpeg)
-
-![](./interfaces/cadastroPedido_2.jpeg)
-
-![](./interfaces/cadastroPedido_3.jpeg)
+![](./interfaces/cadastroPedido.png)
 

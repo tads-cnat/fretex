@@ -4,9 +4,11 @@
 
 **Situações de fretes:**
 
-- Em espera: O Pedido de Frete já foi realizado pelo usuário do tipo Cliente, porém está na espera de propostas dos freteiros.
-- Em andamento: A negociação do Pedido de Frete foi finalizada.
-- Encerrado: O Pedido de Frete foi entregue.
+- Em negociação: O Pedido de Frete já foi realizado pelo usuário do tipo Cliente, porém está na espera de propostas dos freteiros.
+- Aguardando coleta: A negociação do Pedido de Frete foi finalizada e o pedido está pronto para ser coletado na data prevista.
+- Em trânsito: O Pedido de Frete se encontra em transporte sob os cuidados do freteiro.
+- Concluído: O Pedido de Frete foi entregue.
+- Cancelado: O Pedido de Frete foi cancelado.
 
 **Tipos de usuário:**
 
