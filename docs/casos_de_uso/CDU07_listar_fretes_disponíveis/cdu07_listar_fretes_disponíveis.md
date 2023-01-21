@@ -26,9 +26,9 @@
 ## 4-Fluxos de evento: 
 **4.1-  Fluxo básico:** 
 
-1. O Freteiro acessa a página dashboard no menu de navegação. 
+1. O Freteiro escolhe a opção "Fretes Disponíveis" no seu menu de navegação. 
 2. O sistema apresenta todos os fretes disponíveis. 
 
 **5- Protótipo(s) de inteface do Listar Fretes Disponíveis:**  
 
-![](./interfaces/listarFretesDisponíveis.jpeg)
+![](./interfaces/listarFretesDisponíveis.png)
