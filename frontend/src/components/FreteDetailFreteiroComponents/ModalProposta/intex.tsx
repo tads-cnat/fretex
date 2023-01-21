@@ -6,6 +6,7 @@ import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 import { ICliente, IFreteiro, IVeiculo } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
+import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingPage from "../../Global/LoadingPage";
 import ModalComponent from "../../Global/Modal";
 import CardVeiculo from "../../Profile/CardVeiculo";
@@ -13,6 +14,7 @@ import LabelInput from "../../Profile/LabelInput";
 import { LabelContainer } from "../../Profile/LabelInput/styles";
 import CardsContainer from "../CardsContainer";
 import { BtnYellow } from "../NegociationComponent/styles";
+import { schemaProposta } from "./schema";
 import { ConteinerVeiculos, FormContainer } from "./styles";
 
 interface IModalProposta {
@@ -61,7 +63,9 @@ const ModalProposta = ({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormDataProposta>();
+  } = useForm<IFormDataProposta>({
+    resolver: yupResolver(schemaProposta)
+  });
 
   const onSubmit: SubmitHandler<IFormDataProposta> = (data) => {
     const proposta = {
@@ -116,6 +120,8 @@ const ModalProposta = ({
               ))}
           </ConteinerVeiculos>
         </CardsContainer>
+        
+        {errors.veiculo && <p className="error">{errors.veiculo?.message}</p>}
         <div className="valorContainer">
           <span>Valor da proposta:</span>
           <LabelInput
@@ -126,7 +132,7 @@ const ModalProposta = ({
             <input
               {...register("valor")}
               type="number"
-              placeholder="Seu nome completo"
+              placeholder="Valor da proposta"
               style={{ color: "#000" }}
             />
           </LabelInput>
