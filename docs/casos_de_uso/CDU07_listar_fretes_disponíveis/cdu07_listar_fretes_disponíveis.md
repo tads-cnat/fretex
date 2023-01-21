@@ -31,4 +31,4 @@
 
 **5- Protótipo(s) de inteface do Listar Fretes Disponíveis:**  
 
-![](./interfaces/listarFretesDisponíveis.png)
+![](./interfaces/listarfretesDisponíveis.png)
