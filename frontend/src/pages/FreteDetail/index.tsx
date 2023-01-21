@@ -10,42 +10,43 @@ import Login from "../Login";
 import Layout from "../../components/Layout";
 import { useQuery } from "react-query";
 import LoadingPage from "../../components/Global/LoadingPage";
+import { isFreteiro } from "../../utils/isFreteiro";
 
 const FreteDetail = () => {
-  const [pedido, setPedido] = useState<IPedido>();
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { getPedido, getCliente } = useApi();
-  const { user, typeUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    setLoading(true);
-    getPedido(Number(id))
-      .then((res) => {
-        setPedido(res.data);
-        setLoading(false);
-      })
-      .catch((res) => console.log(res));
-  }, []);
-
-  const { data, isLoading } = useQuery(
-    "pedidoCreatedBy",
-    () => getCliente(pedido?.cliente),
+  const { data: pedido, isLoading: isLoadingPedido } = useQuery(
+    "pedido",
+    () => getPedido(Number(id)),
     {
-      enabled: !!pedido?.cliente,
+      enabled: !!id,
     },
   );
 
-  if (loading === false && typeUser === 2 && user?.id !== pedido?.cliente)
-    return <Login />;
+  const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
+    "pedidoCreatedBy",
+    () => getCliente(pedido.data.cliente),
+    {
+      enabled: !!pedido?.data.cliente,
+    },
+  );
 
+  if (!user) return <Login />;
+  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
+  if (isLoadingPedido || isLoadingClientePedido) return <LoadingPage />;
   return (
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {isLoading && <LoadingPage />}
-          {!isLoading && (
-            <FreteDetailComponent pedido={pedido} user={data?.data} />
+          {(isLoadingClientePedido || isLoadingPedido) && <LoadingPage />}
+          {!isLoadingClientePedido && (
+            <FreteDetailComponent
+              pedido={pedido.data}
+              clientePedido={userPedido.data}
+              actualUser={user}
+            />
           )}
         </Wrapper>
       </ContainerPrincipal>

@@ -9,7 +9,7 @@ import {
   BtnYellowLinkRouter,
 } from "./styles";
 import useApi from "../../hooks/useApi";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { isFreteiro } from "../../utils/isFreteiro";
@@ -26,12 +26,12 @@ function objToQueryString(obj: any) {
 }
 
 const Dashboard = () => {
+  window.scrollTo(0, 0);
   const { user } = useContext(AuthContext);
-  const { getSearchPedidos } = useApi();
+  const { getSearchPedidos, deletePedido } = useApi();
 
   const typeUser = user ? isFreteiro(user) : null;
-  console.log(typeUser);
-  //rever
+
   const queryStringEN = objToQueryString(
     typeUser
       ? {

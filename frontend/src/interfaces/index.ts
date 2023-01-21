@@ -31,6 +31,7 @@ export interface IUserUpdateFormData {
 }
 
 export interface IVeiculo {
+    id: number,
     url_foto: any,
     placa: string,
     cor: string,

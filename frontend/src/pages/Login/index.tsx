@@ -48,7 +48,7 @@ const Login = () => {
 
     if (res === true) {
       toast.success('Login realizado com sucesso!')
-      navigate('/fretes-disponiveis')
+      navigate('/fretesDisponiveis')
     } else if (res === false) {
       toast.success('Login realizado com sucesso!')
       navigate('/dashboard')

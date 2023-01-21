@@ -9,22 +9,20 @@ export const Card = styled.div`
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     transition: .3s;
-    &:hover{
-        transform: scale(1.03);
-    }
+
     @media (max-width: 768px) {
         & {
         grid-template-columns: 1fr;
         }
-        &:hover{
-        transform: none;
-    }
     }
     .ImagemVeiculo {
         max-height: 250px;
         @media (max-width: 768px) {
             order: -1;
             max-height: 300px;
+        }
+        @media (max-width: 400px) {
+            max-height: 150px;
         }
     }
 `

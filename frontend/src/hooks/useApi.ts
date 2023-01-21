@@ -148,6 +148,14 @@ export const useApi = () => ({
     getCEP: async (cep: string) => {
         const response = await cepApi.get(`/${cep}/json/`)
         return response.data
+    },
+    deletePedido: async (id: number) => {
+        const response = await api.delete(`/pedido/${id}/`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
     }
 })
 

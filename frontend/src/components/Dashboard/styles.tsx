@@ -21,6 +21,11 @@ export const BoxPedido = styled.div<IActive>`
     
 `;
 
+export const AlertText  = styled.div`
+    text-align: center;
+    margin: 15vh 0;
+`;
+
 export const Header = styled.div<Status>`
     display: flex;
     justify-content: space-between;
@@ -53,7 +58,7 @@ export const Botoes = styled.div`
     display: flex;
     column-gap: 16px;
 
-    a, button {
+    a, button, .btnRed {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -71,5 +76,10 @@ export const Botoes = styled.div`
         :hover {
             background-color: #F3F3F3;
         }
+    }
+
+    button.btnRed {
+        border: 1px solid #DC2E2E;
+        color: #DC2E2E;
     }
 `

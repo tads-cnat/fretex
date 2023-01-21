@@ -48,6 +48,11 @@ export const Content1 = styled.div`
             width: 100%;
         }
     }
+    h3 {
+        font-weight: 600;
+        font-size: var(--font-xl);
+        color: #353535;
+    }
     .userLink{
         display: flex;
         align-items: center;
@@ -58,7 +63,8 @@ export const Content1 = styled.div`
             border-radius: 50%;
         }
         span {
-            font-size: var(--font-medium);
+            color: #787878;
+            font-size: var(--font-small);
             font-weight: 500;
             transition: .3s;
         }
@@ -95,58 +101,9 @@ export const Negotiation = styled.div`
     gap: 2rem;
 `;
 
-export const HeaderContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    row-gap: 1.5em;
-    p {
-        border-radius: 15px;
-        background-color: #E7E7E7;
-        color: #7B7B7B;
-        padding: 0px 15px 0px 15px;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 24px;
-    }
-    div {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        column-gap: 2rem;
-        row-gap: 0.75em;
-    }
-`;
 
-export const PropostaContainer2 = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    img {
-        height: 50px;
-        width: 50px;
-    }
-    p {
-        line-height: 18px;
-    }
-`;
 
-export const AceitaContra = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
 
-`;
-
-export const ValorPerfil = styled.div`
-    display: flex;
-    gap: 10px;
-    margin: 0 100px 0 0;
-`;
 
 export const BtnGreen = styled(BtnPattern)`
     background-color: #46843C;

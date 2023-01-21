@@ -153,6 +153,7 @@ class PropostaViewSet(viewsets.ModelViewSet):
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
+    filterset_fields = ["usuario", "pedido"]
 
 
 class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
