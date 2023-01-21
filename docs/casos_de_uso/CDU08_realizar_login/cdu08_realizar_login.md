@@ -33,6 +33,12 @@
 4. O ator finaliza o Login.
 5. O sistema inicia a sessão no dashboard do ator.
 
+**4.2-  Fluxo Exceção (3):** 
+
+a.	Se o ator não preencher todos os dados,  o sistema retorna uma mensagem de erro, informando os campos que devem ser preenchidos.
+b. Se não existir uma conta com os dados que o ator informou, o sistema retorna uma mensagem de erro.
+
+
 
 ## 5- Protótipo(s) de interface do Realizar Login:
 
