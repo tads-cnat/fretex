@@ -40,6 +40,15 @@ export const useApi = () => ({
         })
         return response.data
     },
+    registerProposta: async (formData: FormData) => {
+        const response = await api.post('/proposta/', formData, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response.data
+    },
     registerVeiculo: async (veiculo: IVeiculo) => {
         await api.post('/veiculo/', veiculo, {
             headers: {

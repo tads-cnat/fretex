@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 import caixas from "../../../assets/images/caixas.png";
-
+import perfil from "../../../assets/images/perfil.svg";
 import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
 import geoalt from "../../../assets/images/geo-alt.svg";
 import info from "../../../assets/images/info-circle.svg";
@@ -63,10 +63,15 @@ const FreteDetailComponent = ({
           )}
           <div>
             <Link to={`/perfil/${pedido.cliente}`} className="userLink">
-              <img
-                src={clientePedido.url_foto}
-                alt={clientePedido.first_name}
-              />
+              {clientePedido.url_foto ? (
+                <img
+                  src={clientePedido.url_foto}
+                  alt={clientePedido.first_name}
+                />
+              ) : (
+                <img src={perfil} alt={clientePedido.first_name} />
+              )}
+
               <span>
                 {pedido.cliente_first_name} {pedido.cliente_last_name}
               </span>
@@ -141,7 +146,7 @@ const FreteDetailComponent = ({
       </Content>
 
       <Negotiation>
-        <NegociationComponent actualUser={actualUser} />
+        <NegociationComponent actualUser={actualUser} pedidoId={pedido.id} />
       </Negotiation>
     </Container>
   );

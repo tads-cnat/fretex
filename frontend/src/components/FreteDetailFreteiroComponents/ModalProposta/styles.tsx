@@ -1,7 +1,28 @@
 import styled from "styled-components";
 
+export const FormContainer = styled.form`
+    margin-bottom: 20px;
+
+    .valorContainer {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        span {
+            font-weight: 600;
+            font-size: var(--font-large);
+            margin-bottom: 10px;
+        }
+    }
+
+    .submitContainer {
+        text-align: center;
+    }
+`;
+
 export const ConteinerVeiculos = styled.div`
     height: 40vh;
+    padding: 0 10px;
     overflow-y: scroll;
 
     .labelRadio {
@@ -10,3 +31,4 @@ export const ConteinerVeiculos = styled.div`
         gap: 20px;
     }
 `;
+

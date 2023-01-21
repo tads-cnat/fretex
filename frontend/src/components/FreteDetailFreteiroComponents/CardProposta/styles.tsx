@@ -43,13 +43,13 @@ export const ContentHeader = styled.header`
     border: none;
     cursor: pointer;
 
-    svg {
+    img {
       width: 100%;
       height: 100%;
       opacity: 0.8;
       transition: 0.3s;
     }
-    svg:hover {
+    img:hover {
       opacity: 1;
     }
   }

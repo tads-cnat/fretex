@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, ContentHeader, ContentMain } from "./styles";
-import { ReactComponent as More } from "../../../assets/images/maisSVG.svg";
+import  More from "../../../assets/images/maisSVG.svg";
 import ContentProposta from "../ContentProposta";
 
 interface ICardProposta {
@@ -34,7 +34,7 @@ const CardProposta = () => {
         <div>
           <span>A responder</span>
           <button type="button">
-            <More />
+            <img src={More} alt="ver mais" />
           </button>
         </div>
       </ContentHeader>

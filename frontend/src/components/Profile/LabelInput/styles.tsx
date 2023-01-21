@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { InputLabelStyles } from ".";
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.label<InputLabelStyles>`
   display: flex;
   align-items: center;
-  background: #1b1b1b;
+  background: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "#1b1b1b"};
   border-radius: 10px;
   width: 100%;
   border: 2px solid #1b1b1b;
@@ -37,6 +39,8 @@ export const InputLabel = styled.label`
     width: 100%;
     height: 100%;
     padding: 10px;
+    
+    color: ${(props) => (props.color ? props.color : "#000")};
     background-color: transparent !important;
     outline: none;
     border: none;

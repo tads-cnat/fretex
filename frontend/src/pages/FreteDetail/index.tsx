@@ -35,12 +35,12 @@ const FreteDetail = () => {
 
   if (!user) return <Login />;
   if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
+  if (isLoadingClientePedido || isLoadingPedido) return <LoadingPage />;
   return (
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {(isLoadingClientePedido || isLoadingPedido) && <LoadingPage />}
-          {!isLoadingClientePedido && (
+          {pedido && !isLoadingClientePedido && (
             <FreteDetailComponent
               pedido={pedido.data}
               clientePedido={userPedido.data}

@@ -20,7 +20,6 @@ const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }) => {
         getVeiculoForId(veiculos.tipo_veiculo)
             .then((res) => {
                 setTipoVeiculo(res.data[0])
-                console.log(res.data)
             }
             )
             .catch((error) => console.log(error))

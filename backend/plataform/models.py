@@ -125,7 +125,7 @@ class Proposta(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='proposta_set')
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
-    data_criacao = models.DateField(auto_now_add=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
     eh_aceita = models.BooleanField(default=False)
     contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     ehNegada = models.BooleanField(default=False)

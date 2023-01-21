@@ -7,10 +7,11 @@ import { useToggle } from "../../../hooks/useToggle";
 interface ICards {
   children: ReactNode;
   title: string;
+  toggle: () => void;
+  value: boolean;
 }
 
-const CardsContainer = ({ children, title }: ICards) => {
-  const { toggle, value } = useToggle(true);
+const CardsContainer = ({ children, title, toggle, value }: ICards) => {
   return (
     <Container>
       <ContentHeader active={value}>

@@ -16,19 +16,33 @@ import { ICliente, IFreteiro } from "../../../interfaces";
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
+  pedidoId: number;
 }
 
-const NegociationComponent = ({actualUser}:INegociation) => {
-  const { toggle, value } = useToggle();
+const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
+  const { toggle: toggleModalProposta, value: valueModalProposta } =
+    useToggle();
+  const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
+    useToggle(true);
+  const { toggle: togglePropostasEsperando, value: valuePropostasEsperando } =
+    useToggle(true);
+  const { toggle: togglePropostasCanceladas, value: valuePropostasCanceladas } =
+    useToggle(true);
 
   const handleClick = (e: any) => {
     e.preventDefault();
-    toggle();
+    toggleModalProposta();
   };
 
   return (
     <>
-      <ModalProposta toggle={toggle} value={value} actualUser={actualUser} />
+      <ModalProposta
+        toggle={toggleModalProposta}
+        value={valueModalProposta}
+        actualUser={actualUser}
+        actualUserId={actualUser.id}
+        pedidoId={pedidoId}
+      />
       <HeaderContainer>
         <div>
           <h2>Negociação</h2>
@@ -40,14 +54,26 @@ const NegociationComponent = ({actualUser}:INegociation) => {
       </HeaderContainer>
       <PropostaContainer2>
         <div>
-          <CardsContainer title="Propostas ativas">
+          <CardsContainer
+            title="Propostas ativas"
+            toggle={togglePropostasAtivas}
+            value={valuePropostasAtivas}
+          >
             <CardProposta />
           </CardsContainer>
         </div>
-        <CardsContainer title="Propostas esperando resposta">
+        <CardsContainer
+          title="Propostas esperando resposta"
+          toggle={togglePropostasEsperando}
+          value={valuePropostasEsperando}
+        >
           <CardProposta />
         </CardsContainer>
-        <CardsContainer title="Propostas recusadas">
+        <CardsContainer
+          title="Propostas recusadas"
+          toggle={togglePropostasCanceladas}
+          value={valuePropostasCanceladas}
+        >
           <CardProposta />
         </CardsContainer>
 
