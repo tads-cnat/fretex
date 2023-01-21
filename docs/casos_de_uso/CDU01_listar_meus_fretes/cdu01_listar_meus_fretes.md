@@ -25,8 +25,8 @@
 ## 4- Fluxos de evento: 
 **4.1- Fluxo básico:** 
 
-1. O ator seleciona a opção Meus Fretes no seu Dashboard. 
-2. O sistema verifica os pedidos existentes e retorna uma lista com todos  os  pedidos  cadastrados,  seja  em  situação  de  “em  negociação”,  ”aguardando coleta”, “em transporte” ou “finalizado”. 
+1. O ator seleciona a opção Dashboard. 
+2. O sistema verifica os pedidos existentes e retorna uma lista com todos  os  pedidos  cadastrados,  seja  em  situação  de  “em  negociação”,  ”aguardando coleta”, “em trânsito”, “concluído” ou "cancelado". 
 
 **4.2- Fluxo de Exceção – Nenhum pedido cadastrado:** 
 
@@ -34,5 +34,5 @@
 
 ## 5- Protótipo(s) de interface do Listar Meus Fretes:
 
-![](./interfaces/listarMeusFretes.jpeg)
+![](./interfaces/listarMeusFretes.png)
 
