@@ -35,7 +35,6 @@ const FreteDetail = () => {
 
   if (!user) return <Login />;
   if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
-  if (isLoadingPedido || isLoadingClientePedido) return <LoadingPage />;
   return (
     <Layout>
       <ContainerPrincipal>

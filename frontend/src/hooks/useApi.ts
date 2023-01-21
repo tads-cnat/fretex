@@ -71,6 +71,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getVeiculoForId: async (id: number) => {
+        const response = await api.get(`/tipodeveiculo/?id=${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     getPedidos: async () => {
         const response = await api.get('/pedido/', {
             headers: {

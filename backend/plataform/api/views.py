@@ -138,6 +138,7 @@ class TipoVeiculoViewSet(viewsets.ModelViewSet):
     serializer_class = TipoVeiculoSerializer
     queryset = TipoVeiculo.objects.all()
     renderer_classes = [CustomRenderer]
+    filterset_fields = ["id"]
 
 
 class VeiculoViewSet(viewsets.ModelViewSet):

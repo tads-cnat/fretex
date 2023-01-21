@@ -17,7 +17,6 @@ interface IModalProposta {
 }
 
 const ModalProposta = ({ toggle, value, actualUser }: IModalProposta) => {
-  const { user } = useContext(AuthContext);
   const { getVeiculosForFreteiro } = useApi();
 
   const {
