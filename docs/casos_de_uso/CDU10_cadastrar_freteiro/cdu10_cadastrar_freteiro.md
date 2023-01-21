@@ -20,7 +20,7 @@
  - Freteiro. 
 
 ## 3-Fluxos de evento: 
-** 3.1-  Fluxo básico:** 
+**3.1-  Fluxo básico:** 
 
 1. O ator seleciona a opção “ Cadastrar-se”.
 2. O ator escolhe o tipo de cadastro. 
