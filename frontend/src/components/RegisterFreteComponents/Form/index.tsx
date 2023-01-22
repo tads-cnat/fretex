@@ -37,7 +37,6 @@ function isErrorDateRange(
   const today = new Date();
 
   if (startDateFormated < today || startDateFormated === today) {
-    console.log("erro1");
     setError("Data de coleta não pode ser menor ou igual à data de hoje!");
     return true;
   }
@@ -46,9 +45,7 @@ function isErrorDateRange(
     startDateFormated > endDateFormated ||
     startDateFormated.getDate() === endDateFormated.getDate()
   ) {
-    setError(
-      "Data de coleta não pode ser menor ou igual à data de entrega!",
-    );
+    setError("Data de coleta não pode ser menor ou igual à data de entrega!");
     return true;
   }
   return false;
@@ -76,8 +73,10 @@ const Index = () => {
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
     const imagem_url = produto.imagem_url[0] && produto.imagem_url[0];
 
-    if (isErrorDateRange(pedido.data_coleta, pedido.data_entrega, setErrorDate)) {
-      setFocus("data_coleta")
+    if (
+      isErrorDateRange(pedido.data_coleta, pedido.data_entrega, setErrorDate)
+    ) {
+      setFocus("data_coleta");
       return;
     }
 
@@ -103,13 +102,12 @@ const Index = () => {
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
       else if (value) formData.append(`${key}`, value);
     });
-    //  console.log(...formData);
-    /*  registerPedido(formData)
+    registerPedido(formData)
       .then(() => {
-        toast.success('Pedido cadastrado com sucesso!')
-      //  navigate("/dashboard")
+        toast.success("Pedido cadastrado com sucesso!");
+        navigate("/dashboard");
       })
-      .catch((error) => console.log(error));*/
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
