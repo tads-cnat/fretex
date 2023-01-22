@@ -75,11 +75,20 @@ Fretex é a nova plataforma de fretes que se propõe a servir de facilitador par
 | :--- | :--- | :--- | :--- |
 | CDU01 | O cliente pode listar um ou mais pedidos de frete. | Cliente | Sim |
 | CDU02 | O cliente pode cadastrar um pedido de frete. | Cliente | Sim |
-| CDU03 | O cliente pode aceitar a proposta feita pelo freteiro. | Cliente | Sim |
-| CDU04 | Caso o cliente não concorde com a proposta recente do frete, ele poderá realizar uma nova proposta ao freteiro. | Cliente | Sim |
-| CDU05 | O freteiro pode aceitar a proposta feita pelo cliente. | Freteiro | Sim |
+| CDU03 | O cliente pode aceitar a proposta feita pelo freteiro. | Cliente | Não |
+| CDU04 | Caso o cliente não concorde com a proposta recente do frete, ele poderá realizar uma nova proposta ao freteiro. | Cliente | Não |
+| CDU05 | O freteiro pode aceitar a proposta feita pelo cliente. | Freteiro | Não |
 | CDU06 | Permite que o freteiro submeta uma proposta para um pedido de frete. | Freteiro | Sim |
 | CDU07 | Permite listar todos os fretes disponíveis para o freteiro realizar propostas | Freteiro | Sim |
+| CDU08 | O ator pode utilizar os seus email e senha para entrar na plataforma como cliente ou freteiro. | Freteiro e Cliente | Sim |
+| CDU09 | O cliente pode realizar o seu próprio cadastro na plataforma. | Cliente | Sim |
+| CDU10 | Permite que freteiros se cadastrem na plataforma. | Freteiro | Sim |
+| CDU11 | O cliente pode atualizar seu perfil. | Cliente | Sim |
+| CDU12 | Permite que o freteiro atualize seus dados de cadastro. | Freteiro | Sim |
+| CDU13 | Permite que o freteiro cadastre um veículo. | Freteiro | Sim |
+| CDU14 | Permite que o freteiro liste os veículos cadastrados. | Freteiro | Sim |
+| CDU15 | O cliente pode deletar um pedido de frete nos status "em negociação" e "aguardando coleta". | Cliente | Sim |
+
 
 ## 6.	Diagramas Conceituais
 ### 6.1.	Visão Lógica
@@ -95,25 +104,13 @@ Fretex é a nova plataforma de fretes que se propõe a servir de facilitador par
 | Endereço | Mantem as informações acerca dos endereços vinculados a um pedido (coleta e entrega) |
 | Status | Reflete o status de um pedido de entrega |
 | Produto | Mantem as informações acerca da mercadoria que será transportada em um pedido de frete |
-| TipoVeiculo | Reflete a modalidade do veiculo vinculado a um freteiro |
-| Veiculo | Mantem as informações acerca dos veiculos vinculados a um cadastro de freteiro |
+| TipoVeiculo | Reflete a modalidade do veículo vinculado a um freteiro |
+| Veículo | Mantem as informações acerca dos veículos vinculados a um cadastro de freteiro |
 
-#### Modelo comportamental
-
-Diagrama de sequencia: Cadastro de pedido de frete
-![Diagrama de sequencia: Cadastro de pedido de frete](https://github.com/tads-cnat/fretex/blob/main/docs/diagramas/DiagramasDeSequencia/CadastroPedido.png?raw=true "Diagrama de sequencia: Cadastro de pedido de frete")
-
-Diagrama de sequencia: Realizar Proposta
-![Diagrama de sequencia: Realizar Proposta](https://github.com/tads-cnat/fretex/blob/main/docs/diagramas/DiagramasDeSequencia/RealizarProposta(cliente).jpg?raw=true "Diagrama de sequencia: Realizar Proposta")
 
 ## 7. Detalhamento da Implementação e Ambiente Físico
 
-### 7.1.	Visão de Implementação
-| Componente | Responsabilidades |
-| :--- | :--- |
-|  |  |
-
-### 7.2.	Visão de Distribuição
+### 7.1.	Visão de Distribuição
 | Nó | Descrição |
 | :--- | :--- |
 | SGBD - Sqlite | Sistema de banco de dados da aplicação |
@@ -121,7 +118,7 @@ Diagrama de sequencia: Realizar Proposta
 | Servidor da aplicação - Backend | Conjunto de classes, regras de negocio e endpoints |
 | Computador do usuario | Maquina que o usuario utilizará para fazer acesso a aplicação |
 
-### 7.3. Persistência
+### 7.2. Persistência
 | Classe | Tabela | Significado |
 | :--- | :--- | :--- |
 Status|status|Status possíveis de pedido
@@ -129,7 +126,7 @@ Produto|produtos|Produto que é transportado em um pedido
 Endereco|enderecos|Endereço de um freteiro, ou de entrega ou de coleta
 Pedido|pedidos|Pedido de frete feito por um cliente
 TipoVeiculo|tipos_veiculo|Tipo de veículo o qual um veículo pertence ou tipo de veículo que pode ser usado em uma entrega
-Veiculo|veiculos|Veiculo de um freteiro
+Veiculo|veiculos|Veículo de um freteiro
 Freteiro|freteiros|Usuario que pode relizar fretes
 Usuario|usuarios|Usuario base do sistema
 Proposta|propostas|Proposta feita a um pedido de frete por um usuário
