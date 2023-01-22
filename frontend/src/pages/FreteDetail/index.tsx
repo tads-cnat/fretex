@@ -19,14 +19,6 @@ const FreteDetail = () => {
     useApi();
   const { user } = useContext(AuthContext);
 
-  const queryStringPropostas = objToQueryString(
-    user &&
-      id && {
-        usuario: `${user.id}`,
-        pedido: id,
-      },
-  );
-
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
     "pedido",
     () => getPedido(Number(id)),
@@ -34,7 +26,7 @@ const FreteDetail = () => {
       enabled: !!id,
     },
   );
-
+ // console.log(pedido);
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     "pedidoCreatedBy",
     () => getCliente(pedido.data.cliente),
@@ -42,7 +34,18 @@ const FreteDetail = () => {
       enabled: !!pedido?.data.cliente,
     },
   );
-
+ // console.log(userPedido);
+ /* const queryStringPropostas = objToQueryString(
+    (user && (user.id === pedido.data.cliente)) ? {
+        usuario: `${user.id}`,
+        pedido: pedido.id,
+      }
+      : {
+        usuario: `${user?.id}`,
+        pedido: id,
+      },
+  );
+  console.log(queryStringPropostas);
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     "propostas",
     () => getPropostasForPedido(queryStringPropostas),
@@ -50,14 +53,13 @@ const FreteDetail = () => {
       enabled: !!user && !!isFreteiro(user) && !!queryStringPropostas,
     },
   );
-
-  
-
+  console.log(propostas);
+*/
   if (!user) return <Login />;
   if (
     isLoadingClientePedido ||
     isLoadingPedido ||
-    isLoadingPropostas ||
+   // isLoadingPropostas ||
     !pedido
   )
     return <LoadingPage />;
@@ -66,12 +68,12 @@ const FreteDetail = () => {
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {pedido && propostas && !isLoadingClientePedido && (
+          {pedido /*&& propostas*/ && !isLoadingClientePedido && (
             <FreteDetailComponent
               pedido={pedido.data}
               clientePedido={userPedido.data}
               actualUser={user}
-              propostas={propostas.data}
+           //   propostas={propostas.data}
             />
           )}
         </Wrapper>

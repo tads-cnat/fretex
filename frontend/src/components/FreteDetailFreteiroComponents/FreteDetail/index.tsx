@@ -4,9 +4,7 @@ import {
   Negotiation,
   Content1,
   Content2,
-  BtnGreen,
   Content2Info,
-  BtnYellow,
 } from "./styles";
 
 import caixas from "../../../assets/images/caixas.png";
@@ -23,14 +21,14 @@ interface IFreteDetail {
   pedido: IPedido;
   clientePedido: ICliente;
   actualUser: IFreteiro | ICliente;
-  propostas: IProposta[];
+ // propostas: IProposta[];
 }
 
 const FreteDetailComponent = ({
   pedido,
   clientePedido,
   actualUser,
-  propostas,
+ // propostas,
 }: IFreteDetail) => {
   const navigate = useNavigate();
 
@@ -148,7 +146,11 @@ const FreteDetailComponent = ({
       </Content>
 
       <Negotiation>
-        <NegociationComponent actualUser={actualUser} pedidoId={pedido.id} propostas={propostas} />
+        <NegociationComponent
+          actualUser={actualUser}
+          pedidoId={pedido.id}
+        //  propostas={propostas}
+        />
       </Negotiation>
     </Container>
   );

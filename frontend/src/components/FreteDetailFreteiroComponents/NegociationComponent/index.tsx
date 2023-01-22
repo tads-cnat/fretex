@@ -1,13 +1,4 @@
-import React from "react";
-import {
-  AceitaContra,
-  BtnGreen,
-  BtnYellow,
-  HeaderContainer,
-  PropostaContainer2,
-  ValorPerfil,
-} from "./styles";
-import userPhoto from "../../../assets/images/user-circle.svg";
+import { BtnYellow, HeaderContainer, PropostaContainer2 } from "./styles";
 import CardsContainer from "../CardsContainer";
 import CardProposta from "../CardProposta";
 import ModalProposta from "../ModalProposta/intex";
@@ -17,7 +8,7 @@ import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
 interface INegociation {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
-  propostas: IProposta[];
+  //  propostas: IProposta[];
 }
 
 const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
@@ -77,19 +68,6 @@ const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
         >
           <CardProposta />
         </CardsContainer>
-
-        {/**
-        <ValorPerfil>
-          <img src={userPhoto} alt="avatar-user" />
-          <div>
-            <h3>R$ 270,00</h3>
-            <p>feita em: dd/mm/yyyy</p>
-          </div>
-        </ValorPerfil> 
-        <AceitaContra>
-          <BtnGreen to="/aceitar-proposta-freteiro">Aceitar</BtnGreen>
-          <h4>Contraproposta</h4>
-        </AceitaContra>*/}
       </PropostaContainer2>
     </>
   );

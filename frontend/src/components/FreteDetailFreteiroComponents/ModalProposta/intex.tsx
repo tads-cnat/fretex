@@ -4,20 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
-import { ICliente, IFormDataProposta, IFreteiro, IVeiculo } from "../../../interfaces";
+import {
+  ICliente,
+  IFormDataProposta,
+  IFreteiro,
+  IVeiculo,
+} from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingPage from "../../Global/LoadingPage";
 import ModalComponent from "../../Global/Modal";
 import CardVeiculo from "../../Profile/CardVeiculo";
 import LabelInput from "../../Profile/LabelInput";
-import { LabelContainer } from "../../Profile/LabelInput/styles";
 import CardsContainer from "../CardsContainer";
 import { BtnYellow as BtnSubmit } from "../NegociationComponent/styles";
 import { schemaProposta } from "./schema";
 import { ContainerVeiculos, FormContainer } from "./styles";
 import { BtnYellowLinkRouter } from "../../../pages/Dashboard/styles";
-import { useEffect } from "react";
 
 interface IModalProposta {
   toggle: () => void;
@@ -39,11 +42,7 @@ const ModalProposta = ({
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
   const navigate = useNavigate();
-  const {
-    data: veiculos,
-    isLoading: isLoadingVeiculos,
-    isError,
-  } = useQuery(
+  const { data: veiculos, isLoading: isLoadingVeiculos } = useQuery(
     "veiculosDoFreteiro",
     () => getVeiculosForFreteiro(actualUser.id),
     {
@@ -96,7 +95,7 @@ const ModalProposta = ({
         >
           <ContainerVeiculos>
             {isLoadingVeiculos && <LoadingPage />}
-            {!isLoadingVeiculos && veiculos.data.length === 0 && (
+            {!isLoadingVeiculos && veiculos && veiculos.data.length === 0 && (
               <div className="cadastrarVeiculo">
                 <p>Você não possui veículo</p>
                 <BtnYellowLinkRouter to={`/perfil/${actualUserId}/veiculos`}>

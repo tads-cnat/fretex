@@ -36,7 +36,7 @@ const BoxDashboard = ({
   isLoading,
   isError,
 }: IBoxDashBoard) => {
-  const { toggle, value, setAsTrue } = useToggle(initialToggleValue);
+  const { toggle, value } = useToggle(initialToggleValue);
   const { user } = useContext(AuthContext);
   const { deletePedido } = useApi();
   const client = useQueryClient();
@@ -132,7 +132,7 @@ const BoxDashboard = ({
               </ContainerCalendar>
             </ContainerInfos>
             <Botoes>
-              <Link to={`/fretes/${pedido.id}`}>Visualizar</Link>
+              <Link to={`/fretes/${pedido.id}/`}>Visualizar</Link>
               {user?.id === pedido.cliente && pedido.status === "TR" && (
                 <button>Alterar status</button>
               )}
