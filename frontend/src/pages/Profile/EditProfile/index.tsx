@@ -40,6 +40,7 @@ import { isFreteiro } from "../../../utils/isFreteiro";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import useApi from "../../../hooks/useApi";
 import { AuthContext } from "../../../context/Auth/AuthContext";
+import { toast } from "react-toastify";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const EditProfile = () => {
   } = useAddress<IUserUpdateFormData>(
     isFreteiro(user) ? schemaFreteiro : schemaCliente,
   );
-  
+
   const onSubmit: SubmitHandler<IUserUpdateFormData> = (data) => {
     const formData = new FormData();
     const userUpdate = {
@@ -78,6 +79,7 @@ const EditProfile = () => {
     if (!isFreteiro(user)) {
       updateCliente(user.id, formData)
         .then((res) => {
+          toast.info('Perfil atualizado com sucesso!')
           setUser(res.data);
         })
         .catch((res) => console.log(res.response.data));
@@ -89,6 +91,7 @@ const EditProfile = () => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
     updateFreteiro(user.id, formData).then((res) => {
+      toast.info('Perfil atualizado com sucesso!')
       setUser(res.data);
     });
   };

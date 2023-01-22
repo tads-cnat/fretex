@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import useApi from "../../hooks/useApi";
 import { ICliente, IFreteiro } from "../../interfaces";
 import { AuthContext } from "./AuthContext";
@@ -7,6 +8,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
   const [typeUser, setTypeUser] = useState<number>(0);
   const [isLoadingUser, setIsLoadingUser] = useState(true);
+  const client = useQueryClient();
   const api = useApi();
 
   const signin = async (email: string, password: string) => {
@@ -53,6 +55,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   }, []);
 
   const signout = () => {
+    client.clear();
     api.logout();
     setToken("");
     setUser(null);

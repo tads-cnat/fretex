@@ -13,6 +13,7 @@ import NavUser from "./NavUser";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import perfil from "../../assets/images/perfil.svg";
 import { useToggle } from "../../hooks/useToggle";
+import { toast } from "react-toastify";
 
 interface INavbar {
   id?: string;
@@ -26,6 +27,7 @@ const Navbar = ({ id }: INavbar) => {
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    toast.info('Usuário deslogado!')
     signout();
     navigate("/");
   };

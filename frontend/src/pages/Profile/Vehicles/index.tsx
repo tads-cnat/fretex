@@ -20,6 +20,7 @@ import { schemaVeiculo } from "./schema";
 import CardVeiculo from "../../../components/Profile/CardVeiculo";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../../../components/Global/LoadingPage";
+import { toast } from "react-toastify";
 
 interface ITiposDeVeiculo {
   id: number;
@@ -70,6 +71,7 @@ const Vehicles = () => {
       setAsFalse();
       getVeiculosForFreteiro(Number(id))
         .then((res) => {
+          toast.success('Veículo cadastrado com sucesso!')
           setVeiculos(res.data);
         })
         .catch((res) => console.log(res));

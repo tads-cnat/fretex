@@ -3,11 +3,16 @@ import { InputLabel, LabelContainer } from "./styles";
 import { ReactNode } from "react";
 
 interface InterfaceInput {
-  Icon: React.ElementType;
+  Icon?: React.ElementType;
   isError: FieldError | undefined;
   errorMessage: string | undefined;
   style?: object;
+  backgroundColorInput?: string;
   children?: ReactNode;
+}
+
+export interface InputLabelStyles {
+  backgroundColor?: string;
 }
 
 const LabelInput = ({
@@ -16,11 +21,12 @@ const LabelInput = ({
   isError,
   errorMessage,
   children,
+  backgroundColorInput,
 }: InterfaceInput) => {
   return (
     <LabelContainer style={style}>
-      <InputLabel>
-        <Icon />
+      <InputLabel backgroundColor={backgroundColorInput}>
+        {Icon && <Icon />}
         {children}
       </InputLabel>
       {isError && <p className="error">{errorMessage}</p>}

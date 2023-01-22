@@ -31,6 +31,7 @@ export interface IUserUpdateFormData {
 }
 
 export interface IVeiculo {
+    id: number,
     url_foto: any,
     placa: string,
     cor: string,
@@ -103,10 +104,31 @@ export interface IPedido {
     criado_em: string,
 }
 
+export interface IProposta {
+    id: number;
+    valor: number;
+    eh_aceita: boolean;
+    ehNegada: boolean;
+    usuario: number;
+    pedido: number;
+    veiculo: number;
+    contraproposta: null | number;
+}
+
+export interface IFormDataProposta {
+    valor: number;
+    eh_aceita: boolean;
+    ehNegada: boolean;
+    usuario: number;
+    pedido: number;
+    veiculo: number;
+    contraproposta: null | number;
+}
+
 export interface IPedidoFormData {
     produto: {
         nome: string,
-        imagem_url: any,
+        imagem_url: FileList,
     },
     origem: IEndereco,
     destino: IEndereco,

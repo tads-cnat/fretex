@@ -16,9 +16,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
-import { ICliente, IClienteFormData } from "../../../interfaces";
+import {  IClienteFormData } from "../../../interfaces";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
+import { toast } from "react-toastify";
 
 const RegisterClientForm = () => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -60,6 +61,7 @@ const RegisterClientForm = () => {
     };
     registerCliente(cliente)
       .then(() => {
+        toast.success('Cliente cadastrado com sucesso!')
         navigate("/login");
       })
       .catch((err) => {

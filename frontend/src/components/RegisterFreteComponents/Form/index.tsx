@@ -13,17 +13,87 @@ import {
 import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
 import { SubmitHandler } from "react-hook-form";
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas";
-import { IPedido, IPedidoFormData } from "../../../interfaces";
+import { IPedidoFormData } from "../../../interfaces";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
 import { Turnos } from "./turnos";
 import InputMask from "react-input-mask";
 import { useAddress } from "../../../hooks/useAddress";
+import { toast } from "react-toastify";
 
 interface ITiposDeVeiculo {
   id: number;
   descricao: string;
+}
+
+function isErrorDateRange(
+  startDate: string,
+  startShift: string,
+  endDate: string,
+  endShift: string,
+  setError: (text: string) => void,
+  setErrorTurno: (text: string) => void,
+  setFocus: (text: any) => any,
+) {
+  const startDateArray = startDate.split("-").map((num) => Number(num));
+  const endDateArray = endDate.split("-").map((num) => Number(num));
+  const today = new Date();
+  const startDateFormated = new Date(
+    startDateArray[0],
+    startDateArray[1] - 1,
+    startDateArray[2],
+  );
+  const endDateFormated = new Date(
+    endDateArray[0],
+    endDateArray[1] - 1,
+    endDateArray[2],
+  );
+  const todayFormated = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+
+  if (startDateFormated < todayFormated) {
+    setError("Data de coleta não pode ser menor que a data de hoje!");
+    return true;
+  }
+
+  if (startDateFormated > endDateFormated) {
+    setError("Data de coleta não pode ser maior que a data de entrega!");
+    return true;
+  }
+
+  if (
+    startDateFormated.getDate() === endDateFormated.getDate() &&
+    startDateFormated.getMonth() === endDateFormated.getMonth() &&
+    startDateFormated.getFullYear() === endDateFormated.getFullYear()
+  ) {
+    if (startShift === "TA") {
+      if (endShift === "MA") {
+        setFocus("turno_coleta");
+        setErrorTurno("Turnos inválidos!");
+        return true;
+      }
+    } else if (startShift === "NO") {
+      if (endShift === "MA" || endShift === "TA") {
+        setFocus("turno_coleta");
+        setErrorTurno("Turnos inválidos!");
+        return true;
+      }
+    }
+  }
+
+  if (today.getHours() > 12) {
+    if (startShift === "MA") {
+      setFocus("turno_coleta");
+      setErrorTurno("Turnos inválidos! Hoje já está à tarde");
+      return true;
+    }
+  }
+
+  return false;
 }
 
 const Index = () => {
@@ -34,13 +104,42 @@ const Index = () => {
     register,
     completeAddress,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useAddress<IPedidoFormData>(schemaPedido);
+  const [errorImg, setErrorImg] = useState("");
+  const [errorDate, setErrorDate] = useState("");
+  const [errorTurno, setErrorTurno] = useState("");
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
+    setErrorImg("");
+    setErrorDate("");
+    setErrorTurno("");
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
+    const imagem_url = produto.imagem_url[0] && produto.imagem_url[0];
+
+    if (
+      isErrorDateRange(
+        pedido.data_coleta,
+        pedido.turno_coleta,
+        pedido.data_entrega,
+        pedido.turno_entrega,
+        setErrorDate,
+        setErrorTurno,
+        setFocus,
+      )
+    ) {
+      return;
+    }
+
+    if (!imagem_url) {
+      setErrorImg("Campo Obrigatório");
+      setFocus("produto.imagem_url");
+      return;
+    }
+
     Object.entries(origem).forEach(([key, value]) => {
       if (value) formData.append(`origem.${key}`, value);
     });
@@ -48,7 +147,8 @@ const Index = () => {
       if (value) formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (value && value[0].name) formData.append(`produto.${key}`, value[0]);
+      if (imagem_url && key === "imagem_url")
+        formData.append(`produto.${key}`, imagem_url);
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
@@ -56,16 +156,18 @@ const Index = () => {
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
       else if (value) formData.append(`${key}`, value);
     });
-
     registerPedido(formData)
-      .then(() => navigate("/dashboard"))
+      .then(() => {
+        toast.success("Pedido cadastrado com sucesso!");
+        navigate("/dashboard");
+      })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     tiposVeiculo()
       .then((res) => setTiposDeVeiculo(res.data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error)); // eslint-disable-next-line
   }, []);
 
   return (
@@ -292,6 +394,7 @@ const Index = () => {
                     accept="image/jpeg,image/png,image/gif"
                   />
                 </label>
+                {errorImg && <p className="error">{errorImg}</p>}
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -339,6 +442,7 @@ const Index = () => {
                 {errors.turno_coleta && (
                   <p className="error">{errors.turno_coleta?.message}</p>
                 )}
+                {errorTurno && <p className="error">{errorTurno}</p>}
               </div>
               <div>
                 <label>
@@ -370,6 +474,7 @@ const Index = () => {
                 {errors.data_coleta && (
                   <p className="error">{errors.data_coleta?.message}</p>
                 )}
+                {errorDate && <p className="error">{errorDate}</p>}
               </div>
               <div>
                 <label>

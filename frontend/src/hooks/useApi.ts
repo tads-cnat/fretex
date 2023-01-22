@@ -40,6 +40,15 @@ export const useApi = () => ({
         })
         return response.data
     },
+    registerProposta: async (formData: FormData) => {
+        const response = await api.post('/proposta/', formData, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response.data
+    },
     registerVeiculo: async (veiculo: IVeiculo) => {
         await api.post('/veiculo/', veiculo, {
             headers: {
@@ -71,6 +80,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getVeiculoForId: async (id: number) => {
+        const response = await api.get(`/tipodeveiculo/?id=${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     getPedidos: async () => {
         const response = await api.get('/pedido/', {
             headers: {
@@ -81,6 +98,14 @@ export const useApi = () => ({
     },
     getSearchPedidos: async (queryString: any) => {
         const response = await api.get(`/pedido/?${queryString}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
+    getPropostasForPedido: async (queryString: any) => {
+        const response = await api.get(`/proposta/?${queryString}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`
             }
@@ -147,6 +172,14 @@ export const useApi = () => ({
     },
     getCEP: async (cep: string) => {
         const response = await cepApi.get(`/${cep}/json/`)
+        return response.data
+    },
+    deletePedido: async (id: number) => {
+        const response = await api.delete(`/pedido/${id}/`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
         return response.data
     }
 })

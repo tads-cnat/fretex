@@ -24,6 +24,7 @@ import { schemaFreteiro } from "../../../pages/ResgisterUser/schemas";
 import { useToggle } from "../../../hooks/useToggle";
 import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
 import { useAddress } from "../../../hooks/useAddress";
+import { toast } from 'react-toastify'
 
 const RegisterFreteiroForm = () => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -42,7 +43,9 @@ const RegisterFreteiroForm = () => {
   const navigate = useNavigate();
 
   const { onSubmit, error } = useFreteiroForm({
-    onSuccess: () => navigate("/login"),
+    onSuccess: () => {
+      toast.success('Freteiro cadastrado com sucesso!')
+      navigate("/login")},
   });
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
@@ -244,8 +247,8 @@ const RegisterFreteiroForm = () => {
 
             <h2>Conta Freteiro</h2>
             <p>
-              Na conta de cliente você pode cadastrar seus pedidos de frete para
-              que eles possam ser transportados da melhor maneira.
+              Na conta de freteiro você pode realizar propostas para vários 
+              pedidos de fretes diferentes, e fazer sua grana.
             </p>
           </section>
         </div>

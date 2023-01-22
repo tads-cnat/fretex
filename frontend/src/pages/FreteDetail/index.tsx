@@ -10,42 +10,71 @@ import Login from "../Login";
 import Layout from "../../components/Layout";
 import { useQuery } from "react-query";
 import LoadingPage from "../../components/Global/LoadingPage";
+import { isFreteiro } from "../../utils/isFreteiro";
+import { objToQueryString } from "../../utils/queyString";
 
 const FreteDetail = () => {
-  const [pedido, setPedido] = useState<IPedido>();
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { getPedido, getCliente } = useApi();
-  const { user, typeUser } = useContext(AuthContext);
+  const { getPedido, getCliente, getPropostasForPedido, getTypeUser } =
+    useApi();
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    setLoading(true);
-    getPedido(Number(id))
-      .then((res) => {
-        setPedido(res.data);
-        setLoading(false);
-      })
-      .catch((res) => console.log(res));
-  }, []);
-
-  const { data, isLoading } = useQuery(
-    "pedidoCreatedBy",
-    () => getCliente(pedido?.cliente),
+  const { data: pedido, isLoading: isLoadingPedido } = useQuery(
+    "pedido",
+    () => getPedido(Number(id)),
     {
-      enabled: !!pedido?.cliente,
+      enabled: !!id,
     },
   );
-
-  if (loading === false && typeUser === 2 && user?.id !== pedido?.cliente)
-    return <Login />;
-
+ // console.log(pedido);
+  const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
+    "pedidoCreatedBy",
+    () => getCliente(pedido.data.cliente),
+    {
+      enabled: !!pedido?.data.cliente,
+    },
+  );
+ // console.log(userPedido);
+ /* const queryStringPropostas = objToQueryString(
+    (user && (user.id === pedido.data.cliente)) ? {
+        usuario: `${user.id}`,
+        pedido: pedido.id,
+      }
+      : {
+        usuario: `${user?.id}`,
+        pedido: id,
+      },
+  );
+  console.log(queryStringPropostas);
+  const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
+    "propostas",
+    () => getPropostasForPedido(queryStringPropostas),
+    {
+      enabled: !!user && !!isFreteiro(user) && !!queryStringPropostas,
+    },
+  );
+  console.log(propostas);
+*/
+  if (!user) return <Login />;
+  if (
+    isLoadingClientePedido ||
+    isLoadingPedido ||
+   // isLoadingPropostas ||
+    !pedido
+  )
+    return <LoadingPage />;
+  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
   return (
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {isLoading && <LoadingPage />}
-          {!isLoading && (
-            <FreteDetailComponent pedido={pedido} user={data?.data} />
+          {pedido /*&& propostas*/ && !isLoadingClientePedido && (
+            <FreteDetailComponent
+              pedido={pedido.data}
+              clientePedido={userPedido.data}
+              actualUser={user}
+           //   propostas={propostas.data}
+            />
           )}
         </Wrapper>
       </ContainerPrincipal>

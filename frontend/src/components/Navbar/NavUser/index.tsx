@@ -3,6 +3,7 @@ import perfil from "../../../assets/images/perfil.svg";
 import Seta from "../../../assets/images/seta.svg";
 import { Link, NavLink } from "react-router-dom";
 import { ICliente, IFreteiro } from "../../../interfaces";
+import { toast } from "react-toastify";
 
 interface INavUser {
   user: ICliente | IFreteiro;
@@ -16,6 +17,7 @@ const NavUser = ({ user, signout, navigate, active, setActive }: INavUser) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     signout();
+    toast.info('Usuário deslogado!')
     navigate("/");
   };
 
