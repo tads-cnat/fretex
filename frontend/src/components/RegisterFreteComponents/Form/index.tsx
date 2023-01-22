@@ -27,6 +27,33 @@ interface ITiposDeVeiculo {
   descricao: string;
 }
 
+function isErrorDateRange(
+  startDate: string,
+  endDate: string,
+  setError: (text: string) => void,
+) {
+  const startDateFormated = new Date(startDate);
+  const endDateFormated = new Date(endDate);
+  const today = new Date();
+
+  if (startDateFormated < today || startDateFormated === today) {
+    console.log("erro1");
+    setError("Data de coleta não pode ser menor ou igual à data de hoje!");
+    return true;
+  }
+
+  if (
+    startDateFormated > endDateFormated ||
+    startDateFormated.getDate() === endDateFormated.getDate()
+  ) {
+    setError(
+      "Data de coleta não pode ser menor ou igual à data de entrega!",
+    );
+    return true;
+  }
+  return false;
+}
+
 const Index = () => {
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
@@ -35,13 +62,31 @@ const Index = () => {
     register,
     completeAddress,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useAddress<IPedidoFormData>(schemaPedido);
+  const [errorImg, setErrorImg] = useState("");
+  const [errorDate, setErrorDate] = useState("");
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
+    setErrorImg("");
+    setErrorDate("");
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
+    const imagem_url = produto.imagem_url[0] && produto.imagem_url[0];
+
+    if (isErrorDateRange(pedido.data_coleta, pedido.data_entrega, setErrorDate)) {
+      setFocus("data_coleta")
+      return;
+    }
+
+    if (!imagem_url) {
+      setErrorImg("Campo Obrigatório");
+      setFocus("produto.imagem_url");
+      return;
+    }
+
     Object.entries(origem).forEach(([key, value]) => {
       if (value) formData.append(`origem.${key}`, value);
     });
@@ -49,7 +94,8 @@ const Index = () => {
       if (value) formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (value && value[0].name) formData.append(`produto.${key}`, value[0]);
+      if (imagem_url && key === "imagem_url")
+        formData.append(`produto.${key}`, imagem_url);
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
@@ -57,13 +103,13 @@ const Index = () => {
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
       else if (value) formData.append(`${key}`, value);
     });
-
-    registerPedido(formData)
+    //  console.log(...formData);
+    /*  registerPedido(formData)
       .then(() => {
         toast.success('Pedido cadastrado com sucesso!')
-        navigate("/dashboard")
+      //  navigate("/dashboard")
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error));*/
   };
 
   useEffect(() => {
@@ -296,6 +342,7 @@ const Index = () => {
                     accept="image/jpeg,image/png,image/gif"
                   />
                 </label>
+                {errorImg && <p className="error">{errorImg}</p>}
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -374,6 +421,7 @@ const Index = () => {
                 {errors.data_coleta && (
                   <p className="error">{errors.data_coleta?.message}</p>
                 )}
+                {errorDate && <p className="error">{errorDate}</p>}
               </div>
               <div>
                 <label>

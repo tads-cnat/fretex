@@ -12,11 +12,12 @@ import CardsContainer from "../CardsContainer";
 import CardProposta from "../CardProposta";
 import ModalProposta from "../ModalProposta/intex";
 import { useToggle } from "../../../hooks/useToggle";
-import { ICliente, IFreteiro } from "../../../interfaces";
+import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
+  propostas: IProposta[];
 }
 
 const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {

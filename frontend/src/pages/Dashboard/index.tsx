@@ -14,16 +14,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { isFreteiro } from "../../utils/isFreteiro";
 import LoadingPage from "../../components/Global/LoadingPage";
-
-function objToQueryString(obj: any) {
-  const keyValuePairs = [];
-  for (const key in obj) {
-    keyValuePairs.push(
-      encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]),
-    );
-  }
-  return keyValuePairs.join("&");
-}
+import { objToQueryString } from "../../utils/queyString";
 
 const Dashboard = () => {
   window.scrollTo(0, 0);

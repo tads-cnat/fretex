@@ -70,14 +70,12 @@ export const schemaPedido = yup.object({
         .required('Campo Obrigatório'),
     data_coleta: yup
         .string()
-        //    .transform((value) => new Date(value))
-
-
+        .nullable()
         .required('Data de coleta Obrigatório'),
     data_entrega: yup
         .string()
-
-        .required(),
+        .nullable()
+        .required('Data de entrega Obrigatório'),
     turno_entrega: yup
         .string()
         .required('Turno de entrega obrigatório'),

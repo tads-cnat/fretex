@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
-import { ICliente, IFreteiro, IVeiculo } from "../../../interfaces";
+import { ICliente, IFormDataProposta, IFreteiro, IVeiculo } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingPage from "../../Global/LoadingPage";
@@ -13,9 +13,11 @@ import CardVeiculo from "../../Profile/CardVeiculo";
 import LabelInput from "../../Profile/LabelInput";
 import { LabelContainer } from "../../Profile/LabelInput/styles";
 import CardsContainer from "../CardsContainer";
-import { BtnYellow } from "../NegociationComponent/styles";
+import { BtnYellow as BtnSubmit } from "../NegociationComponent/styles";
 import { schemaProposta } from "./schema";
-import { ConteinerVeiculos, FormContainer } from "./styles";
+import { ContainerVeiculos, FormContainer } from "./styles";
+import { BtnYellowLinkRouter } from "../../../pages/Dashboard/styles";
+import { useEffect } from "react";
 
 interface IModalProposta {
   toggle: () => void;
@@ -23,16 +25,6 @@ interface IModalProposta {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
   actualUserId: number;
-}
-
-interface IFormDataProposta {
-  valor: number;
-  eh_aceita: boolean;
-  ehNegada: boolean;
-  usuario: number;
-  pedido: number;
-  veiculo: number;
-  contraproposta: null | number;
 }
 
 const ModalProposta = ({
@@ -64,7 +56,7 @@ const ModalProposta = ({
     formState: { errors },
     handleSubmit,
   } = useForm<IFormDataProposta>({
-    resolver: yupResolver(schemaProposta)
+    resolver: yupResolver(schemaProposta),
   });
 
   const onSubmit: SubmitHandler<IFormDataProposta> = (data) => {
@@ -93,7 +85,7 @@ const ModalProposta = ({
   const handleClickRadio = () => {
     toggleCardsContainer();
   };
-
+  console.log(veiculos);
   return (
     <ModalComponent title="Faça sua proposta" toggle={toggle} value={value}>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -102,8 +94,16 @@ const ModalProposta = ({
           toggle={toggleCardsContainer}
           value={valueCardsContainer}
         >
-          <ConteinerVeiculos>
+          <ContainerVeiculos>
             {isLoadingVeiculos && <LoadingPage />}
+            {!isLoadingVeiculos && veiculos.data.length === 0 && (
+              <div className="cadastrarVeiculo">
+                <p>Você não possui veículo</p>
+                <BtnYellowLinkRouter to={`/perfil/${actualUserId}/veiculos`}>
+                  Casdastrar Veículo
+                </BtnYellowLinkRouter>
+              </div>
+            )}
             {veiculos &&
               !isLoadingVeiculos &&
               veiculos.data.map((veiculo: IVeiculo) => (
@@ -118,9 +118,9 @@ const ModalProposta = ({
                   <CardVeiculo veiculos={veiculo} />
                 </label>
               ))}
-          </ConteinerVeiculos>
+          </ContainerVeiculos>
         </CardsContainer>
-        
+
         {errors.veiculo && <p className="error">{errors.veiculo?.message}</p>}
         <div className="valorContainer">
           <span>Valor da proposta:</span>
@@ -138,7 +138,7 @@ const ModalProposta = ({
           </LabelInput>
         </div>
         <div className="submitContainer">
-          <BtnYellow type="submit">Realizar proposta</BtnYellow>
+          <BtnSubmit type="submit">Realizar proposta</BtnSubmit>
         </div>
       </FormContainer>
     </ModalComponent>

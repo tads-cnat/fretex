@@ -15,7 +15,7 @@ import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-c
 import geoalt from "../../../assets/images/geo-alt.svg";
 import info from "../../../assets/images/info-circle.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { ICliente, IFreteiro, IPedido } from "../../../interfaces";
+import { ICliente, IFreteiro, IPedido, IProposta } from "../../../interfaces";
 import { Seta } from "../../RegisterFreteComponents/Form/styles";
 import NegociationComponent from "../NegociationComponent";
 
@@ -23,12 +23,14 @@ interface IFreteDetail {
   pedido: IPedido;
   clientePedido: ICliente;
   actualUser: IFreteiro | ICliente;
+  propostas: IProposta[];
 }
 
 const FreteDetailComponent = ({
   pedido,
   clientePedido,
   actualUser,
+  propostas,
 }: IFreteDetail) => {
   const navigate = useNavigate();
 
@@ -56,8 +58,8 @@ const FreteDetailComponent = ({
       </div>
       <Content>
         <Content1>
-          {pedido.produto.imagem_url ? (
-            <img src={pedido.produto.imagem_url} alt="caixas" />
+          {pedido.produto?.imagem_url ? (
+            <img src={pedido?.produto?.imagem_url} alt="caixas" />
           ) : (
             <img src={caixas} alt="caixas" />
           )}
@@ -146,7 +148,7 @@ const FreteDetailComponent = ({
       </Content>
 
       <Negotiation>
-        <NegociationComponent actualUser={actualUser} pedidoId={pedido.id} />
+        <NegociationComponent actualUser={actualUser} pedidoId={pedido.id} propostas={propostas} />
       </Negotiation>
     </Container>
   );

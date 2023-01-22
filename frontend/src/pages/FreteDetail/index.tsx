@@ -11,11 +11,21 @@ import Layout from "../../components/Layout";
 import { useQuery } from "react-query";
 import LoadingPage from "../../components/Global/LoadingPage";
 import { isFreteiro } from "../../utils/isFreteiro";
+import { objToQueryString } from "../../utils/queyString";
 
 const FreteDetail = () => {
   const { id } = useParams();
-  const { getPedido, getCliente } = useApi();
+  const { getPedido, getCliente, getPropostasForPedido, getTypeUser } =
+    useApi();
   const { user } = useContext(AuthContext);
+
+  const queryStringPropostas = objToQueryString(
+    user &&
+      id && {
+        usuario: `${user.id}`,
+        pedido: id,
+      },
+  );
 
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
     "pedido",
@@ -33,18 +43,35 @@ const FreteDetail = () => {
     },
   );
 
+  const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
+    "propostas",
+    () => getPropostasForPedido(queryStringPropostas),
+    {
+      enabled: !!user && !!isFreteiro(user) && !!queryStringPropostas,
+    },
+  );
+
+  
+
   if (!user) return <Login />;
+  if (
+    isLoadingClientePedido ||
+    isLoadingPedido ||
+    isLoadingPropostas ||
+    !pedido
+  )
+    return <LoadingPage />;
   if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
-  if (isLoadingClientePedido || isLoadingPedido) return <LoadingPage />;
   return (
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {pedido && !isLoadingClientePedido && (
+          {pedido && propostas && !isLoadingClientePedido && (
             <FreteDetailComponent
               pedido={pedido.data}
               clientePedido={userPedido.data}
               actualUser={user}
+              propostas={propostas.data}
             />
           )}
         </Wrapper>
