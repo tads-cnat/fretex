@@ -5,6 +5,7 @@ from plataform.api.serializers import (
     RegisterFreteiroSerializer,
     LoginSerializer,
     AvaliacaoUsuarioSerializer,
+    TriggerSerializer,
     UserSerializer,
     ClienteSerializer,
     EnderecoSerializer,
@@ -25,6 +26,7 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
     AvaliacaoUsuario,
+    Log
 )
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -166,3 +168,11 @@ class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         request.data["avaliador"] = Cliente.objects.get(user_ptr=self.request.user)
         return super().create(request, *args, **kwargs)
+
+class TriggerViewSet(viewsets.ModelViewSet):
+    serializer_class = TriggerSerializer
+    queryset = Log.objects.all()
+    renderer_classes = [CustomRenderer]
+    permission_classes = []
+
+

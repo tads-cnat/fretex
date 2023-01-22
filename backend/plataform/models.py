@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
     CEP = models.CharField(max_length=9)
@@ -146,3 +145,6 @@ class AvaliacaoUsuario(models.Model):
     )
     nota = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
     observacao = models.TextField()
+
+class Log(models.Model):
+    data = models.DateTimeField(auto_now_add=True)
