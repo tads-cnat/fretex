@@ -12,8 +12,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('auth', '0012_alter_user_first_name_max_length'),
     ]
 
     operations = [
@@ -137,7 +137,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('valor', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('data_criacao', models.DateTimeField(auto_now_add=True)),
+                ('data_criacao', models.DateField(auto_now_add=True)),
                 ('eh_aceita', models.BooleanField(default=False)),
                 ('ehNegada', models.BooleanField(default=False)),
                 ('contraproposta', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='plataform.proposta')),
