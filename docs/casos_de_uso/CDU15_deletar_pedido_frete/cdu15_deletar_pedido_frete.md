@@ -27,7 +27,7 @@
 **4.1-  Fluxo básico:** 
 
 1.  O ator seleciona o pedido de frete que deseja deletar.
-2.	O ator seleciona a opção deletar.
+2.	O ator seleciona a opção "Excluir Pedido".
 3.	O sistema exibe o pedido que será deletado e pede a confirmação do cliente.
 4.	O cliente confirma a ação.
 5.	O sistema deleta o pedido em questão do banco de dados e emite uma confirmação visual.
