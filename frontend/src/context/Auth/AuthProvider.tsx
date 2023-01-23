@@ -67,7 +67,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, typeUser, isLoadingUser, signin, signout }}
+      value={{ user, typeUser, isLoadingUser, signin, signout, setUser }}
     >
       {children}
     </AuthContext.Provider>

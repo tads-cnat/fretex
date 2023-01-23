@@ -7,6 +7,7 @@ interface IAuthContextType {
   typeUser: number;
   signin: (email: string, password: string) => Promise<boolean | null>;
   signout: () => void;
+  setUser: (user:ICliente |IFreteiro) => void;
 }
 
 export const AuthContext = createContext<IAuthContextType>(null!);

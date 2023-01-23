@@ -46,7 +46,7 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const { updateCliente, updateFreteiro } = useApi();
   const { user, setUser, handleSelectTab } = useContextProfile();
-  const { user: actualUser } = useContext(AuthContext);
+  const { user: actualUser, setUser:setActualUser } = useContext(AuthContext);
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const { value: password, toggle: togglePassword } = useToggle();
@@ -81,6 +81,7 @@ const EditProfile = () => {
         .then((res) => {
           toast.info('Perfil atualizado com sucesso!')
           setUser(res.data);
+          setActualUser(res.data)
         })
         .catch((res) => console.log(res.response.data));
       return;
@@ -93,6 +94,7 @@ const EditProfile = () => {
     updateFreteiro(user.id, formData).then((res) => {
       toast.info('Perfil atualizado com sucesso!')
       setUser(res.data);
+      setActualUser(res.data)
     });
   };
 

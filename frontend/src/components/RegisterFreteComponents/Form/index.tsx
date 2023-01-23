@@ -85,7 +85,7 @@ function isErrorDateRange(
     }
   }
 
-  if (today.getHours() > 12) {
+  if (today.getHours() >= 12) {
     if (startShift === "MA") {
       setFocus("turno_coleta");
       setErrorTurno("Turnos inválidos! Hoje já está à tarde");

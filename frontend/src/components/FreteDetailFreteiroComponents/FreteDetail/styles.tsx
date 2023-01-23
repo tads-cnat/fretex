@@ -60,6 +60,7 @@ export const Content1 = styled.div`
         gap: 5px;
         img {
             width: 25px;
+            height: 25px;
             border-radius: 50%;
         }
         span {
