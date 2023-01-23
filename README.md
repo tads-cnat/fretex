@@ -34,8 +34,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ### 🛠 Padrão de projeto
 
-- Singleton
-- Proxy
+- Provider Pattern
+- Proxy Pattern
 
 # 🔧 Instalação
 
