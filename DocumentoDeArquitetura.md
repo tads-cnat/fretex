@@ -65,7 +65,7 @@ Fretex é a nova plataforma de fretes que se propõe a servir de facilitador par
 | Restrição de software e programação |
 | RT1 | Acessibilidade | Não foi implementada na interface nenhum conjunto de ferramentes para o auxilio de pessoas com deficiência |
 | Restrição de sistema operacional |
-| RT3 | SO que possibibilitem criação e hospedagem de servidores HTTP |  |
+| RT3 | SO que possibilitem criação e hospedagem de servidores HTTP |  |
 | Restrições de Hardware |
 | RT5 | Que atenda os resquisitos minimos para rodar o Django | Framework utilizado no projeto |
 
