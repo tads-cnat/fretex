@@ -1,44 +1,26 @@
+from core.api.helpers import open_api_request_body
 from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from plataform.api.serializers import (
-    RegisterClienteSerializer,
-    RegisterFreteiroSerializer,
-    LoginSerializer,
-    AvaliacaoUsuarioSerializer,
-    TriggerSerializer,
-    UserSerializer,
-    ClienteSerializer,
-    EnderecoSerializer,
-    FreteiroSerializer,
-    PedidoSerializer,
-    ProdutoSerializer,
-    PropostaSerializer,
-    TipoVeiculoSerializer,
-    VeiculoSerializer,
-)
-from plataform.models import (
-    Cliente,
-    Endereco,
-    Freteiro,
-    Pedido,
-    Produto,
-    Proposta,
-    TipoVeiculo,
-    Veiculo,
-    AvaliacaoUsuario,
-    Log
-)
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import status
-
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from core.api.helpers import open_api_request_body
-from drf_yasg import openapi
+from plataform.api.serializers import (AvaliacaoUsuarioSerializer,
+                                       ClienteSerializer, EnderecoSerializer,
+                                       FreteiroSerializer, LoginSerializer,
+                                       PedidoSerializer, ProdutoSerializer,
+                                       PropostaSerializer,
+                                       RegisterClienteSerializer,
+                                       RegisterFreteiroSerializer,
+                                       TipoVeiculoSerializer,
+                                       TriggerSerializer, UserSerializer,
+                                       VeiculoSerializer)
+from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
+                              Log, Pedido, Produto, Proposta, TipoVeiculo,
+                              Veiculo)
+from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 
 class AuthViewSet(viewsets.GenericViewSet):
@@ -156,7 +138,7 @@ class PropostaViewSet(viewsets.ModelViewSet):
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
-    filterset_fields = ["usuario", "pedido"]
+    filterset_fields = ["usuario", "pedido", "is_contraproposta", "is_esperandoFreteiro","is_esperandoCliente"]
 
 
 class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):

@@ -21,17 +21,16 @@ interface IFreteDetail {
   pedido: IPedido;
   clientePedido: ICliente;
   actualUser: IFreteiro | ICliente;
- // propostas: IProposta[];
+  propostas: IProposta[];
 }
 
 const FreteDetailComponent = ({
   pedido,
   clientePedido,
   actualUser,
- // propostas,
+  propostas,
 }: IFreteDetail) => {
   const navigate = useNavigate();
-
   const formatDate = (initialDate: string) => {
     const date = initialDate.replaceAll("-", "/");
     const year = date.slice(0, 4);
@@ -138,7 +137,7 @@ const FreteDetailComponent = ({
                 <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
               </p>
               <p>
-                <span>Observações:</span> {pedido.observacao}
+                <span>Observações:</span> {pedido.observacao ? pedido.observacao : "Não possui observações"}
               </p>
             </div>
           </Content2Info>
@@ -149,7 +148,7 @@ const FreteDetailComponent = ({
         <NegociationComponent
           actualUser={actualUser}
           pedidoId={pedido.id}
-        //  propostas={propostas}
+          propostas={propostas}
         />
       </Negotiation>
     </Container>

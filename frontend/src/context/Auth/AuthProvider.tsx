@@ -55,7 +55,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   }, []);
 
   const signout = () => {
-    client.clear();
+    client.getQueryCache().clear();    
     api.logout();
     setToken("");
     setUser(null);

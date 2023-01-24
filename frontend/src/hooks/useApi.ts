@@ -96,6 +96,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getPropostas: async () => {
+        const response = await api.get('/proposta/', {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     getSearchPedidos: async (queryString: any) => {
         const response = await api.get(`/pedido/?${queryString}`, {
             headers: {

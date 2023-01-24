@@ -109,6 +109,9 @@ export interface IProposta {
     valor: number;
     eh_aceita: boolean;
     ehNegada: boolean;
+    is_contrapropostas: boolean;
+    is_esperandoCliente: boolean;
+    is_esperandoFreteiro: boolean;
     usuario: number;
     pedido: number;
     veiculo: number;
@@ -120,6 +123,7 @@ export interface IFormDataProposta {
     eh_aceita: boolean;
     ehNegada: boolean;
     usuario: number;
+    is_esperandoCliente: boolean;
     pedido: number;
     veiculo: number;
     contraproposta: null | number;

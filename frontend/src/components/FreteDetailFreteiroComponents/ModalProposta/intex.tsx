@@ -64,6 +64,7 @@ const ModalProposta = ({
       eh_aceita: false,
       ehNegada: false,
       usuario: actualUserId,
+      is_esperandoCliente: true,
       pedido: pedidoId,
       contraproposta: null,
     };
@@ -84,7 +85,7 @@ const ModalProposta = ({
   const handleClickRadio = () => {
     toggleCardsContainer();
   };
-  console.log(veiculos);
+  
   return (
     <ModalComponent title="Faça sua proposta" toggle={toggle} value={value}>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>

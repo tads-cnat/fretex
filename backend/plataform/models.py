@@ -126,6 +126,9 @@ class Proposta(models.Model):
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateTimeField(auto_now_add=True)
     eh_aceita = models.BooleanField(default=False)
+    is_contraproposta = models.BooleanField(default=False)
+    is_esperandoFreteiro = models.BooleanField(default=True)
+    is_esperandoCliente = models.BooleanField(default=False)
     contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     ehNegada = models.BooleanField(default=False)
 

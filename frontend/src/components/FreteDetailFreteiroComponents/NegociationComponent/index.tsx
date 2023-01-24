@@ -4,14 +4,19 @@ import CardProposta from "../CardProposta";
 import ModalProposta from "../ModalProposta/intex";
 import { useToggle } from "../../../hooks/useToggle";
 import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
+import { isFreteiro } from "../../../utils/isFreteiro";
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
-  //  propostas: IProposta[];
+  propostas: IProposta[];
 }
 
-const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
+const NegociationComponent = ({
+  actualUser,
+  pedidoId,
+  propostas,
+}: INegociation) => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
   const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
@@ -25,6 +30,21 @@ const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
     e.preventDefault();
     toggleModalProposta();
   };
+
+  const propostasAtivasForFreteiro = propostas.filter(
+    (proposta) => proposta.is_esperandoFreteiro === true,
+  );
+  console.log(propostasAtivasForFreteiro);
+
+  const propostasCanceladasForFreteiro = propostas.filter(
+    (proposta) => proposta.ehNegada === true,
+  );
+  console.log(propostasCanceladasForFreteiro);
+
+  const propostasEmEsperaForFreteiro = propostas.filter(
+    (proposta) => proposta.is_esperandoCliente === true,
+  );
+  console.log(propostasEmEsperaForFreteiro);
 
   return (
     <>
@@ -40,9 +60,12 @@ const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
           <h2>Negociação</h2>
           <p>Aguardando freteiro</p>
         </div>
-        <BtnYellow type="button" onClick={handleClick}>
-          Realizar Proposta
-        </BtnYellow>
+        {isFreteiro(actualUser) &&
+          !propostas.find((p) => p.usuario === actualUser.id) && (
+            <BtnYellow type="button" onClick={handleClick}>
+              Realizar Proposta
+            </BtnYellow>
+          )}
       </HeaderContainer>
       <PropostaContainer2>
         <div>
@@ -51,7 +74,7 @@ const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
             toggle={togglePropostasAtivas}
             value={valuePropostasAtivas}
           >
-            <CardProposta />
+            <CardProposta propostas={propostasAtivasForFreteiro} />
           </CardsContainer>
         </div>
         <CardsContainer
@@ -59,14 +82,14 @@ const NegociationComponent = ({ actualUser, pedidoId }: INegociation) => {
           toggle={togglePropostasEsperando}
           value={valuePropostasEsperando}
         >
-          <CardProposta />
+          <CardProposta propostas={propostasEmEsperaForFreteiro} />
         </CardsContainer>
         <CardsContainer
           title="Propostas recusadas"
           toggle={togglePropostasCanceladas}
           value={valuePropostasCanceladas}
         >
-          <CardProposta />
+          <CardProposta propostas={propostasCanceladasForFreteiro} />
         </CardsContainer>
       </PropostaContainer2>
     </>

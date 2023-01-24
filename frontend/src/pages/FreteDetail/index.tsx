@@ -15,7 +15,7 @@ import { objToQueryString } from "../../utils/queyString";
 
 const FreteDetail = () => {
   const { id } = useParams();
-  const { getPedido, getCliente, getPropostasForPedido, getTypeUser } =
+  const { getPedido, getCliente, getPropostasForPedido, getPropostas } =
     useApi();
   const { user } = useContext(AuthContext);
 
@@ -26,7 +26,7 @@ const FreteDetail = () => {
       enabled: !!id,
     },
   );
- // console.log(pedido);
+
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     "pedidoCreatedBy",
     () => getCliente(pedido.data.cliente),
@@ -34,48 +34,62 @@ const FreteDetail = () => {
       enabled: !!pedido?.data.cliente,
     },
   );
- // console.log(userPedido);
- /* const queryStringPropostas = objToQueryString(
-    (user && (user.id === pedido.data.cliente)) ? {
-        usuario: `${user.id}`,
-        pedido: pedido.id,
-      }
-      : {
-        usuario: `${user?.id}`,
-        pedido: id,
-      },
-  );
-  console.log(queryStringPropostas);
-  const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
-    "propostas",
+
+  const queryStringPropostas =
+    pedido?.data?.id &&
+    user &&
+    //   isFreteiro(user) &&
+    objToQueryString({
+      usuario: user.id,
+      pedido: pedido.data.id,
+    });
+
+  const {
+    data: propostasForFreteiro,
+    isLoading: isLoadingPropostasForFreteiro,
+  } = useQuery(
+    "propostasForFreteiro",
     () => getPropostasForPedido(queryStringPropostas),
     {
-      enabled: !!user && !!isFreteiro(user) && !!queryStringPropostas,
+      enabled:
+        !!user &&
+        !!isFreteiro(user) &&
+        !!pedido?.data &&
+        !!queryStringPropostas,
     },
   );
-  console.log(propostas);
-*/
+
+  const { data: propostasForCliente, isLoading: isLoadingPropostasForCliente } =
+    useQuery("propostasForCliente", () => getPropostas(), {
+      enabled: !!user && !!!isFreteiro(user) && !!pedido?.data,
+    });
+
   if (!user) return <Login />;
   if (
-    isLoadingClientePedido ||
-    isLoadingPedido ||
-   // isLoadingPropostas ||
-    !pedido
+    isLoadingPropostasForFreteiro ||
+    isLoadingPropostasForCliente ||
+    isLoadingPedido
   )
     return <LoadingPage />;
-  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
+  if (user && !isFreteiro(user) && user.id !== pedido.data.cliente)
+    return <Login />;
   return (
     <Layout>
       <ContainerPrincipal>
         <Wrapper bgColor="#f5f5f5">
-          {pedido /*&& propostas*/ && !isLoadingClientePedido && (
-            <FreteDetailComponent
-              pedido={pedido.data}
-              clientePedido={userPedido.data}
-              actualUser={user}
-           //   propostas={propostas.data}
-            />
-          )}
+          {!isLoadingClientePedido &&
+            !isLoadingPedido &&
+            !isLoadingPropostasForFreteiro &&
+            !isLoadingPropostasForCliente && (
+              <FreteDetailComponent
+                pedido={pedido.data}
+                clientePedido={userPedido.data}
+                actualUser={user}
+                propostas={
+                  isFreteiro(user) ? propostasForFreteiro.data : propostasForCliente.data
+                }
+              />
+            )}
         </Wrapper>
       </ContainerPrincipal>
     </Layout>
