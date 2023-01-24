@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IActive, Status } from "../../interfaces/styledComponents";
+import { IActive, IStatus } from "../../interfaces/styledComponents";
 
 
 export const Box = styled.div`
@@ -26,7 +26,7 @@ export const AlertText  = styled.div`
     margin: 15vh 0;
 `;
 
-export const Header = styled.div<Status>`
+export const Header = styled.div<IStatus>`
     display: flex;
     justify-content: space-between;
     div {

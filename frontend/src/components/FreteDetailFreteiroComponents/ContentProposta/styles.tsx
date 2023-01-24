@@ -1,18 +1,29 @@
 import styled from "styled-components";
+import { IStatusColors } from "../../../interfaces/styledComponents";
 import { BtnPattern } from "../../../styles";
 
-export const ContentMain = styled.main`
+export const ContentMain = styled.main<IStatusColors>`
   display: flex;
   justify-content: space-between;
   gap: 10px;
   align-items: center;
 
   .valorProposta,
-  .botoes {
+  .botoes,
+  .recusadas,
+  .espera {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  .recusadas,
+  .espera {
+    color: ${(props) => (props.color ? props.color : "#000")};
+    p {
+      font-size: var(--font-small);
+    }
   }
 
   .contraproposta {
@@ -41,11 +52,31 @@ export const ContentMain = styled.main`
     .contraproposta {
       padding: 4px 8px;
     }
+    .valorProposta {
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+      p {
+        font-size: var(--font-small);
+      }
+    }
   }
   @media (max-width: 500px) {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: ${(props) =>
+      props.color === "#7B7B7B" || props.color === "#DC2E2E"
+        ? "row"
+        : "column"};
+    
+    align-items: ${(props) =>
+      props.color === "#7B7B7B" || props.color === "#DC2E2E"
+        ? "center"
+        : "flex-start"};
 
+    .espera p,
+    .recusadas p {
+      display: none;
+    }
     .contraproposta {
       width: 100%;
     }

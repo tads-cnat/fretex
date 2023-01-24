@@ -14,7 +14,7 @@ export interface InterfaceInfo {
 }
 
 export interface IDropdownMenu {
-  show?:  boolean | string;
+  show?: boolean | string;
   animation?: string | boolean;
 }
 
@@ -26,6 +26,11 @@ export interface IActive {
   active?: boolean;
 }
 
-export interface Status {
-  status?: string;
+export interface IStatus {
+  status: string;
+}
+
+export interface IStatusColors {
+  color: string;
+  bg: string;
 }

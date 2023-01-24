@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IStatusColors } from "../../../interfaces/styledComponents";
 import { BtnPattern } from "../../../styles";
 
 export const Container = styled.section`
@@ -13,7 +14,7 @@ export const ContentMain = styled.div`
   gap: 10px;
 `;
 
-export const ContentHeader = styled.header`
+export const ContentHeader = styled.header<IStatusColors>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,10 +23,10 @@ export const ContentHeader = styled.header`
   margin-bottom: 20px;
   span {
     padding: 2px 30px;
-    color: #868830;
+    color: ${(props) => (props.color ? props.color : "#000")};
     font-size: small;
     font-weight: 400;
-    background-color: #f7f9b3;
+    background-color: ${(props) => (props.bg ? props.bg : "#fff")};
     border-radius: 16px;
   }
 

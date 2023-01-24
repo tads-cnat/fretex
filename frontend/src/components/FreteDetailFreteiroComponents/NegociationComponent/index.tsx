@@ -74,7 +74,10 @@ const NegociationComponent = ({
             toggle={togglePropostasAtivas}
             value={valuePropostasAtivas}
           >
-            <CardProposta propostas={propostasAtivasForFreteiro} />
+            <CardProposta
+              propostas={propostasAtivasForFreteiro}
+              type="A responder"
+            />
           </CardsContainer>
         </div>
         <CardsContainer
@@ -82,14 +85,20 @@ const NegociationComponent = ({
           toggle={togglePropostasEsperando}
           value={valuePropostasEsperando}
         >
-          <CardProposta propostas={propostasEmEsperaForFreteiro} />
+          <CardProposta
+            propostas={propostasEmEsperaForFreteiro}
+            type="Aguardando freteiro"
+          />
         </CardsContainer>
         <CardsContainer
           title="Propostas recusadas"
           toggle={togglePropostasCanceladas}
           value={valuePropostasCanceladas}
         >
-          <CardProposta propostas={propostasCanceladasForFreteiro} />
+          <CardProposta
+            propostas={propostasCanceladasForFreteiro}
+            type="Recusadas"
+          />
         </CardsContainer>
       </PropostaContainer2>
     </>
