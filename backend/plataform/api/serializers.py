@@ -1,21 +1,11 @@
-from django.db import transaction
 from django.contrib.auth.models import User
-from rest_framework.validators import UniqueValidator
-from plataform.models import (
-    Cliente,
-    Endereco,
-    Freteiro,
-    Pedido,
-    Produto,
-    Proposta,
-    TipoVeiculo,
-    Veiculo,
-    AvaliacaoUsuario,
-    Log
-)
-from rest_framework import serializers
+from django.db import transaction
+from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
+                              Log, Pedido, Produto, Proposta, TipoVeiculo,
+                              Veiculo)
+from rest_framework import serializers, status
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.validators import UniqueValidator
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -282,9 +272,10 @@ class VeiculoSerializer(serializers.ModelSerializer):
 
 
 class PropostaSerializer(serializers.ModelSerializer):
+    usuarioDetail = UserSerializer(read_only=True)
     class Meta:
         model = Proposta
-        fields = "__all__"
+        fields = ("id","pedido", "usuario","usuarioDetail","veiculo","valor", "data_criacao", "eh_aceita", "is_contraproposta","is_esperandoFreteiro", "is_esperandoCliente","contraproposta", "ehNegada")
 
 
 class AvaliacaoUsuarioSerializer(serializers.ModelSerializer):

@@ -64,6 +64,14 @@ export const useApi = () => ({
         })
         return response.data
     },
+    getVeiculo: async (id: number) => {
+        const response = await api.get(`/veiculo/${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`
+            }
+        })
+        return response.data
+    },
     validateToken: async (token: string) => {
         const response = await api.get('/auth/user/', {
             headers: {
@@ -162,6 +170,24 @@ export const useApi = () => ({
     },
     updateFreteiro: async (id: number, data: FormData) => {
         const response = await api.patch(`/freteiro/${id}/`, data, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response.data
+    },
+    updatePedido: async (id: number, data: FormData) => {
+        const response = await api.patch(`/pedido/${id}/`, data, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("authToken")}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        return response.data
+    },
+    updateProposta: async (id: number, data: FormData) => {
+        const response = await api.patch(`/proposta/${id}/`, data, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("authToken")}`,
                 'Content-Type': 'multipart/form-data',

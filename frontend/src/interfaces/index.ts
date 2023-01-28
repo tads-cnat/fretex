@@ -109,7 +109,8 @@ export interface IProposta {
     valor: number;
     eh_aceita: boolean;
     ehNegada: boolean;
-    is_contrapropostas: boolean;
+    data_criacao: string;
+    is_contraproposta: boolean
     is_esperandoCliente: boolean;
     is_esperandoFreteiro: boolean;
     usuario: number;

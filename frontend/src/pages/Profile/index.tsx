@@ -30,11 +30,11 @@ const Profile = () => {
   const { getCliente, getFreteiro, getTypeUser } = useApi();
 
   const { data: actualTypeUser } = useQuery<ITypeUser>(
-    "actualUser",
+    ["actualUser", Number(id)],
     () => getTypeUser(Number(id)),
     {
       enabled: !!id,
-      refetchOnMount: "always"
+      refetchOnMount: "always",
     },
   );
 
@@ -46,7 +46,7 @@ const Profile = () => {
     () => getFreteiro(Number(id)).then((res) => setUserToRender(res.data)),
     {
       enabled: !!actualTypeUser && !!isFreteiroType,
-      refetchOnMount: "always"
+      refetchOnMount: "always",
     },
   );
 

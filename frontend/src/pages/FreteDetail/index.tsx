@@ -20,7 +20,7 @@ const FreteDetail = () => {
   const { user } = useContext(AuthContext);
 
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
-    "pedido",
+    ["pedido", id],
     () => getPedido(Number(id)),
     {
       enabled: !!id,
@@ -28,7 +28,7 @@ const FreteDetail = () => {
   );
 
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
-    "pedidoCreatedBy",
+    ["pedidoCreatedBy", id],
     () => getCliente(pedido.data.cliente),
     {
       enabled: !!pedido?.data.cliente,
@@ -38,39 +38,20 @@ const FreteDetail = () => {
   const queryStringPropostas =
     pedido?.data?.id &&
     user &&
-    //   isFreteiro(user) &&
     objToQueryString({
-      usuario: user.id,
       pedido: pedido.data.id,
     });
 
-  const {
-    data: propostasForFreteiro,
-    isLoading: isLoadingPropostasForFreteiro,
-  } = useQuery(
-    "propostasForFreteiro",
+  const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
+    ["propostasForPedido", id],
     () => getPropostasForPedido(queryStringPropostas),
     {
-      enabled:
-        !!user &&
-        !!isFreteiro(user) &&
-        !!pedido?.data &&
-        !!queryStringPropostas,
+      enabled: !!user && !!pedido?.data && !!queryStringPropostas,
     },
   );
 
-  const { data: propostasForCliente, isLoading: isLoadingPropostasForCliente } =
-    useQuery("propostasForCliente", () => getPropostas(), {
-      enabled: !!user && !!!isFreteiro(user) && !!pedido?.data,
-    });
-
   if (!user) return <Login />;
-  if (
-    isLoadingPropostasForFreteiro ||
-    isLoadingPropostasForCliente ||
-    isLoadingPedido
-  )
-    return <LoadingPage />;
+  if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
   if (user && !isFreteiro(user) && user.id !== pedido.data.cliente)
     return <Login />;
   return (
@@ -79,15 +60,12 @@ const FreteDetail = () => {
         <Wrapper bgColor="#f5f5f5">
           {!isLoadingClientePedido &&
             !isLoadingPedido &&
-            !isLoadingPropostasForFreteiro &&
-            !isLoadingPropostasForCliente && (
+            !isLoadingPropostas && (
               <FreteDetailComponent
                 pedido={pedido.data}
                 clientePedido={userPedido.data}
                 actualUser={user}
-                propostas={
-                  isFreteiro(user) ? propostasForFreteiro.data : propostasForCliente.data
-                }
+                propostas={propostas.data}
               />
             )}
         </Wrapper>

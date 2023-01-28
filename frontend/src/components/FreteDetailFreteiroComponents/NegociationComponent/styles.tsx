@@ -39,6 +39,13 @@ export const PropostaContainer2 = styled.div`
     grid-column: 1/-1;
   }
 
+  .containerCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   img {
     height: 50px;
     width: 50px;
@@ -49,6 +56,9 @@ export const PropostaContainer2 = styled.div`
   }
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
+    .containerCards {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 

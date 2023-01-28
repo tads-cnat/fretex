@@ -5,46 +5,38 @@ import ModalProposta from "../ModalProposta/intex";
 import { useToggle } from "../../../hooks/useToggle";
 import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
+import Loading from "../../Global/Loading";
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
   propostas: IProposta[];
+  ownerPedido: number;
 }
 
 const NegociationComponent = ({
   actualUser,
   pedidoId,
   propostas,
+  ownerPedido,
 }: INegociation) => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
   const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
-    useToggle(true);
-  const { toggle: togglePropostasEsperando, value: valuePropostasEsperando } =
-    useToggle(true);
-  const { toggle: togglePropostasCanceladas, value: valuePropostasCanceladas } =
     useToggle(true);
 
   const handleClick = (e: any) => {
     e.preventDefault();
     toggleModalProposta();
   };
-
-  const propostasAtivasForFreteiro = propostas.filter(
-    (proposta) => proposta.is_esperandoFreteiro === true,
-  );
-  console.log(propostasAtivasForFreteiro);
-
-  const propostasCanceladasForFreteiro = propostas.filter(
-    (proposta) => proposta.ehNegada === true,
-  );
-  console.log(propostasCanceladasForFreteiro);
-
-  const propostasEmEsperaForFreteiro = propostas.filter(
-    (proposta) => proposta.is_esperandoCliente === true,
-  );
-  console.log(propostasEmEsperaForFreteiro);
+  let usuarios: number[] = [];
+  if (Array.isArray(propostas) && propostas.length > 0) {
+    usuarios = Array.from(new Set(propostas.map((p) => p.usuario))).filter(
+      (usuario) => usuario !== ownerPedido,
+    );
+  }
+//  console.log(usuarios)
+//  console.log(ownerPedido);
 
   return (
     <>
@@ -74,32 +66,45 @@ const NegociationComponent = ({
             toggle={togglePropostasAtivas}
             value={valuePropostasAtivas}
           >
-            <CardProposta
-              propostas={propostasAtivasForFreteiro}
-              type="A responder"
-            />
+            {usuarios.length === 0 && !isFreteiro(actualUser) && (
+              <p>Nenhuma proposta recebida</p>
+            )}
+
+            {!isFreteiro(actualUser) && (
+              <div className="containerCards">
+                {usuarios.length !== 0 &&
+                  !isFreteiro(actualUser) &&
+                  usuarios.map((usuarioId) => (
+                    <CardProposta
+                      key={usuarioId}
+                      actualUser={actualUser}
+                      propostas={propostas}
+                      OwnerPropostasId={usuarioId}
+                      pedidoId={pedidoId}
+                      ownerPedido={ownerPedido}
+                    />
+                  ))}
+              </div>
+            )}
+
+            {!usuarios.find((u) => actualUser.id === u) &&
+              isFreteiro(actualUser) && <p>Você não fez nenhuma propostas</p>}
+
+            {usuarios.length !== 0 &&
+              isFreteiro(actualUser) &&
+              !!usuarios.find((u) => actualUser.id === u) && (
+                <div className="containerCards" key={actualUser.id}>
+                  <CardProposta
+                    actualUser={actualUser}
+                    propostas={propostas}
+                    OwnerPropostasId={actualUser.id}
+                    pedidoId={pedidoId}
+                    ownerPedido={ownerPedido}
+                  />
+                </div>
+              )}
           </CardsContainer>
         </div>
-        <CardsContainer
-          title="Propostas esperando resposta"
-          toggle={togglePropostasEsperando}
-          value={valuePropostasEsperando}
-        >
-          <CardProposta
-            propostas={propostasEmEsperaForFreteiro}
-            type="Aguardando freteiro"
-          />
-        </CardsContainer>
-        <CardsContainer
-          title="Propostas recusadas"
-          toggle={togglePropostasCanceladas}
-          value={valuePropostasCanceladas}
-        >
-          <CardProposta
-            propostas={propostasCanceladasForFreteiro}
-            type="Recusadas"
-          />
-        </CardsContainer>
       </PropostaContainer2>
     </>
   );

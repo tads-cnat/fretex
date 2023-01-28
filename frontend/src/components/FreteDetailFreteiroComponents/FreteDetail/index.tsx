@@ -149,6 +149,7 @@ const FreteDetailComponent = ({
           actualUser={actualUser}
           pedidoId={pedido.id}
           propostas={propostas}
+          ownerPedido={pedido.cliente}
         />
       </Negotiation>
     </Container>

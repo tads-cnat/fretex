@@ -8,9 +8,16 @@ export const ContentMain = styled.main<IStatusColors>`
   gap: 10px;
   align-items: center;
 
+  .imgPerfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
   .valorProposta,
   .botoes,
   .recusadas,
+  .aceita,
   .espera {
     display: flex;
     justify-content: center;
@@ -19,7 +26,8 @@ export const ContentMain = styled.main<IStatusColors>`
   }
 
   .recusadas,
-  .espera {
+  .espera,
+  .aceita {
     color: ${(props) => (props.color ? props.color : "#000")};
     p {
       font-size: var(--font-small);
@@ -43,17 +51,23 @@ export const ContentMain = styled.main<IStatusColors>`
   }
 
   @media (max-width: 768px) {
+    align-items: start;
+    flex-direction: column;
     .botoes {
       flex-direction: column;
       align-items: flex-end;
       width: 100%;
       gap: 5px;
     }
+    .botoes button {
+      width: 100%;
+      padding: 10px;
+    }
     .contraproposta {
       padding: 4px 8px;
     }
     .valorProposta {
-      svg {
+      svg, .imgPerfil {
         width: 30px;
         height: 30px;
       }
@@ -67,14 +81,15 @@ export const ContentMain = styled.main<IStatusColors>`
       props.color === "#7B7B7B" || props.color === "#DC2E2E"
         ? "row"
         : "column"};
-    
+
     align-items: ${(props) =>
       props.color === "#7B7B7B" || props.color === "#DC2E2E"
         ? "center"
         : "flex-start"};
 
     .espera p,
-    .recusadas p {
+    .recusadas p,
+    .aceita p {
       display: none;
     }
     .contraproposta {
