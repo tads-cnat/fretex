@@ -110,7 +110,7 @@ const ContentProposta = ({
   //  console.log(typeUser);
 
   const { data: freteiro, isLoading: isLoadingFreteiro } = useQuery(
-    ["UserOfProposta", proposta.id],
+    ["UserOfProposta", proposta.usuario],
     () => getFreteiro(proposta.usuario),
     {
       enabled:
@@ -119,9 +119,9 @@ const ContentProposta = ({
         !!typeUser.data.extra_data.freteiro,
     },
   );
-/*
+
   const { data: cliente, isLoading: isLoadingCliente } = useQuery(
-    ["UserOfProposta", proposta.id],
+    ["UserOfProposta", proposta.usuario],
     () => getCliente(proposta.usuario),
     {
       enabled:
@@ -131,7 +131,7 @@ const ContentProposta = ({
     },
   );
   console.log(cliente);
-*/
+
   const formatDateAndTime = (initialDate: string) => {
     const time = initialDate.slice(11, 16);
     const date = initialDate.slice(0, 10).replaceAll("-", "/");
@@ -145,7 +145,7 @@ const ContentProposta = ({
     e.preventDefault();
     toggle();
   };
-  if (isLoadingFreteiro/* || isLoadingCliente*/) return <Loading />;
+  if (isLoadingFreteiro || isLoadingCliente) return <Loading />;
   return (
     <>
       <ModalContraproposta
@@ -157,10 +157,18 @@ const ContentProposta = ({
       />
       <ContentMain color={typeContent.color} bg={typeContent.bg}>
         <div className="valorProposta">
-          {proposta.usuario && freteiro ? (
+          {freteiro || cliente ? (
             <img
-              src={freteiro?.data.url_foto}
-              alt={freteiro?.data.first_name}
+              src={
+                isFreteiro(freteiro.data)
+                  ? freteiro.data.url_foto
+                  : cliente.data.url_foto
+              }
+              alt={
+                isFreteiro(freteiro.data)
+                  ? freteiro.data.first_name
+                  : cliente.data.first_name
+              }
               className="imgPerfil"
             />
           ) : (

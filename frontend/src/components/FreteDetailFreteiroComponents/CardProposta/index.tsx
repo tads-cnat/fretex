@@ -31,16 +31,22 @@ const CardProposta = ({
   const { getFreteiro } = useApi();
 
   let propostasFiltradas: IProposta[] = [];
-  propostasFiltradas = propostas
-    .filter(
-      (p) =>
-        (p.usuario === OwnerPropostasId ||
-          p.contraproposta === p.id ||
-          p.usuario === ownerPedido) &&
-        p.pedido === pedidoId,
-    )
-    .sort((p) => p.id);
-    console.log(propostasFiltradas)
+  propostasFiltradas = propostas.filter(
+    (p) =>
+      (p.usuario === OwnerPropostasId ||
+        p.contraproposta === p.id ||
+        p.usuario === ownerPedido) &&
+      p.pedido === pedidoId,
+  );
+  const ultimoProposta = propostasFiltradas.slice(-1);
+      
+  const ultimoVeiculo = ultimoProposta[0].veiculo;
+  
+  propostasFiltradas = propostasFiltradas.filter(
+    (p) => p.veiculo === ultimoVeiculo,
+  );
+
+ // console.log(propostasFiltradas);
 
   let propostasRecusadasForFreteiro: IProposta[] = [];
   propostasRecusadasForFreteiro = propostasFiltradas.filter(

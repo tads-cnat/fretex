@@ -86,7 +86,7 @@ const ModalContraproposta = ({
     const contraproposta = {
       eh_aceita: false,
       ehNegada: false,
-      usuario: proposta.usuario,
+      usuario: actualUser.id,
       pedido: proposta.pedido,
       veiculo: proposta.veiculo,
       contraproposta: proposta.id,
