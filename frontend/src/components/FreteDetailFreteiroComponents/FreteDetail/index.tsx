@@ -16,6 +16,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ICliente, IFreteiro, IPedido, IProposta } from "../../../interfaces";
 import { Seta } from "../../RegisterFreteComponents/Form/styles";
 import NegociationComponent from "../NegociationComponent";
+import useApi from "../../../hooks/useApi";
+import { useQuery } from "react-query";
+import Loading from "../../Global/Loading";
 
 interface IFreteDetail {
   pedido: IPedido;
@@ -31,6 +34,7 @@ const FreteDetailComponent = ({
   propostas,
 }: IFreteDetail) => {
   const navigate = useNavigate();
+  const { getVeiculoForId, tiposVeiculo } = useApi();
   const formatDate = (initialDate: string) => {
     const date = initialDate.replaceAll("-", "/");
     const year = date.slice(0, 4);
@@ -45,6 +49,17 @@ const FreteDetailComponent = ({
     else if (turno === "NO") return "Noite";
   };
 
+  const { data: tipoVeiculos, isLoading } = useQuery(
+    ["tiposVeiculo"],
+    tiposVeiculo,
+  );
+  const filteredArray =
+    !isLoading &&
+    tipoVeiculos.data.filter((element: any) =>
+      pedido.tipo_veiculo.includes(element.id),
+    );
+
+  if (isLoading) return <Loading />;
   return (
     <Container>
       <div>
@@ -127,6 +142,11 @@ const FreteDetailComponent = ({
             <div>
               <h4>Informações adicionais </h4>
               <p>
+                <span>Tipos de veículos aceitos:</span>{" "}
+                {filteredArray.length > 0 &&
+                  filteredArray.map((p: any) => `${p.descricao}/`)}
+              </p>
+              <p>
                 <span>Data máxima de entrega:</span>{" "}
                 {formatDate(pedido.data_entrega)}
               </p>
@@ -137,7 +157,10 @@ const FreteDetailComponent = ({
                 <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
               </p>
               <p>
-                <span>Observações:</span> {pedido.observacao ? pedido.observacao : "Não possui observações"}
+                <span>Observações:</span>{" "}
+                {pedido.observacao
+                  ? pedido.observacao
+                  : "Não possui observações"}
               </p>
             </div>
           </Content2Info>
@@ -150,6 +173,7 @@ const FreteDetailComponent = ({
           pedidoId={pedido.id}
           propostas={propostas}
           ownerPedido={pedido.cliente}
+          pedidoVeiculos={pedido.tipo_veiculo}
         />
       </Negotiation>
     </Container>

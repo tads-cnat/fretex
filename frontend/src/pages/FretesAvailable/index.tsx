@@ -11,26 +11,30 @@ import { useQuery } from "react-query";
 import Loading from "../../components/Global/Loading";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import LoadingPage from "../../components/Global/LoadingPage";
+import { objToQueryString } from "../../utils/queyString";
 
 const FretesAvailable = () => {
   const { user } = useContext(AuthContext);
-  const { getPedidos } = useApi();
+  const { getPedidos, getSearchPedidos } = useApi();
   const [inputText, setInputText] = useState();
+
+  const query = objToQueryString({
+    status: "EN",
+  });
+  
   const {
     data: pedidos,
     isLoading,
     isError,
-  } = useQuery("pedidosDisponiveis", getPedidos, {
-    enabled: !!user,
+  } = useQuery("pedidosDisponiveis", () => getSearchPedidos(query), {
+    enabled: !!user && !!query,
   });
-/*
+  /*
   const { data, status } = useQuery(['search', inputText], () => getPedidos(), {
     refetchOnWindowFocus: false
   });
 */
-  const handleChange = (e: any) => {
-
-  };
+  const handleChange = (e: any) => {};
 
   if (!user) return <LoadingPage />;
   return (

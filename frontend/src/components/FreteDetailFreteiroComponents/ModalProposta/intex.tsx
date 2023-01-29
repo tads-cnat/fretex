@@ -21,6 +21,7 @@ import { BtnYellow as BtnSubmit } from "../NegociationComponent/styles";
 import { schemaProposta } from "./schema";
 import { ContainerVeiculos, FormContainer } from "./styles";
 import { BtnYellowLinkRouter } from "../../../pages/Dashboard/styles";
+import Loading from "../../Global/Loading";
 
 interface IModalProposta {
   toggle: () => void;
@@ -28,6 +29,7 @@ interface IModalProposta {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
   actualUserId: number;
+  pedidoVeiculos: number[];
 }
 
 const ModalProposta = ({
@@ -36,6 +38,7 @@ const ModalProposta = ({
   actualUser,
   pedidoId,
   actualUserId,
+  pedidoVeiculos,
 }: IModalProposta) => {
   const { getVeiculosForFreteiro } = useApi();
   const { registerProposta } = useApi();
@@ -85,7 +88,11 @@ const ModalProposta = ({
   const handleClickRadio = () => {
     toggleCardsContainer();
   };
-  
+
+ /* const veiculosFiltered =
+    !isLoadingVeiculos &&
+    veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo));*/
+  if (isLoadingVeiculos) return <Loading />;
   return (
     <ModalComponent title="Faça sua proposta" toggle={toggle} value={value}>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +105,10 @@ const ModalProposta = ({
             {isLoadingVeiculos && <LoadingPage />}
             {!isLoadingVeiculos && veiculos && veiculos.data.length === 0 && (
               <div className="cadastrarVeiculo">
-                <p>Você não possui veículo</p>
+                <p>
+                  Você não possui veículo ou veiculo do tipo aceito pelo pedido
+                  de frete
+                </p>
                 <BtnYellowLinkRouter to={`/perfil/${actualUserId}/veiculos`}>
                   Casdastrar Veículo
                 </BtnYellowLinkRouter>
@@ -106,18 +116,19 @@ const ModalProposta = ({
             )}
             {veiculos &&
               !isLoadingVeiculos &&
-              veiculos.data.map((veiculo: IVeiculo) => (
-                <label className="labelRadio" key={veiculo.id}>
-                  <input
-                    type="radio"
-                    {...register("veiculo")}
-                    onClick={handleClickRadio}
-                    value={veiculo.id}
-                  />
-                  {/* tu é bom dantas resolve essa ae */}
-                  <CardVeiculo veiculos={veiculo} />
-                </label>
-              ))}
+              veiculos.data
+                .filter((v: IVeiculo) => pedidoVeiculos.includes(v.tipo_veiculo))
+                .map((veiculo: IVeiculo) => (
+                  <label className="labelRadio" key={veiculo.id}>
+                    <input
+                      type="radio"
+                      {...register("veiculo")}
+                      onClick={handleClickRadio}
+                      value={veiculo.id}
+                    />
+                    <CardVeiculo veiculos={veiculo} />
+                  </label>
+                ))}
           </ContainerVeiculos>
         </CardsContainer>
 

@@ -14,6 +14,7 @@ import { useToggle } from "../../../hooks/useToggle";
 import { toast } from "react-toastify";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import Loading from "../../Global/Loading";
+import ModalMoreInfo from "../ModalMoreInfo";
 
 interface IContentProposta {
   type: string;
@@ -130,7 +131,7 @@ const ContentProposta = ({
         !!typeUser.data.extra_data.cliente,
     },
   );
-  console.log(cliente);
+ // console.log(cliente);
 
   const formatDateAndTime = (initialDate: string) => {
     const time = initialDate.slice(11, 16);
@@ -148,6 +149,7 @@ const ContentProposta = ({
   if (isLoadingFreteiro || isLoadingCliente) return <Loading />;
   return (
     <>
+      {/**<ModalMoreInfo /> */}
       <ModalContraproposta
         toggle={toggle}
         value={value}

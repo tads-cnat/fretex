@@ -28,6 +28,7 @@ const CardProposta = ({
     color: "",
     bg: "",
   });
+  const [type, setType] = useState("");
   const { getFreteiro } = useApi();
 
   let propostasFiltradas: IProposta[] = [];
@@ -39,14 +40,14 @@ const CardProposta = ({
       p.pedido === pedidoId,
   );
   const ultimoProposta = propostasFiltradas.slice(-1);
-      
+
   const ultimoVeiculo = ultimoProposta[0].veiculo;
-  
+
   propostasFiltradas = propostasFiltradas.filter(
     (p) => p.veiculo === ultimoVeiculo,
   );
 
- // console.log(propostasFiltradas);
+  // console.log(propostasFiltradas);
 
   let propostasRecusadasForFreteiro: IProposta[] = [];
   propostasRecusadasForFreteiro = propostasFiltradas.filter(
@@ -83,23 +84,33 @@ const CardProposta = ({
       },
     );
 
-  /*  const changeTypeCard = (type: string) => {
+  const changeTypeCard = (type: string) => {
     switch (type) {
-      case "A responder":
+      case "A responder" || "Aceita":
         setTypeCard({ color: "#868830", bg: "#F7F9B3" });
         break;
-      case "Aguardando freteiro":
+      case "Aguardando freteiro" || "Aguardando cliente":
         setTypeCard({ color: "#7B7B7B", bg: "#E7E7E7" });
         break;
       case "Recusadas":
         setTypeCard({ color: "#DC2E2E", bg: "rgba(220, 46, 46, 0.2)" });
         break;
     }
-  };*/
+  };
 
-  /*  useEffect(() => {
+  const chooseType = () => {
+    if (propostaAceitaForFreteiro.length > 0) {
+      setType("Aceita");
+    } else if (propostasRecusadasForFreteiro.length > 0) {
+      setType("Recusadas");
+    }
+  };
+
+  useEffect(() => {
+    chooseType();
     changeTypeCard(type);
-  }, [type]);*/
+  }, [type]);
+  // console.log(propostaAceitaForFreteiro)
   if (isLoadingUserOwnerProposta) return <Loading />;
   return (
     <Container>
@@ -111,7 +122,7 @@ const CardProposta = ({
           </h4>
         </div>
         <div>
-          <span>{/*type*/}</span>
+          {/** <span>{type}</span> */}
           <button type="button">
             <img src={More} alt="ver mais" />
           </button>

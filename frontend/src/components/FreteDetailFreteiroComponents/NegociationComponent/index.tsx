@@ -12,6 +12,7 @@ interface INegociation {
   pedidoId: number;
   propostas: IProposta[];
   ownerPedido: number;
+  pedidoVeiculos: number[];
 }
 
 const NegociationComponent = ({
@@ -19,6 +20,7 @@ const NegociationComponent = ({
   pedidoId,
   propostas,
   ownerPedido,
+  pedidoVeiculos,
 }: INegociation) => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
@@ -35,8 +37,8 @@ const NegociationComponent = ({
       (usuario) => usuario !== ownerPedido,
     );
   }
-//  console.log(usuarios)
-//  console.log(ownerPedido);
+  //  console.log(usuarios)
+  //  console.log(ownerPedido);
 
   return (
     <>
@@ -46,11 +48,12 @@ const NegociationComponent = ({
         actualUser={actualUser}
         actualUserId={actualUser.id}
         pedidoId={pedidoId}
+        pedidoVeiculos={pedidoVeiculos}
       />
       <HeaderContainer>
         <div>
           <h2>Negociação</h2>
-          <p>Aguardando freteiro</p>
+         {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
           !propostas.find((p) => p.usuario === actualUser.id) && (

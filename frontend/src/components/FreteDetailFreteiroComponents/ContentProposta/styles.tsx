@@ -79,13 +79,13 @@ export const ContentMain = styled.main<IStatusColors>`
   @media (max-width: 500px) {
     flex-direction: ${(props) =>
       props.color === "#7B7B7B" || props.color === "#DC2E2E"
-        ? "row"
-        : "column"};
+        ? "column"
+        : "row"};
 
     align-items: ${(props) =>
       props.color === "#7B7B7B" || props.color === "#DC2E2E"
-        ? "center"
-        : "flex-start"};
+        ? "flex-start"
+        : "center"};
 
     .espera p,
     .recusadas p,
