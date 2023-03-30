@@ -75,9 +75,9 @@ Fretex é a nova plataforma de fretes que se propõe a servir de facilitador par
 | :--- | :--- | :--- | :--- |
 | CDU01 | O cliente pode listar um ou mais pedidos de frete. | Cliente | Sim |
 | CDU02 | O cliente pode cadastrar um pedido de frete. | Cliente | Sim |
-| CDU03 | O cliente pode aceitar a proposta feita pelo freteiro. | Cliente | Não |
-| CDU04 | Caso o cliente não concorde com a proposta recente do frete, ele poderá realizar uma nova proposta ao freteiro. | Cliente | Não |
-| CDU05 | O freteiro pode aceitar a proposta feita pelo cliente. | Freteiro | Não |
+| CDU03 | O cliente pode aceitar a proposta feita pelo freteiro. | Cliente | Sim |
+| CDU04 | Caso o cliente não concorde com a proposta recente do frete, ele poderá realizar uma nova proposta ao freteiro. | Cliente | Sim |
+| CDU05 | O freteiro pode aceitar a proposta feita pelo cliente. | Freteiro | Sim |
 | CDU06 | Permite que o freteiro submeta uma proposta para um pedido de frete. | Freteiro | Sim |
 | CDU07 | Permite listar todos os fretes disponíveis para o freteiro realizar propostas | Freteiro | Sim |
 | CDU08 | O ator pode utilizar os seus email e senha para entrar na plataforma como cliente ou freteiro. | Freteiro e Cliente | Sim |
