@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IDropdownMenu } from "../../interfaces/styledComponents";
+import { type IDropdownMenu } from "../../interfaces/styledComponents";
 import { BtnPattern } from "../../styles";
 
 export const Header = styled.header`

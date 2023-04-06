@@ -1,9 +1,10 @@
-import { Container, Content } from "./styles";
-import perfil from "../../../assets/images/perfil.svg";
-import Seta from "../../../assets/images/seta.svg";
-import { Link, NavLink } from "react-router-dom";
-import { ICliente, IFreteiro } from "../../../interfaces";
-import { toast } from "react-toastify";
+import { Container, Content } from './styles';
+import perfil from '../../../assets/images/perfil.svg';
+import Seta from '../../../assets/images/seta.svg';
+import { Link, NavLink } from 'react-router-dom';
+import { type ICliente, type IFreteiro } from '../../../interfaces';
+import { toast } from 'react-toastify';
+import { INavLink } from '../../../interfaces/INavLink';
 
 interface INavUser {
   user: ICliente | IFreteiro;
@@ -17,12 +18,17 @@ const NavUser = ({ user, signout, navigate, active, setActive }: INavUser) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     signout();
-    toast.info('Usuário deslogado!')
-    navigate("/");
+    toast.info('Usuário deslogado!');
+    navigate('/');
   };
 
   return (
-    <Container onClick={() => setActive()} active={active}>
+    <Container
+      onClick={() => {
+        setActive();
+      }}
+      active={active}
+    >
       {user.url_foto ? (
         <img src={user.url_foto} alt={user.first_name} className="perfil" />
       ) : (
@@ -34,7 +40,9 @@ const NavUser = ({ user, signout, navigate, active, setActive }: INavUser) => {
       <Content active={active}>
         <NavLink
           to={`/perfil/${user.id}`}
-          className={({ isActive }) => (isActive ? "active" : "") + " links"}
+          className={({ isActive }: INavLink) =>
+            (isActive ? 'active' : '') + ' links'
+          }
         >
           Meu perfil
         </NavLink>

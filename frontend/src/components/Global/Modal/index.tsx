@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { IActive } from "../../../interfaces/styledComponents";
 import Modal from "react-modal";
@@ -19,7 +19,7 @@ const ModalComponent = ({ children, title, toggle, value }: IModal) => {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => { window.removeEventListener("resize", handleResize); };
   }, []);
 
   const customStyles = {

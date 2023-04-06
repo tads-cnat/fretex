@@ -1,4 +1,4 @@
-import { IClienteFormData, IPedido, IVeiculo } from "../interfaces"
+import { type IClienteFormData, type IPedido, type IVeiculo } from "../interfaces"
 import { api, cepApi } from "../services/api"
 import { } from 'react-query'
 import { useQuery } from "react-query/types/react"

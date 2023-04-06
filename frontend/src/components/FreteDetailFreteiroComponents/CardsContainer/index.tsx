@@ -1,8 +1,7 @@
-import React, { ReactNode } from "react";
-import { Container, ContentHeader, ContentMain } from "./styles";
-import { ReactComponent as Min } from "../../../assets/images/minus-circle.svg";
-import { ReactComponent as Max } from "../../../assets/images/minus-circle-plus.svg";
-import { useToggle } from "../../../hooks/useToggle";
+import { type ReactNode } from 'react';
+import { Container, ContentHeader, ContentMain } from './styles';
+import { ReactComponent as Min } from '../../../assets/images/minus-circle.svg';
+import { ReactComponent as Max } from '../../../assets/images/minus-circle-plus.svg';
 
 interface ICards {
   children: ReactNode;

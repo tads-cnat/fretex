@@ -1,6 +1,6 @@
-import { FieldError } from "react-hook-form";
+import { type FieldError } from "react-hook-form";
 import { InputLabel, LabelContainer } from "./styles";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 
 interface InterfaceInput {
   Icon?: React.ElementType;
@@ -29,7 +29,7 @@ const LabelInput = ({
         {Icon && <Icon />}
         {children}
       </InputLabel>
-      {isError && <p className="error">{errorMessage}</p>}
+      {(isError != null) && <p className="error">{errorMessage}</p>}
     </LabelContainer>
   );
 };

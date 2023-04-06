@@ -15,7 +15,7 @@ export const Registration = () => {
           Para Clientes<SpanYellow>.</SpanYellow>
         </Title>
         <Text>Publique seus pedidos de fretes.</Text>
-        <BtnPattern to="/register" onClick={() => handleTypeUser('cliente')}>
+        <BtnPattern to="/register" onClick={() => { handleTypeUser('cliente'); }}>
           Cadastre-se
         </BtnPattern>
       </RegisterUser>
@@ -26,7 +26,7 @@ export const Registration = () => {
         <Text> Encontre as melhores cargas para o seu veículo.</Text>
         <BtnPattern
           to="/register"
-          onClick={() => handleTypeUser('freteiro')}
+          onClick={() => { handleTypeUser('freteiro'); }}
         >
           Cadastre-se
         </BtnPattern>

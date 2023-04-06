@@ -3,7 +3,7 @@ import CardsContainer from "../CardsContainer";
 import CardProposta from "../CardProposta";
 import ModalProposta from "../ModalProposta/intex";
 import { useToggle } from "../../../hooks/useToggle";
-import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
+import { type ICliente, type IFreteiro, type IProposta } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import Loading from "../../Global/Loading";
 
@@ -56,7 +56,7 @@ const NegociationComponent = ({
          {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          !propostas.find((p) => p.usuario === actualUser.id) && (
+          (propostas.find((p) => p.usuario === actualUser.id) == null) && (
             <BtnYellow type="button" onClick={handleClick}>
               Realizar Proposta
             </BtnYellow>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InterfaceInfo } from "../../interfaces/styledComponents";
+import { type InterfaceInfo } from "../../interfaces/styledComponents";
 
 export const FinalFooterContainer = styled.section`
   background-color: var(--bg-grey2);

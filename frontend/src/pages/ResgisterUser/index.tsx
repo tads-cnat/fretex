@@ -27,14 +27,14 @@ const Register = () => {
         <WrapperRegister bgColor="#282828">
           <div className="typeRegister">
             <BtnTypeUser
-              onClick={() => handleClick("cliente")}
-              active={typeResgister === "cliente" ? true : false}
+              onClick={() => { handleClick("cliente"); }}
+              active={typeResgister === "cliente"}
             >
               Cliente
             </BtnTypeUser>
             <BtnTypeUser
-              onClick={() => handleClick("freteiro")}
-              active={typeResgister === "freteiro" ? true : false}
+              onClick={() => { handleClick("freteiro"); }}
+              active={typeResgister === "freteiro"}
             >
               Freteiro
             </BtnTypeUser>

@@ -21,7 +21,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const { getSearchPedidos, deletePedido } = useApi();
 
-  const typeUser = user ? isFreteiro(user) : null;
+  const typeUser = (user != null) ? isFreteiro(user) : null;
 
   const queryStringEN = objToQueryString(
     typeUser
@@ -86,7 +86,7 @@ const Dashboard = () => {
     data: pedidosEN,
     isLoading: isLoadingPedidosEN,
     isError: errorPedidosEN,
-  } = useQuery("pedidosEN", () => getSearchPedidos(queryStringEN), {
+  } = useQuery("pedidosEN", async () => await getSearchPedidos(queryStringEN), {
     enabled: !!user?.id,
   });
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
     data: pedidosAG,
     isLoading: isLoadingPedidosAG,
     isError: errorPedidosAG,
-  } = useQuery("pedidosAG", () => getSearchPedidos(queryStringAG), {
+  } = useQuery("pedidosAG", async () => await getSearchPedidos(queryStringAG), {
     enabled: !!user?.id,
   });
 
@@ -102,7 +102,7 @@ const Dashboard = () => {
     data: pedidosTR,
     isLoading: isLoadingPedidosTR,
     isError: errorPedidosTR,
-  } = useQuery("pedidosTR", () => getSearchPedidos(queryStringTR), {
+  } = useQuery("pedidosTR", async () => await getSearchPedidos(queryStringTR), {
     enabled: !!user?.id,
   });
 
@@ -110,7 +110,7 @@ const Dashboard = () => {
     data: pedidosCO,
     isLoading: isLoadingPedidosCO,
     isError: errorPedidosCO,
-  } = useQuery("pedidosCO", () => getSearchPedidos(queryStringCO), {
+  } = useQuery("pedidosCO", async () => await getSearchPedidos(queryStringCO), {
     enabled: !!user?.id,
   });
 
@@ -118,17 +118,17 @@ const Dashboard = () => {
     data: pedidosCA,
     isLoading: isLoadingPedidosCA,
     isError: errorPedidosCA,
-  } = useQuery("pedidosCA", () => getSearchPedidos(queryStringCA), {
+  } = useQuery("pedidosCA", async () => await getSearchPedidos(queryStringCA), {
     enabled: !!user?.id,
   });
 
-  if (!user) return <LoadingPage />;
+  if (user == null) return <LoadingPage />;
   return (
     <Layout>
       <Wrapper style={{ minHeight: "80vh" }}>
         <Title>Dashboard</Title>
         <Filter>
-          <span>Seus Fretes {/*dos últimos 30 dias*/}</span>
+          <span>Seus Fretes {/* dos últimos 30 dias */}</span>
           <div>
             <button className="concluidos">Ver todos os concluídos</button>
             {isFreteiro(user) && (

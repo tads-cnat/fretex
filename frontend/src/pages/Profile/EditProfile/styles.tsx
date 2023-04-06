@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { PerfilImg } from "../../../components/RegisterComponents/RegisterFreteiroForm/styles";
-import { IActive } from "../../../interfaces/styledComponents";
+import { type IActive } from "../../../interfaces/styledComponents";
 
 export const Container = styled.div`
   margin-bottom: 50px;

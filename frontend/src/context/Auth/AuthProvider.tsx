@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import useApi from "../../hooks/useApi";
-import { ICliente, IFreteiro } from "../../interfaces";
+import { type ICliente, type IFreteiro } from "../../interfaces";
 import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {

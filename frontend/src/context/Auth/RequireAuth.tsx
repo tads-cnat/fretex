@@ -12,9 +12,9 @@ const RequireAuth = ({
 }) => {
   const { user, typeUser, isLoadingUser } = useContext(AuthContext);
 
-  if (!user && !isLoadingUser) return <Login />;
-  else if (user && level === 3) return children;
-  else if (user && typeUser !== level) return <Login />;
+  if ((user == null) && !isLoadingUser) return <Login />;
+  else if ((user != null) && level === 3) return children;
+  else if ((user != null) && typeUser !== level) return <Login />;
 
   return children;
 };

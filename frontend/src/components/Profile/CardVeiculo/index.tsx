@@ -1,5 +1,5 @@
 import { Card, Informacoes, Img } from "./styles";
-import { IVeiculo } from "../../../interfaces";
+import { type IVeiculo } from "../../../interfaces";
 import { ReactComponent as Gota } from "../../../assets/images/gota_colorir.svg";
 import { ReactComponent as Info } from "../../../assets/images/InfoCircle.svg";
 import Placa from "../../../assets/images/placaCarro.png";
@@ -22,7 +22,7 @@ const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }) => {
                 setTipoVeiculo(res.data[0])
             }
             )
-            .catch((error) => console.log(error))
+            .catch((error) => { console.log(error); })
     }, [])
 
     return (
@@ -39,7 +39,7 @@ const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }) => {
                     </div>
                     <div>
                         <Info />
-                        {TipoVeiculo &&
+                        {(TipoVeiculo != null) &&
                             <span>
                                 Tipo: {TipoVeiculo?.descricao}
                             </span>

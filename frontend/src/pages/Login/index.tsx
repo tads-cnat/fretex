@@ -13,9 +13,9 @@ import { SpanYellow, Wrapper } from "../../styles";
 import { BgRegister } from "../ResgisterUser/style";
 import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { schemaLogin } from "./schemas";
-import { ILogin } from "../../interfaces";
+import { type ILogin } from "../../interfaces";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { useToggle } from "../../hooks/useToggle";
 import { toast } from 'react-toastify'
@@ -89,13 +89,13 @@ const Login = () => {
                     placeholder="Seu E-mail"
                   />
                 </label>
-                {errors.email && (
+                {(errors.email != null) && (
                   <p className="error">{errors.email?.message}</p>
                 )}
                 <label>
                   <Password />
                   <input
-                    type={password === true ? "text" : "password"}
+                    type={password ? "text" : "password"}
                     {...register("password")}
                     placeholder="Sua senha"
                   />
@@ -103,7 +103,7 @@ const Login = () => {
                     {password ? <ClosedEye /> : <Eye />}
                   </button>
                 </label>
-                {errors.password && (
+                {(errors.password != null) && (
                   <p className="error">{errors.password?.message}</p>
                 )}
                 {error && <p className="error">{error}</p>}

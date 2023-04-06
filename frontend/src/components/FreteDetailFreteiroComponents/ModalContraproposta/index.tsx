@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
-import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
+import { type ICliente, type IFreteiro, type IProposta } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import LoadingPage from "../../Global/LoadingPage";
 import ModalComponent from "../../Global/Modal";
@@ -53,7 +53,7 @@ const ModalContraproposta = ({
 
   const { data: veiculo, isLoading: isLoadingVeiculo } = useQuery(
     ["veiculoDaPropostaInicial", proposta.id],
-    () => getVeiculo(proposta.veiculo),
+    async () => await getVeiculo(proposta.veiculo),
     {
       enabled: !!proposta,
     },
@@ -61,7 +61,7 @@ const ModalContraproposta = ({
 
   const registerPropostaMutation = useMutation(
     ["createProposta", proposta.id],
-    (data: FormData) => registerProposta(data).then((res) => res),
+    async (data: FormData) => await registerProposta(data).then((res) => res),
     {
       onSuccess: () => {
         client.refetchQueries("propostasForPedido");
@@ -71,7 +71,7 @@ const ModalContraproposta = ({
 
   const updatePropostaMutation = useMutation(
     ["updateProposta", proposta.id],
-    ({ id, data }: IUpdate) => updateProposta(id, data),
+    async ({ id, data }: IUpdate) => await updateProposta(id, data),
     {
       onSuccess: () => {
         client.refetchQueries("propostasForPedido");
@@ -92,8 +92,8 @@ const ModalContraproposta = ({
       contraproposta: proposta.id,
       valor: data.valor,
       is_contraproposta: true,
-      is_esperandoFreteiro: isFreteiro(actualUser) ? false : true,
-      is_esperandoCliente: isFreteiro(actualUser) ? true : false,
+      is_esperandoFreteiro: !isFreteiro(actualUser),
+      is_esperandoCliente: !!isFreteiro(actualUser),
     };
 
     Object.entries(contraproposta).forEach(([key, value]) => {

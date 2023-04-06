@@ -13,7 +13,7 @@ import {
   IClienteFormData,
   IFreteiro,
   IFreteiroFormData,
-  IUserUpdateFormData,
+  type IUserUpdateFormData,
 } from "../../../interfaces";
 import { schemaCliente, schemaFreteiro } from "../../ResgisterUser/schemas";
 import perfil from "../../../assets/images/imgperfil.svg";
@@ -37,7 +37,7 @@ import {
 } from "./styles";
 import LabelInput from "../../../components/Profile/LabelInput";
 import { isFreteiro } from "../../../utils/isFreteiro";
-import { SubmitHandler } from "react-hook-form/dist/types";
+import { type SubmitHandler } from "react-hook-form/dist/types";
 import useApi from "../../../hooks/useApi";
 import { AuthContext } from "../../../context/Auth/AuthContext";
 import { toast } from "react-toastify";
@@ -83,7 +83,7 @@ const EditProfile = () => {
           setUser(res.data);
           setActualUser(res.data)
         })
-        .catch((res) => console.log(res.response.data));
+        .catch((res) => { console.log(res.response.data); });
       return;
     }
 
@@ -140,7 +140,7 @@ const EditProfile = () => {
     toggleConfirmPassword();
   };
 
-  if (!user || !actualUser) return <p>Carregando...</p>;
+  if (!user || (actualUser == null)) return <p>Carregando...</p>;
   if (user && actualUser && user.id !== actualUser.id) navigate("/login");
   return (
     <Container>
@@ -148,7 +148,7 @@ const EditProfile = () => {
         <h1 className="title">Edite seu perfil</h1>
         <PerfilImgUpdate>
           <label>
-            <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
+            <img src={imagePreview || perfil} alt="perfil" />
             <input
               type="file"
               {...register("url_foto")}
@@ -200,7 +200,7 @@ const EditProfile = () => {
               errorMessage={errors.password?.message}
             >
               <input
-                type={password === true ? "text" : "password"}
+                type={password ? "text" : "password"}
                 {...register("password")}
                 placeholder="Digite sua senha para atualização"
               />
@@ -214,7 +214,7 @@ const EditProfile = () => {
               errorMessage={errors.confirmPassword?.message}
             >
               <input
-                type={confirmPassword === true ? "text" : "password"}
+                type={confirmPassword ? "text" : "password"}
                 {...register("confirmPassword")}
                 placeholder="Confirme sua senha para atualização"
               />

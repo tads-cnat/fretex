@@ -22,7 +22,7 @@ const ProfileMenu = ({
       <Link
         to={`/perfil/${userId}/`}
         className={selectedTab === 0 ? "menuBtn active" : "menuBtn"}
-        onClick={() => handleClick(0)}
+        onClick={() => { handleClick(0); }}
       >
         Fretes Realizados
       </Link>
@@ -30,7 +30,7 @@ const ProfileMenu = ({
         <Link
           to={`/perfil/${userId}/veiculos`}
           className={selectedTab === 1 ? "menuBtn active" : "menuBtn"}
-          onClick={() => handleClick(1)}
+          onClick={() => { handleClick(1); }}
         >
           Veículos
         </Link>
@@ -39,7 +39,7 @@ const ProfileMenu = ({
       <Link
         to={`/perfil/${userId}/avaliacoes`}
         className={selectedTab === 2 ? "menuBtn active" : "menuBtn"}
-        onClick={() => handleClick(2)}
+        onClick={() => { handleClick(2); }}
       >
         Avaliações
       </Link>
@@ -47,7 +47,7 @@ const ProfileMenu = ({
         <Link
           to={`/perfil/${userId}/editarPerfil`}
           className={selectedTab === 3 ? "menuBtn active" : "menuBtn"}
-          onClick={() => handleClick(3)}
+          onClick={() => { handleClick(3); }}
         >
           Editar Perfil
         </Link>

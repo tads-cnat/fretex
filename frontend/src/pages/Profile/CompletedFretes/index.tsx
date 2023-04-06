@@ -3,7 +3,7 @@ import styled from "styled-components";
 import BoxFretes from "../../../components/FretesAvailable/BoxFretes";
 import { AuthContext } from "../../../context/Auth/AuthContext";
 import useApi from "../../../hooks/useApi";
-import { IPedido } from "../../../interfaces";
+import { type IPedido } from "../../../interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const CompletedFretes = () => {
     });
   }, []);
 
-  if (!user) return <p>Carregando...</p>;
+  if (user == null) return <p>Carregando...</p>;
   return (
     <>
       {fretes.length === 0 && (

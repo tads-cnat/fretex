@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { IFreteiroFormData } from "../interfaces";
+import { type IFreteiroFormData } from "../interfaces";
 import useApi from "./useApi";
-import { SubmitHandler } from "react-hook-form";
+import { type SubmitHandler } from "react-hook-form";
 
-type Props = {
+interface Props {
     onSuccess: () => void
 }
 

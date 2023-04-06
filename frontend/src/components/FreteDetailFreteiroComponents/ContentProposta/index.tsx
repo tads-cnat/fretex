@@ -5,8 +5,8 @@ import { ReactComponent as Clock } from "../../../assets/images/clock.svg";
 import { ReactComponent as Canceled } from "../../../assets/images/canceled.svg";
 import { ReactComponent as Done } from "../../../assets/images/Concluido.svg";
 
-import { IStatusColors } from "../../../interfaces/styledComponents";
-import { ICliente, IFreteiro, IProposta } from "../../../interfaces";
+import { type IStatusColors } from "../../../interfaces/styledComponents";
+import { type ICliente, type IFreteiro, type IProposta } from "../../../interfaces";
 import useApi from "../../../hooks/useApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ModalContraproposta from "../ModalContraproposta";
@@ -42,7 +42,7 @@ const ContentProposta = ({
   const client = useQueryClient();
   const updatePropostaMutation = useMutation(
     ["updateProposta", proposta.id],
-    ({ id, data }: IUpdate) => updateProposta(id, data),
+    async ({ id, data }: IUpdate) => await updateProposta(id, data),
     {
       onSuccess: () => {
         client.refetchQueries("propostasForPedido");
@@ -52,7 +52,7 @@ const ContentProposta = ({
 
   const updatePedidoMutation = useMutation(
     "updateProposta",
-    ({ id, data }: IUpdate) => updatePedido(id, data),
+    async ({ id, data }: IUpdate) => await updatePedido(id, data),
     {
       onSuccess: () => {
         client.refetchQueries(["pedidosEN", "pedidosAG"]);
@@ -103,7 +103,7 @@ const ContentProposta = ({
 
   const { data: typeUser, isLoading: isLoadingTypeUser } = useQuery(
     ["TypeOfUser", proposta.id],
-    () => getTypeUser(proposta.usuario),
+    async () => await getTypeUser(proposta.usuario),
     {
       enabled: !!proposta?.usuario,
     },
@@ -112,7 +112,7 @@ const ContentProposta = ({
 
   const { data: freteiro, isLoading: isLoadingFreteiro } = useQuery(
     ["UserOfProposta", proposta.usuario],
-    () => getFreteiro(proposta.usuario),
+    async () => await getFreteiro(proposta.usuario),
     {
       enabled:
         !!proposta?.usuario &&
@@ -123,7 +123,7 @@ const ContentProposta = ({
 
   const { data: cliente, isLoading: isLoadingCliente } = useQuery(
     ["UserOfProposta", proposta.usuario],
-    () => getCliente(proposta.usuario),
+    async () => await getCliente(proposta.usuario),
     {
       enabled:
         !!proposta?.usuario &&
@@ -149,7 +149,7 @@ const ContentProposta = ({
   if (isLoadingFreteiro || isLoadingCliente) return <Loading />;
   return (
     <>
-      {/**<ModalMoreInfo /> */}
+      {/** <ModalMoreInfo /> */}
       <ModalContraproposta
         toggle={toggle}
         value={value}

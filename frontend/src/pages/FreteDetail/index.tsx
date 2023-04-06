@@ -21,7 +21,7 @@ const FreteDetail = () => {
 
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
     ["pedido", id],
-    () => getPedido(Number(id)),
+    async () => await getPedido(Number(id)),
     {
       enabled: !!id,
     },
@@ -29,7 +29,7 @@ const FreteDetail = () => {
 
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     ["pedidoCreatedBy", id],
-    () => getCliente(pedido.data.cliente),
+    async () => await getCliente(pedido.data.cliente),
     {
       enabled: !!pedido?.data.cliente,
     },
@@ -37,20 +37,20 @@ const FreteDetail = () => {
 
   const queryStringPropostas =
     pedido?.data?.id &&
-    user &&
+    (user != null) &&
     objToQueryString({
       pedido: pedido.data.id,
     });
 
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     ["propostasForPedido", id],
-    () => getPropostasForPedido(queryStringPropostas),
+    async () => await getPropostasForPedido(queryStringPropostas),
     {
-      enabled: !!user && !!pedido?.data && !!queryStringPropostas,
+      enabled: !(user == null) && !!pedido?.data && !!queryStringPropostas,
     },
   );
 
-  if (!user) return <Login />;
+  if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
   if (user && !isFreteiro(user) && user.id !== pedido.data.cliente)
     return <Login />;

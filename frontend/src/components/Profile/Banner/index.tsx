@@ -6,7 +6,7 @@ import { useToggle } from "../../../hooks/useToggle";
 import { BtnYellow } from "../../../pages/Dashboard/styles";
 import useApi from "../../../hooks/useApi";
 import { useParams } from "react-router-dom";
-import { ICliente, IFreteiro } from "../../../interfaces";
+import { type ICliente, type IFreteiro } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 
 interface IBanner {
@@ -38,14 +38,14 @@ const Banner = ({ user, ownerPage }: IBanner) => {
           setImageBanner(res.data.capa_foto);
           toggle();
         })
-        .catch((res) => console.log(res.response.data));
+        .catch((res) => { console.log(res.response.data); });
     } else {
       updateCliente(Number(id), formData)
         .then((res) => {
           setImageBanner(res.data.capa_foto);
           toggle();
         })
-        .catch((res) => console.log(res.response.data));
+        .catch((res) => { console.log(res.response.data); });
     }
   };
 

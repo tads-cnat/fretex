@@ -12,11 +12,11 @@ import Eye from "../../../assets/Svg/Eye";
 import { useEffect, useState } from "react";
 import ClosedEye from "../../../assets/Svg/ClosedEye";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
-import {  IClienteFormData } from "../../../interfaces";
+import {  type IClienteFormData } from "../../../interfaces";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 import { toast } from "react-toastify";
@@ -95,7 +95,7 @@ const RegisterClientForm = () => {
                 placeholder="Seu E-mail"
               />
             </label>
-            {errors.email && <p className="error">{errors.email?.message}</p>}
+            {(errors.email != null) && <p className="error">{errors.email?.message}</p>}
             <label>
               <User />
               <input
@@ -104,7 +104,7 @@ const RegisterClientForm = () => {
                 placeholder="Seu nome completo"
               />
             </label>
-            {errors.full_name && (
+            {(errors.full_name != null) && (
               <p className="error">{errors.full_name?.message}</p>
             )}
             <label>
@@ -115,11 +115,11 @@ const RegisterClientForm = () => {
                 placeholder="Seu cpf"
               ></InputMask>
             </label>
-            {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
+            {(errors.cpf != null) && <p className="error">{errors.cpf?.message}</p>}
             <label>
               <Password />
               <input
-                type={password === true ? "text" : "password"}
+                type={password ? "text" : "password"}
                 {...register("password")}
                 placeholder="Sua senha"
               />
@@ -127,13 +127,13 @@ const RegisterClientForm = () => {
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {errors.password && (
+            {(errors.password != null) && (
               <p className="error">{errors.password?.message}</p>
             )}
             <label>
               <Password />
               <input
-                type={confirmPassword === true ? "text" : "password"}
+                type={confirmPassword ? "text" : "password"}
                 {...register("confirmPassword")}
                 placeholder="Confirme sua senha"
               />
@@ -141,7 +141,7 @@ const RegisterClientForm = () => {
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {errors.confirmPassword && (
+            {(errors.confirmPassword != null) && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
             {error && <p className="error">{error}</p>}

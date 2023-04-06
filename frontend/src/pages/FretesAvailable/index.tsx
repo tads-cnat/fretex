@@ -5,7 +5,7 @@ import { ContainerBg, ContainerMain, ContainerFretes, Search } from "./styles";
 import SearchImg from "../../assets/images/search.svg";
 import useApi from "../../hooks/useApi";
 import { useContext, useEffect, useState } from "react";
-import { IPedido } from "../../interfaces";
+import { type IPedido } from "../../interfaces";
 import Layout from "../../components/Layout";
 import { useQuery } from "react-query";
 import Loading from "../../components/Global/Loading";
@@ -26,8 +26,8 @@ const FretesAvailable = () => {
     data: pedidos,
     isLoading,
     isError,
-  } = useQuery("pedidosDisponiveis", () => getSearchPedidos(query), {
-    enabled: !!user && !!query,
+  } = useQuery("pedidosDisponiveis", async () => await getSearchPedidos(query), {
+    enabled: !(user == null) && !!query,
   });
   /*
   const { data, status } = useQuery(['search', inputText], () => getPedidos(), {
@@ -36,7 +36,7 @@ const FretesAvailable = () => {
 */
   const handleChange = (e: any) => {};
 
-  if (!user) return <LoadingPage />;
+  if (user == null) return <LoadingPage />;
   return (
     <Layout>
       <ContainerBg>
@@ -47,7 +47,7 @@ const FretesAvailable = () => {
             <input
               type="text"
               placeholder="Material"
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(e) => { handleChange(e.target.value); }}
             />
           </Search>
           <ContainerMain>

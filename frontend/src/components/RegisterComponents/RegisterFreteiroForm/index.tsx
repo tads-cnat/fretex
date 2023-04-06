@@ -18,7 +18,7 @@ import ClosedEye from "../../../assets/Svg/ClosedEye";
 import Eye from "../../../assets/Svg/Eye";
 import { SpanYellow } from "../../../styles";
 import { useEffect, useState } from "react";
-import { IFreteiroFormData } from "../../../interfaces";
+import { type IFreteiroFormData } from "../../../interfaces";
 import { Link, useNavigate } from "react-router-dom";
 import { schemaFreteiro } from "../../../pages/ResgisterUser/schemas";
 import { useToggle } from "../../../hooks/useToggle";
@@ -76,7 +76,7 @@ const RegisterFreteiroForm = () => {
             <h1>Crie sua conta</h1>
             <PerfilImg>
               <label>
-                <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
+                <img src={imagePreview || perfil} alt="perfil" />
                 <input
                   type="file"
                   {...register("url_foto")}
@@ -84,7 +84,7 @@ const RegisterFreteiroForm = () => {
                   onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>
-                {/*errors.url_foto && <p className="error">{errors.url_foto?.message}</p>*/}
+                {/* errors.url_foto && <p className="error">{errors.url_foto?.message}</p> */}
               </label>
             </PerfilImg>
             <label>
@@ -96,7 +96,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu E-mail"
               />
             </label>
-            {errors.email && <p className="error">{errors.email?.message}</p>}
+            {(errors.email != null) && <p className="error">{errors.email?.message}</p>}
             <label>
               <User />
               <input
@@ -105,7 +105,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu nome completo"
               />
             </label>
-            {errors.full_name && (
+            {(errors.full_name != null) && (
               <p className="error">{errors.full_name?.message}</p>
             )}
             <label>
@@ -116,33 +116,33 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu cpf"
               ></InputMask>
             </label>
-            {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
+            {(errors.cpf != null) && <p className="error">{errors.cpf?.message}</p>}
             <label>
               <Password />
               <input
                 {...register("password")}
-                type={password === true ? "text" : "password"}
+                type={password ? "text" : "password"}
                 placeholder="Sua senha"
               />
               <button type="button" onClick={handlePassword}>
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {errors.password && (
+            {(errors.password != null) && (
               <p className="error">{errors.password?.message}</p>
             )}
             <label>
               <Password />
               <input
                 {...register("confirmPassword")}
-                type={confirmPassword === true ? "text" : "password"}
+                type={confirmPassword ? "text" : "password"}
                 placeholder="Confirme sua senha"
               />
               <button type="button" onClick={handleConfirmPassword}>
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {errors.confirmPassword && (
+            {(errors.confirmPassword != null) && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
           </RegisterPerson>
@@ -157,7 +157,7 @@ const RegisterFreteiroForm = () => {
                 onBlur={completeAddress}
               ></InputMask>
             </label>
-            {errors.endereco?.CEP && (
+            {((errors.endereco?.CEP) != null) && (
               <p className="error">{errors.endereco.CEP?.message}</p>
             )}
             <label>
@@ -168,7 +168,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Sua rua"
               />
             </label>
-            {errors.endereco?.rua && (
+            {((errors.endereco?.rua) != null) && (
               <p className="error">{errors.endereco.rua?.message}</p>
             )}
             <label>
@@ -179,7 +179,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Número da sua casa"
               />
             </label>
-            {errors.endereco?.numero && (
+            {((errors.endereco?.numero) != null) && (
               <p className="error">{errors.endereco.numero?.message}</p>
             )}
             <label>
@@ -190,7 +190,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu bairro"
               />
             </label>
-            {errors.endereco?.bairro && (
+            {((errors.endereco?.bairro) != null) && (
               <p className="error">{errors.endereco.bairro?.message}</p>
             )}
             <label>
@@ -201,7 +201,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Sua cidade"
               />
             </label>
-            {errors.endereco?.cidade && (
+            {((errors.endereco?.cidade) != null) && (
               <p className="error">{errors?.endereco.cidade.message}</p>
             )}
             <label>
@@ -212,7 +212,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Seu estado"
               />
             </label>
-            {errors.endereco?.estado && (
+            {((errors.endereco?.estado) != null) && (
               <p className="error">{errors.endereco.estado?.message}</p>
             )}
             <label>
@@ -223,7 +223,7 @@ const RegisterFreteiroForm = () => {
                 placeholder="Complemento"
               />
             </label>
-            {errors.endereco?.complemento && (
+            {((errors.endereco?.complemento) != null) && (
               <p className="error">{errors.endereco.complemento?.message}</p>
             )}
             {error && <p className="error">{error}</p>}

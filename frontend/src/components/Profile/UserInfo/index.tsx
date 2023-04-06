@@ -1,6 +1,6 @@
 import { Container, ContainerImage, Content, Title } from "./styles";
 import perfil from "../../../assets/images/perfil.svg";
-import { ICliente, IFreteiro } from "../../../interfaces";
+import { type ICliente, type IFreteiro } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 
 const UserTitle = ({ user }: { user: ICliente | IFreteiro }) => {

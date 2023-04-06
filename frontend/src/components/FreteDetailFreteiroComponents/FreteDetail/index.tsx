@@ -13,7 +13,7 @@ import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-c
 import geoalt from "../../../assets/images/geo-alt.svg";
 import info from "../../../assets/images/info-circle.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { ICliente, IFreteiro, IPedido, IProposta } from "../../../interfaces";
+import { type ICliente, type IFreteiro, type IPedido, type IProposta } from "../../../interfaces";
 import { Seta } from "../../RegisterFreteComponents/Form/styles";
 import NegociationComponent from "../NegociationComponent";
 import useApi from "../../../hooks/useApi";
@@ -64,7 +64,7 @@ const FreteDetailComponent = ({
     <Container>
       <div>
         <h1>Detalhes de frete</h1>
-        <Seta onClick={() => navigate(-1)}>
+        <Seta onClick={() => { navigate(-1); }}>
           <Arrowleft /> Voltar
         </Seta>
       </div>

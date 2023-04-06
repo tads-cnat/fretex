@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IActive } from "../../interfaces/styledComponents";
+import { type IActive } from "../../interfaces/styledComponents";
 import { Wrapper } from "../../styles";
 
 export const BgRegister = styled.section`

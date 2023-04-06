@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IRegisterImage } from "../../../interfaces/styledComponents";
+import { type IRegisterImage } from "../../../interfaces/styledComponents";
 
 export const RegisterContainer = styled.div`
   display: grid;

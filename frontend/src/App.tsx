@@ -1,8 +1,8 @@
-import { GlobalStyle, StyledApp } from "./styles";
-import Routes from "./routes/Routes";
-import { Toast } from "./components/Toast";
+import { GlobalStyle, StyledApp } from './styles';
+import Routes from './routes/Routes';
+import { Toast } from './components/Toast';
 
-function App() {
+const App = (): JSX.Element => {
   return (
     <StyledApp>
       <GlobalStyle />
@@ -10,6 +10,6 @@ function App() {
       <Toast />
     </StyledApp>
   );
-}
+};
 
 export default App;

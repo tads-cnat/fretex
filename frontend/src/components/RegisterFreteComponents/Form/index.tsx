@@ -11,9 +11,9 @@ import {
   ButtonDiv,
 } from "./styles";
 import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
-import { SubmitHandler } from "react-hook-form";
+import { type SubmitHandler } from "react-hook-form";
 import { schemaPedido } from "../../../pages/RegisterFrete/schemas";
-import { IPedidoFormData } from "../../../interfaces";
+import { type IPedidoFormData } from "../../../interfaces";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 import { useEffect, useState } from "react";
@@ -161,13 +161,13 @@ const Index = () => {
         toast.success("Pedido cadastrado com sucesso!");
         navigate("/dashboard");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { console.log(error); });
   };
 
   useEffect(() => {
     tiposVeiculo()
-      .then((res) => setTiposDeVeiculo(res.data))
-      .catch((error) => console.log(error)); // eslint-disable-next-line
+      .then((res) => { setTiposDeVeiculo(res.data); })
+      .catch((error) => { console.log(error); }); // eslint-disable-next-line
   }, []);
 
   return (
@@ -175,7 +175,7 @@ const Index = () => {
       <Container>
         <div>
           <h1>Cadastro de pedido</h1>
-          <Seta onClick={() => navigate(-1)}>
+          <Seta onClick={() => { navigate(-1); }}>
             <Arrowleft /> Voltar
           </Seta>
         </div>
@@ -192,7 +192,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o CEP"
                 ></InputMask>
-                {errors.origem?.CEP && (
+                {((errors.origem?.CEP) != null) && (
                   <p className="error">{errors.origem.CEP?.message}</p>
                 )}
               </label>
@@ -204,7 +204,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o nome da rua"
                 />
-                {errors.origem?.rua && (
+                {((errors.origem?.rua) != null) && (
                   <p className="error">{errors.origem.rua?.message}</p>
                 )}
               </label>
@@ -216,7 +216,7 @@ const Index = () => {
                   type="number"
                   placeholder="Digite o numero da casa"
                 />
-                {errors.origem?.numero && (
+                {((errors.origem?.numero) != null) && (
                   <p className="error">{errors.origem.numero?.message}</p>
                 )}
               </label>
@@ -228,7 +228,7 @@ const Index = () => {
                   type="string"
                   placeholder="Digite o bairro"
                 />
-                {errors.origem?.bairro && (
+                {((errors.origem?.bairro) != null) && (
                   <p className="error">{errors.origem.bairro?.message}</p>
                 )}
               </label>
@@ -240,7 +240,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite a Cidade"
                 />
-                {errors.origem?.cidade && (
+                {((errors.origem?.cidade) != null) && (
                   <p className="error">{errors.origem.cidade?.message}</p>
                 )}
               </label>
@@ -252,7 +252,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o Estado"
                 />
-                {errors.origem?.estado && (
+                {((errors.origem?.estado) != null) && (
                   <p className="error">{errors.origem.estado?.message}</p>
                 )}
               </label>
@@ -276,7 +276,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o CEP"
                 ></InputMask>
-                {errors.destino?.CEP && (
+                {((errors.destino?.CEP) != null) && (
                   <p className="error">{errors.destino.CEP?.message}</p>
                 )}
               </label>
@@ -287,7 +287,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o nome da rua"
                 />
-                {errors.destino?.rua && (
+                {((errors.destino?.rua) != null) && (
                   <p className="error">{errors.destino.rua?.message}</p>
                 )}
               </label>
@@ -298,7 +298,7 @@ const Index = () => {
                   type="number"
                   placeholder="Digite o numero da casa"
                 />
-                {errors.destino?.numero && (
+                {((errors.destino?.numero) != null) && (
                   <p className="error">{errors.destino.numero?.message}</p>
                 )}
               </label>
@@ -309,7 +309,7 @@ const Index = () => {
                   type="string"
                   placeholder="Digite o bairro"
                 />
-                {errors.destino?.bairro && (
+                {((errors.destino?.bairro) != null) && (
                   <p className="error">{errors.destino.bairro?.message}</p>
                 )}
               </label>
@@ -320,7 +320,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite a Cidade"
                 />
-                {errors.destino?.cidade && (
+                {((errors.destino?.cidade) != null) && (
                   <p className="error">{errors.destino.cidade?.message}</p>
                 )}
               </label>
@@ -331,7 +331,7 @@ const Index = () => {
                   type="text"
                   placeholder="Digite o Estado"
                 />
-                {errors.destino?.estado && (
+                {((errors.destino?.estado) != null) && (
                   <p className="error">{errors.destino.estado?.message}</p>
                 )}
               </label>
@@ -357,7 +357,7 @@ const Index = () => {
                     type="text"
                     placeholder="Digite o nome do produto"
                   />
-                  {errors.produto?.nome && (
+                  {((errors.produto?.nome) != null) && (
                     <p className="error">{errors.produto.nome?.message}</p>
                   )}
                 </label>
@@ -379,7 +379,7 @@ const Index = () => {
                         </label>
                       ))}
                   </div>
-                  {errors.tipo_veiculo && (
+                  {(errors.tipo_veiculo != null) && (
                     <p className="error">{errors.tipo_veiculo?.message}</p>
                   )}
                 </div>
@@ -402,7 +402,7 @@ const Index = () => {
                     placeholder="Digite as observações"
                   />
                 </label>
-                {errors.observacao && (
+                {(errors.observacao != null) && (
                   <p className="error">{errors.observacao?.message}</p>
                 )}
               </div>
@@ -420,7 +420,7 @@ const Index = () => {
                     type="text"
                     placeholder="Digite o nome do destinatario"
                   />
-                  {errors.nomeDestinatario && (
+                  {(errors.nomeDestinatario != null) && (
                     <p className="error">{errors.nomeDestinatario?.message}</p>
                   )}
                 </label>
@@ -439,7 +439,7 @@ const Index = () => {
                     ))}
                   </select>
                 </label>
-                {errors.turno_coleta && (
+                {(errors.turno_coleta != null) && (
                   <p className="error">{errors.turno_coleta?.message}</p>
                 )}
                 {errorTurno && <p className="error">{errorTurno}</p>}
@@ -456,7 +456,7 @@ const Index = () => {
                     ))}
                   </select>
                 </label>
-                {errors.turno_entrega && (
+                {(errors.turno_entrega != null) && (
                   <p className="error">{errors.turno_entrega?.message}</p>
                 )}
               </div>
@@ -471,7 +471,7 @@ const Index = () => {
                     placeholder="Digite o nome do destinatario"
                   />
                 </label>
-                {errors.data_coleta && (
+                {(errors.data_coleta != null) && (
                   <p className="error">{errors.data_coleta?.message}</p>
                 )}
                 {errorDate && <p className="error">{errorDate}</p>}
@@ -485,7 +485,7 @@ const Index = () => {
                     placeholder="Digite o turno da entrega"
                   />
                 </label>
-                {errors.data_entrega && (
+                {(errors.data_entrega != null) && (
                   <p className="error">{errors.data_entrega?.message}</p>
                 )}
               </div>

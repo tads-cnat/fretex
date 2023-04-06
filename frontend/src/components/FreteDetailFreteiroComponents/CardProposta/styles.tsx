@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IStatusColors } from "../../../interfaces/styledComponents";
+import { type IStatusColors } from "../../../interfaces/styledComponents";
 import { BtnPattern } from "../../../styles";
 
 export const Container = styled.section`

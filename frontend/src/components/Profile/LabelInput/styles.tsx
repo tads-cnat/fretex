@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputLabelStyles } from ".";
+import { type InputLabelStyles } from ".";
 
 export const InputLabel = styled.label<InputLabelStyles>`
   display: flex;

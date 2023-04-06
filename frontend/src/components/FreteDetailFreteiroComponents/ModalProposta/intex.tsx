@@ -1,14 +1,14 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useApi from "../../../hooks/useApi";
 import { useToggle } from "../../../hooks/useToggle";
 import {
-  ICliente,
-  IFormDataProposta,
-  IFreteiro,
-  IVeiculo,
+  type ICliente,
+  type IFormDataProposta,
+  type IFreteiro,
+  type IVeiculo,
 } from "../../../interfaces";
 import { isFreteiro } from "../../../utils/isFreteiro";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -47,7 +47,7 @@ const ModalProposta = ({
   const navigate = useNavigate();
   const { data: veiculos, isLoading: isLoadingVeiculos } = useQuery(
     "veiculosDoFreteiro",
-    () => getVeiculosForFreteiro(actualUser.id),
+    async () => await getVeiculosForFreteiro(actualUser.id),
     {
       enabled: isFreteiro(actualUser),
     },
@@ -82,7 +82,7 @@ const ModalProposta = ({
         toast.success("Proposta feita com sucesso!");
         navigate("/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => { console.log(err); });
   };
 
   const handleClickRadio = () => {
@@ -91,7 +91,7 @@ const ModalProposta = ({
 
  /* const veiculosFiltered =
     !isLoadingVeiculos &&
-    veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo));*/
+    veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo)); */
   if (isLoadingVeiculos) return <Loading />;
   return (
     <ModalComponent title="Faça sua proposta" toggle={toggle} value={value}>
@@ -132,7 +132,7 @@ const ModalProposta = ({
           </ContainerVeiculos>
         </CardsContainer>
 
-        {errors.veiculo && <p className="error">{errors.veiculo?.message}</p>}
+        {(errors.veiculo != null) && <p className="error">{errors.veiculo?.message}</p>}
         <div className="valorContainer">
           <span>Valor da proposta:</span>
           <LabelInput

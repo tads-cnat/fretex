@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { Link } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
-import { IWrapper } from "./interfaces/styledComponents";
+
+import { type IWrapper } from "./interfaces/styledComponents";
 
 export const GlobalStyle = createGlobalStyle`
   :root {

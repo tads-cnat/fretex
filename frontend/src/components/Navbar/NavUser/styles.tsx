@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IActive } from "../../../interfaces/styledComponents";
+import { type IActive } from "../../../interfaces/styledComponents";
 
 export const Container = styled.button<IActive>`
   display: flex;

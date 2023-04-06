@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ICliente, IFreteiro } from "../../interfaces";
+import { type ICliente, type IFreteiro } from "../../interfaces";
 
 interface IAuthContextType {
   user: ICliente | IFreteiro | null;

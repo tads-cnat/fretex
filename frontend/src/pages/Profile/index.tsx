@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Outlet, useOutletContext, useParams } from "react-router-dom";
-import Loading from "../../components/Global/Loading";
 import Layout from "../../components/Layout";
 import Banner from "../../components/Profile/Banner";
 import ProfileMenu from "../../components/Profile/Menu";
 import UserInfo from "../../components/Profile/UserInfo";
 import { AuthContext } from "../../context/Auth/AuthContext";
-import { ICliente, IFreteiro, ITypeUser } from "../../interfaces";
+import { type ICliente, type IFreteiro, type ITypeUser } from "../../interfaces";
 import { Wrapper } from "../../styles";
 import { BoxWithShadow, Container, Content } from "./styles";
 import { isFreteiro } from "../../utils/isFreteiro";
@@ -31,7 +30,7 @@ const Profile = () => {
 
   const { data: actualTypeUser } = useQuery<ITypeUser>(
     ["actualUser", Number(id)],
-    () => getTypeUser(Number(id)),
+    async () => await getTypeUser(Number(id)),
     {
       enabled: !!id,
       refetchOnMount: "always",
@@ -39,22 +38,22 @@ const Profile = () => {
   );
 
   const isFreteiroType =
-    actualTypeUser && !!actualTypeUser.data.extra_data.freteiro;
+    (actualTypeUser != null) && !!actualTypeUser.data.extra_data.freteiro;
 
   useQuery(
     "userProfileFreteiro",
-    () => getFreteiro(Number(id)).then((res) => setUserToRender(res.data)),
+    async () => { await getFreteiro(Number(id)).then((res) => { setUserToRender(res.data); }); },
     {
-      enabled: !!actualTypeUser && !!isFreteiroType,
+      enabled: !(actualTypeUser == null) && !!isFreteiroType,
       refetchOnMount: "always",
     },
   );
 
   useQuery(
     "userProfileCliente",
-    () => getCliente(Number(id)).then((res) => setUserToRender(res.data)),
+    async () => { await getCliente(Number(id)).then((res) => { setUserToRender(res.data); }); },
     {
-      enabled: !!actualTypeUser && !isFreteiroType,
+      enabled: !(actualTypeUser == null) && !isFreteiroType,
     },
   );
 
@@ -62,7 +61,7 @@ const Profile = () => {
     setSelectedTab(tab);
   };
 
-  if (!actualUser || !userToRender) return <LoadingPage />;
+  if ((actualUser == null) || (userToRender == null)) return <LoadingPage />;
   else
     return (
       <Layout>
@@ -91,7 +90,7 @@ const Profile = () => {
                     context={{
                       user: userToRender,
                       setUser: setUserToRender,
-                      handleSelectTab: handleSelectTab,
+                      handleSelectTab,
                     }}
                   />
                 </Content>
@@ -104,6 +103,7 @@ const Profile = () => {
       </Layout>
     );
 };
+//type of the return of useOutletContext is not working
 
 export const useContextProfile = () => {
   return useOutletContext<IProfileContext>();

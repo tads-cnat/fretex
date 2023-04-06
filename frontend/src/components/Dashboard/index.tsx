@@ -11,9 +11,9 @@ import {
   End,
   Seta,
 } from "../FretesAvailable/BoxFretes/styles";
-import { IPedido } from "../../interfaces";
-import { useContext, useState } from "react";
-import { useEffect } from "react";
+import { type IPedido } from "../../interfaces";
+import { useContext, useState , useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { useToggle } from "../../hooks/useToggle";
 import Loading from "../Global/Loading";
@@ -75,7 +75,7 @@ const BoxDashboard = ({
 
   const deletePedidoMutation = useMutation(
     "pedidosEN",
-    (id: number) => deletePedido(id),
+    async (id: number) => await deletePedido(id),
     {
       onSuccess: () => {
         client.refetchQueries("pedidosEN");
@@ -99,15 +99,15 @@ const BoxDashboard = ({
           {value ? <Min /> : <Max />}
         </button>
       </Header>
-      {isError && value === true && (
+      {isError && value && (
         <AlertText>Houve um erro, tente novamente!</AlertText>
       )}
-      {isLoading && value === true && <Loading />}
-      {!isLoading && pedidos && pedidos.length === 0 && value === true && (
+      {isLoading && value && <Loading />}
+      {!isLoading && (pedidos != null) && pedidos.length === 0 && value && (
         <AlertText>Não há pedidos</AlertText>
       )}
       {!isLoading &&
-        pedidos &&
+        (pedidos != null) &&
         pedidos.map((pedido) => (
           <BoxPedido key={pedido.id} active={value}>
             <ContainerInfos>
@@ -139,7 +139,7 @@ const BoxDashboard = ({
               {user?.id === pedido.cliente && pedido.status === "EN" && (
                 <button
                   className="btnRed"
-                  onClick={(e) => handleClick(e, pedido.id)}
+                  onClick={(e) => { handleClick(e, pedido.id); }}
                 >
                   Excluir pedido
                 </button>

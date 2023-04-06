@@ -36,7 +36,7 @@ export const schemaFreteiro = yup.object({
           .test("type", "We only support jpeg", function (value) {
             return value && value[0] && value[0].type === "image/jpeg";
           }),
-        }),*/
+        }), */
     email: yup
         .string()
         .email("Email inválido")

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IActive, IStatus } from "../../interfaces/styledComponents";
+import { type IActive, type IStatus } from "../../interfaces/styledComponents";
 
 
 export const Box = styled.div`
