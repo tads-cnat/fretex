@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
-import useApi from "../../hooks/useApi";
-import { type ICliente, type IFreteiro } from "../../interfaces";
-import { AuthContext } from "./AuthContext";
+import { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
+import useApi from '../../hooks/useApi';
+import { type ICliente, type IFreteiro } from '../../interfaces';
+import { AuthContext } from './AuthContext';
 
-const AuthProvider = ({ children }: { children: JSX.Element }) => {
+const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
   const [typeUser, setTypeUser] = useState<number>(0);
   const [isLoadingUser, setIsLoadingUser] = useState(true);
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   const validateToken = async () => {
-    const storageToken = localStorage.getItem("authToken");
+    const storageToken = localStorage.getItem('authToken');
     if (storageToken) {
       const userData = await api.validateToken(storageToken);
       if (userData.data.user) {
@@ -54,15 +54,15 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     validateToken();
   }, []);
 
-  const signout = () => {
-    client.getQueryCache().clear();    
+  const signout = (): void => {
+    client.getQueryCache().clear();
     api.logout();
-    setToken("");
+    setToken('');
     setUser(null);
   };
 
-  const setToken = (token: string) => {
-    localStorage.setItem("authToken", token);
+  const setToken = (token: string): void => {
+    localStorage.setItem('authToken', token);
   };
 
   return (

@@ -1,7 +1,7 @@
-import { type IHomeBox } from "../../../interfaces/Home";
-import { Box, BoxWithLines, Description, Image, Title } from "./styles";
+import { type IHomeBox } from '../../../interfaces/Home';
+import { Box, BoxWithLines, Description, Image, Title } from './styles';
 
-const HomeBox = ({ title, desc, img, line }: IHomeBox) => {
+const HomeBox = ({ title, desc, img, line }: IHomeBox): JSX.Element => {
   return (
     <>
       {line ? (

@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
-import RegisterClienteForm from "../../components/RegisterComponents/RegisterClienteForm";
-import RegisterFreteiroForm from "../../components/RegisterComponents/RegisterFreteiroForm";
-import { BgRegister, BtnTypeUser, Container, WrapperRegister } from "./style";
+import { useEffect, useState } from 'react';
+import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm';
+import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
+import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 
-const Register = () => {
+const Register = (): JSX.Element => {
   window.scrollTo(0, 0);
-  const [typeResgister, setTypeRegister] = useState("cliente");
+  const [typeResgister, setTypeRegister] = useState('cliente');
 
   useEffect(() => {
-    const type = localStorage.getItem("typeUser");
+    const type = localStorage.getItem('typeUser');
     if (type) {
-      type === "cliente"
-        ? setTypeRegister("cliente")
-        : setTypeRegister("freteiro");
+      type === 'cliente'
+        ? setTypeRegister('cliente')
+        : setTypeRegister('freteiro');
     }
   }, []);
 
-  const handleClick = (type: string) => {
+  const handleChangeTypeOfUser = (type: string): void => {
     setTypeRegister(type);
-    localStorage.setItem("typeUser", type);
+    localStorage.setItem('typeUser', type);
   };
 
   return (
@@ -27,19 +27,23 @@ const Register = () => {
         <WrapperRegister bgColor="#282828">
           <div className="typeRegister">
             <BtnTypeUser
-              onClick={() => { handleClick("cliente"); }}
-              active={typeResgister === "cliente"}
+              onClick={() => {
+                handleChangeTypeOfUser('cliente');
+              }}
+              active={typeResgister === 'cliente'}
             >
               Cliente
             </BtnTypeUser>
             <BtnTypeUser
-              onClick={() => { handleClick("freteiro"); }}
-              active={typeResgister === "freteiro"}
+              onClick={() => {
+                handleChangeTypeOfUser('freteiro');
+              }}
+              active={typeResgister === 'freteiro'}
             >
               Freteiro
             </BtnTypeUser>
           </div>
-          {typeResgister === "cliente" ? (
+          {typeResgister === 'cliente' ? (
             <RegisterClienteForm />
           ) : (
             <RegisterFreteiroForm />

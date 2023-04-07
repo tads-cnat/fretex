@@ -1,19 +1,22 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import useApi from "../../../hooks/useApi";
-import { useToggle } from "../../../hooks/useToggle";
-import { type ICliente, type IFreteiro, type IProposta } from "../../../interfaces";
-import { isFreteiro } from "../../../utils/isFreteiro";
-import LoadingPage from "../../Global/LoadingPage";
-import ModalComponent from "../../Global/Modal";
-import CardVeiculo from "../../Profile/CardVeiculo";
-import LabelInput from "../../Profile/LabelInput";
-import CardsContainer from "../CardsContainer";
-import { FormContainer } from "../ModalProposta/styles";
-import { schemaContraproposta } from "./schema";
-import { BtnYellow } from "../NegociationComponent/styles";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import useApi from '../../../hooks/useApi';
+import { useToggle } from '../../../hooks/useToggle';
+import {
+  type ICliente,
+  type IFreteiro,
+  type IProposta,
+} from '../../../interfaces';
+import { isFreteiro } from '../../../utils/isFreteiro';
+import LoadingPage from '../../Global/LoadingPage';
+import ModalComponent from '../../Global/Modal';
+import CardVeiculo from '../../Profile/CardVeiculo';
+import LabelInput from '../../Profile/LabelInput';
+import CardsContainer from '../CardsContainer';
+import { FormContainer } from '../ModalProposta/styles';
+import { schemaContraproposta } from './schema';
+import { BtnYellow } from '../NegociationComponent/styles';
 
 interface IModal {
   toggle: () => void;
@@ -38,7 +41,7 @@ const ModalContraproposta = ({
   proposta,
   actualUser,
   propostas,
-}: IModal) => {
+}: IModal): JSX.Element => {
   const { getVeiculo, registerProposta, updateProposta } = useApi();
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
@@ -52,7 +55,7 @@ const ModalContraproposta = ({
   });
 
   const { data: veiculo, isLoading: isLoadingVeiculo } = useQuery(
-    ["veiculoDaPropostaInicial", proposta.id],
+    ['veiculoDaPropostaInicial', proposta.id],
     async () => await getVeiculo(proposta.veiculo),
     {
       enabled: !!proposta,
@@ -60,21 +63,21 @@ const ModalContraproposta = ({
   );
 
   const registerPropostaMutation = useMutation(
-    ["createProposta", proposta.id],
+    ['createProposta', proposta.id],
     async (data: FormData) => await registerProposta(data).then((res) => res),
     {
       onSuccess: () => {
-        client.refetchQueries("propostasForPedido");
+        client.refetchQueries('propostasForPedido');
       },
     },
   );
 
   const updatePropostaMutation = useMutation(
-    ["updateProposta", proposta.id],
+    ['updateProposta', proposta.id],
     async ({ id, data }: IUpdate) => await updateProposta(id, data),
     {
       onSuccess: () => {
-        client.refetchQueries("propostasForPedido");
+        client.refetchQueries('propostasForPedido');
       },
     },
   );
@@ -136,8 +139,8 @@ const ModalContraproposta = ({
           <CardsContainer
             title={
               isFreteiro(actualUser)
-                ? "Veículo escolhido por você:"
-                : "Veículo escolhido pelo freteiro:"
+                ? 'Veículo escolhido por você:'
+                : 'Veículo escolhido pelo freteiro:'
             }
             toggle={toggleCardsContainer}
             value={valueCardsContainer}
@@ -152,10 +155,10 @@ const ModalContraproposta = ({
               errorMessage={errors.valor?.message}
             >
               <input
-                {...register("valor")}
+                {...register('valor')}
                 type="number"
                 placeholder="Valor da contraproposta"
-                style={{ color: "#000" }}
+                style={{ color: '#000' }}
               />
             </LabelInput>
           </div>

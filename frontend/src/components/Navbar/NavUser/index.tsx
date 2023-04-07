@@ -4,7 +4,7 @@ import Seta from '../../../assets/images/seta.svg';
 import { Link, NavLink } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../interfaces';
 import { toast } from 'react-toastify';
-import { INavLink } from '../../../interfaces/INavLink';
+import { type INavLink } from '../../../interfaces/INavLink';
 
 interface INavUser {
   user: ICliente | IFreteiro;
@@ -14,8 +14,14 @@ interface INavUser {
   setActive: () => void;
 }
 
-const NavUser = ({ user, signout, navigate, active, setActive }: INavUser) => {
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+const NavUser = ({
+  user,
+  signout,
+  navigate,
+  active,
+  setActive,
+}: INavUser): JSX.Element => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     signout();
     toast.info('Usuário deslogado!');

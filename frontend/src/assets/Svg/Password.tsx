@@ -1,6 +1,4 @@
-import React from "react";
-
-const Password = () => {
+const Password = (): JSX.Element => {
   return (
     <svg
       width="15"

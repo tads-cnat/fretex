@@ -10,7 +10,12 @@ interface ICards {
   value: boolean;
 }
 
-const CardsContainer = ({ children, title, toggle, value }: ICards) => {
+const CardsContainer = ({
+  children,
+  title,
+  toggle,
+  value,
+}: ICards): JSX.Element => {
   return (
     <Container>
       <ContentHeader active={value}>

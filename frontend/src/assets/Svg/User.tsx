@@ -1,6 +1,4 @@
-import React from "react";
-
-const User = () => {
+const User = (): JSX.Element => {
   return (
     <svg
       width="15"

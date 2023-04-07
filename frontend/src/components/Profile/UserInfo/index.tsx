@@ -1,18 +1,18 @@
-import { Container, ContainerImage, Content, Title } from "./styles";
-import perfil from "../../../assets/images/perfil.svg";
-import { type ICliente, type IFreteiro } from "../../../interfaces";
-import { isFreteiro } from "../../../utils/isFreteiro";
+import { Container, ContainerImage, Content, Title } from './styles';
+import perfil from '../../../assets/images/perfil.svg';
+import { type ICliente, type IFreteiro } from '../../../interfaces';
+import { isFreteiro } from '../../../utils/isFreteiro';
 
-const UserTitle = ({ user }: { user: ICliente | IFreteiro }) => {
+const UserTitle = ({ user }: { user: ICliente | IFreteiro }): JSX.Element => {
   return (
     <Title className="title">
-      {user.first_name} {user.last_name}{" "}
+      {user.first_name} {user.last_name}{' '}
       {isFreteiro(user) && `- ${user.endereco.cidade}/${user.endereco.estado}`}
     </Title>
   );
 };
 
-const UserInfo = ({ user }: { user: IFreteiro | ICliente }) => {
+const UserInfo = ({ user }: { user: IFreteiro | ICliente }): JSX.Element => {
   return (
     <>
       <Container>

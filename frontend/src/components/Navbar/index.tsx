@@ -14,19 +14,19 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import perfil from '../../assets/images/perfil.svg';
 import { useToggle } from '../../hooks/useToggle';
 import { toast } from 'react-toastify';
-import { INavLink } from '../../interfaces/INavLink';
+import { type INavLink } from '../../interfaces/INavLink';
 
 interface INavbar {
   id?: string;
 }
 
-const Navbar = ({ id }: INavbar) => {
+const Navbar = ({ id }: INavbar): JSX.Element => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user, typeUser, signout } = useContext(AuthContext);
   const { value: active, toggle: setActive } = useToggle();
   const navigate = useNavigate();
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     toast.info('Usuário deslogado!');
     signout();

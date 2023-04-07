@@ -5,20 +5,25 @@ import {
   Content1,
   Content2,
   Content2Info,
-} from "./styles";
+} from './styles';
 
-import caixas from "../../../assets/images/caixas.png";
-import perfil from "../../../assets/images/perfil.svg";
-import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
-import geoalt from "../../../assets/images/geo-alt.svg";
-import info from "../../../assets/images/info-circle.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { type ICliente, type IFreteiro, type IPedido, type IProposta } from "../../../interfaces";
-import { Seta } from "../../RegisterFreteComponents/Form/styles";
-import NegociationComponent from "../NegociationComponent";
-import useApi from "../../../hooks/useApi";
-import { useQuery } from "react-query";
-import Loading from "../../Global/Loading";
+import caixas from '../../../assets/images/caixas.png';
+import perfil from '../../../assets/images/perfil.svg';
+import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
+import geoalt from '../../../assets/images/geo-alt.svg';
+import info from '../../../assets/images/info-circle.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  type ICliente,
+  type IFreteiro,
+  type IPedido,
+  type IProposta,
+} from '../../../interfaces';
+import { Seta } from '../../RegisterFreteComponents/Form/styles';
+import NegociationComponent from '../NegociationComponent';
+import useApi from '../../../hooks/useApi';
+import { useQuery } from 'react-query';
+import Loading from '../../Global/Loading';
 
 interface IFreteDetail {
   pedido: IPedido;
@@ -36,7 +41,7 @@ const FreteDetailComponent = ({
   const navigate = useNavigate();
   const { getVeiculoForId, tiposVeiculo } = useApi();
   const formatDate = (initialDate: string) => {
-    const date = initialDate.replaceAll("-", "/");
+    const date = initialDate.replaceAll('-', '/');
     const year = date.slice(0, 4);
     const day = date.slice(8);
     const month = date.slice(4, 8);
@@ -44,13 +49,13 @@ const FreteDetailComponent = ({
   };
 
   const formatTurno = (turno: string) => {
-    if (turno === "TA") return "Tarde";
-    else if (turno === "MA") return "Manhã";
-    else if (turno === "NO") return "Noite";
+    if (turno === 'TA') return 'Tarde';
+    else if (turno === 'MA') return 'Manhã';
+    else if (turno === 'NO') return 'Noite';
   };
 
   const { data: tipoVeiculos, isLoading } = useQuery(
-    ["tiposVeiculo"],
+    ['tiposVeiculo'],
     tiposVeiculo,
   );
   const filteredArray =
@@ -64,7 +69,11 @@ const FreteDetailComponent = ({
     <Container>
       <div>
         <h1>Detalhes de frete</h1>
-        <Seta onClick={() => { navigate(-1); }}>
+        <Seta
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
           <Arrowleft /> Voltar
         </Seta>
       </div>
@@ -91,7 +100,7 @@ const FreteDetailComponent = ({
               </span>
             </Link>
             <h3>{pedido.produto.nome}</h3>
-            <p>Pedido realizado em: {formatDate(pedido.criado_em)}</p>{" "}
+            <p>Pedido realizado em: {formatDate(pedido.criado_em)}</p>{' '}
           </div>
         </Content1>
         <Content2>
@@ -142,12 +151,12 @@ const FreteDetailComponent = ({
             <div>
               <h4>Informações adicionais </h4>
               <p>
-                <span>Tipos de veículos aceitos:</span>{" "}
+                <span>Tipos de veículos aceitos:</span>{' '}
                 {filteredArray.length > 0 &&
                   filteredArray.map((p: any) => `${p.descricao}/`)}
               </p>
               <p>
-                <span>Data máxima de entrega:</span>{" "}
+                <span>Data máxima de entrega:</span>{' '}
                 {formatDate(pedido.data_entrega)}
               </p>
               <p>
@@ -157,10 +166,10 @@ const FreteDetailComponent = ({
                 <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
               </p>
               <p>
-                <span>Observações:</span>{" "}
+                <span>Observações:</span>{' '}
                 {pedido.observacao
                   ? pedido.observacao
-                  : "Não possui observações"}
+                  : 'Não possui observações'}
               </p>
             </div>
           </Content2Info>

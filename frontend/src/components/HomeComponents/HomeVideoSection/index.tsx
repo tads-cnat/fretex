@@ -10,7 +10,7 @@ import {
 import Video from "../../../assets/videos/video.mp4";
 import { SpanYellow, BtnPattern } from "../../../styles";
 
-const HomeVideoSection = () => {
+const HomeVideoSection = ():JSX.Element => {
   return (
     <VideoSection>
       <ContainerVideo>

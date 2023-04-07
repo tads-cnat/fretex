@@ -1,6 +1,4 @@
-import React from "react";
-
-const Eye = ({ color }: { color?: string }) => {
+const Eye = ({ color }: { color?: string }): JSX.Element => {
   return (
     <svg
       width="15"

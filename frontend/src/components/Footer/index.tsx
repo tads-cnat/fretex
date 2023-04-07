@@ -1,4 +1,4 @@
-import { SpanYellow, Wrapper } from "../../styles";
+import { SpanYellow, Wrapper } from '../../styles';
 import {
   FooterStyled,
   FooterContainer,
@@ -11,12 +11,12 @@ import {
   Logos,
   FinalFooterContainer,
   ImgLink,
-} from "./styles";
-import instagram from "../../assets/images/Vectorinstagram.svg";
-import facebook from "../../assets/images/Vectorfacebook.svg";
-import youtube from "../../assets/images/Vectoryoutube.svg";
+} from './styles';
+import instagram from '../../assets/images/Vectorinstagram.svg';
+import facebook from '../../assets/images/Vectorfacebook.svg';
+import youtube from '../../assets/images/Vectoryoutube.svg';
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
   return (
     <footer>
       <FooterContainer>
@@ -29,19 +29,19 @@ const Footer = () => {
             </FooterBoxLogo>
             <FooterBoxInfo>
               <Title>CONTATO</Title>
-              <Info marginBottom={"5px"}>+55 21 99999-9999</Info>
+              <Info marginBottom={'5px'}>+55 21 99999-9999</Info>
               <Info
-                border={"1px solid #424242"}
-                marginBottom={"10px"}
-                padding={"0 0 10px 0"}
+                border={'1px solid #424242'}
+                marginBottom={'10px'}
+                padding={'0 0 10px 0'}
               >
                 contato@fretex.com
               </Info>
-              <Info marginBottom={"5px"}>Rua do IF, 42 - Grêmio</Info>
+              <Info marginBottom={'5px'}>Rua do IF, 42 - Grêmio</Info>
               <Info
-                border={"1px solid #424242"}
-                marginBottom={"20px"}
-                padding={"0 0 10px 0"}
+                border={'1px solid #424242'}
+                marginBottom={'20px'}
+                padding={'0 0 10px 0'}
               >
                 Natal - RN
               </Info>

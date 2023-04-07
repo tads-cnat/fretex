@@ -1,30 +1,30 @@
-import { SpanYellow } from "../../../styles";
-import Email from "../../../assets/Svg/Email";
-import Password from "../../../assets/Svg/Password";
-import User from "../../../assets/Svg/User";
+import { SpanYellow } from '../../../styles';
+import Email from '../../../assets/Svg/Email';
+import Password from '../../../assets/Svg/Password';
+import User from '../../../assets/Svg/User';
 import {
   ContainerForm,
   BtnYellow,
   ContainerPrincipal,
   ContainerContent,
-} from "./styles";
-import Eye from "../../../assets/Svg/Eye";
-import { useEffect, useState } from "react";
-import ClosedEye from "../../../assets/Svg/ClosedEye";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import InputMask from "react-input-mask";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
-import {  type IClienteFormData } from "../../../interfaces";
-import useApi from "../../../hooks/useApi";
-import { useToggle } from "../../../hooks/useToggle";
-import { toast } from "react-toastify";
+} from './styles';
+import Eye from '../../../assets/Svg/Eye';
+import { useEffect, useState } from 'react';
+import ClosedEye from '../../../assets/Svg/ClosedEye';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import InputMask from 'react-input-mask';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
+import { type IClienteFormData } from '../../../interfaces';
+import useApi from '../../../hooks/useApi';
+import { useToggle } from '../../../hooks/useToggle';
+import { toast } from 'react-toastify';
 
-const RegisterClientForm = () => {
+const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
   const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const {
     register,
     handleSubmit,
@@ -37,22 +37,22 @@ const RegisterClientForm = () => {
   const { registerCliente } = useApi();
   const navigate = useNavigate();
 
-  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
+  const handlePassword = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     togglePassword();
   };
 
-  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
+  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     toggleConfirmPassword();
   };
 
   useEffect(() => {
-    setFocus("email");
+    setFocus('email');
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
-    setError("");
+    setError('');
     const cliente: IClienteFormData = {
       email: data.email,
       full_name: data.full_name,
@@ -61,21 +61,21 @@ const RegisterClientForm = () => {
     };
     registerCliente(cliente)
       .then(() => {
-        toast.success('Cliente cadastrado com sucesso!')
-        navigate("/login");
+        toast.success('Cliente cadastrado com sucesso!');
+        navigate('/login');
       })
       .catch((err) => {
         const errors = err.response.data.errors;
         if (
-          errors.hasOwnProperty("email") &&
-          errors.email[0] === "This field must be unique."
+          errors.hasOwnProperty('email') &&
+          errors.email[0] === 'This field must be unique.'
         ) {
-          setError("Email, possui uma conta cadastrada!");
+          setError('Email, possui uma conta cadastrada!');
         } else if (
-          errors.hasOwnProperty("cpf") &&
-          errors.cpf[0] === "This field must be unique."
+          errors.hasOwnProperty('cpf') &&
+          errors.cpf[0] === 'This field must be unique.'
         ) {
-          setError("CPF, possui uma conta cadastrada!");
+          setError('CPF, possui uma conta cadastrada!');
         }
       });
   };
@@ -89,59 +89,63 @@ const RegisterClientForm = () => {
             <label>
               <Email />
               <input
-                {...register("email")}
+                {...register('email')}
                 type="email"
                 autoComplete="on"
                 placeholder="Seu E-mail"
               />
             </label>
-            {(errors.email != null) && <p className="error">{errors.email?.message}</p>}
+            {errors.email != null && (
+              <p className="error">{errors.email?.message}</p>
+            )}
             <label>
               <User />
               <input
-                {...register("full_name")}
+                {...register('full_name')}
                 type="text"
                 placeholder="Seu nome completo"
               />
             </label>
-            {(errors.full_name != null) && (
+            {errors.full_name != null && (
               <p className="error">{errors.full_name?.message}</p>
             )}
             <label>
               <User />
               <InputMask
                 mask="999.999.999-99"
-                {...register("cpf")}
+                {...register('cpf')}
                 placeholder="Seu cpf"
               ></InputMask>
             </label>
-            {(errors.cpf != null) && <p className="error">{errors.cpf?.message}</p>}
+            {errors.cpf != null && (
+              <p className="error">{errors.cpf?.message}</p>
+            )}
             <label>
               <Password />
               <input
-                type={password ? "text" : "password"}
-                {...register("password")}
+                type={password ? 'text' : 'password'}
+                {...register('password')}
                 placeholder="Sua senha"
               />
               <button type="button" onClick={handlePassword}>
                 {password ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {(errors.password != null) && (
+            {errors.password != null && (
               <p className="error">{errors.password?.message}</p>
             )}
             <label>
               <Password />
               <input
-                type={confirmPassword ? "text" : "password"}
-                {...register("confirmPassword")}
+                type={confirmPassword ? 'text' : 'password'}
+                {...register('confirmPassword')}
                 placeholder="Confirme sua senha"
               />
               <button type="button" onClick={handleConfirmPassword}>
                 {confirmPassword ? <ClosedEye /> : <Eye />}
               </button>
             </label>
-            {(errors.confirmPassword != null) && (
+            {errors.confirmPassword != null && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
             {error && <p className="error">{error}</p>}
