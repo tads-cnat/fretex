@@ -85,7 +85,7 @@ const Vehicles = (): JSX.Element => {
     });
   };
 
-  const onChange = (e: any) => {
+  const onChange = (e: any): void => {
     try {
       const file = e.target.files[0];
       setImagemVeiculo(file);

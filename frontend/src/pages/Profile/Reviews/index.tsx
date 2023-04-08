@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react'
-import { useContextProfile } from '..'
+import { useEffect } from 'react';
+import { useContextProfile } from '..';
 
-const Reviews = () => {
-  const {user, handleSelectTab} = useContextProfile()
+const Reviews = (): JSX.Element => {
+  const { user, handleSelectTab } = useContextProfile();
 
   useEffect(() => {
-    handleSelectTab(1)
-  }, [handleSelectTab])
+    handleSelectTab(1);
+  }, [handleSelectTab]);
 
-  if(!user) return <p>Carregando...</p>
-  return (
-    <div>Reviews</div>
-  )
-}
+  if (!user) return <p>Carregando...</p>;
+  return <div>Reviews</div>;
+};
 
-export default Reviews
+export default Reviews;

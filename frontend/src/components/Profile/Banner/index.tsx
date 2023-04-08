@@ -1,20 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
-import { Image, Container, Form, Preview } from "./styles";
-import { ReactComponent as Pencil } from "../../../assets/images/pencil.svg";
-import Modal from "../../Global/Modal";
-import { useToggle } from "../../../hooks/useToggle";
-import { BtnYellow } from "../../../pages/Dashboard/styles";
-import useApi from "../../../hooks/useApi";
-import { useParams } from "react-router-dom";
-import { type ICliente, type IFreteiro } from "../../../interfaces";
-import { isFreteiro } from "../../../utils/isFreteiro";
+import { useEffect, useState } from 'react';
+import { Image, Container, Form, Preview } from './styles';
+import { ReactComponent as Pencil } from '../../../assets/images/pencil.svg';
+import Modal from '../../Global/Modal';
+import { useToggle } from '../../../hooks/useToggle';
+import { BtnYellow } from '../../../pages/Dashboard/styles';
+import useApi from '../../../hooks/useApi';
+import { useParams } from 'react-router-dom';
+import { type ICliente, type IFreteiro } from '../../../interfaces';
+import { isFreteiro } from '../../../utils/isFreteiro';
 
 interface IBanner {
   user: IFreteiro | ICliente;
   ownerPage: boolean;
 }
 
-const Banner = ({ user, ownerPage }: IBanner) => {
+const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
   const { toggle, value } = useToggle();
   const { id } = useParams();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
@@ -22,7 +22,7 @@ const Banner = ({ user, ownerPage }: IBanner) => {
   const [capaFoto, setCapaFoto] = useState();
   const { updateFreteiro, updateCliente } = useApi();
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: any): void => {
     e.preventDefault();
     const formData = new FormData();
     const userUpdate = {
@@ -38,14 +38,18 @@ const Banner = ({ user, ownerPage }: IBanner) => {
           setImageBanner(res.data.capa_foto);
           toggle();
         })
-        .catch((res) => { console.log(res.response.data); });
+        .catch((res) => {
+          console.log(res.response.data);
+        });
     } else {
       updateCliente(Number(id), formData)
         .then((res) => {
           setImageBanner(res.data.capa_foto);
           toggle();
         })
-        .catch((res) => { console.log(res.response.data); });
+        .catch((res) => {
+          console.log(res.response.data);
+        });
     }
   };
 
@@ -53,7 +57,7 @@ const Banner = ({ user, ownerPage }: IBanner) => {
     setImageBanner(user.capa_foto);
   }, [user.capa_foto]);
 
-  const onChange = (e: any) => {
+  const onChange = (e: any): void => {
     try {
       const file = e.target.files[0];
       setCapaFoto(file);
@@ -88,7 +92,7 @@ const Banner = ({ user, ownerPage }: IBanner) => {
           <button
             className="editBtn"
             onClick={toggle}
-            style={ownerPage ? { display: "flex" } : { display: "none" }}
+            style={ownerPage ? { display: 'flex' } : { display: 'none' }}
           >
             <Pencil className="editImage" />
           </button>

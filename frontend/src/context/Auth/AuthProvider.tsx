@@ -11,7 +11,10 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const client = useQueryClient();
   const api = useApi();
 
-  const signin = async (email: string, password: string) => {
+  const signin = async (
+    email: string,
+    password: string,
+  ): Promise<boolean | null> => {
     setIsLoadingUser(true);
     const data = await api.signin(email, password);
 
@@ -32,7 +35,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
     return null;
   };
 
-  const validateToken = async () => {
+  const validateToken = async (): Promise<void> => {
     const storageToken = localStorage.getItem('authToken');
     if (storageToken) {
       const userData = await api.validateToken(storageToken);
@@ -56,9 +59,15 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
 
   const signout = (): void => {
     client.getQueryCache().clear();
-    api.logout();
-    setToken('');
-    setUser(null);
+    api
+      .logout()
+      .then(() => {
+        setToken('');
+        setUser(null);
+      })
+      .catch(() => {
+        console.log('error');
+      });
   };
 
   const setToken = (token: string): void => {

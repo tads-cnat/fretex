@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import { type IStatusColors } from "../../../interfaces/styledComponents";
-import { BtnPattern } from "../../../styles";
+import styled from 'styled-components';
+import { type IStatusColors } from '../../../interfaces/styledComponents';
 
 export const ContentMain = styled.main<IStatusColors>`
   display: flex;
@@ -28,7 +27,7 @@ export const ContentMain = styled.main<IStatusColors>`
   .recusadas,
   .espera,
   .aceita {
-    color: ${(props) => (props.color ? props.color : "#000")};
+    color: ${({ color }) => color || '#000'};
     p {
       font-size: var(--font-small);
     }
@@ -67,7 +66,8 @@ export const ContentMain = styled.main<IStatusColors>`
       padding: 4px 8px;
     }
     .valorProposta {
-      svg, .imgPerfil {
+      svg,
+      .imgPerfil {
         width: 30px;
         height: 30px;
       }
@@ -78,14 +78,14 @@ export const ContentMain = styled.main<IStatusColors>`
   }
   @media (max-width: 500px) {
     flex-direction: ${(props) =>
-      props.color === "#7B7B7B" || props.color === "#DC2E2E"
-        ? "column"
-        : "row"};
+      props.color === '#7B7B7B' || props.color === '#DC2E2E'
+        ? 'column'
+        : 'row'};
 
     align-items: ${(props) =>
-      props.color === "#7B7B7B" || props.color === "#DC2E2E"
-        ? "flex-start"
-        : "center"};
+      props.color === '#7B7B7B' || props.color === '#DC2E2E'
+        ? 'flex-start'
+        : 'center'};
 
     .espera p,
     .recusadas p,

@@ -6,7 +6,6 @@ import {
   Content2,
   Content2Info,
 } from './styles';
-
 import caixas from '../../../assets/images/caixas.png';
 import perfil from '../../../assets/images/perfil.svg';
 import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
@@ -24,6 +23,7 @@ import NegociationComponent from '../NegociationComponent';
 import useApi from '../../../hooks/useApi';
 import { useQuery } from 'react-query';
 import Loading from '../../Global/Loading';
+import { formatDate } from '../../../utils/formatDate';
 
 interface IFreteDetail {
   pedido: IPedido;
@@ -32,27 +32,27 @@ interface IFreteDetail {
   propostas: IProposta[];
 }
 
+const formatTurno = (turno: string): string => {
+  switch (turno) {
+    case 'TA':
+      return 'Tarde';
+    case 'MA':
+      return 'Manhã';
+    case 'NO':
+      return 'Noite';
+    default:
+      return 'Turno não informado';
+  }
+};
+
 const FreteDetailComponent = ({
   pedido,
   clientePedido,
   actualUser,
   propostas,
-}: IFreteDetail) => {
+}: IFreteDetail): JSX.Element => {
   const navigate = useNavigate();
-  const { getVeiculoForId, tiposVeiculo } = useApi();
-  const formatDate = (initialDate: string) => {
-    const date = initialDate.replaceAll('-', '/');
-    const year = date.slice(0, 4);
-    const day = date.slice(8);
-    const month = date.slice(4, 8);
-    return `${day}${month}${year}`;
-  };
-
-  const formatTurno = (turno: string) => {
-    if (turno === 'TA') return 'Tarde';
-    else if (turno === 'MA') return 'Manhã';
-    else if (turno === 'NO') return 'Noite';
-  };
+  const { tiposVeiculo } = useApi();
 
   const { data: tipoVeiculos, isLoading } = useQuery(
     ['tiposVeiculo'],

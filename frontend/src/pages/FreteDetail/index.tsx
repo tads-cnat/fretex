@@ -1,26 +1,24 @@
-import { Wrapper } from "../../styles";
-import { ContainerPrincipal } from "./styles";
-import { useContext, useEffect, useState } from "react";
-import { IPedido } from "../../interfaces";
-import { useParams } from "react-router-dom";
-import useApi from "../../hooks/useApi";
-import { AuthContext } from "../../context/Auth/AuthContext";
-import FreteDetailComponent from "../../components/FreteDetailFreteiroComponents/FreteDetail";
-import Login from "../Login";
-import Layout from "../../components/Layout";
-import { useQuery } from "react-query";
-import LoadingPage from "../../components/Global/LoadingPage";
-import { isFreteiro } from "../../utils/isFreteiro";
-import { objToQueryString } from "../../utils/queyString";
+import { Wrapper } from '../../styles';
+import { ContainerPrincipal } from './styles';
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import useApi from '../../hooks/useApi';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import FreteDetailComponent from '../../components/FreteDetailFreteiroComponents/FreteDetail';
+import Login from '../Login';
+import Layout from '../../components/Layout';
+import { useQuery } from 'react-query';
+import LoadingPage from '../../components/Global/LoadingPage';
+import { isFreteiro } from '../../utils/isFreteiro';
+import { objToQueryString } from '../../utils/queyString';
 
-const FreteDetail = () => {
+const FreteDetail = (): JSX.Element => {
   const { id } = useParams();
-  const { getPedido, getCliente, getPropostasForPedido, getPropostas } =
-    useApi();
+  const { getPedido, getCliente, getPropostasForPedido } = useApi();
   const { user } = useContext(AuthContext);
 
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
-    ["pedido", id],
+    ['pedido', id],
     async () => await getPedido(Number(id)),
     {
       enabled: !!id,
@@ -28,7 +26,7 @@ const FreteDetail = () => {
   );
 
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
-    ["pedidoCreatedBy", id],
+    ['pedidoCreatedBy', id],
     async () => await getCliente(pedido.data.cliente),
     {
       enabled: !!pedido?.data.cliente,
@@ -37,13 +35,13 @@ const FreteDetail = () => {
 
   const queryStringPropostas =
     pedido?.data?.id &&
-    (user != null) &&
+    user != null &&
     objToQueryString({
       pedido: pedido.data.id,
     });
 
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
-    ["propostasForPedido", id],
+    ['propostasForPedido', id],
     async () => await getPropostasForPedido(queryStringPropostas),
     {
       enabled: !(user == null) && !!pedido?.data && !!queryStringPropostas,

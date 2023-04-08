@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import { type IStatusColors } from "../../../interfaces/styledComponents";
-import { BtnPattern } from "../../../styles";
+import styled from 'styled-components';
+import { type IStatusColors } from '../../../interfaces/styledComponents';
 
 export const Container = styled.section`
   border: 1px solid #eaeaea;
@@ -23,10 +22,10 @@ export const ContentHeader = styled.header<IStatusColors>`
   margin-bottom: 20px;
   span {
     padding: 2px 30px;
-    color: ${(props) => (props.color ? props.color : "#000")};
+    color: ${({ color }) => color || '#000'};
     font-size: small;
     font-weight: 400;
-    background-color: ${(props) => (props.bg ? props.bg : "#fff")};
+    background-color: ${({bg}) => (bg || '#fff')};
     border-radius: 16px;
   }
 

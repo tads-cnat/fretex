@@ -1,37 +1,31 @@
-import BoxDashboard from "../../components/Dashboard";
-import Layout from "../../components/Layout";
-import { Wrapper } from "../../styles";
-import {
-  BtnYellow,
-  Filter,
-  Title,
-  ContainerPedidos,
-  BtnYellowLinkRouter,
-} from "./styles";
-import useApi from "../../hooks/useApi";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/Auth/AuthContext";
-import { isFreteiro } from "../../utils/isFreteiro";
-import LoadingPage from "../../components/Global/LoadingPage";
-import { objToQueryString } from "../../utils/queyString";
+import BoxDashboard from '../../components/Dashboard';
+import Layout from '../../components/Layout';
+import { Wrapper } from '../../styles';
+import { Filter, Title, ContainerPedidos, BtnYellowLinkRouter } from './styles';
+import useApi from '../../hooks/useApi';
+import { useQuery } from 'react-query';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import { isFreteiro } from '../../utils/isFreteiro';
+import LoadingPage from '../../components/Global/LoadingPage';
+import { objToQueryString } from '../../utils/queyString';
 
-const Dashboard = () => {
+const Dashboard = (): JSX.Element => {
   window.scrollTo(0, 0);
   const { user } = useContext(AuthContext);
-  const { getSearchPedidos, deletePedido } = useApi();
+  const { getSearchPedidos } = useApi();
 
-  const typeUser = (user != null) ? isFreteiro(user) : null;
+  const typeUser = user != null ? isFreteiro(user) : null;
 
   const queryStringEN = objToQueryString(
     typeUser
       ? {
           proposta_set__usuario: `${user?.id}`,
-          status: "EN",
+          status: 'EN',
         }
       : {
           cliente: `${user?.id}`,
-          status: "EN",
+          status: 'EN',
         },
   );
 
@@ -39,11 +33,11 @@ const Dashboard = () => {
     typeUser
       ? {
           proposta_set__usuario: `${user?.id}`,
-          status: "AG",
+          status: 'AG',
         }
       : {
           cliente: `${user?.id}`,
-          status: "AG",
+          status: 'AG',
         },
   );
 
@@ -51,22 +45,22 @@ const Dashboard = () => {
     typeUser
       ? {
           proposta_set__usuario: `${user?.id}`,
-          status: "TR",
+          status: 'TR',
         }
       : {
           cliente: `${user?.id}`,
-          status: "TR",
+          status: 'TR',
         },
   );
   const queryStringCO = objToQueryString(
     typeUser
       ? {
           proposta_set__usuario: `${user?.id}`,
-          status: "CO",
+          status: 'CO',
         }
       : {
           cliente: `${user?.id}`,
-          status: "CO",
+          status: 'CO',
         },
   );
 
@@ -74,11 +68,11 @@ const Dashboard = () => {
     typeUser
       ? {
           proposta_set__usuario: `${user?.id}`,
-          status: "CA",
+          status: 'CA',
         }
       : {
           cliente: `${user?.id}`,
-          status: "CA",
+          status: 'CA',
         },
   );
 
@@ -86,7 +80,7 @@ const Dashboard = () => {
     data: pedidosEN,
     isLoading: isLoadingPedidosEN,
     isError: errorPedidosEN,
-  } = useQuery("pedidosEN", async () => await getSearchPedidos(queryStringEN), {
+  } = useQuery('pedidosEN', async () => await getSearchPedidos(queryStringEN), {
     enabled: !!user?.id,
   });
 
@@ -94,7 +88,7 @@ const Dashboard = () => {
     data: pedidosAG,
     isLoading: isLoadingPedidosAG,
     isError: errorPedidosAG,
-  } = useQuery("pedidosAG", async () => await getSearchPedidos(queryStringAG), {
+  } = useQuery('pedidosAG', async () => await getSearchPedidos(queryStringAG), {
     enabled: !!user?.id,
   });
 
@@ -102,7 +96,7 @@ const Dashboard = () => {
     data: pedidosTR,
     isLoading: isLoadingPedidosTR,
     isError: errorPedidosTR,
-  } = useQuery("pedidosTR", async () => await getSearchPedidos(queryStringTR), {
+  } = useQuery('pedidosTR', async () => await getSearchPedidos(queryStringTR), {
     enabled: !!user?.id,
   });
 
@@ -110,7 +104,7 @@ const Dashboard = () => {
     data: pedidosCO,
     isLoading: isLoadingPedidosCO,
     isError: errorPedidosCO,
-  } = useQuery("pedidosCO", async () => await getSearchPedidos(queryStringCO), {
+  } = useQuery('pedidosCO', async () => await getSearchPedidos(queryStringCO), {
     enabled: !!user?.id,
   });
 
@@ -118,28 +112,28 @@ const Dashboard = () => {
     data: pedidosCA,
     isLoading: isLoadingPedidosCA,
     isError: errorPedidosCA,
-  } = useQuery("pedidosCA", async () => await getSearchPedidos(queryStringCA), {
+  } = useQuery('pedidosCA', async () => await getSearchPedidos(queryStringCA), {
     enabled: !!user?.id,
   });
 
   if (user == null) return <LoadingPage />;
   return (
     <Layout>
-      <Wrapper style={{ minHeight: "80vh" }}>
+      <Wrapper style={{ minHeight: '80vh' }}>
         <Title>Dashboard</Title>
         <Filter>
           <span>Seus Fretes {/* dos últimos 30 dias */}</span>
           <div>
             <button className="concluidos">Ver todos os concluídos</button>
             {isFreteiro(user) && (
-              <BtnYellowLinkRouter to={"/fretesDisponiveis"}>
+              <BtnYellowLinkRouter to={'/fretesDisponiveis'}>
                 Buscar novos fretes
               </BtnYellowLinkRouter>
             )}
           </div>
         </Filter>
         <ContainerPedidos>
-          <div className={"containers"}>
+          <div className={'containers'}>
             <BoxDashboard
               pedidos={pedidosEN?.data}
               isLoading={isLoadingPedidosEN}
@@ -154,7 +148,7 @@ const Dashboard = () => {
               status="Aguardando coleta"
             />
           </div>
-          <div className={"containers"}>
+          <div className={'containers'}>
             <BoxDashboard
               pedidos={pedidosTR?.data}
               isLoading={isLoadingPedidosTR}

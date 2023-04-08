@@ -1,8 +1,7 @@
-import React, { type ReactNode, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { IActive } from "../../../interfaces/styledComponents";
-import Modal from "react-modal";
-import { ReactComponent as Close } from "../../../assets/images/X.svg";
+import { type ReactNode, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Modal from 'react-modal';
+import { ReactComponent as Close } from '../../../assets/images/X.svg';
 
 interface IModal {
   children: ReactNode;
@@ -11,29 +10,36 @@ interface IModal {
   title: string;
 }
 
-const ModalComponent = ({ children, title, toggle, value }: IModal) => {
+const ModalComponent = ({
+  children,
+  title,
+  toggle,
+  value,
+}: IModal): JSX.Element => {
   const [width, setWidth] = useState(window.innerWidth);
-  const handleResize = () => {
+  const handleResize = (): void => {
     setWidth(window.innerWidth);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => { window.removeEventListener("resize", handleResize); };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const customStyles = {
     content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      width: width > 1200 ? "1200px" : "98%",
-      height: width > 1200 ? "auto" : '80vh',
-      padding: "0",
-      overflow: width > 1200 ? "none" : "scroll",
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: width > 1200 ? '1200px' : '98%',
+      height: width > 1200 ? 'auto' : '80vh',
+      padding: '0',
+      overflow: width > 1200 ? 'none' : 'scroll',
     },
   };
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ILoading {
   color?: string;
@@ -6,34 +6,27 @@ interface ILoading {
   height?: string;
 }
 
-const Loading = ({ color, width, height }: ILoading) => {
+const Loading = ({ color, width, height }: ILoading): JSX.Element => {
   return (
-    <LoadingContainer>
-      <LoadingStyled color={color} width={width} height={height}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </LoadingStyled>
-    </LoadingContainer>
+    <LoadingStyled color={color} width={width} height={height}>
+      <div></div>
+      <div></div>
+      <div></div>
+    </LoadingStyled>
   );
 };
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 const LoadingStyled = styled.div<ILoading>`
   display: inline-block;
   position: relative;
-  width: ${(props) => (props.width ? props.width : "80px")};
-  height: ${(props) => (props.height ? props.height : "80px")};
+  width: ${({ width }) => width ?? '80px'};
+  height: ${({ height }) => height ?? '80px'};
 
   div {
     display: inline-block;
     position: absolute;
     left: 8px;
     width: 16px;
-    background: ${(props) =>
-      props.color ? props.color : "var(--theme-primary)"};
+    background: ${({ color }) => color ?? 'var(--theme-primary)'};
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   div:nth-child(1) {

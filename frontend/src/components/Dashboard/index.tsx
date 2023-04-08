@@ -13,13 +13,13 @@ import {
 } from '../FretesAvailable/BoxFretes/styles';
 import { type IPedido } from '../../interfaces';
 import { useContext, useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
 import { useToggle } from '../../hooks/useToggle';
 import Loading from '../Global/Loading';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import useApi from '../../hooks/useApi';
 import { useMutation, useQueryClient } from 'react-query';
+import { formatDate } from '../../utils/formatDate';
 
 interface IBoxDashBoard {
   pedidos: IPedido[] | undefined;
@@ -40,14 +40,6 @@ const BoxDashboard = ({
   const { user } = useContext(AuthContext);
   const { deletePedido } = useApi();
   const client = useQueryClient();
-
-  const formatDate = (pedido: any): string => {
-    const date = pedido.data_entrega.replaceAll('-', '/');
-    const year = date.slice(0, 4);
-    const day = date.slice(8);
-    const month = date.slice(4, 8);
-    return `${day}${month}${year}`;
-  };
 
   const [color, setColor] = useState('');
   const changeColor = (status: string): void => {
@@ -131,7 +123,7 @@ const BoxDashboard = ({
               </ContainerEndereco>
               <ContainerCalendar>
                 <img src={Calendar} alt="Calendária" />
-                <span>Entregar até {formatDate(pedido)}</span>
+                <span>Entregar até {formatDate(pedido.data_entrega)}</span>
               </ContainerCalendar>
             </ContainerInfos>
             <Botoes>

@@ -1,14 +1,14 @@
-import Loading from "../Loading";
+import Loading from '../Loading';
 
-const LoadingPage = () => {
+const LoadingPage = (): JSX.Element => {
   return (
     <div
       style={{
-        height: "80vh",
-        display: "flex",
-        justifyContent: "center",
-        justifyItems: "center",
-        alignItems: "center",
+        height: '80vh',
+        display: 'flex',
+        justifyContent: 'center',
+        justifyItems: 'center',
+        alignItems: 'center',
       }}
     >
       <Loading />

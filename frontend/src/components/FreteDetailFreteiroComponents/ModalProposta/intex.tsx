@@ -1,27 +1,27 @@
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import useApi from "../../../hooks/useApi";
-import { useToggle } from "../../../hooks/useToggle";
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import useApi from '../../../hooks/useApi';
+import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
   type IFormDataProposta,
   type IFreteiro,
   type IVeiculo,
-} from "../../../interfaces";
-import { isFreteiro } from "../../../utils/isFreteiro";
-import { yupResolver } from "@hookform/resolvers/yup";
-import LoadingPage from "../../Global/LoadingPage";
-import ModalComponent from "../../Global/Modal";
-import CardVeiculo from "../../Profile/CardVeiculo";
-import LabelInput from "../../Profile/LabelInput";
-import CardsContainer from "../CardsContainer";
-import { BtnYellow as BtnSubmit } from "../NegociationComponent/styles";
-import { schemaProposta } from "./schema";
-import { ContainerVeiculos, FormContainer } from "./styles";
-import { BtnYellowLinkRouter } from "../../../pages/Dashboard/styles";
-import Loading from "../../Global/Loading";
+} from '../../../interfaces';
+import { isFreteiro } from '../../../utils/isFreteiro';
+import { yupResolver } from '@hookform/resolvers/yup';
+import LoadingPage from '../../Global/LoadingPage';
+import ModalComponent from '../../Global/Modal';
+import CardVeiculo from '../../Profile/CardVeiculo';
+import LabelInput from '../../Profile/LabelInput';
+import CardsContainer from '../CardsContainer';
+import { BtnYellow as BtnSubmit } from '../NegociationComponent/styles';
+import { schemaProposta } from './schema';
+import { ContainerVeiculos, FormContainer } from './styles';
+import { BtnYellowLinkRouter } from '../../../pages/Dashboard/styles';
+import Loading from '../../Global/Loading';
 
 interface IModalProposta {
   toggle: () => void;
@@ -39,14 +39,14 @@ const ModalProposta = ({
   pedidoId,
   actualUserId,
   pedidoVeiculos,
-}: IModalProposta) => {
+}: IModalProposta): JSX.Element => {
   const { getVeiculosForFreteiro } = useApi();
   const { registerProposta } = useApi();
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
   const navigate = useNavigate();
   const { data: veiculos, isLoading: isLoadingVeiculos } = useQuery(
-    "veiculosDoFreteiro",
+    'veiculosDoFreteiro',
     async () => await getVeiculosForFreteiro(actualUser.id),
     {
       enabled: isFreteiro(actualUser),
@@ -79,17 +79,19 @@ const ModalProposta = ({
 
     registerProposta(formData)
       .then(() => {
-        toast.success("Proposta feita com sucesso!");
-        navigate("/dashboard");
+        toast.success('Proposta feita com sucesso!');
+        navigate('/dashboard');
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleClickRadio = () => {
     toggleCardsContainer();
   };
 
- /* const veiculosFiltered =
+  /* const veiculosFiltered =
     !isLoadingVeiculos &&
     veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo)); */
   if (isLoadingVeiculos) return <Loading />;
@@ -117,12 +119,14 @@ const ModalProposta = ({
             {veiculos &&
               !isLoadingVeiculos &&
               veiculos.data
-                .filter((v: IVeiculo) => pedidoVeiculos.includes(v.tipo_veiculo))
+                .filter((v: IVeiculo) =>
+                  pedidoVeiculos.includes(v.tipo_veiculo),
+                )
                 .map((veiculo: IVeiculo) => (
                   <label className="labelRadio" key={veiculo.id}>
                     <input
                       type="radio"
-                      {...register("veiculo")}
+                      {...register('veiculo')}
                       onClick={handleClickRadio}
                       value={veiculo.id}
                     />
@@ -132,7 +136,9 @@ const ModalProposta = ({
           </ContainerVeiculos>
         </CardsContainer>
 
-        {(errors.veiculo != null) && <p className="error">{errors.veiculo?.message}</p>}
+        {errors.veiculo != null && (
+          <p className="error">{errors.veiculo?.message}</p>
+        )}
         <div className="valorContainer">
           <span>Valor da proposta:</span>
           <LabelInput
@@ -141,10 +147,10 @@ const ModalProposta = ({
             errorMessage={errors.valor?.message}
           >
             <input
-              {...register("valor")}
+              {...register('valor')}
               type="number"
               placeholder="Valor da proposta"
-              style={{ color: "#000" }}
+              style={{ color: '#000' }}
             />
           </LabelInput>
         </div>

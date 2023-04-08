@@ -1,52 +1,37 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useContextProfile } from "..";
-import {
-  RegisterAddress,
-  RegisterPerson,
-} from "../../../components/RegisterComponents/RegisterFreteiroForm/styles";
-import { useAddress } from "../../../hooks/useAddress";
-import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
-import { useToggle } from "../../../hooks/useToggle";
-import {
-  ICliente,
-  IClienteFormData,
-  IFreteiro,
-  IFreteiroFormData,
-  type IUserUpdateFormData,
-} from "../../../interfaces";
-import { schemaCliente, schemaFreteiro } from "../../ResgisterUser/schemas";
-import perfil from "../../../assets/images/imgperfil.svg";
-import User from "../../../assets/Svg/User";
-import InputMask from "react-input-mask";
-import Email from "../../../assets/Svg/Email";
-import Password from "../../../assets/Svg/Password";
-import ClosedEye from "../../../assets/Svg/ClosedEye";
-import Eye from "../../../assets/Svg/Eye";
-import { ContainerInfos } from "../../../components/FretesAvailable/BoxFretes/styles";
-import { SpanYellow } from "../../../styles";
-import Login from "../../Login";
-import { BtnYellow } from "../../../components/RegisterComponents/RegisterClienteForm/styles";
-import Loc from "../../../assets/Svg/Loc";
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useContextProfile } from '..';
+import { useAddress } from '../../../hooks/useAddress';
+import { useToggle } from '../../../hooks/useToggle';
+import { type IUserUpdateFormData } from '../../../interfaces';
+import { schemaCliente, schemaFreteiro } from '../../ResgisterUser/schemas';
+import perfil from '../../../assets/images/imgperfil.svg';
+import User from '../../../assets/Svg/User';
+import InputMask from 'react-input-mask';
+import Password from '../../../assets/Svg/Password';
+import ClosedEye from '../../../assets/Svg/ClosedEye';
+import Eye from '../../../assets/Svg/Eye';
+import { BtnYellow } from '../../../components/RegisterComponents/RegisterClienteForm/styles';
+import Loc from '../../../assets/Svg/Loc';
 import {
   Container,
   GridContent,
   GridEndereco,
   InputsContainerGrid,
   PerfilImgUpdate,
-} from "./styles";
-import LabelInput from "../../../components/Profile/LabelInput";
-import { isFreteiro } from "../../../utils/isFreteiro";
-import { type SubmitHandler } from "react-hook-form/dist/types";
-import useApi from "../../../hooks/useApi";
-import { AuthContext } from "../../../context/Auth/AuthContext";
-import { toast } from "react-toastify";
+} from './styles';
+import LabelInput from '../../../components/Profile/LabelInput';
+import { isFreteiro } from '../../../utils/isFreteiro';
+import { type SubmitHandler } from 'react-hook-form/dist/types';
+import useApi from '../../../hooks/useApi';
+import { AuthContext } from '../../../context/Auth/AuthContext';
+import { toast } from 'react-toastify';
 
-const EditProfile = () => {
+const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
   const { updateCliente, updateFreteiro } = useApi();
   const { user, setUser, handleSelectTab } = useContextProfile();
-  const { user: actualUser, setUser:setActualUser } = useContext(AuthContext);
+  const { user: actualUser, setUser: setActualUser } = useContext(AuthContext);
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const { value: password, toggle: togglePassword } = useToggle();
@@ -58,7 +43,6 @@ const EditProfile = () => {
     setValue,
     setFocus,
     watch,
-    getValues,
     completeAddress,
   } = useAddress<IUserUpdateFormData>(
     isFreteiro(user) ? schemaFreteiro : schemaCliente,
@@ -68,8 +52,8 @@ const EditProfile = () => {
     const formData = new FormData();
     const userUpdate = {
       url_foto: image,
-      first_name: data.full_name?.split(" ")[0],
-      last_name: data.full_name?.split(" ").slice(1).join(" "),
+      first_name: data.full_name?.split(' ')[0],
+      last_name: data.full_name?.split(' ').slice(1).join(' '),
     };
 
     Object.entries(userUpdate).forEach(([key, value]) => {
@@ -79,11 +63,13 @@ const EditProfile = () => {
     if (!isFreteiro(user)) {
       updateCliente(user.id, formData)
         .then((res) => {
-          toast.info('Perfil atualizado com sucesso!')
+          toast.info('Perfil atualizado com sucesso!');
           setUser(res.data);
-          setActualUser(res.data)
+          setActualUser(res.data);
         })
-        .catch((res) => { console.log(res.response.data); });
+        .catch((res) => {
+          console.log(res.response.data);
+        });
       return;
     }
 
@@ -92,9 +78,9 @@ const EditProfile = () => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
     updateFreteiro(user.id, formData).then((res) => {
-      toast.info('Perfil atualizado com sucesso!')
+      toast.info('Perfil atualizado com sucesso!');
       setUser(res.data);
-      setActualUser(res.data)
+      setActualUser(res.data);
     });
   };
 
@@ -104,44 +90,44 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (user) {
-      setFocus("full_name");
+      setFocus('full_name');
       setImagePreview(user.url_foto);
-      setValue("url_foto", user.url_foto);
-      setValue("email", user.email);
-      setValue("capa_foto", user.url_foto);
-      setValue("full_name", `${user.first_name} ${user.last_name}`);
-      setValue("cpf", user.cpf);
+      setValue('url_foto', user.url_foto);
+      setValue('email', user.email);
+      setValue('capa_foto', user.url_foto);
+      setValue('full_name', `${user.first_name} ${user.last_name}`);
+      setValue('cpf', user.cpf);
 
       if (isFreteiro(user)) {
-        setValue("endereco.CEP", user.endereco.CEP);
-        setValue("endereco.bairro", user.endereco.bairro);
-        setValue("endereco.rua", user.endereco.rua);
-        setValue("endereco.cidade", user.endereco.cidade);
-        setValue("endereco.numero", user.endereco.numero);
-        setValue("endereco.estado", user.endereco.estado);
-        setValue("endereco.complemento", user.endereco.complemento);
+        setValue('endereco.CEP', user.endereco.CEP);
+        setValue('endereco.bairro', user.endereco.bairro);
+        setValue('endereco.rua', user.endereco.rua);
+        setValue('endereco.cidade', user.endereco.cidade);
+        setValue('endereco.numero', user.endereco.numero);
+        setValue('endereco.estado', user.endereco.estado);
+        setValue('endereco.complemento', user.endereco.complemento);
       }
     }
   }, [user, setFocus, setValue]);
 
-  const onChange = (e: any) => {
+  const onChange = (e: any): void => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
   };
 
-  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
+  const handlePassword = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     togglePassword();
   };
 
-  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
+  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     toggleConfirmPassword();
   };
 
-  if (!user || (actualUser == null)) return <p>Carregando...</p>;
-  if (user && actualUser && user.id !== actualUser.id) navigate("/login");
+  if (!user || actualUser == null) return <p>Carregando...</p>;
+  if (user && actualUser && user.id !== actualUser.id) navigate('/login');
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -151,7 +137,7 @@ const EditProfile = () => {
             <img src={imagePreview || perfil} alt="perfil" />
             <input
               type="file"
-              {...register("url_foto")}
+              {...register('url_foto')}
               accept="image/jpeg,image/png,image/gif"
               onChange={onChange}
             />
@@ -160,11 +146,11 @@ const EditProfile = () => {
 
           <div>
             <h2>
-              {watch("full_name")}{" "}
+              {watch('full_name')}{' '}
               {isFreteiro(user) &&
-                `- ${watch("endereco.cidade")}/${watch("endereco.estado")}`}
+                `- ${watch('endereco.cidade')}/${watch('endereco.estado')}`}
             </h2>
-            <p>{watch("email")}</p>
+            <p>{watch('email')}</p>
           </div>
         </PerfilImgUpdate>
 
@@ -177,7 +163,7 @@ const EditProfile = () => {
               errorMessage={errors.full_name?.message}
             >
               <input
-                {...register("full_name")}
+                {...register('full_name')}
                 type="text"
                 placeholder="Seu nome completo"
               />
@@ -188,7 +174,7 @@ const EditProfile = () => {
               errorMessage={errors.cpf?.message}
             >
               <input
-                {...register("cpf")}
+                {...register('cpf')}
                 type="text"
                 placeholder="Seu cpf"
                 disabled
@@ -200,8 +186,8 @@ const EditProfile = () => {
               errorMessage={errors.password?.message}
             >
               <input
-                type={password ? "text" : "password"}
-                {...register("password")}
+                type={password ? 'text' : 'password'}
+                {...register('password')}
                 placeholder="Digite sua senha para atualização"
               />
               <button type="button" onClick={handlePassword}>
@@ -214,8 +200,8 @@ const EditProfile = () => {
               errorMessage={errors.confirmPassword?.message}
             >
               <input
-                type={confirmPassword ? "text" : "password"}
-                {...register("confirmPassword")}
+                type={confirmPassword ? 'text' : 'password'}
+                {...register('confirmPassword')}
                 placeholder="Confirme sua senha para atualização"
               />
               <button type="button" onClick={handleConfirmPassword}>
@@ -234,7 +220,7 @@ const EditProfile = () => {
                 >
                   <InputMask
                     mask="99999-999"
-                    {...register("endereco.CEP")}
+                    {...register('endereco.CEP')}
                     placeholder="Seu CEP"
                     onBlur={completeAddress}
                   ></InputMask>
@@ -245,7 +231,7 @@ const EditProfile = () => {
                   errorMessage={errors.endereco?.rua?.message}
                 >
                   <input
-                    {...register("endereco.rua")}
+                    {...register('endereco.rua')}
                     type="text"
                     placeholder="Sua rua"
                   />
@@ -256,7 +242,7 @@ const EditProfile = () => {
                   errorMessage={errors.endereco?.numero?.message}
                 >
                   <input
-                    {...register("endereco.numero")}
+                    {...register('endereco.numero')}
                     type="text"
                     placeholder="Número da sua casa"
                   />
@@ -269,7 +255,7 @@ const EditProfile = () => {
                   errorMessage={errors.endereco?.bairro?.message}
                 >
                   <input
-                    {...register("endereco.bairro")}
+                    {...register('endereco.bairro')}
                     type="text"
                     placeholder="Seu bairro"
                   />
@@ -280,7 +266,7 @@ const EditProfile = () => {
                   errorMessage={errors.endereco?.cidade?.message}
                 >
                   <input
-                    {...register("endereco.cidade")}
+                    {...register('endereco.cidade')}
                     type="text"
                     placeholder="Sua cidade"
                   />
@@ -292,7 +278,7 @@ const EditProfile = () => {
                   errorMessage={errors.endereco?.estado?.message}
                 >
                   <input
-                    {...register("endereco.estado")}
+                    {...register('endereco.estado')}
                     type="text"
                     placeholder="Seu estado"
                   />
@@ -302,10 +288,10 @@ const EditProfile = () => {
                 Icon={Loc}
                 isError={errors.endereco?.complemento}
                 errorMessage={errors.endereco?.complemento?.message}
-                style={{ gridColumn: "1/-1" }}
+                style={{ gridColumn: '1/-1' }}
               >
                 <input
-                  {...register("endereco.complemento")}
+                  {...register('endereco.complemento')}
                   type="text"
                   placeholder="Complemento"
                 />

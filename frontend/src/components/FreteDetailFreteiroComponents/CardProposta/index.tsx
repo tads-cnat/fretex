@@ -27,7 +27,7 @@ const CardProposta = ({
   pedidoId,
   ownerPedido,
   actualUser,
-}: ICardProposta) => {
+}: ICardProposta): JSX.Element => {
   const [typeCard, setTypeCard] = useState<IStatusColors>({
     color: '',
     bg: '',
@@ -84,7 +84,7 @@ const CardProposta = ({
       },
     );
 
-  const changeTypeCard = (type: string) => {
+  const changeTypeCard = (type: string): void => {
     switch (type) {
       case 'A responder' || 'Aceita':
         setTypeCard({ color: '#868830', bg: '#F7F9B3' });
@@ -98,7 +98,7 @@ const CardProposta = ({
     }
   };
 
-  const chooseType = () => {
+  const chooseType = (): void => {
     if (propostaAceitaForFreteiro.length > 0) {
       setType('Aceita');
     } else if (propostasRecusadasForFreteiro.length > 0) {

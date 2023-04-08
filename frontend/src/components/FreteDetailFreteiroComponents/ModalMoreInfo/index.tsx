@@ -1,9 +1,5 @@
-import React from 'react'
+const ModalMoreInfo = (): JSX.Element => {
+  return <div>ModalMoreInfo</div>;
+};
 
-const ModalMoreInfo = () => {
-  return (
-    <div>ModalMoreInfo</div>
-  )
-}
-
-export default ModalMoreInfo
+export default ModalMoreInfo;

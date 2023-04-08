@@ -1,11 +1,15 @@
-import { BtnYellow, HeaderContainer, PropostaContainer2 } from "./styles";
-import CardsContainer from "../CardsContainer";
-import CardProposta from "../CardProposta";
-import ModalProposta from "../ModalProposta/intex";
-import { useToggle } from "../../../hooks/useToggle";
-import { type ICliente, type IFreteiro, type IProposta } from "../../../interfaces";
-import { isFreteiro } from "../../../utils/isFreteiro";
-import Loading from "../../Global/Loading";
+import { BtnYellow, HeaderContainer, PropostaContainer2 } from './styles';
+import CardsContainer from '../CardsContainer';
+import CardProposta from '../CardProposta';
+import ModalProposta from '../ModalProposta/intex';
+import { useToggle } from '../../../hooks/useToggle';
+import {
+  type ICliente,
+  type IFreteiro,
+  type IProposta,
+} from '../../../interfaces';
+import { isFreteiro } from '../../../utils/isFreteiro';
+import { type MouseEvent } from 'react';
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -21,13 +25,13 @@ const NegociationComponent = ({
   propostas,
   ownerPedido,
   pedidoVeiculos,
-}: INegociation) => {
+}: INegociation): JSX.Element => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
   const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
     useToggle(true);
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     toggleModalProposta();
   };
@@ -53,10 +57,10 @@ const NegociationComponent = ({
       <HeaderContainer>
         <div>
           <h2>Negociação</h2>
-         {/** <p>Aguardando freteiro</p> */}
+          {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          (propostas.find((p) => p.usuario === actualUser.id) == null) && (
+          propostas.find((p) => p.usuario === actualUser.id) == null && (
             <BtnYellow type="button" onClick={handleClick}>
               Realizar Proposta
             </BtnYellow>

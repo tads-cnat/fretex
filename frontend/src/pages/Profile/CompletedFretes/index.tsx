@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import BoxFretes from "../../../components/FretesAvailable/BoxFretes";
-import { AuthContext } from "../../../context/Auth/AuthContext";
-import useApi from "../../../hooks/useApi";
-import { type IPedido } from "../../../interfaces";
+import { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import BoxFretes from '../../../components/FretesAvailable/BoxFretes';
+import { AuthContext } from '../../../context/Auth/AuthContext';
+import useApi from '../../../hooks/useApi';
+import { type IPedido } from '../../../interfaces';
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const Content = styled.div`
   gap: 20px;
 `;
 
-const CompletedFretes = () => {
+const CompletedFretes = (): JSX.Element => {
   const [fretes, setFretes] = useState<IPedido[]>([]);
   const { getPedidos } = useApi();
   const { user } = useContext(AuthContext);
@@ -28,7 +28,7 @@ const CompletedFretes = () => {
       setFretes(
         res.data.filter(
           (pedido: IPedido) =>
-            pedido.cliente === user?.id && pedido.status === "CO",
+            pedido.cliente === user?.id && pedido.status === 'CO',
         ),
       );
     });

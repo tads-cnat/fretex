@@ -11,7 +11,7 @@ interface ITiposDeVeiculo {
   descricao: string;
 }
 
-const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }): void => {
+const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }): JSX.Element => {
   const { getVeiculoForId } = useApi();
   const [TipoVeiculo, setTipoVeiculo] = useState<ITiposDeVeiculo>();
 

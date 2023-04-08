@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { type IDropdownMenu } from "../../interfaces/styledComponents";
-import { BtnPattern } from "../../styles";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { type IDropdownMenu } from '../../interfaces/styledComponents';
+import { BtnPattern } from '../../styles';
 
 export const Header = styled.header`
   background-color: var(--bg-grey);
@@ -72,7 +72,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
 
   @media (max-width: 768px) {
     & {
-      display: ${(props) => (props.show ? "flex" : "none")};
+      display: ${({ show }) => (show ? 'flex' : 'none')};
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -86,8 +86,8 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     }
 
     .linkMobile {
-    display: block;
-  }
+      display: block;
+    }
 
     .containerUser {
       width: 100%;
@@ -170,7 +170,7 @@ export const ButtonMenuContainer = styled.div<IDropdownMenu>`
 
     button span::after,
     button span::before {
-      content: "";
+      content: '';
       display: block;
       width: 20px;
       height: 2px;
@@ -181,15 +181,15 @@ export const ButtonMenuContainer = styled.div<IDropdownMenu>`
     }
 
     button span {
-      border-top-color: ${(props) =>
-        props.animation ? "transparent" : "initial"};
+      border-top-color: ${({ animation }) =>
+        animation ? 'transparent' : 'initial'};
     }
     button span::before {
-      transform: ${(props) => (props.animation ? "rotate(135deg)" : "none")};
+      transform: ${({ animation }) => (animation ? 'rotate(135deg)' : 'none')};
     }
     button span::after {
-      transform: ${(props) => (props.animation ? "rotate(-135deg)" : "none")};
-      top: ${(props) => (props.animation ? "-7px" : "none")};
+      transform: ${({ animation }) => (animation ? 'rotate(-135deg)' : 'none')};
+      top: ${({ animation }) => (animation ? '-7px' : 'none')};
     }
   }
 `;
