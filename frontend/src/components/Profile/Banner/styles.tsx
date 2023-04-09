@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { type IActive } from '../../../interfaces/styledComponents';
+import { type IActive } from '../../../interfaces/IActive';
 
 interface InterfaceImage {
   image?: string;
@@ -34,7 +34,8 @@ export const Form = styled.form`
 export const Image = styled.div<InterfaceImage>`
   width: 100%;
   height: 50vh;
-  background: ${({ image }) => (image ? `url(${image}) #282828` : '#282828')};
+  background: ${({ image }) =>
+    image !== undefined ? `url(${image}) #282828` : '#282828'};
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

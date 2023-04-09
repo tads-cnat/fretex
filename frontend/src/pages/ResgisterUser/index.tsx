@@ -4,12 +4,12 @@ import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFr
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 
 const Register = (): JSX.Element => {
-  window.scrollTo(0, 0);
   const [typeResgister, setTypeRegister] = useState('cliente');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const type = localStorage.getItem('typeUser');
-    if (type) {
+    if (type !== null) {
       type === 'cliente'
         ? setTypeRegister('cliente')
         : setTypeRegister('freteiro');

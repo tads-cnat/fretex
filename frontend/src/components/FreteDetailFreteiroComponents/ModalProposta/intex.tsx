@@ -87,7 +87,7 @@ const ModalProposta = ({
       });
   };
 
-  const handleClickRadio = () => {
+  const handleClickRadio = (): void => {
     toggleCardsContainer();
   };
 

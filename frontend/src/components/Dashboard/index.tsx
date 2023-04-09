@@ -20,6 +20,7 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import useApi from '../../hooks/useApi';
 import { useMutation, useQueryClient } from 'react-query';
 import { formatDate } from '../../utils/formatDate';
+import { toast } from 'react-toastify';
 
 interface IBoxDashBoard {
   pedidos: IPedido[] | undefined;
@@ -70,7 +71,14 @@ const BoxDashboard = ({
     async (id: number) => await deletePedido(id),
     {
       onSuccess: () => {
-        client.refetchQueries('pedidosEN');
+        client
+          .refetchQueries('pedidosEN')
+          .then(() => {
+            toast.success('Pedido excluído com sucesso!');
+          })
+          .catch(() => {
+            toast.error('Houve um erro, tente novamente!');
+          });
       },
     },
   );

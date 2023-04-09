@@ -80,16 +80,18 @@ const CardProposta = ({
       ['propostasOwner', OwnerPropostasId],
       async () => await getFreteiro(OwnerPropostasId),
       {
-        enabled: !!OwnerPropostasId,
+        enabled: !isNaN(OwnerPropostasId),
       },
     );
-
+console.log(OwnerPropostasId)
   const changeTypeCard = (type: string): void => {
     switch (type) {
-      case 'A responder' || 'Aceita':
+      case 'A responder':
+      case 'Aceita':
         setTypeCard({ color: '#868830', bg: '#F7F9B3' });
         break;
-      case 'Aguardando freteiro' || 'Aguardando cliente':
+      case 'Aguardando freteiro':
+      case 'Aguardando cliente':
         setTypeCard({ color: '#7B7B7B', bg: '#E7E7E7' });
         break;
       case 'Recusadas':

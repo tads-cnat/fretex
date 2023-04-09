@@ -22,10 +22,6 @@ export interface IWrapper {
   bgColor?: string;
 }
 
-export interface IActive {
-  active?: boolean;
-}
-
 export interface IStatus {
   status: string;
 }

@@ -3,6 +3,8 @@ import { useQueryClient } from 'react-query';
 import useApi from '../../hooks/useApi';
 import { type ICliente, type IFreteiro } from '../../interfaces';
 import { AuthContext } from './AuthContext';
+import { toast } from 'react-toastify';
+import { type NavigateFunction } from 'react-router-dom';
 
 const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
@@ -57,16 +59,18 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
     validateToken();
   }, []);
 
-  const signout = (): void => {
+  const signout = (Navigate: NavigateFunction): void => {
     client.getQueryCache().clear();
     api
       .logout()
       .then(() => {
         setToken('');
         setUser(null);
+        toast.info('Usuário deslogado!');
+        Navigate('/');
       })
       .catch(() => {
-        console.log('error');
+        toast.error('Erro ao deslogar, tente novamente!');
       });
   };
 

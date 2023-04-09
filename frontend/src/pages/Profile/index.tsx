@@ -36,7 +36,7 @@ const Profile = (): JSX.Element => {
     ['actualUser', Number(id)],
     async () => await getTypeUser(Number(id)),
     {
-      enabled: !!id,
+      enabled: id !== undefined,
       refetchOnMount: 'always',
     },
   );
@@ -77,7 +77,7 @@ const Profile = (): JSX.Element => {
   else
     return (
       <Layout>
-        {userToRender && actualUser ? (
+        {userToRender !== undefined && actualUser !== null ? (
           <>
             <Banner
               user={userToRender}

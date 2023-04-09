@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { type IActive } from '../../../interfaces/styledComponents';
+import { type IActive } from '../../../interfaces/IActive';
 
 export const Container = styled.section`
   border-radius: 6px;

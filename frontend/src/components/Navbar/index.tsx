@@ -13,7 +13,6 @@ import NavUser from './NavUser';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import perfil from '../../assets/images/perfil.svg';
 import { useToggle } from '../../hooks/useToggle';
-import { toast } from 'react-toastify';
 import { type INavLink } from '../../interfaces/INavLink';
 
 interface INavbar {
@@ -24,13 +23,11 @@ const Navbar = ({ id }: INavbar): JSX.Element => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user, typeUser, signout } = useContext(AuthContext);
   const { value: active, toggle: setActive } = useToggle();
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
-    toast.info('Usuário deslogado!');
-    signout();
-    navigate('/');
+    signout(Navigate);
   };
 
   return (
@@ -123,8 +120,6 @@ const Navbar = ({ id }: INavbar): JSX.Element => {
               {user !== null ? (
                 <NavUser
                   user={user}
-                  signout={signout}
-                  navigate={navigate}
                   active={active}
                   setActive={setActive}
                 />

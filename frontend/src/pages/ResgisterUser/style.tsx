@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { type IActive } from '../../interfaces/styledComponents';
 import { Wrapper } from '../../styles';
+import { type IActive } from '../../interfaces/IActive';
 
 export const BgRegister = styled.section`
   background-color: #282828;

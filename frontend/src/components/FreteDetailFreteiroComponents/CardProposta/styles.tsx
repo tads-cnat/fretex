@@ -22,10 +22,10 @@ export const ContentHeader = styled.header<IStatusColors>`
   margin-bottom: 20px;
   span {
     padding: 2px 30px;
-    color: ${({ color }) => color || '#000'};
+    color: ${({ color }) => color};
     font-size: small;
     font-weight: 400;
-    background-color: ${({bg}) => (bg || '#fff')};
+    background-color: ${({ bg }) => bg};
     border-radius: 16px;
   }
 
