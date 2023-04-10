@@ -13,9 +13,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": [
-      "C:/Users/gamer/Desktop/Programas/Front-End/react/fretex/frontend/tsconfig.json"
-    ]
+    "project": ["**/tsconfig.json"]
   },
   "plugins": ["react", "prettier"],
   "settings": {
