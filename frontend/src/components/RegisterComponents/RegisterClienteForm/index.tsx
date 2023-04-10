@@ -67,12 +67,12 @@ const RegisterClientForm = (): JSX.Element => {
       .catch((err) => {
         const errors = err.response.data.errors;
         if (
-          errors.hasOwnProperty('email') &&
+          Object.prototype.hasOwnProperty.call(errors, 'email') &&
           errors.email[0] === 'This field must be unique.'
         ) {
           setError('Email, possui uma conta cadastrada!');
         } else if (
-          errors.hasOwnProperty('cpf') &&
+          Object.prototype.hasOwnProperty.call(errors, 'cpf') &&
           errors.cpf[0] === 'This field must be unique.'
         ) {
           setError('CPF, possui uma conta cadastrada!');
@@ -148,7 +148,7 @@ const RegisterClientForm = (): JSX.Element => {
             {errors.confirmPassword != null && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
-            {error && <p className="error">{error}</p>}
+            {error !== "" && <p className="error">{error}</p>}
           </div>
           <section>
             <BtnYellow type="submit">Cadastre-se</BtnYellow>
