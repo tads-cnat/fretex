@@ -118,7 +118,7 @@ const Index = (): JSX.Element => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
-    const imagemUrl = produto.imagem_url[0] && produto.imagem_url[0];
+    const imagemUrl = produto.imagem_url[0];
 
     if (
       isErrorDateRange(
@@ -134,7 +134,7 @@ const Index = (): JSX.Element => {
       return;
     }
 
-    if (!imagemUrl) {
+    if (produto.imagem_url.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
       return;
@@ -147,7 +147,7 @@ const Index = (): JSX.Element => {
       if (value) formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (imagemUrl && key === 'imagem_url')
+      if (produto.imagem_url.length === 0 && key === 'imagem_url')
         formData.append(`produto.${key}`, imagemUrl);
       else if (value) formData.append(`produto.${key}`, value);
     });

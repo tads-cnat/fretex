@@ -31,15 +31,15 @@ export interface IUserUpdateFormData {
 }
 
 export interface IVeiculo {
-  id: number,
-  url_foto: any,
-  placa: string,
-  cor: string,
-  marca: string,
-  modelo: string,
-  ano: string,
-  freteiro: string,
-  tipo_veiculo: number,
+  id: number;
+  url_foto: any;
+  placa: string;
+  cor: string;
+  marca: string;
+  modelo: string;
+  ano: string;
+  freteiro: string;
+  tipo_veiculo: number;
 }
 
 export interface IFreteiroFormDataUpdate {
@@ -83,25 +83,25 @@ export interface IEndereco {
 }
 
 export interface IPedido {
-  id: number,
-  cliente: number,
-  cliente_first_name: string,
-  cliente_last_name?: string,
+  id: number;
+  cliente: number;
+  cliente_first_name: string;
+  cliente_last_name?: string;
   produto: {
-    nome: string,
-    imagem_url: any,
-  },
-  origem: IEndereco,
-  destino: IEndereco,
-  status: string,
-  tipo_veiculo: number[],
-  observacao: string,
-  nomeDestinatario: string,
-  data_coleta: string,
-  data_entrega: string,
-  turno_entrega: string,
-  turno_coleta: string,
-  criado_em: string,
+    nome: string;
+    imagem_url: any;
+  };
+  origem: IEndereco;
+  destino: IEndereco;
+  status: string;
+  tipo_veiculo: number[];
+  observacao: string;
+  nomeDestinatario: string;
+  data_coleta: string;
+  data_entrega: string;
+  turno_entrega: string;
+  turno_coleta: string;
+  criado_em: string;
 }
 
 export interface IProposta {
@@ -110,7 +110,7 @@ export interface IProposta {
   eh_aceita: boolean;
   ehNegada: boolean;
   data_criacao: string;
-  is_contraproposta: boolean
+  is_contraproposta: boolean;
   is_esperandoCliente: boolean;
   is_esperandoFreteiro: boolean;
   usuario: number;
@@ -132,19 +132,19 @@ export interface IFormDataProposta {
 
 export interface IPedidoFormData {
   produto: {
-    nome: string,
-    imagem_url: FileList,
-  },
-  origem: IEndereco,
-  destino: IEndereco,
-  status?: string,
-  tipo_veiculo: number[],
-  observacao?: string,
-  nomeDestinatario: string,
-  data_coleta: string,
-  data_entrega: string,
-  turno_entrega: string,
-  turno_coleta: string
+    nome: string;
+    imagem_url: FileList;
+  };
+  origem: IEndereco;
+  destino: IEndereco;
+  status?: string;
+  tipo_veiculo: number[];
+  observacao?: string;
+  nomeDestinatario: string;
+  data_coleta: string;
+  data_entrega: string;
+  turno_entrega: string;
+  turno_coleta: string;
 }
 
 export interface ILogin {
@@ -154,19 +154,17 @@ export interface ILogin {
 
 export interface ITypeUser {
   data: {
-    id: number,
-    username: string,
-    first_name: string,
-    email: string,
-    last_name: string,
+    id: number;
+    username: string;
+    first_name: string;
+    email: string;
+    last_name: string;
     extra_data: {
-      freteiro: number | null,
-      cliente: number | null,
-    }
-  },
-  metadata: any,
-  success: boolean,
-  errors: any
+      freteiro: number | null;
+      cliente: number | null;
+    };
+  };
+  metadata: any;
+  success: boolean;
+  errors: any;
 }
-
-
