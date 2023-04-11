@@ -20,6 +20,7 @@ import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
 import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
+import { IRegisterCliente } from '../../../interfaces/IRegisterCliente';
 
 const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -53,9 +54,9 @@ const RegisterClientForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
-    const cliente: IClienteFormData = {
+    const cliente: IRegisterCliente = {
       email: data.email,
-      full_name: data.full_name,
+      fullName: data.full_name,
       cpf: data.cpf,
       password: data.password,
     };
@@ -67,15 +68,13 @@ const RegisterClientForm = (): JSX.Element => {
       .catch((err) => {
         const errors = err.response.data.errors;
         if (
-          errors.hasOwnProperty('email') &&
-          errors.email[0] === 'This field must be unique.'
+          Object.prototype.hasOwnProperty.call(errors, 'email')
         ) {
-          setError('Email, possui uma conta cadastrada!');
+          setError(errors.email[0]);
         } else if (
-          errors.hasOwnProperty('cpf') &&
-          errors.cpf[0] === 'This field must be unique.'
+          Object.prototype.hasOwnProperty.call(errors, 'cpf')
         ) {
-          setError('CPF, possui uma conta cadastrada!');
+          setError(errors.cpf[0]);
         }
       });
   };
