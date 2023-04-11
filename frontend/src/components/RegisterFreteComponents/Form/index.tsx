@@ -374,20 +374,19 @@ const Index = (): JSX.Element => {
                 <div className="containerTipoVeiculo">
                   <span>Tipos de veículo</span>
                   <div className="tipoveiculo">
-                    {tiposDeVeiculo &&
-                      tiposDeVeiculo?.map((tipoveiculo) => (
-                        <label
-                          key={tipoveiculo.id}
-                          className="checkbox_tipoveiculo"
-                        >
-                          <input
-                            {...register('tipo_veiculo')}
-                            type="checkbox"
-                            value={tipoveiculo.id}
-                          />
-                          {tipoveiculo.descricao}
-                        </label>
-                      ))}
+                    {tiposDeVeiculo?.map((tipoveiculo) => (
+                      <label
+                        key={tipoveiculo.id}
+                        className="checkbox_tipoveiculo"
+                      >
+                        <input
+                          {...register('tipo_veiculo')}
+                          type="checkbox"
+                          value={tipoveiculo.id}
+                        />
+                        {tipoveiculo.descricao}
+                      </label>
+                    ))}
                   </div>
                   {errors.tipo_veiculo != null && (
                     <p className="error">{errors.tipo_veiculo?.message}</p>
