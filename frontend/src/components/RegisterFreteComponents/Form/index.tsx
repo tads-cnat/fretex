@@ -403,7 +403,9 @@ const Index = (): JSX.Element => {
                     accept="image/jpeg,image/png,image/gif"
                   />
                 </label>
-                {errorImg && <p className="error">{errorImg}</p>}
+                {errorImg !== '' && Boolean(errorImg) && (
+                  <p className="error">{errorImg}</p>
+                )}
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -451,7 +453,9 @@ const Index = (): JSX.Element => {
                 {errors.turno_coleta != null && (
                   <p className="error">{errors.turno_coleta?.message}</p>
                 )}
-                {errorTurno && <p className="error">{errorTurno}</p>}
+                {errorTurno !== '' && Boolean(errorTurno) && (
+                  <p className="error">{errorTurno}</p>
+                )}
               </div>
               <div>
                 <label>
@@ -483,7 +487,9 @@ const Index = (): JSX.Element => {
                 {errors.data_coleta != null && (
                   <p className="error">{errors.data_coleta?.message}</p>
                 )}
-                {errorDate && <p className="error">{errorDate}</p>}
+                {errorDate !== '' && Boolean(errorDate) && (
+                  <p className="error">{errorDate}</p>
+                )}
               </div>
               <div>
                 <label>
