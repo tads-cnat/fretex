@@ -46,8 +46,8 @@ const ContentProposta = ({
     ['updateProposta', proposta.id],
     async ({ id, data }: IUpdate) => await updateProposta(id, data),
     {
-      onSuccess: () => {
-        client.refetchQueries('propostasForPedido');
+      onSuccess: async () => {
+        await client.refetchQueries('propostasForPedido');
       },
     },
   );
@@ -56,8 +56,8 @@ const ContentProposta = ({
     'updateProposta',
     async ({ id, data }: IUpdate) => await updatePedido(id, data),
     {
-      onSuccess: () => {
-        client.refetchQueries(['pedidosEN', 'pedidosAG']);
+      onSuccess: async () => {
+        await client.refetchQueries(['pedidosEN', 'pedidosAG']);
       },
     },
   );
