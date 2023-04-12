@@ -141,20 +141,24 @@ const Index = (): JSX.Element => {
     }
 
     Object.entries(origem).forEach(([key, value]) => {
-      if (value) formData.append(`origem.${key}`, value);
+      if (value !== null && value !== undefined)
+        formData.append(`origem.${key}`, value);
     });
     Object.entries(destino).forEach(([key, value]) => {
-      if (value) formData.append(`destino.${key}`, value);
+      if (value !== null && value !== undefined)
+        formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
       if (produto.imagem_url.length === 0 && key === 'imagem_url')
         formData.append(`produto.${key}`, imagemUrl);
-      else if (value) formData.append(`produto.${key}`, value);
+      else if (typeof value === 'boolean' && value)
+        formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
-      if (value && key === 'tipo_veiculo')
+      if (typeof value === 'boolean' && value && key === 'tipo_veiculo')
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
-      else if (value) formData.append(`${key}`, value);
+      else if (typeof value === 'boolean' && value)
+        formData.append(`${key}`, value);
     });
     registerPedido(formData)
       .then(() => {
