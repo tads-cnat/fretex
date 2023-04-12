@@ -74,7 +74,8 @@ const ModalProposta = ({
     const formData = new FormData();
 
     Object.entries(proposta).forEach(([key, value]) => {
-      if (typeof value === 'boolean' && value) formData.append(key, value.toString());
+      if (typeof value === 'boolean' && value)
+        formData.append(key, value.toString());
     });
 
     registerProposta(formData)
