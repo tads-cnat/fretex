@@ -10,12 +10,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunSQL("""
-            CREATE TRIGGER LogPedidoTrigger
-            AFTER INSERT
-            ON plataform_pedido
-            BEGIN
-                INSERT INTO plataform_log(data) VALUES (current_timestamp);
-            END;
-        """)
+        # # TODO - Isso não funciona no postgres
+        # migrations.RunSQL("""
+        #     CREATE TRIGGER LogPedidoTrigger
+        #     AFTER INSERT
+        #     ON plataform_pedido
+        #     BEGIN
+        #         INSERT INTO plataform_log(data) VALUES (current_timestamp);
+        #     END;
+        # """)
     ]

@@ -11,8 +11,8 @@ services:
       - .:/code
   django:
     container_name: fretex_django
-    working_dir: /code/backend
     build: .
+    working_dir: /code/backend
     command: bash -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     networks:
       - default
@@ -22,3 +22,22 @@ services:
       - .:/code
     depends_on:
       - node
+  postgres:
+    container_name: fretex_postgres
+    image: postgres:13
+    networks:
+      - default
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fretex
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+
+
+    
