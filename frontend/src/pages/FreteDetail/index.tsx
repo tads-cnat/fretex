@@ -50,7 +50,7 @@ const FreteDetail = (): JSX.Element => {
 
   if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
-  if (user && !isFreteiro(user) && user.id !== pedido.data.cliente)
+  if (!isFreteiro(user) && user.id !== pedido.data.cliente)
     return <Login />;
   return (
     <Layout>

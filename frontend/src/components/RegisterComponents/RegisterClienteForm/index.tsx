@@ -67,13 +67,9 @@ const RegisterClientForm = (): JSX.Element => {
       })
       .catch((err) => {
         const errors = err.response.data.errors;
-        if (
-          Object.prototype.hasOwnProperty.call(errors, 'email')
-        ) {
+        if (Object.prototype.hasOwnProperty.call(errors, 'email')) {
           setError(errors.email[0]);
-        } else if (
-          Object.prototype.hasOwnProperty.call(errors, 'cpf')
-        ) {
+        } else if (Object.prototype.hasOwnProperty.call(errors, 'cpf')) {
           setError(errors.cpf[0]);
         }
       });
@@ -147,7 +143,7 @@ const RegisterClientForm = (): JSX.Element => {
             {errors.confirmPassword != null && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
-            {error && <p className="error">{error}</p>}
+            {error !== "" && <p className="error">{error}</p>}
           </div>
           <section>
             <BtnYellow type="submit">Cadastre-se</BtnYellow>
