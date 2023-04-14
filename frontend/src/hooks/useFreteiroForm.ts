@@ -35,21 +35,12 @@ export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
       .then(onSuccess)
       .catch((err) => {
         const errors = err.response.data.errors;
-        if (
-          Object.prototype.hasOwnProperty.call(errors, 'email') &&
-          errors.email[0] === 'This field must be unique.'
-        ) {
-          setError('Email, possui uma conta cadastrada!');
-        } else if (
-          Object.prototype.hasOwnProperty.call(errors, 'cpf') &&
-          errors.cpf[0] === 'This field must be unique.'
-        ) {
-          setError('CPF, possui uma conta cadastrada!');
-        } else if (
-          Object.prototype.hasOwnProperty.call(errors, 'url_foto') &&
-          errors.url_foto[0].includes('Upload a valid image.')
-        ) {
-          setError('Envie uma imagem válida!');
+        if (Object.prototype.hasOwnProperty.call(errors, 'email')) {
+          setError(errors.email[0]);
+        } else if (Object.prototype.hasOwnProperty.call(errors, 'cpf')) {
+          setError(errors.cpf[0]);
+        } else if (Object.prototype.hasOwnProperty.call(errors, 'url_foto')) {
+          setError(errors.url_foto[0]);
         }
       });
   };
