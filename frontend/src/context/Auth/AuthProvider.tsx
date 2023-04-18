@@ -5,6 +5,7 @@ import { type ICliente, type IFreteiro } from '../../interfaces';
 import { AuthContext } from './AuthContext';
 import { toast } from 'react-toastify';
 import { type NavigateFunction } from 'react-router-dom';
+import { type IResponseValidateToken } from '../../interfaces/IResponseValidateToken';
 
 const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
@@ -37,22 +38,38 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
     return null;
   };
 
-  const validateToken = async (): Promise<void> => {
+  const validateToken = (): void => {
     const storageToken = localStorage.getItem('authToken');
-    if (storageToken) {
-      const userData = await api.validateToken(storageToken);
-      if (userData.data.user) {
-        userData.data.user.id === userData.data.user.extra_data.freteiro
-          ? api.getFreteiro(userData.data.user.id).then((res) => {
+    if (storageToken === null || storageToken === '') return;
+
+    api
+      .validateToken(storageToken)
+      .then((res: IResponseValidateToken) => {
+        if (res.data.user.id === res.data.user.extra_data.freteiro) {
+          api
+            .getFreteiro(res.data.user.id)
+            .then((res) => {
               setUser(res.data);
               setTypeUser(1);
             })
-          : api.getCliente(userData.data.user.id).then((res) => {
+            .catch(() => {
+              setToken('');
+            });
+        } else {
+          api
+            .getCliente(res.data.user.id)
+            .then((res) => {
               setUser(res.data);
               setTypeUser(2);
+            })
+            .catch(() => {
+              setToken('');
             });
-      }
-    }
+        }
+      })
+      .catch(() => {
+        setToken('');
+      });
   };
 
   useEffect(() => {
