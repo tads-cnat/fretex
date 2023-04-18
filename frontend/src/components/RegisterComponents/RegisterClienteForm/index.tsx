@@ -20,7 +20,7 @@ import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
 import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
-import { IRegisterCliente } from '../../../interfaces/IRegisterCliente';
+import { type IRegisterCliente } from '../../../interfaces/IRegisterCliente';
 
 const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();

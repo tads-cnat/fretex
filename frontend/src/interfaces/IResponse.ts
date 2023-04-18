@@ -1,7 +1,5 @@
 export interface IResponse {
-  data: {
-    user: any;
-  };
+  data: unknown;
   errors: object;
   metadata: object;
   success: boolean;

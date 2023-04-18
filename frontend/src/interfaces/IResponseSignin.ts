@@ -1,17 +1,9 @@
-export interface IResponseSignin {
+import { type IResponse } from './IResponse';
+import { type IUserAuthRensponse } from './IUserAuthResponse';
+
+export interface IResponseSignin extends IResponse {
   data: {
-    user: {
-      email: string;
-      extra_data: {
-        cliente: null | number;
-        freteiro: null | number;
-      };
-      first_name: string;
-      id: number;
-      last_name: string;
-      username: string;
-    };
+    token: string;
+    user: IUserAuthRensponse;
   };
-  metadata: object;
-  success: boolean;
 }

@@ -18,7 +18,6 @@ import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useToggle } from '../../hooks/useToggle';
-import { toast } from 'react-toastify';
 
 const Login = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -32,7 +31,7 @@ const Login = (): JSX.Element => {
     resolver: yupResolver(schemaLogin),
   });
   const { signin } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
 
   const handlePassword = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
@@ -43,22 +42,8 @@ const Login = (): JSX.Element => {
     setFocus('email');
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<ILogin> = async (data) => {
-    const res = await signin(data.email, data.password);
-
-    if (res === true) {
-      toast.success('Login realizado com sucesso!');
-      navigate('/fretesDisponiveis');
-    } else if (res === false) {
-      toast.success('Login realizado com sucesso!');
-      navigate('/dashboard');
-    } else {
-      toast.error('Usuário e/ou senha incorreto(s)');
-      setError('Credenciais incorretas');
-      setTimeout(() => {
-        setError('');
-      }, 5000);
-    }
+  const onSubmit: SubmitHandler<ILogin> = ({ email, password }) => {
+    signin(email, password, Navigate, setError);
   };
 
   return (
@@ -77,7 +62,7 @@ const Login = (): JSX.Element => {
             </div>
           </ContainerContent2>
           <ContainerForm>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={() => handleSubmit(onSubmit)}>
               <h1>Entre na sua conta</h1>
               <div>
                 <label>
@@ -106,7 +91,7 @@ const Login = (): JSX.Element => {
                 {errors.password != null && (
                   <p className="error">{errors.password?.message}</p>
                 )}
-                {error && <p className="error">{error}</p>}
+                {error.length !== 0 && <p className="error">{error}</p>}
               </div>
               <section>
                 <BtnYellow type="submit">Entrar</BtnYellow>

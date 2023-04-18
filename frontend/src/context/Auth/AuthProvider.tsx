@@ -6,6 +6,7 @@ import { AuthContext } from './AuthContext';
 import { toast } from 'react-toastify';
 import { type NavigateFunction } from 'react-router-dom';
 import { type IResponseValidateToken } from '../../interfaces/IResponseValidateToken';
+import { type IResponseSignin } from '../../interfaces/IResponseSignin';
 
 const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [user, setUser] = useState<IFreteiro | ICliente | null>(null);
@@ -14,28 +15,55 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const client = useQueryClient();
   const api = useApi();
 
-  const signin = async (
+  const signin = (
     email: string,
     password: string,
-  ): Promise<boolean | null> => {
+    Navigate: NavigateFunction,
+    setError: (error: string) => void,
+  ): void => {
+    setError('');
     setIsLoadingUser(true);
-    const data = await api.signin(email, password);
-
-    if (data.data.user && data.data.token) {
-      setToken(data.data.token);
-      data.data.user.id === data.data.user.extra_data.freteiro
-        ? api.getFreteiro(data.data.user.id).then((res) => {
-            setUser(res.data);
-            setTypeUser(1);
-          })
-        : api.getCliente(data.data.user.id).then((res) => {
-            setUser(res.data);
-            setTypeUser(2);
-          });
-      setIsLoadingUser(false);
-      return data.data.user.id === data.data.user.extra_data.freteiro;
-    }
-    return null;
+    api
+      .signin(email, password)
+      .then((res: IResponseSignin) => {
+        const { data } = res;
+        setToken(data.token);
+        if (data.user.id === data.user.extra_data.freteiro) {
+          api
+            .getFreteiro(data.user.id)
+            .then((resFreteiro) => {
+              setIsLoadingUser(false);
+              setUser(resFreteiro.data);
+              setTypeUser(1);
+              toast.success('Login realizado com sucesso!');
+              Navigate('/fretesDisponiveis');
+            })
+            .catch(() => {
+              setError(
+                'Não foi possível realizar o login, tente novamente mais tarde!',
+              );
+            });
+        } else {
+          api
+            .getCliente(data.user.id)
+            .then((resCliente) => {
+              setIsLoadingUser(false);
+              setUser(resCliente.data);
+              setTypeUser(2);
+              toast.success('Login realizado com sucesso!');
+              Navigate('/dashboard');
+            })
+            .catch(() => {
+              setError(
+                'Não foi possível realizar o login, tente novamente mais tarde!',
+              );
+            });
+        }
+      })
+      .catch(() => {
+        setError('Usuário e/ou senha incorreto(s)');
+        toast.error('Usuário e/ou senha incorreto(s)');
+      });
   };
 
   const validateToken = (): void => {
@@ -74,7 +102,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
 
   useEffect(() => {
     validateToken();
-  }, []);
+  }, [localStorage.getItem('authToken')]);
 
   const signout = (Navigate: NavigateFunction): void => {
     client.getQueryCache().clear();
