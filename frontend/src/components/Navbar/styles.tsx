@@ -72,7 +72,8 @@ export const LinksFretes = styled.div<IDropdownMenu>`
 
   @media (max-width: 768px) {
     & {
-      display: ${({ show }) => (show ? 'flex' : 'none')};
+      display: ${({ show }) =>
+        typeof show === 'boolean' && show ? 'flex' : 'none'};
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -182,14 +183,23 @@ export const ButtonMenuContainer = styled.div<IDropdownMenu>`
 
     button span {
       border-top-color: ${({ animation }) =>
-        animation ? 'transparent' : 'initial'};
+        typeof animation === 'boolean' && animation
+          ? 'transparent'
+          : 'initial'};
     }
     button span::before {
-      transform: ${({ animation }) => (animation ? 'rotate(135deg)' : 'none')};
+      transform: ${({ animation }) =>
+        typeof animation === 'boolean' && animation
+          ? 'rotate(135deg)'
+          : 'none'};
     }
     button span::after {
-      transform: ${({ animation }) => (animation ? 'rotate(-135deg)' : 'none')};
-      top: ${({ animation }) => (animation ? '-7px' : 'none')};
+      transform: ${({ animation }) =>
+        typeof animation === 'boolean' && animation
+          ? 'rotate(-135deg)'
+          : 'none'};
+      top: ${({ animation }) =>
+        typeof animation === 'boolean' && animation ? '-7px' : 'none'};
     }
   }
 `;

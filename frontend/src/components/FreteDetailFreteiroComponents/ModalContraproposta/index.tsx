@@ -100,7 +100,8 @@ const ModalContraproposta = ({
     };
 
     Object.entries(contraproposta).forEach(([key, value]) => {
-      if (value) formData.append(key, value.toString());
+      if (typeof value === 'boolean' && value)
+        formData.append(key, value.toString());
     });
 
     registerPropostaMutation.mutate(formData);

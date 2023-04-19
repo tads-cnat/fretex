@@ -26,7 +26,7 @@ const LabelInput = ({
   return (
     <LabelContainer style={style}>
       <InputLabel backgroundColor={backgroundColorInput}>
-        {Icon && <Icon />}
+        {Boolean(Icon) && (typeof Icon === 'function' ? <Icon /> : Icon)}
         {children}
       </InputLabel>
       {isError != null && <p className="error">{errorMessage}</p>}
