@@ -118,7 +118,7 @@ const Index = (): JSX.Element => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
-    const imagemUrl = produto.imagem_url[0] && produto.imagem_url[0];
+    const imagemUrl = produto.imagem_url[0];
 
     if (
       isErrorDateRange(
@@ -134,27 +134,31 @@ const Index = (): JSX.Element => {
       return;
     }
 
-    if (!imagemUrl) {
+    if (produto.imagem_url.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
       return;
     }
 
     Object.entries(origem).forEach(([key, value]) => {
-      if (value) formData.append(`origem.${key}`, value);
+      if (value !== null && value !== undefined)
+        formData.append(`origem.${key}`, value);
     });
     Object.entries(destino).forEach(([key, value]) => {
-      if (value) formData.append(`destino.${key}`, value);
+      if (value !== null && value !== undefined)
+        formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (imagemUrl && key === 'imagem_url')
+      if (produto.imagem_url.length === 0 && key === 'imagem_url')
         formData.append(`produto.${key}`, imagemUrl);
-      else if (value) formData.append(`produto.${key}`, value);
+      else if (typeof value === 'boolean' && value)
+        formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
-      if (value && key === 'tipo_veiculo')
+      if (typeof value === 'boolean' && value && key === 'tipo_veiculo')
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
-      else if (value) formData.append(`${key}`, value);
+      else if (typeof value === 'boolean' && value)
+        formData.append(`${key}`, value);
     });
     registerPedido(formData)
       .then(() => {
@@ -374,20 +378,19 @@ const Index = (): JSX.Element => {
                 <div className="containerTipoVeiculo">
                   <span>Tipos de veículo</span>
                   <div className="tipoveiculo">
-                    {tiposDeVeiculo &&
-                      tiposDeVeiculo?.map((tipoveiculo) => (
-                        <label
-                          key={tipoveiculo.id}
-                          className="checkbox_tipoveiculo"
-                        >
-                          <input
-                            {...register('tipo_veiculo')}
-                            type="checkbox"
-                            value={tipoveiculo.id}
-                          />
-                          {tipoveiculo.descricao}
-                        </label>
-                      ))}
+                    {tiposDeVeiculo?.map((tipoveiculo) => (
+                      <label
+                        key={tipoveiculo.id}
+                        className="checkbox_tipoveiculo"
+                      >
+                        <input
+                          {...register('tipo_veiculo')}
+                          type="checkbox"
+                          value={tipoveiculo.id}
+                        />
+                        {tipoveiculo.descricao}
+                      </label>
+                    ))}
                   </div>
                   {errors.tipo_veiculo != null && (
                     <p className="error">{errors.tipo_veiculo?.message}</p>
@@ -404,7 +407,9 @@ const Index = (): JSX.Element => {
                     accept="image/jpeg,image/png,image/gif"
                   />
                 </label>
-                {errorImg && <p className="error">{errorImg}</p>}
+                {errorImg !== '' && Boolean(errorImg) && (
+                  <p className="error">{errorImg}</p>
+                )}
                 <label>
                   <span>Observaçoes</span>
                   <textarea
@@ -452,7 +457,9 @@ const Index = (): JSX.Element => {
                 {errors.turno_coleta != null && (
                   <p className="error">{errors.turno_coleta?.message}</p>
                 )}
-                {errorTurno && <p className="error">{errorTurno}</p>}
+                {errorTurno !== '' && Boolean(errorTurno) && (
+                  <p className="error">{errorTurno}</p>
+                )}
               </div>
               <div>
                 <label>
@@ -484,7 +491,9 @@ const Index = (): JSX.Element => {
                 {errors.data_coleta != null && (
                   <p className="error">{errors.data_coleta?.message}</p>
                 )}
-                {errorDate && <p className="error">{errorDate}</p>}
+                {errorDate !== '' && Boolean(errorDate) && (
+                  <p className="error">{errorDate}</p>
+                )}
               </div>
               <div>
                 <label>
