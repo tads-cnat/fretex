@@ -1,3 +1,6 @@
 [tool.black]
 line-length = 119
 order = "stdlib,thirdparty,local"
+
+[tool.isort]
+sections = "FUTURE,TYPING,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"

@@ -1,5 +1,6 @@
-from plataform.api import views
 from rest_framework_extensions.routers import ExtendedSimpleRouter
+
+from plataform.api import views
 
 router = ExtendedSimpleRouter(trailing_slash=False)
 
