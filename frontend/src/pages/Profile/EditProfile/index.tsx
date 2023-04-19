@@ -134,7 +134,7 @@ const EditProfile = (): JSX.Element => {
         <h1 className="title">Edite seu perfil</h1>
         <PerfilImgUpdate>
           <label>
-            <img src={imagePreview || perfil} alt="perfil" />
+            <img src={imagePreview ?? perfil} alt="perfil" />
             <input
               type="file"
               {...register('url_foto')}
