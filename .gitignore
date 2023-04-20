@@ -199,3 +199,4 @@ cython_debug/
 *yarn-error.log*
 
 *lint_result.txt*
+/backend/core/local_settings.py
