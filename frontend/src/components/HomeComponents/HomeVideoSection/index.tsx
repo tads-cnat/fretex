@@ -7,8 +7,9 @@ import {
   VideoP,
   VideoSection,
 } from "./styles";
+import Button from "../../Global/Button";
 import Video from "../../../assets/videos/video.mp4";
-import { SpanYellow, BtnPattern } from "../../../styles";
+import {SpanYellow} from "../../../styles";
 
 const HomeVideoSection = ():JSX.Element => {
   return (
@@ -24,7 +25,7 @@ const HomeVideoSection = ():JSX.Element => {
           A maior plataforma de transporte rodoviário de cargas do Brasil
         </VideoP>
         <VideoBtnWrapper>
-          <BtnPattern to="/register">Comece agora</BtnPattern>
+          <Button link="/register">Comece agora</Button>
         </VideoBtnWrapper>
       </ContainerVideoContent>
     </VideoSection>

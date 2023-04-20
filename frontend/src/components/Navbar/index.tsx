@@ -1,3 +1,4 @@
+import Button from '../Global/Button';
 import { Wrapper, SpanYellow } from '../../styles';
 import { useContext, useState } from 'react';
 import {
@@ -6,7 +7,6 @@ import {
   LinksFretes,
   NavContainer,
   ButtonMenuContainer,
-  BtnPatternLogin,
 } from './styles';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import NavUser from './NavUser';
@@ -118,13 +118,9 @@ const Navbar = ({ id }: INavbar): JSX.Element => {
             )}
             <div className="containerUser">
               {user !== null ? (
-                <NavUser
-                  user={user}
-                  active={active}
-                  setActive={setActive}
-                />
+                <NavUser user={user} active={active} setActive={setActive} />
               ) : (
-                <BtnPatternLogin to="/login">Login</BtnPatternLogin>
+                <Button link="/login">Login</Button>
               )}
             </div>
           </LinksFretes>
