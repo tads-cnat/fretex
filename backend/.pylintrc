@@ -11,38 +11,11 @@ disable = C0114, C0115, C0116, R0801, R0903, W1203
 # Enable some additional warnings that are helpful for DRF projects
 enable = W1401, R1705, R1710, R1711
 
-[TYPECHECK]
 
-# Set the Python version to use for type checking
-python_version = 3.9
-
-[FORMAT]
-
-# Use black as the code formatter
-# You will need to install black separately using pip
-formatter = black
-
-[IMPORTS]
-
-# Set the maximum number of imported names allowed for a module
-max-imports = 25
-
-# Set the maximum number of statements in a single import block
-max-module-lines = 50
-
-[DESIGN]
-
-# Enable checking for cyclomatic complexity
-# The default maximum complexity is 10
-max-complexity = 12
-
-[DUPLICATES]
-
-# Enable checking for duplicate code
-enabled = yes
-
-# Set the minimum similarity threshold for reporting duplicates
-min-similarity-lines = 4
+[SIMILARITIES]
+min-similarity-lines=4
+ignore-comments=yes
+ignore-imports=yes
 
 [DJANGO]
 
@@ -52,46 +25,10 @@ load-plugins=pylint_django
 # Enable checking for undefined Django settings
 django-settings-module = core.settings
 
-# Enable checking for undefined Django models
-django-undefined-models = yes
-
-# Disable checking for missing module docstrings in Django apps
-django-app-configs = no
-
 [BASIC]
 
 # Set the maximum line length to 120 characters
 max-line-length = 120
-
-# Set the maximum number of characters allowed on a single line
-max-character-per-line = 120
-
-; # Disable checking for variable names that do not conform to PEP8
-; variable-rgx = ''
-
-; # Disable checking for method names that do not conform to PEP8
-; method-rgx = ''
-
-; # Disable checking for function names that do not conform to PEP8
-; function-rgx = ''
-
-; # Disable checking for class names that do not conform to PEP8
-; class-rgx = ''
-
-; # Disable checking for module names that do not conform to PEP8
-; module-rgx = ''
-
-; # Disable checking for constant names that do not conform to PEP8
-; const-rgx = ''
-
-; # Disable checking for argument names that do not conform to PEP8
-; argument-rgx = ''
-
-; # Disable checking for regular expression names that do not conform to PEP8
-; good-names = ''
-
-# Disable checking for names that are too short
-min-name-length = 1
 
 # Disable checking for trailing whitespace
 ignore-long-lines = yes

@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import transaction
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from plataform.models import (
     AvaliacaoUsuario,
     Cliente,
@@ -12,8 +15,6 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
 )
-from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
 
 
 class EnderecoSerializer(serializers.ModelSerializer):

@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["fretex.pythonanywhere.com", "127.0.0.1", "localhost"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -104,19 +102,14 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
         "rest_framework.permissions.IsAdminUser",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication"
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.TokenAuthentication"],
 }
 
 # SWAGGER
 
 SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
-    },
+    "SECURITY_DEFINITIONS": {"api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}},
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -152,7 +145,6 @@ TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

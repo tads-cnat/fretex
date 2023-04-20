@@ -1,5 +1,6 @@
 from drf_yasg import openapi
 
+
 def open_api_request_body(parameters):
     o_parameters = {}
     for parameter in parameters.keys():

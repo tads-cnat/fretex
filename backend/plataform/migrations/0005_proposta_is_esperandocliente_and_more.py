@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('plataform', '0004_proposta_is_contraproposta'),
+        ("plataform", "0004_proposta_is_contraproposta"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='proposta',
-            name='is_esperandoCliente',
+            model_name="proposta",
+            name="is_esperandoCliente",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='proposta',
-            name='is_esperandoFreteiro',
+            model_name="proposta",
+            name="is_esperandoFreteiro",
             field=models.BooleanField(default=True),
         ),
     ]

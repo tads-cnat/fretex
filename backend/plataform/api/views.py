@@ -1,6 +1,14 @@
-from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
 from django.db.models import Q
+from rest_framework import status, viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework_extensions.mixins import NestedViewSetMixin
+
+from core.api.renders import CustomRenderer
 from plataform.api.serializers import (
     AvaliacaoUsuarioSerializer,
     ClienteSerializer,
@@ -29,22 +37,12 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
 )
-from rest_framework import status, viewsets
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
-from rest_framework.mixins import ListModelMixin
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework_extensions.mixins import NestedViewSetMixin
 
 
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
     serializer_class = None
-
-    def get_serializer_class(self):
-        return super().get_serializer_class()
 
     @action(detail=False, methods=["post"], serializer_class=LoginSerializer)
     def login(self, request):
