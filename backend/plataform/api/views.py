@@ -39,13 +39,6 @@ from plataform.models import (
 )
 
 
-def foo():
-    x = 1
-    y = 2
-    z = 3
-    print(x + y + z)
-
-
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
