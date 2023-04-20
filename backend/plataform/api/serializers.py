@@ -52,13 +52,6 @@ class RegisterClienteSerializer(serializers.Serializer):
         return cliente
 
 
-def foo():
-    x = 1
-    y = 2
-    z = 3
-    print(x + y + z)
-
-
 class RegisterFreteiroSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
     cpf = serializers.CharField(
