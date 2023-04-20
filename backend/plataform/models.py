@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=100)
@@ -121,7 +122,9 @@ class Veiculo(models.Model):
 
 class Proposta(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='proposta_set')
+    pedido = models.ForeignKey(
+        Pedido, on_delete=models.CASCADE, related_name="proposta_set"
+    )
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateTimeField(auto_now_add=True)
@@ -129,7 +132,9 @@ class Proposta(models.Model):
     is_contraproposta = models.BooleanField(default=False)
     is_esperandoFreteiro = models.BooleanField(default=True)
     is_esperandoCliente = models.BooleanField(default=False)
-    contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
+    contraproposta = models.ForeignKey(
+        "self", on_delete=models.CASCADE, null=True, blank=True
+    )
     ehNegada = models.BooleanField(default=False)
 
     class Meta:
@@ -148,6 +153,7 @@ class AvaliacaoUsuario(models.Model):
     )
     nota = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
     observacao = models.TextField()
+
 
 class Log(models.Model):
     data = models.DateTimeField(auto_now_add=True)
