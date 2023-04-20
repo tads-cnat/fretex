@@ -1,16 +1,10 @@
 {
   "python.formatting.provider": "black",
-  "isort.args": [
-    "--profile",
-    "black",
-    "--known-third-party",
-    "django,pytest,rest_framework_extensions"
-  ],
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
-    },
+      "source.organizeImports": true,
+    }
   },
 }

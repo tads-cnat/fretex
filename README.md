@@ -41,6 +41,10 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 >Descrever os comandos iniciais para começar a colaborar com o desenvolvimento do projeto
 
+# Lint backend
+### Rodar na pasta backend
+* `pylint --enable=similarities plataform > lint_result.txt`
+* `pylint plataform > lint_result.txt`
 
 
 # 📄 Documentação
