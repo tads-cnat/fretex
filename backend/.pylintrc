@@ -13,7 +13,7 @@ enable = W1401, R1705, R1710, R1711
 
 
 [SIMILARITIES]
-min-similarity-lines=4
+min-similarity-lines=3
 ignore-comments=yes
 ignore-imports=yes
 
