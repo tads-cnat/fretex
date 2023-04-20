@@ -12,6 +12,7 @@ import Loading from '../../components/Global/Loading';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
+import Head from '../../components/Head';
 
 const FretesAvailable = (): JSX.Element => {
   const { user } = useContext(AuthContext);
@@ -42,47 +43,50 @@ const FretesAvailable = (): JSX.Element => {
 
   if (user == null) return <LoadingPage />;
   return (
-    <Layout>
-      <ContainerBg>
-        <Wrapper bgColor="#f5f5f5">
-          <h1>Fretes Disponíveis</h1>
-          <Search>
-            <img src={SearchImg} alt="" />
-            <input
-              type="text"
-              placeholder="Material"
-              onChange={(e) => {
-                handleChange(e.target.value);
-              }}
-            />
-          </Search>
-          <ContainerMain>
-            <Filter />
-            <ContainerFretes>
-              {isError && <p>Houve um erro, tente novamente!</p>}
-              {!isLoading && pedidos.data.length === 0 && (
-                <p
-                  style={{
-                    textAlign: 'center',
-                    marginTop: '40px',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Não há pedidos postados
-                </p>
-              )}
-              {!isLoading && pedidos ? (
-                pedidos.data.map((pedido: IPedido) => (
-                  <BoxFretes key={pedido.id} pedido={pedido} />
-                ))
-              ) : (
-                <Loading />
-              )}
-            </ContainerFretes>
-          </ContainerMain>
-        </Wrapper>
-      </ContainerBg>
-    </Layout>
+    <>
+      <Head title="Fretes disponíveis" />
+      <Layout>
+        <ContainerBg>
+          <Wrapper bgColor="#f5f5f5">
+            <h1>Fretes Disponíveis</h1>
+            <Search>
+              <img src={SearchImg} alt="" />
+              <input
+                type="text"
+                placeholder="Material"
+                onChange={(e) => {
+                  handleChange(e.target.value);
+                }}
+              />
+            </Search>
+            <ContainerMain>
+              <Filter />
+              <ContainerFretes>
+                {isError && <p>Houve um erro, tente novamente!</p>}
+                {!isLoading && pedidos.data.length === 0 && (
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      marginTop: '40px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Não há pedidos postados
+                  </p>
+                )}
+                {!isLoading && pedidos ? (
+                  pedidos.data.map((pedido: IPedido) => (
+                    <BoxFretes key={pedido.id} pedido={pedido} />
+                  ))
+                ) : (
+                  <Loading />
+                )}
+              </ContainerFretes>
+            </ContainerMain>
+          </Wrapper>
+        </ContainerBg>
+      </Layout>{' '}
+    </>
   );
 };
 

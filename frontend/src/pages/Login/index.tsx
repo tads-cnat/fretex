@@ -18,6 +18,7 @@ import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useToggle } from '../../hooks/useToggle';
+import Head from '../../components/Head';
 
 const Login = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -47,63 +48,66 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <BgRegister>
-      <Wrapper bgColor="#282828">
-        <ContainerPrincipal>
-          <ContainerContent2>
-            <div>
-              <section>
-                <h1>
-                  <Link to="/">
-                    Frete<SpanYellow>X</SpanYellow>
-                  </Link>
-                </h1>
-              </section>
-            </div>
-          </ContainerContent2>
-          <ContainerForm>
-            <form onSubmit={() => handleSubmit(onSubmit)}>
-              <h1>Entre na sua conta</h1>
+    <>
+      <Head title='Login'/>
+      <BgRegister>
+        <Wrapper bgColor="#282828">
+          <ContainerPrincipal>
+            <ContainerContent2>
               <div>
-                <label>
-                  <Email />
-                  <input
-                    {...register('email')}
-                    type="email"
-                    autoComplete="on"
-                    placeholder="Seu E-mail"
-                  />
-                </label>
-                {errors.email != null && (
-                  <p className="error">{errors.email?.message}</p>
-                )}
-                <label>
-                  <Password />
-                  <input
-                    type={password ? 'text' : 'password'}
-                    {...register('password')}
-                    placeholder="Sua senha"
-                  />
-                  <button type="button" onClick={handlePassword}>
-                    {password ? <ClosedEye /> : <Eye />}
-                  </button>
-                </label>
-                {errors.password != null && (
-                  <p className="error">{errors.password?.message}</p>
-                )}
-                {error.length !== 0 && <p className="error">{error}</p>}
+                <section>
+                  <h1>
+                    <Link to="/">
+                      Frete<SpanYellow>X</SpanYellow>
+                    </Link>
+                  </h1>
+                </section>
               </div>
-              <section>
-                <BtnYellow type="submit">Entrar</BtnYellow>
-                <p>
-                  Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
-                </p>
-              </section>
-            </form>
-          </ContainerForm>
-        </ContainerPrincipal>
-      </Wrapper>
-    </BgRegister>
+            </ContainerContent2>
+            <ContainerForm>
+              <form onSubmit={() => handleSubmit(onSubmit)}>
+                <h1>Entre na sua conta</h1>
+                <div>
+                  <label>
+                    <Email />
+                    <input
+                      {...register('email')}
+                      type="email"
+                      autoComplete="on"
+                      placeholder="Seu E-mail"
+                    />
+                  </label>
+                  {errors.email != null && (
+                    <p className="error">{errors.email?.message}</p>
+                  )}
+                  <label>
+                    <Password />
+                    <input
+                      type={password ? 'text' : 'password'}
+                      {...register('password')}
+                      placeholder="Sua senha"
+                    />
+                    <button type="button" onClick={handlePassword}>
+                      {password ? <ClosedEye /> : <Eye />}
+                    </button>
+                  </label>
+                  {errors.password != null && (
+                    <p className="error">{errors.password?.message}</p>
+                  )}
+                  {error.length !== 0 && <p className="error">{error}</p>}
+                </div>
+                <section>
+                  <BtnYellow type="submit">Entrar</BtnYellow>
+                  <p>
+                    Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
+                  </p>
+                </section>
+              </form>
+            </ContainerForm>
+          </ContainerPrincipal>
+        </Wrapper>
+      </BgRegister>
+    </>
   );
 };
 

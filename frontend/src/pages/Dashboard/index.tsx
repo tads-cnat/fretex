@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import { isFreteiro } from '../../utils/isFreteiro';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
+import Head from '../../components/Head';
 
 const Dashboard = (): JSX.Element => {
   window.scrollTo(0, 0);
@@ -118,59 +119,62 @@ const Dashboard = (): JSX.Element => {
 
   if (user == null) return <LoadingPage />;
   return (
-    <Layout>
-      <Wrapper style={{ minHeight: '80vh' }}>
-        <Title>Dashboard</Title>
-        <Filter>
-          <span>Seus Fretes {/* dos últimos 30 dias */}</span>
-          <div>
-            <button className="concluidos">Ver todos os concluídos</button>
-            {isFreteiro(user) && (
-              <BtnYellowLinkRouter to={'/fretesDisponiveis'}>
-                Buscar novos fretes
-              </BtnYellowLinkRouter>
-            )}
-          </div>
-        </Filter>
-        <ContainerPedidos>
-          <div className={'containers'}>
-            <BoxDashboard
-              pedidos={pedidosEN?.data}
-              isLoading={isLoadingPedidosEN}
-              isError={errorPedidosEN}
-              initialToggleValue={true}
-              status="Em negociação"
-            />
-            <BoxDashboard
-              pedidos={pedidosAG?.data}
-              isLoading={isLoadingPedidosAG}
-              isError={errorPedidosAG}
-              status="Aguardando coleta"
-            />
-          </div>
-          <div className={'containers'}>
-            <BoxDashboard
-              pedidos={pedidosTR?.data}
-              isLoading={isLoadingPedidosTR}
-              isError={errorPedidosTR}
-              status="Em trânsito"
-            />
-            <BoxDashboard
-              pedidos={pedidosCO?.data}
-              isLoading={isLoadingPedidosCO}
-              isError={errorPedidosCO}
-              status="Concluído"
-            />
-            <BoxDashboard
-              pedidos={pedidosCA?.data}
-              isLoading={isLoadingPedidosCA}
-              isError={errorPedidosCA}
-              status="Cancelado"
-            />
-          </div>
-        </ContainerPedidos>
-      </Wrapper>
-    </Layout>
+    <>
+    <Head title='Dashboard'/>
+      <Layout>
+        <Wrapper style={{ minHeight: '80vh' }}>
+          <Title>Dashboard</Title>
+          <Filter>
+            <span>Seus Fretes {/* dos últimos 30 dias */}</span>
+            <div>
+              <button className="concluidos">Ver todos os concluídos</button>
+              {isFreteiro(user) && (
+                <BtnYellowLinkRouter to={'/fretesDisponiveis'}>
+                  Buscar novos fretes
+                </BtnYellowLinkRouter>
+              )}
+            </div>
+          </Filter>
+          <ContainerPedidos>
+            <div className={'containers'}>
+              <BoxDashboard
+                pedidos={pedidosEN?.data}
+                isLoading={isLoadingPedidosEN}
+                isError={errorPedidosEN}
+                initialToggleValue={true}
+                status="Em negociação"
+              />
+              <BoxDashboard
+                pedidos={pedidosAG?.data}
+                isLoading={isLoadingPedidosAG}
+                isError={errorPedidosAG}
+                status="Aguardando coleta"
+              />
+            </div>
+            <div className={'containers'}>
+              <BoxDashboard
+                pedidos={pedidosTR?.data}
+                isLoading={isLoadingPedidosTR}
+                isError={errorPedidosTR}
+                status="Em trânsito"
+              />
+              <BoxDashboard
+                pedidos={pedidosCO?.data}
+                isLoading={isLoadingPedidosCO}
+                isError={errorPedidosCO}
+                status="Concluído"
+              />
+              <BoxDashboard
+                pedidos={pedidosCA?.data}
+                isLoading={isLoadingPedidosCA}
+                isError={errorPedidosCA}
+                status="Cancelado"
+              />
+            </div>
+          </ContainerPedidos>
+        </Wrapper>
+      </Layout>
+    </>
   );
 };
 
