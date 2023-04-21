@@ -1,13 +1,13 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { Link } from "react-router-dom";
+import styled, { createGlobalStyle } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { type IWrapper } from "./interfaces/styledComponents";
+import { type IWrapper } from '../interfaces/styledComponents';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   :root {
     --theme-primary: #F6AD08;
 
-    
+
     --bg-grey: #353535;
     --bg-grey2: #282828;
     --bg-grey3: #f5f5f5;
@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --btn-text-color1: #332200;
     --btn-hover: #d89a0a;
-    
+
     --font-small: .75rem;
     --font-medium: 1rem;
     --font-large: 1.5rem;
@@ -68,7 +68,7 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
+
   .error {
     color: #ee5757;
     display: inline-block;

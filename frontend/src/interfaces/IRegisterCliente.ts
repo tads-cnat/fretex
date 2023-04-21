@@ -1,5 +1,5 @@
 export interface IRegisterCliente {
-  fullName: string,
+  full_name: string,
   email: string,
   cpf: string,
   password: string,

@@ -1,7 +1,7 @@
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import Form from '../../components/RegisterFreteComponents/Form';
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { ContainerPrincipal } from './styles';
 
 const index = (): JSX.Element => {

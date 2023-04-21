@@ -1,4 +1,4 @@
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { ContainerPrincipal } from './styles';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
@@ -50,8 +50,7 @@ const FreteDetail = (): JSX.Element => {
 
   if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
-  if (!isFreteiro(user) && user.id !== pedido.data.cliente)
-    return <Login />;
+  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
   return (
     <Layout>
       <ContainerPrincipal>

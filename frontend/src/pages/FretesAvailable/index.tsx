@@ -1,6 +1,6 @@
 import BoxFretes from '../../components/FretesAvailable/BoxFretes';
 import Filter from '../../components/FretesAvailable/Filter';
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { ContainerBg, ContainerMain, ContainerFretes, Search } from './styles';
 import SearchImg from '../../assets/images/search.svg';
 import useApi from '../../hooks/useApi';

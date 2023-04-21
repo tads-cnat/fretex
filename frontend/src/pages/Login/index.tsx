@@ -9,7 +9,7 @@ import {
   BtnYellow,
 } from '../../components/RegisterComponents/RegisterClienteForm/styles';
 import { ContainerContent2 } from './styles';
-import { SpanYellow, Wrapper } from '../../styles';
+import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import { BgRegister } from '../ResgisterUser/style';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -62,7 +62,7 @@ const Login = (): JSX.Element => {
             </div>
           </ContainerContent2>
           <ContainerForm>
-            <form onSubmit={() => handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <h1>Entre na sua conta</h1>
               <div>
                 <label>

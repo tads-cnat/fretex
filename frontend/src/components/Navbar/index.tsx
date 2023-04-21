@@ -1,4 +1,4 @@
-import { Wrapper, SpanYellow } from '../../styles';
+import { Wrapper, SpanYellow } from '../../styles/globalStyles';
 import { useContext, useState } from 'react';
 import {
   Header,
@@ -118,11 +118,7 @@ const Navbar = ({ id }: INavbar): JSX.Element => {
             )}
             <div className="containerUser">
               {user !== null ? (
-                <NavUser
-                  user={user}
-                  active={active}
-                  setActive={setActive}
-                />
+                <NavUser user={user} active={active} setActive={setActive} />
               ) : (
                 <BtnPatternLogin to="/login">Login</BtnPatternLogin>
               )}

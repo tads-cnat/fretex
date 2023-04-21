@@ -10,7 +10,7 @@ import {
   type IFreteiro,
   type ITypeUser,
 } from '../../interfaces';
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { BoxWithShadow, Container, Content } from './styles';
 import { isFreteiro } from '../../utils/isFreteiro';
 import useApi from '../../hooks/useApi';

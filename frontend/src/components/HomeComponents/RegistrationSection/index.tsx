@@ -1,4 +1,4 @@
-import { BtnPattern, SpanYellow } from '../../../styles';
+import { BtnPattern, SpanYellow } from '../../../styles/globalStyles';
 import { RegisterContainer, RegisterUser, Title, Text } from './styles';
 import imgCliente from '../../../assets/images/ParaClientes.png';
 import imgFreteiro from '../../../assets/images/ParaFreteiros.png';

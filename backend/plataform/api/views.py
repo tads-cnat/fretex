@@ -3,38 +3,23 @@ from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from plataform.api.serializers import (
-    AvaliacaoUsuarioSerializer,
-    ClienteSerializer,
-    EnderecoSerializer,
-    FreteiroSerializer,
-    LoginSerializer,
-    PedidoSerializer,
-    ProdutoSerializer,
-    PropostaSerializer,
-    RegisterClienteSerializer,
-    RegisterFreteiroSerializer,
-    TipoVeiculoSerializer,
-    TriggerSerializer,
-    UserSerializer,
-    VeiculoSerializer,
-)
-from plataform.models import (
-    AvaliacaoUsuario,
-    Cliente,
-    Endereco,
-    Freteiro,
-    Log,
-    Pedido,
-    Produto,
-    Proposta,
-    TipoVeiculo,
-    Veiculo,
-)
+from plataform.api.serializers import (AvaliacaoUsuarioSerializer,
+                                       ClienteSerializer, EnderecoSerializer,
+                                       FreteiroSerializer, LoginSerializer,
+                                       PedidoSerializer, ProdutoSerializer,
+                                       PropostaSerializer,
+                                       RegisterClienteSerializer,
+                                       RegisterFreteiroSerializer,
+                                       TipoVeiculoSerializer,
+                                       TriggerSerializer, UserSerializer,
+                                       VeiculoSerializer)
+from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
+                              Log, Pedido, Produto, Proposta, TipoVeiculo,
+                              Veiculo)
 from rest_framework import status, viewsets
-from rest_framework.mixins import ListModelMixin
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
+from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
@@ -80,6 +65,10 @@ class AuthViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
+        if User.objects.filter(email=request.data.get("email")).exists():
+            return Response({"email":[ "Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+        if Cliente.objects.filter(cpf=request.data.get("cpf")).exists():
+            return Response({"cpf":[ "CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
         return Response(
@@ -139,6 +128,7 @@ class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListMod
     renderer_classes = [CustomRenderer]
 
 from django.db.models import Q
+
 
 class MinhasPropostasPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
     permission_classes = [IsAuthenticated]
