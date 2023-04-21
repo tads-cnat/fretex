@@ -145,6 +145,7 @@ export const ContainerForm = styled.div`
     color: #bfbfbf;
     transition: 0.5s;
   }
+  
   label:focus-within svg {
     color: var(--theme-primary);
   }

@@ -21,6 +21,7 @@ import useApi from '../../../hooks/useApi';
 import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
 import { type IRegisterCliente } from '../../../interfaces/IRegisterCliente';
+import Input from '../../../components/Input/index';
 
 const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -54,6 +55,7 @@ const RegisterClientForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
+    console.log(data);
     const cliente: IRegisterCliente = {
       email: data.email,
       fullName: data.full_name,
@@ -81,7 +83,8 @@ const RegisterClientForm = (): JSX.Element => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Crie sua conta</h1>
           <div>
-            <label>
+            {/* <Input type="text" placeholder="test" {...register('email')} /> */}
+            <label> 
               <Email />
               <input
                 {...register('email')}
@@ -143,7 +146,7 @@ const RegisterClientForm = (): JSX.Element => {
             {errors.confirmPassword != null && (
               <p className="error">{errors.confirmPassword?.message}</p>
             )}
-            {error !== "" && <p className="error">{error}</p>}
+            {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
             <BtnYellow type="submit">Cadastre-se</BtnYellow>
