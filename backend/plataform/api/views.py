@@ -1,8 +1,14 @@
-from core.api.helpers import open_api_request_body
-from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
+from django.db.models import Q
+from rest_framework import status, viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework_extensions.mixins import NestedViewSetMixin
+
+from core.api.renders import CustomRenderer
 from plataform.api.serializers import (
     AvaliacaoUsuarioSerializer,
     ClienteSerializer,
@@ -31,22 +37,12 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
 )
-from rest_framework import status, viewsets
-from rest_framework.mixins import ListModelMixin
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework_extensions.mixins import NestedViewSetMixin
 
 
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
     serializer_class = None
-
-    def get_serializer_class(self):
-        return super().get_serializer_class()
 
     @action(detail=False, methods=["post"], serializer_class=LoginSerializer)
     def login(self, request):
@@ -80,6 +76,10 @@ class AuthViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
+        if User.objects.filter(email=request.data.get("email")).exists():
+            return Response({"email":[ "Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+        if Cliente.objects.filter(cpf=request.data.get("cpf")).exists():
+            return Response({"cpf":[ "CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
         return Response(
@@ -131,23 +131,35 @@ class PedidoViewSet(viewsets.ModelViewSet):
         request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
         request.data["status"] = "EN"
         return super().create(request, *args, **kwargs)
-    
-class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+
+
+class PropostaPedidoViewSet(
+    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
+):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
-from django.db.models import Q
 
-class MinhasPropostasPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+class MinhasPropostasPedidoViewSet(
+    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
+):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
     def get_queryset(self):
-        return super().get_queryset().filter(Q(usuario=self.request.user) | Q(contraproposta__usuario=self.request.user))
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                Q(usuario=self.request.user)
+                | Q(contraproposta__usuario=self.request.user)
+            )
+        )
+
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]

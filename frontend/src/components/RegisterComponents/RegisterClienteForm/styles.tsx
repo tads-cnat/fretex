@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Animation } from "../../../styles";
+import styled from 'styled-components';
+import { Animation } from '../../../styles/globalStyles';
 
 export const ContainerPrincipal = styled(Animation)`
   display: grid;
@@ -25,7 +25,7 @@ export const ContainerContent = styled.div`
     padding-left: 50px;
     border-left: 1px solid #5f5f5f;
     height: 70%;
-    a{
+    a {
       text-decoration: none;
       color: var(--text-light);
     }
@@ -49,7 +49,7 @@ export const ContainerContent = styled.div`
     font-weight: 600;
     font-size: var(--font-medium);
   }
-  
+
   @media (max-width: 768px) {
     div {
       order: -1;

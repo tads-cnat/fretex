@@ -1,4 +1,4 @@
-import { SpanYellow } from '../../../styles';
+import { SpanYellow } from '../../../styles/globalStyles';
 import Email from '../../../assets/Svg/Email';
 import Password from '../../../assets/Svg/Password';
 import User from '../../../assets/Svg/User';
@@ -20,8 +20,11 @@ import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
 import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
+<<<<<<< HEAD
 import { type IRegisterCliente } from '../../../interfaces/IRegisterCliente';
 import Input from '../../../components/Input/index';
+=======
+>>>>>>> origin/dev
 
 const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -55,6 +58,7 @@ const RegisterClientForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
+<<<<<<< HEAD
     console.log(data);
     const cliente: IRegisterCliente = {
       email: data.email,
@@ -63,6 +67,10 @@ const RegisterClientForm = (): JSX.Element => {
       password: data.password,
     };
     registerCliente(cliente)
+=======
+    const { email, full_name, cpf, password } = data;
+    registerCliente({ email, full_name, cpf, password })
+>>>>>>> origin/dev
       .then(() => {
         toast.success('Cliente cadastrado com sucesso!');
         navigate('/login');

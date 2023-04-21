@@ -18,8 +18,8 @@ export const useApi = () => ({
     })
     return response.data
   },
-  registerCliente: async ({ fullName, email, cpf, password }: IRegisterCliente) => {
-    const response = await api.post('/auth/register_cliente/', { fullName, cpf, email, password })
+  registerCliente: async ({ full_name, email, cpf, password }: IRegisterCliente) => {
+    const response = await api.post('/auth/register_cliente/', { full_name, cpf, email, password })
     return response.data
   },
   registerFreteiro: async (data: FormData) => {

@@ -6,11 +6,11 @@ import {
   VideoH1,
   VideoP,
   VideoSection,
-} from "./styles";
-import Video from "../../../assets/videos/video.mp4";
-import { SpanYellow, BtnPattern } from "../../../styles";
+} from './styles';
+import Video from '../../../assets/videos/video.mp4';
+import { SpanYellow, BtnPattern } from '../../../styles/globalStyles';
 
-const HomeVideoSection = ():JSX.Element => {
+const HomeVideoSection = (): JSX.Element => {
   return (
     <VideoSection>
       <ContainerVideo>

@@ -1,7 +1,7 @@
-from rest_framework_extensions.routers import ExtendedSimpleRouter
-from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 
 from plataform.api.router import router as plataform_router
 
