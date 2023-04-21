@@ -1,4 +1,4 @@
-import { SpanYellow, Wrapper } from '../../../styles';
+import { SpanYellow, Wrapper } from '../../../styles/globalStyles';
 import {
   VantagensContainer,
   VantagensFlex,

@@ -1,6 +1,6 @@
 import BoxDashboard from '../../components/Dashboard';
 import Layout from '../../components/Layout';
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { Filter, Title, ContainerPedidos, BtnYellowLinkRouter } from './styles';
 import useApi from '../../hooks/useApi';
 import { useQuery } from 'react-query';

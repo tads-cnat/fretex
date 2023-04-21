@@ -76,6 +76,10 @@ class AuthViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
+        if User.objects.filter(email=request.data.get("email")).exists():
+            return Response({"email":[ "Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+        if Cliente.objects.filter(cpf=request.data.get("cpf")).exists():
+            return Response({"cpf":[ "CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
         return Response(

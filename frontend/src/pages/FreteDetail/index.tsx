@@ -1,4 +1,4 @@
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { ContainerPrincipal } from './styles';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { type IDropdownMenu } from '../../interfaces/styledComponents';
-import { BtnPattern } from '../../styles';
+import { BtnPattern } from '../../styles/globalStyles';
 
 export const Header = styled.header`
   background-color: var(--bg-grey);
