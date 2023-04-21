@@ -1,21 +1,5 @@
-from core.api.helpers import open_api_request_body
-from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
-from plataform.api.serializers import (AvaliacaoUsuarioSerializer,
-                                       ClienteSerializer, EnderecoSerializer,
-                                       FreteiroSerializer, LoginSerializer,
-                                       PedidoSerializer, ProdutoSerializer,
-                                       PropostaSerializer,
-                                       RegisterClienteSerializer,
-                                       RegisterFreteiroSerializer,
-                                       TipoVeiculoSerializer,
-                                       TriggerSerializer, UserSerializer,
-                                       VeiculoSerializer)
-from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
-                              Log, Pedido, Produto, Proposta, TipoVeiculo,
-                              Veiculo)
+from django.db.models import Q
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
@@ -24,14 +8,41 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
+from core.api.renders import CustomRenderer
+from plataform.api.serializers import (
+    AvaliacaoUsuarioSerializer,
+    ClienteSerializer,
+    EnderecoSerializer,
+    FreteiroSerializer,
+    LoginSerializer,
+    PedidoSerializer,
+    ProdutoSerializer,
+    PropostaSerializer,
+    RegisterClienteSerializer,
+    RegisterFreteiroSerializer,
+    TipoVeiculoSerializer,
+    TriggerSerializer,
+    UserSerializer,
+    VeiculoSerializer,
+)
+from plataform.models import (
+    AvaliacaoUsuario,
+    Cliente,
+    Endereco,
+    Freteiro,
+    Log,
+    Pedido,
+    Produto,
+    Proposta,
+    TipoVeiculo,
+    Veiculo,
+)
+
 
 class AuthViewSet(viewsets.GenericViewSet):
     permission_classes = []
     renderer_classes = [CustomRenderer]
     serializer_class = None
-
-    def get_serializer_class(self):
-        return super().get_serializer_class()
 
     @action(detail=False, methods=["post"], serializer_class=LoginSerializer)
     def login(self, request):
@@ -120,24 +131,35 @@ class PedidoViewSet(viewsets.ModelViewSet):
         request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
         request.data["status"] = "EN"
         return super().create(request, *args, **kwargs)
-    
-class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+
+
+class PropostaPedidoViewSet(
+    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
+):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
-from django.db.models import Q
 
-
-class MinhasPropostasPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+class MinhasPropostasPedidoViewSet(
+    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
+):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
     def get_queryset(self):
-        return super().get_queryset().filter(Q(usuario=self.request.user) | Q(contraproposta__usuario=self.request.user))
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                Q(usuario=self.request.user)
+                | Q(contraproposta__usuario=self.request.user)
+            )
+        )
+
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]

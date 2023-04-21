@@ -1,11 +1,20 @@
 from django.contrib.auth.models import User
 from django.db import transaction
-from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
-                              Log, Pedido, Produto, Proposta, TipoVeiculo,
-                              Veiculo)
-from rest_framework import serializers, status
-from rest_framework.response import Response
+from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+
+from plataform.models import (
+    AvaliacaoUsuario,
+    Cliente,
+    Endereco,
+    Freteiro,
+    Log,
+    Pedido,
+    Produto,
+    Proposta,
+    TipoVeiculo,
+    Veiculo,
+)
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -32,7 +41,7 @@ class RegisterClienteSerializer(serializers.Serializer):
 
     @transaction.atomic
     def create(self, validated_data):
-        full_name_sp = validated_data.pop("full_name").split(' ')
+        full_name_sp = validated_data.pop("full_name").split(" ")
         validated_data["first_name"] = full_name_sp.pop(0)
         validated_data["last_name"] = " ".join(full_name_sp)
 
@@ -55,11 +64,10 @@ class RegisterFreteiroSerializer(serializers.Serializer):
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
     url_foto = serializers.ImageField(required=False)
-    
 
     @transaction.atomic
     def create(self, validated_data):
-        full_name_sp = validated_data.pop("full_name").split(' ')
+        full_name_sp = validated_data.pop("full_name").split(" ")
         validated_data["first_name"] = full_name_sp.pop(0)
         validated_data["last_name"] = " ".join(full_name_sp)
 
@@ -132,26 +140,36 @@ class FreteiroSerializer(serializers.ModelSerializer):
             freteiro.save()
 
             return freteiro
-    
+
     def update(self, instance, validated_data):
-        address_data = validated_data.pop('endereco', None)
+        address_data = validated_data.pop("endereco", None)
         if address_data:
-            instance.endereco.cep = address_data.get('cep', instance.endereco.CEP)
-            instance.endereco.rua = address_data.get('rua', instance.endereco.rua)
-            instance.endereco.numero = address_data.get('numero', instance.endereco.numero)
-            instance.endereco.bairro = address_data.get('bairro', instance.endereco.bairro)
-            instance.endereco.cidade = address_data.get('cidade', instance.endereco.cidade)
-            instance.endereco.estado = address_data.get('estado', instance.endereco.estado)
-            instance.endereco.complemento = address_data.get('complemento', instance.endereco.complemento)
+            instance.endereco.cep = address_data.get("cep", instance.endereco.CEP)
+            instance.endereco.rua = address_data.get("rua", instance.endereco.rua)
+            instance.endereco.numero = address_data.get(
+                "numero", instance.endereco.numero
+            )
+            instance.endereco.bairro = address_data.get(
+                "bairro", instance.endereco.bairro
+            )
+            instance.endereco.cidade = address_data.get(
+                "cidade", instance.endereco.cidade
+            )
+            instance.endereco.estado = address_data.get(
+                "estado", instance.endereco.estado
+            )
+            instance.endereco.complemento = address_data.get(
+                "complemento", instance.endereco.complemento
+            )
             instance.endereco.save()
-        instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.email = validated_data.get('email', instance.email)
-        instance.cpf = validated_data.get('cpf', instance.cpf)
-        instance.url_foto = validated_data.get('url_foto', instance.url_foto)
-        instance.capa_foto = validated_data.get('capa_foto', instance.capa_foto)
-        password = validated_data.get('password', None)
+        instance.username = validated_data.get("username", instance.username)
+        instance.first_name = validated_data.get("first_name", instance.first_name)
+        instance.last_name = validated_data.get("last_name", instance.last_name)
+        instance.email = validated_data.get("email", instance.email)
+        instance.cpf = validated_data.get("cpf", instance.cpf)
+        instance.url_foto = validated_data.get("url_foto", instance.url_foto)
+        instance.capa_foto = validated_data.get("capa_foto", instance.capa_foto)
+        password = validated_data.get("password", None)
         if password:
             instance.set_password(password)
         instance.save()
@@ -205,9 +223,15 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
-    tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
-    cliente_first_name = serializers.CharField(source='cliente.first_name', read_only=True)
-    cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
+    tipo_veiculo = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=TipoVeiculo.objects.all()
+    )
+    cliente_first_name = serializers.CharField(
+        source="cliente.first_name", read_only=True
+    )
+    cliente_last_name = serializers.CharField(
+        source="cliente.last_name", read_only=True
+    )
 
     class Meta:
         model = Pedido
@@ -232,10 +256,10 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
-        serializer = PedidoSerializer(data=self.context['request'].data)
+        serializer = PedidoSerializer(data=self.context["request"].data)
         origem = validated_data.pop("origem")
         origem = Endereco.objects.create(**origem)
-        
+
         destino = validated_data.pop("destino")
         destino = Endereco.objects.create(**destino)
 
@@ -243,13 +267,17 @@ class PedidoSerializer(serializers.ModelSerializer):
         produto = Produto.objects.create(**produto)
 
         tipos_veiculos = validated_data.pop("tipo_veiculo")
-        
+
         try:
-            if (int(len(tipos_veiculos)) == 0):
-                tipos_veiculos = list(map(int,self.context['request'].data["tipo_veiculo[]"].split(",")))
+            if int(len(tipos_veiculos)) == 0:
+                tipos_veiculos = list(
+                    map(int, self.context["request"].data["tipo_veiculo[]"].split(","))
+                )
         except:
             serializer.is_valid()
-            raise serializers.ValidationError({"tipo_veiculo": "tipo_veiculo field is missing"})
+            raise serializers.ValidationError(
+                {"tipo_veiculo": "tipo_veiculo field is missing"}
+            )
 
         pedido = Pedido.objects.create(
             **validated_data, origem=origem, destino=destino, produto=produto
@@ -257,15 +285,16 @@ class PedidoSerializer(serializers.ModelSerializer):
         pedido.tipo_veiculo.set(tipos_veiculos)
 
         return pedido
-        
+
     def update(self, instance, validated_data):
-        instance.status = validated_data.get('status', instance.status)
+        instance.status = validated_data.get("status", instance.status)
         instance.save()
         return instance
 
 
 class VeiculoSerializer(serializers.ModelSerializer):
     url_foto = serializers.ImageField(required=True)
+
     class Meta:
         model = Veiculo
         fields = "__all__"
@@ -273,15 +302,31 @@ class VeiculoSerializer(serializers.ModelSerializer):
 
 class PropostaSerializer(serializers.ModelSerializer):
     usuarioDetail = UserSerializer(read_only=True)
+
     class Meta:
         model = Proposta
-        fields = ("id","pedido", "usuario","usuarioDetail","veiculo","valor", "data_criacao", "eh_aceita", "is_contraproposta","is_esperandoFreteiro", "is_esperandoCliente","contraproposta", "ehNegada")
+        fields = (
+            "id",
+            "pedido",
+            "usuario",
+            "usuarioDetail",
+            "veiculo",
+            "valor",
+            "data_criacao",
+            "eh_aceita",
+            "is_contraproposta",
+            "is_esperandoFreteiro",
+            "is_esperandoCliente",
+            "contraproposta",
+            "ehNegada",
+        )
 
 
 class AvaliacaoUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvaliacaoUsuario
         fields = "__all__"
+
 
 class TriggerSerializer(serializers.ModelSerializer):
     class Meta:
