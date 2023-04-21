@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm';
 import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
+import Head from '../../components/Head';
 
 const Register = (): JSX.Element => {
   const [typeResgister, setTypeRegister] = useState('cliente');
@@ -22,35 +23,38 @@ const Register = (): JSX.Element => {
   };
 
   return (
-    <BgRegister>
-      <Container>
-        <WrapperRegister bgColor="#282828">
-          <div className="typeRegister">
-            <BtnTypeUser
-              onClick={() => {
-                handleChangeTypeOfUser('cliente');
-              }}
-              active={typeResgister === 'cliente'}
-            >
-              Cliente
-            </BtnTypeUser>
-            <BtnTypeUser
-              onClick={() => {
-                handleChangeTypeOfUser('freteiro');
-              }}
-              active={typeResgister === 'freteiro'}
-            >
-              Freteiro
-            </BtnTypeUser>
-          </div>
-          {typeResgister === 'cliente' ? (
-            <RegisterClienteForm />
-          ) : (
-            <RegisterFreteiroForm />
-          )}
-        </WrapperRegister>
-      </Container>
-    </BgRegister>
+    <>
+      <Head title="Cadastro" />
+      <BgRegister>
+        <Container>
+          <WrapperRegister bgColor="#282828">
+            <div className="typeRegister">
+              <BtnTypeUser
+                onClick={() => {
+                  handleChangeTypeOfUser('cliente');
+                }}
+                active={typeResgister === 'cliente'}
+              >
+                Cliente
+              </BtnTypeUser>
+              <BtnTypeUser
+                onClick={() => {
+                  handleChangeTypeOfUser('freteiro');
+                }}
+                active={typeResgister === 'freteiro'}
+              >
+                Freteiro
+              </BtnTypeUser>
+            </div>
+            {typeResgister === 'cliente' ? (
+              <RegisterClienteForm />
+            ) : (
+              <RegisterFreteiroForm />
+            )}
+          </WrapperRegister>
+        </Container>
+      </BgRegister>{' '}
+    </>
   );
 };
 

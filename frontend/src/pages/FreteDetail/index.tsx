@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { isFreteiro } from '../../utils/isFreteiro';
 import { objToQueryString } from '../../utils/queyString';
+import Head from '../../components/Head';
 
 const FreteDetail = (): JSX.Element => {
   const { id } = useParams();
@@ -50,25 +51,27 @@ const FreteDetail = (): JSX.Element => {
 
   if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
-  if (!isFreteiro(user) && user.id !== pedido.data.cliente)
-    return <Login />;
+  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
   return (
-    <Layout>
-      <ContainerPrincipal>
-        <Wrapper bgColor="#f5f5f5">
-          {!isLoadingClientePedido &&
-            !isLoadingPedido &&
-            !isLoadingPropostas && (
-              <FreteDetailComponent
-                pedido={pedido.data}
-                clientePedido={userPedido.data}
-                actualUser={user}
-                propostas={propostas.data}
-              />
-            )}
-        </Wrapper>
-      </ContainerPrincipal>
-    </Layout>
+    <>
+      <Head title="Detalhes do frete" />
+      <Layout>
+        <ContainerPrincipal>
+          <Wrapper bgColor="#f5f5f5">
+            {!isLoadingClientePedido &&
+              !isLoadingPedido &&
+              !isLoadingPropostas && (
+                <FreteDetailComponent
+                  pedido={pedido.data}
+                  clientePedido={userPedido.data}
+                  actualUser={user}
+                  propostas={propostas.data}
+                />
+              )}
+          </Wrapper>
+        </ContainerPrincipal>
+      </Layout>
+    </>
   );
 };
 
