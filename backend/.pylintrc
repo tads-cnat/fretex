@@ -1,0 +1,34 @@
+[MASTER]
+
+# Add your own customizations here
+ignore-patterns=.*migrations
+
+[MESSAGES CONTROL]
+
+# Disable some warnings that are not relevant for DRF projects
+disable = C0114, C0115, C0116, R0801, R0903, W1203
+
+# Enable some additional warnings that are helpful for DRF projects
+enable = W1401, R1705, R1710, R1711
+
+
+[SIMILARITIES]
+min-similarity-lines=3
+ignore-comments=yes
+ignore-imports=yes
+
+[DJANGO]
+
+# Enable pylint-django plugin
+load-plugins=pylint_django
+
+# Enable checking for undefined Django settings
+django-settings-module = core.settings
+
+[BASIC]
+
+# Set the maximum line length to 120 characters
+max-line-length = 120
+
+# Disable checking for trailing whitespace
+ignore-long-lines = yes

@@ -11,7 +11,7 @@ import Button from "../../Global/Button";
 import Video from "../../../assets/videos/video.mp4";
 import {SpanYellow} from "../../../styles";
 
-const HomeVideoSection = ():JSX.Element => {
+const HomeVideoSection = (): JSX.Element => {
   return (
     <VideoSection>
       <ContainerVideo>

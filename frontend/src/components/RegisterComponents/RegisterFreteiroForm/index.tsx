@@ -16,7 +16,7 @@ import User from '../../../assets/Svg/User';
 import Password from '../../../assets/Svg/Password';
 import ClosedEye from '../../../assets/Svg/ClosedEye';
 import Eye from '../../../assets/Svg/Eye';
-import { SpanYellow } from '../../../styles';
+import { SpanYellow } from '../../../styles/globalStyles';
 import { useEffect, useState } from 'react';
 import { type IFreteiroFormData } from '../../../interfaces';
 import { Link, useNavigate } from 'react-router-dom';

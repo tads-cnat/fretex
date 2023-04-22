@@ -1,9 +1,11 @@
-from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
+from django.core.management.base import BaseCommand, CommandError
+
 from plataform.models import Cliente, Endereco, Freteiro
 
+
 class Command(BaseCommand):
-    help = 'Seed the database'
+    help = "Seed the database"
 
     def handle(self, *args, **options):
         self.create_cliente("arthur", "123.456.789-00")
@@ -13,7 +15,6 @@ class Command(BaseCommand):
         self.create_freteiro("tonny", "123.456.789-03")
         self.create_freteiro("dantas", "123.456.789-04")
         self.create_freteiro("sávio", "123.456.789-05")
-
     def create_cliente(self, name, cpf):
         data = {
             "first_name": name,
@@ -28,7 +29,6 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS('Successfully created cliente "%s" 123456' % cliente.username))
         return cliente
-    
     def create_freteiro(self, name, cpf):
         data = {
             "first_name": name,

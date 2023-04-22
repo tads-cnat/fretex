@@ -10,12 +10,13 @@ import {
   type IFreteiro,
   type ITypeUser,
 } from '../../interfaces';
-import { Wrapper } from '../../styles';
+import { Wrapper } from '../../styles/globalStyles';
 import { BoxWithShadow, Container, Content } from './styles';
 import { isFreteiro } from '../../utils/isFreteiro';
 import useApi from '../../hooks/useApi';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { useQuery } from 'react-query';
+import Head from '../../components/Head';
 
 interface IProfileContext {
   user: ICliente | IFreteiro;
@@ -76,43 +77,46 @@ const Profile = (): JSX.Element => {
   if (actualUser == null || userToRender == null) return <LoadingPage />;
   else
     return (
-      <Layout>
-        {userToRender !== undefined && actualUser !== null ? (
-          <>
-            <Banner
-              user={userToRender}
-              ownerPage={userToRender.id === actualUser.id}
-            />
-            <BoxWithShadow style={{ background: '#fafafa' }}>
-              <Wrapper>
-                <UserInfo user={userToRender} />
-                <ProfileMenu
-                  userId={userToRender.id}
-                  ownerPage={userToRender.id === actualUser.id}
-                  isFreteiro={isFreteiro(userToRender)}
-                  selectedTab={selectedTab}
-                  handleClick={handleSelectTab}
-                />
-              </Wrapper>
-            </BoxWithShadow>
-            <Container style={{ background: '#f1f1f1' }}>
-              <Wrapper>
-                <Content>
-                  <Outlet
-                    context={{
-                      user: userToRender,
-                      setUser: setUserToRender,
-                      handleSelectTab,
-                    }}
+      <>
+        <Head title="Perfil" />
+        <Layout>
+          {userToRender !== undefined && actualUser !== null ? (
+            <>
+              <Banner
+                user={userToRender}
+                ownerPage={userToRender.id === actualUser.id}
+              />
+              <BoxWithShadow style={{ background: '#fafafa' }}>
+                <Wrapper>
+                  <UserInfo user={userToRender} />
+                  <ProfileMenu
+                    userId={userToRender.id}
+                    ownerPage={userToRender.id === actualUser.id}
+                    isFreteiro={isFreteiro(userToRender)}
+                    selectedTab={selectedTab}
+                    handleClick={handleSelectTab}
                   />
-                </Content>
-              </Wrapper>
-            </Container>
-          </>
-        ) : (
-          <LoadingPage />
-        )}
-      </Layout>
+                </Wrapper>
+              </BoxWithShadow>
+              <Container style={{ background: '#f1f1f1' }}>
+                <Wrapper>
+                  <Content>
+                    <Outlet
+                      context={{
+                        user: userToRender,
+                        setUser: setUserToRender,
+                        handleSelectTab,
+                      }}
+                    />
+                  </Content>
+                </Wrapper>
+              </Container>
+            </>
+          ) : (
+            <LoadingPage />
+          )}
+        </Layout>{' '}
+      </>
     );
 };
 // type of the return of useOutletContext is not working
