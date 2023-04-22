@@ -7,9 +7,9 @@ import {
   ProdutoDivContent,
   EntregaDiv,
   EntregaDivContent,
-  BtnYellow,
   ButtonDiv,
 } from './styles';
+import Button from '../../Global/Button';
 import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
@@ -511,7 +511,9 @@ const Index = (): JSX.Element => {
             </EntregaDivContent>
           </EntregaDiv>
           <ButtonDiv>
-            <BtnYellow type="submit">Finalizar pedido</BtnYellow>
+            <Button isButton type="submit" fontSize="large">
+              Finalizar pedido
+            </Button>
           </ButtonDiv>
         </Form>
       </Container>
