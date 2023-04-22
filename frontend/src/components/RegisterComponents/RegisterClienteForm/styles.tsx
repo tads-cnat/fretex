@@ -188,20 +188,3 @@ export const ContainerForm = styled.div`
     }
   }
 `;
-
-export const BtnYellow = styled.button`
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--text-light);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 0px;
-  font-weight: 700;
-  font-size: var(--font-large);
-  line-height: 24px;
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-`;

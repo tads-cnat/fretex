@@ -6,7 +6,6 @@ import Eye from '../../assets/Svg/Eye';
 import {
   ContainerPrincipal,
   ContainerForm,
-  BtnYellow,
 } from '../../components/RegisterComponents/RegisterClienteForm/styles';
 import { ContainerContent2 } from './styles';
 import { SpanYellow, Wrapper } from '../../styles/globalStyles';
@@ -101,7 +100,6 @@ const Login = (): JSX.Element => {
                   <Button type="submit" isButton>
                     Entrar
                   </Button>
-                  <BtnYellow type="submit">Entrar</BtnYellow>
                   <p>
                     Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
                   </p>

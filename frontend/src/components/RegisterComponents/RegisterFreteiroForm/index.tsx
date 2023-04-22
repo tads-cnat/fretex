@@ -6,7 +6,6 @@ import {
   RegisterAddress,
   Login,
   ContainerInfos,
-  BtnYellow,
 } from './styles';
 import InputMask from 'react-input-mask';
 import perfil from '../../../assets/images/imgperfil.svg';
@@ -25,6 +24,7 @@ import { useToggle } from '../../../hooks/useToggle';
 import { useFreteiroForm } from '../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
+import Button from '../../Global/Button';
 
 const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -232,7 +232,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
               <p className="error">{errors.endereco.complemento?.message}</p>
             )}
             {error && <p className="error">{error}</p>}
-            <BtnYellow>Cadastre-se</BtnYellow>
+            <Button isButton>Cadastre-se</Button>
           </RegisterAddress>
         </form>
         <Login>

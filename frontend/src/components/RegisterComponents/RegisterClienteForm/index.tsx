@@ -4,7 +4,6 @@ import Password from '../../../assets/Svg/Password';
 import User from '../../../assets/Svg/User';
 import {
   ContainerForm,
-  BtnYellow,
   ContainerPrincipal,
   ContainerContent,
 } from './styles';
@@ -20,6 +19,7 @@ import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
 import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
+import Button from '../../Global/Button';
 
 const RegisterClientForm = (): JSX.Element => {
   const { value: password, toggle: togglePassword } = useToggle();
@@ -140,7 +140,7 @@ const RegisterClientForm = (): JSX.Element => {
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <BtnYellow type="submit">Cadastre-se</BtnYellow>
+            <Button isButton type="submit">Cadastre-se</Button>
             <p>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>
