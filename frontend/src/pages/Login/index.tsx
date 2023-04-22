@@ -18,6 +18,7 @@ import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useToggle } from '../../hooks/useToggle';
+import Head from '../../components/Head';
 import Button from '../../components/Global/Button';
 
 const Login = (): JSX.Element => {
@@ -49,7 +50,7 @@ const Login = (): JSX.Element => {
 
   return (
     <>
-      <Head title='Login'/>
+      <Head title="Login" />
       <BgRegister>
         <Wrapper bgColor="#282828">
           <ContainerPrincipal>
@@ -63,20 +64,6 @@ const Login = (): JSX.Element => {
                   </h1>
                 </section>
               </div>
-<<<<<<< HEAD
-              <section>
-                <Button type="submit" isButton>Entrar</Button>
-                <BtnYellow type="submit">Entrar</BtnYellow>
-                <p>
-                  Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
-                </p>
-              </section>
-            </form>
-          </ContainerForm>
-        </ContainerPrincipal>
-      </Wrapper>
-    </BgRegister>
-=======
             </ContainerContent2>
             <ContainerForm>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -111,6 +98,9 @@ const Login = (): JSX.Element => {
                   {error.length !== 0 && <p className="error">{error}</p>}
                 </div>
                 <section>
+                  <Button type="submit" isButton>
+                    Entrar
+                  </Button>
                   <BtnYellow type="submit">Entrar</BtnYellow>
                   <p>
                     Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
@@ -122,7 +112,6 @@ const Login = (): JSX.Element => {
         </Wrapper>
       </BgRegister>
     </>
->>>>>>> dev
   );
 };
 

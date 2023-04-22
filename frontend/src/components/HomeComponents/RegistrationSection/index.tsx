@@ -1,4 +1,4 @@
-import {SpanYellow } from '../../../styles';
+import { SpanYellow } from '../../../styles/globalStyles';
 import Button from '../../Global/Button';
 import { RegisterContainer, RegisterUser, Title, Text } from './styles';
 import imgCliente from '../../../assets/images/ParaClientes.png';

@@ -1,5 +1,5 @@
 import Button from '../Global/Button';
-import { Wrapper, SpanYellow } from '../../styles';
+import { Wrapper, SpanYellow } from '../../styles/globalStyles';
 import { useContext, useState } from 'react';
 import {
   Header,

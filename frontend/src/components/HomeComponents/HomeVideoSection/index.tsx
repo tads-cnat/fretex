@@ -6,10 +6,10 @@ import {
   VideoH1,
   VideoP,
   VideoSection,
-} from "./styles";
-import Button from "../../Global/Button";
-import Video from "../../../assets/videos/video.mp4";
-import {SpanYellow} from "../../../styles";
+} from './styles';
+import Button from '../../Global/Button';
+import Video from '../../../assets/videos/video.mp4';
+import { SpanYellow } from '../../../styles/globalStyles';
 
 const HomeVideoSection = (): JSX.Element => {
   return (
