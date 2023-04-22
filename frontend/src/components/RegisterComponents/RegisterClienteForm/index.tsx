@@ -87,7 +87,7 @@ const RegisterClientForm = (): JSX.Element => {
       label: 'Senha',
       placeholder: 'Sua senha',
       required: true,
-      svg: <User />,
+      svg: <Password />,
     },
 
     {
@@ -96,7 +96,7 @@ const RegisterClientForm = (): JSX.Element => {
       label: 'Confirmação da senha',
       placeholder: 'Confirme sua senha',
       required: true,
-      svg: <User />,
+      svg: <Password />,
     },
   ];
 
