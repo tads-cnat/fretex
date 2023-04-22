@@ -1,7 +1,7 @@
 import { BtnYellow, HeaderContainer, PropostaContainer2 } from './styles';
 import CardsContainer from '../CardsContainer';
 import CardProposta from '../CardProposta';
-import ModalProposta from '../ModalProposta/intex';
+import ModalProposta from '../ModalProposta';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,

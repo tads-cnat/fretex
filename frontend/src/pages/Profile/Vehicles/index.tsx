@@ -6,7 +6,6 @@ import {
   ContainerMain,
   ContainerInputs,
   ContainerImagem,
-  ButtonCadastro,
   Preview,
   QtdVeiculos,
 } from './styles';
@@ -21,6 +20,7 @@ import CardVeiculo from '../../../components/Profile/CardVeiculo';
 import { useParams } from 'react-router-dom';
 import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
+import Button from '../../../components/Global/Button';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -98,9 +98,9 @@ const Vehicles = (): JSX.Element => {
     <>
       <QtdVeiculos>
         <p>{veiculos.length} Veículo(s)</p>
-        <ButtonCadastro onClick={setAsTrue}>
+        <Button isButton onClick={setAsTrue}>
           <PlusVeiculo /> Cadastrar Veículo
-        </ButtonCadastro>
+        </Button>
       </QtdVeiculos>
       {!veiculos && <LoadingPage />}
       {veiculos && veiculos.length === 0 && (
@@ -214,7 +214,7 @@ const Vehicles = (): JSX.Element => {
               <p>Clique para inserir uma imagem</p>
             </ContainerImagem>
           </ContainerMain>
-          <ButtonCadastro>Cadastrar Veículo</ButtonCadastro>
+          <Button isButton type="submit">Cadastrar Veículo</Button>
         </form>
       </ModalComponent>
     </>
