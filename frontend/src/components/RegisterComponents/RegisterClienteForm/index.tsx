@@ -119,56 +119,6 @@ const RegisterClientForm = (): JSX.Element => {
               />
             ))}
 
-            {/* <Input
-              {...register('email')}
-              type="email"
-              placeholder="Seu email"
-              label="Email"
-              svg={<Email />}
-              error={errors.email}
-              required={true}
-            />
-
-            <Input
-              {...register('full_name')}
-              type="text"
-              placeholder="Seu nome completo"
-              label="Nome Completo"
-              svg={<User />}
-              error={errors.full_name}
-              required={true}
-            />
-
-            <Input
-              {...register('cpf')}
-              type="text"
-              placeholder="Seu cpf"
-              label="CPF"
-              svg={<User />}
-              error={errors.cpf}
-              required={true}
-              mask="999.999.999-99"
-            />
-
-            <Input
-              {...register('password')}
-              type="password"
-              placeholder="Sua senha"
-              label="Senha"
-              svg={<Password />}
-              error={errors.password}
-              required={true}
-            />
-
-            <Input
-              {...register('confirmPassword')}
-              type="password"
-              placeholder="Confirme sua senha"
-              label="Confirmação da Senha"
-              svg={<Password />}
-              error={errors.confirmPassword}
-              required={true}
-            /> */}
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>

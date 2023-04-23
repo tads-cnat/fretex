@@ -23,6 +23,16 @@ export const Container = styled.label`
     display: inline-block;
     font-size: var(--font-small);
     text-align: left;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation: animeDown 0.3s forwards;
+  }
+
+  @keyframes animeDown {
+    to {
+      transform: initial;
+      opacity: initial;
+    }
   }
 `;
 
