@@ -44,6 +44,7 @@ const Vehicles = (): JSX.Element => {
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
   const { registerVeiculo, tiposVeiculo } = useApi();
   const { user, handleSelectTab } = useContextProfile();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     handleSelectTab(1);
@@ -53,7 +54,11 @@ const Vehicles = (): JSX.Element => {
       })
       .catch((res) => {
         console.log(res);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+      ;
 
     tiposVeiculo()
       .then((res) => {
@@ -101,7 +106,7 @@ const Vehicles = (): JSX.Element => {
           <PlusVeiculo /> Cadastrar Veículo
         </ButtonCadastro>
       </QtdVeiculos>
-      {!veiculos && <LoadingPage />}
+      {loading && <LoadingPage />}
       {veiculos.length === 0 && (
         <p style={{ textAlign: 'center', margin: '15vh' }}>
           Não possui veículos cadastrados.
