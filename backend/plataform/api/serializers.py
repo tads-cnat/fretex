@@ -232,6 +232,12 @@ class PedidoSerializer(serializers.ModelSerializer):
     cliente_last_name = serializers.CharField(
         source="cliente.last_name", read_only=True
     )
+    status = serializers.HiddenField(default="EN")
+    cliente = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    def validate(self, data):
+        data['cliente'] = self.context['request'].user.cliente
+        return super().validate(data)
 
     class Meta:
         model = Pedido
