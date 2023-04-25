@@ -26,7 +26,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInput> = (
     e.preventDefault();
     togglePassword();
   };
-  console.log(error?.message);
   return (
     <Container>
       {label !== undefined && (

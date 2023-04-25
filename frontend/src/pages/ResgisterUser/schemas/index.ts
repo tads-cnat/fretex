@@ -69,7 +69,7 @@ export const schemaFreteiro = yup.object({
         numero: yup
             .number()
             .transform((value) => (isNaN(value) ? 0 : value))
-            .min(1, "mínimo de um números")
+            .min(1, "Mínimo de um número")
             .required('Numero Obrigatório'),
         bairro: yup
             .string()

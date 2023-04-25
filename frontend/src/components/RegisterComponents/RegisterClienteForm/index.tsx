@@ -39,7 +39,6 @@ const RegisterClientForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
-    console.log(data);
     const { email, full_name, cpf, password } = data;
     registerCliente({ email, full_name, cpf, password })
       .then(() => {

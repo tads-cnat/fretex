@@ -8,7 +8,6 @@ import {
   ContainerInfos,
   BtnYellow,
 } from './styles';
-import InputMask from 'react-input-mask';
 import perfil from '../../../assets/images/imgperfil.svg';
 import Email from '../../../assets/Svg/Email';
 import Loc from '../../../assets/Svg/Loc';
@@ -137,7 +136,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
           <RegisterAddress>
             <h1 className="title">Seu Endereço</h1>
             <Input
-              {...register("endereco.CEP")}
+              {...register('endereco.CEP')}
               type="text"
               label="CEP"
               placeholder="Seu CEP"
@@ -147,7 +146,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
               onBlur={completeAddress}
             />
             <Input
-              {...register("endereco.rua")}
+              {...register('endereco.rua')}
               type="text"
               label="Rua"
               placeholder="Sua rua"
@@ -156,7 +155,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
               required={true}
             />
             <Input
-              {...register("endereco.numero")}
+              {...register('endereco.numero')}
               type="text"
               label="Número"
               placeholder="Número da sua casa"
@@ -166,7 +165,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
             />
 
             <Input
-              {...register("endereco.bairro")}
+              {...register('endereco.bairro')}
               type="text"
               label="Bairro"
               placeholder="Seu bairro"
@@ -176,7 +175,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
             />
 
             <Input
-              {...register("endereco.cidade")}
+              {...register('endereco.cidade')}
               type="text"
               label="Cidade"
               placeholder="Sua cidade"
@@ -186,7 +185,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
             />
 
             <Input
-              {...register("endereco.estado")}
+              {...register('endereco.estado')}
               type="text"
               label="Estado"
               placeholder="Seu estado"
@@ -196,7 +195,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
             />
 
             <Input
-              {...register("endereco.complemento")}
+              {...register('endereco.complemento')}
               type="text"
               label="Complemento"
               placeholder="Complemento..."
