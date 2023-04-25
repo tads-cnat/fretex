@@ -100,69 +100,6 @@ const RegisterFreteiroForm = (): JSX.Element => {
     },
   ];
 
-  const inputsAdress = [
-    {
-      type: 'text',
-      name: 'endereco.CEP',
-      label: 'CEP',
-      placeholder: 'Seu CEP',
-      required: true,
-      svg: <Loc />,
-    },
-    {
-      type: 'text',
-      name: 'endereco.rua',
-      label: 'Rua',
-      placeholder: 'Sua rua',
-      required: true,
-      svg: <Loc />,
-    },
-    {
-      type: 'text',
-      name: 'endereco.numero',
-      label: 'Número',
-      placeholder: 'Número da sua casa',
-      required: true,
-      svg: <Loc />,
-    },
-
-    {
-      type: 'text',
-      name: 'endereco.bairro',
-      label: 'Bairro',
-      placeholder: 'Seu bairro',
-      required: true,
-      svg: <Loc />,
-    },
-
-    {
-      type: 'text',
-      name: 'endereco.cidade',
-      label: 'Cidade',
-      placeholder: 'Sua cidade',
-      required: true,
-      svg: <Loc />,
-    },
-
-    {
-      type: 'text',
-      name: 'endereco.estado',
-      label: 'Estado',
-      placeholder: 'Seu estado',
-      required: true,
-      svg: <Loc />,
-    },
-
-    {
-      type: 'text',
-      name: 'endereco.complemento',
-      label: 'Complemento',
-      placeholder: 'Complemento...',
-      required: true,
-      svg: <Loc />,
-    },
-  ];
-
   return (
     <ContainerMain>
       <ContainerForm2>
@@ -199,96 +136,73 @@ const RegisterFreteiroForm = (): JSX.Element => {
           </RegisterPerson>
           <RegisterAddress>
             <h1 className="title">Seu Endereço</h1>
-            {inputsAdress.map((input, index) => (
-              <Input
-                key={index}
-                {...register(`${input.name}`)}
-                type={input.type}
-                label={input.label}
-                placeholder={input.placeholder}
-                svg={input.svg}
-                error={errors[input.name]}
-                required={input.required}
-              />
-            ))}
-            {/* <label>
-              <Loc />
-              <InputMask
-                mask="99999-999"
-                {...register('endereco.CEP')}
-                placeholder="Seu CEP"
-                onBlur={completeAddress}
-              ></InputMask>
-            </label>
-            {errors.endereco?.CEP != null && (
-              <p className="error">{errors.endereco.CEP?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.rua')}
-                type="text"
-                placeholder="Sua rua"
-              />
-            </label>
-            {errors.endereco?.rua != null && (
-              <p className="error">{errors.endereco.rua?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.numero')}
-                type="text"
-                placeholder="Número da sua casa"
-              />
-            </label>
-            {errors.endereco?.numero != null && (
-              <p className="error">{errors.endereco.numero?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.bairro')}
-                type="text"
-                placeholder="Seu bairro"
-              />
-            </label>
-            {errors.endereco?.bairro != null && (
-              <p className="error">{errors.endereco.bairro?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.cidade')}
-                type="text"
-                placeholder="Sua cidade"
-              />
-            </label>
-            {errors.endereco?.cidade != null && (
-              <p className="error">{errors?.endereco.cidade.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.estado')}
-                type="text"
-                placeholder="Seu estado"
-              />
-            </label>
-            {errors.endereco?.estado != null && (
-              <p className="error">{errors.endereco.estado?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register('endereco.complemento')}
-                type="text"
-                placeholder="Complemento"
-              />
-            </label>
-            {errors.endereco?.complemento != null && (
-              <p className="error">{errors.endereco.complemento?.message}</p>
-            )} */}
+            <Input
+              {...register("endereco.CEP")}
+              type="text"
+              label="CEP"
+              placeholder="Seu CEP"
+              svg={<Loc />}
+              error={errors.endereco?.CEP}
+              required={true}
+              onBlur={completeAddress}
+            />
+            <Input
+              {...register("endereco.rua")}
+              type="text"
+              label="Rua"
+              placeholder="Sua rua"
+              svg={<Loc />}
+              error={errors.endereco?.rua}
+              required={true}
+            />
+            <Input
+              {...register("endereco.numero")}
+              type="text"
+              label="Número"
+              placeholder="Número da sua casa"
+              svg={<Loc />}
+              error={errors.endereco?.numero}
+              required={true}
+            />
+
+            <Input
+              {...register("endereco.bairro")}
+              type="text"
+              label="Bairro"
+              placeholder="Seu bairro"
+              svg={<Loc />}
+              error={errors.endereco?.bairro}
+              required={true}
+            />
+
+            <Input
+              {...register("endereco.cidade")}
+              type="text"
+              label="Cidade"
+              placeholder="Sua cidade"
+              svg={<Loc />}
+              error={errors.endereco?.cidade}
+              required={true}
+            />
+
+            <Input
+              {...register("endereco.estado")}
+              type="text"
+              label="Estado"
+              placeholder="Seu estado"
+              svg={<Loc />}
+              error={errors.endereco?.estado}
+              required={true}
+            />
+
+            <Input
+              {...register("endereco.complemento")}
+              type="text"
+              label="Complemento"
+              placeholder="Complemento..."
+              svg={<Loc />}
+              error={errors.endereco?.complemento}
+            />
             {error !== '' && <p className="error">{error}</p>}
             <BtnYellow>Cadastre-se</BtnYellow>
           </RegisterAddress>

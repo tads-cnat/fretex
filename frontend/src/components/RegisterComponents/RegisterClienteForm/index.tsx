@@ -26,6 +26,7 @@ const RegisterClientForm = (): JSX.Element => {
     formState: { errors },
     setFocus,
   } = useForm<IClienteFormData>({
+    mode: "onChange",
     resolver: yupResolver(schemaCliente),
   });
 
