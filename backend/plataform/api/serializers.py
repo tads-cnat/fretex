@@ -111,14 +111,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "first_name", "email", "last_name", "extra_data")
 
     def get_extra_data(self, obj):
-        try:
-            freteiro = Freteiro.objects.get(user_ptr=obj)
-        except:
-            freteiro = None
-        try:
-            cliente = Cliente.objects.get(user_ptr=obj)
-        except:
-            cliente = None
+        freteiro = Freteiro.objects.filter(user_ptr=obj).first()
+        cliente = Cliente.objects.filter(user_ptr=obj).first()
         return {
             "freteiro": freteiro.id if freteiro else None,
             "cliente": cliente.id if cliente else None,

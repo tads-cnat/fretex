@@ -1,5 +1,4 @@
-from django.core.management import call_command
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from plataform.models import Cliente, Endereco, Freteiro
 
@@ -15,6 +14,7 @@ class Command(BaseCommand):
         self.create_freteiro("tonny", "123.456.789-03")
         self.create_freteiro("dantas", "123.456.789-04")
         self.create_freteiro("sávio", "123.456.789-05")
+
     def create_cliente(self, name, cpf):
         data = {
             "first_name": name,
@@ -23,12 +23,19 @@ class Command(BaseCommand):
             "username": f"{name}@gmail.com",
             "email": f"{name}@gmail.com",
         }
-        cliente, created = Cliente.objects.update_or_create(cpf=data["cpf"], defaults=data)
+        cliente, created = Cliente.objects.update_or_create(
+            cpf=data["cpf"], defaults=data
+        )
         cliente.set_password("123456")
         cliente.save()
 
-        self.stdout.write(self.style.SUCCESS('Successfully created cliente "%s" 123456' % cliente.username))
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Successfully created cliente '{cliente.username}' 123456"
+            )
+        )
         return cliente
+
     def create_freteiro(self, name, cpf):
         data = {
             "first_name": name,
@@ -47,9 +54,15 @@ class Command(BaseCommand):
         }
         endereco = Endereco.objects.create(**endereco_data)
 
-        freteiro, created = Freteiro.objects.update_or_create(cpf=data["cpf"], defaults={**data, "endereco": endereco})
+        freteiro, created = Freteiro.objects.update_or_create(
+            cpf=data["cpf"], defaults={**data, "endereco": endereco}
+        )
         freteiro.set_password("123456")
         freteiro.save()
 
-        self.stdout.write(self.style.SUCCESS('Successfully created freteiro "%s" 123456' % freteiro.username))
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Successfully created freteiro '{freteiro.username}' 123456"
+            )
+        )
         return freteiro
