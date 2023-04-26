@@ -1,7 +1,7 @@
 [MASTER]
 
 # Add your own customizations here
-ignore-patterns=.*migrations
+ignore=migrations
 
 [MESSAGES CONTROL]
 
