@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import transaction
 from rest_framework import serializers
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.validators import UniqueValidator
 
 from plataform.models import (
@@ -22,10 +23,22 @@ class EnderecoSerializer(serializers.ModelSerializer):
         model = Endereco
         fields = "__all__"
 
+    def create(self, validated_data):
+        raise MethodNotAllowed("POST")
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
+
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+    def create(self, validated_data):
+        raise MethodNotAllowed("POST")
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
 
 
 class RegisterClienteSerializer(serializers.Serializer):
@@ -50,6 +63,9 @@ class RegisterClienteSerializer(serializers.Serializer):
         cliente.set_password(validated_data.get("password"))
         cliente.save()
         return cliente
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
 
 
 class RegisterFreteiroSerializer(serializers.Serializer):
@@ -82,6 +98,9 @@ class RegisterFreteiroSerializer(serializers.Serializer):
         freteiro.save()
 
         return freteiro
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -236,7 +255,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     cliente = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     def validate(self, data):
-        data['cliente'] = self.context['request'].user.cliente
+        data["cliente"] = self.context["request"].user.cliente
         return super().validate(data)
 
     class Meta:
