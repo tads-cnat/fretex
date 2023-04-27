@@ -28,9 +28,9 @@ const FreteDetail = (): JSX.Element => {
 
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     ['pedidoCreatedBy', id],
-    async () => await getCliente(pedido.data.cliente),
+    async () => await getCliente(pedido?.data?.cliente),
     {
-      enabled: !!pedido?.data.cliente,
+      enabled: !!pedido?.data?.cliente,
     },
   );
 
@@ -38,7 +38,7 @@ const FreteDetail = (): JSX.Element => {
     pedido?.data?.id &&
     user != null &&
     objToQueryString({
-      pedido: pedido.data.id,
+      pedido: pedido?.data?.id,
     });
 
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
@@ -51,7 +51,6 @@ const FreteDetail = (): JSX.Element => {
 
   if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
-  if (user && !isFreteiro(user) && user.id !== pedido.data.cliente) return <LoadingPage />;
   return (
     <>
       <Head title="Detalhes do frete" />
@@ -63,7 +62,7 @@ const FreteDetail = (): JSX.Element => {
               !isLoadingPropostas && (
                 <FreteDetailComponent
                   pedido={pedido.data}
-                  clientePedido={userPedido.data}
+                  clientePedido={userPedido?.data}
                   actualUser={user}
                   propostas={propostas.data}
                 />
