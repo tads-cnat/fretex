@@ -51,7 +51,7 @@ const FreteDetail = (): JSX.Element => {
 
   if (user == null) return <Login />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
-  if (!isFreteiro(user) && user.id !== pedido.data.cliente) return <Login />;
+  if (user && !isFreteiro(user) && user.id !== pedido.data.cliente) return <LoadingPage />;
   return (
     <>
       <Head title="Detalhes do frete" />
