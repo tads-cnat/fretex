@@ -3,6 +3,7 @@ import RegisterClienteForm from '../../components/RegisterComponents/RegisterCli
 import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 import Head from '../../components/Head';
+import { btnTypeUserData } from './constants';
 
 const Register = (): JSX.Element => {
   const [typeResgister, setTypeRegister] = useState('cliente');
@@ -29,22 +30,17 @@ const Register = (): JSX.Element => {
         <Container>
           <WrapperRegister bgColor="#282828">
             <div className="typeRegister">
-              <BtnTypeUser
-                onClick={() => {
-                  handleChangeTypeOfUser('cliente');
-                }}
-                active={typeResgister === 'cliente'}
-              >
-                Cliente
-              </BtnTypeUser>
-              <BtnTypeUser
-                onClick={() => {
-                  handleChangeTypeOfUser('freteiro');
-                }}
-                active={typeResgister === 'freteiro'}
-              >
-                Freteiro
-              </BtnTypeUser>
+              {btnTypeUserData.map((btn, i) => (
+                <BtnTypeUser
+                  key={i}
+                  onClick={() => {
+                    handleChangeTypeOfUser(btn.type);
+                  }}
+                  active={typeResgister === btn.type}
+                >
+                  {btn.text}
+                </BtnTypeUser>
+              ))}
             </div>
             {typeResgister === 'cliente' ? (
               <RegisterClienteForm />

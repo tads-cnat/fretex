@@ -44,6 +44,7 @@ const Vehicles = (): JSX.Element => {
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
   const { registerVeiculo, tiposVeiculo } = useApi();
   const { user, handleSelectTab } = useContextProfile();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     handleSelectTab(1);
@@ -53,7 +54,11 @@ const Vehicles = (): JSX.Element => {
       })
       .catch((res) => {
         console.log(res);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+      ;
 
     tiposVeiculo()
       .then((res) => {
@@ -64,25 +69,24 @@ const Vehicles = (): JSX.Element => {
       });
   }, []);
 
-  const onSubmit: SubmitHandler<IVeiculo> = (data) => {
+  const onSubmit: SubmitHandler<IVeiculo> = async (data) => {
     const formData: any = new FormData();
     Object.entries(data).forEach(([key, value]) => {
-      if (value && key === 'url_foto') formData.append(`${key}`, imagemVeiculo);
-      else if (value) formData.append(`${key}`, value);
+      if (typeof value !== 'undefined' && key === 'url_foto')
+        formData.append(`${key}`, imagemVeiculo);
+      else if (typeof value !== 'undefined') formData.append(`${key}`, value);
     });
     formData.append('freteiro', user.id);
 
-    registerVeiculo(formData).then(() => {
+    try {
+      await registerVeiculo(formData);
       setAsFalse();
-      getVeiculosForFreteiro(Number(id))
-        .then((res) => {
-          toast.success('Veículo cadastrado com sucesso!');
-          setVeiculos(res.data);
-        })
-        .catch((res) => {
-          console.log(res);
-        });
-    });
+      const res = await getVeiculosForFreteiro(Number(id));
+      toast.success('Veículo cadastrado com sucesso!');
+      setVeiculos(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onChange = (e: any): void => {
@@ -102,16 +106,15 @@ const Vehicles = (): JSX.Element => {
           <PlusVeiculo /> Cadastrar Veículo
         </Button>
       </QtdVeiculos>
-      {!veiculos && <LoadingPage />}
-      {veiculos && veiculos.length === 0 && (
+      {loading && <LoadingPage />}
+      {veiculos.length === 0 && (
         <p style={{ textAlign: 'center', margin: '15vh' }}>
           Não possui veículos cadastrados.
         </p>
       )}
-      {veiculos &&
-        veiculos?.map((veiculo, id) => (
-          <CardVeiculo key={id} veiculos={veiculo} />
-        ))}
+      {veiculos?.map((veiculo, id) => (
+        <CardVeiculo key={id} veiculos={veiculo} />
+      ))}
       <ModalComponent title="Cadastrar Veículo" toggle={toggle} value={value}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ContainerMain>
@@ -178,17 +181,16 @@ const Vehicles = (): JSX.Element => {
               <div>
                 <h2>Tipo do veículo *</h2>
                 <label>
-                  {tiposDeVeiculo != null &&
-                    tiposDeVeiculo?.map((tiposveiculo) => (
-                      <label key={tiposveiculo.id}>
-                        <input
-                          {...register('tipo_veiculo')}
-                          type="radio"
-                          value={tiposveiculo.id}
-                        />
-                        <span>{tiposveiculo.descricao}</span>
-                      </label>
-                    ))}
+                  {tiposDeVeiculo?.map((tiposveiculo) => (
+                    <label key={tiposveiculo.id}>
+                      <input
+                        {...register('tipo_veiculo')}
+                        type="radio"
+                        value={tiposveiculo.id}
+                      />
+                      <span>{tiposveiculo.descricao}</span>
+                    </label>
+                  ))}
                 </label>
               </div>
               {errors.tipo_veiculo != null && (
@@ -198,7 +200,7 @@ const Vehicles = (): JSX.Element => {
             <ContainerImagem>
               <label>
                 <Preview>
-                  {imagemPreview ? (
+                  {imagemPreview !== null && imagemPreview !== '' ? (
                     <img src={imagemPreview} alt="veiculo" />
                   ) : (
                     <img src={veiculo} alt="veiculo" />

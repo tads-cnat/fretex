@@ -127,11 +127,6 @@ class PedidoViewSet(viewsets.ModelViewSet):
     renderer_classes = [CustomRenderer]
     filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
 
-    def create(self, request, *args, **kwargs):
-        request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
-        request.data["status"] = "EN"
-        return super().create(request, *args, **kwargs)
-
 
 class PropostaPedidoViewSet(
     NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
