@@ -2,28 +2,19 @@ import { SpanYellow } from '../../../styles/globalStyles';
 import Email from '../../../assets/Svg/Email';
 import Password from '../../../assets/Svg/Password';
 import User from '../../../assets/Svg/User';
-import {
-  ContainerForm,
-  ContainerPrincipal,
-  ContainerContent,
-} from './styles';
-import Eye from '../../../assets/Svg/Eye';
+import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
 import { useEffect, useState } from 'react';
-import ClosedEye from '../../../assets/Svg/ClosedEye';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import InputMask from 'react-input-mask';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
 import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
-import { useToggle } from '../../../hooks/useToggle';
 import { toast } from 'react-toastify';
 import Button from '../../Global/Button';
+import { Input } from '../../Input';
 
 const RegisterClientForm = (): JSX.Element => {
-  const { value: password, toggle: togglePassword } = useToggle();
-  const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
   const [error, setError] = useState<string>('');
   const {
     register,
@@ -31,21 +22,12 @@ const RegisterClientForm = (): JSX.Element => {
     formState: { errors },
     setFocus,
   } = useForm<IClienteFormData>({
+    mode: 'onChange',
     resolver: yupResolver(schemaCliente),
   });
 
   const { registerCliente } = useApi();
   const navigate = useNavigate();
-
-  const handlePassword = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    togglePassword();
-  };
-
-  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    toggleConfirmPassword();
-  };
 
   useEffect(() => {
     setFocus('email');
@@ -69,78 +51,76 @@ const RegisterClientForm = (): JSX.Element => {
       });
   };
 
+  const inputs = [
+    {
+      type: 'email',
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Seu email',
+      required: true,
+      svg: <Email />,
+    },
+    {
+      type: 'text',
+      name: 'full_name',
+      label: 'Nome completo',
+      placeholder: 'Seu nome completo',
+      required: true,
+      svg: <User />,
+    },
+    {
+      type: 'text',
+      name: 'cpf',
+      label: 'CPF',
+      placeholder: 'Seu CPF',
+      required: true,
+      svg: <User />,
+    },
+
+    {
+      type: 'password',
+      name: 'password',
+      label: 'Senha',
+      placeholder: 'Sua senha',
+      required: true,
+      svg: <Password />,
+    },
+
+    {
+      type: 'password',
+      name: 'confirmPassword',
+      label: 'Confirmação da senha',
+      placeholder: 'Confirme sua senha',
+      required: true,
+      svg: <Password />,
+    },
+  ];
+
   return (
     <ContainerPrincipal>
       <ContainerForm>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Crie sua conta</h1>
           <div>
-            <label>
-              <Email />
-              <input
-                {...register('email')}
-                type="email"
-                autoComplete="on"
-                placeholder="Seu E-mail"
+            {inputs.map((input, index) => (
+              <Input
+                key={index}
+                {...register(`${input.name}`)}
+                type={input.type}
+                label={input.label}
+                placeholder={input.placeholder}
+                svg={input.svg}
+                error={errors[input.name]}
+                required={input.required}
               />
-            </label>
-            {errors.email != null && (
-              <p className="error">{errors.email?.message}</p>
-            )}
-            <label>
-              <User />
-              <input
-                {...register('full_name')}
-                type="text"
-                placeholder="Seu nome completo"
-              />
-            </label>
-            {errors.full_name != null && (
-              <p className="error">{errors.full_name?.message}</p>
-            )}
-            <label>
-              <User />
-              <InputMask
-                mask="999.999.999-99"
-                {...register('cpf')}
-                placeholder="Seu cpf"
-              ></InputMask>
-            </label>
-            {errors.cpf != null && (
-              <p className="error">{errors.cpf?.message}</p>
-            )}
-            <label>
-              <Password />
-              <input
-                type={password ? 'text' : 'password'}
-                {...register('password')}
-                placeholder="Sua senha"
-              />
-              <button type="button" onClick={handlePassword}>
-                {password ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.password != null && (
-              <p className="error">{errors.password?.message}</p>
-            )}
-            <label>
-              <Password />
-              <input
-                type={confirmPassword ? 'text' : 'password'}
-                {...register('confirmPassword')}
-                placeholder="Confirme sua senha"
-              />
-              <button type="button" onClick={handleConfirmPassword}>
-                {confirmPassword ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.confirmPassword != null && (
-              <p className="error">{errors.confirmPassword?.message}</p>
-            )}
+            ))}
+
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <Button isButton type="submit">Cadastre-se</Button>
+            <Button isButton type="submit">
+              Cadastre-se
+            </Button>
             <p>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>

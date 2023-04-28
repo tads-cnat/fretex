@@ -67,13 +67,6 @@ export const ContainerForm = styled.div`
   border-radius: 10px;
   background-color: #353535;
 
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
-  }
-
   form {
     padding: 80px 40px;
     max-width: 500px;
@@ -89,13 +82,6 @@ export const ContainerForm = styled.div`
       font-size: 18px;
       margin-bottom: 20px;
     }
-  }
-
-  form div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
   }
 
   section {
@@ -130,32 +116,6 @@ export const ContainerForm = styled.div`
     color: var(--bg-ligth);
   }
 
-  label {
-    display: flex;
-    align-items: center;
-    background: #1b1b1b;
-    border-radius: 10px;
-    width: 100%;
-    border: 2px solid #1b1b1b;
-    padding: 0 10px;
-    transition: 0.5s;
-  }
-
-  label svg {
-    color: #bfbfbf;
-    transition: 0.5s;
-  }
-  label:focus-within svg {
-    color: var(--theme-primary);
-  }
-
-  label:focus-within {
-    border: 2px solid var(--theme-primary);
-  }
-  label input:focus {
-    background-color: transparent !important;
-  }
-
   label button {
     display: flex;
     align-items: center;
@@ -164,21 +124,12 @@ export const ContainerForm = styled.div`
     border: none;
     cursor: pointer;
   }
-  label input {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    background-color: transparent !important;
-    outline: none;
-    border: none;
-    color: var(--text-light);
-  }
 
-  label input:-webkit-autofill {
-    caret-color: white;
-    -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0px 1000px #1b1b1b inset;
-    transition: background-color 5000s ease-in-out 0s;
+  .error {
+    color: #ee5757;
+    display: inline-block;
+    font-size: var(--font-small);
+    text-align: left;
   }
 
   @media (max-width: 768px) {

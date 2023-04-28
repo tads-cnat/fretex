@@ -16,9 +16,10 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     handleSubmit,
     getValues,
     setFocus,
-    formState: { errors },
+    formState: { errors }, clearErrors,
     ...rest
   } = useForm<T>({
+    mode: "onChange",
     resolver: yupResolver(schema),
   })
   const { getCEP } = useApi()
@@ -46,6 +47,8 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
       setValue(cidade, res.localidade);
       setValue(estado, res.uf);
     });
+
+    clearErrors([rua, bairro, cidade, estado])
   }
   return {
     register,
