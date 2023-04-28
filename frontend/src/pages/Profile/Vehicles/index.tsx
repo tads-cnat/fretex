@@ -57,8 +57,7 @@ const Vehicles = (): JSX.Element => {
       })
       .finally(() => {
         setLoading(false);
-      })
-      ;
+      });
 
     tiposVeiculo()
       .then((res) => {
@@ -200,7 +199,7 @@ const Vehicles = (): JSX.Element => {
             <ContainerImagem>
               <label>
                 <Preview>
-                  {imagemPreview !== null && imagemPreview !== '' ? (
+                  {imagemPreview !== undefined ? (
                     <img src={imagemPreview} alt="veiculo" />
                   ) : (
                     <img src={veiculo} alt="veiculo" />
@@ -216,7 +215,9 @@ const Vehicles = (): JSX.Element => {
               <p>Clique para inserir uma imagem</p>
             </ContainerImagem>
           </ContainerMain>
-          <Button isButton type="submit">Cadastrar Veículo</Button>
+          <Button isButton type="submit">
+            Cadastrar Veículo
+          </Button>
         </form>
       </ModalComponent>
     </>

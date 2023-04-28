@@ -1,7 +1,7 @@
 import BoxDashboard from '../../components/Dashboard';
 import Layout from '../../components/Layout';
 import { Wrapper } from '../../styles/globalStyles';
-import { Filter, Title, ContainerPedidos, BtnYellowLinkRouter } from './styles';
+import { Filter, Title, ContainerPedidos } from './styles';
 import useApi from '../../hooks/useApi';
 import { useQuery } from 'react-query';
 import { useContext } from 'react';
@@ -10,6 +10,7 @@ import { isFreteiro } from '../../utils/isFreteiro';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
 import Head from '../../components/Head';
+import Button from '../../components/Global/Button';
 
 const Dashboard = (): JSX.Element => {
   window.scrollTo(0, 0);
@@ -120,7 +121,7 @@ const Dashboard = (): JSX.Element => {
   if (user == null) return <LoadingPage />;
   return (
     <>
-    <Head title='Dashboard'/>
+      <Head title="Dashboard" />
       <Layout>
         <Wrapper style={{ minHeight: '80vh' }}>
           <Title>Dashboard</Title>
@@ -129,9 +130,7 @@ const Dashboard = (): JSX.Element => {
             <div>
               <button className="concluidos">Ver todos os concluídos</button>
               {isFreteiro(user) && (
-                <BtnYellowLinkRouter to={'/fretesDisponiveis'}>
-                  Buscar novos fretes
-                </BtnYellowLinkRouter>
+                <Button link={'/fretesDisponiveis'}>Buscar novos fretes</Button>
               )}
             </div>
           </Filter>

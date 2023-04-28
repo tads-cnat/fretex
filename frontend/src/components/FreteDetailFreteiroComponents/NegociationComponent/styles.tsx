@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -73,16 +73,6 @@ export const BtnGreen = styled.button`
 
   &:hover {
     background-color: #386b30;
-  }
-`;
-
-export const BtnYellow = styled(BtnGreen)`
-  background-color: var(--theme-primary);
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-  @media (max-width: 500px) {
-    width: 100%;
   }
 `;
 

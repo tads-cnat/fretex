@@ -3,11 +3,11 @@ import { Image, Container, Form, Preview } from './styles';
 import { ReactComponent as Pencil } from '../../../assets/images/pencil.svg';
 import Modal from '../../Global/Modal';
 import { useToggle } from '../../../hooks/useToggle';
-import { BtnYellow } from '../../../pages/Dashboard/styles';
 import useApi from '../../../hooks/useApi';
 import { useParams } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
+import Button from '../../Global/Button';
 
 interface IBanner {
   user: IFreteiro | ICliente;
@@ -83,9 +83,9 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
               accept="image/jpeg,image/png,image/gif"
               onChange={onChange}
             />
-            <BtnYellow type="submit" onClick={handleClick}>
+            <Button isButton type="submit" onClick={handleClick}>
               Enviar
-            </BtnYellow>
+            </Button>
           </Form>
         </Modal>
         <Image image={imageBanner}>

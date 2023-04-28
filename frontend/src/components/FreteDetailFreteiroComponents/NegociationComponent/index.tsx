@@ -1,4 +1,4 @@
-import { BtnYellow, HeaderContainer, PropostaContainer2 } from './styles';
+import { HeaderContainer, PropostaContainer2 } from './styles';
 import CardsContainer from '../CardsContainer';
 import CardProposta from '../CardProposta';
 import ModalProposta from '../ModalProposta';
@@ -10,6 +10,7 @@ import {
 } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type MouseEvent } from 'react';
+import Button from '../../Global/Button';
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -61,9 +62,9 @@ const NegociationComponent = ({
         </div>
         {isFreteiro(actualUser) &&
           propostas.find((p) => p.usuario === actualUser.id) == null && (
-            <BtnYellow type="button" onClick={handleClick}>
-              Realizar Proposta
-            </BtnYellow>
+            <Button type="button" isButton onClick={handleClick}>
+              Realizar proposta
+            </Button>
           )}
       </HeaderContainer>
       <PropostaContainer2>

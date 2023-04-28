@@ -1,12 +1,13 @@
 import React from 'react';
 import { LinkYellow, BtnYellow } from './styles';
+import { type MouseEvent } from 'react';
 
 interface IButton {
   type?: 'button' | 'submit' | 'reset' | undefined;
   fontSize?: 'medium' | 'large';
   link?: string;
   children: any;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLElement>) => void;
   isButton?: boolean;
 }
 

@@ -4,6 +4,7 @@ import { type IBtn } from '../../../interfaces/styledComponents';
 
 export const LinkYellow = styled(Link)`
   display: flex;
+  gap: 4px;
   align-items: center;
   padding: 9px 32px;
   background-color: var(--theme-primary);
@@ -21,6 +22,7 @@ export const LinkYellow = styled(Link)`
 
 export const BtnYellow = styled.button<IBtn>`
   display: flex;
+  gap: 4px;
   justify-content: center;
   padding: 9px 32px;
   background-color: var(--theme-primary);

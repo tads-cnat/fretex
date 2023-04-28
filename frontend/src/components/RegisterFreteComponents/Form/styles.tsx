@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -27,12 +27,12 @@ export const Seta = styled.button`
   gap: 0.5em;
   font-size: var(--font-medium);
   border: none;
-  transition: all .3s;
+  transition: all 0.3s;
   background-color: transparent;
   cursor: pointer;
-  
+
   &:hover {
-    color: var(--theme-primary)
+    color: var(--theme-primary);
   }
 `;
 
@@ -180,23 +180,6 @@ export const EntregaDivContent = styled.div`
   }
   div {
     padding: 10px;
-  }
-`;
-
-export const BtnYellow = styled.button`
-  cursor: pointer;
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--text-light);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  border: 0px;
-  font-weight: 700;
-  font-size: var(--font-large);
-  line-height: 24px;
-  &:hover {
-    background-color: var(--btn-hover);
   }
 `;
 
