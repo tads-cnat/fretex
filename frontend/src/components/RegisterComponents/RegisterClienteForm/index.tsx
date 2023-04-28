@@ -2,12 +2,7 @@ import { SpanYellow } from '../../../styles/globalStyles';
 import Email from '../../../assets/Svg/Email';
 import Password from '../../../assets/Svg/Password';
 import User from '../../../assets/Svg/User';
-import {
-  ContainerForm,
-  BtnYellow,
-  ContainerPrincipal,
-  ContainerContent,
-} from './styles';
+import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -16,7 +11,8 @@ import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
 import { type IClienteFormData } from '../../../interfaces';
 import useApi from '../../../hooks/useApi';
 import { toast } from 'react-toastify';
-import { Input } from '../../../components/Input/index';
+import Button from '../../Global/Button';
+import { Input } from '../../Input';
 
 const RegisterClientForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
@@ -26,7 +22,7 @@ const RegisterClientForm = (): JSX.Element => {
     formState: { errors },
     setFocus,
   } = useForm<IClienteFormData>({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(schemaCliente),
   });
 
@@ -122,7 +118,9 @@ const RegisterClientForm = (): JSX.Element => {
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <BtnYellow type="submit">Cadastre-se</BtnYellow>
+            <Button isButton type="submit">
+              Cadastre-se
+            </Button>
             <p>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>

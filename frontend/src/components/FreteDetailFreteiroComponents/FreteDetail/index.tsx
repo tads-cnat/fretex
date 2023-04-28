@@ -86,20 +86,20 @@ const FreteDetailComponent = ({
           )}
           <div>
             <Link to={`/perfil/${pedido.cliente}`} className="userLink">
-              {clientePedido.url_foto ? (
+              {clientePedido?.url_foto ? (
                 <img
                   src={clientePedido.url_foto}
                   alt={clientePedido.first_name}
                 />
               ) : (
-                <img src={perfil} alt={clientePedido.first_name} />
+                <img src={perfil} alt={clientePedido?.first_name} />
               )}
 
               <span>
-                {pedido.cliente_first_name} {pedido.cliente_last_name}
+                {pedido?.cliente_first_name} {pedido.cliente_last_name}
               </span>
             </Link>
-            <h3>{pedido.produto.nome}</h3>
+            <h3>{pedido?.produto.nome}</h3>
             <p>Pedido realizado em: {formatDate(pedido.criado_em)}</p>{' '}
           </div>
         </Content1>

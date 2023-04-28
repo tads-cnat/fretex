@@ -16,7 +16,7 @@ import LabelInput from '../../Profile/LabelInput';
 import CardsContainer from '../CardsContainer';
 import { FormContainer } from '../ModalProposta/styles';
 import { schemaContraproposta } from './schema';
-import { BtnYellow } from '../NegociationComponent/styles';
+import Button from '../../Global/Button';
 
 interface IModal {
   toggle: () => void;
@@ -164,7 +164,9 @@ const ModalContraproposta = ({
             </LabelInput>
           </div>
           <div className="submitContainer">
-            <BtnYellow type="submit">Realizar proposta</BtnYellow>
+            <Button isButton type="submit">
+              Realizar proposta
+            </Button>
           </div>
         </FormContainer>
       )}

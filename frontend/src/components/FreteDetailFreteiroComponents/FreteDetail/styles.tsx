@@ -104,7 +104,3 @@ export const BtnGreen = styled(BtnPattern)`
   background-color: #46843c;
   color: #ffffff;
 `;
-
-export const BtnYellow = styled(BtnPattern)`
-  color: #ffffff;
-`;

@@ -11,7 +11,6 @@ import InputMask from 'react-input-mask';
 import Password from '../../../assets/Svg/Password';
 import ClosedEye from '../../../assets/Svg/ClosedEye';
 import Eye from '../../../assets/Svg/Eye';
-import { BtnYellow } from '../../../components/RegisterComponents/RegisterClienteForm/styles';
 import Loc from '../../../assets/Svg/Loc';
 import {
   Container,
@@ -26,6 +25,7 @@ import { type SubmitHandler } from 'react-hook-form/dist/types';
 import useApi from '../../../hooks/useApi';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
+import Button from '../../../components/Global/Button';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
@@ -300,7 +300,7 @@ const EditProfile = (): JSX.Element => {
           )}
         </InputsContainerGrid>
         <div className="containerButton">
-          <BtnYellow>Atualizar Perfil</BtnYellow>
+          <Button isButton>Atualizar Perfil</Button>
         </div>
       </form>
     </Container>

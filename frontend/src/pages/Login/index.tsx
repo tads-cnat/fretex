@@ -6,7 +6,6 @@ import Eye from '../../assets/Svg/Eye';
 import {
   ContainerPrincipal,
   ContainerForm,
-  BtnYellow,
 } from '../../components/RegisterComponents/RegisterClienteForm/styles';
 import { ContainerContent2 } from './styles';
 import { SpanYellow, Wrapper } from '../../styles/globalStyles';
@@ -19,6 +18,7 @@ import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { useToggle } from '../../hooks/useToggle';
 import Head from '../../components/Head';
+import Button from '../../components/Global/Button';
 import { Input } from '../../components/Input';
 
 const Login = (): JSX.Element => {
@@ -101,11 +101,12 @@ const Login = (): JSX.Element => {
                     />
                   ))}
 
-              
                   {error.length !== 0 && <p className="error">{error}</p>}
                 </div>
                 <section>
-                  <BtnYellow type="submit">Entrar</BtnYellow>
+                  <Button type="submit" isButton>
+                    Entrar
+                  </Button>
                   <p>
                     Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
                   </p>

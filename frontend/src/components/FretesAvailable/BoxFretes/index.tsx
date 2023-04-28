@@ -8,7 +8,6 @@ import {
   ContainerCalendar,
   ContainerImgMain,
   ContainerImg,
-  BtnYellow,
 } from './styles';
 import caixa from '../../../assets/images/caixas.png';
 import Loc from '../../../assets/images/geo-alt.svg';
@@ -16,6 +15,7 @@ import Arrow from '../../../assets/images/arrow-right.svg';
 import Calendar from '../../../assets/images/calendar.svg';
 import { type IPedido } from '../../../interfaces';
 import { formatDate } from '../../../utils/formatDate';
+import Button from '../../Global/Button';
 
 const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (
@@ -42,7 +42,7 @@ const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
             <span>Entregar até {formatDate(pedido.data_entrega)}</span>
           </ContainerCalendar>
         </ContainerInfos>
-        <BtnYellow to={`/fretes/${pedido.id}`}>Negociar</BtnYellow>
+        <Button link={`/fretes/${pedido.id}`}>Negociar</Button>
       </ContainerInfoBtn>
       <ContainerImgMain>
         {pedido.produto.imagem_url ? (

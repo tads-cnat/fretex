@@ -30,3 +30,7 @@ export interface IStatusColors {
   color: string;
   bg: string;
 }
+
+export interface IBtn {
+  fontSize: string;
+}

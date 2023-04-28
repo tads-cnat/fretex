@@ -7,9 +7,9 @@ import {
   ProdutoDivContent,
   EntregaDiv,
   EntregaDivContent,
-  BtnYellow,
   ButtonDiv,
 } from './styles';
+import Button from '../../Global/Button';
 import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
@@ -119,7 +119,7 @@ const Index = (): JSX.Element => {
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
     const imagemUrl = produto.imagem_url[0];
-
+    console.log(data)
     if (
       isErrorDateRange(
         pedido.data_coleta,
@@ -149,17 +149,20 @@ const Index = (): JSX.Element => {
         formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (produto.imagem_url.length === 0 && key === 'imagem_url')
+      if (imagemUrl && key === 'imagem_url')
         formData.append(`produto.${key}`, imagemUrl);
-      else if (typeof value === 'boolean' && value)
+      else if (value)
         formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
-      if (typeof value === 'boolean' && value && key === 'tipo_veiculo')
+      if (value && key === 'tipo_veiculo')
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
-      else if (typeof value === 'boolean' && value)
+      else if (value)
         formData.append(`${key}`, value);
     });
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}, ${pair[1]}`);
+    }
     registerPedido(formData)
       .then(() => {
         toast.success('Pedido cadastrado com sucesso!');
@@ -511,7 +514,9 @@ const Index = (): JSX.Element => {
             </EntregaDivContent>
           </EntregaDiv>
           <ButtonDiv>
-            <BtnYellow type="submit">Finalizar pedido</BtnYellow>
+            <Button isButton type="submit" fontSize="large">
+              Finalizar pedido
+            </Button>
           </ButtonDiv>
         </Form>
       </Container>

@@ -74,22 +74,3 @@ export const Preview = styled.div`
   }
 `;
 
-export const ButtonCadastro = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--text-light);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  border: 0px;
-  font-weight: 700;
-  font-size: var(--font-medium);
-  line-height: 24px;
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-`;

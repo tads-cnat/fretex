@@ -17,11 +17,10 @@ import ModalComponent from '../../Global/Modal';
 import CardVeiculo from '../../Profile/CardVeiculo';
 import LabelInput from '../../Profile/LabelInput';
 import CardsContainer from '../CardsContainer';
-import { BtnYellow as BtnSubmit } from '../NegociationComponent/styles';
 import { schemaProposta } from './schema';
 import { ContainerVeiculos, FormContainer } from './styles';
-import { BtnYellowLinkRouter } from '../../../pages/Dashboard/styles';
 import Loading from '../../Global/Loading';
+import Button from '../../Global/Button';
 
 interface IModalProposta {
   toggle: () => void;
@@ -112,9 +111,9 @@ const ModalProposta = ({
                   Você não possui veículo ou veiculo do tipo aceito pelo pedido
                   de frete
                 </p>
-                <BtnYellowLinkRouter to={`/perfil/${actualUserId}/veiculos`}>
+                <Button link={`/perfil/${actualUserId}/veiculos`}>
                   Casdastrar Veículo
-                </BtnYellowLinkRouter>
+                </Button>
               </div>
             )}
             {veiculos &&
@@ -156,7 +155,9 @@ const ModalProposta = ({
           </LabelInput>
         </div>
         <div className="submitContainer">
-          <BtnSubmit type="submit">Realizar proposta</BtnSubmit>
+          <Button isButton type="submit">
+            Realizar proposta
+          </Button>
         </div>
       </FormContainer>
     </ModalComponent>

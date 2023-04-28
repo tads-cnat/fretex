@@ -6,7 +6,6 @@ import {
   RegisterAddress,
   Login,
   ContainerInfos,
-  BtnYellow,
 } from './styles';
 import perfil from '../../../assets/images/imgperfil.svg';
 import Email from '../../../assets/Svg/Email';
@@ -21,6 +20,7 @@ import { schemaFreteiro } from '../../../pages/ResgisterUser/schemas';
 import { useFreteiroForm } from '../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
+import Button from '../../Global/Button';
 import { Input } from '../../Input';
 
 const RegisterFreteiroForm = (): JSX.Element => {
@@ -203,7 +203,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
               error={errors.endereco?.complemento}
             />
             {error !== '' && <p className="error">{error}</p>}
-            <BtnYellow>Cadastre-se</BtnYellow>
+            <Button isButton type='submit'>Cadastre-se</Button>
           </RegisterAddress>
         </form>
         <Login>
