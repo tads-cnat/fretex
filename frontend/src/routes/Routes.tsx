@@ -12,6 +12,7 @@ import Avaliacoes from '../pages/Profile/Avaliacoes';
 import Vehicles from '../pages/Profile/Vehicles';
 import EditProfile from '../pages/Profile/EditProfile';
 import Dashboard from '../pages/Dashboard';
+import Page404 from '../components/Global/Page404';
 
 const RoutesApp = (): JSX.Element => {
   return (
@@ -20,6 +21,7 @@ const RoutesApp = (): JSX.Element => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Page404 />} />
 
         <Route
           path="/perfil/:id"
