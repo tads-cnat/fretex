@@ -1,0 +1,5 @@
+FROM node:16
+WORKDIR /code
+COPY frontend/package.json /code/
+COPY frontend/package-lock.json /code/
+RUN yarn add .

@@ -2,9 +2,7 @@ version: "3"
 services:
   node:
     container_name: fretex_node
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.node
+    image: node:16
     working_dir: /code/frontend
     command: bash -c "npm install && yarn start"
     ports:
@@ -13,11 +11,9 @@ services:
       - .:/code
   django:
     container_name: fretex_django
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.django
+    build: ./docker/Dockerfile.django
     working_dir: /code/backend
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "gunicorn core.wsgi"
     networks:
       - default
     ports:
