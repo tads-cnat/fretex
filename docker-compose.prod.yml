@@ -6,7 +6,7 @@ services:
     working_dir: /code
     command: bash -c "yarn start"
     ports:
-      - "81:3000"
+      - "80:3000"
   django:
     container_name: fretex_django
     image: arthurmed/fretex_django_prod:0.0.1
