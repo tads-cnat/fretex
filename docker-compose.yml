@@ -2,9 +2,7 @@ version: "3"
 services:
   node:
     container_name: fretex_node
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.node
+    image: node:16
     working_dir: /code/frontend
     command: bash -c "npm install && yarn start"
     ports:
