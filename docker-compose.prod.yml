@@ -2,26 +2,20 @@ version: "3"
 services:
   node:
     container_name: fretex_node
-    image: node:16
-    working_dir: /code/frontend
-    command: bash -c "npm install && yarn start"
+    image: arthurmed/fretex_node_prod:0.0.1
+    working_dir: /code
+    command: bash -c "yarn start"
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/code
+      - "80:3000"
   django:
     container_name: fretex_django
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.django
-    working_dir: /code/backend
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    image: arthurmed/fretex_django_prod:0.0.1
+    working_dir: /code
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
     networks:
       - default
     ports:
       - "8000:8000"
-    volumes:
-      - .:/code
     depends_on:
       - node
   postgres:
