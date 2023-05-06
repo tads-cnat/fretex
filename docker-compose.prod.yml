@@ -1,23 +1,22 @@
 version: "3"
 services:
-  node:
-    container_name: fretex_node
-    image: arthurmed/fretex_node_prod:0.0.1
-    working_dir: /code
-    command: bash -c "yarn start"
+  frontend:
+    container_name: fretex_frontend
+    image: arthurmed/fretex-frontend
     ports:
-      - "80:3000"
-  django:
-    container_name: fretex_django
-    image: arthurmed/fretex_django_prod:0.0.1
-    working_dir: /code
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+      - "80:80"
+  backend:
+    container_name: fretex_backend
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.django
+    command: bash -c "python manage.py migrate && gunicorn core.wsgi:application --config gunicorn_config.py"
     networks:
       - default
     ports:
       - "8000:8000"
     depends_on:
-      - node
+      - postgres
   postgres:
     container_name: fretex_postgres
     image: postgres:13

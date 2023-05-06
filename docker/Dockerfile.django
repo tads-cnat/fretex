@@ -1,6 +1,6 @@
 FROM python:3.10
-WORKDIR /code
-COPY backend /code/
+WORKDIR /code/backend
+COPY backend .
 RUN pip install -r requirements.txt
 EXPOSE 8000
-CMD ["python", "manage.py", "migrate", "&&", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "core.wsgi:application", "--config", "gunicorn_config.py"]
