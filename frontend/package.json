@@ -29,6 +29,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true TSC_COMPILE_ON_ERROR=true react-scripts build --no-lint",
+    "build-ignore-lint": "react-scripts build --no-lint",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint src/**/*.tsx src/**/*.ts --fix"
