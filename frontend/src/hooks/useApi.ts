@@ -44,7 +44,7 @@ export const useApi = () => ({
   validateToken: async () => {
     const response = await api.get('/auth/user/')
     return response.data
-  },
+  }, // ??
   tiposVeiculo: async () => {
     const response = await api.get('/tipodeveiculo/')
     return response.data
@@ -84,11 +84,11 @@ export const useApi = () => ({
   getUser: async () => {
     const response = await api.get(`/auth/user/`)
     return response.data
-  },
+  }, // ??
   getTypeUser: async (id: number) => {
     const response = await api.get(`usuarios/${id}/`)
     return response.data
-  },
+  }, // ??
   updateFreteiro: async (id: number, data: FormData) => {
     const response = await api.patch(`/freteiro/${id}/`, data)
     return response.data
