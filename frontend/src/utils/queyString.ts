@@ -7,3 +7,10 @@ export const objToQueryString = (obj: any): string => {
   }
   return keyValuePairs.join("&");
 }
+
+export const objToQueryStringMelhorada = (obj: any): string => { 
+  const queryString = Object.keys(obj)
+    .map((key) => obj[key].map((value) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&'))
+    .join('&');
+  return queryString;
+}
