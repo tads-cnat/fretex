@@ -125,7 +125,7 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
-    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
+    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario", "turno_coleta"]
 
 
 class PropostaPedidoViewSet(
