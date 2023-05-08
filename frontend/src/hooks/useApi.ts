@@ -1,6 +1,6 @@
 import { type IPedido, type IVeiculo } from "../interfaces"
 import { type IRegisterCliente } from "../interfaces/IRegisterCliente"
-import { api, cepApi } from "../services/api"
+import { api, cepApi } from "../api/api"
 
 // GET com ou sem Slash
 // POST APENAS COM SLASH
@@ -41,7 +41,7 @@ export const useApi = () => ({
     const response = await api.get(`/veiculo/${id}`)
     return response.data
   },
-  validateToken: async (token: string) => {
+  validateToken: async () => {
     const response = await api.get('/auth/user/')
     return response.data
   },
