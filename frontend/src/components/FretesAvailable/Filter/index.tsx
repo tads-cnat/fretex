@@ -1,37 +1,12 @@
-import { useEffect, useState } from 'react';
-import { objToQueryStringMelhorada } from '../../../utils/queyString';
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 
-const Filter = (): JSX.Element => {
-  const [coleta, setColeta] = useState([]);
-  const [veiculos, setVeiculos] = useState([]);
-  const [url, setUrl] = useState('');
-  console.log('url:',url)
+interface IFilterFretes {
+  handleChange: (e: any, tipo: any,) => void;
+  veiculos: string[];
+  coleta: string[];
+}
 
-  useEffect(() => {
-    const objeto = {
-      tipo_veiculo: veiculos,
-      turno_coleta: coleta,
-    }
-    console.log('objeto:',objeto)
-    setUrl(objToQueryStringMelhorada(objeto))
-  }, [veiculos, coleta])
-
-  function handleChange(e, tipo) {
-    if (tipo === 'veiculo') {
-      if (e.target.checked) {
-        setVeiculos([...veiculos, e.target.value]);
-      } else {
-        setVeiculos(veiculos.filter((key) => key !== e.target.value));
-      }
-    } else if (tipo === 'coleta') {
-      if (e.target.checked) {
-        setColeta([...coleta, e.target.value]);
-      } else {
-        setColeta(coleta.filter((key) => key !== e.target.value));
-      }
-    }
-  }
+const Filter = ({coleta,handleChange,veiculos}:IFilterFretes): JSX.Element => {
 
   return (
     <ContainerFilter>

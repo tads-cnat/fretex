@@ -13,12 +13,15 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
 import Head from '../../components/Head';
+import useFilterFretes from '../../hooks/useFilterFretes';
 
 const FretesAvailable = (): JSX.Element => {
   const { user } = useContext(AuthContext);
   const { getSearchPedidos } = useApi();
+  const {handleChange: handleChangeFilter, url, veiculos: veiculosArrayChecked, coleta: coletaArrayChecked} = useFilterFretes();
   // const [inputText, setInputText] = useState();
 
+  
   const query = objToQueryString({
     status: 'EN',
   });
@@ -39,7 +42,8 @@ const FretesAvailable = (): JSX.Element => {
     refetchOnWindowFocus: false
   });
 */
-  const handleChange = (e: any): void => {};
+
+
 
   if (user == null) return <LoadingPage />;
   return (
@@ -54,13 +58,13 @@ const FretesAvailable = (): JSX.Element => {
               <input
                 type="text"
                 placeholder="Material"
-                onChange={(e) => {
-                  handleChange(e.target.value);
-                }}
+                // onChange={(e) => {
+                //   handleChange(e.target.value);
+                // }}
               />
             </Search>
             <ContainerMain>
-              <Filter />
+              <Filter handleChange={handleChangeFilter} veiculos={veiculosArrayChecked} coleta={coletaArrayChecked}/>
               <ContainerFretes>
                 {isError && <p>Houve um erro, tente novamente!</p>}
                 {!isLoading && pedidos.data.length === 0 && (
