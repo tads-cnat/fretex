@@ -22,23 +22,11 @@ const FretesAvailable = (): JSX.Element => {
     handleChange: handleChangeFilter,
     veiculos: veiculosArrayChecked,
     coleta: coletaArrayChecked,
+    pedidos,
+    isLoading,
+    isError
   } = useFilterFretes(user);
 
-  const query = objToQueryString({
-    status: 'EN',
-  });
-
-  const {
-    data: pedidos,
-    isLoading,
-    isError,
-  } = useQuery(
-    'pedidosDisponiveis',
-    async () => await getSearchPedidos(query),
-    {
-      enabled: !(user == null),
-    },
-  );
 
   if (user == null) return <LoadingPage />;
   return (

@@ -3,7 +3,7 @@ import {
   objToQueryString,
   objToQueryStringMelhorada,
 } from '../utils/queyString';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useApi from './useApi';
 
 interface IFilterFretes {
@@ -11,6 +11,9 @@ interface IFilterFretes {
   url: string;
   veiculos: string[];
   coleta: string[];
+  pedidos: any;
+  isLoading: boolean;
+  isError: boolean,
 }
 
 const useFilterFretes = (user: any): IFilterFretes => {
@@ -36,14 +39,27 @@ const useFilterFretes = (user: any): IFilterFretes => {
     status: 'EN',
   });
 
-  const { mutate } = useMutation(
+  const {
+    data: pedidos,
+    isLoading,
+    isError,
+  } = useQuery(
     'pedidosDisponiveis',
+    async () => await getSearchPedidos(query),
+    {
+      enabled: !(user == null),
+    },
+  );
+
+
+  const { mutate } = useMutation(
+    'atualizaPedidosDisponiveis',
     async (url: string) =>
       await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
-      // onSuccess: async () => {
-      //   await cliente.refetchQueries('pedidosDisponiveis');
-      // },
+      onSuccess: async () => {
+        await cliente.refetchQueries('pedidosDisponiveis');
+      },
     },
   );
 
@@ -63,7 +79,7 @@ const useFilterFretes = (user: any): IFilterFretes => {
     }
   }
 
-  return { handleChange, url, veiculos, coleta };
+  return { handleChange, url, veiculos, coleta, pedidos, isLoading, isError, };
 };
 
 export default useFilterFretes;

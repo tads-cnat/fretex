@@ -42,6 +42,7 @@ const ContentProposta = ({
   const { updateProposta, updatePedido, getFreteiro, getCliente, getTypeUser } =
     useApi();
   const client = useQueryClient();
+  
   const updatePropostaMutation = useMutation(
     ['updateProposta', proposta.id],
     async ({ id, data }: IUpdate) => await updateProposta(id, data),
