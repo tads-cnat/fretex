@@ -43,9 +43,10 @@ const useFilterFretes = (user: any): IFilterFretes => {
     data: pedidos,
     isLoading,
     isError,
+    refetch,
   } = useQuery(
     'pedidosDisponiveis',
-    async () => await getSearchPedidos(query),
+    async () => await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
       enabled: !(user == null),
     },
@@ -57,7 +58,11 @@ const useFilterFretes = (user: any): IFilterFretes => {
       await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
       onSuccess: async () => {
-        await cliente.refetchQueries('pedidosDisponiveis');
+        await cliente.invalidateQueries('pedidosDisponiveis');
+        await refetch();
+      },
+      onError: (error) => {
+        console.log(error);
       },
     },
   );
