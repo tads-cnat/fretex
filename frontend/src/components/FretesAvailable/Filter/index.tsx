@@ -1,13 +1,16 @@
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 
 interface IFilterFretes {
-  handleChange: (e: any, tipo: any,) => void;
-  veiculos: string[];
   coleta: string[];
+  veiculos: string[];
+  handleChange: (e: any, tipo: any) => void;
 }
 
-const Filter = ({coleta,handleChange,veiculos}:IFilterFretes): JSX.Element => {
-
+const Filter = ({
+  coleta,
+  veiculos,
+  handleChange,
+}: IFilterFretes): JSX.Element => {
   return (
     <ContainerFilter>
       <TypesVehicles>
@@ -39,8 +42,8 @@ const Filter = ({coleta,handleChange,veiculos}:IFilterFretes): JSX.Element => {
           <input
             type="checkbox"
             name="matutino"
-            value="matutino"
-            checked={coleta.includes('matutino')}
+            value="MA"
+            checked={coleta.includes('MA')}
             onChange={(e) => handleChange(e, 'coleta')}
           />
           <span>Matutino</span>
@@ -49,8 +52,8 @@ const Filter = ({coleta,handleChange,veiculos}:IFilterFretes): JSX.Element => {
           <input
             type="checkbox"
             name="vespertino"
-            value="vespertino"
-            checked={coleta.includes('vespertino')}
+            value="TA"
+            checked={coleta.includes('TA')}
             onChange={(e) => handleChange(e, 'coleta')}
           />
           <span>Vespertino</span>
@@ -59,8 +62,8 @@ const Filter = ({coleta,handleChange,veiculos}:IFilterFretes): JSX.Element => {
           <input
             type="checkbox"
             name="noturno"
-            value="noturno"
-            checked={coleta.includes('noturno')}
+            value="NO"
+            checked={coleta.includes('NO')}
             onChange={(e) => handleChange(e, 'coleta')}
           />
           <span>Noturno</span>
