@@ -1,24 +1,23 @@
-import axios from "axios"
+import axios from 'axios';
 
 export const cepApi = axios.create({
-    baseURL: 'https://viacep.com.br/ws'
-})
+  baseURL: 'https://viacep.com.br/ws',
+});
 
 export const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
-    headers:{
-        'Content-Type': 'multipart/form-data',
-    }
-})
-
+  baseURL: 'http://127.0.0.1:8000/api',
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+});
 
 api.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem('authToken');
-      if (token) {
-        config.headers.Authorization = `Token ${token}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error),
+  (config) => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Token ${token}`;
+    }
+    return config;
+  },
+  async (error) => await Promise.reject(error),
 );
