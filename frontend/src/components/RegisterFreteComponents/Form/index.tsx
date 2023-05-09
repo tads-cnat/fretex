@@ -18,9 +18,9 @@ import { useNavigate } from 'react-router-dom';
 import useApi from '../../../hooks/useApi';
 import { useEffect, useState } from 'react';
 import { Turnos } from './turnos';
-import InputMask from 'react-input-mask';
 import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
+import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -104,6 +104,7 @@ const Index = (): JSX.Element => {
     register,
     completeAddress,
     handleSubmit,
+    setValue,
     setFocus,
     formState: { errors },
   } = useAddress<IPedidoFormData>(schemaPedido);
@@ -119,7 +120,7 @@ const Index = (): JSX.Element => {
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
     const imagemUrl = produto.imagem_url[0];
-    console.log(data)
+    console.log(data);
     if (
       isErrorDateRange(
         pedido.data_coleta,
@@ -151,14 +152,12 @@ const Index = (): JSX.Element => {
     Object.entries(produto).forEach(([key, value]) => {
       if (imagemUrl && key === 'imagem_url')
         formData.append(`produto.${key}`, imagemUrl);
-      else if (value)
-        formData.append(`produto.${key}`, value);
+      else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
       if (value && key === 'tipo_veiculo')
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
-      else if (value)
-        formData.append(`${key}`, value);
+      else if (value) formData.append(`${key}`, value);
     });
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}, ${pair[1]}`);
@@ -202,13 +201,15 @@ const Index = (): JSX.Element => {
               <h3>Endereço de Coleta</h3>
               <label>
                 <span>CEP *</span>
-                <InputMask
-                  mask="99999-999"
+                <input
                   {...register('origem.CEP')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChangeInputCEP(e, setValue, 'origem.CEP');
+                  }}
                   onBlur={completeAddress}
                   type="text"
                   placeholder="Digite o CEP"
-                ></InputMask>
+                />
                 {errors.origem?.CEP != null && (
                   <p className="error">{errors.origem.CEP?.message}</p>
                 )}
@@ -286,13 +287,15 @@ const Index = (): JSX.Element => {
               <h3>Endereço de Entrega</h3>
               <label>
                 <span>CEP *</span>
-                <InputMask
-                  mask="99999-999"
+                <input
                   {...register('destino.CEP')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChangeInputCEP(e, setValue, 'destino.CEP');
+                  }}
                   onBlur={completeAddress}
                   type="text"
                   placeholder="Digite o CEP"
-                ></InputMask>
+                />
                 {errors.destino?.CEP != null && (
                   <p className="error">{errors.destino.CEP?.message}</p>
                 )}

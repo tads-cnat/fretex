@@ -8,10 +8,7 @@ import {
   ContainerInfos,
 } from './styles';
 import perfil from '../../../assets/images/imgperfil.svg';
-import Email from '../../../assets/Svg/Email';
 import Loc from '../../../assets/Svg/Loc';
-import User from '../../../assets/Svg/User';
-import Password from '../../../assets/Svg/Password';
 import { SpanYellow } from '../../../styles/globalStyles';
 import { useEffect, useState } from 'react';
 import { type IFreteiroFormData } from '../../../interfaces';
@@ -22,6 +19,8 @@ import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
 import Button from '../../Global/Button';
 import { Input } from '../../Input';
+import { inputs } from './inputs';
+import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
 const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -31,6 +30,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
     setFocus,
     completeAddress,
   } = useAddress<IFreteiroFormData>(schemaFreteiro);
@@ -54,51 +54,6 @@ const RegisterFreteiroForm = (): JSX.Element => {
     setImagePreview(URL.createObjectURL(file));
   };
 
-  const inputsPerson = [
-    {
-      type: 'email',
-      name: 'email',
-      label: 'Email',
-      placeholder: 'Seu email',
-      required: true,
-      svg: <Email />,
-    },
-    {
-      type: 'text',
-      name: 'full_name',
-      label: 'Nome completo',
-      placeholder: 'Seu nome completo',
-      required: true,
-      svg: <User />,
-    },
-    {
-      type: 'text',
-      name: 'cpf',
-      label: 'CPF',
-      placeholder: 'Seu CPF',
-      required: true,
-      svg: <User />,
-    },
-
-    {
-      type: 'password',
-      name: 'password',
-      label: 'Senha',
-      placeholder: 'Sua senha',
-      required: true,
-      svg: <Password />,
-    },
-
-    {
-      type: 'password',
-      name: 'confirmPassword',
-      label: 'Confirmação da senha',
-      placeholder: 'Confirme sua senha',
-      required: true,
-      svg: <Password />,
-    },
-  ];
-
   return (
     <ContainerMain>
       <ContainerForm2>
@@ -120,10 +75,17 @@ const RegisterFreteiroForm = (): JSX.Element => {
                 )} */}
               </label>
             </PerfilImg>
-            {inputsPerson.map((input, index) => (
+            {inputs.map((input, index) => (
               <Input
                 key={index}
                 {...register(`${input.name}`)}
+                onChange={
+                  input.onChange !== undefined
+                    ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                        input.onChange(e, setValue);
+                      }
+                    : undefined
+                }
                 type={input.type}
                 label={input.label}
                 placeholder={input.placeholder}
@@ -137,6 +99,9 @@ const RegisterFreteiroForm = (): JSX.Element => {
             <h1 className="title">Seu Endereço</h1>
             <Input
               {...register('endereco.CEP')}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChangeInputCEP(e, setValue, 'endereco.CEP');
+              }}
               type="text"
               label="CEP"
               placeholder="Seu CEP"
@@ -203,7 +168,9 @@ const RegisterFreteiroForm = (): JSX.Element => {
               error={errors.endereco?.complemento}
             />
             {error !== '' && <p className="error">{error}</p>}
-            <Button isButton type='submit'>Cadastre-se</Button>
+            <Button isButton type="submit">
+              Cadastre-se
+            </Button>
           </RegisterAddress>
         </form>
         <Login>
