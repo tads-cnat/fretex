@@ -13,7 +13,7 @@ interface IFilterFretes {
   coleta: string[];
   pedidos: any;
   isLoading: boolean;
-  isError: boolean,
+  isError: boolean;
 }
 
 const useFilterFretes = (user: any): IFilterFretes => {
@@ -51,7 +51,6 @@ const useFilterFretes = (user: any): IFilterFretes => {
     },
   );
 
-
   const { mutate } = useMutation(
     'atualizaPedidosDisponiveis',
     async (url: string) =>
@@ -79,7 +78,7 @@ const useFilterFretes = (user: any): IFilterFretes => {
     }
   }
 
-  return { handleChange, url, veiculos, coleta, pedidos, isLoading, isError, };
+  return { handleChange, url, veiculos, coleta, pedidos, isLoading, isError };
 };
 
 export default useFilterFretes;
