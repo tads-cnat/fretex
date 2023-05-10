@@ -53,7 +53,7 @@ const useFilterFretes = (user: any): IFilterFretes => {
   );
 
   const { mutate } = useMutation(
-    'atualizaPedidosDisponiveis',
+    'PedidosDisponiveis',
     async (url: string) =>
       await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
