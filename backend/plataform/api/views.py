@@ -69,22 +69,18 @@ class AuthViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         freteiro = serializer.save()
-        return Response(
-            UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED
-        )
+        return Response(UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
         if User.objects.filter(email=request.data.get("email")).exists():
-            return Response({"email":[ "Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"email": ["Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         if Cliente.objects.filter(cpf=request.data.get("cpf")).exists():
-            return Response({"cpf":[ "CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"cpf": ["CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
-        return Response(
-            UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED
-        )
+        return Response(UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=["get"])
     def logout(self, request):
@@ -128,18 +124,14 @@ class PedidoViewSet(viewsets.ModelViewSet):
     filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
 
 
-class PropostaPedidoViewSet(
-    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
-):
+class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
 
 
-class MinhasPropostasPedidoViewSet(
-    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
-):
+class MinhasPropostasPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
@@ -147,12 +139,7 @@ class MinhasPropostasPedidoViewSet(
 
     def get_queryset(self):
         return (
-            super()
-            .get_queryset()
-            .filter(
-                Q(usuario=self.request.user)
-                | Q(contraproposta__usuario=self.request.user)
-            )
+            super().get_queryset().filter(Q(usuario=self.request.user) | Q(contraproposta__usuario=self.request.user))
         )
 
 
