@@ -7,7 +7,6 @@ import { type IUserUpdateFormData } from '../../../interfaces';
 import { schemaCliente, schemaFreteiro } from '../../ResgisterUser/schemas';
 import perfil from '../../../assets/images/imgperfil.svg';
 import User from '../../../assets/Svg/User';
-import InputMask from 'react-input-mask';
 import Password from '../../../assets/Svg/Password';
 import ClosedEye from '../../../assets/Svg/ClosedEye';
 import Eye from '../../../assets/Svg/Eye';
@@ -26,6 +25,7 @@ import useApi from '../../../hooks/useApi';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 import Button from '../../../components/Global/Button';
+import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
@@ -218,12 +218,14 @@ const EditProfile = (): JSX.Element => {
                   isError={errors.endereco?.CEP}
                   errorMessage={errors.endereco?.CEP?.message}
                 >
-                  <InputMask
-                    mask="99999-999"
+                  <input
                     {...register('endereco.CEP')}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      handleChangeInputCEP(e, setValue, 'endereco.CEP');
+                    }}
                     placeholder="Seu CEP"
                     onBlur={completeAddress}
-                  ></InputMask>
+                  />
                 </LabelInput>
                 <LabelInput
                   Icon={Loc}
