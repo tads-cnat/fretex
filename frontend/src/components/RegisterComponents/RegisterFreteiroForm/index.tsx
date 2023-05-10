@@ -30,7 +30,6 @@ const RegisterFreteiroForm = (): JSX.Element => {
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
     setFocus,
     completeAddress,
   } = useAddress<IFreteiroFormData>(schemaFreteiro);

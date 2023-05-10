@@ -120,7 +120,6 @@ const Index = (): JSX.Element => {
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
     const imagemUrl = produto.imagem_url[0];
-    console.log(data);
     if (
       isErrorDateRange(
         pedido.data_coleta,

@@ -9,7 +9,7 @@ export const handleChangeInputCEP = (
   value = value
     .replace(/\D/g, '')
     .replace(/(\d{5})(\d)/, '$1-$2')
-    .replace(/(-\d{3})\d+?$/, '$1');
+    .replace(/(-\d{3})\d+$/, '$1');
 
   setValue(field, value);
 };
