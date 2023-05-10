@@ -5,9 +5,13 @@ import {
 } from '../utils/queyString';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useApi from './useApi';
+import { type ICliente, type IFreteiro } from '../interfaces';
 
 interface IFilterFretes {
-  handleChange: (e: any, tipo: any) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    tipo: 'coleta' | 'veiculo',
+  ) => void;
   url: string;
   veiculos: string[];
   coleta: string[];
@@ -16,9 +20,9 @@ interface IFilterFretes {
   isError: boolean;
 }
 
-const useFilterFretes = (user: any): IFilterFretes => {
-  const [coleta, setColeta] = useState([]);
-  const [veiculos, setVeiculos] = useState([]);
+const useFilterFretes = (user: ICliente | IFreteiro | null): IFilterFretes => {
+  const [coleta, setColeta] = useState<string[]>([]);
+  const [veiculos, setVeiculos] = useState<string[]>([]);
   const [url, setUrl] = useState('');
   const { getSearchPedidos } = useApi();
   const cliente = useQueryClient();
@@ -67,7 +71,10 @@ const useFilterFretes = (user: any): IFilterFretes => {
     },
   );
 
-  function handleChange(e: any, tipo: any): void {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    tipo: 'coleta' | 'veiculo',
+  ): void {
     if (tipo === 'veiculo') {
       if (e.target.checked) {
         setVeiculos([...veiculos, e.target.value]);

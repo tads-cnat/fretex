@@ -3,7 +3,10 @@ import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 interface IFilterFretes {
   coleta: string[];
   veiculos: string[];
-  handleChange: (e: any, tipo: any) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    tipo: 'coleta' | 'veiculo',
+  ) => void;
 }
 
 const Filter = ({
@@ -11,6 +14,7 @@ const Filter = ({
   veiculos,
   handleChange,
 }: IFilterFretes): JSX.Element => {
+  console.log(veiculos)
   return (
     <ContainerFilter>
       <TypesVehicles>
@@ -21,7 +25,9 @@ const Filter = ({
             name="carro"
             value="1"
             checked={veiculos.includes('1')}
-            onChange={(e) => handleChange(e, 'veiculo')}
+            onChange={(e) => {
+              handleChange(e, 'veiculo');
+            }}
           />
           <span>Carro</span>
         </label>
@@ -31,7 +37,9 @@ const Filter = ({
             name="caminhao"
             value="2"
             checked={veiculos.includes('2')}
-            onChange={(e) => handleChange(e, 'veiculo')}
+            onChange={(e) => {
+              handleChange(e, 'veiculo');
+            }}
           />
           <span>Caminhão</span>
         </label>
@@ -44,7 +52,9 @@ const Filter = ({
             name="matutino"
             value="MA"
             checked={coleta.includes('MA')}
-            onChange={(e) => handleChange(e, 'coleta')}
+            onChange={(e) => {
+              handleChange(e, 'coleta');
+            }}
           />
           <span>Matutino</span>
         </label>
@@ -54,7 +64,9 @@ const Filter = ({
             name="vespertino"
             value="TA"
             checked={coleta.includes('TA')}
-            onChange={(e) => handleChange(e, 'coleta')}
+            onChange={(e) => {
+              handleChange(e, 'coleta');
+            }}
           />
           <span>Vespertino</span>
         </label>
@@ -64,7 +76,9 @@ const Filter = ({
             name="noturno"
             value="NO"
             checked={coleta.includes('NO')}
-            onChange={(e) => handleChange(e, 'coleta')}
+            onChange={(e) => {
+              handleChange(e, 'coleta');
+            }}
           />
           <span>Noturno</span>
         </label>
