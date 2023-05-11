@@ -83,7 +83,7 @@ const CardProposta = ({
         enabled: !isNaN(OwnerPropostasId),
       },
     );
-console.log(OwnerPropostasId)
+  console.log(OwnerPropostasId);
   const changeTypeCard = (type: string): void => {
     switch (type) {
       case 'A responder':
