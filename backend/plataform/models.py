@@ -66,7 +66,7 @@ class TipoVeiculo(models.Model):
 
 
 class Pedido(models.Model):
-    STATUS = [
+    STATUS_CHOICES = [
         ("CA", "Cancelado"),
         ("EN", "Em negociação"),
         ("AG", "Aguardando coleta"),
@@ -78,7 +78,7 @@ class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_origem")
     destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_destino")
-    status = models.CharField(max_length=2, choices=STATUS, default="EN")
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="EN")
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)
     observacao = models.CharField(max_length=300, blank=True, null=True)
