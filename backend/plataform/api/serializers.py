@@ -43,12 +43,8 @@ class LoginSerializer(serializers.Serializer):
 
 class RegisterClienteSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
-    cpf = serializers.CharField(
-        validators=[UniqueValidator(queryset=Cliente.objects.all())]
-    )
-    email = serializers.EmailField(
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
+    cpf = serializers.CharField(validators=[UniqueValidator(queryset=Cliente.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
     capa_foto = serializers.ImageField(required=False)
 
@@ -70,12 +66,8 @@ class RegisterClienteSerializer(serializers.Serializer):
 
 class RegisterFreteiroSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
-    cpf = serializers.CharField(
-        validators=[UniqueValidator(queryset=Freteiro.objects.all())]
-    )
-    email = serializers.EmailField(
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
+    cpf = serializers.CharField(validators=[UniqueValidator(queryset=Freteiro.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
@@ -159,21 +151,11 @@ class FreteiroSerializer(serializers.ModelSerializer):
         if address_data:
             instance.endereco.cep = address_data.get("cep", instance.endereco.CEP)
             instance.endereco.rua = address_data.get("rua", instance.endereco.rua)
-            instance.endereco.numero = address_data.get(
-                "numero", instance.endereco.numero
-            )
-            instance.endereco.bairro = address_data.get(
-                "bairro", instance.endereco.bairro
-            )
-            instance.endereco.cidade = address_data.get(
-                "cidade", instance.endereco.cidade
-            )
-            instance.endereco.estado = address_data.get(
-                "estado", instance.endereco.estado
-            )
-            instance.endereco.complemento = address_data.get(
-                "complemento", instance.endereco.complemento
-            )
+            instance.endereco.numero = address_data.get("numero", instance.endereco.numero)
+            instance.endereco.bairro = address_data.get("bairro", instance.endereco.bairro)
+            instance.endereco.cidade = address_data.get("cidade", instance.endereco.cidade)
+            instance.endereco.estado = address_data.get("estado", instance.endereco.estado)
+            instance.endereco.complemento = address_data.get("complemento", instance.endereco.complemento)
             instance.endereco.save()
         instance.username = validated_data.get("username", instance.username)
         instance.first_name = validated_data.get("first_name", instance.first_name)
@@ -236,15 +218,9 @@ class PedidoSerializer(serializers.ModelSerializer):
     origem = EnderecoSerializer()
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
-    tipo_veiculo = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=TipoVeiculo.objects.all()
-    )
-    cliente_first_name = serializers.CharField(
-        source="cliente.first_name", read_only=True
-    )
-    cliente_last_name = serializers.CharField(
-        source="cliente.last_name", read_only=True
-    )
+    tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
+    cliente_first_name = serializers.CharField(source="cliente.first_name", read_only=True)
+    cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
     status = serializers.HiddenField(default="EN")
     cliente = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
@@ -289,18 +265,12 @@ class PedidoSerializer(serializers.ModelSerializer):
 
         try:
             if int(len(tipos_veiculos)) == 0:
-                tipos_veiculos = list(
-                    map(int, self.context["request"].data["tipo_veiculo[]"].split(","))
-                )
+                tipos_veiculos = list(map(int, self.context["request"].data["tipo_veiculo[]"].split(",")))
         except:
             serializer.is_valid()
-            raise serializers.ValidationError(
-                {"tipo_veiculo": "tipo_veiculo field is missing"}
-            )
+            raise serializers.ValidationError({"tipo_veiculo": "tipo_veiculo field is missing"})
 
-        pedido = Pedido.objects.create(
-            **validated_data, origem=origem, destino=destino, produto=produto
-        )
+        pedido = Pedido.objects.create(**validated_data, origem=origem, destino=destino, produto=produto)
         pedido.tipo_veiculo.set(tipos_veiculos)
 
         return pedido

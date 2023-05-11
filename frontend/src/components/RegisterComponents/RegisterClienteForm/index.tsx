@@ -1,7 +1,4 @@
 import { SpanYellow } from '../../../styles/globalStyles';
-import Email from '../../../assets/Svg/Email';
-import Password from '../../../assets/Svg/Password';
-import User from '../../../assets/Svg/User';
 import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,11 +10,13 @@ import AuthService from '../../../services/AuthService';
 import { toast } from 'react-toastify';
 import Button from '../../Global/Button';
 import { Input } from '../../Input';
+import { inputs } from './inputs';
 
 const RegisterClientForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
     setFocus,
@@ -50,51 +49,6 @@ const RegisterClientForm = (): JSX.Element => {
       });
   };
 
-  const inputs = [
-    {
-      type: 'email',
-      name: 'email',
-      label: 'Email',
-      placeholder: 'Seu email',
-      required: true,
-      svg: <Email />,
-    },
-    {
-      type: 'text',
-      name: 'full_name',
-      label: 'Nome completo',
-      placeholder: 'Seu nome completo',
-      required: true,
-      svg: <User />,
-    },
-    {
-      type: 'text',
-      name: 'cpf',
-      label: 'CPF',
-      placeholder: 'Seu CPF',
-      required: true,
-      svg: <User />,
-    },
-
-    {
-      type: 'password',
-      name: 'password',
-      label: 'Senha',
-      placeholder: 'Sua senha',
-      required: true,
-      svg: <Password />,
-    },
-
-    {
-      type: 'password',
-      name: 'confirmPassword',
-      label: 'Confirmação da senha',
-      placeholder: 'Confirme sua senha',
-      required: true,
-      svg: <Password />,
-    },
-  ];
-
   return (
     <ContainerPrincipal>
       <ContainerForm>
@@ -105,6 +59,13 @@ const RegisterClientForm = (): JSX.Element => {
               <Input
                 key={index}
                 {...register(`${input.name}`)}
+                onChange={
+                  input.onChange !== undefined
+                    ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                        input.onChange(e, setValue);
+                      }
+                    : undefined
+                }
                 type={input.type}
                 label={input.label}
                 placeholder={input.placeholder}

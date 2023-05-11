@@ -23,17 +23,11 @@ class Command(BaseCommand):
             "username": f"{name}@gmail.com",
             "email": f"{name}@gmail.com",
         }
-        cliente, created = Cliente.objects.update_or_create(
-            cpf=data["cpf"], defaults=data
-        )
+        cliente, created = Cliente.objects.update_or_create(cpf=data["cpf"], defaults=data)
         cliente.set_password("123456")
         cliente.save()
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Successfully created cliente '{cliente.username}' 123456"
-            )
-        )
+        self.stdout.write(self.style.SUCCESS(f"Successfully created cliente '{cliente.username}' 123456"))
         return cliente
 
     def create_freteiro(self, name, cpf):
@@ -54,15 +48,9 @@ class Command(BaseCommand):
         }
         endereco = Endereco.objects.create(**endereco_data)
 
-        freteiro, created = Freteiro.objects.update_or_create(
-            cpf=data["cpf"], defaults={**data, "endereco": endereco}
-        )
+        freteiro, created = Freteiro.objects.update_or_create(cpf=data["cpf"], defaults={**data, "endereco": endereco})
         freteiro.set_password("123456")
         freteiro.save()
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Successfully created freteiro '{freteiro.username}' 123456"
-            )
-        )
+        self.stdout.write(self.style.SUCCESS(f"Successfully created freteiro '{freteiro.username}' 123456"))
         return freteiro

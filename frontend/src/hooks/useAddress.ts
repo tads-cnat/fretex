@@ -1,12 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { type FieldValues, useForm } from "react-hook-form";
-import useApi from "./useApi";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { type FieldValues, useForm } from 'react-hook-form';
+import useApi from './useApi';
 
 const getCEPNumbers = (value: string): string => {
-  return value
-    ?.replace("-", "")
-    .replaceAll("_", "")
-}
+  return value?.replace('-', '').replaceAll('_', '');
+};
 
 export const useAddress = <T extends FieldValues>(schema: any) => {
   const {
@@ -16,30 +14,37 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     handleSubmit,
     getValues,
     setFocus,
-    formState: { errors }, clearErrors,
+    formState: { errors },
+    clearErrors,
     ...rest
   } = useForm<T>({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(schema),
-  })
-  const { getCEP } = useApi()
+  });
+  const { getCEP } = useApi();
 
   const completeAddress = (e: any): void => {
-    const { name, value } = e.target
-    if (!value) return
+    const { name, value } = e.target;
+    if (!value) return;
     const cepDestino = getCEPNumbers(value);
 
-    if (cepDestino.length !== 8) return
+    if (cepDestino.length !== 8) return;
 
-    const tipoDot = name.indexOf(".");
+    const tipoDot = name.indexOf('.');
     const tipo = name.slice(0, tipoDot);
 
-    const rua = tipo.concat(".rua");
-    const bairro = tipo.concat(".bairro");
-    const cidade = tipo.concat(".cidade");
-    const estado = tipo.concat(".estado");
+    const rua = tipo.concat('.rua');
+    const bairro = tipo.concat('.bairro');
+    const cidade = tipo.concat('.cidade');
+    const estado = tipo.concat('.estado');
 
-    if (getValues(rua) || getValues(bairro) || getValues(cidade) || getValues(estado)) return
+    if (
+      getValues(rua) ||
+      getValues(bairro) ||
+      getValues(cidade) ||
+      getValues(estado)
+    )
+      return;
 
     getCEP(cepDestino).then((res) => {
       setValue(rua, res.logradouro);
@@ -48,8 +53,8 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
       setValue(estado, res.uf);
     });
 
-    clearErrors([rua, bairro, cidade, estado])
-  }
+    clearErrors([rua, bairro, cidade, estado]);
+  };
   return {
     register,
     completeAddress,
@@ -59,6 +64,6 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     formState: { errors },
     setValue,
     getValues,
-    rest
-  }
+    rest,
+  };
 };
