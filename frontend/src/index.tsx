@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "react-query";
-import App from "./App";
-import AuthProvider from "./context/Auth/AuthProvider";
-import Modal from "react-modal";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import App from './App';
+import AuthProvider from './context/Auth/AuthProvider';
+import Modal from 'react-modal';
 // import { ReactQueryDevtools } from "react-query/devtools";
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById('root') as HTMLElement,
 );
 
 const queryClient = new QueryClient();
