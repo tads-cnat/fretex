@@ -1,4 +1,4 @@
-const ClosedEye = ():JSX.Element => {
+const ClosedEye = (): JSX.Element => {
   return (
     <svg
       width="15"
