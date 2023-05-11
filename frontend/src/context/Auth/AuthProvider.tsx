@@ -71,7 +71,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
     if (storageToken === null || storageToken === '') return;
 
     api
-      .validateToken(storageToken)
+      .validateToken()
       .then((res: IResponseValidateToken) => {
         if (res.data.user.id === res.data.user.extra_data.freteiro) {
           api
