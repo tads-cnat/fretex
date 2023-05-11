@@ -90,7 +90,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "fretex",
         "USER": "postgres",
-        "PASSWORD": "postgres",
+        "PASSWORD": os.getenv("password"),
         "HOST": "postgres",
         "PORT": "5432",
     }
