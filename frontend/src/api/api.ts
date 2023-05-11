@@ -17,6 +17,8 @@ api.interceptors.request.use(
       const token = localStorage.getItem('authToken');
       if (token) {
         config.headers.Authorization = `Token ${token}`;
+      }else{
+        delete config.headers.Authorization;
       }
       return config;
     },
