@@ -1,19 +1,23 @@
-import { useContext } from 'react';
-import SearchImg from '../../assets/images/search.svg';
 import BoxFretes from '../../components/FretesAvailable/BoxFretes';
 import Filter from '../../components/FretesAvailable/Filter';
+import { Wrapper } from '../../styles/globalStyles';
+import { ContainerBg, ContainerMain, ContainerFretes, Search } from './styles';
+import SearchImg from '../../assets/images/search.svg';
+import { useContext } from 'react';
+import { type IPedido } from '../../interfaces';
+import Layout from '../../components/Layout';
 import Loading from '../../components/Global/Loading';
+import { AuthContext } from '../../context/Auth/AuthContext';
 import LoadingPage from '../../components/Global/LoadingPage';
 import Head from '../../components/Head';
-import Layout from '../../components/Layout';
-import { AuthContext } from '../../context/Auth/AuthContext';
 import useFilterFretes from '../../hooks/useFilterFretes';
-import { type IPedido } from '../../interfaces';
-import { Wrapper } from '../../styles/globalStyles';
-import { ContainerBg, ContainerFretes, ContainerMain, Search } from './styles';
+import { useQuery } from 'react-query';
+import { objToQueryString } from '../../utils/queyString';
+import useApi from '../../hooks/useApi';
 
 const FretesAvailable = (): JSX.Element => {
   const { user } = useContext(AuthContext);
+  const { getSearchPedidos } = useApi();
   const {
     handleChange: handleChangeFilter,
     veiculos: veiculosArrayChecked,
@@ -22,6 +26,7 @@ const FretesAvailable = (): JSX.Element => {
     isLoading,
     isError
   } = useFilterFretes(user);
+
 
   if (user == null) return <LoadingPage />;
   return (
