@@ -1,5 +1,20 @@
+import django_filters
+from core.api.renders import CustomRenderer
 from django.contrib.auth.models import User
 from django.db.models import Q
+from plataform.api.serializers import (AvaliacaoUsuarioSerializer,
+                                       ClienteSerializer, EnderecoSerializer,
+                                       FreteiroSerializer, LoginSerializer,
+                                       PedidoSerializer, ProdutoSerializer,
+                                       PropostaSerializer,
+                                       RegisterClienteSerializer,
+                                       RegisterFreteiroSerializer,
+                                       TipoVeiculoSerializer,
+                                       TriggerSerializer, UserSerializer,
+                                       VeiculoSerializer)
+from plataform.models import (AvaliacaoUsuario, Cliente, Endereco, Freteiro,
+                              Log, Pedido, Produto, Proposta, TipoVeiculo,
+                              Veiculo)
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
@@ -7,36 +22,6 @@ from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
-
-from core.api.renders import CustomRenderer
-from plataform.api.serializers import (
-    AvaliacaoUsuarioSerializer,
-    ClienteSerializer,
-    EnderecoSerializer,
-    FreteiroSerializer,
-    LoginSerializer,
-    PedidoSerializer,
-    ProdutoSerializer,
-    PropostaSerializer,
-    RegisterClienteSerializer,
-    RegisterFreteiroSerializer,
-    TipoVeiculoSerializer,
-    TriggerSerializer,
-    UserSerializer,
-    VeiculoSerializer,
-)
-from plataform.models import (
-    AvaliacaoUsuario,
-    Cliente,
-    Endereco,
-    Freteiro,
-    Log,
-    Pedido,
-    Produto,
-    Proposta,
-    TipoVeiculo,
-    Veiculo,
-)
 
 
 class AuthViewSet(viewsets.GenericViewSet):
@@ -119,15 +104,24 @@ class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     renderer_classes = [CustomRenderer]
 
+class PedidoFilter(django_filters.FilterSet):
+    tipo_veiculo = django_filters.CharFilter(method='filter_tipo_veiculo')
+
+    class Meta:
+        model = Pedido
+        fields = ['status', 'cliente', 'tipo_veiculo', 'proposta_set__usuario', 'turno_coleta']
+
+    def filter_tipo_veiculo(self, queryset, name, value):
+        tipos_veiculo = value.split(',')
+        return queryset.filter(tipo_veiculo__in=tipos_veiculo)
 
 class PedidoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
-    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario", "turno_coleta"]
-
-
+    filterset_class = PedidoFilter
+    
 class PropostaPedidoViewSet(
     NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
 ):

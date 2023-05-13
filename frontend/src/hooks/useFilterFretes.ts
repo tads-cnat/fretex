@@ -22,12 +22,13 @@ const useFilterFretes = (user: any): IFilterFretes => {
   const [url, setUrl] = useState('');
   const { getSearchPedidos } = useApi();
   const cliente = useQueryClient();
+  
+  const objeto = {
+    tipo_veiculo: veiculos,
+    turno_coleta: coleta,
+  };
 
   useEffect(() => {
-    const objeto = {
-      tipo_veiculo: veiculos,
-      turno_coleta: coleta,
-    };
     setUrl(objToQueryStringMelhorada(objeto));
   }, [veiculos, coleta]);
 
