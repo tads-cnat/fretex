@@ -26,16 +26,17 @@ export const objToQueryString = (obj: any): string => {
 export const objToQueryStringMelhorada = (obj: any): string => {
   const queryString = Object.keys(obj)
     .map((key) => {
-      if (Array.isArray(obj[key]) && (obj[key].length !== 0)) {
+      if (Array.isArray(obj[key]) && obj[key].length !== 0) {
         const chaveRepetida = obj[key]
           .map((value) => `${encodeURIComponent(value)}`)
           .join(',');
         return `${key}=${chaveRepetida}`;
-      } else {
+      } else if (obj[key].length !== 0) {
         return `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`;
       }
     })
     .join('&');
+
   if (queryString.startsWith('&')) return queryString.slice(1);
   if (queryString.endsWith('&')) return queryString.slice(0, -1);
   return queryString;

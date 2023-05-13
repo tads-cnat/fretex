@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   objToQueryString,
   objToQueryStringMelhorada,
@@ -22,11 +22,19 @@ const useFilterFretes = (user: any): IFilterFretes => {
   const [url, setUrl] = useState('');
   const { getSearchPedidos } = useApi();
   const cliente = useQueryClient();
-  
+
   const objeto = {
     tipo_veiculo: veiculos,
     turno_coleta: coleta,
   };
+
+  const query = useMemo(
+    () =>
+      objToQueryString({
+        status: 'EN',
+      }),
+    [],
+  );
 
   useEffect(() => {
     setUrl(objToQueryStringMelhorada(objeto));
@@ -35,10 +43,6 @@ const useFilterFretes = (user: any): IFilterFretes => {
   useEffect(() => {
     mutate(url);
   }, [url]);
-
-  const query = objToQueryString({
-    status: 'EN',
-  });
 
   const {
     data: pedidos,
