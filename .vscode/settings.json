@@ -1,5 +1,6 @@
 {
   "python.formatting.provider": "black",
+  "black-formatter.args": ["--config", "backend/pyproject.toml"],
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,

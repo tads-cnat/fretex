@@ -25,8 +25,6 @@ pedido_router.register(
     basename="proposta-freteiro",
     parents_query_lookups=["pedido"],
 )
-router.register(
-    r"avaliacao-usuario", views.AvaliacaoUsuarioViewSet, basename="avaliacao-usuario"
-)
+router.register(r"avaliacao-usuario", views.AvaliacaoUsuarioViewSet, basename="avaliacao-usuario")
 router.register(r"usuarios", views.UserViewSet, basename="user")
 router.register(r"trigger", views.TriggerViewSet, basename="trigger")

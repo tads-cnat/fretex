@@ -107,17 +107,13 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
         "rest_framework.permissions.IsAdminUser",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication"
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.TokenAuthentication"],
 }
 
 # SWAGGER
 
 SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
-    },
+    "SECURITY_DEFINITIONS": {"api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}},
 }
 
 # Password validation
@@ -137,12 +133,10 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-# AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend'] # VALIDAR COM EMAIL
 
 # CORS
 
 CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

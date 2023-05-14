@@ -20,14 +20,10 @@ class Endereco(models.Model):
 
 
 class Freteiro(User):
-    url_foto = models.ImageField(
-        upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True
-    )
+    url_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
     endereco = models.OneToOneField(Endereco, on_delete=models.CASCADE)
-    capa_foto = models.ImageField(
-        upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True
-    )
+    capa_foto = models.ImageField(upload_to="usuarios/freteiro/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
         ordering = ["-id"]
@@ -37,13 +33,9 @@ class Freteiro(User):
 
 
 class Cliente(User):
-    url_foto = models.ImageField(
-        upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True
-    )
+    url_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
     cpf = models.CharField(max_length=15)
-    capa_foto = models.ImageField(
-        upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True
-    )
+    capa_foto = models.ImageField(upload_to="usuarios/cliente/%Y/%m/%d/", blank=True, null=True)
 
     class Meta:
         ordering = ["-id"]
@@ -74,7 +66,7 @@ class TipoVeiculo(models.Model):
 
 
 class Pedido(models.Model):
-    STATUS = [
+    STATUS_CHOICES = [
         ("CA", "Cancelado"),
         ("EN", "Em negociação"),
         ("AG", "Aguardando coleta"),
@@ -84,13 +76,9 @@ class Pedido(models.Model):
     TURNO = [("TA", "Tarde"), ("MA", "Manhã"), ("NO", "Noite")]
 
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    origem = models.ForeignKey(
-        Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_origem"
-    )
-    destino = models.ForeignKey(
-        Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_destino"
-    )
-    status = models.CharField(max_length=2, choices=STATUS, default="EN")
+    origem = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_origem")
+    destino = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="pedido_endereco_destino")
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="EN")
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_veiculo = models.ManyToManyField(TipoVeiculo)
     observacao = models.CharField(max_length=300, blank=True, null=True)
@@ -122,9 +110,7 @@ class Veiculo(models.Model):
 
 class Proposta(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(
-        Pedido, on_delete=models.CASCADE, related_name="proposta_set"
-    )
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="proposta_set")
     veiculo = models.ForeignKey(Veiculo, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     data_criacao = models.DateTimeField(auto_now_add=True)
@@ -132,9 +118,7 @@ class Proposta(models.Model):
     is_contraproposta = models.BooleanField(default=False)
     is_esperandoFreteiro = models.BooleanField(default=True)
     is_esperandoCliente = models.BooleanField(default=False)
-    contraproposta = models.ForeignKey(
-        "self", on_delete=models.CASCADE, null=True, blank=True
-    )
+    contraproposta = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     ehNegada = models.BooleanField(default=False)
 
     class Meta:
@@ -145,12 +129,8 @@ class Proposta(models.Model):
 
 
 class AvaliacaoUsuario(models.Model):
-    avaliador = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="avaliador"
-    )
-    avaliado = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="avaliado"
-    )
+    avaliador = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliador")
+    avaliado = models.ForeignKey(User, on_delete=models.CASCADE, related_name="avaliado")
     nota = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
     observacao = models.TextField()
 
