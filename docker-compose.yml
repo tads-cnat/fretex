@@ -1,23 +1,19 @@
 version: "3"
 services:
-  node:
-    container_name: fretex_node
+  frontend:
+    container_name: fretex_frontend_dev
     build:
       context: .
       dockerfile: docker/Dockerfile.frontend.dev
-    working_dir: /code/frontend
-    command: bash -c "yarn start"
     ports:
       - "3000:3000"
     volumes:
       - .:/code
-  django:
-    container_name: fretex_django
+  backend:
+    container_name: fretex_backend_dev
     build:
       context: .
       dockerfile: docker/Dockerfile.django.dev
-    working_dir: /code/backend
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     networks:
       - default
     ports:
@@ -25,9 +21,9 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - node
+      - postgres
   postgres:
-    container_name: fretex_postgres
+    container_name: fretex_postgres_dev
     image: postgres:13
     networks:
       - default

@@ -5,7 +5,7 @@ export const cepApi = axios.create({
 });
 
 export const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: `http://${window.location.host}/api`,
   headers: {
     'Content-Type': 'multipart/form-data',
   },

@@ -1,5 +1,3 @@
 FROM node:16
 WORKDIR /app/frontend
-COPY frontend /app
-RUN npm install -g .
-CMD ["npm", "start"]
+CMD npm i; yarn start

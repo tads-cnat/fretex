@@ -8,7 +8,6 @@ services:
   backend:
     container_name: fretex_backend
     image: arthurmed/fretex-backend
-    command: bash -c "python manage.py migrate && gunicorn core.wsgi:application --config gunicorn_config.py"
     networks:
       - default
     ports:
