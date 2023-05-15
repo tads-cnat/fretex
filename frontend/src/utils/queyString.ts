@@ -31,8 +31,6 @@ export const objToQueryStringMelhorada = (obj: any): string => {
           .map((value) => `${encodeURIComponent(value)}`)
           .join(',');
         return `${key}=${chaveRepetida}`;
-      } else if (obj[key].length !== 0) {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`;
       }
     })
     .join('&');
