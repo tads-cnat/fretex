@@ -1,6 +1,7 @@
-import { type IPedido, type IVeiculo } from '../interfaces';
-import { type IRegisterCliente } from '../interfaces/IRegisterCliente';
-import { api, cepApi } from '../services/api';
+import { type IPedido, type IVeiculo } from "../interfaces"
+import { type IRegisterCliente } from "../interfaces/IRegisterCliente"
+import { api, cepApi } from "../api/api"
+
 
 // GET com ou sem Slash
 // POST APENAS COM SLASH

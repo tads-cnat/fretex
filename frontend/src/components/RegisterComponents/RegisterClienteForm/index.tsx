@@ -6,7 +6,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
 import { type IClienteFormData } from '../../../interfaces';
-import useApi from '../../../hooks/useApi';
+import AuthService from '../../../services/AuthService';
 import { toast } from 'react-toastify';
 import Button from '../../Global/Button';
 import { Input } from '../../Input';
@@ -25,7 +25,6 @@ const RegisterClientForm = (): JSX.Element => {
     resolver: yupResolver(schemaCliente),
   });
 
-  const { registerCliente } = useApi();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const RegisterClientForm = (): JSX.Element => {
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
     const { email, full_name, cpf, password } = data;
-    registerCliente({ email, full_name, cpf, password })
+    AuthService.registerCliente({ email, full_name, cpf, password })
       .then(() => {
         toast.success('Cliente cadastrado com sucesso!');
         navigate('/login');

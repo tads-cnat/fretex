@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { type IFreteiroFormData } from '../interfaces';
-import useApi from './useApi';
+import AuthService from '../services/AuthService';
 import { type SubmitHandler } from 'react-hook-form';
 
 interface Props {
@@ -13,7 +13,6 @@ interface IUseFreteiroForm {
 }
 
 export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
-  const { registerFreteiro } = useApi();
   const [error, setError] = useState('');
 
   const onSubmit: SubmitHandler<IFreteiroFormData> = (data) => {
@@ -31,7 +30,7 @@ export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
 
-    registerFreteiro(formData)
+    AuthService.registerFreteiro(formData)
       .then(onSuccess)
       .catch((err) => {
         const errors = err.response.data.errors;
