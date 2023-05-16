@@ -1,3 +1,4 @@
 FROM node:16
-WORKDIR /app/frontend
-CMD npm i; yarn start
+WORKDIR /code/frontend
+COPY . /code
+CMD yarn; yarn start

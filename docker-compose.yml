@@ -13,7 +13,7 @@ services:
     container_name: fretex_backend_dev
     build:
       context: .
-      dockerfile: docker/Dockerfile.django.dev
+      dockerfile: docker/Dockerfile.backend.dev
     networks:
       - default
     ports:
