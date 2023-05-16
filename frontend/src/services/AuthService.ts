@@ -33,6 +33,11 @@ class AuthService{
         const response = await api.get('/auth/user/');
         return response.data;
     };
+
+    async getTypeUser(id: Number){
+        const resoponse = await api.get(`usuarios/${id}/`);
+        return resoponse.data;
+    }
 }
 
 export default new AuthService();

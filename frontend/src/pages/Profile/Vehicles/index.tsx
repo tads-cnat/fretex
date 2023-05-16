@@ -11,7 +11,8 @@ import {
 } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import useApi from '../../../hooks/useApi';
+import VeiculoService from '../../../services/VeiculoService';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { type IVeiculo } from '../../../interfaces';
 import { useContextProfile } from '..';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,7 +29,6 @@ interface ITiposDeVeiculo {
 }
 
 const Vehicles = (): JSX.Element => {
-  const { getVeiculosForFreteiro } = useApi();
   const { id } = useParams();
   const { value, toggle, setAsFalse, setAsTrue } = useToggle();
   const {
@@ -42,13 +42,12 @@ const Vehicles = (): JSX.Element => {
   const [imagemPreview, setImagemPreview] = useState<string | undefined>();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>();
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
-  const { registerVeiculo, tiposVeiculo } = useApi();
   const { user, handleSelectTab } = useContextProfile();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     handleSelectTab(1);
-    getVeiculosForFreteiro(Number(id))
+    VeiculoService.getVeiculosForFreteiro(Number(id))
       .then((res) => {
         setVeiculos(res.data);
       })
@@ -59,7 +58,7 @@ const Vehicles = (): JSX.Element => {
         setLoading(false);
       });
 
-    tiposVeiculo()
+      TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
       })
@@ -78,9 +77,9 @@ const Vehicles = (): JSX.Element => {
     formData.append('freteiro', user.id);
 
     try {
-      await registerVeiculo(formData);
+      await VeiculoService.post(formData);
       setAsFalse();
-      const res = await getVeiculosForFreteiro(Number(id));
+      const res = await VeiculoService.getVeiculosForFreteiro(Number(id));
       toast.success('Veículo cadastrado com sucesso!');
       setVeiculos(res.data);
     } catch (err) {

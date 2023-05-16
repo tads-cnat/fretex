@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import Email from '../../assets/Svg/Email';
 import Password from '../../assets/Svg/Password';
-import ClosedEye from '../../assets/Svg/ClosedEye';
-import Eye from '../../assets/Svg/Eye';
 import {
   ContainerPrincipal,
   ContainerForm,
@@ -16,13 +14,11 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import { useToggle } from '../../hooks/useToggle';
 import Head from '../../components/Head';
 import Button from '../../components/Global/Button';
 import { Input } from '../../components/Input';
 
 const Login = (): JSX.Element => {
-  const { value: password, toggle: togglePassword } = useToggle();
   const [error, setError] = useState('');
   const {
     register,
@@ -34,11 +30,6 @@ const Login = (): JSX.Element => {
   });
   const { signin } = useContext(AuthContext);
   const Navigate = useNavigate();
-
-  const handlePassword = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    togglePassword();
-  };
 
   useEffect(() => {
     setFocus('email');
