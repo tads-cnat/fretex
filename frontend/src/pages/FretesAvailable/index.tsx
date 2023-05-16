@@ -3,43 +3,30 @@ import Filter from '../../components/FretesAvailable/Filter';
 import { Wrapper } from '../../styles/globalStyles';
 import { ContainerBg, ContainerMain, ContainerFretes, Search } from './styles';
 import SearchImg from '../../assets/images/search.svg';
-import useApi from '../../hooks/useApi';
 import { useContext } from 'react';
 import { type IPedido } from '../../interfaces';
 import Layout from '../../components/Layout';
-import { useQuery } from 'react-query';
 import Loading from '../../components/Global/Loading';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import LoadingPage from '../../components/Global/LoadingPage';
-import { objToQueryString } from '../../utils/queyString';
 import Head from '../../components/Head';
+import useFilterFretes from '../../hooks/useFilterFretes';
+import { useQuery } from 'react-query';
+import { objToQueryString } from '../../utils/queyString';
+import useApi from '../../hooks/useApi';
 
 const FretesAvailable = (): JSX.Element => {
   const { user } = useContext(AuthContext);
   const { getSearchPedidos } = useApi();
-  // const [inputText, setInputText] = useState();
-
-  const query = objToQueryString({
-    status: 'EN',
-  });
-
   const {
-    data: pedidos,
+    handleChange: handleChangeFilter,
+    veiculos: veiculosArrayChecked,
+    coleta: coletaArrayChecked,
+    pedidos,
     isLoading,
-    isError,
-  } = useQuery(
-    'pedidosDisponiveis',
-    async () => await getSearchPedidos(query),
-    {
-      enabled: !(user == null) && !!query,
-    },
-  );
-  /*
-  const { data, status } = useQuery(['search', inputText], () => getPedidos(), {
-    refetchOnWindowFocus: false
-  });
-*/
-  const handleChange = (e: any): void => {};
+    isError
+  } = useFilterFretes(user);
+
 
   if (user == null) return <LoadingPage />;
   return (
@@ -51,16 +38,14 @@ const FretesAvailable = (): JSX.Element => {
             <h1>Fretes Disponíveis</h1>
             <Search>
               <img src={SearchImg} alt="" />
-              <input
-                type="text"
-                placeholder="Material"
-                onChange={(e) => {
-                  handleChange(e.target.value);
-                }}
-              />
+              <input type="text" placeholder="Material" />
             </Search>
             <ContainerMain>
-              <Filter />
+              <Filter
+                handleChange={handleChangeFilter}
+                veiculos={veiculosArrayChecked}
+                coleta={coletaArrayChecked}
+              />
               <ContainerFretes>
                 {isError && <p>Houve um erro, tente novamente!</p>}
                 {!isLoading && pedidos.data.length === 0 && (

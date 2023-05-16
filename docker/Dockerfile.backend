@@ -3,4 +3,4 @@ WORKDIR /code/backend
 COPY backend .
 RUN pip install -r requirements.txt
 EXPOSE 8000
-CMD ["gunicorn", "core.wsgi:application", "--config", "gunicorn_config.py"]
+CMD python manage.py migrate; gunicorn core.wsgi:application --config gunicorn_config.py
