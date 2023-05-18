@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import useApi from '../../hooks/useApi';
 import AuthService from '../../services/AuthService';
 import FreteiroService from '../../services/FreteiroService';
 import ClienteService from '../../services/ClienteService';
@@ -16,7 +15,6 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [typeUser, setTypeUser] = useState<number>(0);
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const client = useQueryClient();
-  const api = useApi();
 
   const signin = (
     email: string,
