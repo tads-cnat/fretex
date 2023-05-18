@@ -20,7 +20,7 @@ import {
 } from '../../../interfaces';
 import { Seta } from '../../RegisterFreteComponents/Form/styles';
 import NegociationComponent from '../NegociationComponent';
-import useApi from '../../../hooks/useApi';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { useQuery } from 'react-query';
 import Loading from '../../Global/Loading';
 import { formatDate } from '../../../utils/formatDate';
@@ -52,11 +52,10 @@ const FreteDetailComponent = ({
   propostas,
 }: IFreteDetail): JSX.Element => {
   const navigate = useNavigate();
-  const { tiposVeiculo } = useApi();
 
   const { data: tipoVeiculos, isLoading } = useQuery(
     ['tiposVeiculo'],
-    tiposVeiculo,
+    TipoVeiculoService.getAll,
   );
   const filteredArray =
     !isLoading &&

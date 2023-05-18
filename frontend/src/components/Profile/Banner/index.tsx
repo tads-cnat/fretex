@@ -3,7 +3,8 @@ import { Image, Container, Form, Preview } from './styles';
 import { ReactComponent as Pencil } from '../../../assets/images/pencil.svg';
 import Modal from '../../Global/Modal';
 import { useToggle } from '../../../hooks/useToggle';
-import useApi from '../../../hooks/useApi';
+import ClienteService from '../../../services/ClienteService';
+import FreteiroService from '../../../services/FreteiroService';
 import { useParams } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
@@ -20,7 +21,6 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const [imageBanner, setImageBanner] = useState();
   const [capaFoto, setCapaFoto] = useState();
-  const { updateFreteiro, updateCliente } = useApi();
 
   const handleClick = (e: any): void => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
     });
 
     if (isFreteiro(user)) {
-      updateFreteiro(Number(id), formData)
+      FreteiroService.patch(Number(id), formData)
         .then((res) => {
           setImageBanner(res.data.capa_foto);
           toggle();
@@ -42,7 +42,7 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
           console.log(res.response.data);
         });
     } else {
-      updateCliente(Number(id), formData)
+      ClienteService.patch(Number(id), formData)
         .then((res) => {
           setImageBanner(res.data.capa_foto);
           toggle();

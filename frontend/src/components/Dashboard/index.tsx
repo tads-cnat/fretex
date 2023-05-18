@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import { useToggle } from '../../hooks/useToggle';
 import Loading from '../Global/Loading';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import useApi from '../../hooks/useApi';
+import PedidoService from '../../services/PedidoService';
 import { useMutation, useQueryClient } from 'react-query';
 import { formatDate } from '../../utils/formatDate';
 import { toast } from 'react-toastify';
@@ -39,7 +39,6 @@ const BoxDashboard = ({
 }: IBoxDashBoard): JSX.Element => {
   const { toggle, value } = useToggle(initialToggleValue);
   const { user } = useContext(AuthContext);
-  const { deletePedido } = useApi();
   const client = useQueryClient();
 
   const [color, setColor] = useState('');
@@ -68,7 +67,7 @@ const BoxDashboard = ({
 
   const deletePedidoMutation = useMutation(
     'pedidosEN',
-    async (id: number) => await deletePedido(id),
+    async (id: number) => await PedidoService.delete(id),
     {
       onSuccess: () => {
         client

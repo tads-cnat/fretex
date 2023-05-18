@@ -15,7 +15,8 @@ import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
 import { type IPedidoFormData } from '../../../interfaces';
 import { useNavigate } from 'react-router-dom';
-import useApi from '../../../hooks/useApi';
+import PedidoService from '../../../services/PedidoService';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { useEffect, useState } from 'react';
 import { Turnos } from './turnos';
 import { useAddress } from '../../../hooks/useAddress';
@@ -99,7 +100,6 @@ const isErrorDateRange = (
 const Index = (): JSX.Element => {
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
-  const { registerPedido, tiposVeiculo } = useApi();
   const {
     register,
     completeAddress,
@@ -161,7 +161,7 @@ const Index = (): JSX.Element => {
     for (const pair of formData.entries()) {
       console.log(`${pair[0]}, ${pair[1]}`);
     }
-    registerPedido(formData)
+    PedidoService.post(formData)
       .then(() => {
         toast.success('Pedido cadastrado com sucesso!');
         navigate('/dashboard');
@@ -172,7 +172,7 @@ const Index = (): JSX.Element => {
   };
 
   useEffect(() => {
-    tiposVeiculo()
+    TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
       })

@@ -9,7 +9,10 @@ import {
   type IFreteiro,
   type IProposta,
 } from '../../../interfaces';
-import useApi from '../../../hooks/useApi';
+import PropostaService from '../../../services/PropostaService';
+import ClienteService from '../../../services/ClienteService';
+import FreteiroService from '../../../services/FreteiroService';
+import AuthService from '../../../services/AuthService';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ModalContraproposta from '../ModalContraproposta';
 import { useToggle } from '../../../hooks/useToggle';
@@ -17,6 +20,7 @@ import { toast } from 'react-toastify';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import Loading from '../../Global/Loading';
 import { type MouseEvent } from 'react';
+import PedidoService from '../../../services/PedidoService';
 
 interface IContentProposta {
   type: string;
@@ -39,13 +43,11 @@ const ContentProposta = ({
   actualUser,
 }: IContentProposta): JSX.Element => {
   const { toggle, value } = useToggle();
-  const { updateProposta, updatePedido, getFreteiro, getCliente, getTypeUser } =
-    useApi();
   const client = useQueryClient();
   
   const updatePropostaMutation = useMutation(
     ['updateProposta', proposta.id],
-    async ({ id, data }: IUpdate) => await updateProposta(id, data),
+    async ({ id, data }: IUpdate) => await PropostaService.patch(id, data),
     {
       onSuccess: async () => {
         await client.refetchQueries('propostasForPedido');
@@ -55,7 +57,7 @@ const ContentProposta = ({
 
   const updatePedidoMutation = useMutation(
     'updateProposta',
-    async ({ id, data }: IUpdate) => await updatePedido(id, data),
+    async ({ id, data }: IUpdate) => await PedidoService.patch(id, data),
     {
       onSuccess: async () => {
         await client.refetchQueries(['pedidosEN', 'pedidosAG']);
@@ -106,7 +108,7 @@ const ContentProposta = ({
 
   const { data: typeUser, isLoading: isLoadingTypeUser } = useQuery(
     ['TypeOfUser', proposta.id],
-    async () => await getTypeUser(proposta.usuario),
+    async () => await AuthService.getTypeUser(proposta.usuario),
     {
       enabled: !!proposta?.usuario,
     },
@@ -115,7 +117,7 @@ const ContentProposta = ({
 
   const { data: freteiro, isLoading: isLoadingFreteiro } = useQuery(
     ['UserOfProposta', proposta.usuario],
-    async () => await getFreteiro(proposta.usuario),
+    async () => await FreteiroService.get(proposta.usuario),
     {
       enabled:
         !!proposta?.usuario &&
@@ -126,7 +128,7 @@ const ContentProposta = ({
 
   const { data: cliente, isLoading: isLoadingCliente } = useQuery(
     ['UserOfProposta', proposta.usuario],
-    async () => await getCliente(proposta.usuario),
+    async () => await ClienteService.get(proposta.usuario),
     {
       enabled:
         !!proposta?.usuario &&

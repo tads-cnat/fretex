@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { type FieldValues, useForm } from 'react-hook-form';
-import useApi from './useApi';
+import { getCep } from '../services/CepService';
 
 const getCEPNumbers = (value: string): string => {
   return value?.replace('-', '').replaceAll('_', '');
@@ -21,7 +21,6 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
-  const { getCEP } = useApi();
 
   const completeAddress = (e: any): void => {
     const { name, value } = e.target;
@@ -46,7 +45,7 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     )
       return;
 
-    getCEP(cepDestino).then((res) => {
+    getCep(cepDestino).then((res) => {
       setValue(rua, res.logradouro);
       setValue(bairro, res.bairro);
       setValue(cidade, res.localidade);

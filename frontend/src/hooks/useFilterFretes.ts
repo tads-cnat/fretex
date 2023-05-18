@@ -4,7 +4,7 @@ import {
   objToQueryStringMelhorada,
 } from '../utils/queyString';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useApi from './useApi';
+import PedidoService from '../services/PedidoService';
 
 interface IFilterFretes {
   handleChange: (e: any, tipo: any) => void;
@@ -20,7 +20,6 @@ const useFilterFretes = (user: any): IFilterFretes => {
   const [coleta, setColeta] = useState([]);
   const [veiculos, setVeiculos] = useState([]);
   const [url, setUrl] = useState('');
-  const { getSearchPedidos } = useApi();
   const cliente = useQueryClient();
 
   const objeto = {
@@ -51,7 +50,7 @@ const useFilterFretes = (user: any): IFilterFretes => {
     refetch,
   } = useQuery(
     'pedidosDisponiveis',
-    async () => await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
+    async () => await PedidoService.getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
       enabled: !(user == null),
     },
@@ -60,7 +59,7 @@ const useFilterFretes = (user: any): IFilterFretes => {
   const { mutate } = useMutation(
     'PedidosDisponiveis',
     async (url: string) =>
-      await getSearchPedidos(url !== '' ? `${query}&${url}` : query),
+      await PedidoService.getSearchPedidos(url !== '' ? `${query}&${url}` : query),
     {
       onSuccess: async () => {
         await cliente.invalidateQueries('pedidosDisponiveis');

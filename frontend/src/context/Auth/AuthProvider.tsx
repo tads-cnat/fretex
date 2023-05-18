@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import useApi from '../../hooks/useApi';
+import AuthService from '../../services/AuthService';
+import FreteiroService from '../../services/FreteiroService';
+import ClienteService from '../../services/ClienteService';
 import { type ICliente, type IFreteiro } from '../../interfaces';
 import { AuthContext } from './AuthContext';
 import { toast } from 'react-toastify';
@@ -23,14 +26,14 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   ): void => {
     setError('');
     setIsLoadingUser(true);
-    api
-      .signin(email, password)
+    AuthService
+      .login({email, password})
       .then((res: IResponseSignin) => {
         const { data } = res;
         setToken(data.token);
         if (data.user.id === data.user.extra_data.freteiro) {
-          api
-            .getFreteiro(data.user.id)
+          FreteiroService
+            .get(data.user.id)
             .then((resFreteiro) => {
               setIsLoadingUser(false);
               setUser(resFreteiro.data);
@@ -44,8 +47,8 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
               );
             });
         } else {
-          api
-            .getCliente(data.user.id)
+          ClienteService
+            .get(data.user.id)
             .then((resCliente) => {
               setIsLoadingUser(false);
               setUser(resCliente.data);
@@ -70,12 +73,12 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
     const storageToken = localStorage.getItem('authToken');
     if (storageToken === null || storageToken === '') return;
 
-    api
-      .validateToken()
+    AuthService
+      .ValidateToken()
       .then((res: IResponseValidateToken) => {
         if (res.data.user.id === res.data.user.extra_data.freteiro) {
-          api
-            .getFreteiro(res.data.user.id)
+          FreteiroService
+            .get(res.data.user.id)
             .then((res) => {
               setUser(res.data);
               setTypeUser(1);
@@ -84,8 +87,8 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
               setToken('');
             });
         } else {
-          api
-            .getCliente(res.data.user.id)
+          ClienteService
+            .get(res.data.user.id)
             .then((res) => {
               setUser(res.data);
               setTypeUser(2);
@@ -106,7 +109,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
 
   const signout = (Navigate: NavigateFunction): void => {
     client.getQueryCache().clear();
-    api
+    AuthService
       .logout()
       .then(() => {
         setToken('');

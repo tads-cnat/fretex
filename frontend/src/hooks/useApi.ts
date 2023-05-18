@@ -1,6 +1,6 @@
 import { type IPedido, type IVeiculo } from "../interfaces"
 import { type IRegisterCliente } from "../interfaces/IRegisterCliente"
-import { api, cepApi } from "../api/api"
+import { api } from "../api/api"
 
 
 // GET com ou sem Slash
@@ -114,10 +114,6 @@ export const useApi = () => ({
   },
   updateCliente: async (id: number, data: FormData) => {
     const response = await api.patch(`/cliente/${id}/`, data);
-    return response.data;
-  },
-  getCEP: async (cep: string) => {
-    const response = await cepApi.get(`/${cep}/json/`);
     return response.data;
   },
   deletePedido: async (id: number) => {

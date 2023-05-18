@@ -7,7 +7,7 @@ import {
   type IFreteiro,
   type IProposta,
 } from '../../../interfaces';
-import useApi from '../../../hooks/useApi';
+import FreteiroService from '../../../services/FreteiroService';
 import { useQuery } from 'react-query';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import Loading from '../../Global/Loading';
@@ -33,7 +33,6 @@ const CardProposta = ({
     bg: '',
   });
   const [type, setType] = useState('');
-  const { getFreteiro } = useApi();
 
   let propostasFiltradas: IProposta[] = [];
   propostasFiltradas = propostas.filter(
@@ -78,7 +77,7 @@ const CardProposta = ({
   const { data: userOwnerProposta, isLoading: isLoadingUserOwnerProposta } =
     useQuery(
       ['propostasOwner', OwnerPropostasId],
-      async () => await getFreteiro(OwnerPropostasId),
+      async () => await FreteiroService.get(OwnerPropostasId),
       {
         enabled: !isNaN(OwnerPropostasId),
       },

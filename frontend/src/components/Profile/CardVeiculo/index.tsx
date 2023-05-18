@@ -3,7 +3,7 @@ import { type IVeiculo } from '../../../interfaces';
 import { ReactComponent as Gota } from '../../../assets/images/gota_colorir.svg';
 import { ReactComponent as Info } from '../../../assets/images/InfoCircle.svg';
 import Placa from '../../../assets/images/placaCarro.png';
-import useApi from '../../../hooks/useApi';
+import VeiculoService from '../../../services/VeiculoService';
 import { useEffect, useState } from 'react';
 
 interface ITiposDeVeiculo {
@@ -12,11 +12,10 @@ interface ITiposDeVeiculo {
 }
 
 const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }): JSX.Element => {
-  const { getVeiculoForId } = useApi();
   const [TipoVeiculo, setTipoVeiculo] = useState<ITiposDeVeiculo>();
 
   useEffect(() => {
-    getVeiculoForId(veiculos.tipo_veiculo)
+    VeiculoService.get(veiculos.tipo_veiculo)
       .then((res) => {
         setTipoVeiculo(res.data[0]);
       })
