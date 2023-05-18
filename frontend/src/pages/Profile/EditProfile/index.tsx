@@ -81,6 +81,8 @@ const EditProfile = (): JSX.Element => {
       toast.info('Perfil atualizado com sucesso!');
       setUser(res.data);
       setActualUser(res.data);
+    }).catch((res) => {
+      toast.error('Erro ao atualizar perfil!');
     });
   };
 

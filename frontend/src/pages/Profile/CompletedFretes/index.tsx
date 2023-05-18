@@ -4,6 +4,7 @@ import BoxFretes from '../../../components/FretesAvailable/BoxFretes';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { type IPedido } from '../../../interfaces';
 import PedidoService from '../../../services/PedidoService';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +31,8 @@ const CompletedFretes = (): JSX.Element => {
             pedido.cliente === user?.id && pedido.status === 'CO',
         ),
       );
+    }).catch(() => {
+      toast.error('Erro ao carregar fretes');
     });
   }, []);
 

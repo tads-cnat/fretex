@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { type FieldValues, useForm } from 'react-hook-form';
 import { getCep } from '../services/CepService';
+import { toast } from 'react-toastify';
 
 const getCEPNumbers = (value: string): string => {
   return value?.replace('-', '').replaceAll('_', '');
@@ -50,6 +51,8 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
       setValue(bairro, res.bairro);
       setValue(cidade, res.localidade);
       setValue(estado, res.uf);
+    }).catch(() => {
+      toast.error('Erro ao Verificar Código de Cep');
     });
 
     clearErrors([rua, bairro, cidade, estado]);
