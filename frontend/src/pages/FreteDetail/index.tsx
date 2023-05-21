@@ -23,34 +23,45 @@ const FreteDetail = (): JSX.Element => {
     ['pedido', id],
     async () => await PedidoService.get(Number(id)),
     {
-      enabled: !!id,
+      enabled: id !== undefined,
     },
   );
-
+console.log(pedido?.data)
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     ['pedidoCreatedBy', id],
-    async () => await ClienteService.get(pedido?.data?.cliente),
+    async () => await ClienteService.get(pedido.data.cliente),
     {
-      enabled: !!pedido?.data?.cliente,
+      enabled: pedido?.data?.cliente !== undefined || pedido?.data?.cliente !== null,
     },
   );
+/*
+ const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
+    ['pedidoCreatedBy', id],
+    async () => await getCliente(pedido?.data?.cliente),
+  );
 
+*/
   const queryStringPropostas =
-    pedido?.data?.id &&
-    user != null &&
-    objToQueryString({
-      pedido: pedido?.data?.id,
-    });
+    pedido?.data?.id !== undefined && user != null
+      ? objToQueryString({
+          pedido: pedido?.data?.id,
+        })
+      : '';
 
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     ['propostasForPedido', id],
-    async () => await PropostaService.getPropostasForPedido(queryStringPropostas),
+    async () =>
+      await PropostaService.getPropostasForPedido(queryStringPropostas),
     {
-      enabled: !(user == null) && !!pedido?.data && !!queryStringPropostas,
+      enabled:
+        !(user == null) &&
+        pedido?.data !== undefined &&
+        queryStringPropostas !== '',
     },
   );
-
+//  console.log(pedido, userPedido, propostas);
   if (user == null) return <Login />;
+  if (propostas == null) return <LoadingPage />;
   if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
   return (
     <>
@@ -62,10 +73,10 @@ const FreteDetail = (): JSX.Element => {
               !isLoadingPedido &&
               !isLoadingPropostas && (
                 <FreteDetailComponent
-                  pedido={pedido.data}
+                  pedido={pedido?.data}
                   clientePedido={userPedido?.data}
                   actualUser={user}
-                  propostas={propostas.data}
+                  propostas={propostas?.data}
                 />
               )}
           </Wrapper>
