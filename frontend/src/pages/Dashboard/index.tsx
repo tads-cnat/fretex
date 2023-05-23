@@ -117,8 +117,7 @@ const Dashboard = (): JSX.Element => {
   } = useQuery('pedidosCA', async () => await PedidoService.getSearchPedidos(queryStringCA), {
     enabled: !!user?.id,
   });
-
-  if (user == null) return <LoadingPage />;
+  
   return (
     <>
       <Head title="Dashboard" />

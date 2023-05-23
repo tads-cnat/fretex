@@ -92,7 +92,15 @@ const RoutesApp = (): JSX.Element => {
           }
         />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <RequireAuth level={3}> 
+              <Dashboard />
+            </RequireAuth>
+          } 
+        />
+      
       </Routes>
     </BrowserRouter>
   );
