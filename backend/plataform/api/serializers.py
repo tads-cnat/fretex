@@ -1,9 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import transaction
-from rest_framework import serializers
-from rest_framework.exceptions import MethodNotAllowed
-from rest_framework.validators import UniqueValidator
-
 from plataform.models import (
     AvaliacaoUsuario,
     Cliente,
@@ -16,6 +12,9 @@ from plataform.models import (
     TipoVeiculo,
     Veiculo,
 )
+from rest_framework import serializers
+from rest_framework.exceptions import MethodNotAllowed
+from rest_framework.validators import UniqueValidator
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -221,12 +220,11 @@ class PedidoSerializer(serializers.ModelSerializer):
     tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
     cliente_first_name = serializers.CharField(source="cliente.first_name", read_only=True)
     cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
-    status = serializers.HiddenField(default="EN")
-    cliente = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-    def validate(self, data):
+    def to_internal_value(self, data):
+        data["status"] = "EN"
         data["cliente"] = self.context["request"].user.cliente
-        return super().validate(data)
+        return super().to_internal_value(data)
 
     class Meta:
         model = Pedido
@@ -251,7 +249,6 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
-        serializer = PedidoSerializer(data=self.context["request"].data)
         origem = validated_data.pop("origem")
         origem = Endereco.objects.create(**origem)
 
