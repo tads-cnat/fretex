@@ -1,10 +1,9 @@
 import { Wrapper } from '../../styles/globalStyles';
 import { ContainerPrincipal } from './styles';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import FreteDetailComponent from '../../components/FreteDetailFreteiroComponents/FreteDetail';
-import Login from '../Login';
 import Layout from '../../components/Layout';
 import { useQuery } from 'react-query';
 import LoadingPage from '../../components/Global/LoadingPage';
@@ -16,8 +15,8 @@ import ClienteService from '../../services/ClienteService';
 import PropostaService from '../../services/PropostaService';
 
 const FreteDetail = (): JSX.Element => {
-  const { id } = useParams();
   const { user } = useContext(AuthContext);
+  const { id } = useParams();
 
   const { data: pedido, isLoading: isLoadingPedido } = useQuery(
     ['pedido', id],
@@ -26,52 +25,50 @@ const FreteDetail = (): JSX.Element => {
       enabled: id !== undefined,
     },
   );
-console.log(pedido?.data)
+
   const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
     ['pedidoCreatedBy', id],
     async () => await ClienteService.get(pedido.data.cliente),
     {
-      enabled: pedido?.data?.cliente !== undefined || pedido?.data?.cliente !== null,
+      enabled: !isLoadingPedido,
     },
   );
-/*
- const { data: userPedido, isLoading: isLoadingClientePedido } = useQuery(
-    ['pedidoCreatedBy', id],
-    async () => await getCliente(pedido?.data?.cliente),
-  );
 
-*/
-  const queryStringPropostas =
-    pedido?.data?.id !== undefined && user != null
-      ? objToQueryString({
-          pedido: pedido?.data?.id,
-        })
-      : '';
+  const queryStringPropostas = useMemo(() => {
+    if (pedido !== undefined) {
+      return objToQueryString({
+        pedido: pedido.data.id,
+      });
+    }
+    return '';
+  }, [pedido]);
 
+  console.log(queryStringPropostas);
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     ['propostasForPedido', id],
     async () =>
       await PropostaService.getPropostasForPedido(queryStringPropostas),
     {
       enabled:
-        !(user == null) &&
-        pedido?.data !== undefined &&
+        !isLoadingPedido &&
+        !isLoadingClientePedido &&
         queryStringPropostas !== '',
     },
   );
-//  console.log(pedido, userPedido, propostas);
-  if (user == null) return <Login />;
-  if (propostas == null) return <LoadingPage />;
-  if (isLoadingPropostas || isLoadingPedido) return <LoadingPage />;
+  console.log(pedido, userPedido, propostas);
   return (
     <>
       <Head title="Detalhes do frete" />
       <Layout>
         <ContainerPrincipal>
           <Wrapper bgColor="#f5f5f5">
+            {(isLoadingPropostas || isLoadingPedido || isLoadingPropostas) && (
+              <LoadingPage />
+            )}
             {!isLoadingClientePedido &&
               !isLoadingPedido &&
-              !isLoadingPropostas && (
+              !isLoadingPropostas &&
+              user !== null && (
                 <FreteDetailComponent
                   pedido={pedido?.data}
                   clientePedido={userPedido?.data}

@@ -25,6 +25,10 @@ import { useQuery } from 'react-query';
 import Loading from '../../Global/Loading';
 import { formatDate } from '../../../utils/formatDate';
 
+const formatCEP = (cep: string) => {
+  return `${cep.substring(0, 5)}-${cep.substring(5)}`;
+};
+
 interface IFreteDetail {
   pedido: IPedido;
   clientePedido: ICliente;
@@ -53,17 +57,18 @@ const FreteDetailComponent = ({
 }: IFreteDetail): JSX.Element => {
   const navigate = useNavigate();
 
-  const { data: tipoVeiculos, isLoading } = useQuery(
+  const { data: tipoVeiculos, isLoading: isLoadingTipoVeiculos } = useQuery(
     ['tiposVeiculo'],
-    TipoVeiculoService.getAll,
+    async () => await TipoVeiculoService.getAll(),
   );
+
   const filteredArray =
-    !isLoading &&
+    !isLoadingTipoVeiculos &&
     tipoVeiculos.data.filter((element: any) =>
       pedido.tipo_veiculo.includes(element.id),
     );
 
-  if (isLoading) return <Loading />;
+  if (isLoadingTipoVeiculos) return <Loading />;
   return (
     <Container>
       <div>
@@ -78,14 +83,14 @@ const FreteDetailComponent = ({
       </div>
       <Content>
         <Content1>
-          {pedido.produto?.imagem_url ? (
-            <img src={pedido?.produto?.imagem_url} alt="caixas" />
+          {pedido.produto?.imagem_url !== null ? (
+            <img src={pedido.produto.imagem_url} alt="caixas" />
           ) : (
             <img src={caixas} alt="caixas" />
           )}
           <div>
             <Link to={`/perfil/${pedido.cliente}`} className="userLink">
-              {clientePedido?.url_foto ? (
+              {clientePedido?.url_foto !== null ? (
                 <img
                   src={clientePedido.url_foto}
                   alt={clientePedido.first_name}
@@ -108,6 +113,9 @@ const FreteDetailComponent = ({
             <div>
               <h4>Dados de coleta </h4>
               <p>
+                <span>CEP:</span> {formatCEP(pedido.origem.CEP)}
+              </p>
+              <p>
                 <span>Cidade:</span> {pedido.origem.cidade}
               </p>
               <p>
@@ -129,16 +137,19 @@ const FreteDetailComponent = ({
             <div>
               <h4>Dados de Entrega </h4>
               <p>
-                <span>Cidade:</span> {pedido.origem.cidade}
+                <span>CEP:</span> {formatCEP(pedido.destino.CEP)}
               </p>
               <p>
-                <span>Bairro:</span> {pedido.origem.bairro}
+                <span>Cidade:</span> {pedido.destino.cidade}
               </p>
               <p>
-                <span>Rua:</span> {pedido.origem.rua}
+                <span>Bairro:</span> {pedido.destino.bairro}
               </p>
               <p>
-                <span>Número:</span> {pedido.origem.numero}
+                <span>Rua:</span> {pedido.destino.rua}
+              </p>
+              <p>
+                <span>Número:</span> {pedido.destino.numero}
               </p>
               <p>
                 <span>Turno:</span> {formatTurno(pedido.turno_coleta)}
@@ -151,8 +162,11 @@ const FreteDetailComponent = ({
               <h4>Informações adicionais </h4>
               <p>
                 <span>Tipos de veículos aceitos:</span>{' '}
-                {filteredArray.length > 0 &&
-                  filteredArray.map((p: any) => `${p.descricao}/`)}
+                {filteredArray.length > 0
+                  ? filteredArray.map(
+                      (p: { descricao: string }) => `${p.descricao}/`,
+                    )
+                  : 'carregando...'}
               </p>
               <p>
                 <span>Data máxima de entrega:</span>{' '}
@@ -166,7 +180,7 @@ const FreteDetailComponent = ({
               </p>
               <p>
                 <span>Observações:</span>{' '}
-                {pedido.observacao
+                {pedido.observacao !== null
                   ? pedido.observacao
                   : 'Não possui observações'}
               </p>
@@ -174,16 +188,17 @@ const FreteDetailComponent = ({
           </Content2Info>
         </Content2>
       </Content>
-
-      <Negotiation>
-        <NegociationComponent
-          actualUser={actualUser}
-          pedidoId={pedido.id}
-          propostas={propostas}
-          ownerPedido={pedido.cliente}
-          pedidoVeiculos={pedido.tipo_veiculo}
-        />
-      </Negotiation>
+      {
+        <Negotiation>
+          <NegociationComponent
+            actualUser={actualUser}
+            pedidoId={pedido.id}
+            propostas={propostas}
+            ownerPedido={pedido.cliente}
+            pedidoVeiculos={pedido.tipo_veiculo}
+          />
+        </Negotiation>
+      }
     </Container>
   );
 };

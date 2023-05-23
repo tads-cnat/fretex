@@ -24,17 +24,15 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   ): void => {
     setError('');
     setIsLoadingUser(true);
-    AuthService
-      .login({email, password})
+    AuthService.login({ email, password })
       .then((res: IResponseSignin) => {
         const { data } = res;
         setToken(data.token);
         if (data.user.id === data.user.extra_data.freteiro) {
-          FreteiroService
-            .get(data.user.id)
+          FreteiroService.get(data.user.id)
             .then((resFreteiro) => {
-              setIsLoadingUser(false);
               setUser(resFreteiro.data);
+              setIsLoadingUser(false);
               setTypeUser(1);
               toast.success('Login realizado com sucesso!');
               Navigate('/fretesDisponiveis');
@@ -43,10 +41,10 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
               setError(
                 'Não foi possível realizar o login, tente novamente mais tarde!',
               );
+              setIsLoadingUser(false);
             });
         } else {
-          ClienteService
-            .get(data.user.id)
+          ClienteService.get(data.user.id)
             .then((resCliente) => {
               setIsLoadingUser(false);
               setUser(resCliente.data);
@@ -58,45 +56,50 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
               setError(
                 'Não foi possível realizar o login, tente novamente mais tarde!',
               );
+              setIsLoadingUser(false);
             });
         }
       })
       .catch(() => {
         setError('Usuário e/ou senha incorreto(s)');
         toast.error('Usuário e/ou senha incorreto(s)');
+        setIsLoadingUser(false);
       });
   };
 
   const validateToken = (): void => {
+    setIsLoadingUser(true);
     const storageToken = localStorage.getItem('authToken');
     if (storageToken === null || storageToken === '') return;
 
-    AuthService
-      .ValidateToken()
+    AuthService.ValidateToken()
       .then((res: IResponseValidateToken) => {
         if (res.data.user.id === res.data.user.extra_data.freteiro) {
-          FreteiroService
-            .get(res.data.user.id)
+          FreteiroService.get(res.data.user.id)
             .then((res) => {
+              setIsLoadingUser(false);
               setUser(res.data);
               setTypeUser(1);
             })
             .catch(() => {
               setToken('');
+              setIsLoadingUser(false);
             });
         } else {
-          ClienteService
-            .get(res.data.user.id)
+          ClienteService.get(res.data.user.id)
             .then((res) => {
+              setIsLoadingUser(false);
               setUser(res.data);
               setTypeUser(2);
             })
             .catch(() => {
+              setIsLoadingUser(false);
               setToken('');
             });
         }
       })
       .catch(() => {
+        setIsLoadingUser(false);
         setToken('');
       });
   };
@@ -106,16 +109,18 @@ const AuthProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   }, [localStorage.getItem('authToken')]);
 
   const signout = (Navigate: NavigateFunction): void => {
+    setIsLoadingUser(true);
     client.getQueryCache().clear();
-    AuthService
-      .logout()
+    AuthService.logout()
       .then(() => {
+        setIsLoadingUser(false);
         setToken('');
         setUser(null);
         toast.info('Usuário deslogado!');
         Navigate('/');
       })
       .catch(() => {
+        setIsLoadingUser(false);
         toast.error('Erro ao deslogar, tente novamente!');
       });
   };
