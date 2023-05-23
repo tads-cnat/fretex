@@ -21,7 +21,8 @@ import {
 import LabelInput from '../../../components/Profile/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type SubmitHandler } from 'react-hook-form/dist/types';
-import useApi from '../../../hooks/useApi';
+import FreteiroService from '../../../services/FreteiroService';
+import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 import Button from '../../../components/Global/Button';
@@ -29,7 +30,6 @@ import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
-  const { updateCliente, updateFreteiro } = useApi();
   const { user, setUser, handleSelectTab } = useContextProfile();
   const { user: actualUser, setUser: setActualUser } = useContext(AuthContext);
   const [image, setImage] = useState();
@@ -61,7 +61,7 @@ const EditProfile = (): JSX.Element => {
     });
 
     if (!isFreteiro(user)) {
-      updateCliente(user.id, formData)
+      ClienteService.patch(user.id, formData)
         .then((res) => {
           toast.info('Perfil atualizado com sucesso!');
           setUser(res.data);
@@ -77,10 +77,12 @@ const EditProfile = (): JSX.Element => {
     Object.entries(endereco).forEach(([key, value]) => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
-    updateFreteiro(user.id, formData).then((res) => {
+    FreteiroService.patch(user.id, formData).then((res) => {
       toast.info('Perfil atualizado com sucesso!');
       setUser(res.data);
       setActualUser(res.data);
+    }).catch((res) => {
+      toast.error('Erro ao atualizar perfil!');
     });
   };
 

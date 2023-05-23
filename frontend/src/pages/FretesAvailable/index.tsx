@@ -11,13 +11,9 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import LoadingPage from '../../components/Global/LoadingPage';
 import Head from '../../components/Head';
 import useFilterFretes from '../../hooks/useFilterFretes';
-import { useQuery } from 'react-query';
-import { objToQueryString } from '../../utils/queyString';
-import useApi from '../../hooks/useApi';
 
 const FretesAvailable = (): JSX.Element => {
   const { user } = useContext(AuthContext);
-  const { getSearchPedidos } = useApi();
   const {
     handleChange: handleChangeFilter,
     veiculos: veiculosArrayChecked,

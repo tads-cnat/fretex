@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import useApi from '../../../hooks/useApi';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 
 interface IFilterFretes {
@@ -13,17 +14,16 @@ const Filter = ({
   veiculos,
   handleChange,
 }: IFilterFretes): JSX.Element => {
-  const { tiposVeiculo } = useApi();
   const { data: tiposVeiculos } = useQuery(
     'tiposVeiculosDisponiveis',
-    tiposVeiculo,
+    TipoVeiculoService.getAll,
   );
 
   return (
     <ContainerFilter>
       <TypesVehicles>
         <h2>Tipos de Veículo</h2>
-        {tiposVeiculos?.data.map((tipo) => (
+        {tiposVeiculos?.data.map((tipo: any) => (
           <label key={tipo.id}>
             <input
               type="checkbox"

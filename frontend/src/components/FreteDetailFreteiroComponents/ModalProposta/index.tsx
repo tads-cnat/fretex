@@ -2,7 +2,8 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import useApi from '../../../hooks/useApi';
+import VeiculoService from '../../../services/VeiculoService';
+import PropostaService from '../../../services/PropostaService';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
@@ -39,14 +40,12 @@ const ModalProposta = ({
   actualUserId,
   pedidoVeiculos,
 }: IModalProposta): JSX.Element => {
-  const { getVeiculosForFreteiro } = useApi();
-  const { registerProposta } = useApi();
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
   const navigate = useNavigate();
   const { data: veiculos, isLoading: isLoadingVeiculos } = useQuery(
     'veiculosDoFreteiro',
-    async () => await getVeiculosForFreteiro(actualUser.id),
+    async () => await VeiculoService.getVeiculosForFreteiro(actualUser.id),
     {
       enabled: isFreteiro(actualUser),
     },
@@ -77,7 +76,7 @@ const ModalProposta = ({
         formData.append(key, value.toString());
     });
 
-    registerProposta(formData)
+    PropostaService.post(formData)
       .then(() => {
         toast.success('Proposta feita com sucesso!');
         navigate('/dashboard');

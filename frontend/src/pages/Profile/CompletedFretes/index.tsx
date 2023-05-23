@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BoxFretes from '../../../components/FretesAvailable/BoxFretes';
 import { AuthContext } from '../../../context/Auth/AuthContext';
-import useApi from '../../../hooks/useApi';
 import { type IPedido } from '../../../interfaces';
+import PedidoService from '../../../services/PedidoService';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   display: flex;
@@ -20,17 +21,18 @@ const Content = styled.div`
 
 const CompletedFretes = (): JSX.Element => {
   const [fretes, setFretes] = useState<IPedido[]>([]);
-  const { getPedidos } = useApi();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    getPedidos().then((res) => {
+    PedidoService.getAll().then((res) => {
       setFretes(
         res.data.filter(
           (pedido: IPedido) =>
             pedido.cliente === user?.id && pedido.status === 'CO',
         ),
       );
+    }).catch(() => {
+      toast.error('Erro ao carregar fretes');
     });
   }, []);
 

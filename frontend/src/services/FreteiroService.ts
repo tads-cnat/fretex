@@ -1,6 +1,5 @@
-import BaseService from "./BaseService";
+import BaseService from './BaseService';
 
-class FreteiroService extends BaseService {
-}
+class FreteiroService extends BaseService {}
 
 export default new FreteiroService('/freteiro');

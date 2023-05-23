@@ -14,6 +14,9 @@ import { Wrapper } from '../../styles/globalStyles';
 import { BoxWithShadow, Container, Content } from './styles';
 import { isFreteiro } from '../../utils/isFreteiro';
 import useApi from '../../hooks/useApi';
+import ClienteService from '../../services/ClienteService';
+import FreteiroService from '../../services/FreteiroService';
+import AuthService from '../../services/AuthService';
 import LoadingPage from '../../components/Global/LoadingPage';
 import { useQuery } from 'react-query';
 import Head from '../../components/Head';
@@ -31,11 +34,10 @@ const Profile = (): JSX.Element => {
   const [userToRender, setUserToRender] = useState<
     ICliente | IFreteiro | undefined
   >();
-  const { getCliente, getFreteiro, getTypeUser } = useApi();
 
   const { data: actualTypeUser } = useQuery<ITypeUser>(
     ['actualUser', Number(id)],
-    async () => await getTypeUser(Number(id)),
+    async () => await AuthService.getTypeUser(Number(id)),
     {
       enabled: id !== undefined,
       refetchOnMount: 'always',
@@ -48,7 +50,7 @@ const Profile = (): JSX.Element => {
   useQuery(
     'userProfileFreteiro',
     async () => {
-      await getFreteiro(Number(id)).then((res) => {
+      await FreteiroService.get(Number(id)).then((res) => {
         setUserToRender(res.data);
       });
     },
@@ -61,7 +63,7 @@ const Profile = (): JSX.Element => {
   useQuery(
     'userProfileCliente',
     async () => {
-      await getCliente(Number(id)).then((res) => {
+      await ClienteService.get(Number(id)).then((res) => {
         setUserToRender(res.data);
       });
     },

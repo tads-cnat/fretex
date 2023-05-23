@@ -1,7 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useApi from '../../../hooks/useApi';
+import VeiculoService from '../../../services/VeiculoService';
+import PropostaService from '../../../services/PropostaService';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
@@ -42,7 +43,6 @@ const ModalContraproposta = ({
   actualUser,
   propostas,
 }: IModal): JSX.Element => {
-  const { getVeiculo, registerProposta, updateProposta } = useApi();
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
   const client = useQueryClient();
@@ -56,7 +56,7 @@ const ModalContraproposta = ({
 
   const { data: veiculo, isLoading: isLoadingVeiculo } = useQuery(
     ['veiculoDaPropostaInicial', proposta.id],
-    async () => await getVeiculo(proposta.veiculo),
+    async () => await VeiculoService.get(proposta.veiculo),
     {
       enabled: !!proposta,
     },
@@ -64,7 +64,7 @@ const ModalContraproposta = ({
 
   const registerPropostaMutation = useMutation(
     ['createProposta', proposta.id],
-    async (data: FormData) => await registerProposta(data).then((res) => res),
+    async (data: FormData) => await PropostaService.post(data).then((res) => res),
     {
       onSuccess: () => {
         client.refetchQueries('propostasForPedido');
@@ -74,7 +74,7 @@ const ModalContraproposta = ({
 
   const updatePropostaMutation = useMutation(
     ['updateProposta', proposta.id],
-    async ({ id, data }: IUpdate) => await updateProposta(id, data),
+    async ({ id, data }: IUpdate) => await PropostaService.patch(id, data),
     {
       onSuccess: () => {
         client.refetchQueries('propostasForPedido');

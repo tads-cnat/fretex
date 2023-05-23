@@ -61,7 +61,7 @@ const NegociationComponent = ({
           {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          propostas.find((p) => p.usuario === actualUser.id) == null && (
+          ( propostas.length > 0 ? propostas.find((p) => p.usuario === actualUser.id) == null : true) && (
             <Button type="button" isButton onClick={handleClick}>
               Realizar proposta
             </Button>

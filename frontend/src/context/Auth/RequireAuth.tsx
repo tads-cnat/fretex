@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Login from '../../pages/Login';
 import { AuthContext } from './AuthContext';
+import LoadingPage from '../../components/Global/LoadingPage';
 
 const RequireAuth = ({
   children,
@@ -11,11 +12,10 @@ const RequireAuth = ({
 }): JSX.Element => {
   const { user, typeUser, isLoadingUser } = useContext(AuthContext);
 
-  if (user == null && !isLoadingUser) return <Login />;
-  else if (user != null && level === 3) return children;
-  else if (user != null && typeUser !== level) return <Login />;
-
-  return children;
+  if (isLoadingUser) return <LoadingPage />;
+  else if (user !== null && (level === 3 || typeUser === level))
+    return children;
+  else return <Login />;
 };
 
 export default RequireAuth;
