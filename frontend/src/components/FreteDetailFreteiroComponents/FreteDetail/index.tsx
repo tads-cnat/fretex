@@ -179,10 +179,8 @@ const FreteDetailComponent = ({
                 <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
               </p>
               <p>
-                <span>Observações:</span>{' '}
-                {pedido.observacao !== null
-                  ? pedido.observacao
-                  : 'Não possui observações'}
+                <span>bservações:</span>{' '}
+                {pedido?.observacao || 'Não possui observações'}
               </p>
             </div>
           </Content2Info>
