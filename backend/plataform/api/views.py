@@ -138,7 +138,13 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
-    filterset_class = PedidoFilter
+    filterset_fields = {
+        'status': ['exact', 'in'],
+        'cliente': ['exact'],
+        'tipo_veiculo': ['exact', 'in'],
+        'proposta_set__usuario': ['exact'],
+        'turno_coleta': ['exact', 'in']
+    }
     
 class PropostaPedidoViewSet(
     NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
