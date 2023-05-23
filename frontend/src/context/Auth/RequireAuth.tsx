@@ -11,16 +11,11 @@ const RequireAuth = ({
   level?: number;
 }): JSX.Element => {
   const { user, typeUser, isLoadingUser } = useContext(AuthContext);
-  console.log(isLoadingUser)
 
   if (isLoadingUser) return <LoadingPage />;
-  else if (user === null && !isLoadingUser) {
-    return <Login />;
-  } else if (user !== null && (level === 3 || typeUser === level)) {
+  else if (user !== null && (level === 3 || typeUser === level))
     return children;
-  } else {
-    return <Login />;
-  }
+  else return <Login />;
 };
 
 export default RequireAuth;

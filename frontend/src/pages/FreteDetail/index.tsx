@@ -43,7 +43,6 @@ const FreteDetail = (): JSX.Element => {
     return '';
   }, [pedido]);
 
-  console.log(queryStringPropostas);
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     ['propostasForPedido', id],
     async () =>
@@ -55,7 +54,7 @@ const FreteDetail = (): JSX.Element => {
         queryStringPropostas !== '',
     },
   );
-  console.log(pedido, userPedido, propostas);
+
   return (
     <>
       <Head title="Detalhes do frete" />
