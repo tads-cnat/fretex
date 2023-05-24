@@ -8,7 +8,6 @@ import { type IPedido } from '../../interfaces';
 import Layout from '../../components/Layout';
 import Loading from '../../components/Global/Loading';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import LoadingPage from '../../components/Global/LoadingPage';
 import Head from '../../components/Head';
 import useFilterFretes from '../../hooks/useFilterFretes';
 
@@ -20,11 +19,9 @@ const FretesAvailable = (): JSX.Element => {
     coleta: coletaArrayChecked,
     pedidos,
     isLoading,
-    isError
+    isError,
   } = useFilterFretes(user);
 
-
-  if (user == null) return <LoadingPage />;
   return (
     <>
       <Head title="Fretes disponíveis" />

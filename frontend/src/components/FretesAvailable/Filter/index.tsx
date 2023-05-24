@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import useApi from '../../../hooks/useApi';
 import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 

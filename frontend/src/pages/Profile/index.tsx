@@ -13,7 +13,6 @@ import {
 import { Wrapper } from '../../styles/globalStyles';
 import { BoxWithShadow, Container, Content } from './styles';
 import { isFreteiro } from '../../utils/isFreteiro';
-import useApi from '../../hooks/useApi';
 import ClienteService from '../../services/ClienteService';
 import FreteiroService from '../../services/FreteiroService';
 import AuthService from '../../services/AuthService';
