@@ -1,3 +1,4 @@
+import django_filters
 from django.contrib.auth.models import User
 from django.db.models import Q
 from rest_framework import status, viewsets
@@ -10,34 +11,33 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from core.api.renders import CustomRenderer
 from plataform.api.serializers import (
-    AvaliacaoUsuarioSerializer,                                 
-    ClienteSerializer, 
+    AvaliacaoUsuarioSerializer,
+    ClienteSerializer,
     EnderecoSerializer,
-    FreteiroSerializer, 
+    FreteiroSerializer,
     LoginSerializer,
-    PedidoSerializer, 
+    PedidoSerializer,
     ProdutoSerializer,
     PropostaSerializer,
     RegisterClienteSerializer,
     RegisterFreteiroSerializer,
     TipoVeiculoSerializer,
-    TriggerSerializer, 
+    TriggerSerializer,
     UserSerializer,
-    VeiculoSerializer
+    VeiculoSerializer,
 )
 from plataform.models import (
-    AvaliacaoUsuario, 
-    Cliente, 
-    Endereco, 
+    AvaliacaoUsuario,
+    Cliente,
+    Endereco,
     Freteiro,
-    Log, 
-    Pedido, 
-    Produto, 
-    Proposta, 
+    Log,
+    Pedido,
+    Produto,
+    Proposta,
     TipoVeiculo,
-    Veiculo
+    Veiculo,
 )
-import django_filters
 
 
 class AuthViewSet(viewsets.GenericViewSet):
@@ -116,39 +116,16 @@ class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     renderer_classes = [CustomRenderer]
 
-class PedidoFilter(django_filters.FilterSet):
-    tipo_veiculo = django_filters.CharFilter(method='filter_pedidos')
-    turno_coleta = django_filters.CharFilter(method='filter_pedidos')
-
-    class Meta:
-        model = Pedido
-        fields = ['status', 'cliente', 'tipo_veiculo', 'proposta_set__usuario', 'turno_coleta']
-
-    def filter_pedidos(self, queryset, key, value):
-        if value != '':
-            valor = value.split(',')
-            if key == 'tipo_veiculo':
-                return queryset.filter(tipo_veiculo__in=valor)
-            elif key == 'turno_coleta':
-                return queryset.filter(turno_coleta__in=valor)
-        return queryset
 
 class PedidoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
-    filterset_fields = {
-        'status': ['exact', 'in'],
-        'cliente': ['exact'],
-        'tipo_veiculo': ['exact', 'in'],
-        'proposta_set__usuario': ['exact'],
-        'turno_coleta': ['exact', 'in']
-    }
-    
-class PropostaPedidoViewSet(
-    NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin
-):
+    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario", "turno_coleta"]
+
+
+class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
     permission_classes = [IsAuthenticated]
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
