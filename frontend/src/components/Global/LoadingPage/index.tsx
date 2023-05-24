@@ -1,10 +1,10 @@
 import Loading from '../Loading';
 
-const LoadingPage = (): JSX.Element => {
+const LoadingPage = ({ height }: { height?: string }): JSX.Element => {
   return (
     <div
       style={{
-        height: '80vh',
+        height: height ?? '80vh',
         display: 'flex',
         justifyContent: 'center',
         justifyItems: 'center',

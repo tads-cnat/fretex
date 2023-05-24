@@ -1,26 +1,34 @@
 import BoxFretes from '../../components/FretesAvailable/BoxFretes';
 import Filter from '../../components/FretesAvailable/Filter';
 import { Wrapper } from '../../styles/globalStyles';
-import { ContainerBg, ContainerMain, ContainerFretes, Search } from './styles';
+import {
+  ContainerBg,
+  ContainerMain,
+  ContainerFretes,
+  Search,
+  MessageError,
+} from './styles';
 import SearchImg from '../../assets/images/search.svg';
-import { useContext } from 'react';
 import { type IPedido } from '../../interfaces';
 import Layout from '../../components/Layout';
-import Loading from '../../components/Global/Loading';
-import { AuthContext } from '../../context/Auth/AuthContext';
 import Head from '../../components/Head';
 import useFilterFretes from '../../hooks/useFilterFretes';
+import LoadingPage from '../../components/Global/LoadingPage';
 
 const FretesAvailable = (): JSX.Element => {
-  const { user } = useContext(AuthContext);
   const {
     handleChange: handleChangeFilter,
     veiculos: veiculosArrayChecked,
     coleta: coletaArrayChecked,
     pedidos,
-    isLoading,
-    isError,
-  } = useFilterFretes(user);
+    isLoadingPedidos,
+    isLoadingMutationPedidos,
+    isErrorPedidos,
+    isErrorMutationPedidos,
+  } = useFilterFretes();
+
+  const isLoading = isLoadingPedidos || isLoadingMutationPedidos;
+  const hasErrorPedidos = isErrorPedidos || isErrorMutationPedidos;
 
   return (
     <>
@@ -40,30 +48,30 @@ const FretesAvailable = (): JSX.Element => {
                 coleta={coletaArrayChecked}
               />
               <ContainerFretes>
-                {isError && <p>Houve um erro, tente novamente!</p>}
-                {!isLoading && pedidos.data.length === 0 && (
-                  <p
-                    style={{
-                      textAlign: 'center',
-                      marginTop: '40px',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Não há pedidos postados
-                  </p>
-                )}
-                {!isLoading && pedidos ? (
-                  pedidos.data.map((pedido: IPedido) => (
-                    <BoxFretes key={pedido.id} pedido={pedido} />
-                  ))
+                {hasErrorPedidos ? (
+                  <MessageError>Houve um erro, tente novamente!</MessageError>
                 ) : (
-                  <Loading />
+                  <>
+                    {isLoading ? (
+                      <LoadingPage height="50vh" />
+                    ) : (
+                      <>
+                        {pedidos.data.length !== 0 ? (
+                          pedidos.data.map((pedido: IPedido) => (
+                            <BoxFretes key={pedido.id} pedido={pedido} />
+                          ))
+                        ) : (
+                          <MessageError>Não há pedidos postados</MessageError>
+                        )}
+                      </>
+                    )}
+                  </>
                 )}
               </ContainerFretes>
             </ContainerMain>
           </Wrapper>
         </ContainerBg>
-      </Layout>{' '}
+      </Layout>
     </>
   );
 };

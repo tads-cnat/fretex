@@ -7,18 +7,23 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import PedidoService from '../services/PedidoService';
 
 interface IFilterFretes {
-  handleChange: (e: any, tipo: any) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    tipo: 'veiculo' | 'coleta',
+  ) => void;
   url: string;
   veiculos: string[];
   coleta: string[];
   pedidos: any;
-  isLoading: boolean;
-  isError: boolean;
+  isLoadingPedidos: boolean;
+  isLoadingMutationPedidos: boolean;
+  isErrorPedidos: boolean;
+  isErrorMutationPedidos: boolean;
 }
 
-const useFilterFretes = (user: any): IFilterFretes => {
-  const [coleta, setColeta] = useState([]);
-  const [veiculos, setVeiculos] = useState([]);
+const useFilterFretes = (): IFilterFretes => {
+  const [coleta, setColeta] = useState<string[]>([]);
+  const [veiculos, setVeiculos] = useState<string[]>([]);
   const [url, setUrl] = useState('');
   const cliente = useQueryClient();
 
@@ -35,31 +40,28 @@ const useFilterFretes = (user: any): IFilterFretes => {
     [],
   );
 
-  useEffect(() => {
-    setUrl(objToQueryStringMelhorada(objeto));
-  }, [veiculos, coleta]);
-
-  useEffect(() => {
-    mutate(url);
-  }, [url]);
-
   const {
     data: pedidos,
-    isLoading,
-    isError,
+    isLoading: isLoadingPedidos,
+    isError: isErrorPedidos,
     refetch,
   } = useQuery(
     'pedidosDisponiveis',
-    async () => await PedidoService.getSearchPedidos(url !== '' ? `${query}&${url}` : query),
-    {
-      enabled: !(user == null),
-    },
+    async () =>
+      await PedidoService.getSearchPedidos(
+        url !== '' ? `${query}&${url}` : query,
+      ),
   );
 
-  const { mutate } = useMutation(
-    'PedidosDisponiveis',
+  const {
+    mutate,
+    isLoading: isLoadingMutationPedidos,
+    isError: isErrorMutationPedidos,
+  } = useMutation(
     async (url: string) =>
-      await PedidoService.getSearchPedidos(url !== '' ? `${query}&${url}` : query),
+      await PedidoService.getSearchPedidos(
+        url !== '' ? `${query}&${url}` : query,
+      ),
     {
       onSuccess: async () => {
         await cliente.invalidateQueries('pedidosDisponiveis');
@@ -71,7 +73,10 @@ const useFilterFretes = (user: any): IFilterFretes => {
     },
   );
 
-  function handleChange(e: any, tipo: any): void {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    tipo: 'veiculo' | 'coleta',
+  ): void {
     if (tipo === 'veiculo') {
       if (e.target.checked) {
         setVeiculos([...veiculos, e.target.value]);
@@ -87,7 +92,25 @@ const useFilterFretes = (user: any): IFilterFretes => {
     }
   }
 
-  return { handleChange, url, veiculos, coleta, pedidos, isLoading, isError };
+  useEffect(() => {
+    mutate(url);
+  }, [url]);
+
+  useEffect(() => {
+    setUrl(objToQueryStringMelhorada(objeto));
+  }, [veiculos, coleta]);
+
+  return {
+    handleChange,
+    url,
+    veiculos,
+    coleta,
+    pedidos,
+    isLoadingPedidos,
+    isLoadingMutationPedidos,
+    isErrorPedidos,
+    isErrorMutationPedidos,
+  };
 };
 
 export default useFilterFretes;

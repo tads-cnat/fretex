@@ -1,6 +1,10 @@
 import { useQuery } from 'react-query';
 import TipoVeiculoService from '../../../services/TipoVeiculoService';
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
+import {
+  type ITipoVeiculo,
+  type ITiposVeiculo,
+} from '../../../interfaces/ITiposVeiculo';
 
 interface IFilterFretes {
   coleta: string[];
@@ -13,29 +17,41 @@ const Filter = ({
   veiculos,
   handleChange,
 }: IFilterFretes): JSX.Element => {
-  const { data: tiposVeiculos } = useQuery(
+  const {
+    data: tiposVeiculo,
+    isLoading: isLoadingTiposVeiculo,
+    isError: isErrorTiposVeiculo,
+  } = useQuery<ITiposVeiculo>(
     'tiposVeiculosDisponiveis',
-    TipoVeiculoService.getAll,
+    async () => await TipoVeiculoService.getAll(),
   );
 
   return (
     <ContainerFilter>
       <TypesVehicles>
         <h2>Tipos de Veículo</h2>
-        {tiposVeiculos?.data.map((tipo: any) => (
-          <label key={tipo.id}>
-            <input
-              type="checkbox"
-              name={tipo.descricao}
-              value={tipo.id}
-              checked={veiculos.includes(`${tipo.id}`)}
-              onChange={(e) => {
-                handleChange(e, 'veiculo');
-              }}
-            />
-            <span>{tipo.descricao}</span>
-          </label>
-        ))}
+        {isErrorTiposVeiculo ? (
+          <p>Houve um erro, tente novamente!</p>
+        ) : (
+          <>
+            {isLoadingTiposVeiculo && <p>Carregando...</p>}
+            {!isLoadingTiposVeiculo &&
+              tiposVeiculo?.data?.map((tipo: ITipoVeiculo) => (
+                <label key={tipo.id}>
+                  <input
+                    type="checkbox"
+                    name={tipo.descricao}
+                    value={tipo.id}
+                    checked={veiculos.includes(`${tipo.id}`)}
+                    onChange={(e) => {
+                      handleChange(e, 'veiculo');
+                    }}
+                  />
+                  <span>{tipo.descricao}</span>
+                </label>
+              ))}
+          </>
+        )}
       </TypesVehicles>
       <PeriodCollect>
         <h2>Turno de coleta</h2>
