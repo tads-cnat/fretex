@@ -1,81 +1,50 @@
-import { SpanYellow } from "../../../styles";
-import Email from "../../../assets/Svg/Email";
-import Password from "../../../assets/Svg/Password";
-import User from "../../../assets/Svg/User";
-import {
-  ContainerForm,
-  BtnYellow,
-  ContainerPrincipal,
-  ContainerContent,
-} from "./styles";
-import Eye from "../../../assets/Svg/Eye";
-import { useEffect, useState } from "react";
-import ClosedEye from "../../../assets/Svg/ClosedEye";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
-import InputMask from "react-input-mask";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaCliente } from "../../../pages/ResgisterUser/schemas";
-import {  IClienteFormData } from "../../../interfaces";
-import useApi from "../../../hooks/useApi";
-import { useToggle } from "../../../hooks/useToggle";
-import { toast } from "react-toastify";
+import { SpanYellow } from '../../../styles/globalStyles';
+import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
+import { type IClienteFormData } from '../../../interfaces';
+import AuthService from '../../../services/AuthService';
+import { toast } from 'react-toastify';
+import Button from '../../Global/Button';
+import { Input } from '../../Input';
+import { inputs } from './inputs';
 
-const RegisterClientForm = () => {
-  const { value: password, toggle: togglePassword } = useToggle();
-  const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
-  const [error, setError] = useState<string>("");
+const RegisterClientForm = (): JSX.Element => {
+  const [error, setError] = useState<string>('');
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
     setFocus,
   } = useForm<IClienteFormData>({
+    mode: 'onChange',
     resolver: yupResolver(schemaCliente),
   });
 
-  const { registerCliente } = useApi();
   const navigate = useNavigate();
 
-  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    togglePassword();
-  };
-
-  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    toggleConfirmPassword();
-  };
-
   useEffect(() => {
-    setFocus("email");
+    setFocus('email');
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
-    setError("");
-    const cliente: IClienteFormData = {
-      email: data.email,
-      full_name: data.full_name,
-      cpf: data.cpf,
-      password: data.password,
-    };
-    registerCliente(cliente)
+    setError('');
+    const { email, full_name, cpf, password } = data;
+    AuthService.registerCliente({ email, full_name, cpf, password })
       .then(() => {
-        toast.success('Cliente cadastrado com sucesso!')
-        navigate("/login");
+        toast.success('Cliente cadastrado com sucesso!');
+        navigate('/login');
       })
       .catch((err) => {
         const errors = err.response.data.errors;
-        if (
-          errors.hasOwnProperty("email") &&
-          errors.email[0] === "This field must be unique."
-        ) {
-          setError("Email, possui uma conta cadastrada!");
-        } else if (
-          errors.hasOwnProperty("cpf") &&
-          errors.cpf[0] === "This field must be unique."
-        ) {
-          setError("CPF, possui uma conta cadastrada!");
+        if (Object.prototype.hasOwnProperty.call(errors, 'email')) {
+          setError(errors.email[0]);
+        } else if (Object.prototype.hasOwnProperty.call(errors, 'cpf')) {
+          setError(errors.cpf[0]);
         }
       });
   };
@@ -86,68 +55,32 @@ const RegisterClientForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Crie sua conta</h1>
           <div>
-            <label>
-              <Email />
-              <input
-                {...register("email")}
-                type="email"
-                autoComplete="on"
-                placeholder="Seu E-mail"
+            {inputs.map((input, index) => (
+              <Input
+                key={index}
+                {...register(`${input.name}`)}
+                onChange={
+                  input.onChange !== undefined
+                    ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                        input.onChange(e, setValue);
+                      }
+                    : undefined
+                }
+                type={input.type}
+                label={input.label}
+                placeholder={input.placeholder}
+                svg={input.svg}
+                error={errors[input.name]}
+                required={input.required}
               />
-            </label>
-            {errors.email && <p className="error">{errors.email?.message}</p>}
-            <label>
-              <User />
-              <input
-                {...register("full_name")}
-                type="text"
-                placeholder="Seu nome completo"
-              />
-            </label>
-            {errors.full_name && (
-              <p className="error">{errors.full_name?.message}</p>
-            )}
-            <label>
-              <User />
-              <InputMask
-                mask="999.999.999-99"
-                {...register("cpf")}
-                placeholder="Seu cpf"
-              ></InputMask>
-            </label>
-            {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
-            <label>
-              <Password />
-              <input
-                type={password === true ? "text" : "password"}
-                {...register("password")}
-                placeholder="Sua senha"
-              />
-              <button type="button" onClick={handlePassword}>
-                {password ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.password && (
-              <p className="error">{errors.password?.message}</p>
-            )}
-            <label>
-              <Password />
-              <input
-                type={confirmPassword === true ? "text" : "password"}
-                {...register("confirmPassword")}
-                placeholder="Confirme sua senha"
-              />
-              <button type="button" onClick={handleConfirmPassword}>
-                {confirmPassword ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.confirmPassword && (
-              <p className="error">{errors.confirmPassword?.message}</p>
-            )}
-            {error && <p className="error">{error}</p>}
+            ))}
+
+            {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <BtnYellow type="submit">Cadastre-se</BtnYellow>
+            <Button isButton type="submit">
+              Cadastre-se
+            </Button>
             <p>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>

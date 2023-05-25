@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import { IActive } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type IActive } from '../../../interfaces/IActive';
 
 export const Container = styled.button<IActive>`
   display: flex;
   align-items: center;
-  background-color: ${(props) => (props.active ? "#3f3f3f" : "#444444")};
+  background-color: ${({ active }) => (active ? '#3f3f3f' : '#444444')};
   border: none;
   padding: 8px;
-  border-radius: ${(props) => (props.active ? "6px 6px 0px 0px" : "6px")};
+  border-radius: ${({ active }) => (active ? '6px 6px 0px 0px' : '6px')};
   cursor: pointer;
   gap: 7px;
   position: relative;
@@ -23,7 +23,7 @@ export const Container = styled.button<IActive>`
   .seta {
     width: 10px;
     transition: 0.2s;
-    transform: ${(props) => (props.active ? "rotate(0deg)" : "rotate(180deg)")};
+    transform: ${({ active }) => (active ? 'rotate(0deg)' : 'rotate(180deg)')};
   }
 
   p {
@@ -33,8 +33,8 @@ export const Container = styled.button<IActive>`
   @media (max-width: 768px) {
     & {
       display: none;
-      margin-bottom: ${(props) => (props.active ? "40px" : "10px")};
-      overflow-y: ${(props) => (props.active ? "visible" : "hidden")};
+      margin-bottom: ${({ active }) => (active ? '40px' : '10px')};
+      overflow-y: ${({ active }) => (active ? 'visible' : 'hidden')};
       background-color: transparent;
       padding: 4px 0;
       width: 100%;
@@ -53,7 +53,7 @@ export const Content = styled.div<IActive>`
   background-color: #444444;
   position: absolute;
   width: 100%;
-  display: ${(props) => (props.active ? "flex" : "none")};
+  display: ${({ active }) => (active ? 'flex' : 'none')};
   flex-direction: column;
   top: 100%;
   right: 0;
@@ -68,7 +68,7 @@ export const Content = styled.div<IActive>`
 
   .links {
     transition: 0.5s;
-    display: ${(props) => (props.active ? "block" : "none")};
+    display: ${({ active }) => (active ? 'block' : 'none')};
     width: 100%;
     color: var(--text-light);
     border: none;
@@ -85,14 +85,14 @@ export const Content = styled.div<IActive>`
         margin: 0 !important;
         position: unset;
         text-align: left;
-        display: "block";
+        display: 'block';
         background-color: var(--bg-grey);
         border-top: 1px solid #424242;
       }
       .links {
         //   display: block;
         display: block;
-        
+
         padding: 4px !important;
       }
     }

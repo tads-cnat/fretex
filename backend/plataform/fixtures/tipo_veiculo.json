@@ -1,0 +1,30 @@
+[
+    {
+        "pk": "1",
+        "model": "plataform.tipoveiculo",
+        "fields": {
+            "descricao": "Moto"
+        }
+    },
+    {
+        "pk": "2",
+        "model": "plataform.tipoveiculo",
+        "fields": {
+            "descricao": "Carro"
+        }
+    },
+    {
+        "pk": "3",
+        "model": "plataform.tipoveiculo",
+        "fields": {
+            "descricao": "Caminhão"
+        }
+    },
+    {
+        "pk": "4",
+        "model": "plataform.tipoveiculo",
+        "fields": {
+            "descricao": "Outros"
+        }
+    }
+]

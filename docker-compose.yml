@@ -1,19 +1,19 @@
 version: "3"
 services:
-  node:
-    container_name: fretex_node
-    image: node:16
-    working_dir: /code/frontend
-    command: bash -c "npm install && yarn start"
+  frontend:
+    container_name: fretex_frontend_dev
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend.dev
     ports:
       - "3000:3000"
     volumes:
       - .:/code
-  django:
-    container_name: fretex_django
-    working_dir: /code/backend
-    build: .
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+  backend:
+    container_name: fretex_backend_dev
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend.dev
     networks:
       - default
     ports:
@@ -21,4 +21,23 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - node
+      - postgres
+  postgres:
+    container_name: fretex_postgres_dev
+    image: postgres:13
+    networks:
+      - default
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fretex
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+
+
+    

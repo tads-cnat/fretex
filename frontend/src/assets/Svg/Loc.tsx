@@ -1,4 +1,4 @@
-const Loc = () => {
+const Loc = (): JSX.Element => {
   return (
     <svg
       width="15"

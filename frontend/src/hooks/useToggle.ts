@@ -1,16 +1,23 @@
 import { useState } from "react"
 
-export const useToggle = (initialValue = false) => {
-    const [value, setValue] = useState(initialValue)
+interface IToggle {
+  value: boolean;
+  toggle: () => void;
+  setAsFalse: () => void;
+  setAsTrue: () => void;
+}
 
-    const toggle = () => setValue(!value)
-    const setAsTrue = () => setValue(true)
-    const setAsFalse = () => setValue(false)
+export const useToggle = (initialValue = false): IToggle => {
+  const [value, setValue] = useState(initialValue)
 
-    return {
-        value,
-        toggle,
-        setAsFalse,
-        setAsTrue
-    }
+  const toggle = (): void => { setValue(!value); }
+  const setAsTrue = (): void => { setValue(true); }
+  const setAsFalse = (): void => { setValue(false); }
+
+  return {
+    value,
+    toggle,
+    setAsFalse,
+    setAsTrue
+  }
 }

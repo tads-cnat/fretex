@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { IActive } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type IActive } from '../../../interfaces/IActive';
 
 interface InterfaceImage {
   image?: string;
@@ -13,7 +13,7 @@ export const Container = styled.div`
 `;
 
 export const Preview = styled.div<IActive>`
-  display: ${(props) => (props.active ? "none" : "block")};
+  display: ${({ active }) => (active ? 'none' : 'block')};
   height: 100%;
   width: 100%;
   display: flex;
@@ -21,7 +21,7 @@ export const Preview = styled.div<IActive>`
   align-items: center;
   color: #fff;
   p {
-    display: ${(props) => (props.active ? "none" : "block")};
+    display: ${({ active }) => (active ? 'none' : 'block')};
   }
 `;
 
@@ -34,8 +34,8 @@ export const Form = styled.form`
 export const Image = styled.div<InterfaceImage>`
   width: 100%;
   height: 50vh;
-  background: ${(props) =>
-    props.image ? `url(${props.image}) #282828` : "#282828"};
+  background: ${({ image }) =>
+    image !== undefined ? `url(${image}) #282828` : '#282828'};
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

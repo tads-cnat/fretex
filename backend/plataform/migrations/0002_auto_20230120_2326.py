@@ -4,18 +4,18 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('plataform', '0001_initial'),
+        ("plataform", "0001_initial"),
     ]
 
     operations = [
-        migrations.RunSQL("""
-            CREATE TRIGGER LogPedidoTrigger
-            AFTER INSERT
-            ON plataform_pedido
-            BEGIN
-                INSERT INTO plataform_log(data) VALUES (current_timestamp);
-            END;
-        """)
+        # # TODO - Isso não funciona no postgres
+        # migrations.RunSQL("""
+        #     CREATE TRIGGER LogPedidoTrigger
+        #     AFTER INSERT
+        #     ON plataform_pedido
+        #     BEGIN
+        #         INSERT INTO plataform_log(data) VALUES (current_timestamp);
+        #     END;
+        # """)
     ]

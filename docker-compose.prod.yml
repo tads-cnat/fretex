@@ -1,0 +1,37 @@
+version: "3"
+services:
+  frontend:
+    container_name: fretex_frontend
+    image: arthurmed/fretex-frontend
+    networks:
+      - default
+    ports:
+      - "80:80"
+  backend:
+    container_name: fretex_backend
+    image: arthurmed/fretex-backend
+    networks:
+      - default
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+  postgres:
+    container_name: fretex_postgres
+    image: postgres:13
+    networks:
+      - default
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fretex
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+
+
+    

@@ -1,35 +1,33 @@
-import { Wrapper, SpanYellow } from "../../styles";
-import { useContext, useState } from "react";
+import Button from '../Global/Button';
+import { Wrapper, SpanYellow } from '../../styles/globalStyles';
+import { useContext, useState } from 'react';
 import {
   Header,
   Logo,
   LinksFretes,
   NavContainer,
   ButtonMenuContainer,
-  BtnPatternLogin,
-} from "./styles";
-import { AuthContext } from "../../context/Auth/AuthContext";
-import NavUser from "./NavUser";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import perfil from "../../assets/images/perfil.svg";
-import { useToggle } from "../../hooks/useToggle";
-import { toast } from "react-toastify";
+} from './styles';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import NavUser from './NavUser';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import perfil from '../../assets/images/perfil.svg';
+import { useToggle } from '../../hooks/useToggle';
+import { type INavLink } from '../../interfaces/INavLink';
 
 interface INavbar {
   id?: string;
 }
 
-const Navbar = ({ id }: INavbar) => {
+const Navbar = ({ id }: INavbar): JSX.Element => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user, typeUser, signout } = useContext(AuthContext);
   const { value: active, toggle: setActive } = useToggle();
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
-    toast.info('Usuário deslogado!')
-    signout();
-    navigate("/");
+    signout(Navigate);
   };
 
   return (
@@ -43,7 +41,7 @@ const Navbar = ({ id }: INavbar) => {
           </div>
 
           <LinksFretes show={dropdownUp}>
-            {!user && (
+            {user == null && (
               <ul>
                 <li>
                   <a href="#howWorks">Como funciona</a>
@@ -56,13 +54,15 @@ const Navbar = ({ id }: INavbar) => {
                 </li>
               </ul>
             )}
-            {user && typeUser === 1 && (
+            {user != null && typeUser === 1 && (
               <ul>
                 <li>
                   <NavLink
                     to="/"
                     end
-                    className={({ isActive }) => (isActive ? "active" : "")}
+                    className={({ isActive }: INavLink) =>
+                      isActive ? 'active' : ''
+                    }
                   >
                     Home
                   </NavLink>
@@ -74,31 +74,26 @@ const Navbar = ({ id }: INavbar) => {
                   <NavLink to={`/dashboard`}>Dashboard</NavLink>
                 </li>
                 <li className="linkMobile">
-                  <NavLink
-                    className="links"
-                    to={`/perfil/${user.id}`}
-                  >
+                  <NavLink className="links" to={`/perfil/${user.id}`}>
                     Meu perfil
                   </NavLink>
                 </li>
                 <li className="linkMobile">
-                  <Link
-                    className="links"
-                    to="/"
-                    onClick={handleClick}
-                  >
+                  <Link className="links" to="/" onClick={handleClick}>
                     Sair
                   </Link>
                 </li>
               </ul>
             )}
-            {user && typeUser === 2 && (
+            {user != null && typeUser === 2 && (
               <ul>
                 <li>
                   <NavLink
                     to="/"
                     end
-                    className={({ isActive }) => (isActive ? "active" : "")}
+                    className={({ isActive }: INavLink) =>
+                      isActive ? 'active' : ''
+                    }
                   >
                     Home
                   </NavLink>
@@ -110,19 +105,12 @@ const Navbar = ({ id }: INavbar) => {
                   <NavLink to={`/dashboard`}>Dashboard</NavLink>
                 </li>
                 <li className="linkMobile">
-                  <NavLink
-                    className="links"
-                    to={`/perfil/${user.id}`}
-                  >
+                  <NavLink className="links" to={`/perfil/${user.id}`}>
                     Meu perfil
                   </NavLink>
                 </li>
                 <li className="linkMobile">
-                  <Link
-                    className="links"
-                    to="/"
-                    onClick={handleClick}
-                  >
+                  <Link className="links" to="/" onClick={handleClick}>
                     Sair
                   </Link>
                 </li>
@@ -130,22 +118,20 @@ const Navbar = ({ id }: INavbar) => {
             )}
             <div className="containerUser">
               {user !== null ? (
-                <NavUser
-                  user={user}
-                  signout={signout}
-                  navigate={navigate}
-                  active={active}
-                  setActive={setActive}
-                />
+                <NavUser user={user} active={active} setActive={setActive} />
               ) : (
-                <BtnPatternLogin to="/login">Login</BtnPatternLogin>
+                <Button link="/login">Login</Button>
               )}
             </div>
           </LinksFretes>
 
           <ButtonMenuContainer animation={dropdownUp}>
-            <button onClick={() => setDropdownUp(!dropdownUp)}>
-              {user && (
+            <button
+              onClick={() => {
+                setDropdownUp(!dropdownUp);
+              }}
+            >
+              {user != null && (
                 <>
                   {user?.url_foto ? (
                     <img src={user?.url_foto} alt={user?.first_name} />

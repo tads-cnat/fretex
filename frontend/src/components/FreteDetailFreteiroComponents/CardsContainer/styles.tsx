@@ -1,5 +1,5 @@
-import styled, { keyframes } from "styled-components";
-import { IActive } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type IActive } from '../../../interfaces/IActive';
 
 export const Container = styled.section`
   border-radius: 6px;
@@ -12,9 +12,9 @@ export const ContentHeader = styled.header<IActive>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: ${(props) => (props.active ? "1px solid #e9e7e7" : "none")};
-  padding-bottom: ${(props) => (props.active ? "10px" : "0")};
-  margin-bottom: ${(props) => (props.active ? "20px" : "0")};
+  border-bottom: ${({ active }) => (active ? '1px solid #e9e7e7' : 'none')};
+  padding-bottom: ${({ active }) => (active ? '10px' : '0')};
+  margin-bottom: ${({ active }) => (active ? '20px' : '0')};
 
   div {
     display: flex;
@@ -45,6 +45,6 @@ export const ContentHeader = styled.header<IActive>`
 export const ContentMain = styled.main<IActive>`
   display: flex;
   flex-direction: column;
-  height: ${(props) => (props.active ? "100%" : "0")};
+  height: ${({ active }) => (active ? '100%' : '0')};
   overflow: hidden;
 `;

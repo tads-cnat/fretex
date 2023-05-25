@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.form`
   margin-bottom: 20px;
@@ -16,7 +16,8 @@ export const FormContainer = styled.form`
   }
 
   .submitContainer {
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 `;
 

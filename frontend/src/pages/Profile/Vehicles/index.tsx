@@ -1,41 +1,40 @@
-import { useState, useEffect, useContext } from "react";
-import veiculo from "../../../assets/images/veiculo.png";
-import { ReactComponent as PlusVeiculo } from "../../../assets/images/PlusCircle.svg";
-import ModalComponent from "../../../components/Global/Modal";
+import { useState, useEffect } from 'react';
+import veiculo from '../../../assets/images/veiculo.png';
+import { ReactComponent as PlusVeiculo } from '../../../assets/images/PlusCircle.svg';
+import ModalComponent from '../../../components/Global/Modal';
 import {
   ContainerMain,
   ContainerInputs,
   ContainerImagem,
-  ButtonCadastro,
   Preview,
   QtdVeiculos,
-} from "./styles";
-import { useToggle } from "../../../hooks/useToggle";
-import { useForm, SubmitHandler } from "react-hook-form";
-import useApi from "../../../hooks/useApi";
-import { IVeiculo } from "../../../interfaces";
-import { useContextProfile } from "..";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaVeiculo } from "./schema";
-import CardVeiculo from "../../../components/Profile/CardVeiculo";
-import { useParams } from "react-router-dom";
-import LoadingPage from "../../../components/Global/LoadingPage";
-import { toast } from "react-toastify";
+} from './styles';
+import { useToggle } from '../../../hooks/useToggle';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import VeiculoService from '../../../services/VeiculoService';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
+import { type IVeiculo } from '../../../interfaces';
+import { useContextProfile } from '..';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaVeiculo } from './schema';
+import CardVeiculo from '../../../components/Profile/CardVeiculo';
+import { useParams } from 'react-router-dom';
+import LoadingPage from '../../../components/Global/LoadingPage';
+import { toast } from 'react-toastify';
+import Button from '../../../components/Global/Button';
 
 interface ITiposDeVeiculo {
   id: number;
   descricao: string;
 }
 
-const Vehicles = () => {
-  const { getVeiculosForFreteiro } = useApi();
+const Vehicles = (): JSX.Element => {
   const { id } = useParams();
   const { value, toggle, setAsFalse, setAsTrue } = useToggle();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setFocus,
   } = useForm<IVeiculo>({
     resolver: yupResolver(schemaVeiculo),
   });
@@ -43,42 +42,52 @@ const Vehicles = () => {
   const [imagemPreview, setImagemPreview] = useState<string | undefined>();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>();
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
-  const { registerVeiculo, tiposVeiculo } = useApi();
   const { user, handleSelectTab } = useContextProfile();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     handleSelectTab(1);
-    getVeiculosForFreteiro(Number(id))
+    VeiculoService.getVeiculosForFreteiro(Number(id))
       .then((res) => {
         setVeiculos(res.data);
       })
-      .catch((res) => console.log(res));
+      .catch((res) => {
+        console.log(res);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
-    tiposVeiculo()
-      .then((res) => setTiposDeVeiculo(res.data))
-      .catch((error) => console.log(error));
+      TipoVeiculoService.getAll()
+      .then((res) => {
+        setTiposDeVeiculo(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
-  const onSubmit: SubmitHandler<IVeiculo> = (data) => {
+  const onSubmit: SubmitHandler<IVeiculo> = async (data) => {
     const formData: any = new FormData();
     Object.entries(data).forEach(([key, value]) => {
-      if (value && key === "url_foto") formData.append(`${key}`, imagemVeiculo);
-      else if (value) formData.append(`${key}`, value);
+      if (typeof value !== 'undefined' && key === 'url_foto')
+        formData.append(`${key}`, imagemVeiculo);
+      else if (typeof value !== 'undefined') formData.append(`${key}`, value);
     });
-    formData.append("freteiro", user.id);
+    formData.append('freteiro', user.id);
 
-    registerVeiculo(formData).then(() => {
+    try {
+      await VeiculoService.post(formData);
       setAsFalse();
-      getVeiculosForFreteiro(Number(id))
-        .then((res) => {
-          toast.success('Veículo cadastrado com sucesso!')
-          setVeiculos(res.data);
-        })
-        .catch((res) => console.log(res));
-    });
+      const res = await VeiculoService.getVeiculosForFreteiro(Number(id));
+      toast.success('Veículo cadastrado com sucesso!');
+      setVeiculos(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const onChange = (e: any) => {
+  const onChange = (e: any): void => {
     try {
       const file = e.target.files[0];
       setImagemVeiculo(file);
@@ -91,20 +100,19 @@ const Vehicles = () => {
     <>
       <QtdVeiculos>
         <p>{veiculos.length} Veículo(s)</p>
-        <ButtonCadastro onClick={setAsTrue}>
+        <Button isButton onClick={setAsTrue}>
           <PlusVeiculo /> Cadastrar Veículo
-        </ButtonCadastro>
+        </Button>
       </QtdVeiculos>
-      {!veiculos && <LoadingPage />}
-      {veiculos && veiculos.length === 0 && (
-        <p style={{ textAlign: "center", margin: "15vh" }}>
+      {loading && <LoadingPage />}
+      {veiculos.length === 0 && (
+        <p style={{ textAlign: 'center', margin: '15vh' }}>
           Não possui veículos cadastrados.
         </p>
       )}
-      {veiculos &&
-        veiculos?.map((veiculo, id) => (
-          <CardVeiculo key={id} veiculos={veiculo} />
-        ))}
+      {veiculos?.map((veiculo, id) => (
+        <CardVeiculo key={id} veiculos={veiculo} />
+      ))}
       <ModalComponent title="Cadastrar Veículo" toggle={toggle} value={value}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ContainerMain>
@@ -112,11 +120,11 @@ const Vehicles = () => {
               <label className="inputsText">
                 <h2>Marca *</h2>
                 <input
-                  {...register("marca")}
+                  {...register('marca')}
                   type="text"
                   placeholder="Marca do veículo"
                 />
-                {errors.marca && (
+                {errors.marca != null && (
                   <p className="error">{errors.marca.message}</p>
                 )}
               </label>
@@ -124,11 +132,11 @@ const Vehicles = () => {
               <label className="inputsText">
                 <h2>Modelo *</h2>
                 <input
-                  {...register("modelo")}
+                  {...register('modelo')}
                   type="text"
                   placeholder="Modelo do veículo"
                 />
-                {errors.modelo && (
+                {errors.modelo != null && (
                   <p className="error">{errors.modelo.message}</p>
                 )}
               </label>
@@ -136,21 +144,23 @@ const Vehicles = () => {
               <label className="inputsText">
                 <h2>Ano *</h2>
                 <input
-                  {...register("ano")}
+                  {...register('ano')}
                   type="text"
                   placeholder="Ano do veículo"
                 />
-                {errors.ano && <p className="error">{errors.ano.message}</p>}
+                {errors.ano != null && (
+                  <p className="error">{errors.ano.message}</p>
+                )}
               </label>
 
               <label className="inputsText">
                 <h2>Placa do veículo *</h2>
                 <input
-                  {...register("placa")}
+                  {...register('placa')}
                   type="text"
                   placeholder="Placa do veículo"
                 />
-                {errors.placa && (
+                {errors.placa != null && (
                   <p className="error">{errors.placa.message}</p>
                 )}
               </label>
@@ -158,36 +168,37 @@ const Vehicles = () => {
               <label className="inputsText">
                 <h2>Cor do veículo *</h2>
                 <input
-                  {...register("cor")}
+                  {...register('cor')}
                   type="text"
                   placeholder="Cor do veículo"
                 />
-                {errors.cor && <p className="error">{errors.cor.message}</p>}
+                {errors.cor != null && (
+                  <p className="error">{errors.cor.message}</p>
+                )}
               </label>
               <div>
                 <h2>Tipo do veículo *</h2>
                 <label>
-                  {tiposDeVeiculo &&
-                    tiposDeVeiculo?.map((tiposveiculo) => (
-                      <label key={tiposveiculo.id}>
-                        <input
-                          {...register("tipo_veiculo")}
-                          type="radio"
-                          value={tiposveiculo.id}
-                        />
-                        <span>{tiposveiculo.descricao}</span>
-                      </label>
-                    ))}
+                  {tiposDeVeiculo?.map((tiposveiculo) => (
+                    <label key={tiposveiculo.id}>
+                      <input
+                        {...register('tipo_veiculo')}
+                        type="radio"
+                        value={tiposveiculo.id}
+                      />
+                      <span>{tiposveiculo.descricao}</span>
+                    </label>
+                  ))}
                 </label>
               </div>
-              {errors.tipo_veiculo && (
+              {errors.tipo_veiculo != null && (
                 <p className="error">{errors.tipo_veiculo.message}</p>
               )}
             </ContainerInputs>
             <ContainerImagem>
               <label>
                 <Preview>
-                  {imagemPreview ? (
+                  {imagemPreview !== undefined ? (
                     <img src={imagemPreview} alt="veiculo" />
                   ) : (
                     <img src={veiculo} alt="veiculo" />
@@ -195,7 +206,7 @@ const Vehicles = () => {
                 </Preview>
                 <input
                   type="file"
-                  {...register("url_foto")}
+                  {...register('url_foto')}
                   accept="image/jpeg,image/png,image/gif"
                   onChange={onChange}
                 />
@@ -203,7 +214,9 @@ const Vehicles = () => {
               <p>Clique para inserir uma imagem</p>
             </ContainerImagem>
           </ContainerMain>
-          <ButtonCadastro>Cadastrar Veículo</ButtonCadastro>
+          <Button isButton type="submit">
+            Cadastrar Veículo
+          </Button>
         </form>
       </ModalComponent>
     </>

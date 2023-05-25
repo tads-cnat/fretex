@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   ContainerContent,
   ContainerForm,
   ContainerPrincipal,
-} from "../RegisterClienteForm/styles";
+} from '../RegisterClienteForm/styles';
 
 export const ContainerMain = styled(ContainerPrincipal)`
   display: grid;
@@ -42,7 +42,6 @@ export const ContainerForm2 = styled(ContainerForm)`
 export const RegisterPerson = styled.div`
   max-width: 100%;
   flex-grow: 1;
-  
 `;
 
 export const PerfilImg = styled.div`
@@ -108,27 +107,10 @@ export const ContainerInfos = styled(ContainerContent)`
       padding-left: 0px;
       border: none;
 
-      a{
+      a {
         text-decoration: none;
         color: var(--text-light);
       }
     }
-  }
-`;
-
-export const BtnYellow = styled.button`
-  cursor: pointer;
-  padding: 9px 32px;
-  background-color: var(--theme-primary);
-  color: var(--text-light);
-  transition: 0.5s;
-  text-decoration: none;
-  border-radius: 6px;
-  border: 0px;
-  font-weight: 700;
-  font-size: var(--font-medium);
-  line-height: 24px;
-  &:hover {
-    background-color: var(--btn-hover);
   }
 `;

@@ -1,21 +1,20 @@
-from django.db import transaction
 from django.contrib.auth.models import User
-from rest_framework.validators import UniqueValidator
+from django.db import transaction
 from plataform.models import (
+    AvaliacaoUsuario,
     Cliente,
     Endereco,
     Freteiro,
+    Log,
     Pedido,
     Produto,
     Proposta,
     TipoVeiculo,
     Veiculo,
-    AvaliacaoUsuario,
-    Log
 )
 from rest_framework import serializers
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.exceptions import MethodNotAllowed
+from rest_framework.validators import UniqueValidator
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
@@ -23,26 +22,34 @@ class EnderecoSerializer(serializers.ModelSerializer):
         model = Endereco
         fields = "__all__"
 
+    def create(self, validated_data):
+        raise MethodNotAllowed("POST")
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
+
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
 
+    def create(self, validated_data):
+        raise MethodNotAllowed("POST")
+
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
+
 
 class RegisterClienteSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
-    cpf = serializers.CharField(
-        validators=[UniqueValidator(queryset=Cliente.objects.all())]
-    )
-    email = serializers.EmailField(
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
+    cpf = serializers.CharField(validators=[UniqueValidator(queryset=Cliente.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
     capa_foto = serializers.ImageField(required=False)
 
     @transaction.atomic
     def create(self, validated_data):
-        full_name_sp = validated_data.pop("full_name").split(' ')
+        full_name_sp = validated_data.pop("full_name").split(" ")
         validated_data["first_name"] = full_name_sp.pop(0)
         validated_data["last_name"] = " ".join(full_name_sp)
 
@@ -52,24 +59,22 @@ class RegisterClienteSerializer(serializers.Serializer):
         cliente.save()
         return cliente
 
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
+
 
 class RegisterFreteiroSerializer(serializers.Serializer):
     full_name = serializers.CharField(required=True)
-    cpf = serializers.CharField(
-        validators=[UniqueValidator(queryset=Freteiro.objects.all())]
-    )
-    email = serializers.EmailField(
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
+    cpf = serializers.CharField(validators=[UniqueValidator(queryset=Freteiro.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField()
     endereco = EnderecoSerializer()
     capa_foto = serializers.ImageField(required=False)
     url_foto = serializers.ImageField(required=False)
-    
 
     @transaction.atomic
     def create(self, validated_data):
-        full_name_sp = validated_data.pop("full_name").split(' ')
+        full_name_sp = validated_data.pop("full_name").split(" ")
         validated_data["first_name"] = full_name_sp.pop(0)
         validated_data["last_name"] = " ".join(full_name_sp)
 
@@ -85,6 +90,9 @@ class RegisterFreteiroSerializer(serializers.Serializer):
 
         return freteiro
 
+    def update(self, instance, validated_data):
+        raise MethodNotAllowed("PUT")
+
 
 class UserSerializer(serializers.ModelSerializer):
     extra_data = serializers.SerializerMethodField()
@@ -94,14 +102,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "first_name", "email", "last_name", "extra_data")
 
     def get_extra_data(self, obj):
-        try:
-            freteiro = Freteiro.objects.get(user_ptr=obj)
-        except:
-            freteiro = None
-        try:
-            cliente = Cliente.objects.get(user_ptr=obj)
-        except:
-            cliente = None
+        freteiro = Freteiro.objects.filter(user_ptr=obj).first()
+        cliente = Cliente.objects.filter(user_ptr=obj).first()
         return {
             "freteiro": freteiro.id if freteiro else None,
             "cliente": cliente.id if cliente else None,
@@ -142,26 +144,26 @@ class FreteiroSerializer(serializers.ModelSerializer):
             freteiro.save()
 
             return freteiro
-    
+
     def update(self, instance, validated_data):
-        address_data = validated_data.pop('endereco', None)
+        address_data = validated_data.pop("endereco", None)
         if address_data:
-            instance.endereco.cep = address_data.get('cep', instance.endereco.CEP)
-            instance.endereco.rua = address_data.get('rua', instance.endereco.rua)
-            instance.endereco.numero = address_data.get('numero', instance.endereco.numero)
-            instance.endereco.bairro = address_data.get('bairro', instance.endereco.bairro)
-            instance.endereco.cidade = address_data.get('cidade', instance.endereco.cidade)
-            instance.endereco.estado = address_data.get('estado', instance.endereco.estado)
-            instance.endereco.complemento = address_data.get('complemento', instance.endereco.complemento)
+            instance.endereco.cep = address_data.get("cep", instance.endereco.CEP)
+            instance.endereco.rua = address_data.get("rua", instance.endereco.rua)
+            instance.endereco.numero = address_data.get("numero", instance.endereco.numero)
+            instance.endereco.bairro = address_data.get("bairro", instance.endereco.bairro)
+            instance.endereco.cidade = address_data.get("cidade", instance.endereco.cidade)
+            instance.endereco.estado = address_data.get("estado", instance.endereco.estado)
+            instance.endereco.complemento = address_data.get("complemento", instance.endereco.complemento)
             instance.endereco.save()
-        instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.email = validated_data.get('email', instance.email)
-        instance.cpf = validated_data.get('cpf', instance.cpf)
-        instance.url_foto = validated_data.get('url_foto', instance.url_foto)
-        instance.capa_foto = validated_data.get('capa_foto', instance.capa_foto)
-        password = validated_data.get('password', None)
+        instance.username = validated_data.get("username", instance.username)
+        instance.first_name = validated_data.get("first_name", instance.first_name)
+        instance.last_name = validated_data.get("last_name", instance.last_name)
+        instance.email = validated_data.get("email", instance.email)
+        instance.cpf = validated_data.get("cpf", instance.cpf)
+        instance.url_foto = validated_data.get("url_foto", instance.url_foto)
+        instance.capa_foto = validated_data.get("capa_foto", instance.capa_foto)
+        password = validated_data.get("password", None)
         if password:
             instance.set_password(password)
         instance.save()
@@ -216,8 +218,13 @@ class PedidoSerializer(serializers.ModelSerializer):
     destino = EnderecoSerializer()
     produto = ProdutoSerializer()
     tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
-    cliente_first_name = serializers.CharField(source='cliente.first_name', read_only=True)
+    cliente_first_name = serializers.CharField(source="cliente.first_name", read_only=True)
     cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
+
+    def to_internal_value(self, data):
+        data["status"] = "EN"
+        data["cliente"] = self.context["request"].user.cliente
+        return super().to_internal_value(data)
 
     class Meta:
         model = Pedido
@@ -242,10 +249,9 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
-        serializer = PedidoSerializer(data=self.context['request'].data)
         origem = validated_data.pop("origem")
         origem = Endereco.objects.create(**origem)
-        
+
         destino = validated_data.pop("destino")
         destino = Endereco.objects.create(**destino)
 
@@ -253,44 +259,59 @@ class PedidoSerializer(serializers.ModelSerializer):
         produto = Produto.objects.create(**produto)
 
         tipos_veiculos = validated_data.pop("tipo_veiculo")
-        
-        try:
-            if (int(len(tipos_veiculos)) == 0):
-                tipos_veiculos = list(map(int,self.context['request'].data["tipo_veiculo[]"].split(",")))
-        except:
-            serializer.is_valid()
+        tipos_veiculos = self.context["request"].data.get("tipo_veiculo[]")
+
+        if tipos_veiculos is None or tipos_veiculos.strip() == "":
             raise serializers.ValidationError({"tipo_veiculo": "tipo_veiculo field is missing"})
 
-        pedido = Pedido.objects.create(
-            **validated_data, origem=origem, destino=destino, produto=produto
-        )
+        tipos_veiculos = list(map(int, tipos_veiculos.split(",")))
+
+        pedido = Pedido.objects.create(**validated_data, origem=origem, destino=destino, produto=produto)
         pedido.tipo_veiculo.set(tipos_veiculos)
 
         return pedido
-        
+
     def update(self, instance, validated_data):
-        instance.status = validated_data.get('status', instance.status)
+        instance.status = validated_data.get("status", instance.status)
         instance.save()
         return instance
 
 
 class VeiculoSerializer(serializers.ModelSerializer):
     url_foto = serializers.ImageField(required=True)
+
     class Meta:
         model = Veiculo
         fields = "__all__"
 
 
 class PropostaSerializer(serializers.ModelSerializer):
+    usuarioDetail = UserSerializer(read_only=True)
+
     class Meta:
         model = Proposta
-        fields = "__all__"
+        fields = (
+            "id",
+            "pedido",
+            "usuario",
+            "usuarioDetail",
+            "veiculo",
+            "valor",
+            "data_criacao",
+            "eh_aceita",
+            "is_contraproposta",
+            "is_esperandoFreteiro",
+            "is_esperandoCliente",
+            "contraproposta",
+            "ehNegada",
+        )
 
 
 class AvaliacaoUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvaliacaoUsuario
         fields = "__all__"
+
 
 class TriggerSerializer(serializers.ModelSerializer):
     class Meta:

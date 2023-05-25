@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import { InputLabelStyles } from ".";
+import styled from 'styled-components';
+import { type InputLabelStyles } from '.';
 
 export const InputLabel = styled.label<InputLabelStyles>`
   display: flex;
   align-items: center;
-  background: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "#1b1b1b"};
+  background: ${({ backgroundColor }) => backgroundColor ?? '#1b1b1b'};
   border-radius: 10px;
   width: 100%;
   border: 2px solid #1b1b1b;
@@ -39,8 +38,8 @@ export const InputLabel = styled.label<InputLabelStyles>`
     width: 100%;
     height: 100%;
     padding: 10px;
-    
-    color: ${(props) => (props.color ? props.color : "#000")};
+
+    color: ${({ color }) => color ?? '#000'};
     background-color: transparent !important;
     outline: none;
     border: none;
@@ -54,11 +53,11 @@ export const InputLabel = styled.label<InputLabelStyles>`
     transition: background-color 5000s ease-in-out 0s;
   }
 
-  input[type="text"]:disabled {
+  input[type='text']:disabled {
     cursor: not-allowed;
   }
 
-  &:has(input[type="text"]:disabled) {
+  &:has(input[type='text']:disabled) {
     opacity: 0.8;
   }
 `;

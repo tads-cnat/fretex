@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { IActive } from "../../interfaces/styledComponents";
-import { Wrapper } from "../../styles";
+import styled from 'styled-components';
+import { Wrapper } from '../../styles/globalStyles';
+import { type IActive } from '../../interfaces/IActive';
 
 export const BgRegister = styled.section`
   background-color: #282828;
@@ -36,9 +36,9 @@ export const BtnTypeUser = styled.button<IActive>`
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
-    width: ${(props) => (props.active ? "100%" : "0")};
+    width: ${({ active }) => (active ? '100%' : '0')};
     height: 3px;
     background-color: var(--theme-primary);
     display: block;

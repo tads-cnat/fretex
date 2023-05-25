@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { ContainerMenu } from "./styles";
+import { Link } from 'react-router-dom';
+import { ContainerMenu } from './styles';
 
 interface IMenu {
   userId: number | undefined;
@@ -16,21 +15,25 @@ const ProfileMenu = ({
   selectedTab,
   isFreteiro,
   ownerPage,
-}: IMenu) => {
+}: IMenu): JSX.Element => {
   return (
     <ContainerMenu>
       <Link
         to={`/perfil/${userId}/`}
-        className={selectedTab === 0 ? "menuBtn active" : "menuBtn"}
-        onClick={() => handleClick(0)}
+        className={selectedTab === 0 ? 'menuBtn active' : 'menuBtn'}
+        onClick={() => {
+          handleClick(0);
+        }}
       >
         Fretes Realizados
       </Link>
       {isFreteiro && (
         <Link
           to={`/perfil/${userId}/veiculos`}
-          className={selectedTab === 1 ? "menuBtn active" : "menuBtn"}
-          onClick={() => handleClick(1)}
+          className={selectedTab === 1 ? 'menuBtn active' : 'menuBtn'}
+          onClick={() => {
+            handleClick(1);
+          }}
         >
           Veículos
         </Link>
@@ -38,16 +41,20 @@ const ProfileMenu = ({
 
       <Link
         to={`/perfil/${userId}/avaliacoes`}
-        className={selectedTab === 2 ? "menuBtn active" : "menuBtn"}
-        onClick={() => handleClick(2)}
+        className={selectedTab === 2 ? 'menuBtn active' : 'menuBtn'}
+        onClick={() => {
+          handleClick(2);
+        }}
       >
         Avaliações
       </Link>
       {ownerPage && (
         <Link
           to={`/perfil/${userId}/editarPerfil`}
-          className={selectedTab === 3 ? "menuBtn active" : "menuBtn"}
-          onClick={() => handleClick(3)}
+          className={selectedTab === 3 ? 'menuBtn active' : 'menuBtn'}
+          onClick={() => {
+            handleClick(3);
+          }}
         >
           Editar Perfil
         </Link>

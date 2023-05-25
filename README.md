@@ -39,8 +39,22 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 # 🔧 Instalação
 
->Descrever os comandos iniciais para começar a colaborar com o desenvolvimento do projeto
+## Backend
+* Comandos executados na pasta /backend
 
+### Sem docker
+* `cp core/local_settings_sample.py local_settings.py` # Se quiser usar SQLITE
+* `pip install -r requirements.txt`
+* `python manage.py migrate`
+* `python manage.py runserver`
+
+### Com docker
+* `cp core/local_settings_sample.py local_settings.py` # Se quiser usar SQLITE
+* `docker compose up`
+
+### Extra
+* `pylint --enable=similarities plataform > lint_result.txt`
+* `pylint plataform > lint_result.txt`
 
 
 # 📄 Documentação

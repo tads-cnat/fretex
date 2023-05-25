@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -39,6 +39,13 @@ export const PropostaContainer2 = styled.div`
     grid-column: 1/-1;
   }
 
+  .containerCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   img {
     height: 50px;
     width: 50px;
@@ -49,6 +56,9 @@ export const PropostaContainer2 = styled.div`
   }
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
+    .containerCards {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 
@@ -63,16 +73,6 @@ export const BtnGreen = styled.button`
 
   &:hover {
     background-color: #386b30;
-  }
-`;
-
-export const BtnYellow = styled(BtnGreen)`
-  background-color: var(--theme-primary);
-  &:hover {
-    background-color: var(--btn-hover);
-  }
-  @media (max-width: 500px) {
-    width: 100%;
   }
 `;
 

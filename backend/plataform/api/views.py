@@ -1,44 +1,43 @@
-from core.api.renders import CustomRenderer
+import django_filters
 from django.contrib.auth.models import User
+from django.db.models import Q
+from rest_framework import status, viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework_extensions.mixins import NestedViewSetMixin
+
+from core.api.renders import CustomRenderer
 from plataform.api.serializers import (
-    RegisterClienteSerializer,
-    RegisterFreteiroSerializer,
-    LoginSerializer,
     AvaliacaoUsuarioSerializer,
-    TriggerSerializer,
-    UserSerializer,
     ClienteSerializer,
     EnderecoSerializer,
     FreteiroSerializer,
+    LoginSerializer,
     PedidoSerializer,
     ProdutoSerializer,
     PropostaSerializer,
+    RegisterClienteSerializer,
+    RegisterFreteiroSerializer,
     TipoVeiculoSerializer,
+    TriggerSerializer,
+    UserSerializer,
     VeiculoSerializer,
 )
 from plataform.models import (
+    AvaliacaoUsuario,
     Cliente,
     Endereco,
     Freteiro,
+    Log,
     Pedido,
     Produto,
     Proposta,
     TipoVeiculo,
     Veiculo,
-    AvaliacaoUsuario,
-    Log
 )
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import status
-
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
-from core.api.helpers import open_api_request_body
-from drf_yasg import openapi
-from rest_framework.authtoken.models import Token
 
 
 class AuthViewSet(viewsets.GenericViewSet):
@@ -71,18 +70,18 @@ class AuthViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         freteiro = serializer.save()
-        return Response(
-            UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED
-        )
+        return Response(UserSerializer(freteiro.user_ptr).data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=["post"], serializer_class=RegisterClienteSerializer)
     def register_cliente(self, request):
         serializer = self.get_serializer(data=request.data)
+        if User.objects.filter(email=request.data.get("email")).exists():
+            return Response({"email": ["Email já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
+        if Cliente.objects.filter(cpf=request.data.get("cpf")).exists():
+            return Response({"cpf": ["CPF já cadastrado"]}, status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         cliente = serializer.save()
-        return Response(
-            UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED
-        )
+        return Response(UserSerializer(cliente.user_ptr).data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=["get"])
     def logout(self, request):
@@ -96,11 +95,14 @@ class EnderecoViewSet(viewsets.ModelViewSet):
     queryset = Endereco.objects.all()
     renderer_classes = [CustomRenderer]
 
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
     queryset = User.objects.all()
     renderer_classes = [CustomRenderer]
+
+
 class FreteiroViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = FreteiroSerializer
@@ -120,12 +122,26 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
     queryset = Pedido.objects.all().distinct()
     renderer_classes = [CustomRenderer]
-    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario"]
+    filterset_fields = ["status", "cliente", "tipo_veiculo", "proposta_set__usuario", "turno_coleta"]
 
-    def create(self, request, *args, **kwargs):
-        request.data["cliente"] = Cliente.objects.get(user_ptr=self.request.user)
-        request.data["status"] = "EN"
-        return super().create(request, *args, **kwargs)
+
+class PropostaPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PropostaSerializer
+    queryset = Proposta.objects.all()
+    renderer_classes = [CustomRenderer]
+
+
+class MinhasPropostasPedidoViewSet(NestedViewSetMixin, viewsets.GenericViewSet, ListModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PropostaSerializer
+    queryset = Proposta.objects.all()
+    renderer_classes = [CustomRenderer]
+
+    def get_queryset(self):
+        return (
+            super().get_queryset().filter(Q(usuario=self.request.user) | Q(contraproposta__usuario=self.request.user))
+        )
 
 
 class ProdutoViewSet(viewsets.ModelViewSet):
@@ -156,7 +172,13 @@ class PropostaViewSet(viewsets.ModelViewSet):
     serializer_class = PropostaSerializer
     queryset = Proposta.objects.all()
     renderer_classes = [CustomRenderer]
-    filterset_fields = ["usuario", "pedido"]
+    filterset_fields = [
+        "usuario",
+        "pedido",
+        "is_contraproposta",
+        "is_esperandoFreteiro",
+        "is_esperandoCliente",
+    ]
 
 
 class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
@@ -169,10 +191,9 @@ class AvaliacaoUsuarioViewSet(viewsets.ModelViewSet):
         request.data["avaliador"] = Cliente.objects.get(user_ptr=self.request.user)
         return super().create(request, *args, **kwargs)
 
+
 class TriggerViewSet(viewsets.ModelViewSet):
     serializer_class = TriggerSerializer
     queryset = Log.objects.all()
     renderer_classes = [CustomRenderer]
     permission_classes = []
-
-

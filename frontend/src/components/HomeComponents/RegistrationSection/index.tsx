@@ -1,11 +1,12 @@
-import { BtnPattern, SpanYellow } from "../../../styles";
-import { RegisterContainer, RegisterUser, Title, Text } from "./styles";
-import imgCliente from "../../../assets/images/ParaClientes.png";
-import imgFreteiro from "../../../assets/images/ParaFreteiros.png";
+import { SpanYellow } from '../../../styles/globalStyles';
+import Button from '../../Global/Button';
+import { RegisterContainer, RegisterUser, Title, Text } from './styles';
+import imgCliente from '../../../assets/images/ParaClientes.png';
+import imgFreteiro from '../../../assets/images/ParaFreteiros.png';
 
-export const Registration = () => {
-  const handleTypeUser = (type: string) => {
-    localStorage.setItem("typeUser", type);
+export const Registration = (): JSX.Element => {
+  const handleTypeUser = (type: string): void => {
+    localStorage.setItem('typeUser', type);
   };
 
   return (
@@ -15,21 +16,29 @@ export const Registration = () => {
           Para Clientes<SpanYellow>.</SpanYellow>
         </Title>
         <Text>Publique seus pedidos de fretes.</Text>
-        <BtnPattern to="/register" onClick={() => handleTypeUser('cliente')}>
-          Cadastre-se
-        </BtnPattern>
+
+        <Button
+          link="/register"
+          onClick={() => {
+            handleTypeUser('cliente');
+          }}
+        >
+          cadastre-se
+        </Button>
       </RegisterUser>
       <RegisterUser img={imgFreteiro}>
         <Title>
           Para Freteiros<SpanYellow>.</SpanYellow>
         </Title>
         <Text> Encontre as melhores cargas para o seu veículo.</Text>
-        <BtnPattern
-          to="/register"
-          onClick={() => handleTypeUser('freteiro')}
+        <Button
+          link="/register"
+          onClick={() => {
+            handleTypeUser('freteiro');
+          }}
         >
-          Cadastre-se
-        </BtnPattern>
+          cadastre-se
+        </Button>
       </RegisterUser>
     </RegisterContainer>
   );

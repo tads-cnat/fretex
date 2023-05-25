@@ -8,28 +8,23 @@ import {
   ContainerCalendar,
   ContainerImgMain,
   ContainerImg,
-  BtnYellow,
-} from "./styles";
-import caixa from "../../../assets/images/caixas.png";
-import Loc from "../../../assets/images/geo-alt.svg";
-import Arrow from "../../../assets/images/arrow-right.svg";
-import Calendar from "../../../assets/images/calendar.svg";
-import { IPedido } from "../../../interfaces";
+} from './styles';
+import caixa from '../../../assets/images/caixas.png';
+import Loc from '../../../assets/images/geo-alt.svg';
+import Arrow from '../../../assets/images/arrow-right.svg';
+import Calendar from '../../../assets/images/calendar.svg';
+import { type IPedido } from '../../../interfaces';
+import { formatDate } from '../../../utils/formatDate';
+import Button from '../../Global/Button';
 
-const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
-  const formatDate = () => {
-    const date = pedido.data_entrega.replaceAll("-","/")
-    const year = date.slice(0,4)
-    const day = date.slice(8)
-    const month = date.slice(4,8)
-    return `${day}${month}${year}`
-  }
-
+const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (
     <ContainerMain>
       <ContainerInfoBtn>
         <ContainerInfos>
-          <p>{pedido.cliente_first_name} {pedido.cliente_last_name}</p>
+          <p>
+            {pedido.cliente_first_name} {pedido.cliente_last_name}
+          </p>
           <h2>{pedido.produto.nome}</h2>
           <ContainerEndereco>
             <End>
@@ -44,10 +39,10 @@ const BoxFretes = ({ pedido }: { pedido: IPedido }) => {
           </ContainerEndereco>
           <ContainerCalendar>
             <img src={Calendar} alt="Calendária" />
-            <span>Entregar até {formatDate()}</span>
+            <span>Entregar até {formatDate(pedido.data_entrega)}</span>
           </ContainerCalendar>
         </ContainerInfos>
-        <BtnYellow to={`/fretes/${pedido.id}`}>Negociar</BtnYellow>
+        <Button link={`/fretes/${pedido.id}`}>Negociar</Button>
       </ContainerInfoBtn>
       <ContainerImgMain>
         {pedido.produto.imagem_url ? (

@@ -6,30 +6,24 @@ import {
   RegisterAddress,
   Login,
   ContainerInfos,
-  BtnYellow,
-} from "./styles";
-import InputMask from "react-input-mask";
-import perfil from "../../../assets/images/imgperfil.svg";
-import Email from "../../../assets/Svg/Email";
-import Loc from "../../../assets/Svg/Loc";
-import User from "../../../assets/Svg/User";
-import Password from "../../../assets/Svg/Password";
-import ClosedEye from "../../../assets/Svg/ClosedEye";
-import Eye from "../../../assets/Svg/Eye";
-import { SpanYellow } from "../../../styles";
-import { useEffect, useState } from "react";
-import { IFreteiroFormData } from "../../../interfaces";
-import { Link, useNavigate } from "react-router-dom";
-import { schemaFreteiro } from "../../../pages/ResgisterUser/schemas";
-import { useToggle } from "../../../hooks/useToggle";
-import { useFreteiroForm } from "../../../hooks/useFreteiroForm";
-import { useAddress } from "../../../hooks/useAddress";
-import { toast } from 'react-toastify'
+} from './styles';
+import perfil from '../../../assets/images/imgperfil.svg';
+import Loc from '../../../assets/Svg/Loc';
+import { SpanYellow } from '../../../styles/globalStyles';
+import { useEffect, useState } from 'react';
+import { type IFreteiroFormData } from '../../../interfaces';
+import { Link, useNavigate } from 'react-router-dom';
+import { schemaFreteiro } from '../../../pages/ResgisterUser/schemas';
+import { useFreteiroForm } from '../../../hooks/useFreteiroForm';
+import { useAddress } from '../../../hooks/useAddress';
+import { toast } from 'react-toastify';
+import Button from '../../Global/Button';
+import { Input } from '../../Input';
+import { inputs } from './inputs';
+import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
-const RegisterFreteiroForm = () => {
+const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
-  const { value: password, toggle: togglePassword } = useToggle();
-  const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
 
   const {
     register,
@@ -37,34 +31,25 @@ const RegisterFreteiroForm = () => {
     formState: { errors },
     setValue,
     setFocus,
-    completeAddress
+    completeAddress,
   } = useAddress<IFreteiroFormData>(schemaFreteiro);
-  
+
   const navigate = useNavigate();
 
   const { onSubmit, error } = useFreteiroForm({
     onSuccess: () => {
-      toast.success('Freteiro cadastrado com sucesso!')
-      navigate("/login")},
+      toast.success('Freteiro cadastrado com sucesso!');
+      navigate('/login');
+    },
   });
 
-  const handlePassword = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    togglePassword();
-  };
-
-  const handleConfirmPassword = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    toggleConfirmPassword();
-  };
-
   useEffect(() => {
-    setFocus("email");
+    setFocus('email');
   }, [setFocus]);
 
-  const onChange = (e: any) => {
+  const onChange = (e: any): void => {
     const file = e.target.files[0];
-    setValue("url_foto", file);
+    setValue('url_foto', file);
     setImagePreview(URL.createObjectURL(file));
   };
 
@@ -76,158 +61,115 @@ const RegisterFreteiroForm = () => {
             <h1>Crie sua conta</h1>
             <PerfilImg>
               <label>
-                <img src={imagePreview ? imagePreview : perfil} alt="perfil" />
+                <img src={imagePreview || perfil} alt="perfil" />
                 <input
                   type="file"
-                  {...register("url_foto")}
+                  {...register('url_foto')}
                   accept="image/jpeg,image/png,image/gif"
                   onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>
-                {/*errors.url_foto && <p className="error">{errors.url_foto?.message}</p>*/}
+                {/* {errors.url_foto != null && (
+                  <p className="error">{errors.url_foto?.message}</p>
+                )} */}
               </label>
             </PerfilImg>
-            <label>
-              <Email />
-              <input
-                {...register("email")}
-                type="email"
-                autoComplete="on"
-                placeholder="Seu E-mail"
+            {inputs.map((input, index) => (
+              <Input
+                key={index}
+                {...register(`${input.name}`)}
+                onChange={
+                  input.onChange !== undefined
+                    ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                        input.onChange(e, setValue);
+                      }
+                    : undefined
+                }
+                type={input.type}
+                label={input.label}
+                placeholder={input.placeholder}
+                svg={input.svg}
+                error={errors[input.name]}
+                required={input.required}
               />
-            </label>
-            {errors.email && <p className="error">{errors.email?.message}</p>}
-            <label>
-              <User />
-              <input
-                {...register("full_name")}
-                type="text"
-                placeholder="Seu nome completo"
-              />
-            </label>
-            {errors.full_name && (
-              <p className="error">{errors.full_name?.message}</p>
-            )}
-            <label>
-              <User />
-              <InputMask
-                mask="999.999.999-99"
-                {...register("cpf")}
-                placeholder="Seu cpf"
-              ></InputMask>
-            </label>
-            {errors.cpf && <p className="error">{errors.cpf?.message}</p>}
-            <label>
-              <Password />
-              <input
-                {...register("password")}
-                type={password === true ? "text" : "password"}
-                placeholder="Sua senha"
-              />
-              <button type="button" onClick={handlePassword}>
-                {password ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.password && (
-              <p className="error">{errors.password?.message}</p>
-            )}
-            <label>
-              <Password />
-              <input
-                {...register("confirmPassword")}
-                type={confirmPassword === true ? "text" : "password"}
-                placeholder="Confirme sua senha"
-              />
-              <button type="button" onClick={handleConfirmPassword}>
-                {confirmPassword ? <ClosedEye /> : <Eye />}
-              </button>
-            </label>
-            {errors.confirmPassword && (
-              <p className="error">{errors.confirmPassword?.message}</p>
-            )}
+            ))}
           </RegisterPerson>
           <RegisterAddress>
             <h1 className="title">Seu Endereço</h1>
-            <label>
-              <Loc />
-              <InputMask
-                mask="99999-999"
-                {...register("endereco.CEP")}
-                placeholder="Seu CEP"
-                onBlur={completeAddress}
-              ></InputMask>
-            </label>
-            {errors.endereco?.CEP && (
-              <p className="error">{errors.endereco.CEP?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.rua")}
-                type="text"
-                placeholder="Sua rua"
-              />
-            </label>
-            {errors.endereco?.rua && (
-              <p className="error">{errors.endereco.rua?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.numero")}
-                type="text"
-                placeholder="Número da sua casa"
-              />
-            </label>
-            {errors.endereco?.numero && (
-              <p className="error">{errors.endereco.numero?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.bairro")}
-                type="text"
-                placeholder="Seu bairro"
-              />
-            </label>
-            {errors.endereco?.bairro && (
-              <p className="error">{errors.endereco.bairro?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.cidade")}
-                type="text"
-                placeholder="Sua cidade"
-              />
-            </label>
-            {errors.endereco?.cidade && (
-              <p className="error">{errors?.endereco.cidade.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.estado")}
-                type="text"
-                placeholder="Seu estado"
-              />
-            </label>
-            {errors.endereco?.estado && (
-              <p className="error">{errors.endereco.estado?.message}</p>
-            )}
-            <label>
-              <Loc />
-              <input
-                {...register("endereco.complemento")}
-                type="text"
-                placeholder="Complemento"
-              />
-            </label>
-            {errors.endereco?.complemento && (
-              <p className="error">{errors.endereco.complemento?.message}</p>
-            )}
-            {error && <p className="error">{error}</p>}
-            <BtnYellow>Cadastre-se</BtnYellow>
+            <Input
+              {...register('endereco.CEP')}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChangeInputCEP(e, setValue, 'endereco.CEP');
+              }}
+              type="text"
+              label="CEP"
+              placeholder="Seu CEP"
+              svg={<Loc />}
+              error={errors.endereco?.CEP}
+              required={true}
+              onBlur={completeAddress}
+            />
+            <Input
+              {...register('endereco.rua')}
+              type="text"
+              label="Rua"
+              placeholder="Sua rua"
+              svg={<Loc />}
+              error={errors.endereco?.rua}
+              required={true}
+            />
+            <Input
+              {...register('endereco.numero')}
+              type="text"
+              label="Número"
+              placeholder="Número da sua casa"
+              svg={<Loc />}
+              error={errors.endereco?.numero}
+              required={true}
+            />
+
+            <Input
+              {...register('endereco.bairro')}
+              type="text"
+              label="Bairro"
+              placeholder="Seu bairro"
+              svg={<Loc />}
+              error={errors.endereco?.bairro}
+              required={true}
+            />
+
+            <Input
+              {...register('endereco.cidade')}
+              type="text"
+              label="Cidade"
+              placeholder="Sua cidade"
+              svg={<Loc />}
+              error={errors.endereco?.cidade}
+              required={true}
+            />
+
+            <Input
+              {...register('endereco.estado')}
+              type="text"
+              label="Estado"
+              placeholder="Seu estado"
+              svg={<Loc />}
+              error={errors.endereco?.estado}
+              required={true}
+            />
+
+            <Input
+              {...register('endereco.complemento')}
+              type="text"
+              label="Complemento"
+              placeholder="Complemento..."
+              svg={<Loc />}
+              error={errors.endereco?.complemento}
+            />
+            {error !== '' && <p className="error">{error}</p>}
+            <Button isButton type="submit">
+              Cadastre-se
+            </Button>
           </RegisterAddress>
         </form>
         <Login>
@@ -247,7 +189,7 @@ const RegisterFreteiroForm = () => {
 
             <h2>Conta Freteiro</h2>
             <p>
-              Na conta de freteiro você pode realizar propostas para vários 
+              Na conta de freteiro você pode realizar propostas para vários
               pedidos de fretes diferentes, e fazer sua grana.
             </p>
           </section>

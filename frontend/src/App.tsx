@@ -1,15 +1,16 @@
-import { GlobalStyle, StyledApp } from "./styles";
-import Routes from "./routes/Routes";
-import { Toast } from "./components/Toast";
+import { GlobalStyles } from './styles/globalStyles';
+import Routes from './routes/Routes';
+import { Toast } from './components/Toast';
+import MyThemeProvider from './styles/MyThemeProvider';
 
-function App() {
+const App = (): JSX.Element => {
   return (
-    <StyledApp>
-      <GlobalStyle />
+    <MyThemeProvider>
+      <GlobalStyles />
       <Routes />
       <Toast />
-    </StyledApp>
+    </MyThemeProvider>
   );
-}
+};
 
 export default App;

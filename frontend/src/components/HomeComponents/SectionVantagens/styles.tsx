@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IRegisterImage } from "../../../interfaces/styledComponents";
+import { type IRegisterImage } from "../../../interfaces/styledComponents";
 
 export const VantagensContainer = styled.section<IRegisterImage>`
   background-color: var(--text-dark);

@@ -1,6 +1,4 @@
-import React from "react";
-
-const ClosedEye = () => {
+const ClosedEye = ():JSX.Element => {
   return (
     <svg
       width="15"

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { BtnPattern } from "../../../styles";
+import styled from 'styled-components';
+import { type IStatusColors } from '../../../interfaces/styledComponents';
 
 export const Container = styled.section`
   border: 1px solid #eaeaea;
@@ -13,7 +13,7 @@ export const ContentMain = styled.div`
   gap: 10px;
 `;
 
-export const ContentHeader = styled.header`
+export const ContentHeader = styled.header<IStatusColors>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,10 +22,10 @@ export const ContentHeader = styled.header`
   margin-bottom: 20px;
   span {
     padding: 2px 30px;
-    color: #868830;
+    color: ${({ color }) => color};
     font-size: small;
     font-weight: 400;
-    background-color: #f7f9b3;
+    background-color: ${({ bg }) => bg};
     border-radius: 16px;
   }
 

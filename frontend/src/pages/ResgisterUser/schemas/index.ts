@@ -36,7 +36,7 @@ export const schemaFreteiro = yup.object({
           .test("type", "We only support jpeg", function (value) {
             return value && value[0] && value[0].type === "image/jpeg";
           }),
-        }),*/
+        }), */
     email: yup
         .string()
         .email("Email inválido")
@@ -69,7 +69,7 @@ export const schemaFreteiro = yup.object({
         numero: yup
             .number()
             .transform((value) => (isNaN(value) ? 0 : value))
-            .min(1, "mínimo de um números")
+            .min(1, "Mínimo de um número")
             .required('Numero Obrigatório'),
         bairro: yup
             .string()

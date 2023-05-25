@@ -13,7 +13,7 @@ export const schemaPedido = yup.object({
         rua: yup
             .string()
             .required('Rua Obrigatória'),
-        CEP: yup //verificar melhor o cep
+        CEP: yup // verificar melhor o cep
             .string()
             .transform((value) => (value.replaceAll("_", "").replace("-", "")))
             .min(8, "CEP inválido")
@@ -38,7 +38,7 @@ export const schemaPedido = yup.object({
         rua: yup
             .string()
             .required('Rua Obrigatória'),
-        CEP: yup //verificar melhor o cep
+        CEP: yup // verificar melhor o cep
             .string()
             .transform((value) => (value.replaceAll("_", "").replace("-", "")))
             //   .oneOf([yup.ref('origem.CEP'), ], "Os CEPs não devem ser iguais")
