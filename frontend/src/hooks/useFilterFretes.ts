@@ -35,7 +35,7 @@ const useFilterFretes = (): IFilterFretes => {
   const query = useMemo(
     () =>
       objToQueryString({
-        status: 'EN',
+        status__in: 'EN',
       }),
     [],
   );
