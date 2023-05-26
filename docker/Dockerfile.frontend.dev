@@ -1,4 +1,4 @@
 FROM node:16
 WORKDIR /code/frontend
 COPY . /code
-CMD yarn; yarn start
+CMD yarn; yarn dev
