@@ -13,17 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from core.api.router import router, schema_view
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from core.api.router import router, schema_view
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls")),
+    path("silk/", include("silk.urls", namespace="silk")),
     re_path(
         r"^api(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
