@@ -19,8 +19,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from core.api.router import router, schema_view
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
