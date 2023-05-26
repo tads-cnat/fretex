@@ -158,9 +158,9 @@ const Index = (): JSX.Element => {
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
       else if (value) formData.append(`${key}`, value);
     });
-    for (const pair of formData.entries()) {
+    /*for (const pair of formData.entries()) {
       console.log(`${pair[0]}, ${pair[1]}`);
-    }
+    }*/
     PedidoService.post(formData)
       .then(() => {
         toast.success('Pedido cadastrado com sucesso!');
