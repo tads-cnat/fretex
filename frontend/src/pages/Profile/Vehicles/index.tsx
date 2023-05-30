@@ -58,7 +58,7 @@ const Vehicles = (): JSX.Element => {
         setLoading(false);
       });
 
-      TipoVeiculoService.getAll()
+    TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
       })
@@ -87,7 +87,7 @@ const Vehicles = (): JSX.Element => {
     }
   };
 
-  const onChange = (e: any): void => {
+  const onChangeImage = (e: any): void => {
     try {
       const file = e.target.files[0];
       setImagemVeiculo(file);
@@ -198,20 +198,17 @@ const Vehicles = (): JSX.Element => {
             <ContainerImagem>
               <label>
                 <Preview>
-                  {imagemPreview !== undefined ? (
-                    <img src={imagemPreview} alt="veiculo" />
-                  ) : (
-                    <img src={veiculo} alt="veiculo" />
-                  )}
+                  <img src={imagemPreview || veiculo} alt="veiculo" />
                 </Preview>
                 <input
+                  id="preview"
                   type="file"
                   {...register('url_foto')}
                   accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
+                  onChange={onChangeImage}
                 />
+                <p>Clique para inserir uma imagem</p>
               </label>
-              <p>Clique para inserir uma imagem</p>
             </ContainerImagem>
           </ContainerMain>
           <Button isButton type="submit">

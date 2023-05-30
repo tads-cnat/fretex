@@ -8,8 +8,10 @@ import {
   EntregaDiv,
   EntregaDivContent,
   ButtonDiv,
+  Preview,
 } from './styles';
 import Button from '../../Global/Button';
+import caixas from '../../../assets/images/caixas.png';
 import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
@@ -111,6 +113,7 @@ const Index = (): JSX.Element => {
   const [errorImg, setErrorImg] = useState('');
   const [errorDate, setErrorDate] = useState('');
   const [errorTurno, setErrorTurno] = useState('');
+  const [imagemPreview, setImagemPreview] = useState('');
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     setErrorImg('');
@@ -180,6 +183,11 @@ const Index = (): JSX.Element => {
         console.log(error);
       }); // eslint-disable-next-line
   }, []);
+
+  const onChangeImage = (e: any) => {
+    const preview = e.target.files[0];
+    setImagemPreview(URL.createObjectURL(preview));
+  };
 
   return (
     <>
@@ -405,12 +413,16 @@ const Index = (): JSX.Element => {
               <div>
                 <label>
                   <span>Foto do produto</span>
-                  <input
-                    {...register('produto.imagem_url')}
-                    type="file"
-                    //  onChange={handleChange}
-                    accept="image/jpeg,image/png,image/gif"
-                  />
+                  <Preview>
+                    <img src={imagemPreview || caixas} alt="imagemProduto" />
+                    <input
+                      {...register('produto.imagem_url')}
+                      type="file"
+                      onChange={onChangeImage}
+                      accept="image/jpeg,image/png,image/gif"
+                    />
+                  </Preview>
+                  <p>Clique para inserir uma imagem</p>
                 </label>
                 {errorImg !== '' && Boolean(errorImg) && (
                   <p className="error">{errorImg}</p>

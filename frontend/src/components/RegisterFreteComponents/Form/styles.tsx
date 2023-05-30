@@ -133,6 +133,7 @@ export const ProdutoDivContent = styled.div`
     display: flex;
     flex-direction: column;
   }
+
   .checkbox_tipoveiculo {
     display: flex;
     align-items: center;
@@ -191,5 +192,20 @@ export const ButtonDiv = styled.div`
   @media (max-width: 540px) {
     justify-content: center;
     padding: 20px 0px 0px 0px;
+  }
+`;
+export const Preview = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 260px;
+  width: 260px;
+  cursor: pointer;
+  img {
+    object-fit: cover;
+    max-width: 100%;
+  }
+  input {
+    display: none;
   }
 `;

@@ -73,4 +73,3 @@ export const Preview = styled.div`
     max-width: 100%;
   }
 `;
-
