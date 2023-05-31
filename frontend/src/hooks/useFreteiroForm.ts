@@ -10,12 +10,15 @@ interface Props {
 interface IUseFreteiroForm {
   onSubmit: SubmitHandler<IFreteiroFormData>;
   error: string;
+  isLoading: boolean;
 }
 
 export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<IFreteiroFormData> = (data) => {
+    setIsLoading(true);
     if (data.url_foto.length === 0) {
       setError('Imagem obrigatória!');
       return;
@@ -41,11 +44,13 @@ export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
         } else if (Object.prototype.hasOwnProperty.call(errors, 'url_foto')) {
           setError(errors.url_foto[0]);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return {
     onSubmit,
     error,
+    isLoading,
   };
 };

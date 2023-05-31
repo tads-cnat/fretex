@@ -1,10 +1,12 @@
-import React from 'react';
-import { LinkYellow, BtnYellow } from './styles';
-import { type MouseEvent } from 'react';
+import React from "react";
+import { LinkYellow, BtnYellow } from "./styles";
+import { type MouseEvent } from "react";
+import Loading from "../Loading";
 
 interface IButton {
-  type?: 'button' | 'submit' | 'reset' | undefined;
-  fontSize?: 'medium' | 'large';
+  type?: "button" | "submit" | "reset" | undefined;
+  isDisabled?: boolean;
+  fontSize?: "medium" | "large";
   link?: string;
   children: any;
   onClick?: (e: MouseEvent<HTMLElement>) => void;
@@ -17,25 +19,38 @@ const Button = ({
   onClick,
   isButton,
   type,
+  isDisabled,
   fontSize,
 }: IButton): JSX.Element => {
   if (isButton === true) {
-    if (fontSize === 'large') {
+    if (fontSize === "large") {
       return (
-        <BtnYellow type={type} fontSize="var(--font-large)" onClick={onClick}>
+        <BtnYellow
+          type={type}
+          fontSize="var(--font-large)"
+          onClick={onClick}
+          disabled={isDisabled}
+        >
+          {/* {isDisabled ? <Loading /> : children} */}
           {children}
         </BtnYellow>
       );
     } else {
       return (
-        <BtnYellow type={type} fontSize="var(--font-medium)" onClick={onClick}>
+        <BtnYellow
+          type={type}
+          fontSize="var(--font-medium)"
+          onClick={onClick}
+          disabled={isDisabled}
+        >
+          {/* {isDisabled ? <Loading/> : children} */}
           {children}
         </BtnYellow>
       );
     }
   } else {
     return (
-      <LinkYellow to={link ?? ''} onClick={onClick}>
+      <LinkYellow to={link ?? ""} onClick={onClick}>
         {children}
       </LinkYellow>
     );

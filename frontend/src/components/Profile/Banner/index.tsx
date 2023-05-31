@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import Button from '../../Global/Button';
+import { set } from 'react-hook-form';
 
 interface IBanner {
   user: IFreteiro | ICliente;
@@ -21,9 +22,11 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const [imageBanner, setImageBanner] = useState();
   const [capaFoto, setCapaFoto] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = (e: any): void => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData();
     const userUpdate = {
       capa_foto: capaFoto,
@@ -51,6 +54,7 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
           console.log(res.response.data);
         });
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -83,7 +87,7 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
               accept="image/jpeg,image/png,image/gif"
               onChange={onChange}
             />
-            <Button isButton type="submit" onClick={handleClick}>
+            <Button isButton type="submit" onClick={handleClick} isDisabled={isLoading}>
               Enviar
             </Button>
           </Form>

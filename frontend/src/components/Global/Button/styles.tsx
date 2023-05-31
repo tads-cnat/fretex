@@ -39,4 +39,8 @@ export const BtnYellow = styled.button<IBtn>`
   &:hover {
     background-color: var(--btn-hover);
   }
+  &:disabled {
+    background-color: var(--btn-disabled);
+    cursor: not-allowed;
+  }
 `;
