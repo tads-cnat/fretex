@@ -13,7 +13,7 @@ export const schemaVeiculo = yup.object({
     .string()
     .min(7, "Placa do veículo inválida")
     .max(7, "Placa do veículo inválida")
-    .matches(/^[a-zA-Z]{3}[0-9]{4}$/, "Placa do veículo inválida")
+    .matches(/^[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/, "Placa do veículo inválida")
     .required("Placa do veículo Obrigatória"),
   cor: yup
     .string()
