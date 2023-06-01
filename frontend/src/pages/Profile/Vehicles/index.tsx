@@ -6,7 +6,6 @@ import {
   ContainerMain,
   ContainerInputs,
   ContainerImagem,
-  Preview,
   QtdVeiculos,
 } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
@@ -22,6 +21,7 @@ import { useParams } from 'react-router-dom';
 import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
 import Button from '../../../components/Global/Button';
+import Preview from '../../../components/Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -195,21 +195,16 @@ const Vehicles = (): JSX.Element => {
                 <p className="error">{errors.tipo_veiculo.message}</p>
               )}
             </ContainerInputs>
-            <ContainerImagem>
-              <label>
-                <Preview>
-                  <img src={imagemPreview || veiculo} alt="veiculo" />
-                </Preview>
-                <input
-                  id="preview"
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChangeImage}
-                />
-                <p>Clique para inserir uma imagem</p>
-              </label>
-            </ContainerImagem>
+            <Preview img={imagemPreview} imgDefault={veiculo} width={'260px'}>
+              <input
+                id="preview"
+                type="file"
+                {...register('url_foto')}
+                accept="image/jpeg,image/png,image/gif"
+                onChange={onChangeImage}
+              />
+              <p>Clique para inserir uma imagem</p>
+            </Preview>
           </ContainerMain>
           <Button isButton type="submit">
             Cadastrar Veículo

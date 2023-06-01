@@ -41,35 +41,3 @@ export const ContainerInputs = styled.div`
     margin: 0 10px 0 5px;
   }
 `;
-
-export const ContainerImagem = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  label {
-    cursor: pointer;
-  }
-  input {
-    display: none;
-  }
-  p {
-    color: var(--text-grey-1);
-    font-size: var(--font-medium);
-  }
-
-  @media (max-width: 768px) {
-    order: -1;
-  }
-`;
-export const Preview = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 260px;
-  width: 260px;
-  img {
-    object-fit: cover;
-    max-width: 100%;
-  }
-`;

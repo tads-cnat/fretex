@@ -194,18 +194,3 @@ export const ButtonDiv = styled.div`
     padding: 20px 0px 0px 0px;
   }
 `;
-export const Preview = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 260px;
-  width: 260px;
-  cursor: pointer;
-  img {
-    object-fit: cover;
-    max-width: 100%;
-  }
-  input {
-    display: none;
-  }
-`;

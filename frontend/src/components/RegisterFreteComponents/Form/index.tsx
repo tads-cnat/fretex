@@ -8,7 +8,6 @@ import {
   EntregaDiv,
   EntregaDivContent,
   ButtonDiv,
-  Preview,
 } from './styles';
 import Button from '../../Global/Button';
 import caixas from '../../../assets/images/caixas.png';
@@ -24,6 +23,7 @@ import { Turnos } from './turnos';
 import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import Preview from '../../Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -411,19 +411,20 @@ const Index = (): JSX.Element => {
                 </div>
               </div>
               <div>
-                <label>
-                  <span>Foto do produto</span>
-                  <Preview>
-                    <img src={imagemPreview || caixas} alt="imagemProduto" />
-                    <input
-                      {...register('produto.imagem_url')}
-                      type="file"
-                      onChange={onChangeImage}
-                      accept="image/jpeg,image/png,image/gif"
-                    />
-                  </Preview>
+                <span>Foto do produto</span>
+                <Preview
+                  img={imagemPreview}
+                  imgDefault={caixas}
+                  width={'260px'}
+                >
+                  <input
+                    {...register('produto.imagem_url')}
+                    type="file"
+                    onChange={onChangeImage}
+                    accept="image/jpeg,image/png,image/gif"
+                  />
                   <p>Clique para inserir uma imagem</p>
-                </label>
+                </Preview>
                 {errorImg !== '' && Boolean(errorImg) && (
                   <p className="error">{errorImg}</p>
                 )}
