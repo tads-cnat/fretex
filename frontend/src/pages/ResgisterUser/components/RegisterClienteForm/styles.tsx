@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Animation } from '../../../styles/globalStyles';
+import { Animation } from '../../../../styles/globalStyles';
 
 export const ContainerPrincipal = styled(Animation)`
   display: grid;

@@ -1,11 +1,12 @@
 import { Container, Description, Title } from './styles';
 import { Wrapper } from '../../styles/globalStyles';
-import HomeBox from '../../components/HomeComponents/HomeBox/index';
-
-import HomeVideoSection from '../../components/HomeComponents/HomeVideoSection';
-import SectionVantagens from '../../components/HomeComponents/SectionVantagens';
-import Registration from '../../components/HomeComponents/RegistrationSection';
-import InfoSection from '../../components/HomeComponents/InfoSection';
+import {
+  HomeBox,
+  HomeVideoSection,
+  SectionVantagens,
+  Registration,
+  InfoSection,
+} from './components';
 import Layout from '../../components/Layout';
 import Head from '../../components/Head';
 import { homeBoxData } from './contants';

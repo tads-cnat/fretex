@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { PerfilImg } from '../../../components/RegisterComponents/RegisterFreteiroForm/styles';
-import { type IActive } from '../../../interfaces/IActive';
+import styled from "styled-components";
+import { PerfilImg } from "../../ResgisterUser/components/RegisterFreteiroForm/styles";
+import { type IActive } from "../../../interfaces/IActive";
 
 export const Container = styled.div`
   margin-bottom: 50px;
@@ -39,21 +39,21 @@ export const PerfilImgUpdate = styled(PerfilImg)`
 
 export const InputsContainerGrid = styled.div<IActive>`
   display: grid;
-  grid-template-columns: ${({ active }) => (active ? '1fr 2fr' : '1fr')};
-  max-width: ${({ active }) => (active ? '100%' : '400px')};
-  margin: ${({ active }) => (active ? '0' : '0 auto')};
+  grid-template-columns: ${({ active }) => (active ? "1fr 2fr" : "1fr")};
+  max-width: ${({ active }) => (active ? "100%" : "400px")};
+  margin: ${({ active }) => (active ? "0" : "0 auto")};
   gap: 20px;
   margin-bottom: 20px;
 
   @media (max-width: 1200px) {
-    grid-template-columns: ${({ active }) => active && '1fr'};
+    grid-template-columns: ${({ active }) => active && "1fr"};
   }
 `;
 
 export const GridContent = styled.div<IActive>`
   h2 {
     margin-bottom: 20px;
-    display: ${({ active }) => (active ? 'inline-block' : 'none')};
+    display: ${({ active }) => (active ? "inline-block" : "none")};
   }
 `;
 

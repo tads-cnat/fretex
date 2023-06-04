@@ -1,7 +1,7 @@
-import { type IHomeBox } from '../../../interfaces/Home';
+import { type IHomeBox } from '../../../../interfaces/Home';
 import { Box, BoxWithLines, Description, Image, Title } from './styles';
 
-const HomeBox = ({ title, desc, img, line }: IHomeBox): JSX.Element => {
+export const HomeBox = ({ title, desc, img, line }: IHomeBox): JSX.Element => {
   return (
     <>
       {line ? (
@@ -20,5 +20,3 @@ const HomeBox = ({ title, desc, img, line }: IHomeBox): JSX.Element => {
     </>
   );
 };
-
-export default HomeBox;

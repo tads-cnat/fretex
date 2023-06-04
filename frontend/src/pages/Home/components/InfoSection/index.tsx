@@ -1,9 +1,9 @@
 import { ContainerInfos, ContainerImg, ContainerInfo, Img } from './styles';
-import ImgInfo from '../../../assets/images/InfoEntregas.png';
-import fundo from '../../../assets/images/fundoBranco.svg';
-import fundoBaixo from '../../../assets/images/fundoBrancoBaixo.svg';
+import ImgInfo from '../../../../assets/images/InfoEntregas.png';
+import fundo from '../../../../assets/images/fundoBranco.svg';
+import fundoBaixo from '../../../../assets/images/fundoBrancoBaixo.svg';
 
-const InfoSection = (): JSX.Element => {
+export const InfoSection = (): JSX.Element => {
   return (
     <ContainerInfos img={fundo} img2={fundoBaixo}>
       <ContainerImg>
@@ -18,5 +18,3 @@ const InfoSection = (): JSX.Element => {
     </ContainerInfos>
   );
 };
-
-export default InfoSection;

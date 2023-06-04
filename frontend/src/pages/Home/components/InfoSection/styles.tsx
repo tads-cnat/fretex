@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { type IRegisterImage2 } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type IRegisterImage2 } from '../../../../interfaces/styledComponents';
 
 export const ContainerInfos = styled.section<IRegisterImage2>`
   background: rgba(246, 173, 8, 0.75);

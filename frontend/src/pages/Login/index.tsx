@@ -4,7 +4,7 @@ import Password from '../../assets/Svg/Password';
 import {
   ContainerPrincipal,
   ContainerForm,
-} from '../../components/RegisterComponents/RegisterClienteForm/styles';
+} from '../ResgisterUser/components/RegisterClienteForm/styles';
 import { ContainerContent2 } from './styles';
 import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import { BgRegister } from '../ResgisterUser/style';

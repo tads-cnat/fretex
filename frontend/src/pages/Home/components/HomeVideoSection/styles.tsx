@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const VideoSection = styled.div`
   background: var(--bg-dark);
@@ -56,4 +56,3 @@ export const VideoBtnWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-

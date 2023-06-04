@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { type IRegisterImage } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type IRegisterImage } from '../../../../interfaces/styledComponents';
 
 export const VantagensContainer = styled.section<IRegisterImage>`
   background-color: var(--text-dark);
@@ -8,8 +8,6 @@ export const VantagensContainer = styled.section<IRegisterImage>`
   background-position: bottom 40px left 40px;
   padding: 0 0 30px 0;
   box-shadow: inset 0 2rem white;
-
-  
 
   @media (max-width: 1200px) {
     background-position: bottom 40px left 20px;
@@ -63,7 +61,7 @@ export const VantagensText = styled.p`
 
   &::after {
     position: relative;
-    content: "";
+    content: '';
     width: 100%;
     height: 4px;
     display: block;

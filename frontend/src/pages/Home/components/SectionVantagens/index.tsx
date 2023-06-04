@@ -1,4 +1,4 @@
-import { SpanYellow, Wrapper } from '../../../styles/globalStyles';
+import { SpanYellow, Wrapper } from '../../../../styles/globalStyles';
 import {
   VantagensContainer,
   VantagensFlex,
@@ -8,12 +8,12 @@ import {
   VantagensP,
   VantagensText,
 } from './styles';
-import diferencial from '../../../assets/images/diferencial.png';
-import comunicacao from '../../../assets/images/comunicacao.svg';
-import filtro from '../../../assets/images/filtro.svg';
-import fundo from '../../../assets/images/fundo.svg';
+import diferencial from '../../../../assets/images/diferencial.png';
+import comunicacao from '../../../../assets/images/comunicacao.svg';
+import filtro from '../../../../assets/images/filtro.svg';
+import fundo from '../../../../assets/images/fundo.svg';
 
-const SectionVantagens = (): JSX.Element => {
+export const SectionVantagens = (): JSX.Element => {
   return (
     <VantagensContainer img={fundo} id="vantagens">
       <Wrapper>
@@ -57,5 +57,3 @@ const SectionVantagens = (): JSX.Element => {
     </VantagensContainer>
   );
 };
-
-export default SectionVantagens;

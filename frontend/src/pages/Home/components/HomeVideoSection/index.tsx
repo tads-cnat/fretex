@@ -7,11 +7,11 @@ import {
   VideoP,
   VideoSection,
 } from './styles';
-import Button from '../../Global/Button';
-import Video from '../../../assets/videos/video.mp4';
-import { SpanYellow } from '../../../styles/globalStyles';
+import Button from '../../../../components/Global/Button';
+import Video from '../../../../assets/videos/video.mp4';
+import { SpanYellow } from '../../../../styles/globalStyles';
 
-const HomeVideoSection = (): JSX.Element => {
+export const HomeVideoSection = (): JSX.Element => {
   return (
     <VideoSection>
       <ContainerVideo>
@@ -31,5 +31,3 @@ const HomeVideoSection = (): JSX.Element => {
     </VideoSection>
   );
 };
-
-export default HomeVideoSection;

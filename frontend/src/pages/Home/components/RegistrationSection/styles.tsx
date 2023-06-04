@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { type IRegisterImage } from "../../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { type IRegisterImage } from '../../../../interfaces/styledComponents';
 
 export const RegisterContainer = styled.div`
   display: grid;
@@ -21,7 +21,7 @@ export const RegisterUser = styled.div<IRegisterImage>`
 
   &::before {
     width: 100%;
-    content: "";
+    content: '';
     height: 100%;
     display: block;
     position: absolute;
@@ -38,7 +38,7 @@ export const RegisterUser = styled.div<IRegisterImage>`
 
   & p,
   & h2 {
-    transition: .5s;
+    transition: 0.5s;
   }
 
   &:hover p,

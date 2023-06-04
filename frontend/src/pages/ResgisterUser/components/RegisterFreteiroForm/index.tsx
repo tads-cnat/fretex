@@ -7,22 +7,22 @@ import {
   Login,
   ContainerInfos,
 } from './styles';
-import perfil from '../../../assets/images/imgperfil.svg';
-import Loc from '../../../assets/Svg/Loc';
-import { SpanYellow } from '../../../styles/globalStyles';
+import perfil from '../../../../assets/images/imgperfil.svg';
+import Loc from '../../../../assets/Svg/Loc';
+import { SpanYellow } from '../../../../styles/globalStyles';
 import { useEffect, useState } from 'react';
-import { type IFreteiroFormData } from '../../../interfaces';
+import { type IFreteiroFormData } from '../../../../interfaces';
 import { Link, useNavigate } from 'react-router-dom';
-import { schemaFreteiro } from '../../../pages/ResgisterUser/schemas';
-import { useFreteiroForm } from '../../../hooks/useFreteiroForm';
-import { useAddress } from '../../../hooks/useAddress';
+import { schemaFreteiro } from '../../schemas';
+import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
+import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import Button from '../../Global/Button';
-import { Input } from '../../Input';
+import Button from '../../../../components/Global/Button';
+import { Input } from '../../../../components/Input';
 import { inputs } from './inputs';
-import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 
-const RegisterFreteiroForm = (): JSX.Element => {
+export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
 
   const {
@@ -198,5 +198,3 @@ const RegisterFreteiroForm = (): JSX.Element => {
     </ContainerMain>
   );
 };
-
-export default RegisterFreteiroForm;

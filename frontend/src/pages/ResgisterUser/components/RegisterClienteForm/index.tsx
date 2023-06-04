@@ -1,18 +1,18 @@
-import { SpanYellow } from '../../../styles/globalStyles';
+import { SpanYellow } from '../../../../styles/globalStyles';
 import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaCliente } from '../../../pages/ResgisterUser/schemas';
-import { type IClienteFormData } from '../../../interfaces';
-import AuthService from '../../../services/AuthService';
+import { schemaCliente } from '../../schemas';
+import { type IClienteFormData } from '../../../../interfaces';
+import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
-import Button from '../../Global/Button';
-import { Input } from '../../Input';
+import Button from '../../../../components/Global/Button';
+import { Input } from '../../../../components/Input';
 import { inputs } from './inputs';
 
-const RegisterClientForm = (): JSX.Element => {
+export const RegisterClienteForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
   const {
     register,
@@ -107,5 +107,3 @@ const RegisterClientForm = (): JSX.Element => {
     </ContainerPrincipal>
   );
 };
-
-export default RegisterClientForm;

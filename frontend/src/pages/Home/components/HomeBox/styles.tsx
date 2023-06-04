@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Box = styled.div`
   text-align: center;
@@ -19,7 +19,7 @@ export const Box = styled.div`
 export const BoxWithLines = styled(Box)`
   position: relative;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     left: -25%;
@@ -29,7 +29,7 @@ export const BoxWithLines = styled(Box)`
     z-index: -1;
   }
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     right: -25%;

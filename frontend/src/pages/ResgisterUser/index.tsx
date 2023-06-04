@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm';
-import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
+import { RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 import Head from '../../components/Head';
 import { btnTypeUserData } from './constants';
