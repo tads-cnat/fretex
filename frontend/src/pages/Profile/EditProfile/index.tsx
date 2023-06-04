@@ -77,13 +77,15 @@ const EditProfile = (): JSX.Element => {
     Object.entries(endereco).forEach(([key, value]) => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
-    FreteiroService.patch(user.id, formData).then((res) => {
-      toast.info('Perfil atualizado com sucesso!');
-      setUser(res.data);
-      setActualUser(res.data);
-    }).catch((res) => {
-      toast.error('Erro ao atualizar perfil!');
-    });
+    FreteiroService.patch(user.id, formData)
+      .then((res) => {
+        toast.info('Perfil atualizado com sucesso!');
+        setUser(res.data);
+        setActualUser(res.data);
+      })
+      .catch((res) => {
+        toast.error('Erro ao atualizar perfil!');
+      });
   };
 
   useEffect(() => {
