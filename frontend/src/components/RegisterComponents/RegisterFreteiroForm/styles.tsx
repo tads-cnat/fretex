@@ -44,45 +44,13 @@ export const RegisterPerson = styled.div`
   flex-grow: 1;
 `;
 
-export const PerfilImg = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  label {
-    width: min-content;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-  }
-  label img {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 150px;
-    height: 150px;
-    transition: 0.5s;
-  }
-  label img:hover,
-  label p:hover img {
-    filter: brightness(50%);
-  }
-
-  input {
-    display: none;
-  }
-`;
-
 export const RegisterAddress = styled.div`
   flex-grow: 1;
   Button {
     margin-top: 15px;
   }
   .title {
-    margin-bottom: 38px;
+    margin-bottom: 53px;
   }
   @media (max-width: 768px) {
     .title {
@@ -94,9 +62,13 @@ export const RegisterAddress = styled.div`
 export const Login = styled.div`
   text-align: center;
   color: var(--text-grey-1);
-  margin-bottom: 40px;
+  margin: 40px 0;
   @media (max-width: 768px) {
     margin-bottom: 40px;
+  }
+
+  a:hover {
+    color: var(--btn-hover);
   }
 `;
 

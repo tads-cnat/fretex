@@ -8,7 +8,7 @@ export const Container = styled.label`
   align-items: center;
   cursor: pointer;
   transition: 0.5s;
-
+  gap: 10px;
   input {
     display: none;
   }
@@ -25,7 +25,7 @@ export const Container = styled.label`
 // 2 --> redondo
 export const ImgPreview = styled.img<IPreviewImage>`
   width: ${(props) => props.width};
-  /* height:  ${(props) => props.width}; */
+  height:  ${(props) => props.width};
   object-fit: cover;
   max-width: 100%;
   border-radius: ${(props) => (props.tipo === 2 ? '50%' : '0')};

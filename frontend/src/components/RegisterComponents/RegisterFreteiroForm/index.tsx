@@ -2,7 +2,6 @@ import {
   ContainerMain,
   ContainerForm2,
   RegisterPerson,
-  PerfilImg,
   RegisterAddress,
   Login,
   ContainerInfos,
@@ -21,6 +20,7 @@ import Button from '../../Global/Button';
 import { Input } from '../../Input';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import Preview from '../../Preview';
 
 const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -59,21 +59,23 @@ const RegisterFreteiroForm = (): JSX.Element => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <RegisterPerson>
             <h1>Crie sua conta</h1>
-            <PerfilImg>
-              <label>
-                <img src={imagePreview || perfil} alt="perfil" />
-                <input
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
-                />
-                <p>Clique para inserir uma imagem</p>
-                {/* {errors.url_foto != null && (
+            <Preview
+              img={imagePreview}
+              imgDefault={perfil}
+              width={'160px'}
+              tipo={2}
+            >
+              <input
+                type="file"
+                {...register('url_foto')}
+                accept="image/jpeg,image/png,image/gif"
+                onChange={onChange}
+              />
+              <p>Clique para inserir uma imagem</p>
+              {/* {errors.url_foto != null && (
                   <p className="error">{errors.url_foto?.message}</p>
                 )} */}
-              </label>
-            </PerfilImg>
+            </Preview>
             {inputs.map((input, index) => (
               <Input
                 key={index}
