@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { type IStatus } from '../../interfaces/styledComponents';
-import { type IActive } from '../../interfaces/IActive';
+import { type IStatus } from '../../../../interfaces/styledComponents';
+import { type IActive } from '../../../../interfaces/IActive';
 
 export const Box = styled.div`
   display: flex;

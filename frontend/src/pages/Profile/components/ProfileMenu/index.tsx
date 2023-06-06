@@ -9,7 +9,7 @@ interface IMenu {
   ownerPage: boolean;
 }
 
-const ProfileMenu = ({
+export const ProfileMenu = ({
   userId,
   handleClick,
   selectedTab,
@@ -62,5 +62,3 @@ const ProfileMenu = ({
     </ContainerMenu>
   );
 };
-
-export default ProfileMenu;

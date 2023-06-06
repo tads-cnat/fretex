@@ -15,7 +15,7 @@ export interface InputLabelStyles {
   backgroundColor?: string;
 }
 
-const LabelInput = ({
+export const LabelInput = ({
   Icon,
   style,
   isError,
@@ -33,5 +33,3 @@ const LabelInput = ({
     </LabelContainer>
   );
 };
-
-export default LabelInput;

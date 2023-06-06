@@ -1,5 +1,5 @@
-import BoxFretes from '../../components/FretesAvailable/BoxFretes';
-import Filter from '../../components/FretesAvailable/Filter';
+import { Filter } from './components';
+import { BoxFretes } from '../../components/BoxFretes';
 import { Wrapper } from '../../styles/globalStyles';
 import {
   ContainerBg,

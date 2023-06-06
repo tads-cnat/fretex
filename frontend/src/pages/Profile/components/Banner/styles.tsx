@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { type IActive } from '../../../interfaces/IActive';
+import { type IActive } from '../../../../interfaces/IActive';
 
 interface InterfaceImage {
   image?: string;

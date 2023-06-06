@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
-import TipoVeiculoService from '../../../services/TipoVeiculoService';
+import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { ContainerFilter, TypesVehicles, PeriodCollect } from './styles';
 import {
   type ITipoVeiculo,
   type ITiposVeiculo,
-} from '../../../interfaces/ITiposVeiculo';
+} from '../../../../interfaces/ITiposVeiculo';
 
 interface IFilterFretes {
   coleta: string[];
@@ -12,7 +12,7 @@ interface IFilterFretes {
   handleChange: (e: any, tipo: any) => void;
 }
 
-const Filter = ({
+export const Filter = ({
   coleta,
   veiculos,
   handleChange,
@@ -95,5 +95,3 @@ const Filter = ({
     </ContainerFilter>
   );
 };
-
-export default Filter;

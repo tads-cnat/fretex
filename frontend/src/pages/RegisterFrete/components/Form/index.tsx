@@ -9,19 +9,19 @@ import {
   EntregaDivContent,
   ButtonDiv,
 } from './styles';
-import Button from '../../Global/Button';
-import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
+import Button from '../../../../components/Global/Button';
+import { ReactComponent as Arrowleft } from '../../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
-import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
-import { type IPedidoFormData } from '../../../interfaces';
+import { schemaPedido } from '../../schemas';
+import { type IPedidoFormData } from '../../../../interfaces';
 import { useNavigate } from 'react-router-dom';
-import PedidoService from '../../../services/PedidoService';
-import TipoVeiculoService from '../../../services/TipoVeiculoService';
+import PedidoService from '../../../../services/PedidoService';
+import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { useEffect, useState } from 'react';
 import { Turnos } from './turnos';
-import { useAddress } from '../../../hooks/useAddress';
+import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -97,7 +97,7 @@ const isErrorDateRange = (
   return false;
 };
 
-const Index = (): JSX.Element => {
+export const FormRegisterFrete = (): JSX.Element => {
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
   const {
@@ -525,5 +525,3 @@ const Index = (): JSX.Element => {
     </>
   );
 };
-
-export default Index;

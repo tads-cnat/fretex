@@ -1,9 +1,9 @@
 import { Card, Informacoes, Img } from './styles';
-import { type IVeiculo } from '../../../interfaces';
-import { ReactComponent as Gota } from '../../../assets/images/gota_colorir.svg';
-import { ReactComponent as Info } from '../../../assets/images/InfoCircle.svg';
-import Placa from '../../../assets/images/placaCarro.png';
-import VeiculoService from '../../../services/VeiculoService';
+import { type IVeiculo } from '../../interfaces';
+import { ReactComponent as Gota } from '../../assets/images/gota_colorir.svg';
+import { ReactComponent as Info } from '../../assets/images/InfoCircle.svg';
+import Placa from '../../assets/images/placaCarro.png';
+import VeiculoService from '../../services/VeiculoService';
 import { useEffect, useState } from 'react';
 
 interface ITiposDeVeiculo {
@@ -11,7 +11,11 @@ interface ITiposDeVeiculo {
   descricao: string;
 }
 
-const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }): JSX.Element => {
+export const CardVeiculo = ({
+  veiculos,
+}: {
+  veiculos: IVeiculo;
+}): JSX.Element => {
   const [TipoVeiculo, setTipoVeiculo] = useState<ITiposDeVeiculo>();
 
   useEffect(() => {
@@ -54,5 +58,3 @@ const CardVeiculo = ({ veiculos }: { veiculos: IVeiculo }): JSX.Element => {
     </Card>
   );
 };
-
-export default CardVeiculo;

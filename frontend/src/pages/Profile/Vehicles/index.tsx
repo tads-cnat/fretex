@@ -17,7 +17,7 @@ import { type IVeiculo } from '../../../interfaces';
 import { useContextProfile } from '..';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaVeiculo } from './schema';
-import CardVeiculo from '../../../components/Profile/CardVeiculo';
+import { CardVeiculo } from '../../../components/CardVeiculo';
 import { useParams } from 'react-router-dom';
 import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
@@ -58,7 +58,7 @@ const Vehicles = (): JSX.Element => {
         setLoading(false);
       });
 
-      TipoVeiculoService.getAll()
+    TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
       })

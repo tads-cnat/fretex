@@ -12,8 +12,8 @@ import {
 import { isFreteiro } from '../../../utils/isFreteiro';
 import LoadingPage from '../../Global/LoadingPage';
 import ModalComponent from '../../Global/Modal';
-import CardVeiculo from '../../Profile/CardVeiculo';
-import LabelInput from '../../Profile/LabelInput';
+import { CardVeiculo } from '../../CardVeiculo';
+import { LabelInput } from '../../LabelInput';
 import CardsContainer from '../CardsContainer';
 import { FormContainer } from '../ModalProposta/styles';
 import { schemaContraproposta } from './schema';
@@ -64,7 +64,8 @@ const ModalContraproposta = ({
 
   const registerPropostaMutation = useMutation(
     ['createProposta', proposta.id],
-    async (data: FormData) => await PropostaService.post(data).then((res) => res),
+    async (data: FormData) =>
+      await PropostaService.post(data).then((res) => res),
     {
       onSuccess: () => {
         client.refetchQueries('propostasForPedido');

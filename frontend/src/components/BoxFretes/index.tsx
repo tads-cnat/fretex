@@ -9,15 +9,15 @@ import {
   ContainerImgMain,
   ContainerImg,
 } from './styles';
-import caixa from '../../../assets/images/caixas.png';
-import Loc from '../../../assets/images/geo-alt.svg';
-import Arrow from '../../../assets/images/arrow-right.svg';
-import Calendar from '../../../assets/images/calendar.svg';
-import { type IPedido } from '../../../interfaces';
-import { formatDate } from '../../../utils/formatDate';
-import Button from '../../Global/Button';
+import caixa from '../../assets/images/caixas.png';
+import Loc from '../../assets/images/geo-alt.svg';
+import Arrow from '../../assets/images/arrow-right.svg';
+import Calendar from '../../assets/images/calendar.svg';
+import { type IPedido } from '../../interfaces';
+import { formatDate } from '../../utils/formatDate';
+import Button from '../Global/Button';
 
-const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
+export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (
     <ContainerMain>
       <ContainerInfoBtn>
@@ -54,5 +54,3 @@ const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
     </ContainerMain>
   );
 };
-
-export default BoxFretes;

@@ -1,8 +1,8 @@
-import Loc from '../../assets/images/geo-alt.svg';
-import Arrow from '../../assets/images/arrow-right.svg';
-import Calendar from '../../assets/images/calendar.svg';
-import { ReactComponent as Min } from '../../assets/images/minus-circle.svg';
-import { ReactComponent as Max } from '../../assets/images/minus-circle-plus.svg';
+import Loc from '../../../../assets/images/geo-alt.svg';
+import Arrow from '../../../../assets/images/arrow-right.svg';
+import Calendar from '../../../../assets/images/calendar.svg';
+import { ReactComponent as Min } from '../../../../assets/images/minus-circle.svg';
+import { ReactComponent as Max } from '../../../../assets/images/minus-circle-plus.svg';
 import { AlertText, Botoes, Box, BoxPedido, Header } from './styles';
 import {
   ContainerCalendar,
@@ -10,16 +10,16 @@ import {
   ContainerInfos,
   End,
   Seta,
-} from '../FretesAvailable/BoxFretes/styles';
-import { type IPedido } from '../../interfaces';
+} from '../../../../components/BoxFretes/styles';
+import { type IPedido } from '../../../../interfaces';
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useToggle } from '../../hooks/useToggle';
-import Loading from '../Global/Loading';
-import { AuthContext } from '../../context/Auth/AuthContext';
-import PedidoService from '../../services/PedidoService';
+import { useToggle } from '../../../../hooks/useToggle';
+import Loading from '../../../../components/Global/Loading';
+import { AuthContext } from '../../../../context/Auth/AuthContext';
+import PedidoService from '../../../../services/PedidoService';
 import { useMutation, useQueryClient } from 'react-query';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate } from '../../../../utils/formatDate';
 import { toast } from 'react-toastify';
 
 interface IBoxDashBoard {
@@ -30,7 +30,7 @@ interface IBoxDashBoard {
   isError: boolean;
 }
 
-const BoxDashboard = ({
+export const BoxDashboard = ({
   pedidos,
   status,
   initialToggleValue,
@@ -154,5 +154,3 @@ const BoxDashboard = ({
     </Box>
   );
 };
-
-export default BoxDashboard;

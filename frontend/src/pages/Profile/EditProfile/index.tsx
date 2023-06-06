@@ -18,7 +18,7 @@ import {
   InputsContainerGrid,
   PerfilImgUpdate,
 } from './styles';
-import LabelInput from '../../../components/Profile/LabelInput';
+import { LabelInput } from '../../../components/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type SubmitHandler } from 'react-hook-form/dist/types';
 import FreteiroService from '../../../services/FreteiroService';

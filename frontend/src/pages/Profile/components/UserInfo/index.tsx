@@ -1,7 +1,7 @@
 import { Container, ContainerImage, Content, Title } from './styles';
-import perfil from '../../../assets/images/perfil.svg';
-import { type ICliente, type IFreteiro } from '../../../interfaces';
-import { isFreteiro } from '../../../utils/isFreteiro';
+import perfil from '../../../../assets/images/perfil.svg';
+import { type ICliente, type IFreteiro } from '../../../../interfaces';
+import { isFreteiro } from '../../../../utils/isFreteiro';
 
 const UserTitle = ({ user }: { user: ICliente | IFreteiro }): JSX.Element => {
   return (
@@ -12,7 +12,7 @@ const UserTitle = ({ user }: { user: ICliente | IFreteiro }): JSX.Element => {
   );
 };
 
-const UserInfo = ({ user }: { user: IFreteiro | ICliente }): JSX.Element => {
+export const UserInfo = ({ user }: { user: IFreteiro | ICliente }): JSX.Element => {
   return (
     <>
       <Container>
@@ -32,5 +32,3 @@ const UserInfo = ({ user }: { user: IFreteiro | ICliente }): JSX.Element => {
     </>
   );
 };
-
-export default UserInfo;

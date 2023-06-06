@@ -5,25 +5,25 @@ import {
   Content1,
   Content2,
   Content2Info,
-} from "./styles";
-import caixas from "../../../assets/images/caixas.png";
-import perfil from "../../../assets/images/perfil.svg";
-import { ReactComponent as Arrowleft } from "../../../assets/images/arrow-left-circle.svg";
-import geoalt from "../../../assets/images/geo-alt.svg";
-import info from "../../../assets/images/info-circle.svg";
-import { Link, useNavigate } from "react-router-dom";
+} from './styles';
+import caixas from '../../../assets/images/caixas.png';
+import perfil from '../../../assets/images/perfil.svg';
+import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
+import geoalt from '../../../assets/images/geo-alt.svg';
+import info from '../../../assets/images/info-circle.svg';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   type ICliente,
   type IFreteiro,
   type IPedido,
   type IProposta,
-} from "../../../interfaces";
-import { Seta } from "../../RegisterFreteComponents/Form/styles";
-import NegociationComponent from "../NegociationComponent";
-import TipoVeiculoService from "../../../services/TipoVeiculoService";
-import { useQuery } from "react-query";
-import Loading from "../../Global/Loading";
-import { formatDate } from "../../../utils/formatDate";
+} from '../../../interfaces';
+import { Seta } from '../../../pages/RegisterFrete/components/Form/styles';
+import NegociationComponent from '../NegociationComponent';
+import TipoVeiculoService from '../../../services/TipoVeiculoService';
+import { useQuery } from 'react-query';
+import Loading from '../../Global/Loading';
+import { formatDate } from '../../../utils/formatDate';
 
 const formatCEP = (cep: string) => {
   return `${cep.substring(0, 5)}-${cep.substring(5)}`;
@@ -38,14 +38,14 @@ interface IFreteDetail {
 
 const formatTurno = (turno: string): string => {
   switch (turno) {
-    case "TA":
-      return "Tarde";
-    case "MA":
-      return "Manhã";
-    case "NO":
-      return "Noite";
+    case 'TA':
+      return 'Tarde';
+    case 'MA':
+      return 'Manhã';
+    case 'NO':
+      return 'Noite';
     default:
-      return "Turno não informado";
+      return 'Turno não informado';
   }
 };
 
@@ -58,14 +58,14 @@ const FreteDetailComponent = ({
   const navigate = useNavigate();
 
   const { data: tipoVeiculos, isLoading: isLoadingTipoVeiculos } = useQuery(
-    ["tiposVeiculo"],
-    async () => await TipoVeiculoService.getAll()
+    ['tiposVeiculo'],
+    async () => await TipoVeiculoService.getAll(),
   );
 
   const filteredArray =
     !isLoadingTipoVeiculos &&
     tipoVeiculos.data.filter((element: any) =>
-      pedido.tipo_veiculo.includes(element.id)
+      pedido.tipo_veiculo.includes(element.id),
     );
 
   if (isLoadingTipoVeiculos) return <Loading />;
@@ -104,7 +104,7 @@ const FreteDetailComponent = ({
               </span>
             </Link>
             <h3>{pedido?.produto.nome}</h3>
-            <p>Pedido realizado em: {formatDate(pedido.criado_em)}</p>{" "}
+            <p>Pedido realizado em: {formatDate(pedido.criado_em)}</p>{' '}
           </div>
         </Content1>
         <Content2>
@@ -161,17 +161,17 @@ const FreteDetailComponent = ({
             <div>
               <h4>Informações adicionais </h4>
               <p>
-                <span>Tipos de veículos aceitos:</span>{" "}
+                <span>Tipos de veículos aceitos:</span>{' '}
                 {filteredArray.length > 0
                   ? filteredArray.map((p: { descricao: string }, i: number) =>
                       filteredArray.length - 1 === i
                         ? p.descricao
-                        : `${p.descricao}/`
+                        : `${p.descricao}/`,
                     )
-                  : "carregando..."}
+                  : 'carregando...'}
               </p>
               <p>
-                <span>Data máxima de entrega:</span>{" "}
+                <span>Data máxima de entrega:</span>{' '}
                 {formatDate(pedido.data_entrega)}
               </p>
               <p>
@@ -181,8 +181,8 @@ const FreteDetailComponent = ({
                 <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
               </p>
               <p>
-                <span>bservações:</span>{" "}
-                {pedido?.observacao || "Não possui observações"}
+                <span>bservações:</span>{' '}
+                {pedido?.observacao || 'Não possui observações'}
               </p>
             </div>
           </Content2Info>

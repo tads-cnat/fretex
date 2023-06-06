@@ -1,9 +1,7 @@
 import { useContext, useState } from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
-import Banner from '../../components/Profile/Banner';
-import ProfileMenu from '../../components/Profile/Menu';
-import UserInfo from '../../components/Profile/UserInfo';
+import { Banner, ProfileMenu, UserInfo } from './components';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import {
   type ICliente,

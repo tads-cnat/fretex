@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Image, Container, Form, Preview } from './styles';
-import { ReactComponent as Pencil } from '../../../assets/images/pencil.svg';
-import Modal from '../../Global/Modal';
-import { useToggle } from '../../../hooks/useToggle';
-import ClienteService from '../../../services/ClienteService';
-import FreteiroService from '../../../services/FreteiroService';
+import { ReactComponent as Pencil } from '../../../../assets/images/pencil.svg';
+import Modal from '../../../../components/Global/Modal';
+import { useToggle } from '../../../../hooks/useToggle';
+import ClienteService from '../../../../services/ClienteService';
+import FreteiroService from '../../../../services/FreteiroService';
 import { useParams } from 'react-router-dom';
-import { type ICliente, type IFreteiro } from '../../../interfaces';
-import { isFreteiro } from '../../../utils/isFreteiro';
-import Button from '../../Global/Button';
+import { type ICliente, type IFreteiro } from '../../../../interfaces';
+import { isFreteiro } from '../../../../utils/isFreteiro';
+import Button from '../../../../components/Global/Button';
 
 interface IBanner {
   user: IFreteiro | ICliente;
   ownerPage: boolean;
 }
 
-const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
+export const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
   const { toggle, value } = useToggle();
   const { id } = useParams();
   const [imagePreview, setImagePreview] = useState<string | undefined>();
@@ -101,5 +101,3 @@ const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
     </>
   );
 };
-
-export default Banner;
