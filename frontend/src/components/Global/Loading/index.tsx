@@ -46,7 +46,6 @@ const LoadingStyled = styled.div<ILoading>`
       top: 8px;
       height: 64px;
     }
-    50%,
     100% {
       top: 24px;
       height: 32px;

@@ -42,7 +42,7 @@ const Button = ({
           onClick={onClick}
           disabled={isDisabled}
         >
-          {isDisabled ? <Loading/> : children}
+          {isDisabled ? <Loading color="white"/> : children}
         </BtnYellow>
       );
     }
