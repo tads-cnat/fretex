@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Container, ImgPreview } from './styles';
+import { Container, ContainerImagem } from './styles';
 
 interface IPreview {
   children: ReactNode;
@@ -12,7 +12,9 @@ interface IPreview {
 const Preview = ({ children, img, imgDefault, width, tipo = 1 }: IPreview) => {
   return (
     <Container>
-      <ImgPreview src={img || imgDefault} width={width} tipo={tipo} />
+      <ContainerImagem width={width} tipo={tipo}>
+        <img src={img || imgDefault} />
+      </ContainerImagem>
       {children}
     </Container>
   );

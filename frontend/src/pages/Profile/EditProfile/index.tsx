@@ -136,7 +136,12 @@ const EditProfile = (): JSX.Element => {
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="title">Edite seu perfil</h1>
-        <Preview img={imagePreview} imgDefault={perfil} width={'160px'} tipo={2}>
+        <Preview
+          img={imagePreview}
+          imgDefault={perfil}
+          width={'160px'}
+          tipo={2}
+        >
           <input
             type="file"
             {...register('url_foto')}
@@ -146,9 +151,9 @@ const EditProfile = (): JSX.Element => {
           <p>Insira uma imagem</p>
         </Preview>
 
-        <div>
+        <div className='dados'>
           <h2>
-            {watch('full_name')}{' '}
+            {watch('full_name')}
             {isFreteiro(user) &&
               `- ${watch('endereco.cidade')}/${watch('endereco.estado')}`}
           </h2>

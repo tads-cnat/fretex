@@ -15,6 +15,12 @@ export const Container = styled.div`
     justify-content: center;
   }
 
+  .dados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   @media (max-width: 1200px) {
     .title {
       margin-bottom: 0px;
