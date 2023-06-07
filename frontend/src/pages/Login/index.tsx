@@ -28,7 +28,7 @@ const Login = (): JSX.Element => {
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),
   });
-  const { signin } = useContext(AuthContext);
+  const { signin, isLoadingUser } = useContext(AuthContext);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Login = (): JSX.Element => {
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<ILogin> = ({ email, password }) => {
-    signin(email, password, Navigate, setError);
+    signin(email, password, Navigate, setError)
   };
 
   const inputs = [
@@ -95,7 +95,7 @@ const Login = (): JSX.Element => {
                   {error.length !== 0 && <p className="error">{error}</p>}
                 </div>
                 <section>
-                  <Button type="submit" isButton>
+                  <Button type="submit" isButton isDisabled={isLoadingUser}>
                     Entrar
                   </Button>
                   <p>

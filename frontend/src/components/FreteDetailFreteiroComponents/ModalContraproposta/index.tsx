@@ -164,7 +164,7 @@ const ModalContraproposta = ({
             </LabelInput>
           </div>
           <div className="submitContainer">
-            <Button isButton type="submit">
+            <Button isButton type="submit" isDisabled={isLoadingVeiculo}>
               Realizar proposta
             </Button>
           </div>

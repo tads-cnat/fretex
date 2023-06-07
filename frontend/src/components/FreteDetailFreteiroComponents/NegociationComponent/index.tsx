@@ -1,16 +1,16 @@
-import { HeaderContainer, PropostaContainer2 } from './styles';
-import CardsContainer from '../CardsContainer';
-import CardProposta from '../CardProposta';
-import ModalProposta from '../ModalProposta';
-import { useToggle } from '../../../hooks/useToggle';
+import { HeaderContainer, PropostaContainer2 } from "./styles";
+import CardsContainer from "../CardsContainer";
+import CardProposta from "../CardProposta";
+import ModalProposta from "../ModalProposta";
+import { useToggle } from "../../../hooks/useToggle";
 import {
   type ICliente,
   type IFreteiro,
   type IProposta,
-} from '../../../interfaces';
-import { isFreteiro } from '../../../utils/isFreteiro';
-import { type MouseEvent } from 'react';
-import Button from '../../Global/Button';
+} from "../../../interfaces";
+import { isFreteiro } from "../../../utils/isFreteiro";
+import { type MouseEvent } from "react";
+import Button from "../../Global/Button";
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -18,6 +18,7 @@ interface INegociation {
   propostas: IProposta[];
   ownerPedido: number;
   pedidoVeiculos: number[];
+  isLoading: boolean;
 }
 
 const NegociationComponent = ({
@@ -26,6 +27,7 @@ const NegociationComponent = ({
   propostas,
   ownerPedido,
   pedidoVeiculos,
+  isLoading,
 }: INegociation): JSX.Element => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
@@ -39,11 +41,9 @@ const NegociationComponent = ({
   let usuarios: number[] = [];
   if (Array.isArray(propostas) && propostas.length > 0) {
     usuarios = Array.from(new Set(propostas.map((p) => p.usuario))).filter(
-      (usuario) => usuario !== ownerPedido,
+      (usuario) => usuario !== ownerPedido
     );
   }
-  //  console.log(usuarios)
-  //  console.log(ownerPedido);
 
   return (
     <>
@@ -61,8 +61,15 @@ const NegociationComponent = ({
           {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          ( propostas.length > 0 ? propostas.find((p) => p.usuario === actualUser.id) == null : true) && (
-            <Button type="button" isButton onClick={handleClick}>
+          (propostas.length > 0
+            ? propostas.find((p) => p.usuario === actualUser.id) == null
+            : true) && (
+            <Button
+              type="button"
+              isButton
+              onClick={handleClick}
+              isDisabled={isLoading}
+            >
               Realizar proposta
             </Button>
           )}

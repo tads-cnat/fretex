@@ -14,6 +14,7 @@ import { inputs } from './inputs';
 
 const RegisterClientForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
     setValue,
@@ -33,6 +34,7 @@ const RegisterClientForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
     setError('');
+    setIsLoading(true);
     const { email, full_name, cpf, password } = data;
     AuthService.registerCliente({ email, full_name, cpf, password })
       .then(() => {
@@ -46,6 +48,9 @@ const RegisterClientForm = (): JSX.Element => {
         } else if (Object.prototype.hasOwnProperty.call(errors, 'cpf')) {
           setError(errors.cpf[0]);
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -78,7 +83,7 @@ const RegisterClientForm = (): JSX.Element => {
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <Button isButton type="submit">
+            <Button isButton type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
             <p>
