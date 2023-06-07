@@ -31,8 +31,7 @@ const Button = ({
           onClick={onClick}
           disabled={isDisabled}
         >
-          {/* {isDisabled ? <Loading /> : children} */}
-          {children}
+          {isDisabled ? <Loading/> : children}
         </BtnYellow>
       );
     } else {
@@ -43,8 +42,7 @@ const Button = ({
           onClick={onClick}
           disabled={isDisabled}
         >
-          {/* {isDisabled ? <Loading/> : children} */}
-          {children}
+          {isDisabled ? <Loading/> : children}
         </BtnYellow>
       );
     }

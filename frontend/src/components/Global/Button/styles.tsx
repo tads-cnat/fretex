@@ -42,5 +42,6 @@ export const BtnYellow = styled.button<IBtn>`
   &:disabled {
     background-color: var(--btn-disabled);
     cursor: not-allowed;
+    max-height: 42px;
   }
 `;
