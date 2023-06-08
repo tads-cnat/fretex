@@ -36,7 +36,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const { onSubmit, error } = useFreteiroForm({
+  const { onSubmit, error, isLoading } = useFreteiroForm({
     onSuccess: () => {
       toast.success('Freteiro cadastrado com sucesso!');
       navigate('/login');
@@ -169,7 +169,7 @@ const RegisterFreteiroForm = (): JSX.Element => {
               error={errors.endereco?.complemento}
             />
             {error !== '' && <p className="error">{error}</p>}
-            <Button isButton type="submit">
+            <Button isButton type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
           </RegisterAddress>

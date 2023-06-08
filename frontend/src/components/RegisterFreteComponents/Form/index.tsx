@@ -114,11 +114,13 @@ const Index = (): JSX.Element => {
   const [errorDate, setErrorDate] = useState('');
   const [errorTurno, setErrorTurno] = useState('');
   const [imagemPreview, setImagemPreview] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     setErrorImg('');
     setErrorDate('');
     setErrorTurno('');
+    setIsLoading(true);
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
@@ -134,12 +136,14 @@ const Index = (): JSX.Element => {
         setFocus,
       )
     ) {
+      setIsLoading(false);
       return;
     }
 
     if (produto.imagem_url.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
+      setIsLoading(false);
       return;
     }
 
@@ -171,6 +175,9 @@ const Index = (): JSX.Element => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -529,7 +536,7 @@ const Index = (): JSX.Element => {
             </EntregaDivContent>
           </EntregaDiv>
           <ButtonDiv>
-            <Button isButton type="submit" fontSize="large">
+            <Button isButton type="submit" fontSize="large" isDisabled={isLoading}>
               Finalizar pedido
             </Button>
           </ButtonDiv>

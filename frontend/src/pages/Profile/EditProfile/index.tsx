@@ -36,6 +36,7 @@ const EditProfile = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string | undefined>();
   const { value: password, toggle: togglePassword } = useToggle();
   const { value: confirmPassword, toggle: toggleConfirmPassword } = useToggle();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -49,6 +50,7 @@ const EditProfile = (): JSX.Element => {
   );
 
   const onSubmit: SubmitHandler<IUserUpdateFormData> = (data) => {
+    setIsLoading(true);
     const formData = new FormData();
     const userUpdate = {
       url_foto: image,
@@ -69,7 +71,7 @@ const EditProfile = (): JSX.Element => {
         })
         .catch((res) => {
           console.log(res.response.data);
-        });
+        }).finally(() => setIsLoading(false));
       return;
     }
 
@@ -77,15 +79,13 @@ const EditProfile = (): JSX.Element => {
     Object.entries(endereco).forEach(([key, value]) => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
-    FreteiroService.patch(user.id, formData)
-      .then((res) => {
-        toast.info('Perfil atualizado com sucesso!');
-        setUser(res.data);
-        setActualUser(res.data);
-      })
-      .catch((res) => {
-        toast.error('Erro ao atualizar perfil!');
-      });
+    FreteiroService.patch(user.id, formData).then((res) => {
+      toast.info('Perfil atualizado com sucesso!');
+      setUser(res.data);
+      setActualUser(res.data);
+    }).catch((res) => {
+      toast.error('Erro ao atualizar perfil!');
+    }).finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -308,7 +308,7 @@ const EditProfile = (): JSX.Element => {
           )}
         </InputsContainerGrid>
         <div className="containerButton">
-          <Button isButton>Atualizar Perfil</Button>
+          <Button isButton isDisabled={isLoading}>Atualizar Perfil</Button>
         </div>
       </form>
     </Container>

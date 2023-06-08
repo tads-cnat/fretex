@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --btn-text-color1: #332200;
     --btn-hover: #d89a0a;
+    --btn-disabled: #c4c4c4;
 
     --font-small: .75rem;
     --font-medium: 1rem;

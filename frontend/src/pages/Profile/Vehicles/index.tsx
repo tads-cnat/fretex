@@ -5,7 +5,6 @@ import ModalComponent from '../../../components/Global/Modal';
 import {
   ContainerMain,
   ContainerInputs,
-  ContainerImagem,
   QtdVeiculos,
 } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
@@ -44,6 +43,7 @@ const Vehicles = (): JSX.Element => {
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
   const { user, handleSelectTab } = useContextProfile();
   const [loading, setLoading] = useState(true);
+  const [imageError, setImageError] = useState('');
 
   useEffect(() => {
     handleSelectTab(1);
@@ -68,6 +68,7 @@ const Vehicles = (): JSX.Element => {
   }, []);
 
   const onSubmit: SubmitHandler<IVeiculo> = async (data) => {
+    setLoading(true);
     const formData: any = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       if (typeof value !== 'undefined' && key === 'url_foto')
@@ -82,8 +83,10 @@ const Vehicles = (): JSX.Element => {
       const res = await VeiculoService.getVeiculosForFreteiro(Number(id));
       toast.success('Veículo cadastrado com sucesso!');
       setVeiculos(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (err:any) {
+      setImageError(err.response.data.errors.url_foto[0]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -206,7 +209,7 @@ const Vehicles = (): JSX.Element => {
               <p>Clique para inserir uma imagem</p>
             </Preview>
           </ContainerMain>
-          <Button isButton type="submit">
+          <Button isButton type="submit" isDisabled={loading}>
             Cadastrar Veículo
           </Button>
         </form>
