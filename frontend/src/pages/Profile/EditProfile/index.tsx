@@ -18,14 +18,13 @@ import {
   InputsContainerGrid,
   PerfilImgUpdate,
 } from './styles';
-import { LabelInput } from '../../../components/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type SubmitHandler } from 'react-hook-form/dist/types';
 import FreteiroService from '../../../services/FreteiroService';
 import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
-import Button from '../../../components/Global/Button';
+import { Button, LabelInput } from '../../../components';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
 
 const EditProfile = (): JSX.Element => {

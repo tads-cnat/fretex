@@ -16,7 +16,7 @@ import instagram from '../../assets/images/Vectorinstagram.svg';
 import facebook from '../../assets/images/Vectorfacebook.svg';
 import youtube from '../../assets/images/Vectoryoutube.svg';
 
-const Footer = (): JSX.Element => {
+export const Footer = (): JSX.Element => {
   return (
     <footer>
       <FooterContainer>
@@ -74,5 +74,3 @@ const Footer = (): JSX.Element => {
     </footer>
   );
 };
-
-export default Footer;

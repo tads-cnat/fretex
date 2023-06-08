@@ -7,7 +7,7 @@ import {
   VideoP,
   VideoSection,
 } from './styles';
-import Button from '../../../../components/Global/Button';
+import { Button } from '../../../../components';
 import Video from '../../../../assets/videos/video.mp4';
 import { SpanYellow } from '../../../../styles/globalStyles';
 

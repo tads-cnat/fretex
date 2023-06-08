@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BoxFretes } from '../../../components/BoxFretes';
+import { BoxFretes } from '../../../components';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { type IPedido } from '../../../interfaces';
 import PedidoService from '../../../services/PedidoService';

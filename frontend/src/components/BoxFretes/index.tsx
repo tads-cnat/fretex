@@ -15,7 +15,7 @@ import Arrow from '../../assets/images/arrow-right.svg';
 import Calendar from '../../assets/images/calendar.svg';
 import { type IPedido } from '../../interfaces';
 import { formatDate } from '../../utils/formatDate';
-import Button from '../Global/Button';
+import { Button } from '../utils';
 
 export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (

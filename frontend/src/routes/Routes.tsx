@@ -12,7 +12,7 @@ import Avaliacoes from '../pages/Profile/Avaliacoes';
 import Vehicles from '../pages/Profile/Vehicles';
 import EditProfile from '../pages/Profile/EditProfile';
 import Dashboard from '../pages/Dashboard';
-import Page404 from '../components/Global/Page404';
+import { Page404 } from '../components';
 
 const RoutesApp = (): JSX.Element => {
   return (
@@ -92,15 +92,14 @@ const RoutesApp = (): JSX.Element => {
           }
         />
 
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
-            <RequireAuth level={3}> 
+            <RequireAuth level={3}>
               <Dashboard />
             </RequireAuth>
-          } 
+          }
         />
-      
       </Routes>
     </BrowserRouter>
   );

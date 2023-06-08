@@ -1,4 +1,4 @@
-import Button from '../Global/Button';
+import { Button } from '../';
 import { Wrapper, SpanYellow } from '../../styles/globalStyles';
 import { useContext, useState } from 'react';
 import {
@@ -19,7 +19,7 @@ interface INavbar {
   id?: string;
 }
 
-const Navbar = ({ id }: INavbar): JSX.Element => {
+export const Navbar = ({ id }: INavbar): JSX.Element => {
   const [dropdownUp, setDropdownUp] = useState<boolean>(false);
   const { user, typeUser, signout } = useContext(AuthContext);
   const { value: active, toggle: setActive } = useToggle();
@@ -149,5 +149,3 @@ const Navbar = ({ id }: INavbar): JSX.Element => {
     </Header>
   );
 };
-
-export default Navbar;

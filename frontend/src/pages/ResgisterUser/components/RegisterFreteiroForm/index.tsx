@@ -17,8 +17,7 @@ import { schemaFreteiro } from '../../schemas';
 import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import Button from '../../../../components/Global/Button';
-import { Input } from '../../../../components/Input';
+import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 

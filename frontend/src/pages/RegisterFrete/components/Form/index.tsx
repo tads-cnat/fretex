@@ -9,7 +9,7 @@ import {
   EntregaDivContent,
   ButtonDiv,
 } from './styles';
-import Button from '../../../../components/Global/Button';
+import { Button } from '../../../../components';
 import { ReactComponent as Arrowleft } from '../../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../schemas';

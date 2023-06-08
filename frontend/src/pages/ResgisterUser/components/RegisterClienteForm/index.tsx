@@ -8,8 +8,7 @@ import { schemaCliente } from '../../schemas';
 import { type IClienteFormData } from '../../../../interfaces';
 import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
-import Button from '../../../../components/Global/Button';
-import { Input } from '../../../../components/Input';
+import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
 
 export const RegisterClienteForm = (): JSX.Element => {

@@ -1,5 +1,5 @@
 import { BoxDashboard } from './components';
-import Layout from '../../components/Layout';
+import { Layout, SEO, Button } from '../../components';
 import { Wrapper } from '../../styles/globalStyles';
 import { Filter, Title, ContainerPedidos } from './styles';
 import { useQuery } from 'react-query';
@@ -7,8 +7,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { isFreteiro } from '../../utils/isFreteiro';
 import { objToQueryString } from '../../utils/queyString';
-import Head from '../../components/Head';
-import Button from '../../components/Global/Button';
 
 import PedidoService from '../../services/PedidoService';
 
@@ -139,7 +137,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <>
-      <Head title="Dashboard" />
+      <SEO title="Dashboard" />
       <Layout>
         <Wrapper style={{ minHeight: '80vh' }}>
           <Title>Dashboard</Title>

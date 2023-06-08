@@ -7,14 +7,13 @@ import {
   Registration,
   InfoSection,
 } from './components';
-import Layout from '../../components/Layout';
-import Head from '../../components/Head';
+import { SEO, Layout } from '../../components';
 import { homeBoxData } from './contants';
 
 const Home = (): JSX.Element => {
   return (
     <>
-      <Head title="Home" description="FreteX sua encomenda sem complicação" />
+      <SEO title="Home" description="FreteX sua encomenda sem complicação" />
       <Layout>
         <HomeVideoSection />
         <Wrapper>

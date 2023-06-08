@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import veiculo from '../../../assets/images/veiculo.png';
 import { ReactComponent as PlusVeiculo } from '../../../assets/images/PlusCircle.svg';
-import ModalComponent from '../../../components/Global/Modal';
+import { ModalComponent, LoadingPage, Button } from '../../../components';
 import {
   ContainerMain,
   ContainerInputs,
@@ -19,9 +19,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaVeiculo } from './schema';
 import { CardVeiculo } from '../../../components/CardVeiculo';
 import { useParams } from 'react-router-dom';
-import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
-import Button from '../../../components/Global/Button';
 
 interface ITiposDeVeiculo {
   id: number;

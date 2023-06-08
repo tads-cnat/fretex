@@ -15,7 +15,7 @@ import { type IPedido } from '../../../../interfaces';
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useToggle } from '../../../../hooks/useToggle';
-import Loading from '../../../../components/Global/Loading';
+import { Loading } from '../../../../components';
 import { AuthContext } from '../../../../context/Auth/AuthContext';
 import PedidoService from '../../../../services/PedidoService';
 import { useMutation, useQueryClient } from 'react-query';
