@@ -113,6 +113,7 @@ const Index = (): JSX.Element => {
   const [errorImg, setErrorImg] = useState('');
   const [errorDate, setErrorDate] = useState('');
   const [errorTurno, setErrorTurno] = useState('');
+  const [imagemProduto, setImagemProduto] = useState('');
   const [imagemPreview, setImagemPreview] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -124,7 +125,7 @@ const Index = (): JSX.Element => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
-    const imagemUrl = produto.imagem_url[0];
+
     if (
       isErrorDateRange(
         pedido.data_coleta,
@@ -140,7 +141,7 @@ const Index = (): JSX.Element => {
       return;
     }
 
-    if (produto.imagem_url.length === 0) {
+    if (imagemProduto.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
       setIsLoading(false);
@@ -156,8 +157,8 @@ const Index = (): JSX.Element => {
         formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (imagemUrl && key === 'imagem_url')
-        formData.append(`produto.${key}`, imagemUrl);
+      if (imagemProduto && key === 'imagem_url')
+        formData.append(`produto.${key}`, imagemProduto);
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
@@ -193,6 +194,7 @@ const Index = (): JSX.Element => {
 
   const onChangeImage = (e: any) => {
     const preview = e.target.files[0];
+    setImagemProduto(preview)
     setImagemPreview(URL.createObjectURL(preview));
   };
 
