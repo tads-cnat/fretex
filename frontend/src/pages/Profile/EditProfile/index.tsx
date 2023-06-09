@@ -19,7 +19,7 @@ import {
 } from './styles';
 import LabelInput from '../../../components/Profile/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
-import { type SubmitHandler } from 'react-hook-form/dist/types';
+import { type SubmitHandler } from 'react-hook-form';
 import FreteiroService from '../../../services/FreteiroService';
 import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
@@ -71,7 +71,8 @@ const EditProfile = (): JSX.Element => {
         })
         .catch((res) => {
           console.log(res.response.data);
-        }).finally(() => setIsLoading(false));
+        })
+        .finally(() => setIsLoading(false));
       return;
     }
 
@@ -79,13 +80,16 @@ const EditProfile = (): JSX.Element => {
     Object.entries(endereco).forEach(([key, value]) => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
-    FreteiroService.patch(user.id, formData).then((res) => {
-      toast.info('Perfil atualizado com sucesso!');
-      setUser(res.data);
-      setActualUser(res.data);
-    }).catch((res) => {
-      toast.error('Erro ao atualizar perfil!');
-    }).finally(() => setIsLoading(false));
+    FreteiroService.patch(user.id, formData)
+      .then((res) => {
+        toast.info('Perfil atualizado com sucesso!');
+        setUser(res.data);
+        setActualUser(res.data);
+      })
+      .catch((res) => {
+        toast.error('Erro ao atualizar perfil!');
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -111,8 +115,8 @@ const EditProfile = (): JSX.Element => {
         setValue('endereco.estado', user.endereco.estado);
         setValue('endereco.complemento', user.endereco.complemento);
       }
-    }
-  }, [user, setFocus, setValue]);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeImage = (e: any): void => {
     const file = e.target.files[0];
@@ -147,12 +151,11 @@ const EditProfile = (): JSX.Element => {
             {...register('url_foto')}
             onChange={onChangeImage}
             accept="image/jpeg,image/png,image/gif"
-            
           />
           <p>Insira uma imagem</p>
         </Preview>
 
-        <div className='dados'>
+        <div className="dados">
           <h2>
             {watch('full_name')}
             {isFreteiro(user) &&
@@ -309,7 +312,9 @@ const EditProfile = (): JSX.Element => {
           )}
         </InputsContainerGrid>
         <div className="containerButton">
-          <Button isButton isDisabled={isLoading}>Atualizar Perfil</Button>
+          <Button isButton isDisabled={isLoading}>
+            Atualizar Perfil
+          </Button>
         </div>
       </form>
     </Container>
