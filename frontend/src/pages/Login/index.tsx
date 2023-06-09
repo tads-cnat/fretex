@@ -36,7 +36,7 @@ const Login = (): JSX.Element => {
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<ILogin> = ({ email, password }) => {
-    signin(email, password, Navigate, setError)
+    signin(email, password, Navigate, setError);
   };
 
   const inputs = [

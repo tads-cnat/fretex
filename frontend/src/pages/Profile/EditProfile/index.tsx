@@ -16,17 +16,17 @@ import {
   GridContent,
   GridEndereco,
   InputsContainerGrid,
-  PerfilImgUpdate,
 } from './styles';
 import LabelInput from '../../../components/Profile/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
-import { type SubmitHandler } from 'react-hook-form/dist/types';
+import { type SubmitHandler } from 'react-hook-form';
 import FreteiroService from '../../../services/FreteiroService';
 import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 import Button from '../../../components/Global/Button';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import Preview from '../../../components/Preview';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
@@ -71,7 +71,8 @@ const EditProfile = (): JSX.Element => {
         })
         .catch((res) => {
           console.log(res.response.data);
-        }).finally(() => setIsLoading(false));
+        })
+        .finally(() => setIsLoading(false));
       return;
     }
 
@@ -79,13 +80,16 @@ const EditProfile = (): JSX.Element => {
     Object.entries(endereco).forEach(([key, value]) => {
       if (value) formData.append(`endereco.${key}`, String(value));
     });
-    FreteiroService.patch(user.id, formData).then((res) => {
-      toast.info('Perfil atualizado com sucesso!');
-      setUser(res.data);
-      setActualUser(res.data);
-    }).catch((res) => {
-      toast.error('Erro ao atualizar perfil!');
-    }).finally(() => setIsLoading(false));
+    FreteiroService.patch(user.id, formData)
+      .then((res) => {
+        toast.info('Perfil atualizado com sucesso!');
+        setUser(res.data);
+        setActualUser(res.data);
+      })
+      .catch((res) => {
+        toast.error('Erro ao atualizar perfil!');
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -111,10 +115,10 @@ const EditProfile = (): JSX.Element => {
         setValue('endereco.estado', user.endereco.estado);
         setValue('endereco.complemento', user.endereco.complemento);
       }
-    }
-  }, [user, setFocus, setValue]);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const onChange = (e: any): void => {
+  const onChangeImage = (e: any): void => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
@@ -136,27 +140,29 @@ const EditProfile = (): JSX.Element => {
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="title">Edite seu perfil</h1>
-        <PerfilImgUpdate>
-          <label>
-            <img src={imagePreview ?? perfil} alt="perfil" />
-            <input
-              type="file"
-              {...register('url_foto')}
-              accept="image/jpeg,image/png,image/gif"
-              onChange={onChange}
-            />
-            <p>Insira uma imagem</p>
-          </label>
+        <Preview
+          img={imagePreview}
+          imgDefault={perfil}
+          width={'160px'}
+          tipo={2}
+        >
+          <input
+            type="file"
+            {...register('url_foto')}
+            onChange={onChangeImage}
+            accept="image/jpeg,image/png,image/gif"
+          />
+          <p>Insira uma imagem</p>
+        </Preview>
 
-          <div>
-            <h2>
-              {watch('full_name')}{' '}
-              {isFreteiro(user) &&
-                `- ${watch('endereco.cidade')}/${watch('endereco.estado')}`}
-            </h2>
-            <p>{watch('email')}</p>
-          </div>
-        </PerfilImgUpdate>
+        <div className="dados">
+          <h2>
+            {watch('full_name')}
+            {isFreteiro(user) &&
+              `- ${watch('endereco.cidade')}/${watch('endereco.estado')}`}
+          </h2>
+          <p>{watch('email')}</p>
+        </div>
 
         <InputsContainerGrid active={isFreteiro(user)}>
           <GridContent active={isFreteiro(user)}>
@@ -306,7 +312,9 @@ const EditProfile = (): JSX.Element => {
           )}
         </InputsContainerGrid>
         <div className="containerButton">
-          <Button isButton isDisabled={isLoading}>Atualizar Perfil</Button>
+          <Button isButton isDisabled={isLoading}>
+            Atualizar Perfil
+          </Button>
         </div>
       </form>
     </Container>

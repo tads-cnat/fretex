@@ -10,6 +10,7 @@ import {
   ButtonDiv,
 } from './styles';
 import Button from '../../Global/Button';
+import caixas from '../../../assets/images/caixas.png';
 import { ReactComponent as Arrowleft } from '../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../../pages/RegisterFrete/schemas';
@@ -22,6 +23,7 @@ import { Turnos } from './turnos';
 import { useAddress } from '../../../hooks/useAddress';
 import { toast } from 'react-toastify';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import Preview from '../../Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -111,6 +113,8 @@ const Index = (): JSX.Element => {
   const [errorImg, setErrorImg] = useState('');
   const [errorDate, setErrorDate] = useState('');
   const [errorTurno, setErrorTurno] = useState('');
+  const [imagemProduto, setImagemProduto] = useState('');
+  const [imagemPreview, setImagemPreview] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
@@ -121,7 +125,7 @@ const Index = (): JSX.Element => {
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
-    const imagemUrl = produto.imagem_url[0];
+
     if (
       isErrorDateRange(
         pedido.data_coleta,
@@ -137,7 +141,7 @@ const Index = (): JSX.Element => {
       return;
     }
 
-    if (produto.imagem_url.length === 0) {
+    if (imagemProduto.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
       setIsLoading(false);
@@ -153,8 +157,8 @@ const Index = (): JSX.Element => {
         formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (imagemUrl && key === 'imagem_url')
-        formData.append(`produto.${key}`, imagemUrl);
+      if (imagemProduto && key === 'imagem_url')
+        formData.append(`produto.${key}`, imagemProduto);
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
@@ -187,6 +191,12 @@ const Index = (): JSX.Element => {
         console.log(error);
       }); // eslint-disable-next-line
   }, []);
+
+  const onChangeImage = (e: any) => {
+    const preview = e.target.files[0];
+    setImagemProduto(preview)
+    setImagemPreview(URL.createObjectURL(preview));
+  };
 
   return (
     <>
@@ -410,15 +420,20 @@ const Index = (): JSX.Element => {
                 </div>
               </div>
               <div>
-                <label>
-                  <span>Foto do produto</span>
+                <span>Foto do produto</span>
+                <Preview
+                  img={imagemPreview}
+                  imgDefault={caixas}
+                  width={'260px'}
+                >
                   <input
                     {...register('produto.imagem_url')}
                     type="file"
-                    //  onChange={handleChange}
+                    onChange={onChangeImage}
                     accept="image/jpeg,image/png,image/gif"
                   />
-                </label>
+                  <p>Clique para inserir uma imagem</p>
+                </Preview>
                 {errorImg !== '' && Boolean(errorImg) && (
                   <p className="error">{errorImg}</p>
                 )}

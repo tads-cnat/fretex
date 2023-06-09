@@ -5,8 +5,6 @@ import ModalComponent from '../../../components/Global/Modal';
 import {
   ContainerMain,
   ContainerInputs,
-  ContainerImagem,
-  Preview,
   QtdVeiculos,
 } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
@@ -22,6 +20,7 @@ import { useParams } from 'react-router-dom';
 import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
 import Button from '../../../components/Global/Button';
+import Preview from '../../../components/Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -59,7 +58,7 @@ const Vehicles = (): JSX.Element => {
         setLoading(false);
       });
 
-      TipoVeiculoService.getAll()
+    TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
       })
@@ -91,7 +90,7 @@ const Vehicles = (): JSX.Element => {
     }
   };
 
-  const onChange = (e: any): void => {
+  const onChangeImage = (e: any): void => {
     try {
       const file = e.target.files[0];
       setImagemVeiculo(file);
@@ -199,25 +198,16 @@ const Vehicles = (): JSX.Element => {
                 <p className="error">{errors.tipo_veiculo.message}</p>
               )}
             </ContainerInputs>
-            <ContainerImagem>
-              <label>
-                <Preview>
-                  {imagemPreview !== undefined ? (
-                    <img src={imagemPreview} alt="veiculo" />
-                  ) : (
-                    <img src={veiculo} alt="veiculo" />
-                  )}
-                </Preview>
-                {imageError && <p className="error">Selecione uma imagem válida</p>}
-                <input
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
-                />
-              </label>
+            <Preview img={imagemPreview} imgDefault={veiculo} width={'260px'}>
+              <input
+                id="preview"
+                type="file"
+                {...register('url_foto')}
+                accept="image/jpeg,image/png,image/gif"
+                onChange={onChangeImage}
+              />
               <p>Clique para inserir uma imagem</p>
-            </ContainerImagem>
+            </Preview>
           </ContainerMain>
           <Button isButton type="submit" isDisabled={loading}>
             Cadastrar Veículo
