@@ -21,6 +21,7 @@ export const useFreteiroForm = ({ onSuccess }: Props): IUseFreteiroForm => {
     setIsLoading(true);
     if (data.url_foto.length === 0) {
       setError('Imagem obrigatória!');
+      setIsLoading(false);
       return;
     }
     const formData = new FormData();

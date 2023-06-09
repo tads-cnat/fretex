@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm';
-import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
+import { RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
-import Head from '../../components/Head';
+import { SEO } from '../../components';
 import { btnTypeUserData } from './constants';
 
 const Register = (): JSX.Element => {
@@ -25,7 +24,7 @@ const Register = (): JSX.Element => {
 
   return (
     <>
-      <Head title="Cadastro" />
+      <SEO title="Cadastro" />
       <BgRegister>
         <Container>
           <WrapperRegister bgColor="#282828">

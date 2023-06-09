@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import veiculo from '../../../assets/images/veiculo.png';
 import { ReactComponent as PlusVeiculo } from '../../../assets/images/PlusCircle.svg';
-import ModalComponent from '../../../components/Global/Modal';
-import {
-  ContainerMain,
-  ContainerInputs,
-  QtdVeiculos,
-} from './styles';
+import { ModalComponent, LoadingPage, Button, Preview, CardVeiculo } from '../../../components';
+import { ContainerMain, ContainerInputs, QtdVeiculos } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import VeiculoService from '../../../services/VeiculoService';
@@ -15,12 +11,8 @@ import { type IVeiculo } from '../../../interfaces';
 import { useContextProfile } from '..';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaVeiculo } from './schema';
-import CardVeiculo from '../../../components/Profile/CardVeiculo';
 import { useParams } from 'react-router-dom';
-import LoadingPage from '../../../components/Global/LoadingPage';
 import { toast } from 'react-toastify';
-import Button from '../../../components/Global/Button';
-import Preview from '../../../components/Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -83,7 +75,7 @@ const Vehicles = (): JSX.Element => {
       const res = await VeiculoService.getVeiculosForFreteiro(Number(id));
       toast.success('Veículo cadastrado com sucesso!');
       setVeiculos(res.data);
-    } catch (err:any) {
+    } catch (err: any) {
       setImageError(err.response.data.errors.url_foto[0]);
     } finally {
       setLoading(false);

@@ -17,16 +17,14 @@ import {
   GridEndereco,
   InputsContainerGrid,
 } from './styles';
-import LabelInput from '../../../components/Profile/LabelInput';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type SubmitHandler } from 'react-hook-form';
 import FreteiroService from '../../../services/FreteiroService';
 import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
-import Button from '../../../components/Global/Button';
+import { Button, LabelInput, Preview } from '../../../components';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
-import Preview from '../../../components/Preview';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();

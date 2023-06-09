@@ -1,9 +1,7 @@
 import { useContext, useState } from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
-import Layout from '../../components/Layout';
-import Banner from '../../components/Profile/Banner';
-import ProfileMenu from '../../components/Profile/Menu';
-import UserInfo from '../../components/Profile/UserInfo';
+import { Layout } from '../../components/Layout';
+import { Banner, ProfileMenu, UserInfo } from './components';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import {
   type ICliente,
@@ -16,9 +14,8 @@ import { isFreteiro } from '../../utils/isFreteiro';
 import ClienteService from '../../services/ClienteService';
 import FreteiroService from '../../services/FreteiroService';
 import AuthService from '../../services/AuthService';
-import LoadingPage from '../../components/Global/LoadingPage';
 import { useQuery } from 'react-query';
-import Head from '../../components/Head';
+import { SEO, LoadingPage } from '../../components';
 
 interface IProfileContext {
   user: ICliente | IFreteiro;
@@ -79,7 +76,7 @@ const Profile = (): JSX.Element => {
   else
     return (
       <>
-        <Head title="Perfil" />
+        <SEO title="Perfil" />
         <Layout>
           {userToRender !== undefined && actualUser !== null ? (
             <>

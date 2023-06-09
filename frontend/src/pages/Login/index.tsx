@@ -4,7 +4,7 @@ import Password from '../../assets/Svg/Password';
 import {
   ContainerPrincipal,
   ContainerForm,
-} from '../../components/RegisterComponents/RegisterClienteForm/styles';
+} from '../ResgisterUser/components/RegisterClienteForm/styles';
 import { ContainerContent2 } from './styles';
 import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import { BgRegister } from '../ResgisterUser/style';
@@ -14,9 +14,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import Head from '../../components/Head';
-import Button from '../../components/Global/Button';
-import { Input } from '../../components/Input';
+import { SEO, Button, Input } from '../../components';
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -60,7 +58,7 @@ const Login = (): JSX.Element => {
 
   return (
     <>
-      <Head title="Login" />
+      <SEO title="Login" />
       <BgRegister>
         <Wrapper bgColor="#282828">
           <ContainerPrincipal>

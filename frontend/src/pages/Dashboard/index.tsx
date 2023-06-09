@@ -1,15 +1,12 @@
-import BoxDashboard from '../../components/Dashboard';
-import Layout from '../../components/Layout';
+import { BoxDashboard } from './components';
+import { Layout, SEO, Button } from '../../components';
 import { Wrapper } from '../../styles/globalStyles';
 import { Filter, Title, ContainerPedidos } from './styles';
 import { useQuery } from 'react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { isFreteiro } from '../../utils/isFreteiro';
-import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
-import Head from '../../components/Head';
-import Button from '../../components/Global/Button';
 
 import PedidoService from '../../services/PedidoService';
 
@@ -82,45 +79,65 @@ const Dashboard = (): JSX.Element => {
     data: pedidosEN,
     isLoading: isLoadingPedidosEN,
     isError: errorPedidosEN,
-  } = useQuery('pedidosEN', async () => await PedidoService.getSearchPedidos(queryStringEN), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosEN',
+    async () => await PedidoService.getSearchPedidos(queryStringEN),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosAG,
     isLoading: isLoadingPedidosAG,
     isError: errorPedidosAG,
-  } = useQuery('pedidosAG', async () => await PedidoService.getSearchPedidos(queryStringAG), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosAG',
+    async () => await PedidoService.getSearchPedidos(queryStringAG),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosTR,
     isLoading: isLoadingPedidosTR,
     isError: errorPedidosTR,
-  } = useQuery('pedidosTR', async () => await PedidoService.getSearchPedidos(queryStringTR), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosTR',
+    async () => await PedidoService.getSearchPedidos(queryStringTR),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosCO,
     isLoading: isLoadingPedidosCO,
     isError: errorPedidosCO,
-  } = useQuery('pedidosCO', async () => await PedidoService.getSearchPedidos(queryStringCO), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosCO',
+    async () => await PedidoService.getSearchPedidos(queryStringCO),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosCA,
     isLoading: isLoadingPedidosCA,
     isError: errorPedidosCA,
-  } = useQuery('pedidosCA', async () => await PedidoService.getSearchPedidos(queryStringCA), {
-    enabled: !!user?.id,
-  });
-  
+  } = useQuery(
+    'pedidosCA',
+    async () => await PedidoService.getSearchPedidos(queryStringCA),
+    {
+      enabled: !!user?.id,
+    },
+  );
+
   return (
     <>
-      <Head title="Dashboard" />
+      <SEO title="Dashboard" />
       <Layout>
         <Wrapper style={{ minHeight: '80vh' }}>
           <Title>Dashboard</Title>

@@ -1,6 +1,6 @@
 import { GlobalStyles } from './styles/globalStyles';
 import Routes from './routes/Routes';
-import { Toast } from './components/Toast';
+import { Toast } from './components/utils/Toast';
 import MyThemeProvider from './styles/MyThemeProvider';
 
 const App = (): JSX.Element => {

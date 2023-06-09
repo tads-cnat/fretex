@@ -3,13 +3,10 @@ import { ContainerPrincipal } from './styles';
 import { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import FreteDetailComponent from '../../components/FreteDetailFreteiroComponents/FreteDetail';
-import Layout from '../../components/Layout';
+import { FreteDetailComponent } from './components';
 import { useQuery } from 'react-query';
-import LoadingPage from '../../components/Global/LoadingPage';
+import { LoadingPage, SEO, Layout } from '../../components';
 import { objToQueryString } from '../../utils/queyString';
-import Head from '../../components/Head';
-
 import PedidoService from '../../services/PedidoService';
 import ClienteService from '../../services/ClienteService';
 import PropostaService from '../../services/PropostaService';
@@ -57,7 +54,7 @@ const FreteDetail = (): JSX.Element => {
 
   return (
     <>
-      <Head title="Detalhes do frete" />
+      <SEO title="Detalhes do frete" />
       <Layout>
         <ContainerPrincipal>
           <Wrapper bgColor="#f5f5f5">
