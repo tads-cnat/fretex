@@ -1,14 +1,23 @@
 import styled from 'styled-components';
 import { type IPreviewImage } from '../../interfaces/styledComponents';
 
-export const Container = styled.label`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   transition: 0.5s;
   gap: 10px;
+
+  label {
+    cursor: pointer;
+    padding: 0 20px;
+  }
+
+  label:hover {
+    filter: brightness(50%);
+  }
+
   input {
     display: none;
   }
@@ -16,9 +25,6 @@ export const Container = styled.label`
   p {
     color: var(--text-grey-1);
     font-size: var(--font-medium);
-  }
-  :hover {
-    filter: brightness(50%);
   }
 `;
 

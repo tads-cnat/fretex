@@ -12,10 +12,12 @@ interface IPreview {
 const Preview = ({ children, img, imgDefault, width, tipo = 1 }: IPreview) => {
   return (
     <Container>
-      <ContainerImagem width={width} tipo={tipo}>
-        <img src={img || imgDefault} />
-      </ContainerImagem>
-      {children}
+      <label>
+        <ContainerImagem width={width} tipo={tipo}>
+          <img src={img || imgDefault} />
+        </ContainerImagem>
+        {children}
+      </label>
     </Container>
   );
 };

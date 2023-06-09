@@ -114,7 +114,7 @@ const EditProfile = (): JSX.Element => {
     }
   }, [user, setFocus, setValue]);
 
-  const onChange = (e: any): void => {
+  const onChangeImage = (e: any): void => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
@@ -145,8 +145,9 @@ const EditProfile = (): JSX.Element => {
           <input
             type="file"
             {...register('url_foto')}
+            onChange={onChangeImage}
             accept="image/jpeg,image/png,image/gif"
-            onChange={onChange}
+            
           />
           <p>Insira uma imagem</p>
         </Preview>
