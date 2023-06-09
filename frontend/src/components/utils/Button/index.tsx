@@ -1,6 +1,6 @@
 import { LinkYellow, BtnYellow } from './styles';
 import { type MouseEvent } from 'react';
-import { Loading } from '../Loading';
+import { Loading } from '../';
 
 interface IButton {
   type?: 'button' | 'submit' | 'reset' | undefined;
@@ -22,29 +22,18 @@ export const Button = ({
   fontSize,
 }: IButton): JSX.Element => {
   if (isButton === true) {
-    if (fontSize === 'large') {
-      return (
-        <BtnYellow
-          type={type}
-          fontSize="var(--font-large)"
-          onClick={onClick}
-          disabled={isDisabled}
-        >
-          {isDisabled ? <Loading /> : children}
-        </BtnYellow>
-      );
-    } else {
-      return (
-        <BtnYellow
-          type={type}
-          fontSize="var(--font-medium)"
-          onClick={onClick}
-          disabled={isDisabled}
-        >
-          {isDisabled ? <Loading color="white" /> : children}
-        </BtnYellow>
-      );
-    }
+    return (
+      <BtnYellow
+        type={type}
+        fontSize={
+          fontSize === 'large' ? 'var(--font-large)' : 'var(--font-medium)'
+        }
+        onClick={onClick}
+        disabled={isDisabled}
+      >
+        {isDisabled ? <Loading color="white" height='42px' svgWidth='60px'/> : children}
+      </BtnYellow>
+    );
   } else {
     return (
       <LinkYellow to={link ?? ''} onClick={onClick}>
