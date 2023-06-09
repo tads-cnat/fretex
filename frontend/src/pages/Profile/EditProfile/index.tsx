@@ -23,9 +23,8 @@ import FreteiroService from '../../../services/FreteiroService';
 import ClienteService from '../../../services/ClienteService';
 import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
-import { Button, LabelInput } from '../../../components';
+import { Button, LabelInput, Preview } from '../../../components';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
-import Preview from '../../../components/Preview';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();

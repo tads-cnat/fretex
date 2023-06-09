@@ -1,7 +1,5 @@
 import { HeaderContainer, PropostaContainer2 } from './styles';
-import CardsContainer from '../CardsContainer';
-import CardProposta from '../CardProposta';
-import ModalProposta from '../ModalProposta';
+import { CardsContainer, CardProposta, ModalProposta, Button } from '../../';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
@@ -10,7 +8,6 @@ import {
 } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type MouseEvent } from 'react';
-import Button from '../../Global/Button';
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -20,7 +17,7 @@ interface INegociation {
   pedidoVeiculos: number[];
 }
 
-const NegociationComponent = ({
+export const NegotiationComponent = ({
   actualUser,
   pedidoId,
   propostas,
@@ -61,7 +58,9 @@ const NegociationComponent = ({
           {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          ( propostas.length > 0 ? propostas.find((p) => p.usuario === actualUser.id) == null : true) && (
+          (propostas.length > 0
+            ? propostas.find((p) => p.usuario === actualUser.id) == null
+            : true) && (
             <Button type="button" isButton onClick={handleClick}>
               Realizar proposta
             </Button>
@@ -117,5 +116,3 @@ const NegociationComponent = ({
     </>
   );
 };
-
-export default NegociationComponent;

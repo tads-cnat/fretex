@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { type IPreviewImage } from '../../interfaces/styledComponents';
+import { type IPreviewImage } from '../../../interfaces/styledComponents';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: 0.5s;
@@ -11,7 +10,9 @@ export const Container = styled.div`
 
   label {
     cursor: pointer;
-    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   label:hover {

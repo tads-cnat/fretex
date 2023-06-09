@@ -9,7 +9,8 @@ import {
   EntregaDivContent,
   ButtonDiv,
 } from './styles';
-import { Button } from '../../../../components';
+import { Button, Preview } from '../../../../components';
+import caixas from '../../../../assets/images/caixas.png';
 import { ReactComponent as Arrowleft } from '../../../../assets/images/arrow-left-circle.svg';
 import { type SubmitHandler } from 'react-hook-form';
 import { schemaPedido } from '../../schemas';
@@ -111,15 +112,19 @@ export const FormRegisterFrete = (): JSX.Element => {
   const [errorImg, setErrorImg] = useState('');
   const [errorDate, setErrorDate] = useState('');
   const [errorTurno, setErrorTurno] = useState('');
+  const [imagemProduto, setImagemProduto] = useState('');
+  const [imagemPreview, setImagemPreview] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     setErrorImg('');
     setErrorDate('');
     setErrorTurno('');
+    setIsLoading(true);
     const formData: any = new FormData();
     const { origem, destino, produto, ...pedido } = data;
     const tipoVeiculo = pedido.tipo_veiculo.map((item) => Number(item));
-    const imagemUrl = produto.imagem_url[0];
+
     if (
       isErrorDateRange(
         pedido.data_coleta,
@@ -131,12 +136,14 @@ export const FormRegisterFrete = (): JSX.Element => {
         setFocus,
       )
     ) {
+      setIsLoading(false);
       return;
     }
 
-    if (produto.imagem_url.length === 0) {
+    if (imagemProduto.length === 0) {
       setErrorImg('Campo Obrigatório');
       setFocus('produto.imagem_url');
+      setIsLoading(false);
       return;
     }
 
@@ -149,8 +156,8 @@ export const FormRegisterFrete = (): JSX.Element => {
         formData.append(`destino.${key}`, value);
     });
     Object.entries(produto).forEach(([key, value]) => {
-      if (imagemUrl && key === 'imagem_url')
-        formData.append(`produto.${key}`, imagemUrl);
+      if (imagemProduto && key === 'imagem_url')
+        formData.append(`produto.${key}`, imagemProduto);
       else if (value) formData.append(`produto.${key}`, value);
     });
     Object.entries(pedido).forEach(([key, value]) => {
@@ -168,6 +175,8 @@ export const FormRegisterFrete = (): JSX.Element => {
       })
       .catch((error) => {
         console.log(error);
+      }).finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -180,6 +189,12 @@ export const FormRegisterFrete = (): JSX.Element => {
         console.log(error);
       }); // eslint-disable-next-line
   }, []);
+
+  const onChangeImage = (e: any) => {
+    const preview = e.target.files[0];
+    setImagemProduto(preview);
+    setImagemPreview(URL.createObjectURL(preview));
+  };
 
   return (
     <>
@@ -403,15 +418,19 @@ export const FormRegisterFrete = (): JSX.Element => {
                 </div>
               </div>
               <div>
-                <label>
-                  <span>Foto do produto</span>
+                <Preview
+                  img={imagemPreview}
+                  imgDefault={caixas}
+                  width={'260px'}
+                >
                   <input
                     {...register('produto.imagem_url')}
                     type="file"
-                    //  onChange={handleChange}
+                    onChange={onChangeImage}
                     accept="image/jpeg,image/png,image/gif"
                   />
-                </label>
+                  <p>Clique para inserir uma imagem</p>
+                </Preview>
                 {errorImg !== '' && Boolean(errorImg) && (
                   <p className="error">{errorImg}</p>
                 )}
@@ -516,7 +535,7 @@ export const FormRegisterFrete = (): JSX.Element => {
             </EntregaDivContent>
           </EntregaDiv>
           <ButtonDiv>
-            <Button isButton type="submit" fontSize="large">
+            <Button isButton type="submit" fontSize="large" isDisabled={isLoading}>
               Finalizar pedido
             </Button>
           </ButtonDiv>

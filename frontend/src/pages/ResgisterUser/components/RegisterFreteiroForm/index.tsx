@@ -16,10 +16,9 @@ import { schemaFreteiro } from '../../schemas';
 import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import { Button, Input } from '../../../../components';
+import { Button, Input, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
-import Preview from '../../Preview';
 
 export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();

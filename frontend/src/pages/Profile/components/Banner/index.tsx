@@ -6,8 +6,8 @@ import { useToggle } from '../../../../hooks/useToggle';
 import ClienteService from '../../../../services/ClienteService';
 import FreteiroService from '../../../../services/FreteiroService';
 import { useParams } from 'react-router-dom';
-import { type ICliente, type IFreteiro } from '../../../interfaces';
-import { isFreteiro } from '../../../utils/isFreteiro';
+import { type ICliente, type IFreteiro } from '../../../../interfaces';
+import { isFreteiro } from '../../../../utils/isFreteiro';
 import { set } from 'react-hook-form';
 
 interface IBanner {

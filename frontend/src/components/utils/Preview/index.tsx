@@ -9,7 +9,7 @@ interface IPreview {
   tipo?: number;
 }
 
-const Preview = ({ children, img, imgDefault, width, tipo = 1 }: IPreview) => {
+export const Preview = ({ children, img, imgDefault, width, tipo = 1 }: IPreview) => {
   return (
     <Container>
       <label>
@@ -21,5 +21,3 @@ const Preview = ({ children, img, imgDefault, width, tipo = 1 }: IPreview) => {
     </Container>
   );
 };
-
-export default Preview;
