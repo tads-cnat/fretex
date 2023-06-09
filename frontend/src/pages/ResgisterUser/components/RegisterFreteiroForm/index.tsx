@@ -2,7 +2,6 @@ import {
   ContainerMain,
   ContainerForm2,
   RegisterPerson,
-  PerfilImg,
   RegisterAddress,
   Login,
   ContainerInfos,
@@ -20,6 +19,7 @@ import { toast } from 'react-toastify';
 import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
+import Preview from '../../Preview';
 
 export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -35,7 +35,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const { onSubmit, error } = useFreteiroForm({
+  const { onSubmit, error, isLoading } = useFreteiroForm({
     onSuccess: () => {
       toast.success('Freteiro cadastrado com sucesso!');
       navigate('/login');
@@ -58,21 +58,23 @@ export const RegisterFreteiroForm = (): JSX.Element => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <RegisterPerson>
             <h1>Crie sua conta</h1>
-            <PerfilImg>
-              <label>
-                <img src={imagePreview || perfil} alt="perfil" />
-                <input
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
-                />
-                <p>Clique para inserir uma imagem</p>
-                {/* {errors.url_foto != null && (
+            <Preview
+              img={imagePreview}
+              imgDefault={perfil}
+              width={'160px'}
+              tipo={2}
+            >
+              <input
+                type="file"
+                {...register('url_foto')}
+                accept="image/jpeg,image/png,image/gif"
+                onChange={onChange}
+              />
+              <p>Clique para inserir uma imagem</p>
+              {/* {errors.url_foto != null && (
                   <p className="error">{errors.url_foto?.message}</p>
                 )} */}
-              </label>
-            </PerfilImg>
+            </Preview>
             {inputs.map((input, index) => (
               <Input
                 key={index}
@@ -166,7 +168,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               error={errors.endereco?.complemento}
             />
             {error !== '' && <p className="error">{error}</p>}
-            <Button isButton type="submit">
+            <Button isButton type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
           </RegisterAddress>

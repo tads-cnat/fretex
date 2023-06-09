@@ -133,6 +133,7 @@ export const ProdutoDivContent = styled.div`
     display: flex;
     flex-direction: column;
   }
+
   .checkbox_tipoveiculo {
     display: flex;
     align-items: center;

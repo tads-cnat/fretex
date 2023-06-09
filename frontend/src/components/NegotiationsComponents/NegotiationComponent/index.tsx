@@ -1,5 +1,7 @@
 import { HeaderContainer, PropostaContainer2 } from './styles';
-import { CardsContainer, CardProposta, ModalProposta } from '../';
+import CardsContainer from '../CardsContainer';
+import CardProposta from '../CardProposta';
+import ModalProposta from '../ModalProposta';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
@@ -8,9 +10,9 @@ import {
 } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type MouseEvent } from 'react';
-import { Button } from '../../utils';
+import Button from '../../Global/Button';
 
-interface INegotiation {
+interface INegociation {
   actualUser: IFreteiro | ICliente;
   pedidoId: number;
   propostas: IProposta[];
@@ -18,13 +20,13 @@ interface INegotiation {
   pedidoVeiculos: number[];
 }
 
-export const NegotiationComponent = ({
+const NegociationComponent = ({
   actualUser,
   pedidoId,
   propostas,
   ownerPedido,
   pedidoVeiculos,
-}: INegotiation): JSX.Element => {
+}: INegociation): JSX.Element => {
   const { toggle: toggleModalProposta, value: valueModalProposta } =
     useToggle();
   const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
@@ -59,9 +61,7 @@ export const NegotiationComponent = ({
           {/** <p>Aguardando freteiro</p> */}
         </div>
         {isFreteiro(actualUser) &&
-          (propostas.length > 0
-            ? propostas.find((p) => p.usuario === actualUser.id) == null
-            : true) && (
+          ( propostas.length > 0 ? propostas.find((p) => p.usuario === actualUser.id) == null : true) && (
             <Button type="button" isButton onClick={handleClick}>
               Realizar proposta
             </Button>
@@ -117,3 +117,5 @@ export const NegotiationComponent = ({
     </>
   );
 };
+
+export default NegociationComponent;

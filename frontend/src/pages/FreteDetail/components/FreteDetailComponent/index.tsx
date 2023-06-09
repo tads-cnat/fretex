@@ -195,6 +195,7 @@ export const FreteDetailComponent = ({
             propostas={propostas}
             ownerPedido={pedido.cliente}
             pedidoVeiculos={pedido.tipo_veiculo}
+            isLoading={isLoadingTipoVeiculos}
           />
         </Negotiation>
       }

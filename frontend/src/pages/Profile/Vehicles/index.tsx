@@ -5,8 +5,6 @@ import { ModalComponent, LoadingPage, Button } from '../../../components';
 import {
   ContainerMain,
   ContainerInputs,
-  ContainerImagem,
-  Preview,
   QtdVeiculos,
 } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
@@ -20,6 +18,7 @@ import { schemaVeiculo } from './schema';
 import { CardVeiculo } from '../../../components/CardVeiculo';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Preview from '../../../components/Preview';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -42,6 +41,7 @@ const Vehicles = (): JSX.Element => {
   const [veiculos, setVeiculos] = useState<IVeiculo[]>([]);
   const { user, handleSelectTab } = useContextProfile();
   const [loading, setLoading] = useState(true);
+  const [imageError, setImageError] = useState('');
 
   useEffect(() => {
     handleSelectTab(1);
@@ -66,6 +66,7 @@ const Vehicles = (): JSX.Element => {
   }, []);
 
   const onSubmit: SubmitHandler<IVeiculo> = async (data) => {
+    setLoading(true);
     const formData: any = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       if (typeof value !== 'undefined' && key === 'url_foto')
@@ -80,12 +81,14 @@ const Vehicles = (): JSX.Element => {
       const res = await VeiculoService.getVeiculosForFreteiro(Number(id));
       toast.success('Veículo cadastrado com sucesso!');
       setVeiculos(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (err:any) {
+      setImageError(err.response.data.errors.url_foto[0]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const onChange = (e: any): void => {
+  const onChangeImage = (e: any): void => {
     try {
       const file = e.target.files[0];
       setImagemVeiculo(file);
@@ -193,26 +196,18 @@ const Vehicles = (): JSX.Element => {
                 <p className="error">{errors.tipo_veiculo.message}</p>
               )}
             </ContainerInputs>
-            <ContainerImagem>
-              <label>
-                <Preview>
-                  {imagemPreview !== undefined ? (
-                    <img src={imagemPreview} alt="veiculo" />
-                  ) : (
-                    <img src={veiculo} alt="veiculo" />
-                  )}
-                </Preview>
-                <input
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
-                />
-              </label>
+            <Preview img={imagemPreview} imgDefault={veiculo} width={'260px'}>
+              <input
+                id="preview"
+                type="file"
+                {...register('url_foto')}
+                accept="image/jpeg,image/png,image/gif"
+                onChange={onChangeImage}
+              />
               <p>Clique para inserir uma imagem</p>
-            </ContainerImagem>
+            </Preview>
           </ContainerMain>
-          <Button isButton type="submit">
+          <Button isButton type="submit" isDisabled={loading}>
             Cadastrar Veículo
           </Button>
         </form>

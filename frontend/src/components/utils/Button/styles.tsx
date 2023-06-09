@@ -39,4 +39,8 @@ export const BtnYellow = styled.button<IBtn>`
   &:hover {
     background-color: var(--btn-hover);
   }
+  &:disabled {
+    cursor: not-allowed;
+    max-height: 42px;
+  }
 `;

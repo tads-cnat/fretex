@@ -150,7 +150,7 @@ export const ModalProposta = ({
           </LabelInput>
         </div>
         <div className="submitContainer">
-          <Button isButton type="submit">
+          <Button isButton type="submit" isDisabled={isLoadingVeiculos}>
             Realizar proposta
           </Button>
         </div>
