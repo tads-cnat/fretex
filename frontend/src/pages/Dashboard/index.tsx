@@ -19,11 +19,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringEN = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'EN',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'EN',
         },
   );
@@ -31,11 +31,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringAG = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'AG',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'AG',
         },
   );
@@ -43,22 +43,22 @@ const Dashboard = (): JSX.Element => {
   const queryStringTR = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'TR',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'TR',
         },
   );
   const queryStringCO = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'CO',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'CO',
         },
   );
@@ -66,11 +66,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringCA = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'CA',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'CA',
         },
   );
