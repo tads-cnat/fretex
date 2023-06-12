@@ -32,7 +32,7 @@ export interface IUserUpdateFormData {
 
 export interface IVeiculo {
   id: number;
-  url_foto: any;
+  url_foto: unknown;
   placa: string;
   cor: string;
   marca: string;

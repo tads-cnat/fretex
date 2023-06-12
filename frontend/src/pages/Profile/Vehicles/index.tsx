@@ -83,6 +83,7 @@ const Vehicles = (): JSX.Element => {
       setVeiculos(res.data);
     } catch (err: any) {
       setImageError(err.response.data.errors.url_foto[0]);
+      console.log(imageError);
     } finally {
       setLoading(false);
     }
@@ -204,7 +205,10 @@ const Vehicles = (): JSX.Element => {
                 accept="image/jpeg,image/png,image/gif"
                 onChange={onChangeImage}
               />
-              <p>Clique para inserir uma imagem</p>
+              <p>Clique para inserir uma imagem</p>{' '}
+              {errors.url_foto != null && (
+                <p className="error">{errors.url_foto.message}</p>
+              )}
             </Preview>
           </ContainerMain>
           <Button isButton type="submit" isDisabled={loading}>
