@@ -70,9 +70,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
                 onChange={onChange}
               />
               <p>Clique para inserir uma imagem</p>
-              {/* {errors.url_foto != null && (
-                  <p className="error">{errors.url_foto?.message}</p>
-                )} */}
+              {error !== '' && <p className="error">{error}</p>}
             </Preview>
             {inputs.map((input, index) => (
               <Input
@@ -82,8 +80,15 @@ export const RegisterFreteiroForm = (): JSX.Element => {
                   input.onChange !== undefined
                     ? (e: React.ChangeEvent<HTMLInputElement>) => {
                         input.onChange(e, setValue);
+                        setValue(`${input.name}`, e.target.value, {
+                          shouldValidate: true,
+                        });
                       }
-                    : undefined
+                    : (e: React.ChangeEvent<HTMLInputElement>) => {
+                        setValue(`${input.name}`, e.target.value, {
+                          shouldValidate: true,
+                        });
+                      }
                 }
                 type={input.type}
                 label={input.label}
@@ -166,7 +171,6 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               svg={<Loc />}
               error={errors.endereco?.complemento}
             />
-            {error !== '' && <p className="error">{error}</p>}
             <Button isButton type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>

@@ -24,7 +24,4 @@ export const schemaVeiculo = yup.object({
     .nullable()
     .min(1, 'Escolha pelo menos 1 veículo')
     .required('Escolha pelo menos 1 veículo'),
-  url_foto: yup
-    .mixed()
-    .test('fileSize', 'Adicione uma imagem', (value) => value.length > 0),
 });
