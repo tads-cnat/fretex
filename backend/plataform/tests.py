@@ -84,7 +84,7 @@ class CadastroTipoVeiculoTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(TipoVeiculo.objects.filter(descricao=dataTipoVeiculo["descricao"]).exists(), True)
 
-class EnderoTests(APITestCase):
+class EnderecoTests(APITestCase):
     def test_create_endereco(self):
         data = {
             "rua": "Rua Teste",
