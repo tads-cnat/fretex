@@ -1,7 +1,7 @@
 
 from django.contrib.auth.models import User
 from django.urls import reverse
-from plataform.models import Cliente, Freteiro, TipoVeiculo
+from plataform.models import Cliente, Freteiro, TipoVeiculo, Endereco
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.test import TestCase
@@ -86,6 +86,7 @@ class CadastroTipoVeiculoTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(TipoVeiculo.objects.filter(descricao=dataTipoVeiculo["descricao"]).exists(), True)
 
+<<<<<<< HEAD
 
 class CadastroTipoVeiculoTestsSistema(APITestCase):
     def test_create_tipo_veiculo(self):
@@ -145,3 +146,18 @@ class CadastroTipoVeiculoIntegracao(TestCase):
         tipo_veiculo_exists = TipoVeiculo.objects.filter(descricao="caminhao 3/4").exists()
         self.assertFalse(tipo_veiculo_exists)
 
+=======
+class EnderecoTests(APITestCase):
+    def test_create_endereco(self):
+        data = {
+            "rua": "Rua Teste",
+            "CEP": "12345678",
+            "numero": "123",
+            "bairro": "Bairro Teste",
+            "cidade": "Cidade Teste",
+            "estado": "Estado Teste",
+            "complemento": "Complemento Teste",
+        }
+        Endereco.objects.create(**data)
+        self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
+>>>>>>> fb74c2b8e50d851c6a614a13bfc96b6066e44e9c
