@@ -48,9 +48,9 @@ class ClienteTests(APITestCase):
 
         user = User.objects.get(username='cliente@hotmail.com')
         # print(user)
-        client2 = APIClient()
-        client2.force_authenticate(user=user)
+        # client2 = APIClient()
+        self.client.force_authenticate(user=user)
 
         url2 = reverse("cliente-list")
-        response = client2.get(url2, data=None, format=None)
+        response = self.client.get(url2, data=None, format=None)
         print('CLIENTES: ',response.json())
