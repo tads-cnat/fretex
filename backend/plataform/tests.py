@@ -30,7 +30,7 @@ class FreteiroTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Freteiro.objects.filter(cpf=data["cpf"]).exists(), True)
 
-class ClienteTests(APITestCase):
+class ClienteTestsSistema(APITestCase):
     def test_create_cliente(self):
 
         url = reverse("auth-register-cliente")
@@ -54,3 +54,17 @@ class ClienteTests(APITestCase):
         url2 = reverse("cliente-list")
         response = self.client.get(url2, data=None, format=None)
         print('CLIENTES: ',response.json())
+
+class ClienteTestsIntegracao(APITestCase):
+    def test_create_cliente(self):
+        data = {
+            "username": "MathewsDantas",
+            "first_name": "Mathews",
+            "last_name": "Santos",
+            "email": "cliente@hotmail.com",
+            "cpf": "11945011614",
+            "password": "Tads.d.b.s123",
+        }
+        cliente = Cliente.objects.create_user(**data)
+        print(cliente)
+        self.assertEqual(Cliente.objects.filter(cpf=data["cpf"]).exists(), True)
