@@ -42,7 +42,6 @@ class ClienteTests(APITestCase):
             "password": "Tads.d.b.s123",
         }
         response = self.client.post(url, data, format="json")
-        print('status test_create_cliente:',response.status_code)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Cliente.objects.filter(cpf=data["cpf"]).exists(), True)
 
@@ -84,7 +83,7 @@ class CadastroTipoVeiculoSistema(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(TipoVeiculo.objects.filter(descricao=dataTipoVeiculo["descricao"]).exists(), True)
 
-class CadastroTipoVeiculoIntegração(APITestCase):
+class CadastroTipoVeiculoIntegracao(APITestCase):
     def test_create_tipo_veiculo(self):
 
         TipoVeiculo.objects.create(
