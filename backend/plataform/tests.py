@@ -86,9 +86,6 @@ class CadastroTipoVeiculoTests(APITestCase):
 
 class EnderoTests(APITestCase):
     def test_create_endereco(self):
-        """
-        Ensure we can create a new freteiro.
-        """
         data = {
             "rua": "Rua Teste",
             "CEP": "12345678",
