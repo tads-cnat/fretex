@@ -1,7 +1,8 @@
 from django.urls import get_resolver, reverse
+from django.contrib.auth.models import User
 from plataform.models import Cliente, Freteiro
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 
 
 class FreteiroTests(APITestCase):
@@ -40,6 +41,16 @@ class ClienteTests(APITestCase):
             "password": "Tads.d.b.s123",
         }
         response = self.client.post(url, data, format="json")
-        print('status test_create_cliente:',response.status_code)
+        print('JSON:', response.json())
+        print('STATUS: ', response.status_code)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Cliente.objects.filter(cpf=data["cpf"]).exists(), True)
+
+        user = User.objects.get(username='cliente@hotmail.com')
+        # print(user)
+        client2 = APIClient()
+        client2.force_authenticate(user=user)
+
+        url2 = reverse("cliente-list")
+        response = client2.get(url2, data=None, format=None)
+        print('CLIENTES: ',response.json())
