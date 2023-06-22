@@ -77,8 +77,7 @@ class PedidoTests(TestCase):
         self.tipo_veiculo = TipoVeiculo.objects.create(
             descricao='Caminhão'
         )
-    
-    def test_create_pedido(self):
+        #Modelo Principal
         self.pedido = Pedido.objects.create(
             cliente=self.cliente,
             origem=self.endereco_origem,
@@ -91,8 +90,11 @@ class PedidoTests(TestCase):
             turno_entrega='MA',
             turno_coleta='TA'
         )
+    
+    def test_create_pedido(self):
         self.assertEqual(Pedido.objects.all().count(), 1)  # Verifique se um novo pedido foi criado
         self.assertEqual(Pedido.objects.last().nomeDestinatario, 'Novo Destinatário')
+    
     def test_update_pedido(self):
         data = {
             'data_coleta' : '2023-06-22', 
@@ -104,7 +106,6 @@ class PedidoTests(TestCase):
         pedido_atualizado = Pedido.objects.get(id=self.pedido.id)
         self.assertEqual(pedido_atualizado.data_coleta, '2023-06-22')
         
-    # teste para deletar pedido
     def test_delete_pedido(self):
         Pedido.objects.filter(id=self.pedido.id).delete()
         pedidos_restantes = Pedido.objects.all()
