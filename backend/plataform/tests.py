@@ -93,7 +93,7 @@ class PedidoTests(TestCase):
     
     def test_create_pedido(self):
         self.assertEqual(Pedido.objects.all().count(), 1)  # Verifique se um novo pedido foi criado
-        self.assertEqual(Pedido.objects.last().nomeDestinatario, 'Novo Destinatário')
+        self.assertEqual(Pedido.objects.last().nomeDestinatario, 'Destinatário')
     
     def test_update_pedido(self):
         data = {
