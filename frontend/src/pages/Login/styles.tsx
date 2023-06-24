@@ -28,3 +28,10 @@ export const ContainerContent2 = styled(ContainerContent)`
     }
   }
 `;
+
+export const DivIcon = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;

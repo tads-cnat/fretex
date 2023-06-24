@@ -68,7 +68,7 @@ export const ContainerForm = styled.div`
   background-color: #353535;
 
   form {
-    padding: 80px 40px;
+    padding: 40px 40px;
     max-width: 500px;
   }
 
