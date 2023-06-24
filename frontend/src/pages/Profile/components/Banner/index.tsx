@@ -8,7 +8,7 @@ import FreteiroService from '../../../../services/FreteiroService';
 import { useParams } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../../interfaces';
 import { isFreteiro } from '../../../../utils/isFreteiro';
-import { set } from 'react-hook-form';
+import { RiUserSettingsLine } from 'react-icons/ri';
 
 interface IBanner {
   user: IFreteiro | ICliente;
@@ -86,7 +86,13 @@ export const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
               accept="image/jpeg,image/png,image/gif"
               onChange={onChange}
             />
-            <Button isButton type="submit" onClick={handleClick} isDisabled={isLoading}>
+            <Button
+              isButton
+              type="submit"
+              onClick={handleClick}
+              isDisabled={isLoading}
+              Icon={RiUserSettingsLine}
+            >
               Enviar
             </Button>
           </Form>

@@ -53,10 +53,12 @@ export const LinksFretes = styled.div<IDropdownMenu>`
   }
 
   ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     text-decoration: none;
     color: var(--bg-ligth);
     font-size: var(--font-medium);
-    display: block;
     transition: 0.5s;
     &:hover {
       color: var(--btn-hover);

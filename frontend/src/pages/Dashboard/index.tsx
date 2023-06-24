@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { isFreteiro } from '../../utils/isFreteiro';
 import { objToQueryString } from '../../utils/queyString';
+import { FaTruckLoading } from 'react-icons/fa';
 
 import PedidoService from '../../services/PedidoService';
 
@@ -146,7 +147,9 @@ const Dashboard = (): JSX.Element => {
             <div>
               <button className="concluidos">Ver todos os concluídos</button>
               {isFreteiro(user) && (
-                <Button link={'/fretesDisponiveis'}>Buscar novos fretes</Button>
+                <Button link={'/fretesDisponiveis'} Icon={FaTruckLoading}>
+                  Buscar novos fretes
+                </Button>
               )}
             </div>
           </Filter>

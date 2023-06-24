@@ -15,6 +15,7 @@ import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { SEO, Button, Input } from '../../components';
+import { RiLoginBoxLine } from 'react-icons/ri';
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -93,7 +94,7 @@ const Login = (): JSX.Element => {
                   {error.length !== 0 && <p className="error">{error}</p>}
                 </div>
                 <section>
-                  <Button type="submit" isButton isDisabled={isLoadingUser}>
+                  <Button type="submit" isButton isDisabled={isLoadingUser} Icon={RiLoginBoxLine}>
                     Entrar
                   </Button>
                   <p>

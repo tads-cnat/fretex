@@ -25,6 +25,7 @@ import { AuthContext } from '../../../context/Auth/AuthContext';
 import { toast } from 'react-toastify';
 import { Button, LabelInput, Preview } from '../../../components';
 import { handleChangeInputCEP } from '../../../utils/handleChangeCEP';
+import { RiUserSettingsLine } from 'react-icons/ri';
 
 const EditProfile = (): JSX.Element => {
   const navigate = useNavigate();
@@ -310,7 +311,7 @@ const EditProfile = (): JSX.Element => {
           )}
         </InputsContainerGrid>
         <div className="containerButton">
-          <Button isButton isDisabled={isLoading}>
+          <Button isButton isDisabled={isLoading} Icon={RiUserSettingsLine}>
             Atualizar Perfil
           </Button>
         </div>
