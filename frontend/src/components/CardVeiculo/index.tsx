@@ -3,8 +3,8 @@ import { type IVeiculo } from '../../interfaces';
 import { ReactComponent as Gota } from '../../assets/images/gota_colorir.svg';
 import { ReactComponent as Info } from '../../assets/images/InfoCircle.svg';
 import Placa from '../../assets/images/placaCarro.png';
-import VeiculoService from '../../services/VeiculoService';
 import { useEffect, useState } from 'react';
+import TipoVeiculoService from '../../services/TipoVeiculoService';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -19,9 +19,9 @@ export const CardVeiculo = ({
   const [TipoVeiculo, setTipoVeiculo] = useState<ITiposDeVeiculo>();
 
   useEffect(() => {
-    VeiculoService.get(veiculos.tipo_veiculo)
+    TipoVeiculoService.get(veiculos.tipo_veiculo)
       .then((res) => {
-        setTipoVeiculo(res.data[0]);
+        setTipoVeiculo(res.data);
       })
       .catch((error) => {
         console.log(error);

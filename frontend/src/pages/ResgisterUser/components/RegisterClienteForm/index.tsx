@@ -21,7 +21,6 @@ export const RegisterClienteForm = (): JSX.Element => {
     formState: { errors },
     setFocus,
   } = useForm<IClienteFormData>({
-    mode: 'onChange',
     resolver: yupResolver(schemaCliente),
   });
 
@@ -67,8 +66,15 @@ export const RegisterClienteForm = (): JSX.Element => {
                   input.onChange !== undefined
                     ? (e: React.ChangeEvent<HTMLInputElement>) => {
                         input.onChange(e, setValue);
+                        setValue(`${input.name}`, e.target.value, {
+                          shouldValidate: true,
+                        });
                       }
-                    : undefined
+                    : (e: React.ChangeEvent<HTMLInputElement>) => {
+                        setValue(`${input.name}`, e.target.value, {
+                          shouldValidate: true,
+                        });
+                      }
                 }
                 type={input.type}
                 label={input.label}
@@ -78,7 +84,6 @@ export const RegisterClienteForm = (): JSX.Element => {
                 required={input.required}
               />
             ))}
-
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>

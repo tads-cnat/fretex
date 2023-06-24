@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import veiculo from '../../../assets/images/veiculo.png';
 import { ReactComponent as PlusVeiculo } from '../../../assets/images/PlusCircle.svg';
-import { ModalComponent, LoadingPage, Button, Preview, CardVeiculo } from '../../../components';
+import {
+  ModalComponent,
+  LoadingPage,
+  Button,
+  Preview,
+  CardVeiculo,
+} from '../../../components';
 import { ContainerMain, ContainerInputs, QtdVeiculos } from './styles';
 import { useToggle } from '../../../hooks/useToggle';
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -199,6 +205,9 @@ const Vehicles = (): JSX.Element => {
                 onChange={onChangeImage}
               />
               <p>Clique para inserir uma imagem</p>
+              {imageError != '' && (
+                <p className="error">{"Adicione a imagem do veículo"}</p>
+              )}
             </Preview>
           </ContainerMain>
           <Button isButton type="submit" isDisabled={loading}>
