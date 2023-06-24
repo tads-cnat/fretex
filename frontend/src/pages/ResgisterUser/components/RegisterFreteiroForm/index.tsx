@@ -108,7 +108,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               }}
               type="text"
               label="CEP"
-              placeholder="Seu CEP"
+              placeholder="00000-000"
               svg={<Loc />}
               error={errors.endereco?.CEP}
               required={true}
@@ -118,7 +118,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.rua')}
               type="text"
               label="Rua"
-              placeholder="Sua rua"
+              placeholder="Ex: Travessa,Rua,Avenida..."
               svg={<Loc />}
               error={errors.endereco?.rua}
               required={true}
@@ -127,7 +127,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.numero')}
               type="text"
               label="Número"
-              placeholder="Número da sua casa"
+              placeholder="Ex: 176"
               svg={<Loc />}
               error={errors.endereco?.numero}
               required={true}
@@ -137,7 +137,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.bairro')}
               type="text"
               label="Bairro"
-              placeholder="Seu bairro"
+              placeholder="Ex: Tirol"
               svg={<Loc />}
               error={errors.endereco?.bairro}
               required={true}
@@ -147,7 +147,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.cidade')}
               type="text"
               label="Cidade"
-              placeholder="Sua cidade"
+              placeholder="Ex: Natal"
               svg={<Loc />}
               error={errors.endereco?.cidade}
               required={true}
@@ -157,7 +157,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.estado')}
               type="text"
               label="Estado"
-              placeholder="Seu estado"
+              placeholder="Ex: RN"
               svg={<Loc />}
               error={errors.endereco?.estado}
               required={true}
@@ -167,7 +167,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               {...register('endereco.complemento')}
               type="text"
               label="Complemento"
-              placeholder="Complemento..."
+              placeholder="Ex: Casa, apartamento..."
               svg={<Loc />}
               error={errors.endereco?.complemento}
             />

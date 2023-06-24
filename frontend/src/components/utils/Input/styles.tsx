@@ -26,6 +26,7 @@ export const Container = styled.label`
     transform: translateY(-20px);
     opacity: 0;
     animation: animeDown 0.3s forwards;
+    font-style: italic;
   }
 
   @keyframes animeDown {

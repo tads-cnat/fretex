@@ -3,6 +3,7 @@ import { RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 import { SEO } from '../../components';
 import { btnTypeUserData } from './constants';
+import { RiUserLine } from 'react-icons/ri';
 
 const Register = (): JSX.Element => {
   const [typeResgister, setTypeRegister] = useState('cliente');
@@ -36,7 +37,9 @@ const Register = (): JSX.Element => {
                     handleChangeTypeOfUser(btn.type);
                   }}
                   active={typeResgister === btn.type}
+                  typeRegister={btn.type}
                 >
+                  <RiUserLine />
                   {btn.text}
                 </BtnTypeUser>
               ))}
