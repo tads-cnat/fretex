@@ -32,6 +32,7 @@ export const Container = styled.div`
     color: #ee5757;
     display: inline-block;
     font-size: var(--font-small);
+    font-style: italic;
   }
 `;
 
