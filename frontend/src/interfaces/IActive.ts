@@ -1,4 +1,4 @@
 export interface IActive {
   active: boolean;
-  typeRegister: string;
+  // typeRegister: string;
 }

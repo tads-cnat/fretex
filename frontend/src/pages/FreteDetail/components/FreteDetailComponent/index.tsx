@@ -20,7 +20,7 @@ import { NegotiationComponent, Loading } from '../../../../components';
 import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { useQuery } from 'react-query';
 import { formatDate } from '../../../../utils/formatDate';
-import { GrLocation } from 'react-icons/gr';
+import { BsGeoAlt } from 'react-icons/bs';
 import { BsArrowLeftCircle, BsInfoCircle } from 'react-icons/bs';
 
 const formatCEP = (cep: string) => {
@@ -107,7 +107,7 @@ export const FreteDetailComponent = ({
         </Content1>
         <Content2>
           <Content2Info>
-            <GrLocation fontSize={'2rem'} />
+            <BsGeoAlt fontSize={'1.5rem'} />
             <div>
               <h4>Dados de coleta </h4>
               <p>
@@ -131,7 +131,7 @@ export const FreteDetailComponent = ({
             </div>
           </Content2Info>
           <Content2Info>
-            <GrLocation fontSize={'2rem'} />
+            <BsGeoAlt fontSize={'1.5rem'} />
             <div>
               <h4>Dados de Entrega </h4>
               <p>
@@ -155,7 +155,7 @@ export const FreteDetailComponent = ({
             </div>
           </Content2Info>
           <Content2Info>
-            <BsInfoCircle fontSize={'2rem'} />
+            <BsInfoCircle fontSize={'1.5rem'} />
             <div>
               <h4>Informações adicionais </h4>
               <p>
