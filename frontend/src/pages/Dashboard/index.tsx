@@ -145,7 +145,6 @@ const Dashboard = (): JSX.Element => {
           <Filter>
             <span>Seus Fretes {/* dos últimos 30 dias */}</span>
             <div>
-              <button className="concluidos">Ver todos os concluídos</button>
               {isFreteiro(user) && (
                 <Button link={'/fretesDisponiveis'} Icon={FaTruckLoading}>
                   Buscar novos fretes
