@@ -54,17 +54,18 @@
 ## Tabela de Custos
 | Recurso                        | Valor               |
 |--------------------------------|---------------------|
-| Analista de negocio            | 35,00 por Hora      |
-| Analista de qualidade          | 20,00 por Hora      |
-| Analista de sistemas           | 30,00 por Hora      |
-| Analista de testes             | 25,00 por Hora      |
+| Analista de Negócios           | 35,00 por Hora      |
+| Analista de Qualidade          | 20,00 por Hora      |
+| Analista de Sistemas           | 30,00 por Hora      |
+| Analista de Testes             | 25,00 por Hora      |
 | Arquiteto de Software          | 47,00 por Hora      |
 | Designer                       | 20,00 por Hora      |
+| Equipamento de Alta Performace | 4500,00             |
 | Especialista em Banco de Bados | 47,00 por Hora      |
 | Especialita em Implantação     | 25,00 por Hora      |
 | Especialista em Marketing      | 30,00 por Hora      |
 | Gerente de Projetos            | 35,00 por Hora      |
-| Recursos humanos               | 15,00 por Hora      |
-| Programador front/back         | 25,00 por Hora      |
+| Recursos Humanos               | 15,00 por Hora      |
+| Programador Front/Back         | 25,00 por Hora      |
 
 * Valores estimados retirados do site [TalentosBR](https://br.talent.com/pt/salary).
