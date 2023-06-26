@@ -13,14 +13,15 @@ import NavUser from './NavUser';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useToggle } from '../../hooks/useToggle';
 import { type INavLink } from '../../interfaces/INavLink';
-import { RiUserSharedLine, RiHome2Line } from 'react-icons/ri';
-import { FaUserCircle, FaUserPlus } from 'react-icons/fa';
+import { RiUserSharedLine, RiHome2Line, RiLogoutBoxLine } from 'react-icons/ri';
+import { FaUserCircle} from 'react-icons/fa';
+import {FiUserPlus} from 'react-icons/fi';
 import { LiaTruckLoadingSolid } from 'react-icons/lia';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import {
-  BsFillCartPlusFill,
-  BsFillGiftFill,
-  BsInfoCircleFill,
+  BsCartPlus,
+  BsGift,
+  BsInfoCircle,
 } from 'react-icons/bs';
 
 interface INavbar {
@@ -53,19 +54,19 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
               <ul>
                 <li>
                   <a href="#howWorks">
-                    <BsInfoCircleFill />
+                    <BsInfoCircle />
                     Como funciona
                   </a>
                 </li>
                 <li>
                   <a href="#vantagens">
-                    <BsFillGiftFill />
+                    <BsGift />
                     Vantagens
                   </a>
                 </li>
                 <li>
                   <a href="#registration">
-                    <FaUserPlus />
+                    <FiUserPlus />
                     Cadastrar-se
                   </a>
                 </li>
@@ -99,11 +100,13 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
                 </li>
                 <li className="linkMobile">
                   <NavLink className="links" to={`/perfil/${user.id}`}>
+                    <FaUserCircle />
                     Meu perfil
                   </NavLink>
                 </li>
                 <li className="linkMobile">
                   <Link className="links" to="/" onClick={handleClick}>
+                    <RiLogoutBoxLine />
                     Sair
                   </Link>
                 </li>
@@ -125,7 +128,7 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
                 </li>
                 <li>
                   <NavLink to="/cadastroFrete">
-                    <BsFillCartPlusFill />
+                    <BsCartPlus />
                     Cadastrar pedido
                   </NavLink>
                 </li>
@@ -137,11 +140,13 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
                 </li>
                 <li className="linkMobile">
                   <NavLink className="links" to={`/perfil/${user.id}`}>
+                    <FaUserCircle />
                     Meu perfil
                   </NavLink>
                 </li>
                 <li className="linkMobile">
                   <Link className="links" to="/" onClick={handleClick}>
+                    <RiLogoutBoxLine />
                     Sair
                   </Link>
                 </li>
