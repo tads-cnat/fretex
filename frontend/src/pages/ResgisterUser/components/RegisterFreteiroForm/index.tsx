@@ -5,6 +5,7 @@ import {
   RegisterAddress,
   Login,
   ContainerInfos,
+  DivFormContent,
 } from './styles';
 import perfil from '../../../../assets/images/imgperfil.svg';
 import Loc from '../../../../assets/Svg/Loc';
@@ -19,6 +20,7 @@ import { toast } from 'react-toastify';
 import { Button, Input, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
+import { RiUserAddLine } from 'react-icons/ri';
 
 export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -55,126 +57,132 @@ export const RegisterFreteiroForm = (): JSX.Element => {
     <ContainerMain>
       <ContainerForm2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <RegisterPerson>
-            <h1>Crie sua conta</h1>
-            <Preview
-              img={imagePreview}
-              imgDefault={perfil}
-              width={'160px'}
-              tipo={2}
-            >
-              <input
-                type="file"
-                {...register('url_foto')}
-                accept="image/jpeg,image/png,image/gif"
-                onChange={onChange}
-              />
-              <p>Clique para inserir uma imagem</p>
-              {error !== '' && <p className="error">{error}</p>}
-            </Preview>
-            {inputs.map((input, index) => (
+          <DivFormContent>
+            <RegisterPerson>
+              <h1>Crie sua conta</h1>
+              <div className='preview-div'>
+              <Preview
+                img={imagePreview}
+                imgDefault={perfil}
+                width={'160px'}
+                tipo={2}
+              >
+                <input
+                  type="file"
+                  {...register('url_foto')}
+                  accept="image/jpeg,image/png,image/gif"
+                  onChange={onChange}
+                />
+                <p>Clique para inserir uma imagem</p>
+                {error !== '' && <p className="error">{error}</p>}
+              </Preview>
+              </div>
+              {inputs.map((input, index) => (
+                <Input
+                  key={index}
+                  {...register(`${input.name}`)}
+                  onChange={
+                    input.onChange !== undefined
+                      ? (e: React.ChangeEvent<HTMLInputElement>) => {
+                          input.onChange(e, setValue);
+                          setValue(`${input.name}`, e.target.value, {
+                            shouldValidate: true,
+                          });
+                        }
+                      : (e: React.ChangeEvent<HTMLInputElement>) => {
+                          setValue(`${input.name}`, e.target.value, {
+                            shouldValidate: true,
+                          });
+                        }
+                  }
+                  type={input.type}
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  svg={input.svg}
+                  error={errors[input.name]}
+                  required={input.required}
+                />
+              ))}
+            </RegisterPerson>
+            <RegisterAddress>
+              <h1 className="title">Seu Endereço</h1>
               <Input
-                key={index}
-                {...register(`${input.name}`)}
-                onChange={
-                  input.onChange !== undefined
-                    ? (e: React.ChangeEvent<HTMLInputElement>) => {
-                        input.onChange(e, setValue);
-                        setValue(`${input.name}`, e.target.value, {
-                          shouldValidate: true,
-                        });
-                      }
-                    : (e: React.ChangeEvent<HTMLInputElement>) => {
-                        setValue(`${input.name}`, e.target.value, {
-                          shouldValidate: true,
-                        });
-                      }
-                }
-                type={input.type}
-                label={input.label}
-                placeholder={input.placeholder}
-                svg={input.svg}
-                error={errors[input.name]}
-                required={input.required}
+                {...register('endereco.CEP')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChangeInputCEP(e, setValue, 'endereco.CEP');
+                }}
+                type="text"
+                label="CEP"
+                placeholder="00000-000"
+                svg={<Loc />}
+                error={errors.endereco?.CEP}
+                required={true}
+                onBlur={completeAddress}
               />
-            ))}
-          </RegisterPerson>
-          <RegisterAddress>
-            <h1 className="title">Seu Endereço</h1>
-            <Input
-              {...register('endereco.CEP')}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChangeInputCEP(e, setValue, 'endereco.CEP');
-              }}
-              type="text"
-              label="CEP"
-              placeholder="Seu CEP"
-              svg={<Loc />}
-              error={errors.endereco?.CEP}
-              required={true}
-              onBlur={completeAddress}
-            />
-            <Input
-              {...register('endereco.rua')}
-              type="text"
-              label="Rua"
-              placeholder="Sua rua"
-              svg={<Loc />}
-              error={errors.endereco?.rua}
-              required={true}
-            />
-            <Input
-              {...register('endereco.numero')}
-              type="text"
-              label="Número"
-              placeholder="Número da sua casa"
-              svg={<Loc />}
-              error={errors.endereco?.numero}
-              required={true}
-            />
+              <Input
+                {...register('endereco.rua')}
+                type="text"
+                label="Rua"
+                placeholder="Ex: Travessa,Rua,Avenida..."
+                svg={<Loc />}
+                error={errors.endereco?.rua}
+                required={true}
+              />
+              <Input
+                {...register('endereco.numero')}
+                type="text"
+                label="Número"
+                placeholder="Ex: 176"
+                svg={<Loc />}
+                error={errors.endereco?.numero}
+                required={true}
+              />
 
-            <Input
-              {...register('endereco.bairro')}
-              type="text"
-              label="Bairro"
-              placeholder="Seu bairro"
-              svg={<Loc />}
-              error={errors.endereco?.bairro}
-              required={true}
-            />
+              <Input
+                {...register('endereco.bairro')}
+                type="text"
+                label="Bairro"
+                placeholder="Ex: Tirol"
+                svg={<Loc />}
+                error={errors.endereco?.bairro}
+                required={true}
+              />
 
-            <Input
-              {...register('endereco.cidade')}
-              type="text"
-              label="Cidade"
-              placeholder="Sua cidade"
-              svg={<Loc />}
-              error={errors.endereco?.cidade}
-              required={true}
-            />
+              <Input
+                {...register('endereco.cidade')}
+                type="text"
+                label="Cidade"
+                placeholder="Ex: Natal"
+                svg={<Loc />}
+                error={errors.endereco?.cidade}
+                required={true}
+              />
 
-            <Input
-              {...register('endereco.estado')}
-              type="text"
-              label="Estado"
-              placeholder="Seu estado"
-              svg={<Loc />}
-              error={errors.endereco?.estado}
-              required={true}
-            />
+              <Input
+                {...register('endereco.estado')}
+                type="text"
+                label="Estado"
+                placeholder="Ex: RN"
+                svg={<Loc />}
+                error={errors.endereco?.estado}
+                required={true}
+              />
 
-            <Input
-              {...register('endereco.complemento')}
-              type="text"
-              label="Complemento"
-              placeholder="Complemento..."
-              svg={<Loc />}
-              error={errors.endereco?.complemento}
-            />
-            <Button isButton type="submit" isDisabled={isLoading}>
+              <Input
+                {...register('endereco.complemento')}
+                type="text"
+                label="Complemento"
+                placeholder="Ex: Casa, apartamento..."
+                svg={<Loc />}
+                error={errors.endereco?.complemento}
+              />
+            </RegisterAddress>
+          </DivFormContent>
+          <div className='button-div'>
+            <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
-          </RegisterAddress>
+          </div>
         </form>
         <Login>
           <span>

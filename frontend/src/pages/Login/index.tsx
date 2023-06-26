@@ -5,7 +5,7 @@ import {
   ContainerPrincipal,
   ContainerForm,
 } from '../ResgisterUser/components/RegisterClienteForm/styles';
-import { ContainerContent2 } from './styles';
+import { ContainerContent2, DivIcon } from './styles';
 import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import { BgRegister } from '../ResgisterUser/style';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,6 +15,8 @@ import { schemaLogin } from './schemas';
 import { type ILogin } from '../../interfaces';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { SEO, Button, Input } from '../../components';
+import { RiLoginBoxLine } from 'react-icons/ri';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -75,6 +77,9 @@ const Login = (): JSX.Element => {
             </ContainerContent2>
             <ContainerForm>
               <form onSubmit={handleSubmit(onSubmit)}>
+                <DivIcon>
+                  <FaUserCircle color={'var(--bg-ligth)'} fontSize={'2.5rem'}/>
+                </DivIcon>
                 <h1>Entre na sua conta</h1>
                 <div>
                   {inputs.map((input, index) => (
@@ -93,11 +98,16 @@ const Login = (): JSX.Element => {
                   {error.length !== 0 && <p className="error">{error}</p>}
                 </div>
                 <section>
-                  <Button type="submit" isButton isDisabled={isLoadingUser}>
+                  <Button
+                    type="submit"
+                    isButton
+                    isDisabled={isLoadingUser}
+                    Icon={RiLoginBoxLine}
+                  >
                     Entrar
                   </Button>
                   <p>
-                    Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
+                    Não tem cadastro?<Link to="/register"> Crie sua conta</Link>
                   </p>
                 </section>
               </form>

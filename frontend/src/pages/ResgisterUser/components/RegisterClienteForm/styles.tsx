@@ -68,7 +68,7 @@ export const ContainerForm = styled.div`
   background-color: #353535;
 
   form {
-    padding: 80px 40px;
+    padding: 40px 40px;
     max-width: 500px;
   }
 
@@ -123,13 +123,6 @@ export const ContainerForm = styled.div`
     background-color: transparent;
     border: none;
     cursor: pointer;
-  }
-
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
   }
 
   @media (max-width: 768px) {

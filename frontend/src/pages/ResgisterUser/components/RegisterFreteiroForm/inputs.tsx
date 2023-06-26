@@ -9,7 +9,7 @@ export const inputs = [
     type: 'email',
     name: 'email',
     label: 'Email',
-    placeholder: 'Seu email',
+    placeholder: 'Ex: usuário@email.com',
     required: true,
     svg: <Email />,
   },
@@ -31,7 +31,7 @@ export const inputs = [
     ) => {
       handleChangeInputCPF(e, setValue, 'cpf');
     },
-    placeholder: 'Seu CPF',
+    placeholder: '000.000.000-00',
     required: true,
     svg: <User />,
   },
@@ -40,7 +40,7 @@ export const inputs = [
     type: 'password',
     name: 'password',
     label: 'Senha',
-    placeholder: 'Sua senha',
+    placeholder: 'Mínimo de 8 caracteres',
     required: true,
     svg: <Password />,
   },

@@ -29,11 +29,18 @@ export const WrapperRegister = styled(Wrapper)`
 `;
 
 export const BtnTypeUser = styled.button<IActive>`
+  display: flex;
+  gap: 4px;
   background: none;
   color: var(--text-light);
   border: none;
   position: relative;
   cursor: pointer;
+
+  svg {
+    color: ${({ typeRegister }) =>
+      typeRegister === 'freteiro' ? 'var(--theme-primary)' : '#0952F7'};
+  }
 
   &::after {
     content: '';
@@ -42,6 +49,7 @@ export const BtnTypeUser = styled.button<IActive>`
     height: 3px;
     background-color: var(--theme-primary);
     display: block;
+    top: 100%;
     transition: 0.5s;
   }
 

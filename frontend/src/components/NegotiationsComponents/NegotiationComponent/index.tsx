@@ -8,6 +8,7 @@ import {
 } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { type MouseEvent } from 'react';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -61,7 +62,12 @@ export const NegotiationComponent = ({
           (propostas.length > 0
             ? propostas.find((p) => p.usuario === actualUser.id) == null
             : true) && (
-            <Button type="button" isButton onClick={handleClick}>
+            <Button
+              type="button"
+              isButton
+              onClick={handleClick}
+              Icon={FaMoneyCheckAlt}
+            >
               Realizar proposta
             </Button>
           )}

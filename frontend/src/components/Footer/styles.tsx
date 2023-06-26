@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { type InterfaceInfo } from "../../interfaces/styledComponents";
+import styled from 'styled-components';
+import { type InterfaceInfo } from '../../interfaces/styledComponents';
 
 export const FinalFooterContainer = styled.section`
   background-color: var(--bg-grey2);
@@ -30,6 +30,13 @@ export const Logos = styled.div`
   @media (max-width: 768px) {
     margin-top: 16px;
   }
+
+  .imgLink {
+    transition: 0.5s;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 export const FooterRodaPe = styled.p`
@@ -40,16 +47,8 @@ export const FooterBoxLogo = styled.div``;
 
 export const FooterBoxInfo = styled.div``;
 
-
-export const ImgLink = styled.img`
-    transition: 0.5s;
-    &:hover{
-        opacity: 0.5;
-    }
-`;
-
 export const Logo = styled.h1`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: var(--font-xxl);
   color: var(--text-light);
 `;

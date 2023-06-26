@@ -69,13 +69,6 @@ export const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
-
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
-  }
 `;
 
 export const StyledApp = styled.div``;

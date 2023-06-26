@@ -70,5 +70,6 @@ export const LabelContainer = styled.div`
     display: inline-block;
     font-size: var(--font-small);
     text-align: left;
+    font-style: italic;
   }
 `;

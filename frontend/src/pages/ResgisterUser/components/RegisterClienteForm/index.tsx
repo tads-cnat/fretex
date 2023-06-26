@@ -10,6 +10,7 @@ import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
 import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
+import { RiUserAddLine } from 'react-icons/ri';
 
 export const RegisterClienteForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
@@ -87,7 +88,7 @@ export const RegisterClienteForm = (): JSX.Element => {
             {error !== '' && <p className="error">{error}</p>}
           </div>
           <section>
-            <Button isButton type="submit" isDisabled={isLoading}>
+            <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
             <p>

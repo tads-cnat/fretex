@@ -1,6 +1,3 @@
-import Loc from '../../../../assets/images/geo-alt.svg';
-import Arrow from '../../../../assets/images/arrow-right.svg';
-import Calendar from '../../../../assets/images/calendar.svg';
 import { ReactComponent as Min } from '../../../../assets/images/minus-circle.svg';
 import { ReactComponent as Max } from '../../../../assets/images/minus-circle-plus.svg';
 import { AlertText, Botoes, Box, BoxPedido, Header } from './styles';
@@ -9,7 +6,6 @@ import {
   ContainerEndereco,
   ContainerInfos,
   End,
-  Seta,
 } from '../../../../components/BoxFretes/styles';
 import { type IPedido } from '../../../../interfaces';
 import { useContext, useState, useEffect } from 'react';
@@ -21,6 +17,8 @@ import PedidoService from '../../../../services/PedidoService';
 import { useMutation, useQueryClient } from 'react-query';
 import { formatDate } from '../../../../utils/formatDate';
 import { toast } from 'react-toastify';
+import { RiArrowRightLine, RiCalendarLine } from 'react-icons/ri';
+import { BsGeoAlt } from 'react-icons/bs';
 
 interface IBoxDashBoard {
   pedidos: IPedido[] | undefined;
@@ -119,17 +117,20 @@ export const BoxDashboard = ({
               <h2>{pedido.produto.nome}</h2>
               <ContainerEndereco>
                 <End>
-                  <img src={Loc} alt="Localização" />
+                  <BsGeoAlt size={'24px'} />
                   <span>{`${pedido.origem.rua}, ${pedido.origem.numero} - ${pedido.origem.bairro}, ${pedido.origem.cidade}/${pedido.origem.estado}`}</span>
                 </End>
-                <Seta src={Arrow} alt="Seta" />
+                <RiArrowRightLine
+                  size={'24px'}
+                  style={{ transform: 'rotate(90deg)' }}
+                />
                 <End>
-                  <img src={Loc} alt="Localização" />
+                  <BsGeoAlt size={'24px'} />
                   <span>{`${pedido.destino.rua}, ${pedido.destino.numero} - ${pedido.destino.bairro}, ${pedido.destino.cidade}/${pedido.destino.estado}`}</span>
                 </End>
               </ContainerEndereco>
               <ContainerCalendar>
-                <img src={Calendar} alt="Calendária" />
+                <RiCalendarLine size={'24px'} />
                 <span>Entregar até {formatDate(pedido.data_entrega)}</span>
               </ContainerCalendar>
             </ContainerInfos>
