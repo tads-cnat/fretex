@@ -125,13 +125,6 @@ export const ContainerForm = styled.div`
     cursor: pointer;
   }
 
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
-  }
-
   @media (max-width: 768px) {
     order: 1;
     form {

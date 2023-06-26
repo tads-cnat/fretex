@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import { Button, Input, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
+import { RiUserAddLine } from 'react-icons/ri';
 
 export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
@@ -178,7 +179,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
             </RegisterAddress>
           </DivFormContent>
           <div className='button-div'>
-            <Button isButton type="submit" isDisabled={isLoading}>
+            <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>
               Cadastre-se
             </Button>
           </div>
