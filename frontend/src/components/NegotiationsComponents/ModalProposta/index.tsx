@@ -88,7 +88,9 @@ export const ModalProposta = ({
 
   const veiculosFiltered =
     !isLoadingVeiculos &&
-    veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo));
+    veiculos.data.filter((v: IVeiculo) =>
+      pedidoVeiculos.includes(v.tipo_veiculo),
+    );
 
   if (isLoadingVeiculos) return <Loading />;
   return (
@@ -116,21 +118,17 @@ export const ModalProposta = ({
               )}
             {veiculos &&
               !isLoadingVeiculos &&
-              veiculos.data
-                .filter((v: IVeiculo) =>
-                  pedidoVeiculos.includes(v.tipo_veiculo),
-                )
-                .map((veiculo: IVeiculo) => (
-                  <label className="labelRadio" key={veiculo.id}>
-                    <input
-                      type="radio"
-                      {...register('veiculo')}
-                      onClick={handleClickRadio}
-                      value={veiculo.id}
-                    />
-                    <CardVeiculo veiculos={veiculo} />
-                  </label>
-                ))}
+              veiculosFiltered.map((veiculo: IVeiculo) => (
+                <label className="labelRadio" key={veiculo.id}>
+                  <input
+                    type="radio"
+                    {...register('veiculo')}
+                    onClick={handleClickRadio}
+                    value={veiculo.id}
+                  />
+                  <CardVeiculo veiculos={veiculo} />
+                </label>
+              ))}
           </ContainerVeiculos>
         </CardsContainer>
 
