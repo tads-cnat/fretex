@@ -23,10 +23,7 @@ import { NegotiationComponent, Loading } from '../../../../components';
 import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { useQuery } from 'react-query';
 import { formatDate } from '../../../../utils/formatDate';
-
-const formatCEP = (cep: string) => {
-  return `${cep.substring(0, 5)}-${cep.substring(5)}`;
-};
+import { formatCEP } from '../../../../utils/formatCEP';
 
 interface IFreteDetail {
   pedido: IPedido;
@@ -72,11 +69,7 @@ export const FreteDetailComponent = ({
     <Container>
       <div>
         <h1>Detalhes de frete</h1>
-        <Seta
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
+        <Seta onClick={() => navigate(-1)}>
           <Arrowleft /> Voltar
         </Seta>
       </div>

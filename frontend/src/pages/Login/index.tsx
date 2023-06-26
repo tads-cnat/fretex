@@ -1,20 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext, useEffect, useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Email from '../../assets/Svg/Email';
 import Password from '../../assets/Svg/Password';
-import {
-  ContainerPrincipal,
-  ContainerForm,
-} from '../ResgisterUser/components/RegisterClienteForm/styles';
-import { ContainerContent2 } from './styles';
-import { SpanYellow, Wrapper } from '../../styles/globalStyles';
-import { BgRegister } from '../ResgisterUser/style';
-import { Link, useNavigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { schemaLogin } from './schemas';
-import { type ILogin } from '../../interfaces';
+import { Button, Input, LoadingPage, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import { SEO, Button, Input } from '../../components';
+import { type ILogin } from '../../interfaces';
+import { SpanYellow, Wrapper } from '../../styles/globalStyles';
+import {
+  ContainerForm,
+  ContainerPrincipal,
+} from '../ResgisterUser/components/RegisterClienteForm/styles';
+import { BgRegister } from '../ResgisterUser/style';
+import { schemaLogin } from './schemas';
+import { ContainerContent2 } from './styles';
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -26,7 +27,7 @@ const Login = (): JSX.Element => {
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),
   });
-  const { signin, isLoadingUser } = useContext(AuthContext);
+  const { signin, isLoadingUser, user } = useContext(AuthContext);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -56,6 +57,14 @@ const Login = (): JSX.Element => {
     },
   ];
 
+  useEffect(() => {
+    if (user) {
+      Navigate('/');
+      toast.info('Você já está logado');
+    }
+  }, [user]);
+
+  if (isLoadingUser) return <LoadingPage />;
   return (
     <>
       <SEO title="Login" />

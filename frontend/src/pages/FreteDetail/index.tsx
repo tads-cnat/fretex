@@ -19,7 +19,7 @@ const FreteDetail = (): JSX.Element => {
     ['pedido', id],
     async () => await PedidoService.get(Number(id)),
     {
-      enabled: id !== undefined,
+      enabled: !!id,
     },
   );
 
@@ -52,26 +52,30 @@ const FreteDetail = (): JSX.Element => {
     },
   );
 
+  const isLoadingPage =
+    isLoadingPropostas || isLoadingPedido || isLoadingPropostas;
+
+  const pageLoaded =
+    !isLoadingClientePedido &&
+    !isLoadingPedido &&
+    !isLoadingPropostas &&
+    user !== null;
+
   return (
     <>
       <SEO title="Detalhes do frete" />
       <Layout>
         <ContainerPrincipal>
           <Wrapper bgColor="#f5f5f5">
-            {(isLoadingPropostas || isLoadingPedido || isLoadingPropostas) && (
-              <LoadingPage />
+            {isLoadingPage && <LoadingPage />}
+            {pageLoaded && (
+              <FreteDetailComponent
+                pedido={pedido?.data}
+                clientePedido={userPedido?.data}
+                actualUser={user}
+                propostas={propostas?.data}
+              />
             )}
-            {!isLoadingClientePedido &&
-              !isLoadingPedido &&
-              !isLoadingPropostas &&
-              user !== null && (
-                <FreteDetailComponent
-                  pedido={pedido?.data}
-                  clientePedido={userPedido?.data}
-                  actualUser={user}
-                  propostas={propostas?.data}
-                />
-              )}
           </Wrapper>
         </ContainerPrincipal>
       </Layout>
