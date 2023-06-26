@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Image, Container, Form, Preview } from './styles';
-import { ReactComponent as Pencil } from '../../../../assets/images/pencil.svg';
 import { ModalComponent, Button } from '../../../../components';
 import { useToggle } from '../../../../hooks/useToggle';
 import ClienteService from '../../../../services/ClienteService';
@@ -9,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { type ICliente, type IFreteiro } from '../../../../interfaces';
 import { isFreteiro } from '../../../../utils/isFreteiro';
 import { RiUserSettingsLine } from 'react-icons/ri';
+import { BsPencilSquare } from 'react-icons/bs';
 
 interface IBanner {
   user: IFreteiro | ICliente;
@@ -103,7 +103,7 @@ export const Banner = ({ user, ownerPage }: IBanner): JSX.Element => {
             onClick={toggle}
             style={ownerPage ? { display: 'flex' } : { display: 'none' }}
           >
-            <Pencil className="editImage" />
+            <BsPencilSquare fontSize={'1.5rem'} />
           </button>
         </Image>
       </Container>
