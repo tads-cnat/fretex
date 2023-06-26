@@ -7,6 +7,7 @@ import { AuthContext } from '../../../context/Auth/AuthContext';
 import { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiLogoutBoxLine } from 'react-icons/ri';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 interface INavUser {
   user: ICliente | IFreteiro;
@@ -37,7 +38,11 @@ const NavUser = ({ user, active, setActive }: INavUser): JSX.Element => {
       )}
 
       <p>{user.first_name}</p>
-      <img src={Seta} alt="seta" className="seta" />
+      {active ? (
+        <IoIosArrowUp color={'white'} fontSize={'1rem'} />
+      ) : (
+        <IoIosArrowDown color={'white'} fontSize={'1rem'} />
+      )}
       <Content active={active}>
         <NavLink
           to={`/perfil/${user.id}`}
