@@ -45,7 +45,7 @@
 ## Reservas (Contingência/Gerencial)
 
 - Reserva de Contingência: 10% do orçamento total (R$ 182.080,87) = R$ 18.208,087
-- Reserva Gerencial: 5% do orçamento total (R$ 9.104,0435) = R$ 9.104,0435
+- Reserva Gerencial: 5% do orçamento total (R$ 182.080,87) = R$ 9.104,0435
 
 ## Valor total previsto
 
