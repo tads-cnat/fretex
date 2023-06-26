@@ -20,9 +20,9 @@
 | **Introdução**              | Descrição e objetivo do projeto                          | Analista, Designer, Desenvolvedor                                                    | 500                 |
 | **Introdução**              | Escopo do projeto                                        | Ferramentas de gestão de projetos                                                    | 500                 |
 | **Iniciação do Projeto**    | Definição do projeto                                     | Gerente de Projeto, Analista                                                         | 500                 |
-| **Iniciação do Projeto**    | Analise de viabilidade                                   | Especialista em análise de negócios                                                  | 1000                |
+| **Iniciação do Projeto**    | Análise de viabilidade                                   | Especialista em análise de negócios                                                  | 1000                |
 | **Iniciação do Projeto**    | Definição da equipe de projeto                           | Processo de seleção de talentos                                                      | 2000                |
-| **Iniciação do Projeto**    | Definição de recursos necessarios                        | Consultoria financeira para aquisição dos recursos gerais do projeto                 | 5000                |
+| **Iniciação do Projeto**    | Definição de recursos necessários                        | Consultoria financeira para aquisição dos recursos gerais do projeto                 | 5000                |
 | **Analise e Planejamento**  | Levantamento de requisitos                               | Analista                                                                             | 1000                |
 | **Analise e Planejamento**  | Definição das funcionalidades, arquitetura e tecnologias | Analista, Arquiteto de Software                                                      | 2000                |
 | **Analise e Planejamento**  | Cronograma de desenvolvimento                            | Ferramentas de gestão de projetos                                                    | 500                 |
