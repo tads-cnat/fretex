@@ -60,7 +60,7 @@
 | Analista de Testes             | 25,00 por Hora      |
 | Arquiteto de Software          | 47,00 por Hora      |
 | Designer                       | 20,00 por Hora      |
-| Equipamento de Alta Performace | 4500,00             |
+| Equipamento de Alta Performace | 4.500,00             |
 | Especialista em Banco de Bados | 47,00 por Hora      |
 | Especialita em Implantação     | 25,00 por Hora      |
 | Especialista em Marketing      | 30,00 por Hora      |
