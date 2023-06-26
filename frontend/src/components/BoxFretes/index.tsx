@@ -16,6 +16,7 @@ import Calendar from '../../assets/images/calendar.svg';
 import { type IPedido } from '../../interfaces';
 import { formatDate } from '../../utils/formatDate';
 import { Button } from '../utils';
+import {FaHandshake} from 'react-icons/fa';
 
 export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (
@@ -42,7 +43,7 @@ export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
             <span>Entregar até {formatDate(pedido.data_entrega)}</span>
           </ContainerCalendar>
         </ContainerInfos>
-        <Button link={`/fretes/${pedido.id}`}>Negociar</Button>
+        <Button link={`/fretes/${pedido.id}`} Icon={FaHandshake}>Negociar</Button>
       </ContainerInfoBtn>
       <ContainerImgMain>
         {pedido.produto.imagem_url ? (

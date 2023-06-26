@@ -18,6 +18,8 @@ import { CardsContainer } from '../';
 import { schemaProposta } from './schema';
 import { ContainerVeiculos, FormContainer } from './styles';
 import { Loading, Button, ModalComponent, LoadingPage } from '../../utils';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
+import { RiCarFill } from 'react-icons/ri';
 
 interface IModalProposta {
   toggle: () => void;
@@ -106,8 +108,11 @@ export const ModalProposta = ({
                   Você não possui veículo ou veiculo do tipo aceito pelo pedido
                   de frete
                 </p>
-                <Button link={`/perfil/${actualUserId}/veiculos`}>
-                  Casdastrar Veículo
+                <Button
+                  link={`/perfil/${actualUserId}/veiculos`}
+                  Icon={RiCarFill}
+                >
+                  Cadastrar Veículo
                 </Button>
               </div>
             )}
@@ -150,7 +155,12 @@ export const ModalProposta = ({
           </LabelInput>
         </div>
         <div className="submitContainer">
-          <Button isButton type="submit" isDisabled={isLoadingVeiculos}>
+          <Button
+            isButton
+            type="submit"
+            isDisabled={isLoadingVeiculos}
+            Icon={FaMoneyCheckAlt}
+          >
             Realizar proposta
           </Button>
         </div>
