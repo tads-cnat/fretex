@@ -20,8 +20,7 @@ import { NegotiationComponent, Loading } from '../../../../components';
 import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { useQuery } from 'react-query';
 import { formatDate } from '../../../../utils/formatDate';
-import { BsGeoAlt } from 'react-icons/bs';
-import { BsArrowLeftCircle, BsInfoCircle } from 'react-icons/bs';
+import { BsArrowLeftCircle, BsInfoCircle, BsGeoAlt } from 'react-icons/bs';
 
 const formatCEP = (cep: string) => {
   return `${cep.substring(0, 5)}-${cep.substring(5)}`;
