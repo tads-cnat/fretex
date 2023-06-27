@@ -1,22 +1,24 @@
-import { useState, useEffect, useContext } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext, useEffect, useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Email from '../../assets/Svg/Email';
 import Password from '../../assets/Svg/Password';
+import { Button, Input, LoadingPage, SEO } from '../../components';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import { type ILogin } from '../../interfaces';
+import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import {
-  ContainerPrincipal,
   ContainerForm,
+  ContainerPrincipal,
 } from '../ResgisterUser/components/RegisterClienteForm/styles';
 import { ContainerContent2, DivIcon } from './styles';
-import { SpanYellow, Wrapper } from '../../styles/globalStyles';
 import { BgRegister } from '../ResgisterUser/style';
-import { Link, useNavigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, type SubmitHandler } from 'react-hook-form';
 import { schemaLogin } from './schemas';
-import { type ILogin } from '../../interfaces';
-import { AuthContext } from '../../context/Auth/AuthContext';
-import { SEO, Button, Input } from '../../components';
 import { RiLoginBoxLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
+
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -28,7 +30,7 @@ const Login = (): JSX.Element => {
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),
   });
-  const { signin, isLoadingUser } = useContext(AuthContext);
+  const { signin, isLoadingUser, user } = useContext(AuthContext);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +60,14 @@ const Login = (): JSX.Element => {
     },
   ];
 
+  useEffect(() => {
+    if (user) {
+      Navigate('/');
+      toast.info('Você já está logado');
+    }
+  }, [user]);
+
+  if (isLoadingUser) return <LoadingPage />;
   return (
     <>
       <SEO title="Login" />

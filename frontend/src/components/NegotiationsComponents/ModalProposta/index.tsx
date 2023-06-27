@@ -41,6 +41,7 @@ export const ModalProposta = ({
   const { toggle: toggleCardsContainer, value: valueCardsContainer } =
     useToggle(true);
   const navigate = useNavigate();
+
   const { data: veiculos, isLoading: isLoadingVeiculos } = useQuery(
     'veiculosDoFreteiro',
     async () => await VeiculoService.getVeiculosForFreteiro(actualUser.id),
@@ -70,8 +71,7 @@ export const ModalProposta = ({
     const formData = new FormData();
 
     Object.entries(proposta).forEach(([key, value]) => {
-      if (typeof value === 'boolean' && value)
-        formData.append(key, value.toString());
+      if (value) formData.append(key, value.toString());
     });
 
     PropostaService.post(formData)
@@ -88,9 +88,12 @@ export const ModalProposta = ({
     toggleCardsContainer();
   };
 
-  /* const veiculosFiltered =
+  const veiculosFiltered =
     !isLoadingVeiculos &&
-    veiculos.data.filter((v: any) => pedidoVeiculos.includes(v.tipo_veiculo)); */
+    veiculos.data.filter((v: IVeiculo) =>
+      pedidoVeiculos.includes(v.tipo_veiculo),
+    );
+
   if (isLoadingVeiculos) return <Loading />;
   return (
     <ModalComponent title="Faça sua proposta" toggle={toggle} value={value}>
@@ -102,37 +105,35 @@ export const ModalProposta = ({
         >
           <ContainerVeiculos>
             {isLoadingVeiculos && <LoadingPage />}
-            {!isLoadingVeiculos && veiculos && veiculos.data.length === 0 && (
-              <div className="cadastrarVeiculo">
-                <p>
-                  Você não possui veículo ou veiculo do tipo aceito pelo pedido
-                  de frete
-                </p>
-                <Button
-                  link={`/perfil/${actualUserId}/veiculos`}
-                  Icon={RiCarFill}
-                >
-                  Cadastrar Veículo
-                </Button>
-              </div>
-            )}
+            {!isLoadingVeiculos &&
+              veiculos &&
+              veiculosFiltered.length === 0 && (
+                <div className="cadastrarVeiculo">
+                  <p>
+                    Você não possui veículo ou veiculo do tipo aceito pelo
+                    pedido de frete
+                  </p>
+                  <Button
+                    link={`/perfil/${actualUserId}/veiculos`}
+                    Icon={RiCarFill}
+                  >
+                    Casdastrar Veículo
+                  </Button>
+                </div>
+              )}
             {veiculos &&
               !isLoadingVeiculos &&
-              veiculos.data
-                .filter((v: IVeiculo) =>
-                  pedidoVeiculos.includes(v.tipo_veiculo),
-                )
-                .map((veiculo: IVeiculo) => (
-                  <label className="labelRadio" key={veiculo.id}>
-                    <input
-                      type="radio"
-                      {...register('veiculo')}
-                      onClick={handleClickRadio}
-                      value={veiculo.id}
-                    />
-                    <CardVeiculo veiculos={veiculo} />
-                  </label>
-                ))}
+              veiculosFiltered.map((veiculo: IVeiculo) => (
+                <label className="labelRadio" key={veiculo.id}>
+                  <input
+                    type="radio"
+                    {...register('veiculo')}
+                    onClick={handleClickRadio}
+                    value={veiculo.id}
+                  />
+                  <CardVeiculo veiculos={veiculo} />
+                </label>
+              ))}
           </ContainerVeiculos>
         </CardsContainer>
 
