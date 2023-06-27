@@ -4,18 +4,17 @@ import {
   ContainerInfos,
   ContainerEndereco,
   End,
-  Seta,
   ContainerCalendar,
   ContainerImgMain,
   ContainerImg,
 } from './styles';
 import caixa from '../../assets/images/caixas.png';
-import Loc from '../../assets/images/geo-alt.svg';
-import Arrow from '../../assets/images/arrow-right.svg';
-import Calendar from '../../assets/images/calendar.svg';
 import { type IPedido } from '../../interfaces';
 import { formatDate } from '../../utils/formatDate';
 import { Button } from '../utils';
+import { BsGeoAlt } from 'react-icons/bs';
+import { LiaHandshakeSolid } from 'react-icons/lia';
+import { RiArrowRightLine, RiCalendarLine } from 'react-icons/ri';
 
 export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
   return (
@@ -28,21 +27,26 @@ export const BoxFretes = ({ pedido }: { pedido: IPedido }): JSX.Element => {
           <h2>{pedido.produto.nome}</h2>
           <ContainerEndereco>
             <End>
-              <img src={Loc} alt="Localização" />
+              <BsGeoAlt size={24}/>
               <span>{`${pedido.origem.rua}, ${pedido.origem.numero} - ${pedido.origem.bairro}, ${pedido.origem.cidade}/${pedido.origem.estado}`}</span>
             </End>
-            <Seta src={Arrow} alt="Seta" />
+            <RiArrowRightLine
+              size={24}
+              style={{ transform: 'rotate(90deg)' }}
+            />
             <End>
-              <img src={Loc} alt="Localização" />
+              <BsGeoAlt size={24}/>
               <span>{`${pedido.destino.rua}, ${pedido.destino.numero} - ${pedido.destino.bairro}, ${pedido.destino.cidade}/${pedido.destino.estado}`}</span>
             </End>
           </ContainerEndereco>
           <ContainerCalendar>
-            <img src={Calendar} alt="Calendária" />
+            <RiCalendarLine size={24}/>
             <span>Entregar até {formatDate(pedido.data_entrega)}</span>
           </ContainerCalendar>
         </ContainerInfos>
-        <Button link={`/fretes/${pedido.id}`}>Negociar</Button>
+        <Button link={`/fretes/${pedido.id}`} Icon={LiaHandshakeSolid}>
+          Negociar
+        </Button>
       </ContainerInfoBtn>
       <ContainerImgMain>
         {pedido.produto.imagem_url ? (

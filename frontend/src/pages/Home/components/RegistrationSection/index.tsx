@@ -3,6 +3,7 @@ import { Button } from '../../../../components';
 import { RegisterContainer, RegisterUser, Title, Text } from './styles';
 import imgCliente from '../../../../assets/images/ParaClientes.png';
 import imgFreteiro from '../../../../assets/images/ParaFreteiros.png';
+import { RiUserAddLine } from 'react-icons/ri';
 
 export const Registration = (): JSX.Element => {
   const handleTypeUser = (type: string): void => {
@@ -19,6 +20,7 @@ export const Registration = (): JSX.Element => {
 
         <Button
           link="/register"
+          Icon={RiUserAddLine}
           onClick={() => {
             handleTypeUser('cliente');
           }}
@@ -33,6 +35,7 @@ export const Registration = (): JSX.Element => {
         <Text> Encontre as melhores cargas para o seu veículo.</Text>
         <Button
           link="/register"
+          Icon={RiUserAddLine}
           onClick={() => {
             handleTypeUser('freteiro');
           }}

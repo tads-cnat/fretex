@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 import { RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { btnTypeUserData } from './constants';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
+import { RiUserLine } from 'react-icons/ri';
 
 const Register = (): JSX.Element => {
   const { user, isLoadingUser } = useContext(AuthContext);
@@ -49,7 +50,9 @@ const Register = (): JSX.Element => {
                     handleChangeTypeOfUser(btn.type);
                   }}
                   active={typeResgister === btn.type}
+                  typeRegister={btn.type}
                 >
+                  <RiUserLine />
                   {btn.text}
                 </BtnTypeUser>
               ))}

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ContainerMain = styled.div`
@@ -41,9 +40,6 @@ export const ContainerInfos = styled.div`
   h2 {
     font-size: var(--font-large);
   }
-  img {
-    width: 24px;
-  }
 `;
 
 export const ContainerEndereco = styled.div`
@@ -51,10 +47,6 @@ export const ContainerEndereco = styled.div`
   flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
-`;
-
-export const Seta = styled.img`
-  transform: rotate(90deg);
 `;
 
 export const End = styled.div`

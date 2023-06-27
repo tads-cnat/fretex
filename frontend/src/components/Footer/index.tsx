@@ -10,11 +10,8 @@ import {
   Info,
   Logos,
   FinalFooterContainer,
-  ImgLink,
 } from './styles';
-import instagram from '../../assets/images/Vectorinstagram.svg';
-import facebook from '../../assets/images/Vectorfacebook.svg';
-import youtube from '../../assets/images/Vectoryoutube.svg';
+import { BsInstagram, BsFacebook, BsYoutube } from 'react-icons/bs';
 
 export const Footer = (): JSX.Element => {
   return (
@@ -46,14 +43,14 @@ export const Footer = (): JSX.Element => {
                 Natal - RN
               </Info>
               <Logos>
-                <a href="/">
-                  <ImgLink src={instagram} alt="Instagram" />
+                <a href="/" className="imgLink">
+                  <BsInstagram color={'white'} fontSize={'2rem'} />
                 </a>
-                <a href="/">
-                  <ImgLink src={facebook} alt="Facebook" />
+                <a href="/" className="imgLink">
+                  <BsFacebook color={'white'} fontSize={'2rem'} />
                 </a>
-                <a href="/">
-                  <ImgLink src={youtube} alt="Youtube" />
+                <a href="/" className="imgLink">
+                  <BsYoutube color={'white'} fontSize={'2rem'} />
                 </a>
               </Logos>
             </FooterBoxInfo>

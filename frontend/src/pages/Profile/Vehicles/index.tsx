@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import veiculo from '../../../assets/images/veiculo.png';
-import { ReactComponent as PlusVeiculo } from '../../../assets/images/PlusCircle.svg';
 import {
   ModalComponent,
   LoadingPage,
@@ -19,6 +18,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaVeiculo } from './schema';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {RiCarFill} from 'react-icons/ri';
+import {AiOutlinePlusCircle} from 'react-icons/ai';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -101,8 +102,8 @@ const Vehicles = (): JSX.Element => {
     <>
       <QtdVeiculos>
         <p>{veiculos.length} Veículo(s)</p>
-        <Button isButton onClick={setAsTrue}>
-          <PlusVeiculo /> Cadastrar Veículo
+        <Button isButton onClick={setAsTrue} Icon={RiCarFill}>
+          Cadastrar Veículo
         </Button>
       </QtdVeiculos>
       {loading && <LoadingPage />}
@@ -210,7 +211,7 @@ const Vehicles = (): JSX.Element => {
               )}
             </Preview>
           </ContainerMain>
-          <Button isButton type="submit" isDisabled={loading}>
+          <Button isButton type="submit" isDisabled={loading} Icon={AiOutlinePlusCircle}>
             Cadastrar Veículo
           </Button>
         </form>

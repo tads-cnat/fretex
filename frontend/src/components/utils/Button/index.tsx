@@ -4,6 +4,7 @@ import { Loading } from '../';
 
 interface IButton {
   type?: 'button' | 'submit' | 'reset' | undefined;
+  Icon?: React.ElementType;
   isDisabled?: boolean;
   fontSize?: 'medium' | 'large';
   link?: string;
@@ -20,6 +21,7 @@ export const Button = ({
   type,
   isDisabled,
   fontSize,
+  Icon,
 }: IButton): JSX.Element => {
   if (isButton === true) {
     return (
@@ -31,12 +33,18 @@ export const Button = ({
         onClick={onClick}
         disabled={isDisabled}
       >
-        {isDisabled ? <Loading color="white" height='42px' svgWidth='60px'/> : children}
+        {Icon && !isDisabled && <Icon fontSize={'1.5rem'} />}
+        {isDisabled ? (
+          <Loading color="white" height="42px" svgWidth="60px" />
+        ) : (
+          children
+        )}
       </BtnYellow>
     );
   } else {
     return (
       <LinkYellow to={link ?? ''} onClick={onClick}>
+        {Icon && <Icon fontSize={'1.5rem'} />}
         {children}
       </LinkYellow>
     );

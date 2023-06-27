@@ -56,17 +56,8 @@ export const VantagensText = styled.p`
   color: var(--theme-primary);
   position: relative;
   display: inline-block;
-  font-size: var(--font-large);
+  font-size: var(--font-xl);
   margin-bottom: 40px;
-
-  &::after {
-    position: relative;
-    content: '';
-    width: 100%;
-    height: 4px;
-    display: block;
-    background-color: var(--theme-primary);
-  }
 
   @media (max-width: 768px) {
     margin-bottom: 20px;

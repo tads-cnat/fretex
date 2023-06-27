@@ -16,6 +16,7 @@ import { CardsContainer } from '../';
 import { FormContainer } from '../ModalProposta/styles';
 import { schemaContraproposta } from './schema';
 import { Button, LoadingPage, ModalComponent } from '../../utils';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
 
 interface IModal {
   toggle: () => void;
@@ -163,7 +164,12 @@ export const ModalContraproposta = ({
             </LabelInput>
           </div>
           <div className="submitContainer">
-            <Button isButton type="submit" isDisabled={isLoadingVeiculo}>
+            <Button
+              isButton
+              type="submit"
+              isDisabled={isLoadingVeiculo}
+              Icon={FaMoneyCheckAlt}
+            >
               Realizar proposta
             </Button>
           </div>

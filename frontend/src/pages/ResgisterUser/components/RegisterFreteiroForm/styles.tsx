@@ -18,39 +18,62 @@ export const ContainerMain = styled(ContainerPrincipal)`
 
 export const ContainerForm2 = styled(ContainerForm)`
   form {
-    display: flex;
     max-width: 100%;
-    justify-content: center;
-    gap: 50px;
-    padding-bottom: 0;
-
+    
     label svg {
       color: #bfbfbf;
       transition: 0.5s;
     }
+
     label:focus-within svg {
       color: var(--theme-primary);
     }
+    .button-div {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .button-div button {
+      width: 45%;
+    }
 
     @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 20px;
+      .button-div button {
+        width: 100%;
+      }
     }
+  }
+`;
+
+export const DivFormContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  label svg {
+    color: #bfbfbf;
+    transition: 0.5s;
+  }
+  label:focus-within svg {
+    color: var(--theme-primary);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 `;
 
 export const RegisterPerson = styled.div`
-  max-width: 100%;
-  flex-grow: 1;
+  .preview-div {
+    margin-bottom: 0.625rem;
+  }
 `;
 
 export const RegisterAddress = styled.div`
-  flex-grow: 1;
-  Button {
-    margin-top: 15px;
-  }
   .title {
-    margin-bottom: 53px;
+    margin-bottom: 54px;
   }
   @media (max-width: 768px) {
     .title {
@@ -62,11 +85,10 @@ export const RegisterAddress = styled.div`
 export const Login = styled.div`
   text-align: center;
   color: var(--text-grey-1);
-  margin: 40px 0;
+  margin-bottom: 1.5rem;
   @media (max-width: 768px) {
     margin-bottom: 40px;
   }
-
   a:hover {
     color: var(--btn-hover);
   }

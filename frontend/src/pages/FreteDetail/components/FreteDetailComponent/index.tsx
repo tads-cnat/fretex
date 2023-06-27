@@ -8,9 +8,6 @@ import {
 } from './styles';
 import caixas from '../../../../assets/images/caixas.png';
 import perfil from '../../../../assets/images/perfil.svg';
-import { ReactComponent as Arrowleft } from '../../../../assets/images/arrow-left-circle.svg';
-import geoalt from '../../../../assets/images/geo-alt.svg';
-import info from '../../../../assets/images/info-circle.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   type ICliente,
@@ -24,6 +21,7 @@ import TipoVeiculoService from '../../../../services/TipoVeiculoService';
 import { useQuery } from 'react-query';
 import { formatDate } from '../../../../utils/formatDate';
 import { formatCEP } from '../../../../utils/formatCEP';
+import { BsArrowLeftCircle, BsInfoCircle, BsGeoAlt } from 'react-icons/bs';
 
 interface IFreteDetail {
   pedido: IPedido;
@@ -70,7 +68,7 @@ export const FreteDetailComponent = ({
       <div>
         <h1>Detalhes de frete</h1>
         <Seta onClick={() => navigate(-1)}>
-          <Arrowleft /> Voltar
+          <BsArrowLeftCircle fontSize={'1.5rem'} /> Voltar
         </Seta>
       </div>
       <Content>
@@ -101,18 +99,9 @@ export const FreteDetailComponent = ({
         </Content1>
         <Content2>
           <Content2Info>
-            <img src={geoalt} alt="localização" />
+            <BsGeoAlt fontSize={'1.5rem'} />
             <div>
               <h4>Dados de coleta </h4>
-              <p>
-                <span>CEP:</span> {formatCEP(pedido.origem.CEP)}
-              </p>
-              <p>
-                <span>Cidade:</span> {pedido.origem.cidade}
-              </p>
-              <p>
-                <span>Bairro:</span> {pedido.origem.bairro}
-              </p>
               <p>
                 <span>Rua:</span> {pedido.origem.rua}
               </p>
@@ -120,23 +109,23 @@ export const FreteDetailComponent = ({
                 <span>Número:</span> {pedido.origem.numero}
               </p>
               <p>
+                <span>Bairro:</span> {pedido.origem.bairro}
+              </p>
+              <p>
+                <span>Cidade:</span> {pedido.origem.cidade}
+              </p>
+              <p>
+                <span>CEP:</span> {formatCEP(pedido.origem.CEP)}
+              </p>
+              <p className="turno">
                 <span>Turno:</span> {formatTurno(pedido.turno_entrega)}
               </p>
             </div>
           </Content2Info>
           <Content2Info>
-            <img src={geoalt} alt="localização" />
+            <BsGeoAlt fontSize={'1.5rem'} />
             <div>
               <h4>Dados de Entrega </h4>
-              <p>
-                <span>CEP:</span> {formatCEP(pedido.destino.CEP)}
-              </p>
-              <p>
-                <span>Cidade:</span> {pedido.destino.cidade}
-              </p>
-              <p>
-                <span>Bairro:</span> {pedido.destino.bairro}
-              </p>
               <p>
                 <span>Rua:</span> {pedido.destino.rua}
               </p>
@@ -144,14 +133,32 @@ export const FreteDetailComponent = ({
                 <span>Número:</span> {pedido.destino.numero}
               </p>
               <p>
+                <span>Bairro:</span> {pedido.destino.bairro}
+              </p>
+              <p>
+                <span>Cidade:</span> {pedido.destino.cidade}
+              </p>
+              <p>
+                <span>CEP:</span> {formatCEP(pedido.destino.CEP)}
+              </p>
+              <p className="turno">
                 <span>Turno:</span> {formatTurno(pedido.turno_coleta)}
               </p>
             </div>
           </Content2Info>
           <Content2Info>
-            <img src={info} alt="info" />
+            <BsInfoCircle fontSize={'1.5rem'} />
             <div>
               <h4>Informações adicionais </h4>
+              <p>
+                <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
+              </p>
+              <p>
+                <span>Data de entrega:</span> {formatDate(pedido.data_entrega)}
+              </p>
+              <p>
+                <span>Data de coleta:</span> {formatDate(pedido.data_coleta)}
+              </p>
               <p>
                 <span>Tipos de veículos aceitos:</span>{' '}
                 {filteredArray.length > 0
@@ -162,18 +169,9 @@ export const FreteDetailComponent = ({
                     )
                   : 'carregando...'}
               </p>
+
               <p>
-                <span>Data máxima de entrega:</span>{' '}
-                {formatDate(pedido.data_entrega)}
-              </p>
-              <p>
-                <span>Data de coleta:</span> {formatDate(pedido.data_coleta)}
-              </p>
-              <p>
-                <span>Nome do recebedor:</span> {pedido.nomeDestinatario}
-              </p>
-              <p>
-                <span>bservações:</span>{' '}
+                <span>observações:</span>{' '}
                 {pedido?.observacao || 'Não possui observações'}
               </p>
             </div>
@@ -188,7 +186,6 @@ export const FreteDetailComponent = ({
             propostas={propostas}
             ownerPedido={pedido.cliente}
             pedidoVeiculos={pedido.tipo_veiculo}
-            isLoading={isLoadingTipoVeiculos}
           />
         </Negotiation>
       }

@@ -24,7 +24,7 @@ export const FormContainer = styled.form`
 export const ContainerVeiculos = styled.div`
   height: 40vh;
   padding: 0 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   .labelRadio {
     display: grid;

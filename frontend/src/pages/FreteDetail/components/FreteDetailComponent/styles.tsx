@@ -89,6 +89,14 @@ export const Content2Info = styled.div`
     height: 22px;
     width: 22px;
   }
+
+  .turno {
+    margin-top: 1rem;
+  }
+
+  h4 {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const Negotiation = styled.div`

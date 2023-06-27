@@ -1,7 +1,6 @@
 import { type ReactNode } from 'react';
 import { Container, ContentHeader, ContentMain } from './styles';
-import { ReactComponent as Min } from '../../../assets/images/minus-circle.svg';
-import { ReactComponent as Max } from '../../../assets/images/minus-circle-plus.svg';
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 
 interface ICards {
   children: ReactNode;
@@ -24,7 +23,7 @@ export const CardsContainer = ({
         </div>
         <div>
           <button type="button" className="toggle" onClick={toggle}>
-            {value ? <Min /> : <Max />}
+            {value ? <AiOutlineMinusCircle /> : <AiOutlinePlusCircle />}
           </button>
         </div>
       </ContentHeader>
@@ -32,4 +31,3 @@ export const CardsContainer = ({
     </Container>
   );
 };
-

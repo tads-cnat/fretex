@@ -49,6 +49,7 @@ export const Form = styled.form`
     color: #ee5757;
     display: inline-block;
     font-size: var(--font-small);
+    font-style: italic;
   }
   h3 {
     font-style: normal;
