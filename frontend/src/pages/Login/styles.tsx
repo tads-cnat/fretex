@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ContainerContent } from "../../components/RegisterComponents/RegisterClienteForm/styles";
+import styled from 'styled-components';
+import { ContainerContent } from '../ResgisterUser/components/RegisterClienteForm/styles';
 
 export const ContainerContent2 = styled(ContainerContent)`
   div {
@@ -27,4 +27,11 @@ export const ContainerContent2 = styled(ContainerContent)`
       font-size: 45px;
     }
   }
+`;
+
+export const DivIcon = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1rem;
 `;

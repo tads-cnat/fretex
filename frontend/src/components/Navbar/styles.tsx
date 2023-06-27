@@ -53,10 +53,12 @@ export const LinksFretes = styled.div<IDropdownMenu>`
   }
 
   ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     text-decoration: none;
     color: var(--bg-ligth);
     font-size: var(--font-medium);
-    display: block;
     transition: 0.5s;
     &:hover {
       color: var(--btn-hover);
@@ -74,6 +76,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     & {
       display: ${({ show }) =>
         typeof show === 'boolean' && show ? 'flex' : 'none'};
+      padding: 0px 30px 10px 30px;
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -83,7 +86,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       left: 0;
       background-color: var(--bg-grey);
       z-index: 1000;
-      gap: 0px;
+      gap: 10px;
     }
 
     .linkMobile {
@@ -94,15 +97,15 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       width: 100%;
       display: flex;
       justify-content: start;
+
     }
 
     ul {
-      padding: 0 30px;
+
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      margin-bottom: 10px;
     }
 
     ul li {
@@ -112,18 +115,7 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     ul li a,
     ul li {
       width: 100%;
-      display: block;
       padding: 5px 0;
-    }
-
-    div {
-      padding: 0 30px;
-    }
-
-    div a {
-      padding: 6px 18px;
-      display: inline-block;
-      margin-bottom: 10px;
     }
   }
 `;

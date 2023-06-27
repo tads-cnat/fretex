@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { PerfilImg } from '../../../components/RegisterComponents/RegisterFreteiroForm/styles';
 import { type IActive } from '../../../interfaces/IActive';
 
 export const Container = styled.div`
@@ -16,24 +15,17 @@ export const Container = styled.div`
     justify-content: center;
   }
 
+  .dados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   @media (max-width: 1200px) {
     .title {
       margin-bottom: 0px;
       margin-top: 0px;
     }
-  }
-`;
-
-export const PerfilImgUpdate = styled(PerfilImg)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  gap: 10px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  p {
-    color: var(--text-grey-2);
   }
 `;
 

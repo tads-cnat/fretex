@@ -1,15 +1,13 @@
-import BoxDashboard from '../../components/Dashboard';
-import Layout from '../../components/Layout';
+import { BoxDashboard } from './components';
+import { Layout, SEO, Button } from '../../components';
 import { Wrapper } from '../../styles/globalStyles';
 import { Filter, Title, ContainerPedidos } from './styles';
 import { useQuery } from 'react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { isFreteiro } from '../../utils/isFreteiro';
-import LoadingPage from '../../components/Global/LoadingPage';
 import { objToQueryString } from '../../utils/queyString';
-import Head from '../../components/Head';
-import Button from '../../components/Global/Button';
+import { FaTruckLoading } from 'react-icons/fa';
 
 import PedidoService from '../../services/PedidoService';
 
@@ -22,11 +20,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringEN = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'EN',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'EN',
         },
   );
@@ -34,11 +32,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringAG = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'AG',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'AG',
         },
   );
@@ -46,22 +44,22 @@ const Dashboard = (): JSX.Element => {
   const queryStringTR = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'TR',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'TR',
         },
   );
   const queryStringCO = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'CO',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'CO',
         },
   );
@@ -69,11 +67,11 @@ const Dashboard = (): JSX.Element => {
   const queryStringCA = objToQueryString(
     typeUser
       ? {
-          proposta_set__usuario: `${user?.id}`,
+          proposta_set__usuario__id: `${user?.id}`,
           status: 'CA',
         }
       : {
-          cliente: `${user?.id}`,
+          cliente__id: `${user?.id}`,
           status: 'CA',
         },
   );
@@ -82,54 +80,75 @@ const Dashboard = (): JSX.Element => {
     data: pedidosEN,
     isLoading: isLoadingPedidosEN,
     isError: errorPedidosEN,
-  } = useQuery('pedidosEN', async () => await PedidoService.getSearchPedidos(queryStringEN), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosEN',
+    async () => await PedidoService.getSearchPedidos(queryStringEN),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosAG,
     isLoading: isLoadingPedidosAG,
     isError: errorPedidosAG,
-  } = useQuery('pedidosAG', async () => await PedidoService.getSearchPedidos(queryStringAG), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosAG',
+    async () => await PedidoService.getSearchPedidos(queryStringAG),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosTR,
     isLoading: isLoadingPedidosTR,
     isError: errorPedidosTR,
-  } = useQuery('pedidosTR', async () => await PedidoService.getSearchPedidos(queryStringTR), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosTR',
+    async () => await PedidoService.getSearchPedidos(queryStringTR),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosCO,
     isLoading: isLoadingPedidosCO,
     isError: errorPedidosCO,
-  } = useQuery('pedidosCO', async () => await PedidoService.getSearchPedidos(queryStringCO), {
-    enabled: !!user?.id,
-  });
+  } = useQuery(
+    'pedidosCO',
+    async () => await PedidoService.getSearchPedidos(queryStringCO),
+    {
+      enabled: !!user?.id,
+    },
+  );
 
   const {
     data: pedidosCA,
     isLoading: isLoadingPedidosCA,
     isError: errorPedidosCA,
-  } = useQuery('pedidosCA', async () => await PedidoService.getSearchPedidos(queryStringCA), {
-    enabled: !!user?.id,
-  });
-  
+  } = useQuery(
+    'pedidosCA',
+    async () => await PedidoService.getSearchPedidos(queryStringCA),
+    {
+      enabled: !!user?.id,
+    },
+  );
+
   return (
     <>
-      <Head title="Dashboard" />
+      <SEO title="Dashboard" />
       <Layout>
         <Wrapper style={{ minHeight: '80vh' }}>
           <Title>Dashboard</Title>
           <Filter>
             <span>Seus Fretes {/* dos últimos 30 dias */}</span>
             <div>
-              <button className="concluidos">Ver todos os concluídos</button>
               {isFreteiro(user) && (
-                <Button link={'/fretesDisponiveis'}>Buscar novos fretes</Button>
+                <Button link={'/fretesDisponiveis'} Icon={FaTruckLoading}>
+                  Buscar novos fretes
+                </Button>
               )}
             </div>
           </Filter>

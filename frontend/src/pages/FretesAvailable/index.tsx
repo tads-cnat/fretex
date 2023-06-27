@@ -1,5 +1,4 @@
-import BoxFretes from '../../components/FretesAvailable/BoxFretes';
-import Filter from '../../components/FretesAvailable/Filter';
+import { Filter } from './components';
 import { Wrapper } from '../../styles/globalStyles';
 import {
   ContainerBg,
@@ -10,10 +9,8 @@ import {
 } from './styles';
 import SearchImg from '../../assets/images/search.svg';
 import { type IPedido } from '../../interfaces';
-import Layout from '../../components/Layout';
-import Head from '../../components/Head';
+import { SEO, LoadingPage, Layout, BoxFretes } from '../../components';
 import useFilterFretes from '../../hooks/useFilterFretes';
-import LoadingPage from '../../components/Global/LoadingPage';
 
 const FretesAvailable = (): JSX.Element => {
   const {
@@ -32,7 +29,7 @@ const FretesAvailable = (): JSX.Element => {
 
   return (
     <>
-      <Head title="Fretes disponíveis" />
+      <SEO title="Fretes disponíveis" />
       <Layout>
         <ContainerBg>
           <Wrapper bgColor="#f5f5f5">

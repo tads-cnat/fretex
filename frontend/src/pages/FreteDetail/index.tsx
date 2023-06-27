@@ -3,13 +3,10 @@ import { ContainerPrincipal } from './styles';
 import { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import FreteDetailComponent from '../../components/FreteDetailFreteiroComponents/FreteDetail';
-import Layout from '../../components/Layout';
+import { FreteDetailComponent } from './components';
 import { useQuery } from 'react-query';
-import LoadingPage from '../../components/Global/LoadingPage';
+import { LoadingPage, SEO, Layout } from '../../components';
 import { objToQueryString } from '../../utils/queyString';
-import Head from '../../components/Head';
-
 import PedidoService from '../../services/PedidoService';
 import ClienteService from '../../services/ClienteService';
 import PropostaService from '../../services/PropostaService';
@@ -22,7 +19,7 @@ const FreteDetail = (): JSX.Element => {
     ['pedido', id],
     async () => await PedidoService.get(Number(id)),
     {
-      enabled: id !== undefined,
+      enabled: !!id,
     },
   );
 
@@ -55,26 +52,30 @@ const FreteDetail = (): JSX.Element => {
     },
   );
 
+  const isLoadingPage =
+    isLoadingPropostas || isLoadingPedido || isLoadingPropostas;
+
+  const pageLoaded =
+    !isLoadingClientePedido &&
+    !isLoadingPedido &&
+    !isLoadingPropostas &&
+    user !== null;
+
   return (
     <>
-      <Head title="Detalhes do frete" />
+      <SEO title="Detalhes do frete" />
       <Layout>
         <ContainerPrincipal>
           <Wrapper bgColor="#f5f5f5">
-            {(isLoadingPropostas || isLoadingPedido || isLoadingPropostas) && (
-              <LoadingPage />
+            {isLoadingPage && <LoadingPage />}
+            {pageLoaded && (
+              <FreteDetailComponent
+                pedido={pedido?.data}
+                clientePedido={userPedido?.data}
+                actualUser={user}
+                propostas={propostas?.data}
+              />
             )}
-            {!isLoadingClientePedido &&
-              !isLoadingPedido &&
-              !isLoadingPropostas &&
-              user !== null && (
-                <FreteDetailComponent
-                  pedido={pedido?.data}
-                  clientePedido={userPedido?.data}
-                  actualUser={user}
-                  propostas={propostas?.data}
-                />
-              )}
           </Wrapper>
         </ContainerPrincipal>
       </Layout>

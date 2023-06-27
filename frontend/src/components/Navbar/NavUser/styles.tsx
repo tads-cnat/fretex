@@ -19,13 +19,6 @@ export const Container = styled.button<IActive>`
     border-radius: 50%;
     object-fit: cover;
   }
-
-  .seta {
-    width: 10px;
-    transition: 0.2s;
-    transform: ${({ active }) => (active ? 'rotate(0deg)' : 'rotate(180deg)')};
-  }
-
   p {
     color: var(--text-light);
   }
@@ -68,7 +61,10 @@ export const Content = styled.div<IActive>`
 
   .links {
     transition: 0.5s;
-    display: ${({ active }) => (active ? 'block' : 'none')};
+    display: ${({ active }) => (active ? 'flex' : 'none')};
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.125rem;
     width: 100%;
     color: var(--text-light);
     border: none;

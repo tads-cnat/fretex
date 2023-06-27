@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Login from '../../pages/Login';
 import { AuthContext } from './AuthContext';
-import LoadingPage from '../../components/Global/LoadingPage';
+import { LoadingPage } from '../../components';
 
 const RequireAuth = ({
   children,

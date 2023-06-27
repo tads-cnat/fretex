@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --btn-text-color1: #332200;
     --btn-hover: #d89a0a;
+    --btn-disabled: #c4c4c4;
 
     --font-small: .75rem;
     --font-medium: 1rem;
@@ -67,13 +68,6 @@ export const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
-  }
-
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
   }
 `;
 
