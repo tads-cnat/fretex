@@ -25,5 +25,6 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.frontend'
+        arguments: '-f $(Build.SourcesDirectory)/docker/Dockerfile.frontend .'
         tags: |
           $(tag)
