@@ -90,7 +90,7 @@ export const ModalProposta = ({
 
   const veiculosFiltered =
     !isLoadingVeiculos &&
-    veiculos.data.filter((v: IVeiculo) =>
+    veiculos?.data?.filter((v: IVeiculo) =>
       pedidoVeiculos.includes(v.tipo_veiculo),
     );
 
