@@ -1,17 +1,15 @@
-# Define a imagem base que será utilizada
-FROM nginx:latest
+# CRA
+FROM node:alpine as build-deps
+WORKDIR /code
+COPY frontend /code/
+RUN npm install
+RUN npm run build
 
-# Remove o arquivo default.conf que já vem com o nginx
+# Nginx
+FROM nginx:1.12-alpine
 RUN rm /etc/nginx/conf.d/default.conf
-
-# Copia o arquivo de configuração personalizado para dentro do container
 COPY frontend/nginx.conf /etc/nginx/conf.d/
-
-# Copia a build da aplicação para o diretório raiz do servidor HTTP do nginx
-COPY frontend/build /usr/share/nginx/html
-
-# Expose indica qual porta o container deve escutar
+COPY --from=build-deps /code/dist /usr/share/nginx/html
 EXPOSE 80
-
-# Define o comando que será executado ao iniciar o container
 CMD ["nginx", "-g", "daemon off;"]
+
