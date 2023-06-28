@@ -16,7 +16,7 @@
 
 ## Estimativas dos Custos
 
-| Tópico                      | Entrega/Fase                                             | Recursos Necessários                                                                 |Duração Estimada em Horas| Custo Estimado (R$) |
+| Tópico                      | Entrega/Fase                                             | Recursos Necessários                                                                 |Duração Estimada em Horas| Custo Estimado (R$) | 
 | --------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------ |-------------------------| ------------------- |
 | **Introdução**              | Descrição e objetivo do projeto                          | Analista, Designer, Desenvolvedor                                                    | 20 horas                | 1.600,00            |
 | **Introdução**              | Escopo do projeto                                        | Ferramentas de gestão de projetos                                                    | 20 horas                | 1.600,00            |
@@ -52,20 +52,20 @@
 - R$ 182.080,87 por 6 meses de projeto
 
 ## Tabela de Custos
-| Recurso                        | Valor               |
-|--------------------------------|---------------------|
-| Analista de Negócios           | 35,00 por Hora      |
-| Analista de Qualidade          | 20,00 por Hora      |
-| Analista de Sistemas           | 30,00 por Hora      |
-| Analista de Testes             | 25,00 por Hora      |
-| Arquiteto de Software          | 47,00 por Hora      |
-| Designer                       | 20,00 por Hora      |
-| Equipamento de Alta Performace | 4.500,00             |
-| Especialista em Banco de Bados | 47,00 por Hora      |
-| Especialita em Implantação     | 25,00 por Hora      |
-| Especialista em Marketing      | 30,00 por Hora      |
-| Gerente de Projetos            | 35,00 por Hora      |
-| Recursos Humanos               | 15,00 por Hora      |
-| Programador Front/Back         | 25,00 por Hora      |
+| Recurso                        | Valor (R$)          | Custo Indireto (R$) | Custo Total (R$) |
+| ------------------------------ | ------------------- | ------------------- | ---------------- |
+| Analista de Negócios           | 35,00 por Hora      | 8,93 por Hora       | 43,93 por Hora   |
+| Analista de Qualidade          | 20,00 por Hora      | 5,10 por Hora       | 25,10 por Hora   |
+| Analista de Sistemas           | 30,00 por Hora      | 7,65 por Hora       | 37,65 por Hora   |
+| Analista de Testes             | 25,00 por Hora      | 6,38 por Hora       | 31,38 por Hora   |
+| Arquiteto de Software          | 47,00 por Hora      | 12,99 por Hora      | 59,99 por Hora   |
+| Designer                       | 20,00 por Hora      | 5,10 por Hora       | 25,10 por Hora   |
+| Equipamento de Alta Performace | 4.500,00            |                     | 4.500,00         |                            
+| Especialista em Banco de Bados | 47,00 por Hora      | 12,99 por Hora      | 59,99 por Hora   |
+| Especialita em Implantação     | 25,00 por Hora      | 6,30 por Hora       | 31,65 por Hora   |
+| Especialista em Marketing      | 30,00 por Hora      | 7,65 por Hora       | 37,65 por Hora   |
+| Gerente de Projetos            | 35,00 por Hora      | 8,93 por Hora       | 43,93 por Hora   |
+| Recursos Humanos               | 15,00 por Hora      | 3,83 por Hora       | 18,83 por Hora   |
+| Programador Front/Back         | 25,00 por Hora      | 6,38 por Hora       | 31,38 por Hora   |
 
 * Valores estimados retirados do site [TalentosBR](https://br.talent.com/pt/salary).
