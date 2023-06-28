@@ -15,8 +15,8 @@ stages:
 - stage: Build
   displayName: Build image
   jobs:
-  - job: Build
-    displayName: Build
+  - job: BuildFrontend
+    displayName: Build Frontend
     pool:
       vmImage: ubuntu-latest
     steps:
