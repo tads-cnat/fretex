@@ -31,3 +31,20 @@ stages:
         tags: |
           latest
           $(tag)
+          
+  - job: BuildBackend
+    displayName: Build Backend
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build and push backend image
+      inputs:
+        containerRegistry: 'Docker Hub Arthur'
+        repository: 'arthurmed/fretex-backend'
+        command: 'buildAndPush'
+        dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.backend'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: |
+          latest
+          $(tag)
