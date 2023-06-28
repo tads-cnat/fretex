@@ -23,7 +23,9 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
-        command: build
+        containerRegistry: 'Docker Hub Arthur'
+        repository: 'arthurmed/fretex-frontend'
+        command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.frontend'
         buildContext: '$(Build.SourcesDirectory)'
         tags: |
