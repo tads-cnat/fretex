@@ -1,10 +1,8 @@
 
 from datetime import datetime
-
 from django.contrib.auth.models import User
 from django.urls import reverse
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
-                              TipoVeiculo)
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, TipoVeiculo)
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -195,16 +193,16 @@ class CadastroTipoVeiculoIntegracao(APITestCase):
         tipo_veiculo_exists = TipoVeiculo.objects.filter(descricao="caminhao 3/4").exists()
         self.assertFalse(tipo_veiculo_exists)
 
-# # class EnderecoTests(APITestCase):
-# #     def test_create_endereco(self):
-# #         data = {
-# #             'data_coleta' : '2023-06-22', 
-# #             'data_entrega' : '2023-06-23',
-# #             'turno_coleta' : 'TA',
-# #             'turno_entrega' : 'NO'
-# #         }
-# #         Endereco.objects.create(**data)
-# #         self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
+# class EnderecoTests(APITestCase):
+#     def test_create_endereco(self):
+#         data = {
+#             'data_coleta' : '2023-06-22', 
+#             'data_entrega' : '2023-06-23',
+#             'turno_coleta' : 'TA',
+#             'turno_entrega' : 'NO'
+#         }
+#         Endereco.objects.create(**data)
+#         self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
 
 class PedidoTests(APITestCase):  
     
