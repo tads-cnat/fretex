@@ -1,10 +1,12 @@
 
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.urls import reverse
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, TipoVeiculo)
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
+                              TipoVeiculo)
 from rest_framework import status
 from rest_framework.test import APITestCase
-from datetime import datetime
 
 
 class FreteiroTests(APITestCase):
@@ -54,7 +56,7 @@ class FreteiroTests(APITestCase):
         self.assertEqual(freteiro_created, True)
 
 class ClienteTestsSistema(APITestCase):
-    def test_create_cliente(self):
+    def setUp(self):
 
         url = reverse("auth-register-cliente")
         data = {
@@ -64,19 +66,49 @@ class ClienteTestsSistema(APITestCase):
             "password": "Tads.d.b.s123",
         }
         response = self.client.post(url, data, format="json")
-        print('JSON:', response.json())
-        print('STATUS: ', response.status_code)
+
+        # print('JSON:', response.json())
+        # print('STATUS: ', response.status_code)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Cliente.objects.filter(cpf=data["cpf"]).exists(), True)
+        self.assertEqual(Cliente.objects.filter(username=data["email"]).exists(), True)
 
-        user = User.objects.get(username='cliente@hotmail.com')
-        # print(user)
-        # client2 = APIClient()
-        self.client.force_authenticate(user=user)
+        self.cliente = User.objects.get(username='cliente@hotmail.com')
+        self.client.force_authenticate(user=self.cliente)
 
-        url2 = reverse("cliente-list")
-        response = self.client.get(url2, data=None, format=None)
-        print('CLIENTES: ',response.json())
+    def test_update_cliente(self):
+
+        url = reverse("cliente-detail", args=[self.cliente.id])
+        # print(url)
+
+        data = {
+            "full_name": "Mathews Dantas Bezerra dos Santos",
+            "email": "novoemail@hotmail.com",
+            "cpf": "11945011614",
+            "password": "NovaSenha123",
+        }
+        response = self.client.patch(url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.cliente.refresh_from_db()
+        self.assertEqual(self.cliente.password, "NovaSenha123")
+
+        # url2 = reverse("cliente-detail", args=[self.cliente.id])
+        # response = self.client.get(url2, data=None, format=None)
+        # print('CLIENTE: ',response.json())
+
+    def test_delete_cliente(self):
+
+        url = reverse("cliente-detail", args=[self.cliente.id])
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Cliente.objects.filter(id=self.cliente.id).exists(), False)    
+
+    # def test_list_clientes(self):
+
+    #     url2 = reverse("cliente-list")
+    #     response = self.client.get(url2, data=None, format=None)
+    #     print('CLIENTES: ',response.json())
 
 class ClienteTestsIntegracao(APITestCase):
     def setUp(self):        
@@ -163,16 +195,16 @@ class CadastroTipoVeiculoIntegracao(APITestCase):
         tipo_veiculo_exists = TipoVeiculo.objects.filter(descricao="caminhao 3/4").exists()
         self.assertFalse(tipo_veiculo_exists)
 
-# class EnderecoTests(APITestCase):
-#     def test_create_endereco(self):
-#         data = {
-#             'data_coleta' : '2023-06-22', 
-#             'data_entrega' : '2023-06-23',
-#             'turno_coleta' : 'TA',
-#             'turno_entrega' : 'NO'
-#         }
-#         Endereco.objects.create(**data)
-#         self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
+# # class EnderecoTests(APITestCase):
+# #     def test_create_endereco(self):
+# #         data = {
+# #             'data_coleta' : '2023-06-22', 
+# #             'data_entrega' : '2023-06-23',
+# #             'turno_coleta' : 'TA',
+# #             'turno_entrega' : 'NO'
+# #         }
+# #         Endereco.objects.create(**data)
+# #         self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
 
 class PedidoTests(APITestCase):  
     
