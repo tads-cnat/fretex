@@ -39,6 +39,7 @@ export const Container = styled.label`
     opacity: 0;
     animation: animeDown 0.3s forwards;
     font-style: italic;
+    font-weight: bold;
   }
 
   @keyframes animeDown {
