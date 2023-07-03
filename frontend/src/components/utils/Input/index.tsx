@@ -34,7 +34,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInput> = (
           {required && <span className="required">*</span>}
         </span>
       )}
-      <InputContainer>
+      <InputContainer $error={error} >
         {svg !== undefined && svg}
         <input ref={ref} type={seePassword ? 'text' : 'password'} {...rest} />
         {type === 'password' && (
