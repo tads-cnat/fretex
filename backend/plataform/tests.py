@@ -1,8 +1,10 @@
 
 from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.urls import reverse
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, TipoVeiculo)
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
+                              TipoVeiculo)
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -70,19 +72,20 @@ class ClienteTestsSistema(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Cliente.objects.filter(username=data["email"]).exists(), True)
 
-        self.cliente = User.objects.get(username='cliente@hotmail.com')
+        self.cliente = Cliente.objects.get(username='cliente@hotmail.com')
         self.client.force_authenticate(user=self.cliente)
 
     def test_update_cliente(self):
-
         url = reverse("cliente-detail", args=[self.cliente.id])
         # print(url)
 
+        self.cliente.email = "novoemail@hotmail.com"
+        self.cliente.password = "NovaSenha123"
         data = {
-            "full_name": "Mathews Dantas Bezerra dos Santos",
-            "email": "novoemail@hotmail.com",
-            "cpf": "11945011614",
-            "password": "NovaSenha123",
+            "full_name": f"{self.cliente.first_name} {self.cliente.last_name}",
+            "email": self.cliente.email,
+            "cpf": self.cliente.cpf,
+            "password": self.cliente.password,
         }
         response = self.client.patch(url, data, format="json")
 
