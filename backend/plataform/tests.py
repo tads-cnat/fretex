@@ -1,12 +1,10 @@
-
 from datetime import datetime
-
 from django.contrib.auth.models import User
 from django.urls import reverse
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
-                              TipoVeiculo)
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,TipoVeiculo)
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 
 class FreteiroTests(APITestCase):
     def test_create_freteiro_sistema(self):
