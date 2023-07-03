@@ -1,11 +1,12 @@
 
-from django.contrib.auth.models import User
-from django.urls import reverse
-from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto, TipoVeiculo)
-from rest_framework import status
-from rest_framework.test import APITestCase
 from datetime import datetime
 
+from django.contrib.auth.models import User
+from django.urls import reverse
+from plataform.models import (Cliente, Endereco, Freteiro, Pedido, Produto,
+                              TipoVeiculo)
+from rest_framework import status
+from rest_framework.test import APITestCase
 
 class FreteiroTests(APITestCase):
     def test_create_freteiro_sistema(self):
@@ -105,8 +106,8 @@ class ClienteTestsIntegracao(APITestCase):
 
         self.assertEqual(Cliente.objects.filter(email="cliente@hotmail.com").exists(), False)
 
-class CadastroTipoVeiculoTestsSistema(APITestCase):
-    def test_create_tipo_veiculo(self):
+class TipoVeiculoTestsSistema(APITestCase):
+    def setUp(self):
 
         #CRIANDO FRETEIRO
         urlFreteiro = reverse("auth-register-freteiro")
@@ -128,20 +129,49 @@ class CadastroTipoVeiculoTestsSistema(APITestCase):
         self.client.post(urlFreteiro, dataFreteiro, format="json")
         #RECUPERA O USER CONTIDO NO FRETEIRO
         user = User.objects.get(username='teste@gmail.com')
-        freteiro = Freteiro.objects.get(username='teste@gmail.com')
-
         #AUTENTICA O USER DO FRETEIRO
         self.client.force_authenticate(user=user)
-
-        #CRIA O TIPO VEICULO
+        #CRIA O TIPO VEICULO PARA TESTES DE DELETE E UPDATE
         urlTipoVeiculo = reverse("tipodeveiculo-list")
         dataTipoVeiculo = {
           "descricao": "Caminhão 3/4",
         }
 
+        self.client.post(urlTipoVeiculo, dataTipoVeiculo, format="json")
+        self.tipo_veiculo = TipoVeiculo.objects.get(descricao="Caminhão 3/4")
+
+    def test_create_tipo_veiculo(self):
+
+        urlTipoVeiculo = reverse("tipodeveiculo-list")
+        dataTipoVeiculo = {
+          "descricao": "Carro 4 portas",
+        }
+
         response = self.client.post(urlTipoVeiculo, dataTipoVeiculo, format="json")
+        self.tipo_veiculo = TipoVeiculo.objects.get(descricao="Carro 4 portas")
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(TipoVeiculo.objects.filter(descricao=dataTipoVeiculo["descricao"]).exists(), True)
+
+
+    def test_delete_tipo_veiculo(self):
+
+        url = reverse("tipodeveiculo-detail", kwargs={"pk": self.tipo_veiculo.id})
+        response = self.client.delete(url, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(TipoVeiculo.objects.filter(descricao="Caminhão 3/4").exists(), False)
+
+    def test_update_tipo_veiculo(self):
+            
+        url = reverse("tipodeveiculo-detail", kwargs={"pk": self.tipo_veiculo.id})
+        data = {
+            "descricao": "Moto",
+        }
+        response = self.client.put(url, data, format="json")
+    
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(TipoVeiculo.objects.filter(descricao=data["descricao"]).exists(), True)
 
 
 class CadastroTipoVeiculoIntegracao(APITestCase):
@@ -162,17 +192,6 @@ class CadastroTipoVeiculoIntegracao(APITestCase):
 
         tipo_veiculo_exists = TipoVeiculo.objects.filter(descricao="caminhao 3/4").exists()
         self.assertFalse(tipo_veiculo_exists)
-
-# class EnderecoTests(APITestCase):
-#     def test_create_endereco(self):
-#         data = {
-#             'data_coleta' : '2023-06-22', 
-#             'data_entrega' : '2023-06-23',
-#             'turno_coleta' : 'TA',
-#             'turno_entrega' : 'NO'
-#         }
-#         Endereco.objects.create(**data)
-#         self.assertEqual(Endereco.objects.filter(CEP="12345678").exists(), True)
 
 class PedidoTests(APITestCase):  
     
