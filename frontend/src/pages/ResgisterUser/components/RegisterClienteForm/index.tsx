@@ -85,7 +85,7 @@ export const RegisterClienteForm = (): JSX.Element => {
                 required={input.required}
               />
             ))}
-            {error !== '' && <p className="error">{error}</p>}
+            {error !== '' && <p className="error-light">{error}</p>}
           </div>
           <section>
             <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>

@@ -105,7 +105,7 @@ const Login = (): JSX.Element => {
                     />
                   ))}
 
-                  {error.length !== 0 && <p className="error-light ">{error}</p>}
+                  {error.length !== 0 && <p className="error-light">{error}</p>}
                 </div>
                 <section>
                   <Button

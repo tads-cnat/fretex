@@ -74,7 +74,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
                   onChange={onChange}
                 />
                 <p>Clique para inserir uma imagem</p>
-                {error !== '' && <p className="error">{error}</p>}
+                {error !== '' && <p className="error-light">{error}</p>}
               </Preview>
               </div>
               {inputs.map((input, index) => (
