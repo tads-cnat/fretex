@@ -78,6 +78,7 @@ export const ContainerForm = styled.div`
     font-size: 28px;
     line-height: 24px;
     margin-bottom: 40px;
+    text-align: center;
     @media (max-width: 768px) {
       font-size: 18px;
       margin-bottom: 20px;
