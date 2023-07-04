@@ -1,12 +1,12 @@
-import { Button } from '../';
-import { Wrapper, SpanYellow } from '../../styles/globalStyles';
+import { Button, Logo } from '../';
+import { Wrapper } from '../../styles/globalStyles';
 import { useContext, useState } from 'react';
 import {
   Header,
-  Logo,
   LinksFretes,
   NavContainer,
   ButtonMenuContainer,
+  ButtonLogin,
 } from './styles';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import NavUser from './NavUser';
@@ -14,15 +14,11 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useToggle } from '../../hooks/useToggle';
 import { type INavLink } from '../../interfaces/INavLink';
 import { RiUserSharedLine, RiHome2Line, RiLogoutBoxLine } from 'react-icons/ri';
-import { FaUserCircle} from 'react-icons/fa';
-import {FiUserPlus} from 'react-icons/fi';
+import { FaUserCircle } from 'react-icons/fa';
+import { FiUserPlus } from 'react-icons/fi';
 import { LiaTruckLoadingSolid } from 'react-icons/lia';
 import { LuLayoutDashboard } from 'react-icons/lu';
-import {
-  BsCartPlus,
-  BsGift,
-  BsInfoCircle,
-} from 'react-icons/bs';
+import { BsCartPlus, BsGift, BsInfoCircle } from 'react-icons/bs';
 
 interface INavbar {
   id?: string;
@@ -43,11 +39,7 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
     <Header id={id}>
       <Wrapper>
         <NavContainer>
-          <div>
-            <Logo to="/">
-              Frete<SpanYellow>X</SpanYellow>
-            </Logo>
-          </div>
+          <Logo width={'150px'} height={'50px'}/>
 
           <LinksFretes show={dropdownUp}>
             {user == null && (
@@ -152,7 +144,7 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
                 </li>
               </ul>
             )}
-            <div className="containerUser">
+            <div className='buttonLoginMobile'>
               {user !== null ? (
                 <NavUser user={user} active={active} setActive={setActive} />
               ) : (
@@ -162,6 +154,16 @@ export const Navbar = ({ id }: INavbar): JSX.Element => {
               )}
             </div>
           </LinksFretes>
+
+          <ButtonLogin>
+            {user !== null ? (
+              <NavUser user={user} active={active} setActive={setActive} />
+            ) : (
+              <Button link="/login" Icon={RiUserSharedLine}>
+                Login
+              </Button>
+            )}
+          </ButtonLogin>
 
           <ButtonMenuContainer animation={dropdownUp}>
             <button

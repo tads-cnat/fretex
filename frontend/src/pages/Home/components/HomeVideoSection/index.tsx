@@ -7,19 +7,18 @@ import {
   VideoP,
   VideoSection,
 } from './styles';
-import { Button } from '../../../../components';
-import Video from '../../../../assets/videos/video.mp4';
-import { SpanYellow } from '../../../../styles/globalStyles';
+import { Button, Logo } from '../../../../components';
+import ImagemDeCaixasHomePage from '../../../../assets/images/imagemDeCaixasHomePage.jpg';
 
 export const HomeVideoSection = (): JSX.Element => {
   return (
     <VideoSection>
       <ContainerVideo>
-        <VideoBg autoPlay loop muted src={Video} />
+        <VideoBg src={ImagemDeCaixasHomePage} />
       </ContainerVideo>
       <ContainerVideoContent>
         <VideoH1>
-          Frete<SpanYellow>X</SpanYellow> sua encomenda sem complicação
+          <Logo /> seu frete sem complicação
         </VideoH1>
         <VideoP>
           A maior plataforma de transporte rodoviário de cargas do Brasil
