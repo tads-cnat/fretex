@@ -95,7 +95,7 @@ export const RegisterClienteForm = (): JSX.Element => {
             >
               Cadastre-se
             </Button>
-            <p>
+            <p className='ajudaCadastro'>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>
           </section>

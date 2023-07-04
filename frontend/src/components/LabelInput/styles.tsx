@@ -64,12 +64,4 @@ export const InputLabel = styled.label<InputLabelStyles>`
 
 export const LabelContainer = styled.div`
   margin-bottom: 5px;
-
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
-    font-style: italic;
-  }
 `;

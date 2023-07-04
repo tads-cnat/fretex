@@ -113,7 +113,7 @@ const Login = (): JSX.Element => {
                   >
                     Entrar
                   </Button>
-                  <p>
+                  <p className='ajudaCadastro'>
                     Não tem cadastro?<Link to="/register"> Crie sua conta</Link>
                   </p>
                 </section>
