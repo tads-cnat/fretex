@@ -239,3 +239,86 @@ class PedidoTests(APITestCase):
         Pedido.objects.filter(id=self.pedido.id).delete()
         pedidos_restantes = Pedido.objects.all()
         self.assertEqual(pedidos_restantes.count(), 0)
+        
+        
+class PedidoTestsSistema(APITestCase):
+    
+    def setUp(self):
+        self.cliente = Cliente.objects.create_user(
+            username='stark',
+            email='tonny@stark.com',
+            password='senha123S',
+            cpf='123456789'
+        )
+        self.endereco_origem = Endereco.objects.create(
+            rua='Rua Origem',
+            CEP='12345678',
+            numero='10',
+            bairro='Bairro Origem',
+            cidade='Cidade Origem',
+            estado='Estado Origem'
+        )
+        self.endereco_destino = Endereco.objects.create(
+            rua='Rua Destino',
+            CEP='98765432',
+            numero='20',
+            bairro='Bairro Destino',
+            cidade='Cidade Destino',
+            estado='Estado Destino'
+        )
+        self.produto = Produto.objects.create(
+            nome='Mesa Gamer'
+        )
+        self.tipo_veiculo = TipoVeiculo.objects.create(
+            descricao='Caminhão'
+        )
+        self.pedido = Pedido.objects.create(
+            cliente=self.cliente,
+            origem=self.endereco_origem,
+            destino=self.endereco_destino,
+            produto=self.produto,
+            nomeDestinatario='Destinatário',
+            data_coleta='2023-06-21',
+            data_entrega='2023-06-22',
+            turno_entrega='MA',
+            turno_coleta='TA'
+        )
+        self.pedido.tipo_veiculo.add(self.tipo_veiculo)
+
+    def test_create_pedido(self):
+        url = reverse('pedido_create') 
+        data = {
+            'cliente': self.cliente.id,
+            'origem': self.endereco_origem.id,
+            'destino': self.endereco_destino.id,
+            'produto': self.produto.id,
+            'nomeDestinatario': 'Destinatário',
+            'data_coleta': '2023-06-21',
+            'data_entrega': '2023-06-22',
+            'turno_entrega': 'MA',
+            'turno_coleta': 'TA'
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)  # Verifica se o pedido foi criado com sucesso
+        self.assertEqual(Pedido.objects.count(), 2)  # Verifica se o número total de pedidos é 2
+
+
+    def test_update_pedido(self):
+        url = reverse('pedido-detail', args=[self.pedido.id])
+        data = {
+            'data_coleta': '2023-06-22',
+            'data_entrega': '2023-06-23',
+            'turno_coleta': 'TA',
+            'turno_entrega': 'NO'
+        }
+        response = self.client.patch(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)  # Verifica se a atualização do pedido foi bem-sucedida
+        self.pedido.refresh_from_db()  # Atualiza o objeto pedido do banco de dados
+        expected_data_coleta = datetime.strptime('2023-06-22', '%Y-%m-%d').date()
+        self.assertEqual(self.pedido.data_coleta, expected_data_coleta)
+
+    def test_delete_pedido(self):
+        url = reverse('pedido-detail', args=[self.pedido.id])  # Substitua 'pedido-detail' pelo nome da URL que corresponde à exclusão de um pedido
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)  # Verifica se a exclusão do pedido foi bem-sucedida
+        self.assertEqual(Pedido.objects.count(), 0)  # Verifica se o número total de pedidos é 0
