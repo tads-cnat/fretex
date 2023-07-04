@@ -13,4 +13,4 @@ class PropostaService extends BaseService {
   }
 }
 
-export default new PropostaService('proposta');
+export default new PropostaService('/proposta');

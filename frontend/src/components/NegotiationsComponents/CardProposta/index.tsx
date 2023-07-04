@@ -32,7 +32,14 @@ export const CardProposta = ({
     color: '',
     bg: '',
   });
-  const [type, setType] = useState('');
+  const [type, setType] = useState<
+    | 'A responder'
+    | 'Aceita'
+    | 'Aguardando freteiro'
+    | 'Aguardando cliente'
+    | 'Recusadas'
+    | ''
+  >('');
 
   let propostasFiltradas: IProposta[] = [];
   propostasFiltradas = propostas.filter(
@@ -53,7 +60,9 @@ export const CardProposta = ({
   // console.log(propostasFiltradas);
 
   let propostasRecusadasForFreteiro: IProposta[] = [];
-  propostasRecusadasForFreteiro = propostasFiltradas.filter((p) => p.ehNegada);
+  propostasRecusadasForFreteiro = propostasFiltradas.filter(
+    (p) => p.ehNegada === true,
+  );
 
   let propostasEsperandoForCliente: IProposta[] = [];
   propostasEsperandoForCliente = propostasFiltradas.filter(
@@ -63,6 +72,7 @@ export const CardProposta = ({
       !p.ehNegada &&
       !p.eh_aceita,
   );
+
   let propostasEsperandoForFreteiro: IProposta[] = [];
   propostasEsperandoForFreteiro = propostasFiltradas.filter(
     (p) =>
@@ -71,6 +81,7 @@ export const CardProposta = ({
       !p.ehNegada &&
       !p.eh_aceita,
   );
+
   let propostaAceitaForFreteiro: IProposta[] = [];
   propostaAceitaForFreteiro = propostasFiltradas.filter((p) => p.eh_aceita);
 
@@ -82,7 +93,7 @@ export const CardProposta = ({
         enabled: !isNaN(OwnerPropostasId),
       },
     );
-  console.log(OwnerPropostasId);
+
   const changeTypeCard = (type: string): void => {
     switch (type) {
       case 'A responder':
@@ -111,7 +122,8 @@ export const CardProposta = ({
     chooseType();
     changeTypeCard(type);
   }, [type]);
-  // console.log(propostaAceitaForFreteiro)
+
+  //console.log(propostasEsperandoForFreteiro);
   if (isLoadingUserOwnerProposta) return <Loading />;
   return (
     <Container>
@@ -141,6 +153,7 @@ export const CardProposta = ({
               actualUser={actualUser}
             />
           ))}
+
         {isFreteiro(actualUser)
           ? propostasEsperandoForFreteiro.map((proposta) => (
               <ContentProposta
@@ -162,6 +175,7 @@ export const CardProposta = ({
                 actualUser={actualUser}
               />
             ))}
+
         {isFreteiro(actualUser)
           ? propostasEsperandoForCliente.map((proposta) => (
               <ContentProposta
@@ -183,6 +197,7 @@ export const CardProposta = ({
                 actualUser={actualUser}
               />
             ))}
+
         {propostasRecusadasForFreteiro.length !== 0 &&
           propostasRecusadasForFreteiro.map((proposta) => (
             <ContentProposta

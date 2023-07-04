@@ -18,11 +18,12 @@ import { type IPedidoFormData } from '../../../../interfaces';
 import { useNavigate } from 'react-router-dom';
 import PedidoService from '../../../../services/PedidoService';
 import TipoVeiculoService from '../../../../services/TipoVeiculoService';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Turnos } from './turnos';
 import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
+import { AuthContext } from '../../../../context/Auth/AuthContext';
 
 interface ITiposDeVeiculo {
   id: number;
@@ -101,6 +102,7 @@ const isErrorDateRange = (
 export const FormRegisterFrete = (): JSX.Element => {
   const navigate = useNavigate();
   const [tiposDeVeiculo, setTiposDeVeiculo] = useState<ITiposDeVeiculo[]>([]);
+  const { user } = useContext(AuthContext);
   const {
     register,
     completeAddress,
@@ -165,6 +167,7 @@ export const FormRegisterFrete = (): JSX.Element => {
         formData.append(`tipo_veiculo[]`, tipoVeiculo);
       else if (value) formData.append(`${key}`, value);
     });
+    formData.append('cliente', user!.id);
     /*for (const pair of formData.entries()) {
       console.log(`${pair[0]}, ${pair[1]}`);
     }*/
@@ -175,7 +178,8 @@ export const FormRegisterFrete = (): JSX.Element => {
       })
       .catch((error) => {
         console.log(error);
-      }).finally(() => {
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   };
@@ -535,7 +539,12 @@ export const FormRegisterFrete = (): JSX.Element => {
             </EntregaDivContent>
           </EntregaDiv>
           <ButtonDiv>
-            <Button isButton type="submit" fontSize="large" isDisabled={isLoading}>
+            <Button
+              isButton
+              type="submit"
+              fontSize="large"
+              isDisabled={isLoading}
+            >
               Finalizar pedido
             </Button>
           </ButtonDiv>

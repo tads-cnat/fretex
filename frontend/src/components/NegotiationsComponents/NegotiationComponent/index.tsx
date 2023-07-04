@@ -1,5 +1,6 @@
-import { HeaderContainer, PropostaContainer2 } from './styles';
-import { CardsContainer, CardProposta, ModalProposta, Button } from '../../';
+import { type MouseEvent } from 'react';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
+import { Button, CardProposta, CardsContainer, ModalProposta } from '../../';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
@@ -7,8 +8,7 @@ import {
   type IProposta,
 } from '../../../interfaces';
 import { isFreteiro } from '../../../utils/isFreteiro';
-import { type MouseEvent } from 'react';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
+import { HeaderContainer, PropostaContainer2 } from './styles';
 
 interface INegociation {
   actualUser: IFreteiro | ICliente;
@@ -29,19 +29,17 @@ export const NegotiationComponent = ({
     useToggle();
   const { toggle: togglePropostasAtivas, value: valuePropostasAtivas } =
     useToggle(true);
-
   const handleClick = (e: MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     toggleModalProposta();
   };
-  let usuarios: number[] = [];
+  let usersThatMadeOffers: number[] = [];
+
   if (Array.isArray(propostas) && propostas.length > 0) {
-    usuarios = Array.from(new Set(propostas.map((p) => p.usuario))).filter(
-      (usuario) => usuario !== ownerPedido,
-    );
+    usersThatMadeOffers = Array.from(
+      new Set(propostas.map((p) => p.usuario)),
+    ).filter((usuario) => usuario !== ownerPedido);
   }
-  //  console.log(usuarios)
-  //  console.log(ownerPedido);
 
   return (
     <>
@@ -79,15 +77,17 @@ export const NegotiationComponent = ({
             toggle={togglePropostasAtivas}
             value={valuePropostasAtivas}
           >
-            {usuarios.length === 0 && !isFreteiro(actualUser) && (
+            {usersThatMadeOffers.length === 0 && !isFreteiro(actualUser) && (
               <p>Nenhuma proposta recebida</p>
             )}
 
+            {!usersThatMadeOffers.find((id) => actualUser.id === id) &&
+              isFreteiro(actualUser) && <p>Você não fez nenhuma propostas</p>}
+
             {!isFreteiro(actualUser) && (
               <div className="containerCards">
-                {usuarios.length !== 0 &&
-                  !isFreteiro(actualUser) &&
-                  usuarios.map((usuarioId) => (
+                {usersThatMadeOffers.length !== 0 &&
+                  usersThatMadeOffers.map((usuarioId) => (
                     <CardProposta
                       key={usuarioId}
                       actualUser={actualUser}
@@ -100,12 +100,9 @@ export const NegotiationComponent = ({
               </div>
             )}
 
-            {!usuarios.find((u) => actualUser.id === u) &&
-              isFreteiro(actualUser) && <p>Você não fez nenhuma propostas</p>}
-
-            {usuarios.length !== 0 &&
+            {usersThatMadeOffers.length !== 0 &&
               isFreteiro(actualUser) &&
-              !!usuarios.find((u) => actualUser.id === u) && (
+              !!usersThatMadeOffers.find((u) => actualUser.id === u) && (
                 <div className="containerCards" key={actualUser.id}>
                   <CardProposta
                     actualUser={actualUser}
