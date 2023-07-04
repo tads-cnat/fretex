@@ -104,7 +104,7 @@ export const ContainerForm = styled.div`
     cursor: pointer;
   }
 
-  p {
+  .ajudaCadastro {
     color: #a8a8a8;
     font-style: normal;
     font-weight: 500;
@@ -112,6 +112,7 @@ export const ContainerForm = styled.div`
     line-height: 19px;
     text-align: center;
   }
+
   a {
     text-decoration: none;
     color: var(--bg-ligth);
