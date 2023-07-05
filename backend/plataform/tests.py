@@ -55,7 +55,7 @@ class FreteiroTests(APITestCase):
         self.assertEqual(freteiro_created, True)
 
 class ClienteTestsSistema(APITestCase):
-    def test_create_cliente(self):
+    def setUp(self):
 
         url = reverse("auth-register-cliente")
         data = {
@@ -64,20 +64,64 @@ class ClienteTestsSistema(APITestCase):
             "cpf": "11945011614",
             "password": "Tads.d.b.s123",
         }
-        response = self.client.post(url, data, format="json")
-        print('JSON:', response.json())
-        print('STATUS: ', response.status_code)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Cliente.objects.filter(cpf=data["cpf"]).exists(), True)
+        self.responsePost = self.client.post(url, data, format="json")
+        # print('JSON:', responsePost.json())
+        # print('STATUS: ', responsePost.status_code)
 
-        user = User.objects.get(username='cliente@hotmail.com')
-        # print(user)
-        # client2 = APIClient()
-        self.client.force_authenticate(user=user)
+        self.cliente = Cliente.objects.get(username=data["email"])
+        self.client.force_authenticate(user=self.cliente)
 
-        url2 = reverse("cliente-list")
-        response = self.client.get(url2, data=None, format=None)
-        print('CLIENTES: ',response.json())
+    def test_create_cliente(self):
+        
+        self.assertEqual(self.responsePost.status_code, status.HTTP_201_CREATED)
+        
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == self.cliente.email:
+                exists = True
+                break
+        self.assertEqual(exists, True)
+
+    def test_update_cliente(self):
+        
+        url = reverse("cliente-detail", args=[self.cliente.id])
+
+        self.cliente.email = "novoemail@hotmail.com"
+        self.cliente.password = "NovaSenha123"
+        data = {
+            "full_name": f"{self.cliente.first_name} {self.cliente.last_name}",
+            "email": self.cliente.email,
+            "cpf": self.cliente.cpf,
+            "password": self.cliente.password,
+        }
+        response = self.client.patch(url, data, format="json")
+
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == data["email"]:
+                exists = True
+                break
+        self.assertEqual(exists, True)
+
+    def test_delete_cliente(self):
+
+        url = reverse("cliente-detail", args=[self.cliente.id])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == self.cliente.email:
+                exists = True
+                break
+        self.assertEqual(exists, False)  
+
 
 class ClienteTestsIntegracao(APITestCase):
     def setUp(self):        
