@@ -263,12 +263,9 @@ class PedidoSerializer(serializers.ModelSerializer):
         produto = Produto.objects.create(**produto)
 
         tipos_veiculos = validated_data.pop("tipo_veiculo")
-        tipos_veiculos = self.context["request"].data.get("tipo_veiculo[]")
-
-        if tipos_veiculos is None or tipos_veiculos.strip() == "":
+                
+        if tipos_veiculos is None or len(tipos_veiculos) == 0:
             raise serializers.ValidationError({"tipo_veiculo": "tipo_veiculo field is missing"})
-
-        tipos_veiculos = list(map(int, tipos_veiculos.split(",")))
 
         pedido = Pedido.objects.create(**validated_data, origem=origem, destino=destino, produto=produto)
         pedido.tipo_veiculo.set(tipos_veiculos)
