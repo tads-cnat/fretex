@@ -244,8 +244,8 @@ class PedidoTests(APITestCase):
 class PedidoTestsSistema(APITestCase):
     
    
-    def test_create_pedido(self):
-        
+    def setUp(self):
+        # Criando o cliente
         urlCliente = reverse("auth-register-cliente")
         data = {
             "full_name": "Tonny Weslley Silva de Souza",
@@ -253,20 +253,17 @@ class PedidoTestsSistema(APITestCase):
             "cpf": "12312312311",
             "password": "404401402",
         }
-        
+
         tipo_veiculo = TipoVeiculo.objects.create(descricao="caminhao 3/4")
         tipo_veiculo2 = TipoVeiculo.objects.create(descricao="bike eletrica")
 
-        
         response = self.client.post(urlCliente, data, format="json")
         user = User.objects.get(username='tonny@cliente.com')
         cliente = Cliente.objects.get(username='tonny@cliente.com')
-        
+
         self.client.force_authenticate(user=user)
-    
-        
-    
-        data = {
+
+        self.data = {
             'cliente': cliente.id,
             'origem': {
                 "rua": "Rua Teste2",
@@ -296,8 +293,49 @@ class PedidoTestsSistema(APITestCase):
             'turno_entrega': 'MA',
             'turno_coleta': 'TA',
         }
-        
+
+    def test_create_pedido(self):
         urlPedido = reverse("pedido-list")
-        response = self.client.post(urlPedido, data, format="json")
+        response = self.client.post(urlPedido, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)  # Verifica se o pedido foi criado com sucesso
-        self.assertEqual(Pedido.objects.count(), 1)  # Verifica se o número total de pedidos é 2
+        self.assertEqual(Pedido.objects.count(), 1)  # Verifica se o número total de pedidos é 1
+        
+    def test_update_pedido(self):
+        # Creating the pedido
+        urlPedido = reverse("pedido-list")
+        response = self.client.post(urlPedido, self.data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        # Retrieving the created pedido
+        pedido_id = response.data.get("id")
+        pedido_url = reverse("pedido-detail", kwargs={"pk": pedido_id})
+        pedido = Pedido.objects.get(id=pedido_id)
+        
+        # Updating the name of the pedido
+        updated_data = {"nomeDestinatario": "Novo nome do pedido"} 
+        
+        response = self.client.patch(pedido_url, updated_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Verifying the updated name
+        updated_pedido = Pedido.objects.get(id=pedido_id)
+        self.assertEqual(updated_pedido.nomeDestinatario, "Novo nome do pedido")
+
+    def test_delete_pedido(self):
+        # Creating the pedido
+        urlPedido = reverse("pedido-list")
+        response = self.client.post(urlPedido, self.data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        # Retrieving the created pedido
+        pedido_id = response.data.get("id")
+        pedido_url = reverse("pedido-detail", kwargs={"pk": pedido_id})
+        pedido = Pedido.objects.get(id=pedido_id)
+        
+        # Deleting the pedido
+        response = self.client.delete(pedido_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
+        # Verifying the pedido was deleted
+        self.assertEqual(Pedido.objects.count(), 0)
+        
