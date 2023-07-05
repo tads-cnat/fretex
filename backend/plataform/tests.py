@@ -297,24 +297,31 @@ class PedidoTestsSistema(APITestCase):
     def test_create_pedido(self):
         urlPedido = reverse("pedido-list")
         response = self.client.post(urlPedido, self.data, format="json")
+        pedido_id = response.data.get("id")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)  # Verifica se o pedido foi criado com sucesso
-        self.assertEqual(Pedido.objects.count(), 1)  # Verifica se o número total de pedidos é 1
+        response_list = self.client.get(urlPedido)
+
+        exists = False
+        for item in response_list.data["results"]:
+            if item['id'] == pedido_id:
+                exists = True
+                break
+        self.assertEqual(exists, True)
+
+        self.public_id_pedido = pedido_id
 
     def test_delete_pedido(self):
-        # Creating the pedido
-        urlPedido = reverse("pedido-list")
-        response = self.client.post(urlPedido, self.data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        
-        # Retrieving the created pedido
-        pedido_id = response.data.get("id")
-        pedido_url = reverse("pedido-detail", kwargs={"pk": pedido_id})
-        pedido = Pedido.objects.get(id=pedido_id)
-        
-        # Deleting the pedido
-        response = self.client.delete(pedido_url)
+
+        urlPedido = reverse("pedido-detail")
+        urlList = reverse("pedido-list")
+        response = self.client.delete(pedido_url, kwargs={"pk":self.pedido.id})
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        
-        # Verifying the pedido was deleted
-        self.assertEqual(Pedido.objects.count(), 0)
-        
+
+        response_list = self.client.get(urlList)
+
+        exists = False
+        for item in response_list.data["results"]:
+            if item['id'] == pedido_id:
+                exists = True
+                break
+        self.assertEqual(exists, False)
