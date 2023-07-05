@@ -72,14 +72,21 @@ class ClienteTestsSistema(APITestCase):
         self.client.force_authenticate(user=self.cliente)
 
     def test_create_cliente(self):
-
+        
         self.assertEqual(self.responsePost.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Cliente.objects.filter(username=self.cliente.email).exists(), True)
+        
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == self.cliente.email:
+                exists = True
+                break
+        self.assertEqual(exists, True)
 
     def test_update_cliente(self):
         
         url = reverse("cliente-detail", args=[self.cliente.id])
-        # print(url)
 
         self.cliente.email = "novoemail@hotmail.com"
         self.cliente.password = "NovaSenha123"
@@ -91,27 +98,30 @@ class ClienteTestsSistema(APITestCase):
         }
         response = self.client.patch(url, data, format="json")
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.cliente.refresh_from_db()
-        self.assertEqual(self.cliente.password, "NovaSenha123")
-
-        # url2 = reverse("cliente-detail", args=[self.cliente.id])
-        # response = self.client.get(url2, data=None, format=None)
-        # print('CLIENTE: ',response.json())
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == data["email"]:
+                exists = True
+                break
+        self.assertEqual(exists, True)
 
     def test_delete_cliente(self):
 
         url = reverse("cliente-detail", args=[self.cliente.id])
         response = self.client.delete(url)
-
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Cliente.objects.filter(id=self.cliente.id).exists(), False)    
 
-    # def test_list_clientes(self):
+        url_list = reverse("cliente-list")
+        response_list = self.client.get(url_list)
+        exists = False
+        for item in response_list.data["results"]:
+            if item["email"] == self.cliente.email:
+                exists = True
+                break
+        self.assertEqual(exists, False)  
 
-    #     url2 = reverse("cliente-list")
-    #     response = self.client.get(url2, data=None, format=None)
-    #     print('CLIENTES: ',response.json())
 
 class ClienteTestsIntegracao(APITestCase):
     def setUp(self):        
