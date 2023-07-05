@@ -33,6 +33,7 @@ class FreteiroTestsSistema(APITestCase):
         Ensure we can create a new freteiro.
         """
         url = reverse("auth-register-freteiro")
+        url_list = reverse("freteiro-list")
         data = {
             "full_name": "Arthur Paiva Teste",
             "cpf": "12345678910",
@@ -49,25 +50,49 @@ class FreteiroTestsSistema(APITestCase):
             },
         }
         response = self.client.post(url, data, format="json")
+
+        response_list = self.client.get(url)
+        exists = False
+        for item in response_list.result:
+            if item["cpf"] == data["cpf"]:
+                exists = True
+                break
+        
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Freteiro.objects.filter(cpf=data["cpf"]).exists(), True)
+        self.assertEqual(exists, True)
 
     def test_update_freteiro(self):
         freteiro_inicial = Freteiro.objects.get(username="ArthurPaiva")
         url = reverse("freteiro-detail", kwargs={"pk": freteiro_inicial.id})
+        url_list = reverse("freteiro-list")
         self.client.force_authenticate(user=User.objects.get(username="ArthurPaiva"))
         post_data = {"email": "novoemail@gmail.com"}
         response = self.client.patch(url, post_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Freteiro.objects.filter(email=post_data["email"]).exists(), True)
+
+        response_list = self.client.get(url)
+        exists = False
+        for item in response_list.result:
+            if item["email"] == post_data["email"]:
+                exists = True
+                break
+        self.assertEqual(exists, True)
 
     def test_delete_freteiro(self):
         freteiro_inicial = Freteiro.objects.get(username="ArthurPaiva")
         url = reverse("freteiro-detail", kwargs={"pk": freteiro_inicial.id})
+        url_list = reverse("freteiro-list")
         self.client.force_authenticate(user=User.objects.get(username="ArthurPaiva"))
         response = self.client.delete(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Freteiro.objects.filter(username="ArthurPaiva").exists(), False)
+
+        response_list = self.client.get(url)
+        exists = False
+        for item in response_list.result:
+            if item["username"] == "ArthurPaiva":
+                exists = True
+                break
+        self.assertEqual(exists, False)
 
 
 class FreteiroTestsIntegracao(APITestCase):
