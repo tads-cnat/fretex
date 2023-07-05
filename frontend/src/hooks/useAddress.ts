@@ -11,6 +11,7 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
   const {
     register,
     setValue,
+    setError,
     watch,
     handleSubmit,
     getValues,
@@ -63,6 +64,7 @@ export const useAddress = <T extends FieldValues>(schema: any) => {
     watch,
     handleSubmit,
     formState: { errors },
+    setError,
     setValue,
     getValues,
     rest,
