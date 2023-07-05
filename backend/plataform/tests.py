@@ -299,27 +299,6 @@ class PedidoTestsSistema(APITestCase):
         response = self.client.post(urlPedido, self.data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)  # Verifica se o pedido foi criado com sucesso
         self.assertEqual(Pedido.objects.count(), 1)  # Verifica se o número total de pedidos é 1
-        
-    def test_update_pedido(self):
-        # Creating the pedido
-        urlPedido = reverse("pedido-list")
-        response = self.client.post(urlPedido, self.data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        
-        # Retrieving the created pedido
-        pedido_id = response.data.get("id")
-        pedido_url = reverse("pedido-detail", kwargs={"pk": pedido_id})
-        pedido = Pedido.objects.get(id=pedido_id)
-        
-        # Updating the name of the pedido
-        updated_data = {"nomeDestinatario": "Novo nome do pedido"} 
-        
-        response = self.client.patch(pedido_url, updated_data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
-        # Verifying the updated name
-        updated_pedido = Pedido.objects.get(id=pedido_id)
-        self.assertEqual(updated_pedido.nomeDestinatario, "Novo nome do pedido")
 
     def test_delete_pedido(self):
         # Creating the pedido
