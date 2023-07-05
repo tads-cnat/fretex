@@ -227,7 +227,6 @@ class PedidoSerializer(serializers.ModelSerializer):
         return super().to_internal_value(data)
 
     def validate(self, attrs):
-            print(attrs)
             return super().validate(attrs)
 
     class Meta:
@@ -274,6 +273,7 @@ class PedidoSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get("status", instance.status)
+        instance.nomeDestinatario = validated_data.get("nomeDestinatario", instance.nomeDestinatario)
         instance.save()
         return instance
 
