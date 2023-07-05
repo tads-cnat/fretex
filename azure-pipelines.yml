@@ -15,15 +15,36 @@ stages:
 - stage: Build
   displayName: Build image
   jobs:
-  - job: Build
-    displayName: Build
+  - job: BuildFrontend
+    displayName: Build Frontend
     pool:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build and push frontend image
       inputs:
-        command: build
+        containerRegistry: 'Docker Hub Arthur'
+        repository: 'arthurmed/fretex-frontend'
+        command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.frontend'
+        buildContext: '$(Build.SourcesDirectory)'
         tags: |
+          latest
+          $(tag)
+          
+  - job: BuildBackend
+    displayName: Build Backend
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build and push backend image
+      inputs:
+        containerRegistry: 'Docker Hub Arthur'
+        repository: 'arthurmed/fretex-backend'
+        command: 'buildAndPush'
+        dockerfile: '$(Build.SourcesDirectory)/docker/Dockerfile.backend'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: |
+          latest
           $(tag)

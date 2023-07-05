@@ -1,22 +1,23 @@
-import { useState, useEffect, useContext } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext, useEffect, useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Email from '../../assets/Svg/Email';
 import Password from '../../assets/Svg/Password';
-import {
-  ContainerPrincipal,
-  ContainerForm,
-} from '../../components/RegisterComponents/RegisterClienteForm/styles';
-import { ContainerContent2 } from './styles';
-import { SpanYellow, Wrapper } from '../../styles/globalStyles';
-import { BgRegister } from '../ResgisterUser/style';
-import { Link, useNavigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { schemaLogin } from './schemas';
-import { type ILogin } from '../../interfaces';
+import { Button, Input, LoadingPage, Logo, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import Head from '../../components/Head';
-import Button from '../../components/Global/Button';
-import { Input } from '../../components/Input';
+import { type ILogin } from '../../interfaces';
+import { Wrapper } from '../../styles/globalStyles';
+import {
+  ContainerForm,
+  ContainerPrincipal,
+} from '../ResgisterUser/components/RegisterClienteForm/styles';
+import { ContainerContent2, DivIcon } from './styles';
+import { BgRegister } from '../ResgisterUser/style';
+import { schemaLogin } from './schemas';
+import { RiLoginBoxLine } from 'react-icons/ri';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -28,7 +29,7 @@ const Login = (): JSX.Element => {
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),
   });
-  const { signin } = useContext(AuthContext);
+  const { signin, isLoadingUser, user } = useContext(AuthContext);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -58,9 +59,17 @@ const Login = (): JSX.Element => {
     },
   ];
 
+  useEffect(() => {
+    if (user) {
+      Navigate('/');
+      toast.info('Você já está logado');
+    }
+  }, [user]);
+
+  if (isLoadingUser) return <LoadingPage />;
   return (
     <>
-      <Head title="Login" />
+      <SEO title="Login" />
       <BgRegister>
         <Wrapper bgColor="#282828">
           <ContainerPrincipal>
@@ -68,15 +77,16 @@ const Login = (): JSX.Element => {
               <div>
                 <section>
                   <h1>
-                    <Link to="/">
-                      Frete<SpanYellow>X</SpanYellow>
-                    </Link>
+                    <Logo width={'250px'} />
                   </h1>
                 </section>
               </div>
             </ContainerContent2>
             <ContainerForm>
               <form onSubmit={handleSubmit(onSubmit)}>
+                <DivIcon>
+                  <FaUserCircle color={'var(--bg-ligth)'} fontSize={'2.5rem'} />
+                </DivIcon>
                 <h1>Entre na sua conta</h1>
                 <div>
                   {inputs.map((input, index) => (
@@ -92,14 +102,19 @@ const Login = (): JSX.Element => {
                     />
                   ))}
 
-                  {error.length !== 0 && <p className="error">{error}</p>}
+                  {error.length !== 0 && <p className="error-light">{error}</p>}
                 </div>
                 <section>
-                  <Button type="submit" isButton>
+                  <Button
+                    type="submit"
+                    isButton
+                    isDisabled={isLoadingUser}
+                    Icon={RiLoginBoxLine}
+                  >
                     Entrar
                   </Button>
-                  <p>
-                    Já tem uma conta?<Link to="/register"> Cadastrar-se</Link>
+                  <p className='ajudaCadastro'>
+                    Não tem cadastro?<Link to="/register"> Crie sua conta</Link>
                   </p>
                 </section>
               </form>

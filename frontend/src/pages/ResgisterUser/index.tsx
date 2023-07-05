@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react';
-import RegisterClienteForm from '../../components/RegisterComponents/RegisterClienteForm';
-import RegisterFreteiroForm from '../../components/RegisterComponents/RegisterFreteiroForm';
-import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
-import Head from '../../components/Head';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { LoadingPage, SEO } from '../../components';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import { RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { btnTypeUserData } from './constants';
+import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
+import { RiUserLine } from 'react-icons/ri';
 
 const Register = (): JSX.Element => {
+  const { user, isLoadingUser } = useContext(AuthContext);
   const [typeResgister, setTypeRegister] = useState('cliente');
+  const Navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,9 +28,17 @@ const Register = (): JSX.Element => {
     localStorage.setItem('typeUser', type);
   };
 
+  useEffect(() => {
+    if (user) {
+      Navigate('/');
+      toast.info('Você já está logado');
+    }
+  }, [user]);
+
+  if (isLoadingUser) return <LoadingPage />;
   return (
     <>
-      <Head title="Cadastro" />
+      <SEO title="Cadastro" />
       <BgRegister>
         <Container>
           <WrapperRegister bgColor="#282828">
@@ -37,7 +50,9 @@ const Register = (): JSX.Element => {
                     handleChangeTypeOfUser(btn.type);
                   }}
                   active={typeResgister === btn.type}
+                  typeRegister={btn.type}
                 >
+                  <RiUserLine />
                   {btn.text}
                 </BtnTypeUser>
               ))}

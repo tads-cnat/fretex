@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from 'react';
 import {
   objToQueryString,
@@ -28,7 +29,7 @@ const useFilterFretes = (): IFilterFretes => {
   const cliente = useQueryClient();
 
   const objeto = {
-    tipo_veiculo: veiculos,
+    tipo_veiculo__id: veiculos,
     turno_coleta: coleta,
   };
 

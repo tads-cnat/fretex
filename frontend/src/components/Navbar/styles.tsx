@@ -6,13 +6,13 @@ import { BtnPattern } from '../../styles/globalStyles';
 export const Header = styled.header`
   background-color: var(--bg-grey);
   color: var(--text-light);
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     position: relative;
   }
 `;
 
 export const BtnPatternLogin = styled(BtnPattern)`
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     margin-top: 5px;
   }
 `;
@@ -22,41 +22,28 @@ export const NavContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-
-  div {
-    flex-grow: 2;
-  }
 `;
 
-export const Logo = styled(Link)`
-  font-weight: 600;
-  font-size: var(--font-xl);
-  color: var(--text-light);
-`;
+export const LogoLink = styled(Link)``;
 
 export const LinksFretes = styled.div<IDropdownMenu>`
   display: flex;
-  flex-grow: 2;
   align-items: center;
   justify-content: space-between;
-
-  div {
-    display: flex;
-    justify-content: end;
-  }
 
   ul {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 30px;
   }
 
   ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     text-decoration: none;
     color: var(--bg-ligth);
     font-size: var(--font-medium);
-    display: block;
     transition: 0.5s;
     &:hover {
       color: var(--btn-hover);
@@ -66,14 +53,16 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     color: var(--btn-hover);
   }
 
-  .linkMobile {
+  .linkMobile,
+  .buttonLoginMobile {
     display: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     & {
       display: ${({ show }) =>
         typeof show === 'boolean' && show ? 'flex' : 'none'};
+      padding: 0px 30px 10px 30px;
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -83,26 +72,19 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       left: 0;
       background-color: var(--bg-grey);
       z-index: 1000;
-      gap: 0px;
+      gap: 10px;
     }
 
-    .linkMobile {
+    .linkMobile,
+    .buttonLoginMobile {
       display: block;
     }
 
-    .containerUser {
-      width: 100%;
-      display: flex;
-      justify-content: start;
-    }
-
     ul {
-      padding: 0 30px;
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      margin-bottom: 10px;
     }
 
     ul li {
@@ -112,19 +94,16 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     ul li a,
     ul li {
       width: 100%;
-      display: block;
       padding: 5px 0;
     }
+  }
+`;
 
-    div {
-      padding: 0 30px;
-    }
-
-    div a {
-      padding: 6px 18px;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
+export const ButtonLogin = styled.button`
+  border: none;
+  background: none;
+  @media (max-width: 840px) {
+    display: none;
   }
 `;
 
@@ -139,7 +118,7 @@ export const NavbarLinks = styled(Link)`
 
 export const ButtonMenuContainer = styled.div<IDropdownMenu>`
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     display: flex;
     justify-content: end;
     img {

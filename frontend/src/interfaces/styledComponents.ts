@@ -34,3 +34,8 @@ export interface IStatusColors {
 export interface IBtn {
   fontSize: string;
 }
+
+export interface IPreviewImage {
+  tipo: number;
+  width: string;
+}

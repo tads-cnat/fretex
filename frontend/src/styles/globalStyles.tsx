@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --btn-text-color1: #332200;
     --btn-hover: #d89a0a;
+    --btn-disabled: #c4c4c4;
 
     --font-small: .75rem;
     --font-medium: 1rem;
@@ -68,12 +69,30 @@ export const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
-
+  
   .error {
+    display: block;
     color: #ee5757;
     display: inline-block;
     font-size: var(--font-small);
     text-align: left;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation: animeDown 0.3s forwards;
+    font-style: italic;
+  }
+
+  .error-light {
+    display: block;
+    color: #ff4a4a;
+    display: inline-block;
+    font-size: var(--font-small);
+    text-align: left;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation: animeDown 0.3s forwards;
+    font-style: italic;
+    font-weight: bold;
   }
 `;
 

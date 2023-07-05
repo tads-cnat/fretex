@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
     "20.168.197.248",
+    "fretex-backend.azurewebsites.net"
 ]
 
 # Application definition

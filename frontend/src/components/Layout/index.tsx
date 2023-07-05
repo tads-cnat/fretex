@@ -1,13 +1,12 @@
 import { type ReactNode } from 'react';
-import Footer from '../Footer';
-import Navbar from '../Navbar';
+import { Footer, Navbar } from '../';
 import { Container, InitialButton } from './styles';
 
 interface ILayout {
   children?: JSX.Element | JSX.Element[] | ReactNode | null;
 }
 
-const Layout = ({ children }: ILayout): JSX.Element => {
+export const Layout = ({ children }: ILayout): JSX.Element => {
   return (
     <>
       <Navbar id="inicio" />
@@ -19,5 +18,3 @@ const Layout = ({ children }: ILayout): JSX.Element => {
     </>
   );
 };
-
-export default Layout;

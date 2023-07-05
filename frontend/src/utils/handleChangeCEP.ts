@@ -11,5 +11,5 @@ export const handleChangeInputCEP = (
     .replace(/(\d{5})(\d)/, '$1-$2')
     .replace(/(-\d{3})\d+$/, '$1');
 
-  setValue(field, value);
+  setValue(field, value, { shouldValidate: true });
 };
