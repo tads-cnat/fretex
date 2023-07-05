@@ -2,10 +2,11 @@
 
 ## Histórico
 
-| Data       | Versão | Descrição                                  | Autores                                                                                    |
-| ---------- | ------ | ------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| 23/06/2023 | 1.0    | Orçarmento Fretex e PDS Corporativo 2023.1 | [Italo Gabriel](https://github.com/ItaloGSM) e [Mathews](https://github.com/MathewsDantas) |
-| 25/06/2023 | 1.1    | Orçarmento Fretex e PDS Corporativo 2023.1 | [Tonny Weslley](https://github.com/tonny-weslley)                                               |
+| Data       | Versão | Descrição                                                         | Autores                                                                                    |
+| ---------- | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 23/06/2023 | 1.0    | Orçarmento Fretex e PDS Corporativo 2023.1                        | [Italo Gabriel](https://github.com/ItaloGSM) e [Mathews](https://github.com/MathewsDantas) |
+| 25/06/2023 | 1.1    | Orçarmento Fretex e PDS Corporativo 2023.1                        | [Tonny Weslley](https://github.com/tonny-weslley)                                          |
+| 02/10/2023 | 1.2    | Atualização de valores Orçarmento Fretex e PDS Corporativo 2023.1 | [Tonny Weslley](https://github.com/tonny-weslley)                                          |
 
 ## Base das estimativas
 
@@ -16,56 +17,75 @@
 
 ## Estimativas dos Custos
 
-| Tópico                      | Entrega/Fase                                             | Recursos Necessários                                                                 |Duração Estimada em Horas| Custo Estimado (R$) |
-| --------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------ |-------------------------| ------------------- |
-| **Introdução**              | Descrição e objetivo do projeto                          | Analista, Designer, Desenvolvedor                                                    | 20 horas                | 1.600,00            |
-| **Introdução**              | Escopo do projeto                                        | Ferramentas de gestão de projetos                                                    | 20 horas                | 1.600,00            |
-| **Iniciação do Projeto**    | Definição do projeto                                     | Gerente de Projeto, Analista                                                         | 20 horas                | 1.300,00            |
-| **Iniciação do Projeto**    | Análise de viabilidade                                   | Especialista em Análise de Negócios                                                  | 20 horas                | 700,00              |
-| **Iniciação do Projeto**    | Definição da equipe de projeto                           | Processo de seleção de talentos                                                      | 40 horas                | 2.000,00            |
-| **Iniciação do Projeto**    | Definição de recursos necessários                        | Consultoria financeira para aquisição dos recursos gerais do projeto                 | 40 horas                | 5.000,00            |
-| **Análise e Planejamento**  | Levantamento de requisitos                               | Analista                                                                             | 40 horas                | 1.200,00            |
-| **Análise e Planejamento**  | Definição das funcionalidades, arquitetura e tecnologias | Analista, Arquiteto de Software                                                      | 40 horas                | 2.140,00            |
-| **Análise e Planejamento**  | Cronograma de desenvolvimento                            | Ferramentas de gestão de projetos, Gerente de Projeto                                | 20 horas                | 1.200,00            |
-| **Análise e Planejamento**  | Produção de diagramas e documentos                       | Ferramentas de diagramação e documentação, Analista                                  | 80 horas                | 2.900,00            |
-| **Desenvolvimento**         | Modelagem do sistema e do banco de dados                 | Arquiteto de Software, Desenvolvedor, Especialista em Banco de Dados, Analista       | 80 horas                | 6.660,00            |
-| **Desenvolvimento**         | Design de interface                                      | Designer de interfaces e Ferramentas de design                                       | 60 horas                | 1.700,00            |
-| **Desenvolvimento**         | Codificação Frontend                                     | Desenvolvedor frontend, Ferramentas de códificação e equipamento de alta performance | 640 horas               | 61.500,00           |
-| **Desenvolvimento**         | Codificação Back-end                                     | Desenvolvedor backend, Ferramentas de códificação e equipamento de alta performance  | 640 horas               | 61.500,00           |
-| **Desenvolvimento**         | Testes                                                   | Analista de Testes, Ferramentas de teste e equipamento de alta performance           | 160 horas               | 8.500,00            |
-| **Implantação**             | Preparação do ambiente de produção                       | Especialista em infraestrutura de hospedagem em nuvem e configuração do sistema      | 160 horas               | 4.000,00            |
-| **Implantação**             | Manutenção do ambiente de produção                       | Servidores e serviços de hospedagem da aplicação                                     | 160 horas mensal        | 980,87 mensal       |
-| **Implantação**             | Monitoramento e ajustes                                  | Equipe de suporte                                                                    | 160 horas mensal        | 4.000,00            |
-| **Implantação**             | Preparar material de treinamento do usuario              | Recurso humano                                                                       | 60 horas                | 900,00              |
-| **Encerramento do projeto** | Marketing                                                | Especialista em Marketing e Pagamento dos meios de comunicação                       | 80 horas                | 10.000,00           |
-| **Encerramento do projeto** | Testes de aceitação                                      | Analista de Testes                                                                   | 60 horas                | 1.500,00            |
-| **Encerramento do projeto** | Avaliação do projeto e próximos passos                   | Analista de Qualidade                                                                | 60 horas                | 1.200,00            |
-|                             |                                                          | Totais                                                                               | 2.440 horas             | 182.080,87          |
+| Tópico                      | Entrega/Fase                                             | Recursos Necessários                                                                             | Duração Estimada em Horas | Custo Estimado (R$) |
+| --------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------- | ------------------- |
+| **Introdução**              | Descrição e objetivo do projeto                          | Analista de Sistemas, Designer, Desenvolvedor                                                    | 20 horas                  | 1.895,60            |
+| **Introdução**              | Escopo do projeto                                        | Analista de Sistemas, Analista de Negócios, Arquiteto de Software                                | 20 horas                  | 2.624,60            |
+| **Iniciação do Projeto**    | Definição do projeto                                     | Analista de Sistemas, Gerente de Projetos                                                        | 20 horas                  | 1.721,00            |
+| **Iniciação do Projeto**    | Análise de viabilidade                                   | Analista de Sistemas, Analista de Negócios, Gerente de Projeto                                   | 20 horas                  | 2.366,40            |
+| **Iniciação do Projeto**    | Definição da equipe de projeto                           | Recursos Humanos, Gerente de Projetos                                                            | 40 horas                  | 2.839,60            |
+| **Iniciação do Projeto**    | Definição de recursos necessários                        | Gerente de Projetos, Analista Contabil                                                           | 40 horas                  | 3.097,20            |
+| **Análise e Planejamento**  | Levantamento de requisitos                               | Analista de Sistemas, Analista de Negócios                                                       | 40 horas                  | 2.668,00            |
+| **Análise e Planejamento**  | Definição das funcionalidades, arquitetura e tecnologias | Analista de Sistemas, Arquiteto de Software                                                      | 40 horas                  | 3.958,40            |
+| **Análise e Planejamento**  | Cronograma de desenvolvimento                            | Gerente de Projetos                                                                              | 40 horas                  | 2.064,80            |
+| **Análise e Planejamento**  | Produção de diagramas e documentos                       | Analista de Sistemas, Arquiteto de Software, Especialista em Banco de Dados, Gerente de Projetos | 80 horas                  | 17.379,20           |
+| **Desenvolvimento**         | Modelagem do sistema e do banco de dados                 | Analista de Sistemas, Arquiteto de Software, Especialista em Banco de Dados                      | 80 horas                  | 13.249,60           |
+| **Desenvolvimento**         | Design de interface e prototipação                       | Designer                                                                                         | 60 horas                  | 1.174,80            |
+| **Desenvolvimento**         | Codificação Frontend                                     | Desenvolvedor (3x)                                                                               | 640 horas                 | 78.278,40           |
+| **Desenvolvimento**         | Codificação Backend                                      | Desenvolvedor (3x)                                                                               | 640 horas                 | 78.278,40           |
+| **Desenvolvimento**         | Testes                                                   | Analista de Testes                                                                               | 160 horas                 | 5.508,80            |
+| **Implantação**             | Preparação do ambiente de produção                       | Especialista em Implantação                                                                      | 160 horas                 | 6.884,80            |
+| **Implantação**             | Manutenção do ambiente de produção                       | Especialista em Implantação                                                                      | 160 horas                 | 6.884,80            |
+| **Implantação**             | Monitoramento e ajustes                                  | Especialista em Implantação                                                                      | 160 horas                 | 6.884,80            |
+| **Implantação**             | Preparar material de treinamento do usuário              | Recurso humano                                                                                   | 60 horas                  | 1.162,20            |
+| **Encerramento do projeto** | Marketing                                                | Especialista em Marketing                                                                        | 80 horas                  | 2.754,40            |
+| **Encerramento do projeto** | Testes de aceitação                                      | Analista de Testes                                                                               | 60 horas                  | 2.065,80            |
+| **Encerramento do projeto** | Avaliação do projeto e próximos passos                   | Gerente de Projetos, Analista de Qualidade                                                       | 60 horas                  | 4.645,80            |
+|                             | Hospedagem                                               | Serviço de Hospedagem (6x)                                                                       | 720 horas mensal          | 5.885,22            |
+|                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (18x)                                               |                           | 101.160,00          |
+|                             | Assinatura de Softwares                                  | Figma Pro (6x)                                                                                   |                           | 344,88              |
+|                             |                                                          | Totais                                                                                           | 2.440 horas               | 342.903,18          |
 
 ## Reservas (Contingência/Gerencial)
 
-- Reserva de Contingência: 10% do orçamento total (R$ 182.080,87) = R$ 18.208,087
-- Reserva Gerencial: 5% do orçamento total (R$ 182.080,87) = R$ 9.104,0435
+- Reserva de Contingência: 10% do orçamento total (R$ 342.903,18) = R$ 34.290,318.
+- Reserva Gerencial: 5% do orçamento total (R$ 342.903,18) = R$ 17.145,16.
 
 ## Valor total previsto
 
-- R$ 182.080,87 por 6 meses de projeto
+- R$ 342.903,18 por 6 meses de projeto
 
-## Tabela de Custos
-| Recurso                        | Valor               |
-|--------------------------------|---------------------|
-| Analista de Negócios           | 35,00 por Hora      |
-| Analista de Qualidade          | 20,00 por Hora      |
-| Analista de Sistemas           | 30,00 por Hora      |
-| Analista de Testes             | 25,00 por Hora      |
-| Arquiteto de Software          | 47,00 por Hora      |
-| Designer                       | 20,00 por Hora      |
-| Equipamento de Alta Performace | 4.500,00             |
-| Especialista em Banco de Bados | 47,00 por Hora      |
-| Especialita em Implantação     | 25,00 por Hora      |
-| Especialista em Marketing      | 30,00 por Hora      |
-| Gerente de Projetos            | 35,00 por Hora      |
-| Recursos Humanos               | 15,00 por Hora      |
-| Programador Front/Back         | 25,00 por Hora      |
+## Tabela de Custos profissionais (Por Hora)
+| Recurso                        | Valor | Custo indireto | Custo total |
+| ------------------------------ | ----- | -------------- | ----------- |
+| Analista de Sistemas           | 24.62 | 2.71           | 27.33       |
+| Analista de Negócios           | 23.08 | 2.54           | 25.62       |
+| Analista de Qualidade          | 18.46 | 2.03           | 20.49       |
+| Analista de Testes             | 24.62 | 2.71           | 27.33       |
+| Arquiteto de Software          | 46.15 | 5.08           | 51.23       |
+| Designer                       | 14.00 | 1.54           | 15.54       |
+| Desenvolvedor                  | 29.16 | 3.21           | 32.37       |
+| Especialista em Banco de Dados | 47.67 | 5.24           | 52.91       |
+| Especialista em Implantação    | 30.77 | 3.39           | 34.16       |
+| Especialista em Marketing      | 24.62 | 2.71           | 27.33       |
+| Gerente de Projetos            | 36.92 | 4.06           | 40.98       |
+| Recursos Humanos               | 13.85 | 1.52           | 15.37       |
+| Analista Contabil              | 18.46 | 2.03           | 20.49       |
 
 * Valores estimados retirados do site [TalentosBR](https://br.talent.com/pt/salary).
+
+## Tabela de Custos de Serviços (Por Mês)
+| Recurso            | Valor  |
+| ------------------ | ------ |
+| Figma Professional | 57.48  |
+| Hospedagem AWS EC2 | 980.87 |  
+
+## Tabela de Custos de Equipamento
+| Recurso     | Valor   | Depreciação anual (Porcentagem)|
+| ----------- | ------- | ------------------------------ |
+| Notebook    | 4500.00 | 20%                            |
+| Monitor     | 520.00  | 20%                            |
+| Periféricos | 130.00  | 20%                            |
+| Mesa        | 170.00  | 10%                            |
+| Cadeira     | 300.00  | 10%                            |
+

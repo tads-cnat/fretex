@@ -18,12 +18,13 @@ export const ContainerVideo = styled.div`
   overflow: hidden;
 `;
 
-export const VideoBg = styled.video`
+export const VideoBg = styled.img`
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
   background: #232a34;
+  filter: blur(3px) brightness(50%);
 `;
 
 export const ContainerVideoContent = styled.div`

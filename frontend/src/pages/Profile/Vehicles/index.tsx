@@ -32,6 +32,7 @@ const Vehicles = (): JSX.Element => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IVeiculo>({
     resolver: yupResolver(schemaVeiculo),
@@ -85,6 +86,7 @@ const Vehicles = (): JSX.Element => {
     } catch (err: any) {
       setImageError(err.response.data.errors.url_foto[0]);
     } finally {
+      reset()
       setLoading(false);
     }
   };

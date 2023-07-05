@@ -178,17 +178,16 @@ export const FreteDetailComponent = ({
           </Content2Info>
         </Content2>
       </Content>
-      {
-        <Negotiation>
-          <NegotiationComponent
-            actualUser={actualUser}
-            pedidoId={pedido.id}
-            propostas={propostas}
-            ownerPedido={pedido.cliente}
-            pedidoVeiculos={pedido.tipo_veiculo}
-          />
-        </Negotiation>
-      }
+
+      <Negotiation>
+        <NegotiationComponent
+          actualUser={actualUser}
+          pedidoId={pedido.id}
+          propostas={propostas}
+          ownerPedido={pedido.cliente}
+          pedidoVeiculos={pedido.tipo_veiculo}
+        />
+      </Negotiation>
     </Container>
   );
 };

@@ -1,11 +1,11 @@
-import { SpanYellow, Wrapper } from '../../styles/globalStyles';
+import { Logo } from '..';
+import { Wrapper } from '../../styles/globalStyles';
 import {
   FooterStyled,
   FooterContainer,
   FooterRodaPe,
   FooterBoxLogo,
   FooterBoxInfo,
-  Logo,
   Title,
   Info,
   Logos,
@@ -20,9 +20,7 @@ export const Footer = (): JSX.Element => {
         <Wrapper>
           <FooterStyled>
             <FooterBoxLogo>
-              <Logo>
-                Frete<SpanYellow>X</SpanYellow>
-              </Logo>
+              <Logo width={'250px'}  />
             </FooterBoxLogo>
             <FooterBoxInfo>
               <Title>CONTATO</Title>

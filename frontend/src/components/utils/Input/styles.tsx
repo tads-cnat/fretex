@@ -17,18 +17,6 @@ export const Container = styled.label`
     margin-left: 4px;
   }
 
-  .error {
-    display: block;
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    text-align: left;
-    transform: translateY(-20px);
-    opacity: 0;
-    animation: animeDown 0.3s forwards;
-    font-style: italic;
-  }
-
   @keyframes animeDown {
     to {
       transform: initial;
@@ -37,14 +25,14 @@ export const Container = styled.label`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ $error?: any; }>`
   display: flex;
   flex-direction: row !important;
   align-items: center;
   background: #1b1b1b;
   border-radius: 10px;
   width: 100%;
-  border: 2px solid #1b1b1b;
+  border: 2px solid ${({ $error }) => ($error != null ? '#ee5757' : '#1b1b1b')};
   padding: 0 10px;
   transition: 0.5s;
 

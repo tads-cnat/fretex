@@ -6,13 +6,13 @@ import { BtnPattern } from '../../styles/globalStyles';
 export const Header = styled.header`
   background-color: var(--bg-grey);
   color: var(--text-light);
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     position: relative;
   }
 `;
 
 export const BtnPatternLogin = styled(BtnPattern)`
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     margin-top: 5px;
   }
 `;
@@ -22,33 +22,18 @@ export const NavContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-
-  div {
-    flex-grow: 2;
-  }
 `;
 
-export const Logo = styled(Link)`
-  font-weight: 600;
-  font-size: var(--font-xl);
-  color: var(--text-light);
-`;
+export const LogoLink = styled(Link)``;
 
 export const LinksFretes = styled.div<IDropdownMenu>`
   display: flex;
-  flex-grow: 2;
   align-items: center;
   justify-content: space-between;
-
-  div {
-    display: flex;
-    justify-content: end;
-  }
 
   ul {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 30px;
   }
 
@@ -68,11 +53,12 @@ export const LinksFretes = styled.div<IDropdownMenu>`
     color: var(--btn-hover);
   }
 
-  .linkMobile {
+  .linkMobile,
+  .buttonLoginMobile {
     display: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     & {
       display: ${({ show }) =>
         typeof show === 'boolean' && show ? 'flex' : 'none'};
@@ -89,19 +75,12 @@ export const LinksFretes = styled.div<IDropdownMenu>`
       gap: 10px;
     }
 
-    .linkMobile {
+    .linkMobile,
+    .buttonLoginMobile {
       display: block;
     }
 
-    .containerUser {
-      width: 100%;
-      display: flex;
-      justify-content: start;
-
-    }
-
     ul {
-
       width: 100%;
       flex-direction: column;
       align-items: flex-start;
@@ -120,6 +99,14 @@ export const LinksFretes = styled.div<IDropdownMenu>`
   }
 `;
 
+export const ButtonLogin = styled.button`
+  border: none;
+  background: none;
+  @media (max-width: 840px) {
+    display: none;
+  }
+`;
+
 export const NavbarLinks = styled(Link)`
   text-decoration: none;
   color: var(--bg-ligth);
@@ -131,7 +118,7 @@ export const NavbarLinks = styled(Link)`
 
 export const ButtonMenuContainer = styled.div<IDropdownMenu>`
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     display: flex;
     justify-content: end;
     img {

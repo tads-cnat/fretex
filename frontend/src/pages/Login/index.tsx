@@ -5,10 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Email from '../../assets/Svg/Email';
 import Password from '../../assets/Svg/Password';
-import { Button, Input, LoadingPage, SEO } from '../../components';
+import { Button, Input, LoadingPage, Logo, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { type ILogin } from '../../interfaces';
-import { SpanYellow, Wrapper } from '../../styles/globalStyles';
+import { Wrapper } from '../../styles/globalStyles';
 import {
   ContainerForm,
   ContainerPrincipal,
@@ -18,7 +18,6 @@ import { BgRegister } from '../ResgisterUser/style';
 import { schemaLogin } from './schemas';
 import { RiLoginBoxLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
-
 
 const Login = (): JSX.Element => {
   const [error, setError] = useState('');
@@ -78,9 +77,7 @@ const Login = (): JSX.Element => {
               <div>
                 <section>
                   <h1>
-                    <Link to="/">
-                      Frete<SpanYellow>X</SpanYellow>
-                    </Link>
+                    <Logo width={'250px'} />
                   </h1>
                 </section>
               </div>
@@ -88,7 +85,7 @@ const Login = (): JSX.Element => {
             <ContainerForm>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <DivIcon>
-                  <FaUserCircle color={'var(--bg-ligth)'} fontSize={'2.5rem'}/>
+                  <FaUserCircle color={'var(--bg-ligth)'} fontSize={'2.5rem'} />
                 </DivIcon>
                 <h1>Entre na sua conta</h1>
                 <div>
@@ -105,7 +102,7 @@ const Login = (): JSX.Element => {
                     />
                   ))}
 
-                  {error.length !== 0 && <p className="error">{error}</p>}
+                  {error.length !== 0 && <p className="error-light">{error}</p>}
                 </div>
                 <section>
                   <Button
@@ -116,7 +113,7 @@ const Login = (): JSX.Element => {
                   >
                     Entrar
                   </Button>
-                  <p>
+                  <p className='ajudaCadastro'>
                     Não tem cadastro?<Link to="/register"> Crie sua conta</Link>
                   </p>
                 </section>

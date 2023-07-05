@@ -45,12 +45,7 @@ export const Form = styled.form`
   @media (max-width: 540px) {
     padding: 24px 8px 24px 8px;
   }
-  .error {
-    color: #ee5757;
-    display: inline-block;
-    font-size: var(--font-small);
-    font-style: italic;
-  }
+
   h3 {
     font-style: normal;
     font-weight: 600;

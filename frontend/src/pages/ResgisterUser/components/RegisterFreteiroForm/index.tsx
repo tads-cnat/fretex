@@ -9,7 +9,6 @@ import {
 } from './styles';
 import perfil from '../../../../assets/images/imgperfil.svg';
 import Loc from '../../../../assets/Svg/Loc';
-import { SpanYellow } from '../../../../styles/globalStyles';
 import { useEffect, useState } from 'react';
 import { type IFreteiroFormData } from '../../../../interfaces';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,7 +16,7 @@ import { schemaFreteiro } from '../../schemas';
 import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import { Button, Input, Preview } from '../../../../components';
+import { Button, Input, Logo, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 import { RiUserAddLine } from 'react-icons/ri';
@@ -60,22 +59,22 @@ export const RegisterFreteiroForm = (): JSX.Element => {
           <DivFormContent>
             <RegisterPerson>
               <h1>Crie sua conta</h1>
-              <div className='preview-div'>
-              <Preview
-                img={imagePreview}
-                imgDefault={perfil}
-                width={'160px'}
-                tipo={2}
-              >
-                <input
-                  type="file"
-                  {...register('url_foto')}
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={onChange}
-                />
-                <p>Clique para inserir uma imagem</p>
-                {error !== '' && <p className="error">{error}</p>}
-              </Preview>
+              <div className="preview-div">
+                <Preview
+                  img={imagePreview}
+                  imgDefault={perfil}
+                  width={'160px'}
+                  tipo={2}
+                >
+                  <input
+                    type="file"
+                    {...register('url_foto')}
+                    accept="image/jpeg,image/png,image/gif"
+                    onChange={onChange}
+                  />
+                  <p>Clique para inserir uma imagem</p>
+                  {error !== '' && <span className="error-light">{error}</span>}
+                </Preview>
               </div>
               {inputs.map((input, index) => (
                 <Input
@@ -178,8 +177,13 @@ export const RegisterFreteiroForm = (): JSX.Element => {
               />
             </RegisterAddress>
           </DivFormContent>
-          <div className='button-div'>
-            <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>
+          <div className="button-div">
+            <Button
+              isButton
+              Icon={RiUserAddLine}
+              type="submit"
+              isDisabled={isLoading}
+            >
               Cadastre-se
             </Button>
           </div>
@@ -194,9 +198,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
         <div>
           <section>
             <h1>
-              <Link to="/">
-                Frete<SpanYellow>X</SpanYellow>
-              </Link>
+              <Logo width={'250px'} />
             </h1>
 
             <h2>Conta Freteiro</h2>
