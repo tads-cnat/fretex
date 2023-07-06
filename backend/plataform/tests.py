@@ -308,13 +308,14 @@ class PedidoTestsSistema(APITestCase):
                 break
         self.assertEqual(exists, True)
 
-        self.public_id_pedido = pedido_id
-
     def test_delete_pedido(self):
-
-        urlPedido = reverse("pedido-detail")
+        #create pedido
         urlList = reverse("pedido-list")
-        response = self.client.delete(pedido_url, kwargs={"pk":self.pedido.id})
+        response = self.client.post(urlList, self.data, format="json")
+        pedido_id = response.data.get("id")        
+
+        urlPedido = reverse("pedido-detail", kwargs={"pk":pedido_id})
+        response = self.client.delete(urlPedido, format="json")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         response_list = self.client.get(urlList)
