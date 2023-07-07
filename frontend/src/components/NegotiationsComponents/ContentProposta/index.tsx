@@ -1,26 +1,26 @@
-import { BtnGreen, ContentMain } from './styles';
-import { ReactComponent as Perfil } from '../../../assets/images/perfil.svg';
-import { ReactComponent as Clock } from '../../../assets/images/clock.svg';
-import { ReactComponent as Canceled } from '../../../assets/images/canceled.svg';
+import { type MouseEvent } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+import { ModalContraproposta } from '../';
 import { ReactComponent as Done } from '../../../assets/images/Concluido.svg';
-import { type IStatusColors } from '../../../interfaces/styledComponents';
+import { ReactComponent as Canceled } from '../../../assets/images/canceled.svg';
+import { ReactComponent as Clock } from '../../../assets/images/clock.svg';
+import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
   type IFreteiro,
   type IProposta,
 } from '../../../interfaces';
-import PropostaService from '../../../services/PropostaService';
+import { type IStatusColors } from '../../../interfaces/styledComponents';
+import AuthService from '../../../services/AuthService';
 import ClienteService from '../../../services/ClienteService';
 import FreteiroService from '../../../services/FreteiroService';
-import AuthService from '../../../services/AuthService';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { ModalContraproposta } from '../';
-import { useToggle } from '../../../hooks/useToggle';
-import { toast } from 'react-toastify';
+import PedidoService from '../../../services/PedidoService';
+import PropostaService from '../../../services/PropostaService';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { Loading } from '../../utils';
-import { type MouseEvent } from 'react';
-import PedidoService from '../../../services/PedidoService';
+import { BtnGreen, ContentMain } from './styles';
 
 interface IContentProposta {
   type: string;
@@ -164,7 +164,7 @@ export const ContentProposta = ({
       />
       <ContentMain color={typeContent.color} bg={typeContent.bg}>
         <div className="valorProposta">
-          {freteiro || cliente ? (
+          {freteiro?.url_foto || cliente?.url_foto ? (
             <img
               src={
                 isFreteiro(freteiro.data)
@@ -179,7 +179,7 @@ export const ContentProposta = ({
               className="imgPerfil"
             />
           ) : (
-            <Perfil />
+            <FaUserCircle fontSize={'1.75rem'} color={'var(--bg-grey2)'} />
           )}
           <div>
             <h4>R$ {proposta.valor}</h4>

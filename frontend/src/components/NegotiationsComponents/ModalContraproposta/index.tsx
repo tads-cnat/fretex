@@ -1,22 +1,23 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import VeiculoService from '../../../services/VeiculoService';
-import PropostaService from '../../../services/PropostaService';
+import { CardsContainer } from '../';
 import { useToggle } from '../../../hooks/useToggle';
 import {
   type ICliente,
   type IFreteiro,
   type IProposta,
 } from '../../../interfaces';
+import PropostaService from '../../../services/PropostaService';
+import VeiculoService from '../../../services/VeiculoService';
 import { isFreteiro } from '../../../utils/isFreteiro';
 import { CardVeiculo } from '../../CardVeiculo';
 import { LabelInput } from '../../LabelInput';
-import { CardsContainer } from '../';
+import { Button, LoadingPage, ModalComponent } from '../../utils';
 import { FormContainer } from '../ModalProposta/styles';
 import { schemaContraproposta } from './schema';
-import { Button, LoadingPage, ModalComponent } from '../../utils';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
 
 interface IModal {
   toggle: () => void;
@@ -52,6 +53,7 @@ export const ModalContraproposta = ({
   } = useForm<IContraProposta>({
     resolver: yupResolver(schemaContraproposta),
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data: veiculo, isLoading: isLoadingVeiculo } = useQuery(
     ['veiculoDaPropostaInicial', proposta.id],
@@ -62,18 +64,53 @@ export const ModalContraproposta = ({
   );
 
   const registerPropostaMutation = useMutation(
-    ['createProposta', proposta.id],
-    async (data: FormData) =>
-      await PropostaService.post(data).then((res) => res),
+    ['propostasForPedido', proposta.id],
+    async (data: FormData) => await PropostaService.post(data),
     {
       onSuccess: () => {
-        client.refetchQueries('propostasForPedido');
+        const formDataToCancel = new FormData();
+
+        const propostaUpdate = {
+          ehNegada: true,
+          is_esperandoFreteiro: false,
+          is_esperandoCliente: false,
+        };
+
+        Object.entries(propostaUpdate).forEach(([key, value]) => {
+          if (value) formDataToCancel.append(key, value.toString());
+        });
+
+        const propostasToUpdate = propostas.filter(
+          (p) => p.usuario === proposta.usuario && p.ehNegada === false,
+        );
+
+        if (propostasToUpdate.length !== 0) {
+          propostasToUpdate.forEach((proposta, index) => {
+            updatePropostaMutation.mutate({
+              id: proposta.id,
+              data: formDataToCancel,
+            });
+
+            if (index === propostasToUpdate.length - 1) {
+              client.refetchQueries('propostasForPedido').then(() => {
+                setIsLoading(false);
+                toggle();
+              });
+            }
+          });
+        } else if (propostasToUpdate.length === 0) {
+          client.refetchQueries('propostasForPedido').then(() => {
+            setIsLoading(false);
+            toggle();
+          });
+        }
       },
     },
   );
+  client.refetchQueries('propostasForPedido');
 
   const updatePropostaMutation = useMutation(
-    ['updateProposta', proposta.id],
+    ['propostasForPedido', proposta.id],
     async ({ id, data }: IUpdate) => await PropostaService.patch(id, data),
     {
       onSuccess: () => {
@@ -83,8 +120,8 @@ export const ModalContraproposta = ({
   );
 
   const onSubmit: SubmitHandler<IContraProposta> = (data) => {
+    setIsLoading(true);
     const formData = new FormData();
-    const formDataToCancel = new FormData();
 
     const contraproposta = {
       eh_aceita: false,
@@ -100,33 +137,10 @@ export const ModalContraproposta = ({
     };
 
     Object.entries(contraproposta).forEach(([key, value]) => {
-      if (typeof value === 'boolean' && value)
-        formData.append(key, value.toString());
+      if (value) formData.append(key, value.toString());
     });
 
     registerPropostaMutation.mutate(formData);
-
-    toggle();
-
-    const propostaUpdate = {
-      ehNegada: true,
-      is_esperandoFreteiro: false,
-      is_esperandoCliente: false,
-    };
-
-    Object.entries(propostaUpdate).forEach(([key, value]) => {
-      if (value) formDataToCancel.append(key, value.toString());
-    });
-
-    const propostasToUpdate = propostas.filter(
-      (p) => p.usuario === proposta.usuario,
-    );
-
-    if (propostasToUpdate.length !== 0) {
-      propostasToUpdate.forEach((p) => {
-        updatePropostaMutation.mutate({ id: p.id, data: formDataToCancel });
-      });
-    }
   };
   return (
     <ModalComponent
@@ -167,7 +181,7 @@ export const ModalContraproposta = ({
             <Button
               isButton
               type="submit"
-              isDisabled={isLoadingVeiculo}
+              isDisabled={isLoading}
               Icon={FaMoneyCheckAlt}
             >
               Realizar proposta

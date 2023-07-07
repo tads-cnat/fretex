@@ -1,4 +1,3 @@
-import { SpanYellow } from '../../../../styles/globalStyles';
 import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { schemaCliente } from '../../schemas';
 import { type IClienteFormData } from '../../../../interfaces';
 import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
-import { Button, Input } from '../../../../components';
+import { Button, Input, Logo } from '../../../../components';
 import { inputs } from './inputs';
 import { RiUserAddLine } from 'react-icons/ri';
 
@@ -88,10 +87,15 @@ export const RegisterClienteForm = (): JSX.Element => {
             {error !== '' && <p className="error-light">{error}</p>}
           </div>
           <section>
-            <Button isButton Icon={RiUserAddLine} type="submit" isDisabled={isLoading}>
+            <Button
+              isButton
+              Icon={RiUserAddLine}
+              type="submit"
+              isDisabled={isLoading}
+            >
               Cadastre-se
             </Button>
-            <p>
+            <p className='ajudaCadastro'>
               Já tem uma conta?<Link to="/login"> Entrar</Link>
             </p>
           </section>
@@ -101,9 +105,7 @@ export const RegisterClienteForm = (): JSX.Element => {
         <div>
           <section>
             <h1>
-              <Link to="/">
-                Frete<SpanYellow>X</SpanYellow>
-              </Link>
+              <Logo width={'250px'} />
             </h1>
 
             <h2>Conta Cliente</h2>

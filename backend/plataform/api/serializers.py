@@ -220,14 +220,16 @@ class PedidoSerializer(serializers.ModelSerializer):
     tipo_veiculo = serializers.PrimaryKeyRelatedField(many=True, queryset=TipoVeiculo.objects.all())
     cliente_first_name = serializers.CharField(source="cliente.first_name", read_only=True)
     cliente_last_name = serializers.CharField(source="cliente.last_name", read_only=True)
-
+    """
     def to_internal_value(self, data):
         data["status"] = "EN"
         data["cliente"] = self.context["request"].user.cliente
         return super().to_internal_value(data)
+    """
 
     def validate(self, attrs):
-            return super().validate(attrs)
+        return super().validate(attrs)
+
 
     class Meta:
         model = Pedido
@@ -272,6 +274,8 @@ class PedidoSerializer(serializers.ModelSerializer):
         return pedido
 
     def update(self, instance, validated_data):
+        print(validated_data)
+
         instance.status = validated_data.get("status", instance.status)
         instance.save()
         return instance

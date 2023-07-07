@@ -59,6 +59,9 @@ const FreteDetail = (): JSX.Element => {
     !isLoadingClientePedido &&
     !isLoadingPedido &&
     !isLoadingPropostas &&
+    propostas &&
+    userPedido &&
+    pedido &&
     user !== null;
 
   return (
@@ -73,7 +76,7 @@ const FreteDetail = (): JSX.Element => {
                 pedido={pedido?.data}
                 clientePedido={userPedido?.data}
                 actualUser={user}
-                propostas={propostas?.data}
+                propostas={propostas?.data?.data}
               />
             )}
           </Wrapper>
