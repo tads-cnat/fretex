@@ -17,6 +17,7 @@ from plataform.api.serializers import (
     TriggerSerializer,
     UserSerializer,
     VeiculoSerializer,
+    VerifyEmailSerializer,
 )
 from plataform.models import (
     AvaliacaoUsuario,
@@ -85,7 +86,14 @@ class AuthViewSet(viewsets.GenericViewSet):
     def logout(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
+    
+    @action (detail=False, methods=["post"], serializer_class=VerifyEmailSerializer)
+    def verify_email(self, request):
+        email = request.data.get('email')
+        if User.objects.filter(email=email).exists():
+            return Response({'existe': True}, status=status.HTTP_200_OK)
+        else:
+            return Response({'existe': False}, status=status.HTTP_200_OK)
 
 class EnderecoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
