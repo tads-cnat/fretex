@@ -1,3 +1,6 @@
+export interface IUserFormData {
+  email : string;
+};
 export interface IClienteFormData {
   url_foto?: any;
   capa_foto?: any;
