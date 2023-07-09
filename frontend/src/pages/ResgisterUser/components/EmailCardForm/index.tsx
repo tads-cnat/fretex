@@ -3,12 +3,10 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaUser } from '../../schemas';
 import { type IUserFormData } from '../../../../interfaces';
-import AuthService from '../../../../services/AuthService';
-import { toast } from 'react-toastify';
 import { ContainerPrincipal, ContainerForm, DivIcon } from './styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { inputs } from './inputs';
-import { Button, Input, Logo } from '../../../../components';
+import { Button, Input } from '../../../../components';
 import { RiUserAddLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -26,16 +24,13 @@ export const EmailCardForm = () => {
         resolver: yupResolver(schemaUser),
     });
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         setFocus('email');
     }, [setFocus]);
 
-    const onSubmit: SubmitHandler<IUserFormData> = (data) => {
+    const onSubmit: SubmitHandler<IUserFormData> = () => {
         setError('');
         setIsLoading(true);
-        const { email } = data;
     };
             
 
