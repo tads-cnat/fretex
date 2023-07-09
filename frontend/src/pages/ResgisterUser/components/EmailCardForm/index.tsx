@@ -40,7 +40,6 @@ export const EmailCardForm = () => {
             
 
     return (
-        console.log(errors["email"]),
         <ContainerPrincipal>
             <ContainerForm>
                 <DivIcon>
