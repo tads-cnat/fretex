@@ -15,10 +15,13 @@ export const registerStepSlice = createSlice({
     reducers: {
         setStep: (state, action: PayloadAction<number>) => {
             state.step = action.payload
+        },
+        backStep: (state) => {
+            state.step -= 1
         }
     }
 })
 
-export const { setStep } = registerStepSlice.actions
+export const { setStep, backStep } = registerStepSlice.actions
 
 export default registerStepSlice.reducer
