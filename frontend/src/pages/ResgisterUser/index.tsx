@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LoadingPage, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import { RegisterClienteForm, RegisterFreteiroForm } from './components';
+import { RegisterClienteForm, RegisterFreteiroForm, EmailCardForm } from './components';
 import { btnTypeUserData } from './constants';
 import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
 import { RiUserLine } from 'react-icons/ri';
@@ -42,25 +42,10 @@ const Register = (): JSX.Element => {
       <BgRegister>
         <Container>
           <WrapperRegister bgColor="#282828">
-            <div className="typeRegister">
-              {btnTypeUserData.map((btn, i) => (
-                <BtnTypeUser
-                  key={i}
-                  onClick={() => {
-                    handleChangeTypeOfUser(btn.type);
-                  }}
-                  active={typeResgister === btn.type}
-                  typeRegister={btn.type}
-                >
-                  <RiUserLine />
-                  {btn.text}
-                </BtnTypeUser>
-              ))}
-            </div>
             {typeResgister === 'cliente' ? (
               <RegisterClienteForm />
             ) : (
-              <RegisterFreteiroForm />
+              <EmailCardForm />
             )}
           </WrapperRegister>
         </Container>
