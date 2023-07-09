@@ -1,4 +1,22 @@
 import * as yup from "yup";
+import AuthService  from '../../../services/AuthService';
+
+export const schemaUser = yup.object({
+    email: yup
+        .string()
+        .email("Email inválido")
+        .required('Email Obrigatório')
+        .test('unique-email', 'O email já está em uso', async (value) => {
+            try {
+              const response = await AuthService.verifyEmail({ email: value });
+              const { existe } = response.data;
+              return !existe;
+            } catch (error) {
+              console.error(error);
+              return true;
+            }
+          })
+}).required();
 
 export const schemaCliente = yup.object({
     email: yup
