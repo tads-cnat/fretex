@@ -41,6 +41,11 @@ class AuthService {
     const resoponse = await api.get(`usuarios/${id}/`);
     return resoponse.data;
   }
+
+  async verifyEmail(data: any) {
+    const response = await api.post(`/auth/verify_email/`, data);
+    return response.data;
+  }
 }
 
 export default new AuthService();
