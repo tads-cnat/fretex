@@ -9,6 +9,8 @@ import { inputs } from './inputs';
 import { Button, Input } from '../../../../components';
 import { RiUserAddLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { setStep } from '../../../../store/slicers/RegisterStepSlicer';
 
 
 export const EmailCardForm = () => {
@@ -23,6 +25,8 @@ export const EmailCardForm = () => {
     } = useForm<IUserFormData>({
         resolver: yupResolver(schemaUser),
     });
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         setFocus('email');
@@ -31,6 +35,7 @@ export const EmailCardForm = () => {
     const onSubmit: SubmitHandler<IUserFormData> = () => {
         setError('');
         setIsLoading(true);
+        dispatch(setStep(2))
     };
             
 
