@@ -3,20 +3,18 @@ import {
   ContainerForm2,
   RegisterPerson,
   RegisterAddress,
-  Login,
-  ContainerInfos,
   DivFormContent,
 } from './styles';
 import perfil from '../../../../assets/images/imgperfil.svg';
 import Loc from '../../../../assets/Svg/Loc';
 import { useEffect, useState } from 'react';
 import { type IFreteiroFormData } from '../../../../interfaces';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { schemaFreteiro } from '../../schemas';
 import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
 import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
-import { Button, Input, Logo, Preview } from '../../../../components';
+import { Button, Input, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 import { RiUserAddLine } from 'react-icons/ri';
@@ -188,11 +186,6 @@ export const RegisterFreteiroForm = (): JSX.Element => {
             </Button>
           </div>
         </form>
-        <Login>
-          <span>
-            Já tem uma conta? <Link to="/login">Entrar</Link>
-          </span>
-        </Login>
       </ContainerForm2>
       
     </ContainerMain>

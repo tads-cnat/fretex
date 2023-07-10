@@ -2,13 +2,15 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface RegisterStepState {
-    step: number
-    email: string
+    step: number,
+    email: string,
+    role: "cliente" | "freteiro", 
 }
 
 const initialState: RegisterStepState = {
     step: 1,
     email: '',
+    role: "cliente"
 }
 
 export const registerStepSlice = createSlice({
@@ -24,9 +26,12 @@ export const registerStepSlice = createSlice({
         setEmail: (state, action: PayloadAction<string>) => {
             state.email = action.payload
         },
+        setRole: (state, action: PayloadAction<"cliente" | "freteiro">) => {
+            state.role = action.payload
+        }
     }
 })
 
-export const { setStep, backStep, setEmail } = registerStepSlice.actions
+export const { setStep, backStep, setEmail, setRole } = registerStepSlice.actions
 
 export default registerStepSlice.reducer

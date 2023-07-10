@@ -7,13 +7,16 @@ import { schemaCliente } from '../../schemas';
 import { type IClienteFormData } from '../../../../interfaces';
 import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
-import { Button, Input, Logo } from '../../../../components';
+import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
 import { RiUserAddLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 export const RegisterClienteForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const email = useSelector((state: RootState) => state.registerStep.email);
   const {
     register,
     setValue,
@@ -27,7 +30,8 @@ export const RegisterClienteForm = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setFocus('email');
+    setFocus('full_name');
+    setValue('email', email || '');
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
@@ -95,9 +99,6 @@ export const RegisterClienteForm = (): JSX.Element => {
             >
               Cadastre-se
             </Button>
-            <p className='ajudaCadastro'>
-              Já tem uma conta?<Link to="/login"> Entrar</Link>
-            </p>
           </section>
         </form>
       </ContainerForm>

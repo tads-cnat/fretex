@@ -6,14 +6,6 @@ import { type UseFormSetValue } from 'react-hook-form';
 
 export const inputs = [
   {
-    type: 'email',
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Ex: usuário@email.com',
-    required: true,
-    svg: <Email />,
-  },
-  {
     type: 'text',
     name: 'full_name',
     label: 'Nome completo',

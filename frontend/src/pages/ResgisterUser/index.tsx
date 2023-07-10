@@ -10,6 +10,7 @@ import { RootState } from '../../store';
 
 const Register = (): JSX.Element => {
   const { user, isLoadingUser } = useContext(AuthContext);
+  const role = useSelector((state: RootState) => state.registerStep.role);
   const step = useSelector((state: RootState) => state.registerStep.step);
   const Navigate = useNavigate();
 
@@ -44,13 +45,15 @@ const Register = (): JSX.Element => {
               <SelectRole/>
             )}
 
-            { step === 3 && (
+            { (step === 3 && role == "cliente") && (
               <RegisterClienteForm/>
             )}
 
-            { step === 4 && (
+            { (step === 3 && role == "freteiro") && (
               <RegisterFreteiroForm/>
             )}
+
+            
 
           </WrapperRegister>
         </Container>
