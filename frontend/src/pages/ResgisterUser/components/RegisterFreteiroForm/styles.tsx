@@ -1,110 +1,136 @@
 import styled from 'styled-components';
-import {
-  ContainerContent,
-  ContainerForm,
-  ContainerPrincipal,
-} from '../RegisterClienteForm/styles';
+import { Animation } from '../../../../styles/globalStyles';
 
-export const ContainerMain = styled(ContainerPrincipal)`
+export const ContainerPrincipal = styled(Animation)`
   display: grid;
   grid-template-columns: 1fr;
-
-  @media (max-width: 1050px) {
-    padding-top: 10px;
-    grid-template-columns: 2fr;
-    gap: 20px;
-  }
-`;
-
-export const ContainerForm2 = styled(ContainerForm)`
-  form {
-    max-width: 100%;
-    
-    label svg {
-      color: #bfbfbf;
-      transition: 0.5s;
-    }
-
-    label:focus-within svg {
-      color: var(--theme-primary);
-    }
-    .button-div {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .button-div button {
-      width: 45%;
-    }
-
-    @media (max-width: 768px) {
-      .button-div button {
-        width: 100%;
-      }
-    }
-  }
-`;
-
-export const DivFormContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-
-  label svg {
-    color: #bfbfbf;
-    transition: 0.5s;
-  }
-  label:focus-within svg {
-    color: var(--theme-primary);
-  }
+  justify-items: center;
+  gap: 50px;
 
   @media (max-width: 768px) {
+    padding-top: 10px;
     grid-template-columns: 1fr;
     gap: 20px;
   }
 `;
 
-export const RegisterPerson = styled.div`
-  .preview-div {
-    margin-bottom: 0.625rem;
-  }
-`;
+export const ContainerContent = styled.div`
+  display: flex;
+  max-width: 400px;
+  align-items: center;
 
-export const RegisterAddress = styled.div`
-  .title {
-    margin-bottom: 54px;
+  div {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    border-left: 1px solid #5f5f5f;
+    height: 70%;
+    a {
+      text-decoration: none;
+      color: var(--text-light);
+    }
   }
+  h1 {
+    color: var(--bg-ligth);
+    font-weight: 600;
+    font-size: var(--font-xl);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: var(--bg-ligth);
+    font-weight: 600;
+    font-size: var(--font-large);
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--bg-ligth);
+    font-weight: 600;
+    font-size: var(--font-medium);
+  }
+
   @media (max-width: 768px) {
-    .title {
+    div {
+      order: -1;
+      padding-left: 0px;
+      border: none;
+    }
+    h1 {
       margin-bottom: 20px;
     }
   }
 `;
 
-export const Login = styled.div`
-  text-align: center;
-  color: var(--text-grey-1);
-  margin-bottom: 1.5rem;
-  @media (max-width: 768px) {
+export const ContainerForm = styled.div`
+  width: 100%;
+  border-radius: 10px;
+  background-color: #353535;
+
+  form {
+    padding: 40px 40px;
+    max-width: 500px;
+  }
+
+  form h1 {
+    color: var(--bg-ligth);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 24px;
     margin-bottom: 40px;
+    text-align: center;
+    @media (max-width: 768px) {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
   }
-  a:hover {
-    color: var(--btn-hover);
+
+  section {
+    text-align: center;
   }
-`;
 
-export const ContainerInfos = styled(ContainerContent)`
-  @media (max-width: 1050px) {
-    order: -1;
-    div {
-      padding-left: 0px;
-      border: none;
+  section p a {
+    transition: 0.5s;
+    color: var(--text-light);
+    &:hover {
+      color: var(--btn-hover);
+    }
+  }
 
-      a {
-        text-decoration: none;
-        color: var(--text-light);
-      }
+  section button {
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: var(--font-medium);
+    cursor: pointer;
+  }
+
+  .ajudaCadastro {
+    color: #a8a8a8;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--bg-ligth);
+  }
+
+  label button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    order: 1;
+    form {
+      padding: 40px 20px;
     }
   }
 `;

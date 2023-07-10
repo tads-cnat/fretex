@@ -1,9 +1,6 @@
 import {
-  ContainerMain,
-  ContainerForm2,
-  RegisterPerson,
-  RegisterAddress,
-  DivFormContent,
+  ContainerForm,
+  ContainerPrincipal,
 } from './styles';
 import perfil from '../../../../assets/images/imgperfil.svg';
 import Loc from '../../../../assets/Svg/Loc';
@@ -34,7 +31,6 @@ export const RegisterFreteiroForm = (): JSX.Element => {
   } = useAddress<IFreteiroFormData>(schemaFreteiro);
 
   const navigate = useNavigate();
-
   const { onSubmit, error, isLoading } = useFreteiroForm({
     onSuccess: () => {
       toast.success('Freteiro cadastrado com sucesso!');
@@ -54,29 +50,27 @@ export const RegisterFreteiroForm = (): JSX.Element => {
   };
 
   return (
-    <ContainerMain>
-      <ContainerForm2>
+    <ContainerPrincipal>
+      <ContainerForm>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DivFormContent>
-            <RegisterPerson>
               <h1>Crie sua conta</h1>
-              <div className="preview-div">
-                <Preview
-                  img={imagePreview}
-                  imgDefault={perfil}
-                  width={'160px'}
-                  tipo={2}
-                >
-                  <input
-                    type="file"
-                    {...register('url_foto')}
-                    accept="image/jpeg,image/png,image/gif"
-                    onChange={onChange}
-                  />
-                  <p>Clique para inserir uma imagem</p>
-                  {error !== '' && <span className="error-light">{error}</span>}
-                </Preview>
-              </div>
+                <div className="preview-div">
+                  <Preview
+                    img={imagePreview}
+                    imgDefault={perfil}
+                    width={'160px'}
+                    tipo={2}
+                  >
+                    <input
+                      type="file"
+                      {...register('url_foto')}
+                      accept="image/jpeg,image/png,image/gif"
+                      onChange={onChange}
+                    />
+                    <p>Clique para inserir uma imagem</p>
+                    {error !== '' && <span className="error-light">{error}</span>}
+                  </Preview>
+                </div>
               {inputs.map((input, index) => (
                 <Input
                   key={index}
@@ -103,94 +97,18 @@ export const RegisterFreteiroForm = (): JSX.Element => {
                   required={input.required}
                 />
               ))}
-            </RegisterPerson>
-            <RegisterAddress>
-              <h1 className="title">Seu Endereço</h1>
-              <Input
-                {...register('endereco.CEP')}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  handleChangeInputCEP(e, setValue, 'endereco.CEP');
-                }}
-                type="text"
-                label="CEP"
-                placeholder="00000-000"
-                svg={<Loc />}
-                error={errors.endereco?.CEP}
-                required={true}
-                onBlur={completeAddress}
-              />
-              <Input
-                {...register('endereco.rua')}
-                type="text"
-                label="Rua"
-                placeholder="Ex: Travessa,Rua,Avenida..."
-                svg={<Loc />}
-                error={errors.endereco?.rua}
-                required={true}
-              />
-              <Input
-                {...register('endereco.numero')}
-                type="text"
-                label="Número"
-                placeholder="Ex: 176"
-                svg={<Loc />}
-                error={errors.endereco?.numero}
-                required={true}
-              />
-
-              <Input
-                {...register('endereco.bairro')}
-                type="text"
-                label="Bairro"
-                placeholder="Ex: Tirol"
-                svg={<Loc />}
-                error={errors.endereco?.bairro}
-                required={true}
-              />
-
-              <Input
-                {...register('endereco.cidade')}
-                type="text"
-                label="Cidade"
-                placeholder="Ex: Natal"
-                svg={<Loc />}
-                error={errors.endereco?.cidade}
-                required={true}
-              />
-
-              <Input
-                {...register('endereco.estado')}
-                type="text"
-                label="Estado"
-                placeholder="Ex: RN"
-                svg={<Loc />}
-                error={errors.endereco?.estado}
-                required={true}
-              />
-
-              <Input
-                {...register('endereco.complemento')}
-                type="text"
-                label="Complemento"
-                placeholder="Ex: Casa, apartamento..."
-                svg={<Loc />}
-                error={errors.endereco?.complemento}
-              />
-            </RegisterAddress>
-          </DivFormContent>
-          <div className="button-div">
-            <Button
-              isButton
-              Icon={RiUserAddLine}
-              type="submit"
-              isDisabled={isLoading}
-            >
-              Cadastre-se
-            </Button>
-          </div>
+              <section>
+              <Button
+                isButton
+                Icon={RiUserAddLine}
+                type="submit"
+                isDisabled={isLoading}
+              >
+                Cadastre-se
+              </Button>
+              </section>
         </form>
-      </ContainerForm2>
-      
-    </ContainerMain>
+      </ContainerForm>
+    </ContainerPrincipal>
   );
 };

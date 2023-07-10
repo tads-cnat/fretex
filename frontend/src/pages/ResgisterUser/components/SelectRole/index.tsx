@@ -48,7 +48,7 @@ export const SelectRole = () => {
                     Cadastre-se
                 </Button>
             </ContainerForm>
-            { role == 1 ? <ClienteContent /> : <FreteiroContent />}
+            { role == "cliente" ? <ClienteContent /> : <FreteiroContent />}
 
         </ContainerPrincipal>
     )
