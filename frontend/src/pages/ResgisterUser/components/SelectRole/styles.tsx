@@ -14,13 +14,12 @@ export const ContainerPrincipal = styled(Animation)`
 
 export const ContainerContent = styled.div`
   display: flex;
-  max-width: 2000;
+  max-width: 2000px;
   align-items: center;
 
   div {
     display: flex;
     align-items: center;
-    padding-left: 50px;
     border-left: 1px solid #5f5f5f;
     height: 70%;
     a {
@@ -61,27 +60,42 @@ export const ContainerContent = styled.div`
 `;
 
 export const ContainerForm = styled.div`
-    width: 100%;
+    width: 20vw;
     border-radius: 10px;
     background-color: #353535;
     
-    section{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 40px 40px;
-    }
-    
-`;
-
-export const OptionCard = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-ligth);
-    border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
+
+    section{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        gap: 20px;
+        padding: 40px 40px;
+    }
+
+    h1{
+        color: var(--text-light);
+        font-weight: 600;
+        font-size: var(--font-large);
+        margin: 10px auto;
+        text-align: center;
+    }
+    
+`;
+
+export const OptionCard = styled.div<{ $selected?: boolean; }>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props => props.$selected ? 'var(--theme-primary)' : '#535353'};
+    border-radius: 20px;
+    padding: 10px 5px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -89,12 +103,11 @@ export const OptionCard = styled.div`
     transition: 0.5s;
     cursor: pointer;
     &:hover {
-        background-color: var(--bg-dark);
+        background-color: var(--theme-primary);
     }
     h1 {
-        color: var(--text-dark);
+        color: var(--text-light);
         font-weight: 600;
         font-size: var(--font-large);
-        margin-bottom: 10px;
     }
 `;
