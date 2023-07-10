@@ -101,21 +101,6 @@ export const RegisterClienteForm = (): JSX.Element => {
           </section>
         </form>
       </ContainerForm>
-      <ContainerContent>
-        <div>
-          <section>
-            <h1>
-              <Logo width={'250px'} />
-            </h1>
-
-            <h2>Conta Cliente</h2>
-            <p>
-              Como cliente você pode cadastrar seus pedidos de frete e negociar
-              diretamente com os nossos freteiros parceiros
-            </p>
-          </section>
-        </div>
-      </ContainerContent>
     </ContainerPrincipal>
   );
 };

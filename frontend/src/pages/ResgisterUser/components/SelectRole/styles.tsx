@@ -14,12 +14,13 @@ export const ContainerPrincipal = styled(Animation)`
 
 export const ContainerContent = styled.div`
   display: flex;
-  max-width: 2000px;
+  max-width: 400px;
   align-items: center;
 
   div {
     display: flex;
     align-items: center;
+    padding-left: 50px;
     border-left: 1px solid #5f5f5f;
     height: 70%;
     a {
@@ -47,20 +48,19 @@ export const ContainerContent = styled.div`
     font-size: var(--font-medium);
   }
 
-  @media (max-width: 2000px) {
+  @media (max-width: 768px) {
     div {
       order: -1;
       padding-left: 0px;
       border: none;
     }
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
   }
 `;
 
 export const ContainerForm = styled.div`
-    width: 20vw;
     border-radius: 10px;
     background-color: #353535;
     
@@ -95,7 +95,7 @@ export const OptionCard = styled.div<{ $selected?: boolean; }>`
     justify-content: center;
     background-color: ${props => props.$selected ? 'var(--theme-primary)' : '#535353'};
     border-radius: 20px;
-    padding: 10px 5px;
+    padding: 10px 20px;
     align-items: center;
     justify-content: center;
     width: 100%;

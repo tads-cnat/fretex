@@ -1,18 +1,9 @@
-import Email from '../../../../assets/Svg/Email';
 import Password from '../../../../assets/Svg/Password';
 import User from '../../../../assets/Svg/User';
 import { handleChangeInputCPF } from '../../../../utils/handleChangeCPF';
 import { type UseFormSetValue } from 'react-hook-form';
 
 export const inputs = [
-  {
-    type: 'email',
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Ex: usuário@email.com',
-    required: true,
-    svg: <Email />,
-  },
   {
     type: 'text',
     name: 'full_name',

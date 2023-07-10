@@ -6,11 +6,12 @@ import { RiUserAddLine } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import { setStep } from '../../../../store/slicers/RegisterStepSlicer';
 import { toast } from 'react-toastify';
+import { ClienteContent, FreteiroContent } from './contents';
 
 export const SelectRole = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [role, setRole] = useState<number>(0);
+    const [role, setRole] = useState<number>(1);
     const dispatch = useDispatch();
 
     const handleSelectRole = (role: number) => {
@@ -18,7 +19,6 @@ export const SelectRole = () => {
     }
 
     const handleSubmit = () => {
-        console.log("apertou")
         if(role == 0) return toast.error("Selecione um tipo de conta");
         setIsLoading(true);
         dispatch(setStep(role == 1 ? 3 : 4));
@@ -48,6 +48,8 @@ export const SelectRole = () => {
                     Cadastre-se
                 </Button>
             </ContainerForm>
+            { role == 1 ? <ClienteContent /> : <FreteiroContent />}
+
         </ContainerPrincipal>
     )
 

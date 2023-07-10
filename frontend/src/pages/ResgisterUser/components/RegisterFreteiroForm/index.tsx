@@ -194,21 +194,7 @@ export const RegisterFreteiroForm = (): JSX.Element => {
           </span>
         </Login>
       </ContainerForm2>
-      <ContainerInfos>
-        <div>
-          <section>
-            <h1>
-              <Logo width={'250px'} />
-            </h1>
-
-            <h2>Conta Freteiro</h2>
-            <p>
-              Na conta de freteiro você pode realizar propostas para vários
-              pedidos de fretes diferentes, e fazer sua grana.
-            </p>
-          </section>
-        </div>
-      </ContainerInfos>
+      
     </ContainerMain>
   );
 };
