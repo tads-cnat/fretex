@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LoadingPage, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import { BackButton, EmailCardForm, SelectRole } from './components';
+import { BackButton, EmailCardForm, SelectRole, RegisterClienteForm, RegisterFreteiroForm } from './components';
 import { BgRegister, Container, WrapperRegister } from './style';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -43,6 +43,15 @@ const Register = (): JSX.Element => {
             { step === 2 && (
               <SelectRole/>
             )}
+
+            { step === 3 && (
+              <RegisterClienteForm/>
+            )}
+
+            { step === 4 && (
+              <RegisterFreteiroForm/>
+            )}
+
           </WrapperRegister>
         </Container>
       </BgRegister>{' '}
