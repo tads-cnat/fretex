@@ -7,6 +7,7 @@
 | 23/06/2023 | 1.0    | Orçarmento Fretex e PDS Corporativo 2023.1                        | [Italo Gabriel](https://github.com/ItaloGSM) e [Mathews](https://github.com/MathewsDantas) |
 | 25/06/2023 | 1.1    | Orçarmento Fretex e PDS Corporativo 2023.1                        | [Tonny Weslley](https://github.com/tonny-weslley)                                          |
 | 02/10/2023 | 1.2    | Atualização de valores Orçarmento Fretex e PDS Corporativo 2023.1 | [Tonny Weslley](https://github.com/tonny-weslley)                                          |
+| 07/10/2023 | 1.3    | Atualização de valores Orçarmento Fretex e PDS Corporativo 2023.1 | [Italo Gabriel](https://github.com/ItaloGSM)                                               |
 
 ## Base das estimativas
 
@@ -44,12 +45,12 @@
 |                             | Hospedagem                                               | Serviço de Hospedagem (6x)                                                                       | 720 horas mensal          | 5.885,22            |
 |                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (18x)                                               |                           | 101.160,00          |
 |                             | Assinatura de Softwares                                  | Figma Pro (6x)                                                                                   |                           | 344,88              |
-|                             |                                                          | Totais                                                                                           | 2.440 horas               | 342.903,18          |
+|                             |                                                          | Totais                                                                                           | 2.440 horas               | 312.115,18          |
 
 ## Reservas (Contingência/Gerencial)
 
-- Reserva de Contingência: 10% do orçamento total (R$ 342.903,18) = R$ 34.290,318.
-- Reserva Gerencial: 5% do orçamento total (R$ 342.903,18) = R$ 17.145,16.
+- Reserva de Contingência: 10% do orçamento total (R$ 312.115,18) = R$ 31.211,518.
+- Reserva Gerencial: 5% do orçamento total (R$ 342.903,18) = R$ 15.605,759.
 
 ## Valor total previsto
 
