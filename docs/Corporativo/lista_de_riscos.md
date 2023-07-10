@@ -5,6 +5,7 @@
 | Data       | Versão     | Autores                                                                                    |
 | :--------- | :--------- | :----------------------------------------------------------------------------------------- |
 | 04/07/2023 | **`1.00`** | [Italo Gabriel](https://github.com/ItaloGSM) e [Mathews](https://github.com/MathewsDantas) |
+| 10/07/2023 | **`2.00`** | [Italo Gabriel](https://github.com/ItaloGSM) |
 
 ## Lista de riscos gerais
 
