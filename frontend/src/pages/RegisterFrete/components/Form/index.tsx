@@ -110,6 +110,7 @@ export const FormRegisterFrete = (): JSX.Element => {
     setValue,
     setFocus,
     formState: { errors },
+    watch
   } = useAddress<IPedidoFormData>(schemaPedido);
   const [errorImg, setErrorImg] = useState('');
   const [errorDate, setErrorDate] = useState('');
@@ -117,6 +118,9 @@ export const FormRegisterFrete = (): JSX.Element => {
   const [imagemProduto, setImagemProduto] = useState('');
   const [imagemPreview, setImagemPreview] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const currentDate = new Date().toISOString().split('T')[0];
+  const data_coleta = watch('data_coleta');
+
 
   const onSubmit: SubmitHandler<IPedidoFormData> = (data) => {
     setErrorImg('');
@@ -185,6 +189,7 @@ export const FormRegisterFrete = (): JSX.Element => {
   };
 
   useEffect(() => {
+    setValue('data_coleta', currentDate);
     TipoVeiculoService.getAll()
       .then((res) => {
         setTiposDeVeiculo(res.data);
@@ -513,6 +518,7 @@ export const FormRegisterFrete = (): JSX.Element => {
                   <input
                     {...register('data_coleta')}
                     type="date"
+                    min={currentDate}
                     placeholder="Digite o nome do destinatario"
                   />
                 </label>
@@ -529,6 +535,7 @@ export const FormRegisterFrete = (): JSX.Element => {
                   <input
                     {...register('data_entrega')}
                     type="date"
+                    min={data_coleta}
                     placeholder="Digite o turno da entrega"
                   />
                 </label>
