@@ -9,13 +9,15 @@ import { inputs } from './inputs';
 import { Button, Input } from '../../../../components';
 import { RiUserAddLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { setStep } from '../../../../store/slicers/RegisterStepSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStep, setEmail } from '../../../../store/slicers/RegisterStepSlicer';
+import { RootState } from '../../../../store';
 
 
 export const EmailCardForm = () => {
     const [error, setError] = useState<any>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const email = useSelector((state: RootState) => state.registerStep.email)
     const {
         register,
         setValue,
@@ -30,11 +32,13 @@ export const EmailCardForm = () => {
 
     useEffect(() => {
         setFocus('email');
+        setValue('email', email || '')
     }, [setFocus]);
 
-    const onSubmit: SubmitHandler<IUserFormData> = () => {
+    const onSubmit: SubmitHandler<IUserFormData> = (e) => {
         setError('');
         setIsLoading(true);
+        dispatch(setEmail(e.email))
         dispatch(setStep(2))
     };
             
