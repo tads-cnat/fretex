@@ -3,10 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface RegisterStepState {
     step: number
+    email: string
 }
 
 const initialState: RegisterStepState = {
     step: 1,
+    email: '',
 }
 
 export const registerStepSlice = createSlice({
@@ -18,10 +20,13 @@ export const registerStepSlice = createSlice({
         },
         backStep: (state) => {
             state.step -= 1
-        }
+        },
+        setEmail: (state, action: PayloadAction<string>) => {
+            state.email = action.payload
+        },
     }
 })
 
-export const { setStep, backStep } = registerStepSlice.actions
+export const { setStep, backStep, setEmail } = registerStepSlice.actions
 
 export default registerStepSlice.reducer
