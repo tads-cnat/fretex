@@ -18,10 +18,12 @@ import { Button, Input, Preview } from '../../../../components';
 import { inputs } from './inputs';
 import { handleChangeInputCEP } from '../../../../utils/handleChangeCEP';
 import { RiUserAddLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 export const RegisterFreteiroForm = (): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string>();
-
+  const email = useSelector((state: RootState) => state.registerStep.email);
   const {
     register,
     handleSubmit,
@@ -41,7 +43,8 @@ export const RegisterFreteiroForm = (): JSX.Element => {
   });
 
   useEffect(() => {
-    setFocus('email');
+    setFocus('full_name');
+    setValue('email', email || '');
   }, [setFocus]);
 
   const onChange = (e: any): void => {
