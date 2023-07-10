@@ -7,7 +7,7 @@ import {
 
 export const ContainerMain = styled(ContainerPrincipal)`
   display: grid;
-  grid-template-columns: 2.5fr 1fr;
+  grid-template-columns: 1fr;
 
   @media (max-width: 1050px) {
     padding-top: 10px;
