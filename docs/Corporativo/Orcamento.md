@@ -43,18 +43,18 @@
 | **Encerramento do projeto** | Testes de aceitação                                      | Analista de Testes                                                                               | 60 horas                  | 2.065,80            |
 | **Encerramento do projeto** | Avaliação do projeto e próximos passos                   | Gerente de Projetos, Analista de Qualidade                                                       | 60 horas                  | 4.645,80            |
 |                             | Hospedagem                                               | Serviço de Hospedagem (6x)                                                                       | 720 horas mensal          | 5.885,22            |
-|                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (18x)                                               |                           | 101.160,00          |
+|                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (18x)                                               |                           | 70.372,00         |
 |                             | Assinatura de Softwares                                  | Figma Pro (6x)                                                                                   |                           | 344,88              |
 |                             |                                                          | Totais                                                                                           | 2.440 horas               | 312.115,18          |
 
 ## Reservas (Contingência/Gerencial)
 
-- Reserva de Contingência: 10% do orçamento total (R$ 312.115,18) = R$ 31.211,518.
-- Reserva Gerencial: 5% do orçamento total (R$ 342.903,18) = R$ 15.605,759.
+- Reserva de Contingência: 10% do orçamento total (R$ 308.919,80) = R$ 30.891,98
+- Reserva Gerencial: 5% do orçamento total (R$ 339.811,78.) = R$ 16.990,59
 
 ## Valor total previsto
 
-- R$ 342.903,18 por 6 meses de projeto
+- R$ 356.802,37 por 6 meses de projeto
 
 ## Tabela de Custos profissionais (Por Hora)
 | Recurso                        | Valor | Custo indireto | Custo total |
