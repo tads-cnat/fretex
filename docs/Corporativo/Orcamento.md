@@ -43,7 +43,7 @@
 | **Encerramento do projeto** | Testes de aceitação                                      | Analista de Testes                                                                               | 60 horas                  | 2.065,80            |
 | **Encerramento do projeto** | Avaliação do projeto e próximos passos                   | Gerente de Projetos, Analista de Qualidade                                                       | 60 horas                  | 4.645,80            |
 |                             | Hospedagem                                               | Serviço de Hospedagem (6x)                                                                       | 720 horas mensal          | 5.885,22            |
-|                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (18x)                                               |                           | 70.372,00         |
+|                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (10x)                                               |                           | 70.372,00         |
 |                             | Assinatura de Softwares                                  | Figma Pro (6x)                                                                                   |                           | 344,88              |
 |                             |                                                          | Totais                                                                                           | 2.440 horas               | 312.115,18          |
 
