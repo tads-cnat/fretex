@@ -49,12 +49,12 @@
 
 ## Reservas (Contingência/Gerencial)
 
-- Reserva de Contingência: 10% do orçamento total (R$ 308.919,80) = R$ 30.891,98
-- Reserva Gerencial: 5% do orçamento total (R$ 339.811,78.) = R$ 16.990,59
+- Reserva de Contingência: 10% do orçamento total (R$ 312.115,18) = R$ 31.211,518
+- Reserva Gerencial: 5% do orçamento total (R$ 343.326,698) = R$ 17.166,3349
 
 ## Valor total previsto
 
-- R$ 356.802,37 por 6 meses de projeto
+- R$ 360.493,0329 por 6 meses de projeto
 
 ## Tabela de Custos profissionais (Por Hora)
 | Recurso                        | Valor | Custo indireto | Custo total |
@@ -84,9 +84,10 @@
 ## Tabela de Custos de Equipamento
 | Recurso     | Valor   | Depreciação anual (Porcentagem)|
 | ----------- | ------- | ------------------------------ |
-| Notebook    | 4500.00 | 20%                            |
-| Monitor     | 520.00  | 20%                            |
-| Periféricos | 130.00  | 20%                            |
-| Mesa        | 170.00  | 10%                            |
-| Cadeira     | 300.00  | 10%                            |
+| Notebook Samsung Galaxy Book2 | 5.421,60 | 20% |
+| Samsung T350 - Monitor Gamer, 24", FHD, 75Hz, HDMI, VGA, Freesync, Preto | 699,00  | 20% |
+| Mouse com fio USB Logitech M90 | 32,90 | 20% |
+| Teclado com fio USB Logitech K120 | 65,90 | 20% |
+| Mesa para Escritório Estilo Industrial | 577,90 | 10% |
+| Cadeira de Escritório Giratória Diretor Executive Três Comfort Preta | 239,90 | 10% |
 
