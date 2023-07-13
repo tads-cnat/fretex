@@ -45,16 +45,16 @@
 |                             | Hospedagem                                               | Serviço de Hospedagem (6x)                                                                       | 720 horas mensal          | 5.885,22            |
 |                             | Equipamento de alto Desempenho                           | Computador, Mouse + Teclado + Cadeira + Mesa (10x)                                               |                           | 70.372,00         |
 |                             | Assinatura de Softwares                                  | Figma Pro (6x)                                                                                   |                           | 344,88              |
-|                             |                                                          | Totais                                                                                           | 2.440 horas               | 312.115,18          |
+|                             |                                                          | Totais                                                                                           | 2.440 horas               | 324.989,5         |
 
 ## Reservas (Contingência/Gerencial)
 
-- Reserva de Contingência: 10% do orçamento total (R$ 312.115,18) = R$ 31.211,518
-- Reserva Gerencial: 5% do orçamento total (R$ 343.326,698) = R$ 17.166,3349
+- Reserva de Contingência: 10% do orçamento total (R$ 324.989,5) = R$ 32.498,95
+- Reserva Gerencial: 5% do orçamento total (R$ 357.488,45) = R$ 17.874,4225
 
 ## Valor total previsto
 
-- R$ 360.493,0329 por 6 meses de projeto
+- R$ 375.362,8725 por 6 meses de projeto
 
 ## Tabela de Custos profissionais (Por Hora)
 | Recurso                        | Valor | Custo indireto | Custo total |
