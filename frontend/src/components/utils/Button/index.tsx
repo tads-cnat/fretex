@@ -34,11 +34,7 @@ export const Button = ({
         disabled={isDisabled}
       >
         {Icon && !isDisabled && <Icon fontSize={'1.5rem'} />}
-        {isDisabled ? (
-          <Loading color="white" height="42px" svgWidth="60px" />
-        ) : (
-          children
-        )}
+        {isDisabled ? <Loading color="#FFFFFF" svgWidth="45px" /> : children}
       </BtnYellow>
     );
   } else {
