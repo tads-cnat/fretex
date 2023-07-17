@@ -1,12 +1,15 @@
 import { Button } from '../../../../components/utils/Button';
 import { RiArrowLeftSLine } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
-import { backStep } from '../../../../store/slicers/RegisterStepSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import { backStep, backFreteiroStep } from '../../../../store/slicers/RegisterStepSlicer';
 import { WrapperButton } from './styles';
+import { RootState } from '../../../../store';
 
 export const BackButton  = () => {
 
-    
+    const freteiroStep = useSelector((state: RootState) => state.registerStep.freteiroStep);
+
+
     const dispatch = useDispatch()
 
     return (
@@ -16,7 +19,7 @@ export const BackButton  = () => {
                 fontSize='medium'
                 isButton={true}
                 Icon={RiArrowLeftSLine}
-                onClick={() => dispatch(backStep())}
+                onClick={() => dispatch(freteiroStep == 2 ? backFreteiroStep() : backStep())}
                 >
                 Voltar
             </Button>

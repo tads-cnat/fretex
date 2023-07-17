@@ -22,6 +22,16 @@ export interface IFreteiroFormData {
   endereco: IEndereco;
 }
 
+export interface IfreteiroRegData{
+  url_foto: any;
+  capa_foto?: any;
+  email: string;
+  full_name: string;
+  cpf: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 export interface IUserUpdateFormData {
   url_foto?: any;
   capa_foto?: any;

@@ -1,4 +1,3 @@
-import Email from '../../../../assets/Svg/Email';
 import User from '../../../../assets/Svg/User';
 import Password from '../../../../assets/Svg/Password';
 import { handleChangeInputCPF } from '../../../../utils/handleChangeCPF';

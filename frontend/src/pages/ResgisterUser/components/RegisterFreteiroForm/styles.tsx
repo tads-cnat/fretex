@@ -69,7 +69,6 @@ export const ContainerForm = styled.div`
 
   form {
     padding: 40px 40px;
-    max-width: 500px;
   }
 
   form h1 {
@@ -98,7 +97,7 @@ export const ContainerForm = styled.div`
   }
 
   section button {
-    margin-bottom: 20px;
+    margin: auto;
     width: 100%;
     font-size: var(--font-medium);
     cursor: pointer;
@@ -133,4 +132,21 @@ export const ContainerForm = styled.div`
       padding: 40px 20px;
     }
   }
+`;
+
+export const PersonalInfoContainer = styled.div`
+
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: 1fr 1fr;
+  width:100%;
+
+  .preview-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
 `;
