@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { ReactComponent as TruckLoading } from '../../../assets/images/truck-loading.svg';
+import { ReactComponent as SpinnerLoading } from '../../../assets/images/OrangeLoadingSpinner.svg';
 
 interface ILoading {
   color?: string;
   width?: string;
   height?: string;
   svgWidth?: string;
-  fontsize?: string;
-  fontweight?: string;
 }
 
 export const Loading = ({
@@ -15,25 +13,20 @@ export const Loading = ({
   width,
   height,
   svgWidth,
-  fontsize,
-  fontweight,
 }: ILoading): JSX.Element => {
   return (
     <LoadingStyled
-      color={color}
       width={width}
       height={height}
-      fontsize={fontsize}
-      fontweight={fontweight}
+      svgWidth={svgWidth}
+      color={color}
     >
-      <TruckLoading style={{ width: svgWidth ?? '80px', height: svgWidth ?? '80px', margin: '10px' }} />
-      <p>Carregando...</p>
+      <SpinnerLoading />
     </LoadingStyled>
   );
 };
 
 const LoadingStyled = styled.div<ILoading>`
-  position: relative;
   width: ${({ width }) => width ?? '100%'};
   height: ${({ height }) => height ?? '100%'};
   display: flex;
@@ -42,28 +35,10 @@ const LoadingStyled = styled.div<ILoading>`
   overflow: hidden;
 
   svg {
-    position: absolute;
-    animation: driving-truck 4s infinite forwards;
-    animation-delay: 1s;
-  }
-  p {
-    color: ${({ color }) => color ?? 'var(--text-light)'};
-    font-size: ${({ fontsize }) => fontsize ?? 'var(--font-medium)'};
-    font-weight: ${({ fontweight }) => fontweight ?? '500'};
-  }
-
-  @keyframes driving-truck {
-    0% {
-      left: 0%;
-    }
-    40% {
-      left: 45%;
-    }
-    60% {
-      left: 44%;
-    }
-    100% {
-      left: 100%;
+    width: ${({ svgWidth }) => svgWidth ?? '80px'};
+    height: ${({ svgWidth }) => svgWidth ?? '80px'};
+    circle {
+      stroke: ${({ color }) => color ?? '#FFFFFF'};
     }
   }
 `;
