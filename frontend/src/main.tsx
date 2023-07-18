@@ -23,7 +23,7 @@ root.render(
           <AuthProvider>
             <App />
           </AuthProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+       {/**   <ReactQueryDevtools initialIsOpen={false} /> */}
         </Provider>
       </QueryClientProvider>
     </React.StrictMode>

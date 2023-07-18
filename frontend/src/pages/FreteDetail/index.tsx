@@ -1,6 +1,6 @@
 import { Wrapper } from '../../styles/globalStyles';
 import { ContainerPrincipal } from './styles';
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/Auth/AuthContext';
 import { FreteDetailComponent } from './components';
@@ -31,14 +31,12 @@ const FreteDetail = (): JSX.Element => {
     },
   );
 
-  const queryStringPropostas = useMemo(() => {
-    if (pedido !== undefined) {
-      return objToQueryString({
-        pedido: pedido.data.id,
-      });
-    }
-    return '';
-  }, [pedido]);
+  const queryStringPropostas =
+    pedido !== undefined
+      ? objToQueryString({
+          pedido: pedido.data.id,
+        })
+      : '';
 
   const { data: propostas, isLoading: isLoadingPropostas } = useQuery(
     ['propostasForPedido', id],

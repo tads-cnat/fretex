@@ -107,7 +107,7 @@ export const ModalContraproposta = ({
       },
     },
   );
-  client.refetchQueries('propostasForPedido');
+  //client.refetchQueries('propostasForPedido');
 
   const updatePropostaMutation = useMutation(
     ['propostasForPedido', proposta.id],

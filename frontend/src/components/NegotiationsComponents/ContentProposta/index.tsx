@@ -35,6 +35,15 @@ interface IUpdate {
   data: FormData;
 }
 
+const formatDateAndTime = (initialDate: string): string => {
+  const time = initialDate.slice(11, 16);
+  const date = initialDate.slice(0, 10).replaceAll('-', '/');
+  const year = date.slice(0, 4);
+  const day = date.slice(8);
+  const month = date.slice(4, 8);
+  return `${day}${month}${year} - ${time}`;
+};
+
 export const ContentProposta = ({
   type,
   typeContent,
@@ -136,16 +145,6 @@ export const ContentProposta = ({
         !!typeUser.data.extra_data.cliente,
     },
   );
-  // console.log(cliente);
-
-  const formatDateAndTime = (initialDate: string): string => {
-    const time = initialDate.slice(11, 16);
-    const date = initialDate.slice(0, 10).replaceAll('-', '/');
-    const year = date.slice(0, 4);
-    const day = date.slice(8);
-    const month = date.slice(4, 8);
-    return `${day}${month}${year} - ${time}`;
-  };
 
   const handleContraproposta = (e: MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -164,7 +163,7 @@ export const ContentProposta = ({
       />
       <ContentMain color={typeContent.color} bg={typeContent.bg}>
         <div className="valorProposta">
-          {freteiro?.url_foto || cliente?.url_foto ? (
+          {freteiro?.data?.url_foto || cliente?.data?.url_foto ? (
             <img
               src={
                 isFreteiro(freteiro.data)

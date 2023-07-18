@@ -70,18 +70,18 @@ export const NegotiationComponent = ({
             </Button>
           )}
       </HeaderContainer>
-      <PropostaContainer2>
+     <PropostaContainer2>
         <div>
           <CardsContainer
             title="Propostas ativas"
             toggle={togglePropostasAtivas}
             value={valuePropostasAtivas}
           >
-            {usersThatMadeOffers.length === 0 && !isFreteiro(actualUser) && (
+           {usersThatMadeOffers.length === 0 && !isFreteiro(actualUser) && (
               <p>Nenhuma proposta recebida</p>
             )}
 
-            {!usersThatMadeOffers.find((id) => actualUser.id === id) &&
+              {!usersThatMadeOffers.find((id) => actualUser.id === id) &&
               isFreteiro(actualUser) && <p>Você não fez nenhuma propostas</p>}
 
             {!isFreteiro(actualUser) && (

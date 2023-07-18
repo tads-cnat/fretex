@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { type IActive } from '../../../interfaces/IActive';
 
-export const Container = styled.button<IActive>`
+export const Container = styled.div<IActive>`
   display: flex;
   align-items: center;
   background-color: ${({ active }) => (active ? '#3f3f3f' : '#444444')};
