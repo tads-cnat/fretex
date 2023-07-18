@@ -75,11 +75,9 @@ const Login = (): JSX.Element => {
           <ContainerPrincipal>
             <ContainerContent2>
               <div>
-                <section>
                   <h1>
                     <Logo width={'250px'} />
                   </h1>
-                </section>
               </div>
             </ContainerContent2>
             <ContainerForm>

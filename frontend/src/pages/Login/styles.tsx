@@ -3,10 +3,11 @@ import { ContainerContent } from '../ResgisterUser/components/RegisterClienteFor
 
 export const ContainerContent2 = styled(ContainerContent)`
   div {
-    border-left: none;
-    border-right: 1px solid #5f5f5f;
+    display: flex !important;
+    justify-content: center !important;
+    border: none;
     margin: 0;
-    padding: 0;
+    padding: 0 !important;
     padding-right: 80px;
     a {
       text-decoration: none;
@@ -20,7 +21,7 @@ export const ContainerContent2 = styled(ContainerContent)`
 
   @media (max-width: 768px) {
     div {
-      border-right: none;
+      border: none;
       padding-right: 0;
     }
     h1 {
