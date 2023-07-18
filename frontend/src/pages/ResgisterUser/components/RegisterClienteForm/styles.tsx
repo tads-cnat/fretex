@@ -3,7 +3,7 @@ import { Animation } from '../../../../styles/globalStyles';
 
 export const ContainerPrincipal = styled(Animation)`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   justify-items: center;
   gap: 50px;
 

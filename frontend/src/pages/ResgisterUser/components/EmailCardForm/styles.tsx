@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { Animation } from '../../../../styles/globalStyles';
 
 export const ContainerPrincipal = styled(Animation)`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
   justify-items: center;
-  gap: 50px;
 
   @media (max-width: 768px) {
     padding-top: 10px;
@@ -57,7 +55,7 @@ export const ContainerContent = styled.div`
       border: none;
     }
     h1 {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
   }
 `;
@@ -69,6 +67,7 @@ export const ContainerForm = styled.div`
 
   form {
     padding: 40px 40px;
+    max-width: 500px;
   }
 
   form h1 {
@@ -97,7 +96,7 @@ export const ContainerForm = styled.div`
   }
 
   section button {
-    margin: auto;
+    margin-bottom: 20px;
     width: 100%;
     font-size: var(--font-medium);
     cursor: pointer;
@@ -134,19 +133,10 @@ export const ContainerForm = styled.div`
   }
 `;
 
-export const PersonalInfoContainer = styled.div`
-
-  display: grid;
-  gap: 20px;
-
-  grid-template-columns: 1fr 1fr;
-  width:100%;
-
-  .preview-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
+export const DivIcon = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
 `;
+

@@ -324,3 +324,11 @@ class TriggerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
         fields = "__all__"
+
+
+class VerifyEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ("email")

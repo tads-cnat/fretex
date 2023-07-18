@@ -1,32 +1,22 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LoadingPage, SEO } from '../../components';
 import { AuthContext } from '../../context/Auth/AuthContext';
-import { RegisterClienteForm, RegisterFreteiroForm } from './components';
-import { btnTypeUserData } from './constants';
-import { BgRegister, BtnTypeUser, Container, WrapperRegister } from './style';
-import { RiUserLine } from 'react-icons/ri';
+import { BackButton, EmailCardForm, SelectRole, RegisterClienteForm, RegisterFreteiroForm } from './components';
+import { BgRegister, Container, WrapperRegister } from './style';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const Register = (): JSX.Element => {
   const { user, isLoadingUser } = useContext(AuthContext);
-  const [typeResgister, setTypeRegister] = useState('cliente');
+  const role = useSelector((state: RootState) => state.registerStep.role);
+  const step = useSelector((state: RootState) => state.registerStep.step);
   const Navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const type = localStorage.getItem('typeUser');
-    if (type !== null) {
-      type === 'cliente'
-        ? setTypeRegister('cliente')
-        : setTypeRegister('freteiro');
-    }
   }, []);
-
-  const handleChangeTypeOfUser = (type: string): void => {
-    setTypeRegister(type);
-    localStorage.setItem('typeUser', type);
-  };
 
   useEffect(() => {
     if (user) {
@@ -42,26 +32,29 @@ const Register = (): JSX.Element => {
       <BgRegister>
         <Container>
           <WrapperRegister bgColor="#282828">
-            <div className="typeRegister">
-              {btnTypeUserData.map((btn, i) => (
-                <BtnTypeUser
-                  key={i}
-                  onClick={() => {
-                    handleChangeTypeOfUser(btn.type);
-                  }}
-                  active={typeResgister === btn.type}
-                  typeRegister={btn.type}
-                >
-                  <RiUserLine />
-                  {btn.text}
-                </BtnTypeUser>
-              ))}
-            </div>
-            {typeResgister === 'cliente' ? (
-              <RegisterClienteForm />
-            ) : (
-              <RegisterFreteiroForm />
+
+            { step !== 1 && (
+              <BackButton/>
             )}
+            
+            { step === 1 && (
+              <EmailCardForm/>
+            )}
+
+            { step === 2 && (
+              <SelectRole/>
+            )}
+
+            { (step === 3 && role == "cliente") && (
+              <RegisterClienteForm/>
+            )}
+
+            { (step === 3 && role == "freteiro") && (
+              <RegisterFreteiroForm/>
+            )}
+
+            
+
           </WrapperRegister>
         </Container>
       </BgRegister>{' '}

@@ -1,19 +1,23 @@
-import { ContainerForm, ContainerPrincipal, ContainerContent } from './styles';
+import { ContainerForm, ContainerPrincipal } from './styles';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaCliente } from '../../schemas';
 import { type IClienteFormData } from '../../../../interfaces';
 import AuthService from '../../../../services/AuthService';
 import { toast } from 'react-toastify';
-import { Button, Input, Logo } from '../../../../components';
+import { Button, Input } from '../../../../components';
 import { inputs } from './inputs';
 import { RiUserAddLine } from 'react-icons/ri';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { clearRedux } from '../../../../store/slicers/RegisterStepSlicer';
 
 export const RegisterClienteForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const email = useSelector((state: RootState) => state.registerStep.email);
   const {
     register,
     setValue,
@@ -25,9 +29,11 @@ export const RegisterClienteForm = (): JSX.Element => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setFocus('email');
+    setFocus('full_name');
+    setValue('email', email || '');
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<IClienteFormData> = (data) => {
@@ -37,6 +43,7 @@ export const RegisterClienteForm = (): JSX.Element => {
     AuthService.registerCliente({ email, full_name, cpf, password })
       .then(() => {
         toast.success('Cliente cadastrado com sucesso!');
+        dispatch(clearRedux());
         navigate('/login');
       })
       .catch((err) => {
@@ -95,27 +102,9 @@ export const RegisterClienteForm = (): JSX.Element => {
             >
               Cadastre-se
             </Button>
-            <p className='ajudaCadastro'>
-              Já tem uma conta?<Link to="/login"> Entrar</Link>
-            </p>
           </section>
         </form>
       </ContainerForm>
-      <ContainerContent>
-        <div>
-          <section>
-            <h1>
-              <Logo width={'250px'} />
-            </h1>
-
-            <h2>Conta Cliente</h2>
-            <p>
-              Como cliente você pode cadastrar seus pedidos de frete e negociar
-              diretamente com os nossos freteiros parceiros
-            </p>
-          </section>
-        </div>
-      </ContainerContent>
     </ContainerPrincipal>
   );
 };
