@@ -63,7 +63,7 @@ export const ContainerContent = styled.div`
 export const ContainerForm = styled.div`
     border-radius: 10px;
     background-color: #353535;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,7 +85,7 @@ export const ContainerForm = styled.div`
         margin: 10px auto;
         text-align: center;
     }
-    
+
 `;
 
 export const OptionCard = styled.div<{ $selected?: boolean; }>`
@@ -93,7 +93,7 @@ export const OptionCard = styled.div<{ $selected?: boolean; }>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.$selected ? 'var(--theme-primary)' : '#535353'};
+    background-color: ${props => props.$selected ? 'var(--btn-hover)' : '#535353'};
     border-radius: 20px;
     padding: 10px 20px;
     align-items: center;
@@ -103,7 +103,7 @@ export const OptionCard = styled.div<{ $selected?: boolean; }>`
     transition: 0.5s;
     cursor: pointer;
     &:hover {
-        background-color: var(--theme-primary);
+        background-color: ${props => props.$selected ? 'var(--btn-hover)' : '#474747'};
     }
     h1 {
         color: var(--text-light);

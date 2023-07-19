@@ -13,6 +13,7 @@ import { RiUserAddLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 import { clearRedux } from '../../../../store/slicers/RegisterStepSlicer';
+import { ClienteContent } from '../SelectRole/contents';
 
 export const RegisterClienteForm = (): JSX.Element => {
   const [error, setError] = useState<string>('');
@@ -105,6 +106,7 @@ export const RegisterClienteForm = (): JSX.Element => {
           </section>
         </form>
       </ContainerForm>
+      <ClienteContent />
     </ContainerPrincipal>
   );
 };

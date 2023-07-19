@@ -1,4 +1,8 @@
-import { ContainerForm, ContainerPrincipal,PersonalInfoContainer } from './styles';
+import {
+  ContainerForm,
+  ContainerPrincipal,
+  PersonalInfoContainer,
+} from './styles';
 import perfil from '../../../../assets/images/imgperfil.svg';
 import { useEffect, useState } from 'react';
 import { type IfreteiroRegData } from '../../../../interfaces';
@@ -14,13 +18,16 @@ import {
 import { RootState } from '../../../../store';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FreteiroContent } from '../SelectRole/contents';
 
 export default function PersonalInfo() {
   const [error, setError] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [imagePreview, setImagePreview] = useState<string>();
   const email = useSelector((state: RootState) => state.registerStep.email);
-  const freteiro = useSelector((state: RootState) => state.registerStep.freteiro);
+  const freteiro = useSelector(
+    (state: RootState) => state.registerStep.freteiro,
+  );
   const dispatch = useDispatch();
   const {
     register,
@@ -47,7 +54,7 @@ export default function PersonalInfo() {
   useEffect(() => {
     setFocus('full_name');
     setValue('email', email || '');
-    if(freteiro != null){
+    if (freteiro != null) {
       setValue('full_name', freteiro.full_name || '');
       setValue('password', freteiro.password || '');
       setValue('cpf', freteiro.cpf || '');
@@ -125,7 +132,7 @@ export default function PersonalInfo() {
           </section>
         </form>
       </ContainerForm>
+      <FreteiroContent />
     </ContainerPrincipal>
   );
 }
-

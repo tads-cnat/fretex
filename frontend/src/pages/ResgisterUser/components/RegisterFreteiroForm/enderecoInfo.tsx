@@ -13,6 +13,7 @@ import { useAddress } from '../../../../hooks/useAddress';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useFreteiroForm } from '../../../../hooks/useFreteiroForm';
+import { FreteiroContent } from '../SelectRole/contents';
 
 export default function EnderecoInfo() {
   const freteiro = useSelector(
@@ -57,6 +58,7 @@ export default function EnderecoInfo() {
     <ContainerPrincipal>
       <ContainerForm>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <h1>Endereço</h1>
           <Input
             {...register('endereco.CEP')}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +141,7 @@ export default function EnderecoInfo() {
           </section>
         </form>
       </ContainerForm>
+      <FreteiroContent />
     </ContainerPrincipal>
   );
 }
-

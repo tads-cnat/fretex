@@ -3,7 +3,7 @@ import { Animation } from '../../../../styles/globalStyles';
 
 export const ContainerPrincipal = styled(Animation)`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-items: center;
   gap: 50px;
 
@@ -139,7 +139,7 @@ export const PersonalInfoContainer = styled.div`
   display: grid;
   gap: 20px;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   width:100%;
 
   .preview-div {
